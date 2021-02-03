@@ -1,6 +1,7 @@
 (* test *)
 (* Hello World! 
-*)
+ Bonjour tout le monde
+ *)
 type 'a stream = Cons of 'a * (unit -> 'a stream) ;;
 
 let hd (Cons (h, _)) = h ;;
