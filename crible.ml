@@ -1,4 +1,4 @@
-
+(* test *)
 
 type 'a stream = Cons of 'a * (unit -> 'a stream) ;;
 
