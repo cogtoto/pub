@@ -1,0 +1,16 @@
+### Starting build.
+Backtrace:
+                      - Failed to build the target prolog.byte
+                          - Building prolog.byte:
+                              - Building prolog.cmo:
+                                  - Failed to build all of these:
+                                      - Building prolog.ml:
+                                          - Failed to build all of these:
+                                              - Building prolog.mly
+                                              - Building prolog.mll
+                                      - Building prolog.mli:
+                                          - Building prolog.mly
+                                      - Building prolog.mlpack
+                                      - Building prolog.mli:
+                                          - Building prolog.mly
+# Compilation unsuccessful.

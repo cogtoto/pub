@@ -1,0 +1,4 @@
+(openloop "i1? " "i1> ")
+(openloop "i2? " "i2> ")
+(openloop "i3? " "i3> ")
+(define exit (primitive-to-reifier (lambda (e r k) (car e))))

@@ -1,0 +1,8 @@
+### Starting build.
+# Target: pi.ml.depends, tags: { extension:ml, file:pi.ml, ocaml, ocamldep, quiet }
+ocamlfind ocamldep -modules pi.ml > pi.ml.depends # cached
+# Target: pi.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:pi.cmo, file:pi.ml, implem, ocaml, quiet }
+ocamlfind ocamlc -c -o pi.cmo pi.ml # cached
+# Target: pi.byte, tags: { byte, dont_link_with, extension:byte, file:pi.byte, link, ocaml, program, quiet }
+ocamlfind ocamlc -linkpkg pi.cmo -o pi.byte # cached
+# Compilation successful.

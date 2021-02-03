@@ -1,0 +1,4 @@
+mode_setup;
+begin_char("F", 10pt#, 10pt#, 0);
+
+

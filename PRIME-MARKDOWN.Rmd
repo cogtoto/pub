@@ -1,0 +1,204 @@
+---
+title: "Les nombres premiers"
+author: "Vincent Cognet"
+date: "23 novembre 2019"
+output:
+  pdf_document: default
+  word_document: default
+  tufte::tufte_handout: default
+  tufte::tufte_html: default
+  html_document:
+    df_print: paged
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Les nombres premiers. Le crible d'Erathostene. Leur répartition. Les nombres premiers jumeaux. La constante de Brun. La fonction zêta. Le produit eulérien et sa convergence avec la suite harmonique
+
+
+
+## Le produit d'Euler aka le produit eulérien
+##  La fonction zêta est égale au produit eulérien
+\[ \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{i=1}^\infty \frac{1}{1-p_i^{-s}} = \prod_{i=1}^\infty \frac{p_i^s}{p_i^s-1} \]
+
+## Exemple pour $s=1$ avec la suite harmonique
+\begin{align}
+1+ \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} +...  &=  \frac{1}{1-\frac{1}{2}} .\frac{1}{1-\frac{1}{3}}.\frac{1}{1-\frac{1}{5}}.\frac{1}{1-\frac{1}{7}}. (...) \\
+ &= \frac{2.3.5.7.11.13.17.19...}{1.2.4.6.10.12.16.18...} 
+ \end{align}
+ 
+## Démontrons cela
+\[\zeta(1) = 1+ \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5}+ \frac{1}{6}+ \frac{1}{7} +  \frac{1}{8} +... \]
+Divisons par 2
+\[ \frac{\zeta(1)}{2} = \frac{1}{2}+\frac{1}{4}+\frac{1}{6}+\frac{1}{8}+\frac{1}{10}+\frac{1}{12} + \frac{1}{14}+ \frac{1}{16}+... \]
+ 
+
+La différence de ces 2 équations donne:
+
+\[ \zeta(1).(1-\frac{1}{2}) = 1 + \frac{1}{3}+\frac{1}{5}+\frac{1}{7}+\frac{1}{9}+\frac{1}{11}+\frac{1}{13}+ ... \]
+Divisons par 3
+\[ \frac{1}{2.3}.\zeta(1) = \frac{1}{3} + \frac{1}{9}+\frac{1}{15}+\frac{1}{21}+\frac{1}{27}+ \frac{1}{33}+ \frac{1}{39}+... \]
+La différence donne:
+\[ \zeta(1).(\frac{1}{2}-\frac{1}{2.3}) = 1 + \frac{1}{5} + \frac{1}{7}+\frac{1}{11}+\frac{1}{13}+ ... \]
+\[\zeta(1).(\frac{1.2}{2.3}) =  1 + \frac{1}{5} + \frac{1}{7}+\frac{1}{11} +\frac{1}{13}+... \]
+Divisons par 5
+\[\zeta(1).(\frac{1.2}{2.3.5}) =    \frac{1}{5} + \frac{1}{25}+\frac{1}{35}+\frac{1}{55}+ ... \]
+La différence donne:
+\[\zeta(1).(\frac{1.2.4}{2.3.5}) = 1 + \frac{1}{7}+\frac{1}{11}+\frac{1}{13}+... \]
+Nous pouvons poursuivre sur le principe du crible d'Erathostène
+\[ \zeta(1).\frac{1.2.4.6.10.12.16.18...}{2.3.5.7.11.13.17.19...} = 1 \]
+\[ \zeta(1) = \frac{2.3.5.7.11.13.17.19...}{1.2.4.6.10.12.16.18...} \]
+
+Le numérateur est le produit de l'ensemble des nombres premiers.
+Le dénominateur est le produit de l'ensemble des nombres premiers moins 1.
+
+
+## Exemple pour $s=2$ avec la suite carrée
+\[ 1+ \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + ...  =  \frac{1}{1-\frac{1}{4}} .\frac{1}{1-\frac{1}{9}}.\frac{1}{1-\frac{1}{25}}.\frac{1}{1-\frac{1}{49}}. (...) \]
+
+## Le code
+```{r}
+
+era <- function(L, n) {
+if (L[1]^2 > L[length(L)]) {return(c(n, L))}
+else { era(L[L%%L[1]!=0], c(n, L[1])) }
+}
+
+twins <- function(P) {
+  R <- 2
+  for (i in 1:(length(P) - 1))  {
+    if (P[i + 1] - P[i] == 2) {
+      R <- c(R, P[i], P[i + 1])
+    }
+  }
+  return(R)
+}
+
+
+Premiers <- function(x) {  
+T<- matrix(c(2:x), ncol=1)
+T2 <- cbind(T, 0)
+T3 <- cbind(T2, 0)
+T4 <- cbind(T3, 0)
+T5 <- cbind(T4, 0)
+T6 <- cbind(T5, 0)
+T7 <- cbind(T6, 0)
+T8 <- cbind(T7, 0)
+colnames(T8) <- c("N", "Premier", "Jumeau", "Cardinal", "InversePremiers", "InverseJumeaux", "Harmonique", "Produit Euler")
+P <- era(c(2:x), 1)
+J <- twins(P)
+T8[1,] <- c(2, 1, 1, 1, 1/2, 1/2, 3/2, 2)
+for(i in 2:length(T)) {
+T8[i,2] <- T8[i,1] %in% P
+T8[i,3] <- T8[i,1] %in% J
+T8[i,4] <- if ( T8[i, 2] ) {T8[i-1, 4] + 1} else {T8[i-1,4]}
+T8[i,5] <- if ( T8[i, 2] ) {T8[i-1, 5] + 1/T8[i,1]} else {T8[i-1,5]}
+T8[i,6] <- if ( T8[i, 3] ) {T8[i-1, 6] + 1/T8[i,1]} else {T8[i-1,6]}
+T8[i,7] <- T8[i-1, 7] + 1/T8[i, 1]
+T8[i,8] <-  if ( T8[i, 2] ) {T8[i-1, 8] * 1/(1-(1/T8[i,1]))} else {T8[i-1,8]}
+}
+appro <- function(x) {x/log(x)}
+print(P)
+matplot(T8[,1], T8[,4], type = "l", ylab="Repartition", col=2)
+matlines(appro(1:x), type='l')
+}
+
+Jumeaux <- function(x) {  
+T<- matrix(c(2:x), ncol=1)
+T2 <- cbind(T, 0)
+T3 <- cbind(T2, 0)
+T4 <- cbind(T3, 0)
+T5 <- cbind(T4, 0)
+T6 <- cbind(T5, 0)
+T7 <- cbind(T6, 0)
+T8 <- cbind(T7, 0)
+colnames(T8) <- c("N", "Premier", "Jumeau", "Cardinal", "InversePremiers", "InverseJumeaux", "Harmonique", "Produit Euler")
+P <- era(c(2:x), 1)
+J <- twins(P)
+T8[1,] <- c(2, 1, 1, 1, 1/2, 1/2, 3/2, 2)
+for(i in 2:length(T)) {
+T8[i,2] <- T8[i,1] %in% P
+T8[i,3] <- T8[i,1] %in% J
+T8[i,4] <- if ( T8[i, 2] ) {T8[i-1, 4] + 1} else {T8[i-1,4]}
+T8[i,5] <- if ( T8[i, 2] ) {T8[i-1, 5] + 1/T8[i,1]} else {T8[i-1,5]}
+T8[i,6] <- if ( T8[i, 3] ) {T8[i-1, 6] + 1/T8[i,1]} else {T8[i-1,6]}
+T8[i,7] <- T8[i-1, 7] + 1/T8[i, 1]
+T8[i,8] <-  if ( T8[i, 2] ) {T8[i-1, 8] * 1/(1-(1/T8[i,1]))} else {T8[i-1,8]}
+}
+matplot(T8[,1], T8[,6], type = "l", ylab="Inverse des jumeaux", col=2)
+}
+
+
+
+
+EulerHarmonique <- function(x) {  
+T<- matrix(c(2:x), ncol=1)
+T2 <- cbind(T, 0)
+T3 <- cbind(T2, 0)
+colnames(T3) <- c("N", "Harmonique", "Produit Euler")
+n<-x*(log(x)+1000)
+P <- era(c(2:n), 1)
+P <- P[-1]
+T3[1,] <- c(2,3/2, 2)
+for(i in 2:length(T)) {
+T3[i,2] <- T3[i-1, 2] + 1/T3[i, 1]
+T3[i,3] <-  T3[i-1,3] * 1/(1-(1/P[i]))} 
+print(T3)
+matplot(T3[,1], T3[,3], type = "l", ylab="Produit Euler", col=2)
+matlines(T3[,2], ylab="Harmonique", col=3)
+}
+
+
+EulerCarre <- function(x) {  
+T<- matrix(c(2:x), ncol=1)
+T2 <- cbind(T, 0)
+T3 <- cbind(T2, 0)
+colnames(T3) <- c("N", "Carré", "Produit Euler")
+n<-x*(log(x)+1000)
+P <- era(c(2:n), 1)
+P <- P[-1]
+T3[1,] <- c(2,5/4, 4/3)
+for(i in 2:length(T)) {
+T3[i,2] <- T3[i-1, 2] + 1/(T3[i, 1]^2)
+T3[i,3] <-  T3[i-1,3] * 1/(1-(1/(P[i])^2))} 
+matplot(T3[,1],T3[,3], type = "l", ylab="Produit Euler", col=2)
+matlines(y=pi^2/6, col=1)
+matlines(T3[,2], ylab="Carré", col=3)
+}
+
+
+
+```
+
+
+## Le résultat de la suite harmonique. En rouge, le produit d'Euler. En vert la suite harmonique. La convergence des deux courbes à l'infini n'est pas évidente.
+```{r}
+EulerHarmonique(50)
+```
+
+
+## Le résultat de la suite carrée. En rouge, le produit d'Euler. En vert la suite carrée. Les courbes convergent vers $\frac{\pi^2}{6}$
+```{r}
+EulerCarre(100)
+```
+
+## La répartition des nombres premiers. En rouge la fonction $x/log(x)$ qui s'approche de cette répartition
+```{r}
+Premiers(1000)
+```
+
+## Les nombres premiers jumeaux et la constante de Brun 
+La somme inverse des nombres premiers jumeaux. Il y en aurait une infinité. Cependant, cette somme converge vers la constante de Brun.
+
+\[ Brun = (\frac{1}{3} + \frac{1}{5}) + (\frac{1}{5} + \frac{1}{7}) + (\frac{1}{11} + \frac{1}{13}) + (\frac{1}{17} + \frac{1}{19}) + (\frac{1}{29} + \frac{1}{31}) +\  ... \]
+
+\[ Brun \approx 1,90216 \]
+
+
+```{r}
+Jumeaux(10000)
+```

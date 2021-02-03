@@ -1,0 +1,6 @@
+{
+    "ocaml.sandbox": {
+        "switch": "ocaml-base-compiler",
+        "kind": "opam"
+    }
+}

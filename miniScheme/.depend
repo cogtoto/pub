@@ -1,0 +1,32 @@
+interpreter.cmo : \
+    schemeyacc.cmi \
+    schemelex.cmo \
+    scheme_expression.cmo
+interpreter.cmx : \
+    schemeyacc.cmx \
+    schemelex.cmx \
+    scheme_expression.cmx
+repl.cmo : \
+    schemeyacc.cmi \
+    schemelex.cmo \
+    scheme_exp.cmo
+repl.cmx : \
+    schemeyacc.cmx \
+    schemelex.cmx \
+    scheme_exp.cmx
+scheme_exp.cmo :
+scheme_exp.cmx :
+scheme_expression.cmo :
+scheme_expression.cmx :
+schemelex.cmo : \
+    schemeyacc.cmi
+schemelex.cmx : \
+    schemeyacc.cmx
+schemeyacc.cmo : \
+    scheme_exp.cmo \
+    schemeyacc.cmi
+schemeyacc.cmx : \
+    scheme_exp.cmx \
+    schemeyacc.cmi
+schemeyacc.cmi : \
+    scheme_exp.cmo
