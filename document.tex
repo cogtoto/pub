@@ -1180,6 +1180,10 @@ let rec reduc_bruijn t =
 	with IRREDUCTIBLE -> t 
 \end{Verbatim}
 
+\section{Le $\lambda$-calcul simplement typé}
+\subsubsection{Implémentation}
+\subsubsection{Inférence de type}
+\subsubsection{L'isomorphisme de Curry-Howard}
 
 \chapter{L'interprétation}
 
@@ -2783,7 +2787,7 @@ match equation with
 | (Func(f1,l1),Func(f2, l2)) -> if f1 = f2 && List.length l1 = List.length l2 
 	then unifierliste (List.combine l1 l2)
 	else raise Impossible
-| (Func(m,n),Var(x)) -> unifier8 (Var(x), Func(m,n)) 
+| (Func(m,n),Var(x)) -> unifier (Var(x), Func(m,n)) 
 | (Var(x), Func(m,n)) -> if (mem (Var(x)) (listevar (Func(m,n)))) 
 	then raise Impossible
 	else [(Var(x), Func(m,n)) ] 
