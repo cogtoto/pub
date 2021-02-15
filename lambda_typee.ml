@@ -17,5 +17,5 @@ let rec imprime_env = function
   | [] -> ()
   | a::b -> imprime a ; print_string " ; " ; imprime_env b ;;
 
-let env1 = [Fleche (Int, Var "a"); Var "b"] in
+let env1 = [Fleche (Int, Var "a"); Var "b"; Fleche (Int, Int)] in
  imprime_env env1 ;;
