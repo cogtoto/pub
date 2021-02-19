@@ -1,6 +1,6 @@
 # Makefile
 build:
-	ocamlbuild -use-ocamlfind pi.byte 
+	ocamlbuild -use-ocamlfind lambda_typee.byte 
 
 clean:
 	ocamlbuild -clean

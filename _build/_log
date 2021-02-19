@@ -1,8 +1,12 @@
 ### Starting build.
-# Target: pi.ml.depends, tags: { extension:ml, file:pi.ml, ocaml, ocamldep, quiet }
-ocamlfind ocamldep -modules pi.ml > pi.ml.depends # cached
-# Target: pi.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:pi.cmo, file:pi.ml, implem, ocaml, quiet }
-ocamlfind ocamlc -c -o pi.cmo pi.ml # cached
-# Target: pi.byte, tags: { byte, dont_link_with, extension:byte, file:pi.byte, link, ocaml, program, quiet }
-ocamlfind ocamlc -linkpkg pi.cmo -o pi.byte # cached
+# Target: lambda_typee.ml.depends, tags: { extension:ml, file:lambda_typee.ml, ocaml, ocamldep, quiet }
+ocamlfind ocamldep -modules lambda_typee.ml > lambda_typee.ml.depends
+# Target: terme.ml.depends, tags: { extension:ml, file:terme.ml, ocaml, ocamldep, quiet }
+ocamlfind ocamldep -modules terme.ml > terme.ml.depends # cached
+# Target: terme.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:terme.cmo, file:terme.ml, implem, ocaml, quiet }
+ocamlfind ocamlc -c -o terme.cmo terme.ml # cached
+# Target: lambda_typee.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:lambda_typee.cmo, file:lambda_typee.ml, implem, ocaml, quiet }
+ocamlfind ocamlc -c -o lambda_typee.cmo lambda_typee.ml
+# Target: lambda_typee.byte, tags: { byte, dont_link_with, extension:byte, file:lambda_typee.byte, link, ocaml, program, quiet }
+ocamlfind ocamlc -linkpkg terme.cmo lambda_typee.cmo -o lambda_typee.byte # cached
 # Compilation successful.
