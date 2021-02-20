@@ -7,20 +7,17 @@ type ltype =
 
 type env = ltype list
 
-
 let imprime ty = 
   let rec aux = function
    | Int  -> "entier"
    | Vart v -> v
    | Fleche (t1,t2) -> aux t1 ^ " -> " ^ aux t2
-in print_string (aux ty) ;;
+in aux ty ;;
 
 let rec imprime_env = function
-  | [] -> ()
-  | a::b -> imprime a ; print_string " ; " ; imprime_env b ;;
+  | [] -> ""
+  | a::b -> (imprime a) ^  " ; " ^ (imprime_env b) ;;
 
-let env1 = [Fleche (Int, Vart "a"); Vart "b"; Fleche (Int, Int)] in
- (imprime_env env1 ; print_newline) ;;
 
 (* preliminary step / création variables de types*)
 type terme = 
@@ -28,6 +25,7 @@ type terme =
   | App of terme * terme 
   | Lam of string * terme
   | Const of int
+  | Plus of terme * terme
 
 open String
 let occurences terme =
@@ -37,7 +35,7 @@ let occurences terme =
   |Lam (v, m) ->  [occ] @ 
                   [int_of_string((string_of_int(occ)^(string_of_int 1)))] @ 
                    aux (int_of_string((string_of_int(occ)^(string_of_int 2))))  m
-  |App (n,m) -> [occ] @
+  |App (n,m) | Plus (n,m) -> [occ] @
                 aux (int_of_string((string_of_int(occ)^(string_of_int 1))))  n @
                 aux (int_of_string((string_of_int(occ)^(string_of_int 2))))  m
     in aux 0  terme
@@ -56,9 +54,9 @@ let rec cut occ terme =
   |   Lam(v,m) when (int_of_string(string_of_char((string_of_int occ).[0]))) = 1 -> Var v
   |   Lam(v,m) when (int_of_string(string_of_char((string_of_int occ).[0]))) = 2  
                     ->  cut (int_of_string(reste (string_of_int occ)))  m
-  |   App(n,m) when (int_of_string(string_of_char((string_of_int occ).[0]))) = 1 
+  |   App(n,m) | Plus(n,m) when (int_of_string(string_of_char((string_of_int occ).[0]))) = 1 
                             -> cut (int_of_string(reste (string_of_int occ))) n
-  |   App(n,m) when (int_of_string(string_of_char((string_of_int occ).[0]))) = 2 
+  |   App(n,m) | Plus(n,m) when (int_of_string(string_of_char((string_of_int occ).[0]))) = 2 
                             -> cut (int_of_string(reste (string_of_int occ))) m
   |   _ -> raise (Erreur "cut") 
     
@@ -72,7 +70,7 @@ let  parcours terme =
         match (cut a terme) with
          | Var v -> (a, "alpha_" ^v ) :: aux b i
          | Const _ -> (a, "alpha_entier") ::  aux b i
-         | Lam _ | App _ -> (a, "alpha_" ^ string_of_int i) :: aux b (i+1) 
+         | Lam _ | App _| Plus _ -> (a, "alpha_" ^ string_of_int i) :: aux b (i+1) 
        end
   in aux (occurences terme) 1
   
@@ -84,20 +82,20 @@ let rec hm terme =
     | (oc, ty)::b -> 
        begin
         match (cut oc terme) with
-         | Const _ -> (Vart ty, Int) :: aux b
+         | Const _  -> (Vart ty, Int) :: aux b
          | Var _ -> (Vart ty, Vart ty) :: aux b
-         | App (e1,e2) -> 
-             begin 
+         | Plus (e1, e2) -> 
               let e1_type = List.assoc (int_of_string (string_of_int oc ^ "1")) p 
               and e2_type =  List.assoc (int_of_string (string_of_int oc ^ "2")) p
-             in  (Vart e1_type, Fleche(Vart e2_type , Vart ty) ) :: aux b 
-             end
-        | Lam (v,e) -> 
-              begin 
-               let v_type = List.assoc (int_of_string (string_of_int oc ^ "1")) p 
-               and e_type =  List.assoc (int_of_string (string_of_int oc ^ "2")) p
-              in  (Vart ty, Fleche(Vart v_type , Vart e_type) ) :: aux b 
-              end    
+                in (Vart ty, Int) :: (Vart e1_type, Int) :: (Vart e2_type, Int) :: aux b
+         | App (e1,e2) -> 
+              let e1_type = List.assoc (int_of_string (string_of_int oc ^ "1")) p 
+              and e2_type =  List.assoc (int_of_string (string_of_int oc ^ "2")) p
+                in  (Vart e1_type, Fleche(Vart e2_type , Vart ty) ) :: aux b 
+         | Lam (v,e) -> 
+              let v_type = List.assoc (int_of_string (string_of_int oc ^ "1")) p 
+              and e_type =  List.assoc (int_of_string (string_of_int oc ^ "2")) p
+                in  (Vart ty, Fleche(Vart v_type , Vart e_type) ) :: aux b 
        end 
   in aux p
 
@@ -121,7 +119,6 @@ let rec union l1 l2 =
   then union (tl l1) l2
   else (hd l1) :: (union (tl l1) l2)
 
-
 let rec listevararg = function
   | [] -> []
   | h::t -> (listevar h) @ (listevararg t)
@@ -132,6 +129,7 @@ and listevar = function
 
   let rec unifier equation =
     match equation with
+    | (Int, Int) -> []
     | (Vart(x),Vart(y)) -> if x=y then [] else [(Vart(x), Vart(y))]
     | (Fleche(f1,l1),Fleche(f2, l2)) ->  unifierliste [(f1, f2)] @ [(l1, l2)]
     | (Fleche(m,n),Vart(x)) -> unifier (Vart(x), Fleche(m,n))
@@ -140,8 +138,8 @@ and listevar = function
                               else [(Vart(x), Fleche(m,n)) ]
     | (Vart(x), Int) -> [(Vart(x), Int) ]
     | (Int, Vart(x)) -> [(Vart(x), Int) ]
-    | _ -> raise (Erreur "Unification Impossible")
-    and unifierliste = function
+    | (e1,e2) -> raise (Erreur ( "unif impossible \n" ^ (imprime e1) ^ " = " ^ (imprime e2) ) )
+     and unifierliste = function
     | [] -> []
     | (x,y)::t ->
     let t2 = unifierliste t in
@@ -156,4 +154,9 @@ and listevar = function
   let t2 = Lam ("x", Var "x") ;;
 
 let t3 = Lam ("f", Lam ("x", App(Var "f", Var "x"))) ;;
-let t4 =  App(Var "f", Const 5) ;;
+let t4 =  Lam ("x", Plus(Var "x", Const 5)) ;;
+
+let infer t = 
+  let p = parcours t in
+  let c = hm t in
+  substituer (Vart (assoc 0 p)) (unifierliste c) ;;

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  15 FEB 2021 10:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  20 FEB 2021 12:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1096,7 +1096,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 1082--1087
 
 Underfull \vbox (badness 2318) has occurred while \output is active []
 
- [25] [26] [27] [28
+ [25] [26]
+Underfull \hbox (badness 10000) in paragraph at lines 1185--1188
+
+ []
+
+[27] [28
 
 ]
 Chapitre 2.
@@ -1106,17 +1111,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [31] [32] [33] [34] (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-32.def
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
 )
-Underfull \hbox (badness 10000) in paragraph at lines 1511--1513
+Underfull \hbox (badness 10000) in paragraph at lines 1531--1533
 
  []
 
 <gumpp.jpeg, id=141, 73.7154pt x 96.36pt>
 File: gumpp.jpeg Graphic file (type jpg)
 <use gumpp.jpeg>
-Package pdftex.def Info: gumpp.jpeg  used on input line 1523.
+Package pdftex.def Info: gumpp.jpeg  used on input line 1543.
 (pdftex.def)             Requested size: 142.26378pt x 185.99564pt.
 [35 </home/vincent/vsc/gumpp.jpeg>]
-Overfull \hbox (62.19678pt too wide) in paragraph at lines 1582--1583
+Overfull \hbox (62.19678pt too wide) in paragraph at lines 1602--1603
 [][] 
  []
 
@@ -1124,7 +1129,7 @@ Overfull \hbox (62.19678pt too wide) in paragraph at lines 1582--1583
 <bruegel.jpg, id=153, 301.125pt x 240.9pt>
 File: bruegel.jpg Graphic file (type jpg)
 <use bruegel.jpg>
-Package pdftex.def Info: bruegel.jpg  used on input line 1743.
+Package pdftex.def Info: bruegel.jpg  used on input line 1763.
 (pdftex.def)             Requested size: 142.26378pt x 113.81482pt.
  [38]
 \g__tikzsymbols_savebox_F_0 g 0 G_10.95_Laughey_1_none_none_box=\box65
@@ -1145,37 +1150,37 @@ Chapitre 3.
 [45
 
 ] [46]
-LaTeX Font Info:    Trying to load font information for LGR+lmtt on input line 2165.
+LaTeX Font Info:    Trying to load font information for LGR+lmtt on input line 2185.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/cbfonts-fd/lgrlmtt.fd
 File: lgrlmtt.fd 2017/07/29 v1.2 Scalable Greek Latin Modern Typewriter
 )
-Underfull \hbox (badness 10000) in paragraph at lines 2170--2171
+Underfull \hbox (badness 10000) in paragraph at lines 2190--2191
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2171--2172
+Underfull \hbox (badness 10000) in paragraph at lines 2191--2192
 
  []
 
 [47] [48]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 2278.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 2298.
 
-Overfull \hbox (28.79843pt too wide) in paragraph at lines 2279--2287
+Overfull \hbox (28.79843pt too wide) in paragraph at lines 2299--2307
 \T1/lmtt/m/n/10.95 ((lambda (v1...vn) body) e1...en) \letterimp D  \T1/lmtt/m/n/10.95 NIL; $\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;ARG;$[] \OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;ARG;CLOSURE$\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 body\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;RTS$\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;JSR 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2279--2287
+Underfull \hbox (badness 10000) in paragraph at lines 2299--2307
 
  []
 
-LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 2303.
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 2323.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Overfull \hbox (0.23276pt too wide) detected at line 2325
+Overfull \hbox (0.23276pt too wide) detected at line 2345
 []
  []
 
@@ -1195,7 +1200,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [61] [62] [63] [64] (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
 File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
 )
-Underfull \hbox (badness 10000) in paragraph at lines 3036--3038
+Underfull \hbox (badness 10000) in paragraph at lines 3056--3058
 
  []
 
@@ -1204,7 +1209,7 @@ Chapitre 5.
 [67
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 3178--3182
+Underfull \hbox (badness 10000) in paragraph at lines 3198--3202
 
  []
 
@@ -1219,56 +1224,56 @@ Chapitre 6.
 <flocon1.pdf, id=286, 150.5625pt x 138.5175pt>
 File: flocon1.pdf Graphic file (type pdf)
 <use flocon1.pdf>
-Package pdftex.def Info: flocon1.pdf  used on input line 3666.
+Package pdftex.def Info: flocon1.pdf  used on input line 3686.
 (pdftex.def)             Requested size: 99.5875pt x 85.3579pt.
 <flocon2.pdf, id=287, 156.585pt x 136.51pt>
 File: flocon2.pdf Graphic file (type pdf)
 <use flocon2.pdf>
-Package pdftex.def Info: flocon2.pdf  used on input line 3667.
+Package pdftex.def Info: flocon2.pdf  used on input line 3687.
 (pdftex.def)             Requested size: 99.58806pt x 85.35811pt.
 <flocon3.pdf, id=288, 149.55875pt x 130.4875pt>
 File: flocon3.pdf Graphic file (type pdf)
 <use flocon3.pdf>
-Package pdftex.def Info: flocon3.pdf  used on input line 3668.
+Package pdftex.def Info: flocon3.pdf  used on input line 3688.
 (pdftex.def)             Requested size: 99.58539pt x 85.35942pt.
 <flocon4.pdf, id=289, 139.52126pt x 127.47626pt>
 File: flocon4.pdf Graphic file (type pdf)
 <use flocon4.pdf>
-Package pdftex.def Info: flocon4.pdf  used on input line 3669.
+Package pdftex.def Info: flocon4.pdf  used on input line 3689.
 (pdftex.def)             Requested size: 99.58661pt x 85.36195pt.
 <bretagne.png, id=290, 730.4088pt x 512.6352pt>
 File: bretagne.png Graphic file (type png)
 <use bretagne.png>
-Package pdftex.def Info: bretagne.png  used on input line 3675.
+Package pdftex.def Info: bretagne.png  used on input line 3695.
 (pdftex.def)             Requested size: 113.81102pt x 79.87221pt.
  [77 </home/vincent/vsc/flocon1.pdf> </home/vincent/vsc/flocon2.pdf> </home/vincent/vsc/flocon3.pdf> </home/vincent/vsc/flocon4.pdf> </home/vincent/vsc/bretagne.png>]
 <mandelbrot.png, id=318, 254.9525pt x 227.85126pt>
 File: mandelbrot.png Graphic file (type png)
 <use mandelbrot.png>
-Package pdftex.def Info: mandelbrot.png  used on input line 3736.
+Package pdftex.def Info: mandelbrot.png  used on input line 3756.
 (pdftex.def)             Requested size: 113.81102pt x 101.71507pt.
 
 Underfull \vbox (badness 1831) has occurred while \output is active []
 
  [78]
 LaTeX Font Info:    Font shape `U/logo/bx/n' in size <14.4> not available
-(Font)              Font shape `U/logo/b/n' tried instead on input line 3739.
+(Font)              Font shape `U/logo/b/n' tried instead on input line 3759.
 <imp.png, id=323, 573.14125pt x 491.8375pt>
 File: imp.png Graphic file (type png)
 <use imp.png>
-Package pdftex.def Info: imp.png  used on input line 3750.
+Package pdftex.def Info: imp.png  used on input line 3770.
 (pdftex.def)             Requested size: 113.81102pt x 97.6603pt.
  [79 </home/vincent/vsc/mandelbrot.png> </home/vincent/vsc/imp.png>]
 <snow.png, id=331, 636.3775pt x 750.805pt>
 File: snow.png Graphic file (type png)
 <use snow.png>
-Package pdftex.def Info: snow.png  used on input line 3822.
+Package pdftex.def Info: snow.png  used on input line 3842.
 (pdftex.def)             Requested size: 113.81102pt x 134.26839pt.
  [80] [81 </home/vincent/vsc/snow.png>] [82] [83] [84] [85]
 <sigmoid.png, id=354, 694.595pt x 729.72626pt>
 File: sigmoid.png Graphic file (type png)
 <use sigmoid.png>
-Package pdftex.def Info: sigmoid.png  used on input line 4154.
+Package pdftex.def Info: sigmoid.png  used on input line 4174.
 (pdftex.def)             Requested size: 142.2657pt x 142.25708pt.
  [86 </home/vincent/vsc/sigmoid.png>] [87] [88] [89] [90] [91] (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
@@ -1289,7 +1294,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  60i,24n,71p,517b,1716s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc} <./snow.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./beta.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/gttn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /home/vincent/vsc/document.pdf (101 pages, 10783230 bytes).
+Output written on /home/vincent/vsc/document.pdf (101 pages, 10784196 bytes).
 PDF statistics:
  540 PDF objects out of 1000 (max. 8388607)
  372 compressed objects within 4 object streams

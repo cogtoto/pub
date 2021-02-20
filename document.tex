@@ -1182,7 +1182,27 @@ let rec reduc_bruijn t =
 
 \section{Le $\lambda$-calcul simplement typé}
 \subsubsection{Implémentation}
-\subsubsection{Inférence de type}
+Un contexte, ou environnement de typage, $\Gamma$ est un ensemble de paires de la forme 
+$( x , \tau )$  où $x$ est une variable et $\tau$ un type.
+ Un jugement de typage est un triplet $\Gamma \vdash t:\tau$  \\
+
+ $t$ sera bien typé dans $\Gamma$  par les règles de jugement suivantes :
+\begin{gather*}
+  \mathrm{si}\ (x,\tau ) \in \Gamma  ,  \mathrm{alors}\ \Gamma \vdash x:\tau  \\
+  \mathrm{si}\  \Gamma \cup (x,\tau _{1})\vdash u:\tau _{2},  \mathrm{alors}\ \Gamma \vdash \lambda x\!:\!\tau _{1}.u\,:\,\tau _{1}\rightarrow \tau _{2} \\
+  \mathrm{si}\ \Gamma \vdash u:\tau _{1}\rightarrow \tau _{2}\ \mathrm{et}\ \Gamma \vdash v:\tau _{1},  
+    \mathrm{alors}\  \Gamma \vdash uv:\tau _{2} \\ 
+\end{gather*}
+  
+    \subsubsection{Inférence de type}
+L'agorithme se déroule en trois temps.
+\begin{enumerate}
+  \item Assignation préliminaire de types ou variables de types à chaque sous-terme de l'expression
+  \item Collecte des contraintes
+  \item Unification de ces constraintes afin de trouver la substitution la plus générale si l'expression est typable.
+  Dans le cas contraire, échec.
+\end{enumerate}
+
 \subsubsection{L'isomorphisme de Curry-Howard}
 
 \chapter{L'interprétation}
