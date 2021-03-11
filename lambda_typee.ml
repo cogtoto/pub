@@ -5,8 +5,6 @@ type ltype =
   | Vart of string
   | Fleche of ltype*ltype
 
-type env = ltype list
-
 let imprime ty = 
   let rec aux = function
    | Int  -> "entier"

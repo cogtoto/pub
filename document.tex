@@ -23,23 +23,24 @@
 \usepackage[utf8x]{inputenc}
 \usepackage{mflogo}
 \usepackage{wrapfig}
+\usepackage{coqdoc}
 \fvset{tabsize=3}
-
 
 \newfont{\letterimp}{beta}
 \newcommand{\imp}{{\letterimp D}\hspace{0.1cm}}
 \newfont{\lettersnow}{snow}
 \newcommand{\snow}{{\lettersnow S\hspace{0.2cm}}}
-
 \newcommand{\trans}{\overset{*}{\longrightarrow_{\beta}}}
 
 \title{Le calcul \\
      Réduction et résolution \\
-	 Exemples en Scheme et en ML \\ \vspace{1cm}
+	 Exemples en Scheme, ML et COQ \\ \vspace{1cm}
    \textgreek{Ἀγεωμέτρητος μη  εἰσίτω } \\
       }
 \author{Vincent Cognet}
-\date{Sainte Marguerite, le 27 avril 2020}
+\date{Sainte-Marguerite, le 27 avril 2020 \\
+      \url{https://github.com/cogtoto}}
+
 
 \newtheorem{definition}{Définition}
 \newtheorem{theoreme}{Théorème}
@@ -59,7 +60,7 @@
 the active will, the contemplative reason, and the desire for aesthetic perfection.} \cite{wm}
 
 
-C'est sous cet angle de l'esthétique que j'ai voulu modestement décrire ici quelques concepts 
+C'est sous cet angle de l'esthétique que j'ai voulu ici modestement décrire quelques concepts 
  des fondements mathématiques de l'informatique.
 
  \vspace{0.5cm}
@@ -1182,28 +1183,116 @@ let rec reduc_bruijn t =
 
 \section{Le $\lambda$-calcul simplement typé}
 \subsubsection{Implémentation}
-Un contexte, ou environnement de typage, $\Gamma$ est un ensemble de paires de la forme 
+Un contexte, ou environnement de typage $\Gamma$, est un ensemble de paires de la forme 
 $( x , \tau )$  où $x$ est une variable et $\tau$ un type.
  Un jugement de typage est un triplet $\Gamma \vdash t:\tau$  \\
 
- $t$ sera bien typé dans $\Gamma$  par les règles de jugement suivantes :
+ Le terme $t$ sera bien typé dans $\Gamma$  par les règles de jugement suivantes :
 \begin{gather*}
-  \mathrm{si}\ (x,\tau ) \in \Gamma  ,  \mathrm{alors}\ \Gamma \vdash x:\tau  \\
-  \mathrm{si}\  \Gamma \cup (x,\tau _{1})\vdash u:\tau _{2},  \mathrm{alors}\ \Gamma \vdash \lambda x\!:\!\tau _{1}.u\,:\,\tau _{1}\rightarrow \tau _{2} \\
-  \mathrm{si}\ \Gamma \vdash u:\tau _{1}\rightarrow \tau _{2}\ \mathrm{et}\ \Gamma \vdash v:\tau _{1},  
+  \mathrm{si}\ (x,\tau ) \in \Gamma  ,\  \mathrm{alors}\ \Gamma \vdash x:\tau  \\
+  \mathrm{si}\  \Gamma \cup (x,\tau _{1})\vdash u:\tau _{2},\  \mathrm{alors}\ \Gamma \vdash \lambda x\!:\!\tau _{1}.u\,:\,\tau _{1}\rightarrow \tau _{2} \\
+  \mathrm{si}\ \Gamma \vdash u:\tau _{1}\rightarrow \tau _{2}\ \mathrm{et}\ \Gamma \vdash v:\tau _{1},\  
     \mathrm{alors}\  \Gamma \vdash uv:\tau _{2} \\ 
 \end{gather*}
   
-    \subsubsection{Inférence de type}
-L'agorithme se déroule en trois temps.
+Afin de jouer avec ce $\lambda$-calcul typé, nous introduisons la constante de type \verb+Int+.
+
+
+\begin{Verbatim}
+type ltype = 
+| Int 
+| Vart of string
+| Fleche of ltype*ltype
+\end{Verbatim}
+
+De même, nous enrichissons notre définition de terme avec le constructeur \verb+Const of int+ et la fonction binaire  \verb+Plus+ 
+\begin{Verbatim}
+type terme = 
+  | Var of string 
+  | App of terme * terme 
+  | Lam of string * terme
+  | Const of int
+  | Plus of terme * terme
+\end{Verbatim}
+
+\subsubsection{Inférence de type d'un terme $t$}
+Prenons l'exemple du terme 
+$\mathtt{apply} \equiv \lambda f . \lambda x .fx$
+
+
+L'algorithme d'inférence se déroule en quatre temps.
+
 \begin{enumerate}
-  \item Assignation préliminaire de types ou variables de types à chaque sous-terme de l'expression
-  \item Collecte des contraintes
-  \item Unification de ces constraintes afin de trouver la substitution la plus générale si l'expression est typable.
-  Dans le cas contraire, échec.
+  \item Assignation préliminaire de types ou variables de types à chaque sous-terme de l'expression.
+  Pour cela, nous parcourons  l'arbre du terme en y affectant à chaque variable liée une variable de type, ainsi qu'à
+  chaque sous-terme. Ce parcours nous rend en sortie une aliste comprenant l'occurence et la variable de type associée $\alpha_i$
+ \begin{center} 
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=2cm},
+  level 2/.style={sibling distance=1.5cm}, scale=0.7]
+  \node{$\lambda$}
+  child { node {$f$}}
+  child { node {$\lambda$} 
+     child { node {$x$}}
+         child { node {@} 
+           child { node {$f$} }
+           child { node {$x$} }
+          }
+      }
+   ;
+\end{tikzpicture} 
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=3cm},
+  level 2/.style={sibling distance=3cm}, scale=0.7]
+  \node{$(0,\alpha_1)$}
+  child { node {$(1, \alpha_f)$}}
+  child { node {$(2, \alpha_2)$} 
+     child { node {$(21, \alpha_x)$}}
+         child { node {$(22, \alpha_3)$} 
+           child { node {$(221,\alpha_f)$ } }
+           child { node {$(222, \alpha_x)$} }
+          }
+      }
+   ;
+\end{tikzpicture} 
+\end{center}
+
+
+
+  \item Collecte des contraintes avec la fonction $T: \mathrm{terme} \mapsto \mathrm{type}$ 
+    \begin{itemize}
+      \item Pour une abstraction :  $e = \lambda x.e_1 $ \imp\ $T(e) = T(x) \rightarrow T(e_1) $
+      \item Pour une application :  $e = e_1 e_2$ \imp\ $T(e_1) = T(e_2) \rightarrow T(e) $
+      \item Pour l'application de l'addition  : $e=e_1+e_2$ \imp\ $T(e)= T(e_1) = T(e_2) = \mathtt{int} $
+    \end{itemize}  
+
+
+\begin{Verbatim}
+utop#  t ;;
+- : terme = Lam ("f", Lam ("x", App (Var "f", Var "x")))
+
+utop# hm t ;;
+- : (ltype * ltype) list =
+[(Vart "alpha_1", Fleche (Vart "alpha_f", Vart "alpha_2"));
+ (Vart "alpha_f", Vart "alpha_f");
+ (Vart "alpha_2", Fleche (Vart "alpha_x", Vart "alpha_3"));
+ (Vart "alpha_x", Vart "alpha_x");
+ (Vart "alpha_f", Fleche (Vart "alpha_x", Vart "alpha_3"));
+ (Vart "alpha_f", Vart "alpha_f"); (Vart "alpha_x", Vart "alpha_x")]
+\end{Verbatim}
+    
+  \item Unification de ces constraintes afin de trouver la substitution la plus générale si l'expression est typable. 
+  Dans le cas contraire, échec. Nous utilisons l'algorithme d'unification que nous détaillerons dans un chapitre suivant.
+
+  \item Nous appliquons cette substitution à la variable de type initialement affectée au terme $t$, à l'étape 1.
+\begin{Verbatim}
+  - : ltype = Fleche (Fleche (Vart "alpha_x", Vart "alpha_3"),
+                      Fleche (Vart "alpha_x", Vart "alpha_3"))
+\end{Verbatim}
 \end{enumerate}
 
-\subsubsection{L'isomorphisme de Curry-Howard}
+\subsubsection{Le code}
+
 
 \chapter{L'interprétation}
 
@@ -1212,7 +1301,7 @@ L'agorithme se déroule en trois temps.
 Nous avons vu que le $\lambda$-calcul utilise la réduction, basée sur un mécanisme de substitution.
 Les langages interprétés que nous allons implémenter n'utilisent pas ce mécanisme de substitution, mais
 font appel un environnement qui permet de représenter les paires variable/valeur.
-A l'application d'une fonction, cet environnement est \textit{(étendu)} avec les nouvelles paires variable/valeur
+A l'application d'une fonction, cet environnement est \textit{étendu} avec les nouvelles paires variable/valeur
 des arguments de la fonction.
 
 Nous perdons donc le côté  pur du $\lambda$-calcul qui se suffit à lui-même pour
@@ -2276,6 +2365,267 @@ $\lambda x^\phi.y^\psi $
 Le modus ponens et les axiomes permettent de simuler $(I_\Rightarrow )$ de la même façon que 
 l'abstraction du $\lambda$-calcul est simulée à l'aide des constantes $S$ et $K$ en logique combinatoire.
 
+
+\section{Compilation basique vers une machine à pile}
+Nous utilisons l'implémentation ci-dessous pour la représentation des piles sous
+formes de listes mutables.
+\begin{Verbatim}
+type 'a pile = 'a list ref ;;
+let empiler x p = p := x :: !p ;;
+
+exception Vide ;;
+
+let depiler p =  
+	match !p with
+  | [] -> raise Vide
+  |x::t -> p:=t ; x ;;
+
+let sommet p =
+	match !p with
+	| [] -> raise Vide
+	| x::t -> x  ;;
+\end{Verbatim}
+
+La machine à pile exécutera les instructions suivantes:\\
+\verb+["EMPILER"; "nombre"],["ADD"], ["SUB"], ["MUL"], ["STOP"]+
+
+La lecture d'une instruction est réalisée par la fonction \texttt{fetch}. Cette
+fonction parcourt de manière linéaire le code représenté par un \textit{array}.
+Chaque \texttt{fetch} incrémente la variable \verb+pc+ qui représente le
+\textit{program counter}.
+
+\begin{Verbatim}
+exception Erreur ;;
+	
+let executer code =
+	let pc = ref 0 in
+	let pile = ref [] in
+	let fetch code  =
+	begin
+		pc := !pc + 1 ; 
+		Array.get code (!pc - 1) 
+	end 
+	in
+	let rec exec () =
+		let instr = fetch code in
+		match instr with
+		| ["EMPILER"; n] -> ( empiler (int_of_string n) pile ; exec () )
+		| ["ADD"] -> let v2 = depiler pile in let v1 = depiler pile in 
+		            ( empiler (v1 + v2) pile ; exec () )
+		| ["SUB"] -> let v2 = depiler pile in let v1 = depiler pile in
+		            ( empiler (v1 - v2) pile ; exec () )
+		| ["MUL"] -> let v2 = depiler pile in let v1 = depiler pile in
+		            ( empiler (v1 * v2) pile ; exec () )
+		| ["STOP"] -> print_int (sommet pile)
+		| _ -> raise Erreur
+	in exec ()
+\end{Verbatim}
+
+Voici l'exécution de la machine à pile:
+\begin{Verbatim}
+let code = [| ["EMPILER"; "10"] ;["EMPILER"; "15"] ; ["ADD"] ;
+						  ["EMPILER"; "4"] ; ["MUL"] ; ["STOP"] |] ;;
+						  
+# executer code ;;
+# 100- : unit = ()
+\end{Verbatim}
+
+\subsection{Certification de la compilation avec le langage COQ}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% coqdoc --latex premier.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{Arith}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{ZArith}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{Bool}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{List}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{exp} : \coqdockw{Set} :=\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{Const} : \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{exp}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{Fois} : \coqdocvar{exp} \ensuremath{\rightarrow} \coqdocvar{exp} \ensuremath{\rightarrow} \coqdocvar{exp}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{Plus} : \coqdocvar{exp} \ensuremath{\rightarrow} \coqdocvar{exp} \ensuremath{\rightarrow} \coqdocvar{exp}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{expEval} (\coqdocvar{e}:\coqdocvar{exp}) : \coqdocvar{nat} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{e} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{Const} \coqdocvar{n} \ensuremath{\Rightarrow} \coqdocvar{n}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{Fois} \coqdocvar{e1} \coqdocvar{e2} \ensuremath{\Rightarrow} \coqdocvar{mult}  (\coqdocvar{expEval} \coqdocvar{e1}) (\coqdocvar{expEval} \coqdocvar{e2})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{Plus} \coqdocvar{e1} \coqdocvar{e2} \ensuremath{\Rightarrow} \coqdocvar{plus} (\coqdocvar{expEval} \coqdocvar{e1}) (\coqdocvar{expEval} \coqdocvar{e2})\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{instr} : \coqdockw{Set} :=\coqdoceol
+\coqdocindent{0.50em}
+\ensuremath{|} \coqdocvar{EMPILER} : \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{instr}\coqdoceol
+\coqdocindent{0.50em}
+\ensuremath{|} \coqdocvar{ADD} :  \coqdocvar{instr}\coqdoceol
+\coqdocindent{0.50em}
+\ensuremath{|} \coqdocvar{MUL} : \coqdocvar{instr}\coqdoceol
+\coqdocnoindent
+.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{programme} := \coqdocvar{list} \coqdocvar{instr}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{pile} := \coqdocvar{list} \coqdocvar{nat}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{instrExec} (\coqdocvar{i}:\coqdocvar{instr}) (\coqdocvar{s}: \coqdocvar{pile}) : \coqdocvar{option} \coqdocvar{pile}:=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{EMPILER} \coqdocvar{n} \ensuremath{\Rightarrow} \coqdocvar{Some} (\coqdocvar{n} :: \coqdocvar{s})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{ADD} \ensuremath{\Rightarrow} \coqdoceol
+\coqdocindent{2.50em}
+\coqdockw{match} \coqdocvar{s} \coqdockw{with}\coqdoceol
+\coqdocindent{2.50em}
+\ensuremath{|} \coqdocvar{arg1} :: \coqdocvar{arg2} :: \coqdocvar{s'} \ensuremath{\Rightarrow} \coqdocvar{Some} (\coqdocvar{expEval} (\coqdocvar{Plus} (\coqdocvar{Const}(\coqdocvar{arg1})) (\coqdocvar{Const}(\coqdocvar{arg2}))) :: \coqdocvar{s'})\coqdoceol
+\coqdocindent{2.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{None}\coqdoceol
+\coqdocindent{2.50em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{MUL} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{2.50em}
+\coqdockw{match} \coqdocvar{s} \coqdockw{with}\coqdoceol
+\coqdocindent{2.50em}
+\ensuremath{|} \coqdocvar{arg1} :: \coqdocvar{arg2} :: \coqdocvar{s'} \ensuremath{\Rightarrow} \coqdocvar{Some} (\coqdocvar{expEval} (\coqdocvar{Fois} (\coqdocvar{Const}(\coqdocvar{arg1})) (\coqdocvar{Const}(\coqdocvar{arg2}))) ::\coqdocvar{s'})\coqdoceol
+\coqdocindent{2.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{None}\coqdoceol
+\coqdocindent{2.50em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{progExec} (\coqdocvar{p}:\coqdocvar{programme})  (\coqdocvar{s}:\coqdocvar{pile}) : \coqdocvar{option} \coqdocvar{pile} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{p} \coqdockw{with} \coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{nil} \ensuremath{\Rightarrow} \coqdocvar{Some} \coqdocvar{s}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{i} :: \coqdocvar{p'} \ensuremath{\Rightarrow} \coqdoceol
+\coqdocindent{3.00em}
+\coqdockw{match} \coqdocvar{instrExec} \coqdocvar{i} \coqdocvar{s} \coqdockw{with}\coqdoceol
+\coqdocindent{3.00em}
+\ensuremath{|} \coqdocvar{None} \ensuremath{\Rightarrow} \coqdocvar{None}\coqdoceol
+\coqdocindent{3.00em}
+\ensuremath{|} \coqdocvar{Some} \coqdocvar{s'} \ensuremath{\Rightarrow} \coqdocvar{progExec} \coqdocvar{p'} \coqdocvar{s'} \coqdoceol
+\coqdocindent{3.00em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{compile} (\coqdocvar{e}:\coqdocvar{exp}) : \coqdocvar{programme} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{e} \coqdockw{with} \coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{Const} \coqdocvar{n} \ensuremath{\Rightarrow} \coqdocvar{EMPILER} \coqdocvar{n} :: \coqdocvar{nil}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{Plus} \coqdocvar{e1} \coqdocvar{e2} \ensuremath{\Rightarrow} \coqdocvar{compile} \coqdocvar{e2} ++ \coqdocvar{compile} \coqdocvar{e1} ++ \coqdocvar{ADD} :: \coqdocvar{nil}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{Fois} \coqdocvar{e1} \coqdocvar{e2} \ensuremath{\Rightarrow} \coqdocvar{compile} \coqdocvar{e2} ++ \coqdocvar{compile} \coqdocvar{e1} ++ \coqdocvar{MUL} :: \coqdocvar{nil}\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end} .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Eval} \coqdoctac{compute} \coqdoctac{in} (\coqdocvar{compile} (\coqdocvar{Const} 1999)) .\coqdoceol
+\coqdocnoindent
+\coqdockw{Eval} \coqdoctac{compute} \coqdoctac{in} (\coqdocvar{compile} (\coqdocvar{Fois} (\coqdocvar{Plus} (\coqdocvar{Const} 1999) (\coqdocvar{Const} 1)) (\coqdocvar{Const} 5))) .\coqdoceol
+\coqdocnoindent
+\coqdockw{Eval} \coqdoctac{compute} \coqdoctac{in} ( \coqdocvar{progExec} (\coqdocvar{compile} (\coqdocvar{Fois} (\coqdocvar{Plus} (\coqdocvar{Const} 1999) (\coqdocvar{Const} 1)) (\coqdocvar{Const} 5))) \coqdocvar{nil}) .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{compile\_correct\_lemme}: \coqdockw{\ensuremath{\forall}} (\coqdocvar{e}:\coqdocvar{exp}) (\coqdocvar{p}: \coqdocvar{programme}) (\coqdocvar{s}: \coqdocvar{pile}),\coqdoceol
+\coqdocindent{14.00em}
+\coqdocvar{progExec} (\coqdocvar{compile} \coqdocvar{e}++\coqdocvar{p}) \coqdocvar{s} = \coqdocvar{progExec} \coqdocvar{p} (\coqdocvar{expEval} \coqdocvar{e}::\coqdocvar{s})\coqdoceol
+\coqdocindent{0.50em}
+.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{induction} \coqdocvar{e}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{intros}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{unfold} \coqdocvar{compile}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{unfold} \coqdocvar{expEval}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{unfold} \coqdocvar{progExec} \coqdoctac{at} 1.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{simpl}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{fold} \coqdocvar{progExec}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{reflexivity}.\coqdoceol
+\coqdocemptyline
+\coqdocindent{0.50em}
+\coqdoctac{intros}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{unfold} \coqdocvar{compile}. \coqdoctac{fold} \coqdocvar{compile}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{unfold} \coqdocvar{expEval}. \coqdoctac{fold} \coqdocvar{expEval}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{rewrite} \coqdocvar{app\_assoc\_reverse}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{rewrite} \coqdocvar{IHe2}. \coqdoctac{rewrite} \coqdocvar{app\_assoc\_reverse}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{rewrite} \coqdocvar{IHe1}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{unfold} \coqdocvar{progExec} \coqdoctac{at} 1. \coqdoctac{simpl}. \coqdoctac{fold} \coqdocvar{progExec}. \coqdoctac{reflexivity}.\coqdoceol
+\coqdocemptyline
+\coqdocindent{0.50em}
+\coqdoctac{intros}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{unfold} \coqdocvar{compile}. \coqdoctac{fold} \coqdocvar{compile}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{rewrite} \coqdocvar{app\_assoc\_reverse}. \coqdoctac{rewrite} \coqdocvar{IHe2}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{rewrite} \coqdocvar{app\_assoc\_reverse}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{unfold} \coqdocvar{progExec} \coqdoctac{at} 1. \coqdoctac{simpl}. \coqdoctac{fold} \coqdocvar{progExec}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{rewrite} \coqdocvar{IHe1}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{unfold} \coqdocvar{progExec} \coqdoctac{at} 1. \coqdoctac{simpl}. \coqdoctac{fold} \coqdocvar{progExec}. \coqdoctac{reflexivity}.\coqdoceol
+\coqdocemptyline
+\coqdocindent{0.50em}
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{compile\_correct}: \coqdockw{\ensuremath{\forall}} \coqdocvar{e} : \coqdocvar{exp}, \coqdocvar{Some} ((\coqdocvar{expEval} \coqdocvar{e}) :: \coqdocvar{nil}) = (\coqdocvar{progExec} (\coqdocvar{compile} \coqdocvar{e}) \coqdocvar{nil}).\coqdoceol
+\coqdocnoindent
+\coqdoctac{intros}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} (\coqdocvar{app\_nil\_end} (\coqdocvar{compile} \coqdocvar{e})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{compile\_correct\_lemme}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{reflexivity}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Print} \coqdocvar{compile\_correct}.\coqdoceol
+\end{coqdoccode}
+
+
 \section{Compilation du LISP vers une machine abstraite}
 \subsubsection{La machine SECD}
 La machine SECD inventée par Landin est une machine abstraite utilisant quatre composants:
@@ -2450,14 +2800,21 @@ Les symboles $O$ et $S$ sont respectivement d'arité $0$ et $1$.
 Nous avons ainsi : $$T_\Sigma = \{0, S0, SS0, SSS0, ... \} $$
 En OCAML, nous pourrons écrire:
 \begin{Verbatim}
-type nat = Zero | S of nat 
+type entiers = Zero | S of entiers 
 \end{Verbatim}
 En Prolog:
 \begin{Verbatim}
-nat(zero).
-nat(s(X)) :- nat(X)
+entiers(zero).
+entiers(s(X)) :- entiers(X)
 \end{Verbatim}
-
+En Coq:
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{entiers} : \coqdockw{Set} := \coqdocvar{Zero} : \coqdocvar{entiers} \ensuremath{|} \coqdocvar{S} : \coqdocvar{entiers} \ensuremath{\rightarrow} \coqdocvar{entiers} .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\end{coqdoccode}
 Les termes se représentent naturellement sous forme d'arbres.
 
 Prenons par exemple le terme \verb+Func("f", [Func("g", [Var "x"; Var "y"]); Var "z"])+
@@ -3761,7 +4118,7 @@ let mandelbrot () =
 design de nouvelles fontes de manière très élégante sous forme d'équations.
 La programmation se fait principalement de manière déclarative.
 
-Je me suis ici amusé à créer un nouveau symbole  \imp que j'ai souvent
+Je me suis  amusé ici à créer le symbole  \imp que j'ai souvent
 utilisé dans cet article, principalement dans la section sur le $\lambda$-calcul. 
 
 \begin{figure}[H]
@@ -3940,71 +4297,6 @@ Nous avons ici utilisé l'opérateur \verb+|>+ défini comme suit \verb+let ( |>
 Cette fonction \verb+count+ est ainsi un morphisme entre le monoïde \verb+String_monoid+ et 
 le monoïde des entiers (avec $+$ comme fonction de composition interne et $0$
 comme élément neutre)
-
-\section{La machine à pile}
-Nous utilisons l'implémentation ci-dessous pour la représentation des piles sous
-formes de listes mutables.
-\begin{Verbatim}
-type 'a pile = 'a list ref ;;
-let empiler x p = p := x :: !p ;;
-
-exception Vide ;;
-
-let depiler p =  
-	match !p with
-  | [] -> raise Vide
-  |x::t -> p:=t ; x ;;
-
-let sommet p =
-	match !p with
-	| [] -> raise Vide
-	| x::t -> x  ;;
-\end{Verbatim}
-
-La machine à pile exécutera les instructions suivantes:\\
-\verb+["EMPILER"; "nombre"],["ADD"], ["SUB"], ["MUL"], ["STOP"]+
-
-La lecture d'une instruction est réalisée par la fonction \texttt{fetch}. Cette
-fonction parcourt de manière linéaire le code représenté par un \textit{array}.
-Chaque \texttt{fetch} incrémente la variable \verb+pc+ qui représente le
-\textit{program counter}.
-
-\begin{Verbatim}
-exception Erreur ;;
-	
-let executer code =
-	let pc = ref 0 in
-	let pile = ref [] in
-	let fetch code  =
-	begin
-		pc := !pc + 1 ; 
-		Array.get code (!pc - 1) 
-	end 
-	in
-	let rec exec () =
-		let instr = fetch code in
-		match instr with
-		| ["EMPILER"; n] -> ( empiler (int_of_string n) pile ; exec () )
-		| ["ADD"] -> let v2 = depiler pile in let v1 = depiler pile in 
-		            ( empiler (v1 + v2) pile ; exec () )
-		| ["SUB"] -> let v2 = depiler pile in let v1 = depiler pile in
-		            ( empiler (v1 - v2) pile ; exec () )
-		| ["MUL"] -> let v2 = depiler pile in let v1 = depiler pile in
-		            ( empiler (v1 * v2) pile ; exec () )
-		| ["STOP"] -> print_int (sommet pile)
-		| _ -> raise Erreur
-	in exec ()
-\end{Verbatim}
-
-Voici l'exécution de la machine à pile:
-\begin{Verbatim}
-let code = [| ["EMPILER"; "10"] ;["EMPILER"; "15"] ; ["ADD"] ;
-						  ["EMPILER"; "4"] ; ["MUL"] ; ["STOP"] |] ;;
-						  
-# executer code ;;
-# 100- : unit = ()
-\end{Verbatim}
-
 \section{Machine Learning and Neural Networks}
 
 \subsection{Introduction}
@@ -4888,8 +5180,48 @@ Et également $e = \lim_{n \rightarrow \infty} (\frac{1}{1+n})^n $
     \draw[domain=0.01:1,   smooth, variable=\x, red] plot (\x, {-\x});
 \end{tikzpicture}
 \end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Découverte de COQ}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% coqdoc --latex basique.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%s
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{Bool}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} \coqdockw{if} \coqdocvar{true} \coqdockw{then} 3 \coqdockw{else} 5.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{leibniz} (\coqdocvar{a} \coqdocvar{b}:\coqdockw{Set}):\coqdockw{Prop} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{\ensuremath{\forall}} \coqdocvar{f}:\coqdockw{Set}\ensuremath{\rightarrow}\coqdockw{Prop}, \coqdocvar{f} \coqdocvar{a} \ensuremath{\rightarrow} \coqdocvar{f} \coqdocvar{b} .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{imp}: \coqdockw{\ensuremath{\forall}} (\coqdocvar{a} \coqdocvar{b} \coqdocvar{c} : \coqdockw{Prop}), ((\coqdocvar{a}\ensuremath{\rightarrow}\coqdocvar{b}) \ensuremath{\land} (\coqdocvar{a}\ensuremath{\rightarrow} \coqdocvar{c})) \ensuremath{\rightarrow} \coqdocvar{a} \ensuremath{\rightarrow} (\coqdocvar{b}\ensuremath{\land}\coqdocvar{c}) .\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{intros}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{destruct}  \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}. \coqdoctac{apply} \coqdocvar{H}. \coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H1}. \coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Print} \coqdocvar{imp}.\coqdoceol
+\coqdocemptyline
+\coqdocemptyline
+\end{coqdoccode}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Srivanasa Ramanujan}
 Le mathématicien indien aurait  découvert la très belle formule 
@@ -4930,7 +5262,7 @@ $$
  \end{array}
  \]
 
-\begin{center}
+ \begin{center}
 \begin{tikzpicture}
   \draw [line width=0.7mm, smooth, tension=1] plot coordinates{(0,0) (1,-0.5) (2.1, 0) (2.5, 0.55)} ;
   \draw [line width=0.7mm, smooth, tension=1] plot coordinates{(0,0) (1,0.5) (2.1, 0) (2.5,-0.55)} ;
@@ -4953,8 +5285,6 @@ $$
 
 Eirene umin !
 }
-% help
-% yo
 
 \bibliographystyle{plain}
 \bibliography{book}

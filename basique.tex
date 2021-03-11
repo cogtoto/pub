@@ -1,0 +1,54 @@
+\documentclass[12pt]{report}
+\usepackage[]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% coqdoc --latex basique.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{basique}{Library }{basique}
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{Bool}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} \coqdockw{if} \coqdocvar{true} \coqdockw{then} 3 \coqdockw{else} 5.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{leibniz} (\coqdocvar{a} \coqdocvar{b}:\coqdockw{Set}):\coqdockw{Prop} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{\ensuremath{\forall}} \coqdocvar{f}:\coqdockw{Set}\ensuremath{\rightarrow}\coqdockw{Prop}, \coqdocvar{f} \coqdocvar{a} \ensuremath{\rightarrow} \coqdocvar{f} \coqdocvar{b} .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{imp}: \coqdockw{\ensuremath{\forall}} (\coqdocvar{a} \coqdocvar{b} \coqdocvar{c} : \coqdockw{Prop}), ((\coqdocvar{a}\ensuremath{\rightarrow}\coqdocvar{b}) \ensuremath{\land} (\coqdocvar{a}\ensuremath{\rightarrow} \coqdocvar{c})) \ensuremath{\rightarrow} \coqdocvar{a} \ensuremath{\rightarrow} (\coqdocvar{b}\ensuremath{\land}\coqdocvar{c}) .\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{intros}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{destruct}  \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}. \coqdoctac{apply} \coqdocvar{H}. \coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H1}. \coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Print} \coqdocvar{imp}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{entiers} : \coqdockw{Set} := \coqdocvar{Zero} : \coqdocvar{entiers} \ensuremath{|} \coqdocvar{S} : \coqdocvar{entiers} \ensuremath{\rightarrow} \coqdocvar{entiers} .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Check} \coqdocvar{entiers}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Check} (\coqdocvar{S} (\coqdocvar{S} (\coqdocvar{S} \coqdocvar{Zero}))).\coqdoceol
+\end{coqdoccode}
+\end{document}
