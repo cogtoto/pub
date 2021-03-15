@@ -18,8 +18,7 @@ Fixpoint expEval (e:exp) : nat :=
 Inductive instr : Set :=
  | EMPILER : nat -> instr
  | ADD :  instr
- | MUL : instr
-.
+ | MUL : instr.
 
 Definition programme := list instr.
 Definition pile := list nat.
@@ -61,8 +60,8 @@ Eval compute in (compile (Fois (Plus (Const 1999) (Const 1)) (Const 5))) .
 Eval compute in ( progExec (compile (Fois (Plus (Const 1999) (Const 1)) (Const 5))) nil) .
 
 Lemma compile_correct_lemme: forall (e:exp) (p: programme) (s: pile),
-                            progExec (compile e++p) s = progExec p (expEval e::s)
- .
+                            progExec (compile e++p) s = progExec p (expEval e::s) .
+Proof.
  induction e.
  intros.
  unfold compile.
@@ -88,7 +87,7 @@ Lemma compile_correct_lemme: forall (e:exp) (p: programme) (s: pile),
  rewrite IHe1. 
  unfold progExec at 1. simpl. fold progExec. reflexivity.
 
- Qed.
+Qed.
 
 Theorem compile_correct: forall e : exp, Some ((expEval e) :: nil) = (progExec (compile e) nil).
 intros.

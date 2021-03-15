@@ -2431,6 +2431,21 @@ let code = [| ["EMPILER"; "10"] ;["EMPILER"; "15"] ; ["ADD"] ;
 \end{Verbatim}
 
 \subsection{Certification de la compilation avec le langage COQ}
+\textit{Quod erat demonstrandum.}
+\begin{center}
+\begin{tikzpicture}
+ \node at(0,6) {$e$} ;
+ \node at(6,6) {$c$} ;
+ \node at(6,0) {$v_2$} ;
+ \node at(0,0) {$v_1$} ;
+\draw[dashed] (0.3,0) -- node[below]{$v_1=v_2$} node[above]{$\forall e, eval(e)= exe(compile\ e)$}(5.7,0)  ;
+\draw[-latex] (6,5.7) -- node[rotate=-90, below]{sémantique de la machine } (6,0.3) ;
+\draw[-latex] (0.3,6) -- node[below]{sémantique du compilateur } (5.7,6) ;
+\draw[-latex] (0,5.7) -- node[rotate=-90, above]{sémantique du langage } (0,0.3);
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% This file has been automatically generated with the command
 %% coqdoc --latex premier.v 

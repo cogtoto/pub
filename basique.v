@@ -1,22 +1,38 @@
 Require Import Bool Arith.
+Require Import List String.
+Import ListNotations.
+Open Scope list_scope.
+Open Scope string_scope.
 
-Compute if true then 3 else 5.
+Check [1;2;3;4].
 
-Definition leibniz (a b:Set):Prop :=
-  forall f:Set->Prop, f a -> f b .
+Section Insertion_sort.
 
-Theorem imp: forall (a b c : Prop), ((a->b) /\ (a-> c)) -> a -> (b/\c) .
-Proof.
-intros.
-destruct  H.
-split. apply H. assumption.
-apply H1. assumption.
-Qed.
+Fixpoint insert  (a:nat) (l : list nat) : list nat :=
+  match l with
+  | nil => a::nil
+  | h::t => if (leb a h) then a::l
+            else h::(insert a t)
+  end.
 
-Print imp.
+Compute insert 6 [1;3;6;7;9].
 
-Inductive entiers : Set := Zero : entiers | S : entiers -> entiers .
-Check entiers.
-Print entiers.
+Fixpoint tri (l: list nat) : list nat :=
+  match l with
+   | nil => nil
+   | h::t => insert h (tri t)
+  end.
 
-Print entiers_ind.
+Compute tri [5;2;9;2;8;7;5;6;2;9;4;1;0;55].
+
+Inductive Triée : list nat -> Prop :=
+ | l_0 : Triée []
+ | l_1 : forall n, Triée [n]
+ | l_2 : forall n1 n2 l, n1<=n2 -> Triée (n2::l) -> Triée (n1::n2::l).
+
+Check Triée.
+
+Definition Tri_spec (f : list nat -> list nat) :=
+  forall l, let l' := f l in Triée l' .
+  
+ Check leb.
