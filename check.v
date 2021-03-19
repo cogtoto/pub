@@ -58,4 +58,6 @@ Fixpoint approx (A:Set) (s: stream A) (n : nat) : list A :=
       end
   end.
 
+ Check approx.
+
 Compute approx nat zeroes 10.

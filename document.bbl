@@ -8,6 +8,10 @@ Badiou Alain.
 \newblock {\em Eloge des mathématiques}.
 \newblock Flammarion, 2015.
 
+\bibitem{baren}
+Henk Barendregt.
+\newblock {\em Lambda calculi with types}.
+
 \bibitem{plisp}
 Jacques Chazarain.
 \newblock {\em Programmer avec Scheme: De la pratique {\`a} la th{\'e}orie}.

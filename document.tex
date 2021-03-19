@@ -1291,9 +1291,86 @@ utop# hm t ;;
 \end{Verbatim}
 \end{enumerate}
 
-\subsubsection{Le code}
+\section{Les \textit{Pure Type Systems}}
+  \subsubsection{Introduction}
+Le $\lambda$-calcul simplement typé que nous nommons $\lambda _\rightarrow$ ne permet
+de représenter des fonctions que des termes vers les termes. De manière générale, nous souhaiterions
+pouvoir modéliser :
+\begin{itemize}
+  \item Fonction des termes vers les termes 
+  \item Fonction des types vers les termes pour permettre le polymorphisme
+  \item Fonction des types vers les types pour avoir des constructeurs de type 
+  \item Fonction des termes vers les types pour avoir des types dépendants
+\end{itemize}
+Nous reprenons ici le très bon formalisme de Barendregt \cite{baren}
+\begin{definition}
+  La syntaxe est la suivante :
+  $$ \mathcal{T} ::= V \,|\, C \,|\,\mathcal{T} \,| \,\mathcal{T} 
+  \,|\, \lambda V:\mathcal{T}.\mathcal{T} \,|\, \Pi V : \mathcal{T}.\mathcal{T}
+  $$
+  $C$ est l'ensemble des deux constantes : $*$ et $\square$ \\
+  $V$ est un ensemble fini de variables \\
+  $\lambda$ est l'opération d'abstraction \\
+  $\Pi$ est l'opérateur produit permettant de matérialiser le type dépendant 
+\end{definition}
+Il n'y a donc pas de distinction entre les termes et les types.
+Chaque terme est annoté de son type, contrairement au $\lambda$-calcul simplement typé 
+\textit{à la Curry} que nous
+avons présenté précedemment où les termes étaient libres de type et un mécanisme d'inférence de 
+type permettait ensuite d'associer à chaque terme un type.
+Le formalisme \textit{PTS} repose sur une base de  $\lambda$-calcul simplement typé 
+\textit{à la Church}.
+
+L'environnement de type $\Gamma$ est défini par :
+$$ \Gamma ::= \emptyset\ |\  \Gamma, x:\mathcal{T} $$
+Nous avons les règles de réduction suivantes:
+$$
+\begin{array}{l}
+ \dfrac {}{(\lambda x:A.B)~C\to _{\beta }B[C/x]} \\[1cm]
+ 
+
+\dfrac {B\to _{\beta }B'}{\lambda x:A.B\to _{\beta }\lambda x:A.B'} \\[1cm]
 
 
+\dfrac {A\to _{\beta }A'}{\lambda x:A.B\to _{\beta }\lambda x:A'.B} \\[1cm]
+
+
+\dfrac {B\to _{\beta }B'}{\Pi x:A.B\to _{\beta }\Pi x:A.B'} \\[1cm]
+
+
+\dfrac {A\to _{\beta }A'}{\Pi x:A.B\to _{\beta }\Pi x:A'.B} \\[1cm]
+  
+\end{array}
+$$
+Nous avons les règles de typage suivantes.
+\[
+\begin{array}{l}
+
+\dfrac {}{\vdash *:\square }\quad {\text{(Axiom)}}\\[1cm]
+
+\dfrac {\Gamma \vdash A:s\quad x{\text{ does not occur in }}\Gamma }{\Gamma ,x:A\vdash x:A}\quad {\text{(Start)}}\\[1cm]
+
+\dfrac {\Gamma \vdash A:B\quad \Gamma \vdash C:s}{\Gamma ,x:C\vdash A:B}\quad {\text{(Weakening)}}\\[1cm]
+
+\dfrac {\Gamma \vdash C:\Pi x:A.B\quad \Gamma \vdash a:A}{\Gamma \vdash Ca:B[a/x]}\quad {\text{(Application)}}\\[1cm]
+
+\dfrac {\Gamma \vdash A:B\quad B=_{\beta }B'\quad \Gamma \vdash B':s}{\Gamma \vdash A:B'}\quad {\text{(Conversion)}}\\[1cm]
+\end{array}
+\]
+
+Soit la paire $( s 1 , s 2 ) $, nous avons les deux règles ci-dessous:
+$$
+\begin{array}{l}
+
+\dfrac {\Gamma \vdash A:s_{1}\quad \Gamma ,x:A\vdash B:s_{2}}{\Gamma \vdash \Pi x:A.B:s_{2}}\quad {\text{(Product)}} \\[1cm]
+
+\dfrac {\Gamma \vdash A:s_{1}\quad \Gamma ,x:A\vdash b:B\quad \Gamma ,x:A\vdash B:s_{2}}{\Gamma \vdash \lambda x:A.b:\Pi x:A.B}\quad {\text{(Abstraction)}}
+\end{array}
+$$
+
+Pour pouvoir éprouver notre système PTS, nous ajoutons les constantes suivantes à notre environnement $\Gamma$
+$$\Gamma = \{ (*:\square) ;\ (\text{nat}:*) ;\ (O:nat) ;\ (\text{succ}:\Pi x:\text{nat}.\text{nat}) \} $$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{L'interprétation}
 
 

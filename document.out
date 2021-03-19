@@ -12,68 +12,69 @@
 \BOOKMARK [2][-]{subsection.1.5.3}{La fonction factorielle}{section.1.5}% 12
 \BOOKMARK [1][-]{section.1.6}{La notation de de Bruijn}{chapter.1}% 13
 \BOOKMARK [1][-]{section.1.7}{Le -calcul simplement typ\351}{chapter.1}% 14
-\BOOKMARK [0][-]{chapter.2}{L'interpr\351tation}{}% 15
-\BOOKMARK [1][-]{section.2.1}{Introduction}{chapter.2}% 16
-\BOOKMARK [1][-]{section.2.2}{Un interpr\350te MiniScheme avec OCAML}{chapter.2}% 17
-\BOOKMARK [2][-]{subsection.2.2.1}{L'\351valuation}{section.2.2}% 18
-\BOOKMARK [2][-]{subsection.2.2.2}{Les \351tapes Read, Eval, Print}{section.2.2}% 19
-\BOOKMARK [2][-]{subsection.2.2.3}{Liaison lexicale vs liaison dynamique}{section.2.2}% 20
-\BOOKMARK [2][-]{subsection.2.2.4}{Gestion de l'environnement}{section.2.2}% 21
-\BOOKMARK [1][-]{section.2.3}{Un interpr\350te LISP avec le nouvel interpr\350te MiniScheme \203}{chapter.2}% 22
-\BOOKMARK [1][-]{section.2.4}{L'auto-interpr\351tation de l'interpr\350te}{chapter.2}% 23
-\BOOKMARK [2][-]{subsection.2.4.1}{La tour de Babel}{section.2.4}% 24
-\BOOKMARK [2][-]{subsection.2.4.2}{R\351ification et r\351flexion}{section.2.4}% 25
-\BOOKMARK [0][-]{chapter.3}{La compilation}{}% 26
-\BOOKMARK [1][-]{section.3.1}{Compilation des -termes en termes applicatifs}{chapter.3}% 27
-\BOOKMARK [1][-]{section.3.2}{Compilation basique vers une machine \340 pile}{chapter.3}% 28
-\BOOKMARK [2][-]{subsection.3.2.1}{Certification de la compilation avec le langage COQ}{section.3.2}% 29
-\BOOKMARK [1][-]{section.3.3}{Compilation du LISP vers une machine abstraite}{chapter.3}% 30
-\BOOKMARK [0][-]{chapter.4}{La r\351solution}{}% 31
-\BOOKMARK [1][-]{section.4.1}{Repr\351sentation des termes finis}{chapter.4}% 32
-\BOOKMARK [1][-]{section.4.2}{La substitution}{chapter.4}% 33
-\BOOKMARK [1][-]{section.4.3}{Filtrage et r\351\351criture}{chapter.4}% 34
-\BOOKMARK [2][-]{subsection.4.3.1}{Le filtrage}{section.4.3}% 35
-\BOOKMARK [2][-]{subsection.4.3.2}{La r\351\351criture et l'arithm\351tique de Peano}{section.4.3}% 36
-\BOOKMARK [1][-]{section.4.4}{L'unification des termes}{chapter.4}% 37
-\BOOKMARK [1][-]{section.4.5}{Un mini PROLOG}{chapter.4}% 38
-\BOOKMARK [1][-]{section.4.6}{Quelques exemples de programmation en PROLOG}{chapter.4}% 39
-\BOOKMARK [2][-]{subsection.4.6.1}{Les entiers naturels}{section.4.6}% 40
-\BOOKMARK [2][-]{subsection.4.6.2}{Les additions de Peano}{section.4.6}% 41
-\BOOKMARK [2][-]{subsection.4.6.3}{La base g\351n\351alogique}{section.4.6}% 42
-\BOOKMARK [1][-]{section.4.7}{L'algorithme de compl\351tion de Knuth-Bendix}{chapter.4}% 43
-\BOOKMARK [2][-]{subsection.4.7.1}{Confluence et paires critiques}{section.4.7}% 44
-\BOOKMARK [2][-]{subsection.4.7.2}{Terminaison}{section.4.7}% 45
-\BOOKMARK [2][-]{subsection.4.7.3}{Compl\351tion de Knuth-Bendix}{section.4.7}% 46
-\BOOKMARK [0][-]{chapter.5}{La calculabilit\351}{}% 47
-\BOOKMARK [1][-]{section.5.1}{Les fonctions r\351cursives}{chapter.5}% 48
-\BOOKMARK [1][-]{section.5.2}{La machine de Turing}{chapter.5}% 49
-\BOOKMARK [1][-]{section.5.3}{La th\350se de Church}{chapter.5}% 50
-\BOOKMARK [0][-]{chapter.6}{Annexes / Divers}{}% 51
-\BOOKMARK [1][-]{section.6.1}{Quelques fonctions sur les listes}{chapter.6}% 52
-\BOOKMARK [1][-]{section.6.2}{Les listes mutables}{chapter.6}% 53
-\BOOKMARK [1][-]{section.6.3}{Les listes infinies ou streams}{chapter.6}% 54
-\BOOKMARK [1][-]{section.6.4}{Le module Graphics d'OCAML, les fractales}{chapter.6}% 55
-\BOOKMARK [1][-]{section.6.5}{Utilisation de Metafont}{chapter.6}% 56
-\BOOKMARK [1][-]{section.6.6}{The boxes}{chapter.6}% 57
-\BOOKMARK [1][-]{section.6.7}{Les modules OCAML. Mod\351lisation d'un mono\357de}{chapter.6}% 58
-\BOOKMARK [1][-]{section.6.8}{Machine Learning and Neural Networks}{chapter.6}% 59
-\BOOKMARK [2][-]{subsection.6.8.1}{Introduction}{section.6.8}% 60
-\BOOKMARK [2][-]{subsection.6.8.2}{Un peu de th\351orie}{section.6.8}% 61
-\BOOKMARK [2][-]{subsection.6.8.3}{Calcul matriciel}{section.6.8}% 62
-\BOOKMARK [2][-]{subsection.6.8.4}{Fonctions d'activation}{section.6.8}% 63
-\BOOKMARK [1][-]{section.6.9}{Les nombres premiers. L'algorithme RSA}{chapter.6}% 64
-\BOOKMARK [1][-]{section.6.10}{Approximation du nombre \040}{chapter.6}% 65
-\BOOKMARK [2][-]{subsection.6.10.1}{La m\351thode des polygones}{section.6.10}% 66
-\BOOKMARK [2][-]{subsection.6.10.2}{La s\351rie altern\351e de Leibniz}{section.6.10}% 67
-\BOOKMARK [2][-]{subsection.6.10.3}{La loi des grands nombres}{section.6.10}% 68
-\BOOKMARK [2][-]{subsection.6.10.4}{Le produit de Wallis}{section.6.10}% 69
-\BOOKMARK [2][-]{subsection.6.10.5}{L'int\351grale 01 11+x2 dx}{section.6.10}% 70
-\BOOKMARK [1][-]{section.6.11}{Po\351sies}{chapter.6}% 71
-\BOOKMARK [1][-]{section.6.12}{L'irrationalit\351 de 2}{chapter.6}% 72
-\BOOKMARK [1][-]{section.6.13}{D\351monstration non constructive}{chapter.6}% 73
-\BOOKMARK [1][-]{section.6.14}{L'hyperbole xy=1}{chapter.6}% 74
-\BOOKMARK [1][-]{section.6.15}{L'exponentielle}{chapter.6}% 75
-\BOOKMARK [1][-]{section.6.16}{Les fonctions sin1x et x . sin1x }{chapter.6}% 76
-\BOOKMARK [1][-]{section.6.17}{D\351couverte de COQ}{chapter.6}% 77
-\BOOKMARK [1][-]{section.6.18}{Srivanasa Ramanujan}{chapter.6}% 78
-\BOOKMARK [1][-]{section.6.19}{L'alphabet grec. Extraits du nouveau testament}{chapter.6}% 79
+\BOOKMARK [1][-]{section.1.8}{Les Pure Type Systems}{chapter.1}% 15
+\BOOKMARK [0][-]{chapter.2}{L'interpr\351tation}{}% 16
+\BOOKMARK [1][-]{section.2.1}{Introduction}{chapter.2}% 17
+\BOOKMARK [1][-]{section.2.2}{Un interpr\350te MiniScheme avec OCAML}{chapter.2}% 18
+\BOOKMARK [2][-]{subsection.2.2.1}{L'\351valuation}{section.2.2}% 19
+\BOOKMARK [2][-]{subsection.2.2.2}{Les \351tapes Read, Eval, Print}{section.2.2}% 20
+\BOOKMARK [2][-]{subsection.2.2.3}{Liaison lexicale vs liaison dynamique}{section.2.2}% 21
+\BOOKMARK [2][-]{subsection.2.2.4}{Gestion de l'environnement}{section.2.2}% 22
+\BOOKMARK [1][-]{section.2.3}{Un interpr\350te LISP avec le nouvel interpr\350te MiniScheme \203}{chapter.2}% 23
+\BOOKMARK [1][-]{section.2.4}{L'auto-interpr\351tation de l'interpr\350te}{chapter.2}% 24
+\BOOKMARK [2][-]{subsection.2.4.1}{La tour de Babel}{section.2.4}% 25
+\BOOKMARK [2][-]{subsection.2.4.2}{R\351ification et r\351flexion}{section.2.4}% 26
+\BOOKMARK [0][-]{chapter.3}{La compilation}{}% 27
+\BOOKMARK [1][-]{section.3.1}{Compilation des -termes en termes applicatifs}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.2}{Compilation basique vers une machine \340 pile}{chapter.3}% 29
+\BOOKMARK [2][-]{subsection.3.2.1}{Certification de la compilation avec le langage COQ}{section.3.2}% 30
+\BOOKMARK [1][-]{section.3.3}{Compilation du LISP vers une machine abstraite}{chapter.3}% 31
+\BOOKMARK [0][-]{chapter.4}{La r\351solution}{}% 32
+\BOOKMARK [1][-]{section.4.1}{Repr\351sentation des termes finis}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.2}{La substitution}{chapter.4}% 34
+\BOOKMARK [1][-]{section.4.3}{Filtrage et r\351\351criture}{chapter.4}% 35
+\BOOKMARK [2][-]{subsection.4.3.1}{Le filtrage}{section.4.3}% 36
+\BOOKMARK [2][-]{subsection.4.3.2}{La r\351\351criture et l'arithm\351tique de Peano}{section.4.3}% 37
+\BOOKMARK [1][-]{section.4.4}{L'unification des termes}{chapter.4}% 38
+\BOOKMARK [1][-]{section.4.5}{Un mini PROLOG}{chapter.4}% 39
+\BOOKMARK [1][-]{section.4.6}{Quelques exemples de programmation en PROLOG}{chapter.4}% 40
+\BOOKMARK [2][-]{subsection.4.6.1}{Les entiers naturels}{section.4.6}% 41
+\BOOKMARK [2][-]{subsection.4.6.2}{Les additions de Peano}{section.4.6}% 42
+\BOOKMARK [2][-]{subsection.4.6.3}{La base g\351n\351alogique}{section.4.6}% 43
+\BOOKMARK [1][-]{section.4.7}{L'algorithme de compl\351tion de Knuth-Bendix}{chapter.4}% 44
+\BOOKMARK [2][-]{subsection.4.7.1}{Confluence et paires critiques}{section.4.7}% 45
+\BOOKMARK [2][-]{subsection.4.7.2}{Terminaison}{section.4.7}% 46
+\BOOKMARK [2][-]{subsection.4.7.3}{Compl\351tion de Knuth-Bendix}{section.4.7}% 47
+\BOOKMARK [0][-]{chapter.5}{La calculabilit\351}{}% 48
+\BOOKMARK [1][-]{section.5.1}{Les fonctions r\351cursives}{chapter.5}% 49
+\BOOKMARK [1][-]{section.5.2}{La machine de Turing}{chapter.5}% 50
+\BOOKMARK [1][-]{section.5.3}{La th\350se de Church}{chapter.5}% 51
+\BOOKMARK [0][-]{chapter.6}{Annexes / Divers}{}% 52
+\BOOKMARK [1][-]{section.6.1}{Quelques fonctions sur les listes}{chapter.6}% 53
+\BOOKMARK [1][-]{section.6.2}{Les listes mutables}{chapter.6}% 54
+\BOOKMARK [1][-]{section.6.3}{Les listes infinies ou streams}{chapter.6}% 55
+\BOOKMARK [1][-]{section.6.4}{Le module Graphics d'OCAML, les fractales}{chapter.6}% 56
+\BOOKMARK [1][-]{section.6.5}{Utilisation de Metafont}{chapter.6}% 57
+\BOOKMARK [1][-]{section.6.6}{The boxes}{chapter.6}% 58
+\BOOKMARK [1][-]{section.6.7}{Les modules OCAML. Mod\351lisation d'un mono\357de}{chapter.6}% 59
+\BOOKMARK [1][-]{section.6.8}{Machine Learning and Neural Networks}{chapter.6}% 60
+\BOOKMARK [2][-]{subsection.6.8.1}{Introduction}{section.6.8}% 61
+\BOOKMARK [2][-]{subsection.6.8.2}{Un peu de th\351orie}{section.6.8}% 62
+\BOOKMARK [2][-]{subsection.6.8.3}{Calcul matriciel}{section.6.8}% 63
+\BOOKMARK [2][-]{subsection.6.8.4}{Fonctions d'activation}{section.6.8}% 64
+\BOOKMARK [1][-]{section.6.9}{Les nombres premiers. L'algorithme RSA}{chapter.6}% 65
+\BOOKMARK [1][-]{section.6.10}{Approximation du nombre \040}{chapter.6}% 66
+\BOOKMARK [2][-]{subsection.6.10.1}{La m\351thode des polygones}{section.6.10}% 67
+\BOOKMARK [2][-]{subsection.6.10.2}{La s\351rie altern\351e de Leibniz}{section.6.10}% 68
+\BOOKMARK [2][-]{subsection.6.10.3}{La loi des grands nombres}{section.6.10}% 69
+\BOOKMARK [2][-]{subsection.6.10.4}{Le produit de Wallis}{section.6.10}% 70
+\BOOKMARK [2][-]{subsection.6.10.5}{L'int\351grale 01 11+x2 dx}{section.6.10}% 71
+\BOOKMARK [1][-]{section.6.11}{Po\351sies}{chapter.6}% 72
+\BOOKMARK [1][-]{section.6.12}{L'irrationalit\351 de 2}{chapter.6}% 73
+\BOOKMARK [1][-]{section.6.13}{D\351monstration non constructive}{chapter.6}% 74
+\BOOKMARK [1][-]{section.6.14}{L'hyperbole xy=1}{chapter.6}% 75
+\BOOKMARK [1][-]{section.6.15}{L'exponentielle}{chapter.6}% 76
+\BOOKMARK [1][-]{section.6.16}{Les fonctions sin1x et x . sin1x }{chapter.6}% 77
+\BOOKMARK [1][-]{section.6.17}{D\351couverte de COQ}{chapter.6}% 78
+\BOOKMARK [1][-]{section.6.18}{Srivanasa Ramanujan}{chapter.6}% 79
+\BOOKMARK [1][-]{section.6.19}{L'alphabet grec. Extraits du nouveau testament}{chapter.6}% 80
