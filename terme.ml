@@ -26,7 +26,6 @@ let rec varLibres lambdaTerm =
   | App (n, m) -> union (varLibres n) (varLibres m)
   | Lam (x, m) -> remove x (varLibres m)
 
-
 let exemple =
   App ((Lam ("x", (App ((Var "y"), (App ((Var "x"), (Var "w"))))))),
        (Lam ("u", (App ((Var "u"), (Var "v"))))))
