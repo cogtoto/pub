@@ -1367,9 +1367,80 @@ $$
 \dfrac {\Gamma \vdash A:s_{1}\quad \Gamma ,x:A\vdash b:B\quad \Gamma ,x:A\vdash B:s_{2}}{\Gamma \vdash \lambda x:A.b:\Pi x:A.B}\quad {\text{(Abstraction)}}
 \end{array}
 $$
+\vspace{0.5cm}
+
+
+Le système \textit{PTS} respecte les propriétés suivantes:
+\begin{enumerate}
+  \item 
+     La propriété de Church-Rosser :  $M\to _{\beta }N\  \text{et}\ M\to _{\beta }N'\ \text{alors il existe}\ N'' 
+     \ \text{tel que}\\
+      N\ \to _{\beta }^{*}N'' \text{ et } N'\to _{\beta }^{*}N''$ \\
+  \item 
+    La propriété de réduction : $\Gamma \vdash M:T\  \text{et}\ 
+    M\to _{\beta }M' \ \text{alors}\  \Gamma \vdash M':T $ \\
+    \item
+    L'unicité des types : $\Gamma \vdash A:B \ \text{et}\ \Gamma \vdash A:B' \ \text{alors}\ B=_{\beta }B'$ \\
+\end{enumerate}
 
 Pour pouvoir éprouver notre système PTS, nous ajoutons les constantes suivantes à notre environnement $\Gamma$
 $$\Gamma = \{ (*:\square) ;\ (\text{nat}:*) ;\ (O:nat) ;\ (\text{succ}:\Pi x:\text{nat}.\text{nat}) \} $$
+
+Voici quelques exemples interprétés par OCAML ci-dessous. Nous avons simplifié l'affichage
+du type $\Pi x:A.B$ par $A\rightarrow B$ si $x$ n'est pas une variable libre de $B$.
+
+Nous utilisons pour l'affichage OCAML les caractères UTF-8 :  \verb+λ, π, →+
+
+\begin{Verbatim}
+(*  Polymorphisme   *)
+let id = Lam("A", C "*", Lam("x", V "A", V "x")) ;;
+let id_nat = App(id, C "nat") ;;
+let zero = App(id_nat, C "O") ;;
+
+id = λA:*.λx:A.x
+id nat = λA:*.λx:A.x nat
+
+print_terme (typage id env0) 
+πA:*.A→A
+
+print_terme (reduc id_nat) ;;
+λx:nat.x
+
+print_terme zero ;;
+λA:*.λx:A.x nat O
+print_terme zero ;;
+print_terme (typage zero env0) ;;
+nat
+
+print_terme (fullReduc zero) ;;
+O
+
+(* Les entiers *)
+let entiers = Prod ("X", C "*",  Prod ("x", V "X", Prod ("y", Prod ("z", V "X", V "X"), V "X")))
+utop # print_terme entiers;;
+πX:*.(X→((X→X)→X))
+
+let zero =  Lam("X", C "*", Lam("x", V "X", Lam ("y", Prod("z", V "X", V "X"), V "x")))
+
+let succ = Lam ("n", entiers, Lam ("X", C "*", Lam ("x", V "X", Lam ("y", Prod("z", V "X", V "X"),
+               App(V "y", App (App(App(V "n", V "X"), V "x"), V "y") )))))
+
+utop # print_terme (fullReduc trois) ;;
+λX:*.λx:X.λy:(X→X).y (y (y x) ) 
+
+(*twice*)
+utop # print_terme twice ;;
+λA:*.λf:(A→A).λa:A.f (f a) 
+
+utop # print_terme (typage twice env0) ;;
+πA:*.((A→A)→(A→A))
+
+let plus2  = App(App(twice, entiers), succ) ;;
+print_terme (fullReduc (App(plus2, trois))) ;
+λX:*.λx:X.λy:(X→X).y (y (y (y (y x) ) ) )
+
+(* définition de prédicats *)
+\end{Verbatim}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{L'interprétation}
 
