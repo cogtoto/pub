@@ -94,6 +94,7 @@ de calcul est similaire aux machines de Turing ou aux fonctions $\mu$-récursive
 Nous l'étudierons en détails.
 
 
+
 \vspace{0.3cm}
 L'autre processus de calcul est la résolution. Nous l'utilisons chaque fois que nous devons résoudre
 une équation. En résolvant $x^2+2x-15=0$, nous souhaitons que notre processus 
@@ -1391,6 +1392,7 @@ du type $\Pi x:A.B$ par $A\rightarrow B$ si $x$ n'est pas une variable libre de 
 
 Nous utilisons pour l'affichage OCAML les caractères UTF-8 :  \verb+λ, π, →+
 
+\begin{scriptsize}
 \begin{Verbatim}
 (*  Polymorphisme   *)
 let id = Lam("A", C "*", Lam("x", V "A", V "x")) ;;
@@ -1441,6 +1443,33 @@ print_terme (fullReduc (App(plus2, trois))) ;
 
 (* définition de prédicats *)
 \end{Verbatim}
+\end{scriptsize}
+Le type produit pourra être défini de la manière suivante :
+
+Si $U$ et $V$ sont des types, alors 
+$$U\times V = \Pi X.(U\rightarrow V \rightarrow X)\rightarrow X$$
+$$ <u,v> = \lambda X:*.\lambda x:(U \rightarrow V \rightarrow X). x u v $$ 
+
+Prenons par exemple le couple d'entiers $<100, 101>$, nous le modélisons par 
+\begin{scriptsize}
+\begin{Verbatim}
+let prod_100_101 = Lam("X", C "nat", Lam("x", Prod("z", C "nat", (Prod ("w", C "nat", V "X" ))),App (App (V "x", N 100), N 101))) ;;
+  print (typage prod_100_101 env0) ;;
+πX:nat.((nat→(nat→X))→X)  
+\end{Verbatim}
+\end{scriptsize}
+
+Les projections sont définies par 
+$$\pi^1 t = t\ U (\lambda x:U.\lambda y:V. x) \text{  et  } \pi^2 t = t\ U (\lambda x:U.\lambda y:V. y)$$
+\begin{scriptsize}
+\begin{Verbatim}
+let proj1 = Lam("t", (typage prod_uv env0), App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "x")) ))
+   in print (fullReduc (App (proj1, prod_100_101)))
+
+let proj2 = Lam("t", (typage prod_uv env0), App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "y")) ))
+in print (fullReduc (App (proj2, prod_uv)))
+\end{Verbatim}
+\end{scriptsize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{L'interprétation}
 
@@ -2598,6 +2627,7 @@ let code = [| ["EMPILER"; "10"] ;["EMPILER"; "15"] ; ["ADD"] ;
 %% This file has been automatically generated with the command
 %% coqdoc --latex premier.v 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{coqdoccode}
 \coqdocnoindent
@@ -4212,8 +4242,9 @@ let flocon n c =
 \begin{figure}[H]
 	\centering
 	\caption{Les côtes de la Bretagne}
-	\includegraphics[width=4.0cm]{bretagne.png}
+	\includegraphics[width=4.0cm]{bretagne3.jpg}
 \end{figure}
+
 Les objets fractales ont une propriété surprenante : ils ont une aire finie, mais un périmètre infini.
 A l'itération $n$, le périmètre de notre flocon est de $3.(\frac{4}{3})^n$. Et nous avons bien entendu 
 $\lim_{n \rightarrow \infty} 3.(\frac{4}{3})^n =\infty $
@@ -5383,7 +5414,31 @@ Et également $e = \lim_{n \rightarrow \infty} (\frac{1}{1+n})^n $
 \coqdocemptyline
 \end{coqdoccode}
 
+Avec notre \textit{Pure Type System} décrit précedemment, nous pouvons modéliser
+une "tautologie" de la manière suivante :
+\begin{Verbatim}
+let trans = Prod("A", C "Type", 
+            Prod("B", C "Type",
+            Prod("C", C "Type",
+            Prod("x", Prod("y", V "A", V "B"), Prod("z", Prod("w", V "B", V "C"), 
+                                                    Prod("v", V "A", V "C")))))) 
+  in print trans ;;
+>> πA:Type.πB:Type.πC:Type.((A→B)→((B→C)→(A→C)))
 
+let proof_trans = Lam("A", C "Type", 
+                  Lam("B", C "Type",
+                  Lam("C", C "Type",
+                  Lam("H", Prod("x", V "A", V "B"),
+                  Lam("H0", Prod("x", V "B", V "C"),
+                  Lam("H1", V "A",
+                   App(V "H0", App (V "H", V "H1")))))))) ;;
+
+print proof_trans ;;
+>> λA:Type.λB:Type.λC:Type.λH:(A→B).λH0:(B→C).λH1:A. (H0 (H H1))
+
+print (check proof_trans env0) ;;
+>> πA:Type.πB:Type.πC:Type.((A→B)→((B→C)→(A→C)))
+\end{Verbatim}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Srivanasa Ramanujan}
@@ -5451,5 +5506,6 @@ Eirene umin !
 
 \bibliographystyle{plain}
 \bibliography{book}
+
 
 \end{document}
