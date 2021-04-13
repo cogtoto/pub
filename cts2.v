@@ -33,21 +33,23 @@ Check @eq_refl nat 2.
 Print trans.
 
 
-Theorem  imp : forall (a b c : Prop), ((a->b) /\ (b->c)) -> a-> (b/\c).
+Theorem  imp : forall (a b c : Prop), ((a->b) /\ (a->c)) -> a-> (b/\c).
 Proof.
-  intros.
-  destruct H.
+  intros a b c H.
+  intro Ha.
   split.
-  apply H.
-  assumption.
- apply H1. apply H. assumption.
+  destruct H as (H1 & H2).
+  apply H1. assumption.
+  destruct H as (H1 & H2).
+  apply H2. assumption.
 Qed.
 
 Print imp.
 
+
+Print conj.
+
 Print and.
-
-
 
 Require Import Arith List Bool.
 Definition factorielle:forall n:nat, nat.
@@ -64,3 +66,5 @@ Print factorielle.
 
 Compute (factorielle 5).
 Print nat_rec.
+
+Check and.
