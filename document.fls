@@ -273,6 +273,8 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/uniquecounter/uniquecounter
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/tools/xr.sty
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/tools/xr.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/lkproof/proof.sty
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/lkproof/proof.sty
 INPUT beta.tfm
 INPUT snow.tfm
 INPUT /home/vincent/vsc/document.aux

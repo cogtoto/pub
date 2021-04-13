@@ -24,6 +24,7 @@
 \usepackage{mflogo}
 \usepackage{wrapfig}
 \usepackage{coqdoc}
+\usepackage{proof}
 \fvset{tabsize=3}
 
 \newfont{\letterimp}{beta}
@@ -1392,7 +1393,6 @@ du type $\Pi x:A.B$ par $A\rightarrow B$ si $x$ n'est pas une variable libre de 
 
 Nous utilisons pour l'affichage OCAML les caractères UTF-8 :  \verb+λ, π, →+
 
-\begin{scriptsize}
 \begin{Verbatim}
 (*  Polymorphisme   *)
 let id = Lam("A", C "*", Lam("x", V "A", V "x")) ;;
@@ -1440,10 +1440,7 @@ utop # print_terme (typage twice env0) ;;
 let plus2  = App(App(twice, entiers), succ) ;;
 print_terme (fullReduc (App(plus2, trois))) ;
 λX:*.λx:X.λy:(X→X).y (y (y (y (y x) ) ) )
-
-(* définition de prédicats *)
 \end{Verbatim}
-\end{scriptsize}
 Le type produit pourra être défini de la manière suivante :
 
 Si $U$ et $V$ sont des types, alors 
@@ -1470,9 +1467,202 @@ let proj2 = Lam("t", (typage prod_uv env0), App(App(V "t", V "U"), Lam ("x", V "
 in print (fullReduc (App (proj2, prod_uv)))
 \end{Verbatim}
 \end{scriptsize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{L'interprétation}
 
+\subsubsection{MiniCOQ}
+Nous  nous éloignons de la pureté du \textit{Pure Type System} en surchargeant notre
+ terme algébrique des types suivants :
+\begin{itemize}
+  \item Le type \verb+Nat+ avec ses constructeurs \verb+0+ et \verb+S+
+  \item Le type de l'égalité \verb+Eq+ avec son unique constructeur \verb+Eq_refl+
+  \item Le type \verb+And+ avec son unique constructeur \verb+Conj+ et ses fonctions
+  \verb+Proj1+ et \verb+Proj2+. L'affichage du type \verb+And+ se fera avec les caractères \verb+/\+
+  \item Le type \verb+Or+ avec ses constructeurs \verb+Or_introl+ et \verb+Or_intror+ et sa fonction \verb+Case+.
+  L'affichage de ce type se fera avec les caractères \verb+\/+
+\end{itemize}
+
+\vspace{0.2cm}
+Démontrons le théorème simple décrit en COQ comme ci-dessous.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% coqdoc -latex imp.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Theorem}  \coqdocvar{imp} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{a} \coqdocvar{b} \coqdocvar{c} : \coqdockw{Prop}), ((\coqdocvar{a}\ensuremath{\rightarrow}\coqdocvar{b}) \ensuremath{\land} (\coqdocvar{a}\ensuremath{\rightarrow}\coqdocvar{c})) \ensuremath{\rightarrow} \coqdocvar{a}\ensuremath{\rightarrow} (\coqdocvar{b}\ensuremath{\land}\coqdocvar{c}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intros} \coqdocvar{a} \coqdocvar{b} \coqdocvar{c} \coqdocvar{H}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intro} \coqdocvar{Ha}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{split}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{destruct} \coqdocvar{H} \coqdockw{as} (\coqdocvar{H1} \& \coqdocvar{H2}).\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply} \coqdocvar{H1}. \coqdoctac{assumption}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{destruct} \coqdocvar{H} \coqdockw{as} (\coqdocvar{H1} \& \coqdocvar{H2}).\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply} \coqdocvar{H2}. \coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Nous pouvons représenter la preuve du théorème avec la dérivation suivante:
+\\
+
+
+\begin{scriptsize}
+\infer [intros\ a\ b\ c\ H]{((A\Rightarrow B)\wedge (A\Rightarrow C))\Rightarrow (A\Rightarrow (B \wedge C))}
+ {\infer[intros\ Ha]{A \Rightarrow (B\wedge C)}
+  {\infer[split]{B \wedge C}
+   { 
+      \infer[apply\ H1]{B} {\infer[destruct\ H\ as\ (H1 , H2)]{A \Rightarrow B}{[(A\Rightarrow B) \wedge (A\Rightarrow C)]} & [A] }
+      & 
+      \infer[apply\ H2]{C} {\infer[destruct\ H\ as\ (H1 , H2)]{A \Rightarrow C}{[(A\Rightarrow B) \wedge (A\Rightarrow C)]} & [A] }
+   }
+  }
+ }
+\end{scriptsize}
+
+
+Avec notre système PTS, nous codons cela de la manière suivante:
+\begin{Verbatim}
+let imp = Prod("A", C "Type", Prod ("B", C "Type", Prod ("C", C "Type",
+               Prod ("z", And(Prod("x", V "A", V "B"), Prod ("y", V "A", V "C")), 
+                     Prod ("w", V "A", And (V "B", V "C"))))))
+in print imp ;;
+> πA:Type.πB:Type.π:Type.((A→B)/\(A→C)→(A→B/\C))
+
+let preuve_imp_pts = 
+ Lam("A", C "Type",
+   Lam("B", C "Type",
+     Lam("C", C "Type", 
+      Lam("h", And(Prod("x", V "A", V "B"), Prod("y", V "A", V "C")), 
+       Lam ("x", V "A", Conj (App(Proj1 (V "h"), V "x"), App(Proj2 (V "h"), V "x"))))))) 
+in (print preuve_imp_pts; print_string "\n"; print (check preuve_imp_pts env0))  ;;
+
+> λA:Type.λB:Type.λC:Type.λh:(A→B)/\(A→C).λx:A.conj((proj1(h) x),(proj2(h) x))
+  πA:Type.πB:Type.πC:Type.((A→B)/\(A→C)→(A→B/\C))
+\end{Verbatim}
+Nous retrouvons en OCAML la dualité entre le type produit \verb+*+ et le $\wedge$ logique,
+ ainsi qu'entre la flèche fonctionnelle \verb+->+ et l'implication logique $\Rightarrow$.
+OCAML infère correctement le type (théorème) depuis le terme (la preuve).
+
+\begin{Verbatim}
+let preuve_imp_ocaml = function h -> (function x -> ((fst h) x, (snd h) x)) ;;
+val preuve_imp_ocaml : ('a -> 'b) * ('a -> 'c) -> 'a -> 'b * 'c 
+\end{Verbatim}
+
+Voici un autre exemple très simple illustrant le type $\wedge$ et les fonctions de construction \verb+And+ et de projections \verb+Proj1/2+
+
+%%% COQ exemple %%
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{et\_refl}: \coqdockw{\ensuremath{\forall}} (\coqdocvar{a} \coqdocvar{b}:\coqdockw{Prop}), \coqdocvar{a}\ensuremath{\land}\coqdocvar{b} \ensuremath{\rightarrow} \coqdocvar{b}\ensuremath{\land}\coqdocvar{a} .\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{intros} \coqdocvar{a} \coqdocvar{b} \coqdocvar{H}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{split}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{destruct} \coqdocvar{H} \coqdockw{as} [\coqdocvar{Ha}  \coqdocvar{Hb}].\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{assumption}.\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{destruct} \coqdocvar{H} \coqdockw{as} [\coqdocvar{Ha} \coqdocvar{Hb}].\coqdoceol
+\coqdocindent{0.50em}
+\coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Print} \coqdocvar{et\_refl}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+\begin{Verbatim}
+let preuve_et_refl = 
+  Lam("A", C "Type",
+    Lam("B", C "Type", 
+     Lam("h", And(V "A", V "B"), Conj(Proj2 (V "h"), Proj1 (V "h"))))) 
+  in ( print preuve_et_refl ; print_string "\n"; print(check preuve_et_refl env0)) ;;
+> λA:Type.λB:Type.λh:A/\B.conj(proj2(h) ,proj1(h))
+  πA:Type.πB:Type.(A/\B→B/\A)
+\end{Verbatim}
+
+
+\subsubsection{Le $\lor$ logique}
+
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{or\_elim}: \coqdockw{\ensuremath{\forall}} (\coqdocvar{a} \coqdocvar{b} \coqdocvar{c}:\coqdockw{Prop}), (\coqdocvar{a}\ensuremath{\rightarrow}\coqdocvar{c})->(\coqdocvar{b}\ensuremath{\rightarrow}\coqdocvar{c})->(\coqdocvar{a}\ensuremath{\lor}\coqdocvar{b})->\coqdocvar{c}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intros} \coqdocvar{a} \coqdocvar{b} \coqdocvar{c} \coqdocvar{h1} \coqdocvar{h2} \coqdocvar{h3}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{destruct} \coqdocvar{h3} \coqdockw{as} [\coqdocvar{ha} \ensuremath{|} \coqdocvar{hb}].\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply} \coqdocvar{h1}. \coqdoctac{exact} \coqdocvar{ha}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply} \coqdocvar{h2}. \coqdoctac{exact} \coqdocvar{hb}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\end{coqdoccode}
+\begin{Verbatim}
+(* fonction générée en COQ*)
+  or_elim = 
+ fun (a b c : Prop) (h1 : a -> c) (h2 : b -> c) (h3 : a \/ b) =>
+ match h3 with
+  | or_introl ha => h1 ha
+  | or_intror hb => h2 hb
+ end
+     : forall a b c : Prop, (a -> c) -> (b -> c) -> a \/ b -> c  
+
+(* fonction OCAML *)
+let preuve_or_elim =
+  Lam("A", C "Type",
+    Lam("B", C "Type",
+      Lam ("C", C "Type",
+        Lam("h1", Prod("x", V "A", V "C"),
+          Lam("h2", Prod("y", V "B", V "C"),
+            Lam("h3", Or(V "A", V "B"), 
+              Case(V "h3", V "h1", V "h2"))))))) 
+  in (print preuve_or_elim ; print_newline() ;
+      print (check preuve_or_elim env0)) ;;
+> λA:Type.λB:Type.λC:Type.λh1:(A→C).λh2:(B→C).λh3:A\/B.case(h3, h1, h2)
+  πA:Type.πB:Type.πC:Type.((A→C)→((B→C)→(A\/B→C)))
+\end{Verbatim}
+
+\subsubsection{Le point fixe}
+Nous surchargeons notre terme algébrique de l'opérateur de point fixe \verb+Y of terme+ qui
+se réduit en \verb+Y t+ \imp\ \verb+t (Y t)+
+\begin{Verbatim}
+let multF = 
+  Lam ("f", Prod("w",Nat, Nat),
+   Lam ("n", Nat, Lam ("m", Nat, 
+        IfThenElse(Egal(V "n",O), O, Add (V "m", App(App (V "f", Sub1 (V "n")), V "m"))))))
+
+let mult = Y multF ;;
+
+let facF = Lam("f", Prod ("z", Nat, Nat), 
+             Lam ("n", Nat,
+              IfThenElse(Egal(V "n", O), S O, (App(App(mult, V "n"), App(V "f", Sub1 (V "n")) ) )))) ;;
+
+let fac = Y facF  ;;
+\end{Verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{L'interprétation}
 
 \section{Introduction}
 Nous avons vu que le $\lambda$-calcul utilise la réduction, basée sur un mécanisme de substitution.
@@ -1486,10 +1676,8 @@ dérouler ses calculs.
 L'interprète ne pourra évaluer son expression qu'en présence d'un environnement.
 Un interprète est ainsi  une fonction \verb+eval+ telle que \verb+(eval+ $\pi$ \verb+env)+ \imp\  \verb+valeur+
 
-
 Nous reprenons ici  un peu du code de l'excellent blog :
 \url{https://bernsteinbear.com/blog/lisp}.
-
 
 Par rapport au code du blog cité, nous faisons deux changements majeurs. Le premier est d'utiliser à nouveau
 les outils d'analyseur lexical et syntaxique \textbf{ocamllex} et \textbf{ocamlyacc}. 
@@ -1500,7 +1688,6 @@ Une fois cet interprète réalisé, nous l'utiliserons pour implémenter un nouv
 liaison \textit{dynamique} et \textit{statique}, évaluation \textit{stricte} et \textit{paresseuse} 
 et enfin un interprète par \textit{continuation}, avant de conclure sur une tour de babel avec capacité de réification
 et réflection de notre méta-interpète. C'est comme une quête philosophique\dots
-
 
 Pour ces diffèrentes variantes, nous nous inspirons de notre bible sur le langage LISP : \textit{LISP In Small Pieces} de Christian Queinnec.
 \cite{lisp}

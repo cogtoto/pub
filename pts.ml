@@ -10,17 +10,30 @@ type terme =
  | App of terme*terme
  | Lam of string*terme*terme
  | Prod of string*terme*terme
- | N of int
  | B of bool
  | Add of terme*terme
- | Sub of terme*terme
+ | Sub1 of terme
  | Egal of terme*terme
  | IfThenElse of terme*terme*terme 
  | Y of terme 
- | Eq of terme*terme*terme
+ (* type eq*)
+ | Eq of terme*terme*terme 
  | Eq_refl of terme*terme 
+  (* type and *) 
+ | And of terme*terme 
+ | Conj of terme*terme 
+ | Proj1 of terme
+ | Proj2 of terme
+ (* type or *) 
+ | Or of terme*terme
+ | Or_introl of terme
+ | Or_intror of terme
+ | Case of terme*terme*terme
+ (* type Nat *)
+ | Nat
+ | O
+ | S of terme
 
- 
 type env = (string * terme) list 
 
 let rec union l1 l2 =
@@ -40,15 +53,25 @@ let rec remove var l =
 let rec varLibres lambdaTerm =
   match lambdaTerm with
   | V x -> [ x ]
-  | C _ | N _ | B _ -> []
-  | App (n, m) | Add (n,m) | Sub (n, m) | Egal (n, m)   -> union (varLibres n) (varLibres m)
+  | C _ | B _ | Nat | O -> []
+  | App (n, m) | Add (n,m) |  Egal (n, m)   -> union (varLibres n) (varLibres m)
+  | Sub1 n -> varLibres n
   | Y m -> varLibres m
   | IfThenElse (b, n, m) -> union (varLibres b) (union (varLibres n) (varLibres m))
   | Lam (x, tx, m) -> union (remove x (varLibres m)) (remove x (varLibres tx))
   | Prod (x, tx, m) -> union (remove x (varLibres m)) (remove x (varLibres tx)) 
   | Eq (t1, t2, t3) -> union (varLibres t1) (union (varLibres t2) (varLibres t3))
   | Eq_refl (t1,t2) -> union (varLibres t1) (varLibres t2)
-
+  | And (t1, t2) ->  union (varLibres t1) (varLibres t2)
+  | Conj (t1, t2) ->  union (varLibres t1) (varLibres t2)
+  | Proj1 t  -> varLibres t
+  | Proj2 t -> varLibres t
+  | S t -> varLibres t
+  | Or (t1, t2) ->  union (varLibres t1) (varLibres t2)
+  | Or_introl t1 -> varLibres t1
+  | Or_intror t1 -> varLibres t1
+  | Case (t1, t2, t3) -> union (varLibres t1) (union (varLibres t2) (varLibres t3)) 
+  
  (** renommer var *)
 let renomme var listeVar =
   let rec renommeAux j =
@@ -59,15 +82,24 @@ let renomme var listeVar =
 let rec substituer exp var terme =
   match exp with
   | V x -> if x = var then terme else exp
-  | C _ | N _ | B _ -> exp
+  | C _ | B _ | Nat | O -> exp
   | App (n, m) -> App ((substituer n var terme), (substituer m var terme))
   | Add (n, m) -> Add ((substituer n var terme), (substituer m var terme))
   | Egal (n, m) -> Egal ((substituer n var terme), (substituer m var terme))
-  | Sub (n, m) -> Sub ((substituer n var terme), (substituer m var terme))
+  | Sub1 n -> Sub1 (substituer n var terme)
   | Y m -> Y (substituer m var terme) (* faut il substituer dans m ? *)
   | IfThenElse (b, n, m) -> IfThenElse ((substituer b var terme), (substituer n var terme), (substituer m var terme))
   | Eq (t1, t2, t3) -> Eq ((substituer t1 var terme), (substituer t2 var terme),(substituer t3 var terme))
   | Eq_refl (t1, t2) -> Eq_refl ((substituer t1 var terme), (substituer t2 var terme))
+  | Or (t1, t2) -> Or ((substituer t1 var terme), (substituer t2 var  terme))
+  | Or_introl t1 -> Or_introl (substituer t1 var terme)
+  | Or_intror t1 -> Or_intror (substituer t1 var terme)
+  | Case (t1, t2, t3) -> Case ((substituer t1 var terme), (substituer t2 var terme),(substituer t3 var terme))
+  | And (t1, t2) -> And ((substituer t1 var terme), (substituer t2 var  terme))
+  | Conj (t1, t2) -> Conj ((substituer t1 var terme), (substituer t2 var  terme))
+  | Proj1 t  -> Proj1 (substituer t var terme)
+  | Proj2 t  -> Proj2 (substituer t var terme)
+  | S t -> S (substituer t var terme)
   | Lam (x, tx, m) -> (* pas d’occurence libre on en fait rien *)
     if not (mem var (varLibres exp)) then exp
       else (* si capture on renomme *)
@@ -86,11 +118,31 @@ let rec substituer exp var terme =
        in Prod (newV, tx, (substituer newCorps var terme)))
     else Prod (x,  (substituer tx var terme), (substituer m var terme))
 
+let estRedex terme =
+  match terme with
+   | App (Lam _, _) -> true
+   | App (Prod _, _) -> true
+   | _ -> false
+
+let betaReducRedex redex =
+  match redex with
+  | App ((Lam (x,tx, m)), n) -> substituer m x n
+  | _ -> raise NotRedex
+
+let boolofterme = function
+  | B b -> b
+  | _ -> raise (Erreur "boolofterme")
+
+let rec somme t1 t2 =
+  match t1 with
+  | O -> t2
+  | S r -> S (somme r t2)
+  | _ -> raise (Erreur "somme")
+
  let rec check terme env =
   match terme with
    | V v -> assoc v env
    | C c -> assoc c env
-   | N _ -> C "nat"
    | B _ -> C "booleen"
    | App (ter1,ter2) -> 
       begin
@@ -98,13 +150,13 @@ let rec substituer exp var terme =
          in let t2 = check ter2 env
           in match t1 with
            | Prod(x,ta,tb) when ta = t2 -> substituer tb x ter2 
-           | _ -> raise (Erreur "check App")
+           | _ -> raise (Erreur "check App" )
       end
     | Lam (v, tv, ter) -> 
         let t1 = check ter ((v,tv)::env)
            in  Prod(v, tv, t1)
     | Prod _ ->  C "Type" 
-    | Add (_, _) | Sub (_,_) -> C "nat"
+    | Add (_, _) | Sub1 _ ->  Nat
     | Egal (_, _) -> C "booleen"
     | IfThenElse (_,ter1,_) -> check ter1 env  
     | Y f -> 
@@ -117,30 +169,35 @@ let rec substituer exp var terme =
        let tt = check x env in
            Prod ("z", tt, Prod ("w", tt, C "Type"))
     | Eq_refl (t1, t2) ->   Eq(t1,  t2,  t2 )
+    | Or (_, _) -> Prod ("z", C "Type", Prod("w", C "Type", C "Type"))
+    | Or_introl t1 -> Or (check t1 env, check t1 env)
+    | Or_intror t1 -> Or (check t1 env, check t1 env)
+    | Case (t1, t2, t3) ->  
+        begin
+          match (check t2 env) with 
+           | Prod(_, x, y) -> y
+           | _ -> raise (Erreur "check case")
+        end
+    | And (_, _) -> Prod ("z", C "Type", Prod("w", C "Type", C "Type"))
+    | Conj (t1, t2) -> And (check t1 env, check t2 env)
+    | Nat -> C "Type"
+    | O | S _ -> Nat
+    | Proj1 t  ->
+      begin 
+        match (check t env) with
+        | And(t1, _) ->  t1 
+        | _ -> raise (Erreur "check Proj1")
+      end
+    | Proj2 t  ->
+      begin 
+        match (check t env) with
+        | And(_, t2) ->  t2 
+        | _ -> raise (Erreur "check Proj2")
+      end
 
-let estRedex terme =
+ let rec reduc terme =
   match terme with
-   | App (Lam _, _) -> true
-   | App (Prod _, _) -> true
-   | _ -> false
-
-let betaReducRedex redex =
-  match redex with
-  | App ((Lam (x,tx, m)), n) -> substituer m x n
-  | _ -> raise NotRedex
-
-let intofterme = function
-  | N n -> n
-  | _ -> raise (Erreur "intofterme")
-
-let boolofterme = function
-  | B b -> b
-  | _ -> raise (Erreur "boolofterme")
-
-let rec reduc terme =
-  match terme with
-  | V _ | C _ -> raise Irreductible
-  | N x  -> N x 
+  | V _ | C _ | Nat | O -> raise Irreductible
   | B x -> B x
   | Lam (x,tx,m) -> Lam (x,tx,  (reduc m))
   | Prod (x, tx,m) -> Prod (x, tx, (reduc m))
@@ -150,13 +207,40 @@ let rec reduc terme =
     else
       (try App ((reduc n), m)
        with | Irreductible -> App (n, (reduc m)))
-  | Add (t1,t2) -> N ((intofterme (fullReduc t1)) + (intofterme (fullReduc t2)))
-  | Sub (t1,t2) -> N ((intofterme (fullReduc t1)) - (intofterme (fullReduc t2)))
-  | Egal (t1,t2) -> B ((intofterme (fullReduc t1)) = (intofterme (fullReduc t2)))
-  | IfThenElse (b, t1,t2) -> if (boolofterme (fullReduc b)) then  (reduc t1) else  (reduc t2)
+  | Add (t1,t2) -> somme (fullReduc t1) (fullReduc t2)
+  | Sub1 (S t) -> fullReduc t
+  | Egal (t1,t2) -> B ((fullReduc t1) = (fullReduc t2))
+  | IfThenElse (b, t1,t2) -> if (boolofterme (fullReduc b)) then  (fullReduc t1) else  (fullReduc t2)
   | Y f -> App(f, (Y f))
   | Eq (t1,t2,t3) -> Eq((fullReduc t1), (fullReduc t2), (fullReduc t3))
   | Eq_refl (t1, t2) -> Eq_refl ((fullReduc t1), (fullReduc t2))
+  | Or_introl t1 -> Or_introl (fullReduc t1)
+  | Or_intror t1 -> Or_intror (fullReduc t1)
+  | Case (t1, t2, t3) ->
+     begin
+      match (fullReduc t1) with
+        | Or_introl v -> App(t2, v)
+        | Or_intror v -> App(t3, v)
+        | _ -> raise (Erreur "reduc case")
+     end
+  | Or (t1, t2) -> Or ((fullReduc t1), (fullReduc t2))
+  | And (t1, t2) -> And ((fullReduc t1), (fullReduc t2))
+  | Conj (t1, t2) -> Conj ((fullReduc t1), (fullReduc t2))
+  | S t -> S (fullReduc t)
+  | Sub1 t -> Sub1 (reduc t)
+  | Proj1 t  ->
+      begin 
+        match (fullReduc t) with
+        | Conj(t1, _) -> t1 
+        | _ -> raise (Erreur "reduc Proj1")
+      end
+  | Proj2 t  ->
+      begin 
+        match (fullReduc t) with
+        | Conj(_, t2) -> t2 
+        | _ -> raise (Erreur "reduc Proj2")
+      end
+
  and 
 fullReduc terme =
   let rec loop terme =
@@ -171,35 +255,42 @@ fullReduc terme =
 ;; 
 
 let lambda = "\xCE\xBB" and pi = "\xCF\x80" and fleche = "\xe2\x86\x92"
+let rec pr_nat = function
+  | O -> 0
+  | S t -> 1+ (pr_nat t)
+  | _ -> raise (Erreur "pr_nat")
 
 let print terme = 
   let rec aux = function
   | V x | C x -> x
-  | N n -> string_of_int n
   | B b -> string_of_bool b
   | Lam (x,xt, m) -> lambda ^ x ^ ":" ^ aux xt ^ "." ^ aux m
-  | App (n, m) ->  " ( " ^ aux n ^ " " ^ aux m ^ ")"
+  | App (n, m) ->  "(" ^ aux n ^ " " ^ aux m ^ ")"
   | Prod (x, xt, m) ->
       if (mem x (varLibres m)) then pi ^ x ^ ":" ^ aux xt ^ "." ^ aux m
       else  "(" ^ aux xt ^ fleche ^ aux m ^ ")"
   | Add (t1, t2) -> aux t1 ^ "+" ^ aux t2 
-  | Sub (t1, t2) -> aux t1 ^ "-" ^ aux t2 
+  | Sub1 t ->  "Sub1 " ^ aux t 
   | Egal (t1, t2) -> aux t1 ^ "=" ^ aux t2 
   | IfThenElse (b, t1, t2) -> " if " ^ aux b ^ " then " ^ aux t1  ^ " else " ^ aux t2
   | Y f -> " Y " ^ aux f
-  | Eq (t1, t2, t3) -> " Eq(" ^ aux t1 ^ ", " ^ aux t2 ^ ", " ^ aux t3 ^ ") "
-  | Eq_refl (t1, t2) -> " Eq _refl(" ^ aux t1 ^ ", " ^ aux t2 ^ ") " 
+  | Eq (t1, t2, t3) -> "eq(" ^ aux t1 ^ ", " ^ aux t2 ^ ", " ^ aux t3 ^ ")"
+  | Eq_refl (t1, t2) -> "eq _refl(" ^ aux t1 ^ ", " ^ aux t2 ^ ")" 
+  | Or_introl t1 -> "or_introl(" ^ aux t1 ^")"
+  | Or_intror t1 -> "or_intror(" ^ aux t1 ^")"
+  | Case (t1,t2,t3) -> "case(" ^ aux t1 ^ ", " ^ aux t2 ^ ", " ^ aux t3 ^ ")" 
+  | Or (t1, t2) -> aux t1 ^ "\\/" ^ aux t2
+  | And (t1, t2) -> aux t1 ^ "/\\" ^ aux t2
+  | Conj (t1, t2) -> "conj(" ^ aux t1 ^ "," ^ aux t2  ^")"
+  | Proj1 t-> "proj1(" ^ aux t ^") "
+  | Proj2 t -> "proj2(" ^ aux t ^") "
+  | Nat -> "nat"
+  | O -> "O"
+  | S t -> string_of_int (1 + (pr_nat t))
  in print_string (aux terme)
 
-
-let env0 = [("Type", C "blanc"); ("nat", C "Type") ; ("O", C "nat") ;  ("1", C "nat"); ("succ", Prod("x", C "nat", C "nat"))
-            ; ("U", C "nat"); ("V", C "nat"); ("u", C "U"); ("v", C "V") ] ;;
-
-let t1 = App (Lam("n", C "nat", V "n"), C "O") ;;
-let t2 = Prod("x", C "nat", C "nat") ;;
-
-let t3 = App(C "succ", C "O") ;;
-check t3 env0 ;;
+let env0 = [("Type", C "blanc");  ("succ", Prod("x", C "nat", C "nat"))
+            ; ("U", C "Type"); ("V", C "Type"); ("u", C "U"); ("v", C "V") ] ;;
 
 let id = Lam("A", C "*", Lam("x", V "A", V "x")) ;;
 
@@ -223,96 +314,55 @@ let zero =  Lam("X", C "*", Lam("x", V "X", Lam ("y", Prod("z", V "X", V "X"), V
 let succ = Lam ("n", entiers, Lam ("X", C "*", Lam ("x", V "X", Lam ("y", Prod("z", V "X", V "X"),
                App(V "y", App (App(App(V "n", V "X"), V "x"), V "y") )))))
 
-let un = App (succ, zero) ;;
-let deux = App (succ, un) ;;
-
-let trois = App (succ, deux) ;;
-
-print (fullReduc trois) ;;
 
 (* twice *)
 let twice = Lam ("A", C "*", Lam ("f", Prod("z", V "A", V "A"), Lam ("a", V "A", App(V "f", App (V "f", V "a")))))
-
-let plus2  = App(App(twice, entiers), succ) ;;
-print (fullReduc (App(plus2, trois))) ;;
-
-let popo = IfThenElse (Egal(N 7, Add (N 2, Sub (N 10, N 5))), N 100, N 999) in
-   ( print (fullReduc popo) ; print_string "\n"; check popo env0) ;;
-
-let pipi = IfThenElse (Egal(N 7, Add (N 2, Sub (N 10, N 5))), N 100, N 999) in
-   ( print pipi ; print_string "\n"; check pipi env0) ;;
-
-let add100 = App(Lam("n", C "nat", Add (V "n", N 100)), N 2) in print (fullReduc add100) ;;
-
-let pnul = Prod("n", C "nat", Prod("z", Egal(V "n", N 0), C "*" )) ;;
-
-let nullify = Lam("x", C "nat", N 0) ;;
-
-(* type produit *)
-
-let env0 = [("*", C "blanc"); ("nat", C "*") ; ("O", C "nat") ;  ("1", C "nat"); ("succ", Prod("x", C "nat", C "nat"))
-            ; ("U", C "nat"); ("V", C "nat"); ("u", C "U"); ("v", C "V") ] ;;
-
-
-let prod_100_101 = Lam("X", C "nat", Lam("x", Prod("z", C "nat", (Prod ("w", C "nat", V "X" ))),App (App (V "x", N 100), N 101))) ;;
-print (check prod_100_101 env0) ;;
-
-let proj1 = Lam("t", (check prod_100_101 env0), App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "x")) ))
-in print (fullReduc (App (proj1, prod_100_101)))
-;
-
-let proj2 = Lam("t", (check prod_100_101 env0), App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "y")) ))
-in print (fullReduc (App (proj2, prod_100_101)))
 ;;
 
 
 (* point fixe *)
 let multF = 
-  Lam ("f", Prod("w", C "nat", C "nat"),
-   Lam ("n", C "nat", Lam ("m", C "nat", 
-        IfThenElse(Egal(V "n", N 0), N 0, Add (V "m", App(App (V "f", Sub (V "n", N 1)), V "m"))))))
+  Lam ("f", Prod("w",Nat, Nat),
+   Lam ("n", Nat, Lam ("m", Nat, 
+        IfThenElse(Egal(V "n",O), O, Add (V "m", App(App (V "f", Sub1 (V "n")), V "m"))))))
 
 let mult = Y multF ;;
 
-let facF = Lam("f", Prod ("z", C "nat", C "nat"), 
-             Lam ("n", C "nat",
-              IfThenElse(Egal(V "n", N 0), N 1, (App(App(mult, V "n"), App(V "f", Sub (V "n", N 1)) ) )))) ;;
+let rec fois n m = if (n = 0) then 0 else ( (+) m (fois (n-1) m)) ;;
+
+fullReduc (App(App(mult, S (S O)), (S O) ));; 
+let facF = Lam("f", Prod ("z", Nat, Nat), 
+             Lam ("n", Nat,
+              IfThenElse(Egal(V "n", O), S O, (App(App(mult, V "n"), App(V "f", Sub1 (V "n")) ) )))) ;;
 
 let fac = Y facF  ;;
 
-fullReduc (App(fac, N 5)) ;;
-fullReduc (App(App(mult, N 5), N 6)) ;;
 (***************************************************************************************)
-let m = Eq_refl(C "nat", N 2) ;;
+let m = Eq_refl(C "nat", S (S O)) ;;
 check m env0 ;;
 
 print (check (check m env0) env0) ;;
 (* théorèmes *)
 
-let cst2 = Lam("n", C "nat", N 2)  ;;
-print (fullReduc (App (cst2, N 10))) ;;
+let cst2 = Lam("n", Nat, S (S O))  ;;
+print (fullReduc (App (cst2, S (S (S (S O))) ))) ;;
 
-let th = Prod("n", C "nat", Eq(C "nat", App(cst2, V "n"), N 2)) 
+let th = Prod("n", Nat, Eq(Nat, App(cst2, V "n"), S (S O) )) 
 in print th;;
-let proof = Lam("n", C "nat", Eq_refl(C "nat", App(cst2, V "n"))) in 
+
+let proof = Lam("n", Nat, Eq_refl(Nat, App(cst2, V "n"))) in 
  print proof  ;;
-let proof = Lam("n", C "nat", Eq_refl(C "nat", App(cst2, V "n"))) in 
+
+let proof = Lam("n", Nat, Eq_refl(Nat, App(cst2, V "n"))) in 
  print (check proof env0) ;;
 
-
-let trivial = Eq(C "nat", N 2, N 2) ;;
+let trivial = Eq(Nat, S (S O), S (S O) ) ;;
 print trivial ;;
 
-let htrivial = Eq_refl(C "nat", N 2) ;;
+let htrivial = Eq_refl(Nat, S (S O) ) ;;
 print htrivial ;;
 print (check htrivial env0 ) ;;
 
-
-let faux = Eq(C "nat", N 2, N 1) ;;
-print faux ;;
-
-let h = Eq_refl(C "nat", N 2) ;;
-print htrivial ;;
 print (check htrivial env0 ) ;;
 
 
@@ -338,13 +388,65 @@ let proof_trans = Lam("A", C "Type",
 
 print proof_trans ;;
 
-check proof_trans env0 ;;
-
-(****************ET ET ET ET *******)
+print (check proof_trans env0) ;;
 let et p q = Prod("X", C "Type", Prod ("z", Prod("u", p, Prod("y", q, V "X")), V "X")) ;;
 
-(*
-and A B, written A /\ B, is the conjunction of A and B
-conj p q is a proof of A /\ B as soon as p is a proof of A and q a proof of B
-proj1 and proj2 are first and second projections of a conjunction 
-*)
+(* type produit *)
+
+let prod_u_v = Lam("X", C "Type",
+       Lam("x", Prod("z", C "U", (Prod ("w", C "V", V "X" ))),App (App (V "x", V "u"), V "v"))) ;;
+
+let trois = S (S (S O));;
+let deux = S (S O);;
+
+fullReduc (App(App(mult, trois), deux) );;
+
+print (fullReduc (App(fac, S (S (S  (S O)))))) ;;
+
+(* Theorem  imp : forall (a b c : Prop), ((a->b) /\ (a->c)) -> a-> (b/\c) *)
+let imp = Prod("A", C "Type", Prod ("B", C "Type", Prod ("C", C "Type",
+               Prod ("z", And(Prod("x", V "A", V "B"), Prod ("y", V "A", V "C")), 
+                     Prod ("w", V "A", And (V "B", V "C"))))))
+in print imp ;;
+
+
+let preuve_imp_ocaml = function h -> (function x -> ((fst h) x, (snd h) x)) ;;
+  
+let preuve_imp_pts = 
+ Lam("A", C "Type",
+   Lam("B", C "Type",
+     Lam("C", C "Type", 
+      Lam("h", And(Prod("x", V "A", V "B"), Prod("y", V "A", V "C")), 
+       Lam ("x", V "A", Conj (App(Proj1 (V "h"), V "x"), App(Proj2 (V "h"), V "x"))))))) 
+in (print preuve_imp_pts; print_string "\n"; print (check preuve_imp_pts env0))  ;;
+
+let et_refl = 
+  Prod("A", C "Type",
+    Prod("B", C "Type", 
+     Prod("x", And(V "A", V "B"), And(V "B", V "A")))) ;;
+
+print et_refl ;;
+
+let preuve_et_refl = 
+  Lam("A", C "Type",
+    Lam("B", C "Type", 
+     Lam("h", And(V "A", V "B"), Conj(Proj2 (V "h"), Proj1 (V "h"))))) 
+in ( print preuve_et_refl ; print_string "\n"; print(check preuve_et_refl env0)) ;;
+
+let or_elim =
+  Prod("A", C "Type",
+    Prod("B", C "Type",
+      Prod("C", C "Type",
+        Prod("x", Prod ("y", V "A", V "B"), Prod ("w", Prod("z", V "B", V "C"), Prod ("v", Or(V "A", V "B"), V "C")))))) ;;
+
+let preuve_or_elim =
+  Lam("A", C "Type",
+    Lam("B", C "Type",
+      Lam ("C", C "Type",
+        Lam("h1", Prod("x", V "A", V "C"),
+          Lam("h2", Prod("y", V "B", V "C"),
+            Lam("h3", Or(V "A", V "B"), 
+              Case(V "h3", V "h1", V "h2"))))))) 
+  in (print preuve_or_elim ; print_newline() ;
+      print (check preuve_or_elim env0)) ;;
+  
