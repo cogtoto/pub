@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  14 MAY 2021 13:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  14 MAY 2021 13:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1345,17 +1345,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [41] [42] [43] [44] (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-32.def
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
 )
-Underfull \hbox (badness 10000) in paragraph at lines 2147--2149
-
- []
-
 <gumpp.jpeg, id=685, 73.7154pt x 96.36pt>
 File: gumpp.jpeg Graphic file (type jpg)
 <use gumpp.jpeg>
-Package pdftex.def Info: gumpp.jpeg  used on input line 2159.
+Package pdftex.def Info: gumpp.jpeg  used on input line 2158.
 (pdftex.def)             Requested size: 142.26378pt x 185.99564pt.
-[45 </home/vincent/vsc/gumpp.jpeg>]
-Overfull \hbox (62.19678pt too wide) in paragraph at lines 2218--2219
+ [45 </home/vincent/vsc/gumpp.jpeg>]
+Overfull \hbox (62.19678pt too wide) in paragraph at lines 2217--2218
 [][] 
  []
 
@@ -1363,7 +1359,7 @@ Overfull \hbox (62.19678pt too wide) in paragraph at lines 2218--2219
 <bruegel.jpg, id=708, 301.125pt x 240.9pt>
 File: bruegel.jpg Graphic file (type jpg)
 <use bruegel.jpg>
-Package pdftex.def Info: bruegel.jpg  used on input line 2379.
+Package pdftex.def Info: bruegel.jpg  used on input line 2378.
 (pdftex.def)             Requested size: 142.26378pt x 113.81482pt.
  [48]
 \g__tikzsymbols_savebox_F_0 g 0 G_10.95_Laughey_1_none_none_box=\box70
@@ -1383,25 +1379,25 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Chapitre 3.
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 2666.
+(hyperref)                removing `math shift' on input line 2665.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\lambda' on input line 2666.
+(hyperref)                removing `\lambda' on input line 2665.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 2666.
+(hyperref)                removing `math shift' on input line 2665.
 
 [55
 
 ] [56]
-Underfull \hbox (badness 10000) in paragraph at lines 2806--2807
+Underfull \hbox (badness 10000) in paragraph at lines 2805--2806
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2807--2808
+Underfull \hbox (badness 10000) in paragraph at lines 2806--2807
 
  []
 
@@ -1410,19 +1406,19 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [62]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 3191.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 3190.
 
-Overfull \hbox (28.79843pt too wide) in paragraph at lines 3192--3200
+Overfull \hbox (28.79843pt too wide) in paragraph at lines 3191--3199
 \T1/lmtt/m/n/10.95 ((lambda (v1...vn) body) e1...en) \letterimp D  \T1/lmtt/m/n/10.95 NIL; $\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;ARG;$[] \OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;ARG;CLOSURE$\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 body\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;RTS$\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;JSR 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3192--3200
+Underfull \hbox (badness 10000) in paragraph at lines 3191--3199
 
  []
 
 
-Overfull \hbox (0.23276pt too wide) detected at line 3238
+Overfull \hbox (0.23276pt too wide) detected at line 3237
 []
  []
 
@@ -1440,7 +1436,7 @@ Underfull \vbox (badness 2698) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [75] [76] [77] [78]
-Underfull \hbox (badness 10000) in paragraph at lines 3956--3958
+Underfull \hbox (badness 10000) in paragraph at lines 3955--3957
 
  []
 
@@ -1449,7 +1445,7 @@ Chapitre 5.
 [81
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 4098--4102
+Underfull \hbox (badness 10000) in paragraph at lines 4097--4101
 
  []
 
@@ -1464,50 +1460,50 @@ Chapitre 6.
 <flocon1.pdf, id=925, 150.5625pt x 138.5175pt>
 File: flocon1.pdf Graphic file (type pdf)
 <use flocon1.pdf>
-Package pdftex.def Info: flocon1.pdf  used on input line 4586.
+Package pdftex.def Info: flocon1.pdf  used on input line 4585.
 (pdftex.def)             Requested size: 99.5875pt x 85.3579pt.
 <flocon2.pdf, id=926, 156.585pt x 136.51pt>
 File: flocon2.pdf Graphic file (type pdf)
 <use flocon2.pdf>
-Package pdftex.def Info: flocon2.pdf  used on input line 4587.
+Package pdftex.def Info: flocon2.pdf  used on input line 4586.
 (pdftex.def)             Requested size: 99.58806pt x 85.35811pt.
 <flocon3.pdf, id=927, 149.55875pt x 130.4875pt>
 File: flocon3.pdf Graphic file (type pdf)
 <use flocon3.pdf>
-Package pdftex.def Info: flocon3.pdf  used on input line 4588.
+Package pdftex.def Info: flocon3.pdf  used on input line 4587.
 (pdftex.def)             Requested size: 99.58539pt x 85.35942pt.
 <flocon4.pdf, id=928, 139.52126pt x 127.47626pt>
 File: flocon4.pdf Graphic file (type pdf)
 <use flocon4.pdf>
-Package pdftex.def Info: flocon4.pdf  used on input line 4589.
+Package pdftex.def Info: flocon4.pdf  used on input line 4588.
 (pdftex.def)             Requested size: 99.58661pt x 85.36195pt.
 <bretagne3.jpg, id=929, 732.85164pt x 514.3497pt>
 File: bretagne3.jpg Graphic file (type jpg)
 <use bretagne3.jpg>
-Package pdftex.def Info: bretagne3.jpg  used on input line 4595.
+Package pdftex.def Info: bretagne3.jpg  used on input line 4594.
 (pdftex.def)             Requested size: 113.81102pt x 79.8725pt.
  [91 </home/vincent/vsc/flocon1.pdf> </home/vincent/vsc/flocon2.pdf> </home/vincent/vsc/flocon3.pdf> </home/vincent/vsc/flocon4.pdf> </home/vincent/vsc/bretagne3.jpg>]
 <mandelbrot.png, id=962, 254.9525pt x 227.85126pt>
 File: mandelbrot.png Graphic file (type png)
 <use mandelbrot.png>
-Package pdftex.def Info: mandelbrot.png  used on input line 4657.
+Package pdftex.def Info: mandelbrot.png  used on input line 4656.
 (pdftex.def)             Requested size: 113.81102pt x 101.71507pt.
 
 Underfull \vbox (badness 1831) has occurred while \output is active []
 
  [92]
 LaTeX Font Info:    Font shape `U/logo/bx/n' in size <14.4> not available
-(Font)              Font shape `U/logo/b/n' tried instead on input line 4660.
+(Font)              Font shape `U/logo/b/n' tried instead on input line 4659.
 <imp.png, id=971, 573.14125pt x 491.8375pt>
 File: imp.png Graphic file (type png)
 <use imp.png>
-Package pdftex.def Info: imp.png  used on input line 4671.
+Package pdftex.def Info: imp.png  used on input line 4670.
 (pdftex.def)             Requested size: 113.81102pt x 97.6603pt.
  [93 </home/vincent/vsc/mandelbrot.png> </home/vincent/vsc/imp.png>]
 <snow.png, id=982, 636.3775pt x 750.805pt>
 File: snow.png Graphic file (type png)
 <use snow.png>
-Package pdftex.def Info: snow.png  used on input line 4743.
+Package pdftex.def Info: snow.png  used on input line 4742.
 (pdftex.def)             Requested size: 113.81102pt x 134.26839pt.
  [94] [95 </home/vincent/vsc/snow.png>] [96]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1516,20 +1512,20 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <sigmoid.png, id=1011, 694.595pt x 729.72626pt>
 File: sigmoid.png Graphic file (type png)
 <use sigmoid.png>
-Package pdftex.def Info: sigmoid.png  used on input line 5010.
+Package pdftex.def Info: sigmoid.png  used on input line 5009.
 (pdftex.def)             Requested size: 142.2657pt x 142.25708pt.
  [99 </home/vincent/vsc/sigmoid.png>] [100] [101] [102] [103]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5305.
+(hyperref)                removing `math shift' on input line 5304.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\pi' on input line 5305.
+(hyperref)                removing `\pi' on input line 5304.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5305.
+(hyperref)                removing `math shift' on input line 5304.
 
 [104] (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
@@ -1538,137 +1534,137 @@ File: pgflibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )) [105] [106] [107] [108]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5589.
+(hyperref)                removing `math shift' on input line 5588.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\intop' on input line 5589.
+(hyperref)                removing `\intop' on input line 5588.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\ilimits@' on input line 5589.
+(hyperref)                removing `\ilimits@' on input line 5588.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 5589.
+(hyperref)                removing `subscript' on input line 5588.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `superscript' on input line 5589.
+(hyperref)                removing `superscript' on input line 5588.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 5589.
+(hyperref)                removing `\begingroup' on input line 5588.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\endgroup' on input line 5589.
+(hyperref)                removing `\endgroup' on input line 5588.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\@@over' on input line 5589.
+(hyperref)                removing `\@@over' on input line 5588.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `superscript' on input line 5589.
+(hyperref)                removing `superscript' on input line 5588.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5589.
+(hyperref)                removing `math shift' on input line 5588.
 
 [109]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5642.
+(hyperref)                removing `math shift' on input line 5641.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\@ifnextchar' on input line 5642.
+(hyperref)                removing `\@ifnextchar' on input line 5641.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5642.
+(hyperref)                removing `math shift' on input line 5641.
 
 [110]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5693.
+(hyperref)                removing `math shift' on input line 5692.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5693.
+(hyperref)                removing `math shift' on input line 5692.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5711.
+(hyperref)                removing `math shift' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathop' on input line 5711.
+(hyperref)                removing `\mathop' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathgroup' on input line 5711.
+(hyperref)                removing `\mathgroup' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\symoperators' on input line 5711.
+(hyperref)                removing `\symoperators' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\@ifnextchar' on input line 5711.
+(hyperref)                removing `\@ifnextchar' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 5711.
+(hyperref)                removing `\begingroup' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\endgroup' on input line 5711.
+(hyperref)                removing `\endgroup' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\@@over' on input line 5711.
+(hyperref)                removing `\@@over' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5711.
+(hyperref)                removing `math shift' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5711.
+(hyperref)                removing `math shift' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathop' on input line 5711.
+(hyperref)                removing `\mathop' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathgroup' on input line 5711.
+(hyperref)                removing `\mathgroup' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\symoperators' on input line 5711.
+(hyperref)                removing `\symoperators' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\@ifnextchar' on input line 5711.
+(hyperref)                removing `\@ifnextchar' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 5711.
+(hyperref)                removing `\begingroup' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\endgroup' on input line 5711.
+(hyperref)                removing `\endgroup' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\@@over' on input line 5711.
+(hyperref)                removing `\@@over' on input line 5710.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 5711.
+(hyperref)                removing `math shift' on input line 5710.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1676,14 +1672,14 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [111] [112] (/home/vincent/vsc/document.bbl [113] [114
 
 ]) [115]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5796.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 5796.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5795.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 5795.
  (/home/vincent/vsc/document.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5796.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5796.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5795.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5795.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 554F6E4336AA62E8FC2A7C77A61879E0;6112.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5796.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5795.
  ) 
 Here is how much of TeX's memory you used:
  39619 strings out of 480478
@@ -1694,7 +1690,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  60i,24n,71p,546b,1716s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc} <./snow.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc} <./beta.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/gttn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /home/vincent/vsc/document.pdf (115 pages, 1429670 bytes).
+Output written on /home/vincent/vsc/document.pdf (115 pages, 1429668 bytes).
 PDF statistics:
  1309 PDF objects out of 1440 (max. 8388607)
  1118 compressed objects within 12 object streams
