@@ -25,7 +25,7 @@
 \usepackage{wrapfig}
 \usepackage{coqdoc}
 \usepackage{proof}
-\fvset{tabsize=3}
+\fvset{tabsize=2}
 
 \newfont{\letterimp}{beta}
 \newcommand{\imp}{{\letterimp D}\hspace{0.1cm}}
@@ -41,7 +41,6 @@
 \author{Vincent Cognet}
 \date{Sainte-Marguerite, le 27 avril 2020 \\
       \url{https://github.com/cogtoto}}
-
 
 \newtheorem{definition}{Définition}
 \newtheorem{theoreme}{Théorème}
@@ -1315,13 +1314,14 @@ Nous reprenons ici le très bon formalisme de Barendregt \cite{baren}
   $\lambda$ est l'opération d'abstraction \\
   $\Pi$ est l'opérateur produit permettant de matérialiser le type dépendant 
 \end{definition}
-Il n'y a donc pas de distinction entre les termes et les types.
+Il n'y a donc pas de distinction entre les termes et les types. Chaque terme est typé, chaque type est typé, avec un système pyramidal
+infini.
+
+Nous utiliserons le formalisme \textit{à la Church}.
 Chaque terme est annoté de son type, contrairement au $\lambda$-calcul simplement typé 
 \textit{à la Curry} que nous
 avons présenté précedemment où les termes étaient libres de type et un mécanisme d'inférence de 
 type permettait ensuite d'associer à chaque terme un type.
-Le formalisme \textit{PTS} repose sur une base de  $\lambda$-calcul simplement typé 
-\textit{à la Church}.
 
 L'environnement de type $\Gamma$ est défini par :
 $$ \Gamma ::= \emptyset\ |\  \Gamma, x:\mathcal{T} $$
@@ -1448,28 +1448,32 @@ $$U\times V = \Pi X.(U\rightarrow V \rightarrow X)\rightarrow X$$
 $$ <u,v> = \lambda X:*.\lambda x:(U \rightarrow V \rightarrow X). x u v $$ 
 
 Prenons par exemple le couple d'entiers $<100, 101>$, nous le modélisons par 
-\begin{scriptsize}
 \begin{Verbatim}
-let prod_100_101 = Lam("X", C "nat", Lam("x", Prod("z", C "nat", (Prod ("w", C "nat", V "X" ))),App (App (V "x", N 100), N 101))) ;;
-  print (typage prod_100_101 env0) ;;
+let prod_100_101 = 
+  Lam("X", C "nat", 
+    Lam("x", Prod("z", C "nat", 
+:w
+     (Prod ("w", C "nat", V "X" ))),App (App (V "x", N 100), N 101))) ;;
+print (typage prod_100_101 env0) ;;
 πX:nat.((nat→(nat→X))→X)  
 \end{Verbatim}
-\end{scriptsize}
 
 Les projections sont définies par 
 $$\pi^1 t = t\ U (\lambda x:U.\lambda y:V. x) \text{  et  } \pi^2 t = t\ U (\lambda x:U.\lambda y:V. y)$$
-\begin{scriptsize}
 \begin{Verbatim}
-let proj1 = Lam("t", (typage prod_uv env0), App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "x")) ))
-   in print (fullReduc (App (proj1, prod_100_101)))
+let proj1 = 
+  Lam("t", (typage prod_uv env0), 
+    App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "x"))))
+ in print (fullReduc (App (proj1, prod_100_101)))
 
-let proj2 = Lam("t", (typage prod_uv env0), App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "y")) ))
+let proj2 = 
+  Lam("t", (typage prod_uv env0),
+    App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "y"))))
 in print (fullReduc (App (proj2, prod_uv)))
 \end{Verbatim}
-\end{scriptsize}
 
 \subsubsection{MiniCOQ}
-Nous  nous éloignons de la pureté du \textit{Pure Type System} en surchargeant notre
+Nous  nous éloignons de la simplicité du \textit{Pure Type System} en surchargeant notre
  terme algébrique des types suivants :
 \begin{itemize}
   \item Le type \verb+Nat+ avec ses constructeurs \verb+0+ et \verb+S+
@@ -1478,6 +1482,8 @@ Nous  nous éloignons de la pureté du \textit{Pure Type System} en surchargeant
   \verb+Proj1+ et \verb+Proj2+. L'affichage du type \verb+And+ se fera avec les caractères \verb+/\+
   \item Le type \verb+Or+ avec ses constructeurs \verb+Or_introl+ et \verb+Or_intror+ et sa fonction \verb+Case+.
   L'affichage de ce type se fera avec les caractères \verb+\/+
+  \item Le type \verb+False+ sans constructeur, mais avec la fonction \verb+False_ind(t1,t2)+ qui se
+  réduit en \verb+t1+ si le type de \verb+t2+ est égal à \verb+False+  (\textit{ex falso quodlibet})
 \end{itemize}
 
 \vspace{0.2cm}
@@ -1530,7 +1536,7 @@ Nous pouvons représenter la preuve du théorème avec la dérivation suivante:
   }
  }
 \end{scriptsize}
-
+\vspace{0.2cm}
 
 Avec notre système PTS, nous codons cela de la manière suivante:
 \begin{Verbatim}
@@ -1541,9 +1547,9 @@ in print imp ;;
 > πA:Type.πB:Type.π:Type.((A→B)/\(A→C)→(A→B/\C))
 
 let preuve_imp_pts = 
- Lam("A", C "Type",
-   Lam("B", C "Type",
-     Lam("C", C "Type", 
+ Lam("A", Type,
+   Lam("B", Type,
+     Lam("C", Type, 
       Lam("h", And(Prod("x", V "A", V "B"), Prod("y", V "A", V "C")), 
        Lam ("x", V "A", Conj (App(Proj1 (V "h"), V "x"), App(Proj2 (V "h"), V "x"))))))) 
 in (print preuve_imp_pts; print_string "\n"; print (check preuve_imp_pts env0))  ;;
@@ -1590,8 +1596,8 @@ Voici un autre exemple très simple illustrant le type $\wedge$ et les fonctions
 
 \begin{Verbatim}
 let preuve_et_refl = 
-  Lam("A", C "Type",
-    Lam("B", C "Type", 
+  Lam("A", Type,
+    Lam("B", Type, 
      Lam("h", And(V "A", V "B"), Conj(Proj2 (V "h"), Proj1 (V "h"))))) 
   in ( print preuve_et_refl ; print_string "\n"; print(check preuve_et_refl env0)) ;;
 > λA:Type.λB:Type.λh:A/\B.conj(proj2(h) ,proj1(h))
@@ -1600,7 +1606,6 @@ let preuve_et_refl =
 
 
 \subsubsection{Le $\lor$ logique}
-
 
 \begin{coqdoccode}
 \coqdocnoindent
@@ -1630,9 +1635,9 @@ let preuve_et_refl =
 
 (* fonction OCAML *)
 let preuve_or_elim =
-  Lam("A", C "Type",
-    Lam("B", C "Type",
-      Lam ("C", C "Type",
+  Lam("A", Type,
+    Lam("B", Type,
+      Lam ("C", Type,
         Lam("h1", Prod("x", V "A", V "C"),
           Lam("h2", Prod("y", V "B", V "C"),
             Lam("h3", Or(V "A", V "B"), 
@@ -1641,6 +1646,92 @@ let preuve_or_elim =
       print (check preuve_or_elim env0)) ;;
 > λA:Type.λB:Type.λC:Type.λh1:(A→C).λh2:(B→C).λh3:A\/B.case(h3, h1, h2)
   πA:Type.πB:Type.πC:Type.((A→C)→((B→C)→(A\/B→C)))
+\end{Verbatim}
+
+\subsubsection{L'égalité}
+Prouvons que $\forall n \in \mathtt{Nat}, (\lambda n.2\  n) = 2$
+\begin{Verbatim}
+let th = Prod("n", Nat, Eq(Nat, App(cst2, V "n"), S (S O) )) 
+  in print th;;
+> πn:nat.eq(nat, (λn:nat.2 n), 2)
+
+let proof = Lam("n", Nat, Eq_refl(Nat, App(cst2, V "n"))) in 
+  (print proof ; print_newline() ;
+   print (check proof env0) ; print_newline() ; 
+   print (fullReduc (check proof env0)))  ;;
+> λn:nat.eq _refl(nat, (λn:nat.2 n))
+  πn:nat.eq(nat, (λn:nat.2 n), (λn:nat.2 n))
+  (nat→eq(nat, 2, 2))
+\end{Verbatim}
+Rappelons la règle de conversion ci-dessous :
+$$
+\frac{\Gamma ⊢ t:A \ \ \     \Gamma ⊢ B:s \ \ \     A=_\beta B}{\Gamma ⊢ t:B}
+$$
+Ainsi, un terme peut avoir plusieurs types.
+
+\noindent La preuve \verb+λn:nat.eq _refl(nat, (λn:nat.2 n))+ est preuve de :
+\begin{itemize}
+ \item \verb+πn:nat.eq(nat, (λn:nat.2 n), (λn:nat.2 n))+
+ \item \verb+πn:nat.eq(nat, (λn:nat.2 n), 2)+
+ \item \verb+(nat→eq(nat, 2, 2))+
+\end{itemize}
+Nous constatons que la preuve n'exhibe pas le process calculatoire de la $\beta$-réduction.
+Le théorème est ici prouvé par calcul et non par raisonnement. Ces considérations philosophiques sont bien développées
+par Henri Poincaré\cite{poincare}
+
+\subsubsection{Le faux}
+\begin{Verbatim}
+let exf = Lam ("x", False, I) (* ex falso quodlibet *)
+  in (print exf ; print_newline() ; print (check exf env0)) ;;
+> λx:False.I
+  (False→True) 
+\end{Verbatim}
+Voici un exemple simple manipulant la négation et la fonction d'induction du faux.
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Theorem}  \coqdocvar{implication}: \coqdockw{\ensuremath{\forall}} (\coqdocvar{A} \coqdocvar{B}:\coqdockw{Prop}), \ensuremath{\lnot}\coqdocvar{A}\ensuremath{\lor}\coqdocvar{B} \ensuremath{\rightarrow} (\coqdocvar{A}\ensuremath{\rightarrow}\coqdocvar{B}) .\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intros}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{destruct} \coqdocvar{H} \coqdockw{as} [\coqdocvar{H1}\ensuremath{|}\coqdocvar{H2}].\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{contradiction}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Print} \coqdocvar{implication}.\coqdoceol
+\begin{Verbatim}
+implication = 
+ fun (A B : Prop) (H : ~ A \/ B) (H0 : A) =>
+  match H with
+  | or_introl H1 => False_ind B (H1 H0)
+  | or_intror H2 => H2
+  end
+   : forall A B : Prop, ~ A \/ B -> A -> B
+\end{Verbatim}
+\end{coqdoccode}
+
+
+Avec notre implémentation OCAML, cela donne :
+\begin{Verbatim}
+let preuve_impl =
+  Lam("A", Type,
+    Lam("B", Type,
+      Lam("H", Or(App(non, V "A"), V "B"),
+        Lam("H0", V "A",
+          Case (V "H", 
+                Lam("x", Prod("w", V "A", False), False_ind(V "B", App(V "x", V "H0"))),
+                Lam ("y", V "B", V "y")))))) 
+in  (print preuve_impl ; print_newline() ;
+     print (fullReduc (check preuve_impl env0))) ;;
+> λA:Type.λB:Type.λH:(λP:Type.~P A)\/B.λH0:A.case(H, λx:~A.false_ind(B,(x H0)), λy:B.y)
+  πA:Type.πB:Type.(~A\/B→(A→B))
 \end{Verbatim}
 
 \subsubsection{Le point fixe}
@@ -1659,8 +1750,82 @@ let facF = Lam("f", Prod ("z", Nat, Nat),
               IfThenElse(Egal(V "n", O), S O, (App(App(mult, V "n"), App(V "f", Sub1 (V "n")) ) )))) ;;
 
 let fac = Y facF  ;;
+
+print (fullReduc (App(fac, S (S (S (S (S O))))))) ;;
+> 120
 \end{Verbatim}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{La logique classique}
+Sous l'angle de la correspondance de Curry-Howard, notre système se base sur la logique intuitionniste.
+C'est-à-dire que toute proposition a une preuve constructive.
+ Autrement dit, le type correspondant à la proposition est habité par un terme de notre système PTS.
+Avec cette logique nous ne pouvons prouver certains théorèmes comme la loi de Peirce $((A\rightarrow B)\rightarrow A)\rightarrow A$
+
+Pour cela nous devons ajouter l'axiome du tiers-exclus $A \vee \neg A$. 
+Voici comment la loi de Pierce se déduit avec l'axiome du tiers-exclus. En COQ, cela donne:
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Axiom} \coqdocvar{classic}: \coqdockw{\ensuremath{\forall}} \coqdocvar{P}: \coqdockw{Prop}, \coqdocvar{P}\symbol{92}/\~{}\coqdocvar{P}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Theorem}  \coqdocvar{Peirce}: \coqdockw{\ensuremath{\forall}} \coqdocvar{A} \coqdocvar{B}:\coqdockw{Prop}, ((\coqdocvar{A}\ensuremath{\rightarrow}\coqdocvar{B})->\coqdocvar{A})->\coqdocvar{A}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intros}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{assert} (\coqdocvar{A}\symbol{92}/\~{}\coqdocvar{A}) \coqdoctac{by} (\coqdoctac{apply} \coqdocvar{classic} ).\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{destruct} \coqdocvar{H0} \coqdockw{as} [\coqdocvar{H1} \ensuremath{|} \coqdocvar{H2}].\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{exact} \coqdocvar{H1}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply} \coqdocvar{H} .\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intros}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{contradiction}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Print} \coqdocvar{Peirce}.\coqdoceol
+\end{coqdoccode}
+
+\begin{Verbatim}
+ Peirce = 
+  fun (A B : Prop) (H : (A -> B) -> A) =>
+  let H0 : A \/ ~ A := classic A in
+  match H0 with
+  | or_introl H1 => H1
+  | or_intror H2 => H (fun H1 : A => False_ind B (H2 H1))
+  end
+    : forall A B : Prop, ((A -> B) -> A) -> A
+\end{Verbatim}
+
+Voici notre implémentation dans notre miniCOQ. 
+Nous créons un environnement \verb+env_classic+ surchargé par le terme \verb+tiers-exclus+ de type $A \vee \neg A$.
+Nous trichons un peu car le type devrait être polymorphe et donc de la forme $\forall P:\mathtt{Type}, P \vee \neg P$, mais 
+je ne vois pas comment ensuite appliquer cet axiome à une variable \verb+A+. Comment COQ gère \verb+let H0 : A \/ ~ A := classic A+ ? 
+
+\begin{Verbatim}
+let env_classic = [("tiers-exclus",  Or(V "A", App(non, V "A")))] ;;
+
+let proof_peirce = 
+  Lam("A", Type,
+    Lam("B", Type, 
+      Lam ("H", Prod("x", Prod("y", V "A", V "B"), V "A"),
+        Case(C "tiers-exclus",
+             Lam("zz", V "A", V "zz"),
+             Lam("yy", V "A", App(V "H", Lam("H1", V "A", False_ind(V "B", App(V "yy", V "H1")))))))))
+  in (print proof_peirce; print_newline();
+    print (check proof_peirce env_classic)) ;;
+> λA:Type.λB:Type.λH:((A→B)→A).case(tiers-exclus,
+                                    λzz:A.zz,
+                                    λyy:A.(H λH1:A.false_ind(B,(yy H1))))
+  πA:Type.πB:Type.(((A→B)→A)→A)
+\end{Verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{L'interprétation}
 
@@ -1715,7 +1880,6 @@ La règle d'évaluation de l'appel par valeur se formalise ainsi comme suit:
 		 { \rho \vdash M N \rightarrow v^{'} }
 \]
 
-
 L'évaluation de $M^{'}$ le corps de la lambda se fait dans l'environnement $\rho ^{'}$ augmenté 
 d'une liaison due du passage de paramètre. C'est la caractéristique de la liaison lexicale.
 Pour  une liaison dynamique, l'évaluation du corps de la lambda se fera  dans l'environnement
@@ -1742,7 +1906,6 @@ le processus d'évaluation.
 	\node (M) at (13,0) {\verb+If(a,b,c)+};
 	\node (E) at (10,0) {\verb+ast+};
 	\node (F) at (7,-3) {eval};
-
 
 	\tikzstyle{estun}=[->,>=latex]
 	\draw[estun] (A)--node[above] {lex} (B);
@@ -1986,7 +2149,7 @@ let fact = ref (function x -> x) in
        
        \vspace{1cm}
        \textgreek{Kαὶ εἶπεν ὁ θεὸς πρὸς Μωυσῆν Ἐγώ εἰμι ὁ ὤν.}\\
-       Exode 3, 14. La Septante
+       Exode 3, 14. La Septante \cite{exode}
 \end{minipage}
 
 & \hspace{1cm}
@@ -5561,71 +5724,6 @@ Et également $e = \lim_{n \rightarrow \infty} (\frac{1}{1+n})^n $
     \draw[domain=0.01:1,   smooth, variable=\x, red] plot (\x, {-\x});
 \end{tikzpicture}
 \end{center}
-%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Découverte de COQ}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% This file has been automatically generated with the command
-%% coqdoc --latex basique.v 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{coqdoccode}
-\coqdocnoindent
-\coqdockw{Require} \coqdockw{Import} \coqdocvar{Bool}.\coqdoceol
-\coqdocemptyline
-\coqdocnoindent
-\coqdockw{Compute} \coqdockw{if} \coqdocvar{true} \coqdockw{then} 3 \coqdockw{else} 5.\coqdoceol
-\coqdocemptyline
-\coqdocnoindent
-\coqdockw{Definition} \coqdocvar{leibniz} (\coqdocvar{a} \coqdocvar{b}:\coqdockw{Set}):\coqdockw{Prop} :=\coqdoceol
-\coqdocindent{1.00em}
-\coqdockw{\ensuremath{\forall}} \coqdocvar{f}:\coqdockw{Set}\ensuremath{\rightarrow}\coqdockw{Prop}, \coqdocvar{f} \coqdocvar{a} \ensuremath{\rightarrow} \coqdocvar{f} \coqdocvar{b} .\coqdoceol
-\coqdocemptyline
-\coqdocnoindent
-\coqdockw{Theorem} \coqdocvar{imp}: \coqdockw{\ensuremath{\forall}} (\coqdocvar{a} \coqdocvar{b} \coqdocvar{c} : \coqdockw{Prop}), ((\coqdocvar{a}\ensuremath{\rightarrow}\coqdocvar{b}) \ensuremath{\land} (\coqdocvar{a}\ensuremath{\rightarrow} \coqdocvar{c})) \ensuremath{\rightarrow} \coqdocvar{a} \ensuremath{\rightarrow} (\coqdocvar{b}\ensuremath{\land}\coqdocvar{c}) .\coqdoceol
-\coqdocnoindent
-\coqdockw{Proof}.\coqdoceol
-\coqdocnoindent
-\coqdoctac{intros}.\coqdoceol
-\coqdocnoindent
-\coqdoctac{destruct}  \coqdocvar{H}.\coqdoceol
-\coqdocnoindent
-\coqdoctac{split}. \coqdoctac{apply} \coqdocvar{H}. \coqdoctac{assumption}.\coqdoceol
-\coqdocnoindent
-\coqdoctac{apply} \coqdocvar{H1}. \coqdoctac{assumption}.\coqdoceol
-\coqdocnoindent
-\coqdockw{Qed}.\coqdoceol
-\coqdocemptyline
-\coqdocnoindent
-\coqdockw{Print} \coqdocvar{imp}.\coqdoceol
-\coqdocemptyline
-\coqdocemptyline
-\end{coqdoccode}
-
-Avec notre \textit{Pure Type System} décrit précedemment, nous pouvons modéliser
-une "tautologie" de la manière suivante :
-\begin{Verbatim}
-let trans = Prod("A", C "Type", 
-            Prod("B", C "Type",
-            Prod("C", C "Type",
-            Prod("x", Prod("y", V "A", V "B"), Prod("z", Prod("w", V "B", V "C"), 
-                                                    Prod("v", V "A", V "C")))))) 
-  in print trans ;;
->> πA:Type.πB:Type.πC:Type.((A→B)→((B→C)→(A→C)))
-
-let proof_trans = Lam("A", C "Type", 
-                  Lam("B", C "Type",
-                  Lam("C", C "Type",
-                  Lam("H", Prod("x", V "A", V "B"),
-                  Lam("H0", Prod("x", V "B", V "C"),
-                  Lam("H1", V "A",
-                   App(V "H0", App (V "H", V "H1")))))))) ;;
-
-print proof_trans ;;
->> λA:Type.λB:Type.λC:Type.λH:(A→B).λH0:(B→C).λH1:A. (H0 (H H1))
-
-print (check proof_trans env0) ;;
->> πA:Type.πB:Type.πC:Type.((A→B)→((B→C)→(A→C)))
-\end{Verbatim}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Srivanasa Ramanujan}

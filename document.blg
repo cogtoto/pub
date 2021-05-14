@@ -7,10 +7,14 @@ Warning--I'm ignoring gb's extra "author" field
 --line 51 of file book.bib
 Warning--I'm ignoring wm's extra "author" field
 --line 58 of file book.bib
+Warning--to sort, need author, editor, or key in exode
 Warning--to sort, need author, editor, or key in genese
 Warning--empty author and editor in genese
 Warning--empty publisher in genese
 Warning--empty year in genese
+Warning--empty author and editor in exode
+Warning--empty publisher in exode
+Warning--empty year in exode
 Warning--empty publisher in baren
 Warning--empty year in baren
 Warning--empty publisher in gide
@@ -18,48 +22,50 @@ Warning--empty year in gide
 Warning--empty publisher in vh
 Warning--empty year in vh
 Warning--empty publisher in lalement
+Warning--can't use both author and editor fields in poincare
+Warning--empty publisher in poincare
 Warning--empty publisher in WS
 Warning--empty year in WS
 Warning--empty publisher in reflective
-You've used 18 entries,
+You've used 20 entries,
             2118 wiz_defined-function locations,
-            576 strings with 5157 characters,
-and the built_in function-call counts, 3942 in all, are:
-= -- 329
-> -- 138
+            582 strings with 5241 characters,
+and the built_in function-call counts, 4336 in all, are:
+= -- 359
+> -- 146
 < -- 1
-+ -- 60
-- -- 40
-* -- 190
-:= -- 675
-add.period$ -- 47
-call.type$ -- 18
-change.case$ -- 56
++ -- 64
+- -- 42
+* -- 219
+:= -- 731
+add.period$ -- 51
+call.type$ -- 20
+change.case$ -- 61
 chr.to.int$ -- 0
-cite$ -- 32
-duplicate$ -- 212
-empty$ -- 399
-format.name$ -- 40
-if$ -- 827
+cite$ -- 40
+duplicate$ -- 237
+empty$ -- 445
+format.name$ -- 42
+if$ -- 910
 int.to.chr$ -- 0
-int.to.str$ -- 18
-missing$ -- 33
-newline$ -- 86
-num.names$ -- 34
-pop$ -- 162
+int.to.str$ -- 20
+missing$ -- 36
+newline$ -- 94
+num.names$ -- 36
+pop$ -- 180
 preamble$ -- 1
-purify$ -- 55
+purify$ -- 60
 quote$ -- 0
-skip$ -- 109
+skip$ -- 120
 stack$ -- 0
-substring$ -- 92
-swap$ -- 19
+substring$ -- 102
+swap$ -- 22
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 38
-warning$ -- 14
-while$ -- 34
-width$ -- 20
-write$ -- 162
-(There were 16 warnings)
+type$ -- 42
+warning$ -- 20
+while$ -- 36
+width$ -- 22
+write$ -- 176
+(There were 22 warnings)

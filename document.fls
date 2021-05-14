@@ -438,9 +438,9 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/cbfonts-fd/lgrlmtt.fd
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cbfonts/gttn1000.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-33.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-33.def
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmtt8.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cbfonts/gttn0800.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmtt8.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-32.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-32.def
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cbfonts/grmn1000.tfm
@@ -462,8 +462,6 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr5.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmbx5.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmtt8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmtt8.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
 INPUT /home/vincent/vsc/flocon1.pdf
 INPUT /home/vincent/vsc/flocon1.pdf
 INPUT /home/vincent/vsc/flocon1.pdf
@@ -515,7 +513,6 @@ INPUT ./beta.600pk
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/gttn0800.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/gttn1000.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx12.pfb
@@ -543,7 +540,6 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtk10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt12.pfb
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt8.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb
