@@ -68,10 +68,36 @@ Qed.
 
 Print my_I.
 
+Fixpoint somme_1_n (n : nat): nat :=
+  match n with
+  | O => O
+  | S n' => n + somme_1_n n'
+  end.
 
+Compute somme_1_n 5 .
 
+Require Import Omega.
 
-
-
+Theorem th_somme_1_n : forall (n:nat), 2*(somme_1_n n) = n*(n+1).
+Proof.
+  intros. simpl. 
+  induction n.
+  assert (som0 : forall (n:nat), somme_1_n n + 0 = somme_1_n n).
+  admit.
+  rewrite -> som0.
+  simpl. reflexivity.
   
+  assert (soms0 : forall (n:nat), somme_1_n (S n) + 0 = somme_1_n n).
+  admit.
+
+  rewrite -> soms0.
+  simpl.
+  
+
+  assert (sommen1 : somme_1_n (n+1)= n+1+somme_1_n n).
+
+  admit.
+  rewrite -> sommen1.
 Qed.
+
+Print th_somme_1_n.

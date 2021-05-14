@@ -3,6 +3,9 @@
 \bibitem{genese}
 {\em Livre de la Genèse, Gn 11, 1-9}.
 
+\bibitem{exode}
+{\em Livre de l'Exode, Ex 3, 14}.
+
 \bibitem{ab}
 Badiou Alain.
 \newblock {\em Eloge des mathématiques}.
@@ -58,6 +61,11 @@ Leslie Lamport.
 C.~Lebossé.
 \newblock {\em Géométrie plane}.
 \newblock Fernand Nathan, 1947.
+
+\bibitem{poincare}
+Henri Poincaré.
+\newblock {\em La science et l'hypothèse}.
+\newblock 1902.
 
 \bibitem{lisp}
 Christian Queinnec.
