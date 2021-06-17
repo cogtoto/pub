@@ -7,14 +7,10 @@ Warning--I'm ignoring gb's extra "author" field
 --line 51 of file book.bib
 Warning--I'm ignoring wm's extra "author" field
 --line 58 of file book.bib
-Warning--to sort, need author, editor, or key in exode
 Warning--to sort, need author, editor, or key in genese
 Warning--empty author and editor in genese
 Warning--empty publisher in genese
 Warning--empty year in genese
-Warning--empty author and editor in exode
-Warning--empty publisher in exode
-Warning--empty year in exode
 Warning--empty publisher in baren
 Warning--empty year in baren
 Warning--empty publisher in gide
@@ -27,45 +23,45 @@ Warning--empty publisher in poincare
 Warning--empty publisher in WS
 Warning--empty year in WS
 Warning--empty publisher in reflective
-You've used 20 entries,
+You've used 19 entries,
             2118 wiz_defined-function locations,
-            582 strings with 5241 characters,
-and the built_in function-call counts, 4336 in all, are:
-= -- 359
-> -- 146
+            580 strings with 5210 characters,
+and the built_in function-call counts, 4163 in all, are:
+= -- 347
+> -- 145
 < -- 1
-+ -- 64
++ -- 63
 - -- 42
-* -- 219
-:= -- 731
-add.period$ -- 51
-call.type$ -- 20
-change.case$ -- 61
+* -- 203
+:= -- 712
+add.period$ -- 50
+call.type$ -- 19
+change.case$ -- 59
 chr.to.int$ -- 0
-cite$ -- 40
-duplicate$ -- 237
-empty$ -- 445
+cite$ -- 35
+duplicate$ -- 224
+empty$ -- 421
 format.name$ -- 42
-if$ -- 910
+if$ -- 872
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 36
-newline$ -- 94
+int.to.str$ -- 19
+missing$ -- 35
+newline$ -- 91
 num.names$ -- 36
-pop$ -- 180
+pop$ -- 170
 preamble$ -- 1
-purify$ -- 60
+purify$ -- 58
 quote$ -- 0
-skip$ -- 120
+skip$ -- 115
 stack$ -- 0
-substring$ -- 102
-swap$ -- 22
+substring$ -- 97
+swap$ -- 21
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 42
-warning$ -- 20
+type$ -- 40
+warning$ -- 16
 while$ -- 36
-width$ -- 22
-write$ -- 176
-(There were 22 warnings)
+width$ -- 21
+write$ -- 171
+(There were 18 warnings)
