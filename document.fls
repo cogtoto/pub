@@ -307,7 +307,6 @@ OUTPUT /home/vincent/vsc/document.pdf
 INPUT /home/vincent/vsc/document.out
 INPUT /home/vincent/vsc/document.out
 OUTPUT /home/vincent/vsc/document.out
-INPUT /usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr17.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-0.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-0.def
@@ -350,6 +349,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmtt12.tfm
+INPUT /usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr17.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT /home/vincent/vsc/document.toc
@@ -511,7 +511,6 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT ./beta.600pk
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/gttn1000.pfb
@@ -547,4 +546,3 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb
