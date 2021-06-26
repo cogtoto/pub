@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Approximation du nombre </TITLE>
+<META NAME="description" CONTENT="Approximation du nombre ">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node106.html">
+<LINK REL="previous" HREF="node88.html">
+<LINK REL="next" HREF="node99.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node99.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node74.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node97.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html571"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node99.html">La méthode des polygones</A>
+<B> monter:</B> <A
+ HREF="node74.html">Annexes / Divers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node97.html">Le code</A>
+ &nbsp; <B>  <A ID="tex2html572"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION008100000000000000000">
+Approximation du nombre <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN> </A>
+</H1>
+
+<P>
+<DIV class="CENTER">
+<TABLE class="PAD " style="">
+<TR><TD CLASS="CENTER">Que</TD>
+<TD CLASS="CENTER">j'</TD>
+<TD CLASS="CENTER">aime</TD>
+<TD CLASS="CENTER">à</TD>
+<TD CLASS="CENTER">faire</TD>
+<TD CLASS="CENTER">connaître</TD>
+<TD CLASS="CENTER">ce</TD>
+<TD CLASS="CENTER">nombre</TD>
+<TD CLASS="CENTER">utile</TD>
+<TD CLASS="CENTER">aux</TD>
+<TD CLASS="CENTER">sages.</TD>
+</TR>
+<TR><TD CLASS="CENTER">3,</TD>
+<TD CLASS="CENTER">1</TD>
+<TD CLASS="CENTER">4</TD>
+<TD CLASS="CENTER">1</TD>
+<TD CLASS="CENTER">5</TD>
+<TD CLASS="CENTER">9</TD>
+<TD CLASS="CENTER">2</TD>
+<TD CLASS="CENTER">6</TD>
+<TD CLASS="CENTER">5</TD>
+<TD CLASS="CENTER">3</TD>
+<TD CLASS="CENTER">5</TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+Cherchons à approcher <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN> par cinq méthodes :
+
+<UL>
+<LI>La loi des grands nombres. 
+	Nous faisons ici un tirage aléatoire de coordonnées <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img537.svg"
+ ALT="$(x,y)$"></SPAN> avec <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img20.svg"
+ ALT="$x$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img220.svg"
+ ALT="$y$"></SPAN> compris entre <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img538.svg"
+ ALT="$-1$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img268.svg"
+ ALT="$1$"></SPAN>.
+	Il y a  <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN> chances sur 4 que le tirage tombe dans le cercle de rayon 1. 
+
+<P>
+</LI>
+<LI>La série alternée de Leibniz 
+	<P><!-- MATH
+ \begin{displaymath}
+\sum_{n=0}^\infty \frac{(-1)^n}{2n+1} = \frac{1}{1} -\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\frac{1}{9} - \dots = \frac{\pi}{4}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img539.svg"
+ ALT="$\displaystyle \sum_{n=0}^\infty \frac{(-1)^n}{2n+1} = \frac{1}{1} -\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\frac{1}{9} - \dots = \frac{\pi}{4} $">
+</DIV><P></P>
+
+<P>
+</LI>
+<LI>Le calcul numérique de l'intégrale 
+	<P><!-- MATH
+ \begin{displaymath}
+\int_0^1 \frac{1}{1+x^2} dx
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img540.svg"
+ ALT="$\displaystyle \int_0^1 \frac{1}{1+x^2} dx$">
+</DIV><P></P>
+
+<P>
+</LI>
+<LI>Le produit de Wallis 
+	<P><!-- MATH
+ \begin{displaymath}
+\pi /2 = \frac{2.2.4.4.6.6.8.8.10.10. ...} {1.3.3.5.5.7.7.9.9.11. ...}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img541.svg"
+ ALT="$\displaystyle \pi /2 = \frac{2.2.4.4.6.6.8.8.10.10. ...} {1.3.3.5.5.7.7.9.9.11. ...}$">
+</DIV><P></P>
+
+<P>
+Ce produit s'écrira mieux sous la forme:
+	<P><!-- MATH
+ \begin{displaymath}
+( \frac{2}{1}.\frac{2}{3} ) . (\frac{4}{2}.\frac{4}{5} ).(\frac{6}{5}.\frac{6}{7} ).(\frac{8}{7}.\frac{8}{9} ) . ...  =  \prod_{n=1}^\infty \frac{2n.2n}{(2n-1).(2n+1)} = \prod_{n=1}^\infty \frac{4n^2}{4n^2-1}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img542.svg"
+ ALT="$\displaystyle ( \frac{2}{1}.\frac{2}{3} ) . (\frac{4}{2}.\frac{4}{5} ).(\frac{6...
+...=1}^\infty \frac{2n.2n}{(2n-1).(2n+1)} = \prod_{n=1}^\infty \frac{4n^2}{4n^2-1}$">
+</DIV><P></P>
+
+<P>
+</LI>
+<LI>Les périmètres des polygones réguliers inscrits et circonscrits au cercle 
+	
+<DIV class="CENTER">
+<IMG
+ STYLE=""
+ SRC="img543.svg"
+ ALT="\begin{figure}\centering
+\usetikzlibrary{shapes.geometric}
+\begin{tikzpicture}...
+...a, minimum size=\x, draw] at (\a*3,0) {};
+}
+\par
+\end{tikzpicture} \end{figure}">
+</DIV>
+
+<P>
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Sous-sections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html573"
+  HREF="node99.html">La méthode des polygones</A>
+<UL>
+<LI><A ID="tex2html574"
+  HREF="node100.html">Calcul de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img8.svg"
+ ALT="$p_{2n}$"></SPAN> en fonction de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img9.svg"
+ ALT="$p_n$"></SPAN></A>
+<LI><A ID="tex2html575"
+  HREF="node101.html">Calcul de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img10.svg"
+ ALT="$p'_n$"></SPAN> en fonction de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img9.svg"
+ ALT="$p_n$"></SPAN></A>
+</UL>
+<BR>
+<LI><A ID="tex2html576"
+  HREF="node102.html">La série alternée de Leibniz</A>
+<LI><A ID="tex2html577"
+  HREF="node103.html">La loi des grands nombres</A>
+<LI><A ID="tex2html578"
+  HREF="node104.html">Le produit de Wallis</A>
+<LI><A ID="tex2html579"
+  HREF="node105.html">L'intégrale <!-- MATH
+ $\int_0^1 \frac{1}{1+x^2} dx$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img605.svg"
+ ALT="$\int_0^1 \frac{1}{1+x^2} dx$"></SPAN></A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

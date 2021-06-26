@@ -1,0 +1,674 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>La récursivité et le point fixe</TITLE>
+<META NAME="description" CONTENT="La récursivité et le point fixe">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html257"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node11.html">Church encoding. Les entiers</A>
+<B> monter:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node9.html">La -réduction faible avec</A>
+ &nbsp; <B>  <A ID="tex2html258"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00340000000000000000">
+La récursivité et le point fixe</A>
+</H1>
+
+<P>
+What else is a loop but a way of representing an endless process in a finite way?
+[<A
+ HREF="node114.html#god">8</A>]
+
+<P>
+<DIV class="CENTER">
+<TABLE class="PAD " style="">
+<TR><TD CLASS="CENTER"><IMG
+  WIDTH="187" HEIGHT="161" STYLE=""
+ SRC="./DrawingHands.jpg"
+ ALT="Image DrawingHands"></TD>
+<TD CLASS="CENTER"><!-- MATH
+ $\sqrt{2} = 1 + \frac{1}{1+\sqrt{2}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img62.svg"
+ ALT="$\sqrt{2} = 1 + \frac{1}{1+\sqrt{2}} $"></SPAN></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+En analyse, le point fixe d'une fonction <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img63.svg"
+ ALT="$f$"></SPAN> est sa valeur <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img20.svg"
+ ALT="$x$"></SPAN> telle que <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img64.svg"
+ ALT="$f(x)=x$"></SPAN>
+
+<P>
+Cela permet de définir <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img20.svg"
+ ALT="$x$"></SPAN> en fonction de lui-même.
+
+<P>
+Cette simple expression <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img65.svg"
+ ALT="$x=f(x)$"></SPAN> est finalement très étrange et déroutante.
+C'est la force de la récursivité : <!-- MATH
+ $x=f(f(f(f(f(f\ldots (x)\ldots))))))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img66.svg"
+ ALT="$x=f(f(f(f(f(f\ldots (x)\ldots))))))$"></SPAN>
+
+<P>
+Un exemple est la valeur <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img12.svg"
+ ALT="$\sqrt {2}$"></SPAN> exprimée sous forme d'une fraction continue,
+expression trouvée je crois par Euler.
+Je la décris ci-dessous  pour le plaisir d'écrire (et lire) de belles formules mathématiques en <SPAN CLASS="logo,LaTeX">L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>X</SPAN>[<A
+ HREF="node114.html#lamport1994latex">12</A>]
+<P><!-- MATH
+ \begin{displaymath}
+\sqrt{2} = 1+\sqrt{2} -1
+= 1+ \frac{(\sqrt{2} -1)(\sqrt{2} +1)}{\sqrt{2} +1}
+= 1 + \frac{1}{1+\sqrt{2}}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img67.svg"
+ ALT="$\displaystyle \sqrt{2} = 1+\sqrt{2} -1
+= 1+ \frac{(\sqrt{2} -1)(\sqrt{2} +1)}{\sqrt{2} +1}
+= 1 + \frac{1}{1+\sqrt{2}}
+$">
+</DIV><P></P>
+
+<P>
+<BR>
+<IMG
+ STYLE=""
+ SRC="img68.svg"
+ ALT="\begin{tikzpicture}
+\draw[-&gt;] (-1, 0) -- (3, 0) node[right] {$x$};
+\draw[-&gt;] (...
+...rac{1}{2
++ \cfrac{1}{ \ddots
+} } } } } \end{displaymath} } ;
+\end{tikzpicture}">
+<BR> 
+
+<P>
+En posant <!-- MATH
+ $f(x) = 1 + \frac{1}{1+x}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img69.svg"
+ ALT="$f(x) = 1 + \frac{1}{1+x} $"></SPAN>, la résolution de l'équation <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img65.svg"
+ ALT="$x=f(x)$"></SPAN> nous permet
+de calculer la valeur de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img12.svg"
+ ALT="$\sqrt {2}$"></SPAN>. Nous utilisons aussi le fait que <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img12.svg"
+ ALT="$\sqrt {2}$"></SPAN> est 
+un point fixe attractif de notre fonction <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img63.svg"
+ ALT="$f$"></SPAN>. C'est-à-dire qu'il existe un <SPAN  CLASS="textit">voisinage</SPAN> de 
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img12.svg"
+ ALT="$\sqrt {2}$"></SPAN> tel que la suite <!-- MATH
+ $x_0,f(x_0),f(f(x_0)),f(f(f(x_0))),\dots$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img70.svg"
+ ALT="$x_0,f(x_0),f(f(x_0)),f(f(f(x_0))),\dots $"></SPAN> converge vers <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img12.svg"
+ ALT="$\sqrt {2}$"></SPAN>
+
+<P>
+En CAML, la fonction qui itère cette fraction continue peut être codée comme suit. 
+Nous partons ici de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img71.svg"
+ ALT="$x_0 =1$"></SPAN>. La fraction continue converge très rapidement.
+<PRE>
+let rec square2 iter =
+	if (iter = 1) then 1.
+	else  1. +. ( 1. /. ( 1. +. square2 (iter - 1)));;
+val square2 : int -&gt; float = &lt;fun&gt;
+
+# square2 30 ;;
+- : float = 1.4142135623730951
+
+# sqrt 2. ;;
+- : float = 1.41421356237309512.
+</PRE>
+
+<P>
+En <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul, nous avons un combinateur<A ID="tex2html3"
+  HREF="footnode.html#foot3098"><SUP><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">2</SPAN></SUP></A> qui nous permet de calculer le point fixe de n'importe quel <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme.
+Ce combinateur s'appelle <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img72.svg"
+ ALT="$Y$"></SPAN> . Il est défini par <P><!-- MATH
+ \begin{displaymath}
+Y=  \lambda f.(\lambda x.f(x x))(\lambda x.f(x x))
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img73.svg"
+ ALT="$\displaystyle Y= \lambda f.(\lambda x.f(x x))(\lambda x.f(x x)) $">
+</DIV><P></P>
+
+<P>
+Ce n'est pas le seul combinateur de point fixe. Voici un autre dû à Turing :
+ <P><!-- MATH
+ \begin{displaymath}
+\Theta = (\lambda x. \lambda y. (y (x x y))) (\lambda x. \lambda y. (y (x x y)))
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img74.svg"
+ ALT="$\displaystyle \Theta = (\lambda x. \lambda y. (y (x x y))) (\lambda x. \lambda y. (y (x x y)))$">
+</DIV><P></P>
+
+<P>
+Voici l'arbre syntaxique de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img72.svg"
+ ALT="$Y$"></SPAN>:
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img75.svg"
+ ALT="\begin{tikzpicture}[level distance=1.5cm,
+level 1/.style={sibling distance=5cm},...
+...child {node {@} child { node {x }} child {node {x }} } } } } ;
+\end{tikzpicture}">
+<BR>
+</DIV>
+Quel que soit le terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN>, nous aurons  <!-- MATH
+ $(YM) = _\beta M(YM)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img76.svg"
+ ALT="$(YM) = _\beta M(YM)$"></SPAN>
+
+<P>
+Essayons ceci avec notre notre fonction <code>fullReduc</code>  en CAML.
+Réduisons <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img77.svg"
+ ALT="$YM$"></SPAN> :
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{l}
+\lambda f . (\lambda x . (f (x x))) (\lambda x . (f (x x))) M \\
+\rightarrow _\beta (\lambda x . (M (xx)))(\lambda x . (M(xx))) \\
+\rightarrow _\beta  (M(\lambda x . (M(xx)))(\lambda x . (M(xx))))  \triangleright [2] \\
+\rightarrow _\beta  (MM(\lambda x . (M(xx)))(\lambda x . (M(xx)))) \\
+\rightarrow _\beta  (MMM(\lambda x . (M(xx)))(\lambda x . (M(xx)))) \\
+\rightarrow _\beta  (MMMM(\lambda x . (M(xx)))(\lambda x . (M(xx)))) \\
+\rightarrow _\beta  \ldots
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img78.svg"
+ ALT="\begin{displaymath}
+\begin{array}{l}
+\lambda f . (\lambda x . (f (x x))) (\lambd...
+...\lambda x . (M(xx)))) \\
+\rightarrow _\beta \ldots
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+La deuxième <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction est bien égale à <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img79.svg"
+ ALT="$M (Y M)$"></SPAN>
+Nous voyons ici le mécanisme d'appel récursif à M. 
+
+<P>
+Détaillons cela avec une fonction exprimée en pseudo-code d'un <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul étendu.
+Nous nous inspirons pour cela du très bon article de wikipedia <kbd><A ID="tex2html4"
+  HREF="https://en.wikipedia.org/wiki/Lambda_calculus">https://en.wikipedia.org/wiki/Lambda_calculus</A></kbd>.
+
+<P>
+Soit <!-- MATH
+ $M = (\lambda f \lambda n .(if\ n=0\ then\ 1\ else\ n*f(n-1)))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img80.svg"
+ ALT="$M = (\lambda f \lambda n .(if\ n=0\ then\ 1\ else\ n*f(n-1)))$"></SPAN>
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{lll}
+(YM)\ 4 & \rightarrow _\beta & M (YM)\ 4 \\
+& \rightarrow _\beta & (\lambda f \lambda n .(if\ n=0\ then\ 1\ else\ n*f(n-1))) (YM)\ 4 \\
+& \rightarrow _\beta & (\lambda  n . (if\ n=0\ then\ 1\ else\ n*((YM) (n-1))))\ 4 \\
+& \rightarrow _\beta & (if\ 4=0\ then\ 1\ else\ 4*((YM)\ (4-1))) \\
+& \rightarrow _\beta & 4 * ((YM)\ 3) \\
+& \rightarrow _\beta & 4 * (M(YM)\ 3) \\
+& \vdots & \\
+& \rightarrow _\beta & 4 * 3 * 2 * 1
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img81.svg"
+ ALT="\begin{displaymath}
+\begin{array}{lll}
+(YM)\ 4 &amp; \rightarrow _\beta &amp; M (YM)\ 4 ...
+... \vdots &amp; \\
+&amp; \rightarrow _\beta &amp; 4 * 3 * 2 * 1
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+Ici encore, nous avons utilisé la stratégie de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction normale. 
+Mais avec une réduction par valeur, le terme en argument <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img82.svg"
+ ALT="$(YM)$"></SPAN> aura été réduit indéfiniment en <!-- MATH
+ $M(M(M(M(M\ldots YM)\ldots)))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img83.svg"
+ ALT="$M(M(M(M(M\ldots YM)\ldots)))$"></SPAN>,
+sans réduire le redex <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img84.svg"
+ ALT="$Mx$"></SPAN>
+
+<P>
+En utilisant notre programme OCAML, voyons cela avec en prenant <!-- MATH
+ $M = \lambda a. (\lambda b . b)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img85.svg"
+ ALT="$M = \lambda a. (\lambda b . b) $"></SPAN> :
+
+<P>
+<code># betaNormal ym ;;</code>
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{lll}
+ & (\lambda f . (\lambda x . (f(xx))\lambda x . (f(xx)))\lambda a . \lambda b . b) &  \\
+ \rightarrow _\beta & (\lambda x . (\lambda a . \lambda b . b(xx))\lambda x . (\lambda a . \lambda b . b(xx))) &\triangleright [2]  \\
+ \rightarrow _\beta & (\lambda a . \lambda b . b(\lambda x . (\lambda a . \lambda b . b(xx))\lambda x . (\lambda a . \lambda b . b(xx))))  &\triangleright [3]  \\
+ \rightarrow _\beta & \lambda b . b &  \\
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img86.svg"
+ ALT="\begin{displaymath}
+\begin{array}{lll}
+&amp; (\lambda f . (\lambda x . (f(xx))\lamb...
+...t [3] \\
+\rightarrow _\beta &amp; \lambda b . b &amp; \\
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+<code># betaValeur ym ;;</code>
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{lll}
+ & (\lambda f . (\lambda x . (f(xx))\lambda x . (f(xx)))\lambda a . \lambda b . b)  &  \\
+\rightarrow _\beta & (\lambda x . (\lambda a . \lambda b . b(xx))\lambda x . (\lambda a . \lambda b . b(xx))) & \triangleright [2]  \\
+\rightarrow _\beta & (\lambda a . \lambda b . b(\lambda x . (\lambda a . \lambda b . b(xx))\lambda x . (\lambda a . \lambda b . b(xx)))) & \triangleright [3] \\
+\rightarrow _\beta & (\lambda a . \lambda b . b(\lambda a . \lambda b . b(\lambda x . (\lambda a . \lambda b . b(xx))\lambda x . (\lambda a . \lambda b . b(xx)))))  & \\
+\rightarrow _\beta & (\lambda a . \lambda b . b(\lambda a . \lambda b . b(\lambda a . \lambda b . b(\lambda x . (\lambda a . \lambda b . b(xx))\lambda x . (\lambda a . \lambda b . b(xx)))))) &  \\
+\rightarrow _\beta & (\lambda a . \lambda b . b(\lambda a . \lambda b . b(\lambda a . \lambda b . b(\lambda a . \lambda b . b(\lambda x . (\lambda a . \lambda b . b(xx))\lambda x . (\lambda a . \lambda b . b(xx)))))))  & \\
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img87.svg"
+ ALT="\begin{displaymath}
+\begin{array}{lll}
+&amp; (\lambda f . (\lambda x . (f(xx))\lamb...
+...mbda x . (\lambda a . \lambda b . b(xx))))))) &amp; \\
+\end{array}\end{displaymath}">
+</DIV><P></P>
+Les étapes  <!-- MATH
+ $\triangleright [2]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img88.svg"
+ ALT="$\triangleright [2]$"></SPAN> et <!-- MATH
+ $\triangleright [3]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img89.svg"
+ ALT="$\triangleright [3]$"></SPAN> sont bien les mêmes sur les deux stratégies. 
+Puis la <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction par valeur va continuer à réduire l'argument
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img82.svg"
+ ALT="$(YM)$"></SPAN>, là où la <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction normale va d'abord réduire le redex <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img84.svg"
+ ALT="$Mx$"></SPAN>
+
+<P>
+Avec la réduction par valeur, il nous faut donc utiliser un autre combinateur de point fixe<A ID="tex2html5"
+  HREF="footnode.html#foot441"><SUP><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">3</SPAN></SUP></A> que nous appelerons <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img90.svg"
+ ALT="$Z$"></SPAN> 
+<P><!-- MATH
+ \begin{displaymath}
+Z = \lambda f.(\lambda x.f(\lambda v.xxv))(\lambda x.f(\lambda v.xxv))
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img91.svg"
+ ALT="$\displaystyle Z = \lambda f.(\lambda x.f(\lambda v.xxv))(\lambda x.f(\lambda v.xxv)) $">
+</DIV><P></P>
+
+<P>
+On constate que Z est  <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img92.svg"
+ ALT="$\eta$"></SPAN>-équivalent à <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img72.svg"
+ ALT="$Y$"></SPAN>. Nous rappelons la définition suivante:
+
+<P>
+<P>
+<DIV><B>Définition  <SPAN CLASS="arabic">4</SPAN></B> &nbsp; 
+<P>
+<I>Les termes <!-- MATH
+ $(\lambda x.Mx)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img93.svg"
+ ALT="$(\lambda x.Mx)$"></SPAN> et M sont <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img92.svg"
+ ALT="$\eta$"></SPAN>-équivalents. On écrira <!-- MATH
+ $(\lambda x.Mx) =_\eta M$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img94.svg"
+ ALT="$(\lambda x.Mx) =_\eta M$"></SPAN>
+</I>
+<P>
+<I>En ML, nous pouvons par exemple dire que <code> let g x = f x</code> est <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img92.svg"
+ ALT="$\eta$"></SPAN>-équivalent à <code> let g = f</code></I></DIV><P></P>
+
+<P>
+Appliquons à nouveau notre exemple avec ce combinateur <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img90.svg"
+ ALT="$Z$"></SPAN> appliqué à <!-- MATH
+ $M=\lambda a. \lambda b. b$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img95.svg"
+ ALT="$M=\lambda a. \lambda b. b$"></SPAN>:
+
+<P>
+<code># betaValeur zm ;;</code>
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{ll}
+& ((\lambda f . ((\lambda x . (f(\lambda v . ((xx)v))))(\lambda x . (f(\lambda v . ((xx)v))))))(\lambda a . (\lambda b . b))) \\
+\rightarrow _\beta &  ((\lambda x . ((\lambda a . (\lambda b . b))(\lambda v . ((xx)v))))(\lambda x . ((\lambda a . (\lambda b . b))(\lambda v . ((xx)v))))) \\
+\rightarrow _\beta &  ((\lambda a . (\lambda b . b))(\lambda v . (((\lambda x . ((\lambda a . (\lambda b . b))(\lambda v . ((xx)v))))(\lambda x . ((\lambda a . (\lambda b . b))(\lambda v . ((xx)v)))))v))) \\
+\rightarrow _\beta &  (\lambda b . b)
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img96.svg"
+ ALT="\begin{displaymath}
+\begin{array}{ll}
+&amp; ((\lambda f . ((\lambda x . (f(\lambda v...
+...v)))))v))) \\
+\rightarrow _\beta &amp; (\lambda b . b)
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+Nous avons le même réultat et les même étapes de réduction avec <code>betaNormal zm ;;</code>
+
+<P>
+En SCHEME, nous pourrons implémenter ce combinateur <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img90.svg"
+ ALT="$Z$"></SPAN> :
+<PRE>
+(define Z
+ (lambda(f)
+   (lambda (x) (lambda(v) ((f (x x) v))))
+   (lambda (x) (lambda(v) ((f (x x) v))))))
+</PRE>
+
+<P>
+En ML, le typage ne nous permettra pas de coder un combinateur comme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img72.svg"
+ ALT="$Y$"></SPAN> ou <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img90.svg"
+ ALT="$Z$"></SPAN>.
+
+<P>
+Essayons cependant d'écrire:
+
+<P>
+<PRE>
+# let rec fix f = f (fix f) ;;
+val fix : ('a -&gt; 'a) -&gt; 'a = &lt;fun&gt;
+
+let factabs fact = function
+  | 0 -&gt; 1
+  | n -&gt; n * fact (n - 1) ;;
+
+val factabs : (int -&gt; int) -&gt; int -&gt; int = &lt;fun&gt;
+# (fix factabs) 5 ;;
+Stack overflow during evaluation (looping recursion?).
+</PRE>
+ML est bien un langage <SPAN  CLASS="textit">strict</SPAN>: les arguments d'une fonction sont évalués en premier 
+comme on l'a vu dans la <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction faible avec appel par valeur.
+
+<P>
+Pour éviter la boucle infinie <!-- MATH
+ $f(f\ldots(f (fix f))\ldots)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img97.svg"
+ ALT="$f(f\ldots(f (fix f))\ldots)$"></SPAN>, 
+une astuce que j'ai pu lire est d'introduire une variable supplémentaire:
+
+<P>
+<PRE>
+# let rec fix f x = f (fix f) x ;;
+val fix : (('a -&gt; 'b) -&gt; 'a -&gt; 'b) -&gt; 'a -&gt; 'b = &lt;fun&gt;
+# (fix factabs) 5 ;;
+- : int = 120
+</PRE>
+Ici aussi, le mécanisme de la &ldquo;<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img92.svg"
+ ALT="$\eta$"></SPAN>-expansion&rdquo; est utilisé.
+Je suis surpris cependant de voir que <code>fix</code> prenant deux arguments est correctement évalué lors de son appel <code>(fix f)</code>.
+Je ne peux reproduire cela en SCHEME:
+
+<P>
+<PRE>
+(define factabs
+  (lambda (f)
+    (lambda (n)
+      (if (eq? n 0)
+          1
+          (* n (f (- n 1)))))))
+
+(define y
+  (lambda (f x)
+    (f (y f) x)))
+
+(y factabs 5)
+=&gt; y: arity mismatch; the expected number of arguments does not match 
+  expected: 2
+  given: 1
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html257"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node11.html">Church encoding. Les entiers</A>
+<B> monter:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node9.html">La -réduction faible avec</A>
+ &nbsp; <B>  <A ID="tex2html258"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

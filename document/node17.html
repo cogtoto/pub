@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Implémentation</TITLE>
+<META NAME="description" CONTENT="Implémentation">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node18.html">
+<LINK REL="previous" HREF="node16.html">
+<LINK REL="next" HREF="node18.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node16.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html276"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node18.html">Inférence de type d'un</A>
+<B> monter:</B> <A
+ HREF="node16.html">Le -calcul simplement typé</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node16.html">Le -calcul simplement typé</A>
+ &nbsp; <B>  <A ID="tex2html277"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00370100000000000000">
+Implémentation</A>
+</H3>
+Un contexte, ou environnement de typage <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img114.svg"
+ ALT="$\Gamma$"></SPAN>, est un ensemble de paires de la forme 
+<!-- MATH
+ $( x , \tau )$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img115.svg"
+ ALT="$( x , \tau )$"></SPAN> où <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img20.svg"
+ ALT="$x$"></SPAN> est une variable et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img116.svg"
+ ALT="$\tau$"></SPAN> un type.
+ Un jugement de typage est un triplet <!-- MATH
+ $\Gamma \vdash t:\tau$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img117.svg"
+ ALT="$\Gamma \vdash t:\tau$"></SPAN> 
+<BR>
+<P>
+Le terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img4.svg"
+ ALT="$t$"></SPAN> sera bien typé dans <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img114.svg"
+ ALT="$\Gamma$"></SPAN> par les règles de jugement suivantes :
+<P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img118.svg"
+ ALT="$\displaystyle \mathrm{si}\ (x,\tau ) \in \Gamma ,\ \mathrm{alors}\ \Gamma \vdash x:\tau$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img119.svg"
+ ALT="$\displaystyle \mathrm{si}\ \Gamma \cup (x,\tau _{1})\vdash u:\tau _{2},\ \mathr...
+...rs}\ \Gamma \vdash \lambda x\!:\!\tau _{1}.u\,:\,\tau _{1}\rightarrow \tau _{2}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img120.svg"
+ ALT="$\displaystyle \mathrm{si}\ \Gamma \vdash u:\tau _{1}\rightarrow \tau _{2}\ \mathrm{et}\ \Gamma \vdash v:\tau _{1},\
+\mathrm{alors}\ \Gamma \vdash uv:\tau _{2}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+Afin de jouer avec ce <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul typé, nous introduisons la constante de type <code>Int</code>.
+
+<P>
+<PRE>
+type ltype = 
+| Int 
+| Vart of string
+| Fleche of ltype*ltype
+</PRE>
+
+<P>
+De même, nous enrichissons notre définition de terme avec le constructeur <code>Const of int</code> et la fonction binaire  <code>Plus</code> 
+<PRE>
+type terme = 
+  | Var of string 
+  | App of terme * terme 
+  | Lam of string * terme
+  | Const of int
+  | Plus of terme * terme
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

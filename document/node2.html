@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Introduction</TITLE>
+<META NAME="description" CONTENT="Introduction">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node3.html">
+<LINK REL="previous" HREF="node1.html">
+<LINK REL="next" HREF="node3.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="document.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html215"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+<B> monter:</B> <A
+ HREF="document.html">Le calcul Réduction et</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node1.html">Table des matières</A>
+ &nbsp; <B>  <A ID="tex2html216"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00200000000000000000">
+Introduction</A>
+</H1>
+
+<P>
+<SPAN  CLASS="textit">Aristote considérait les mathématiques comme une discipline, non pas tant de la vérité, que de la beauté.</SPAN>
+[<A
+ HREF="node114.html#ab">2</A>]
+
+<P>
+<SPAN  CLASS="textit">What is mathematics ? Mathematics as an expression of the human mind reflects
+the active will, the contemplative reason, and the desire for aesthetic perfection.</SPAN> [<A
+ HREF="node114.html#wm">16</A>]
+
+<P>
+C'est sous cet angle de l'esthétique que j'ai voulu ici modestement décrire quelques concepts 
+ des fondements mathématiques de l'informatique.
+
+<P>
+<BR>
+<BR>
+
+<P>
+Qu'est-ce que le <SPAN  CLASS="textbf">calcul</SPAN> ? Il est difficile d'en donner une définition abstraite. Essayons cependant de 
+décrire l'action de calculer, le processus du calcul. 
+
+<P>
+Nous identifions deux processus bien distincts appelés la <SPAN  CLASS="textbf">réduction</SPAN> et la <SPAN  CLASS="textbf">résolution</SPAN>.
+La réduction est l'action de réduire séquentiellement une expression en une autre expression plus simple
+au moyen de règles de réécriture. Lorsque plus aucune règle ne s'applique, l'expression calculée est alors en forme
+<SPAN  CLASS="textit">normale</SPAN>. Cette forme normale correspondra à la <SPAN  CLASS="textit">valeur</SPAN> de notre calcul.
+<P><!-- MATH
+ \begin{displaymath}
+(3+8)+(4-9)*2 \,\leadsto\,  11 -5*2 \, \leadsto\, 11 -10 \,\leadsto\, 1
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img16.svg"
+ ALT="$\displaystyle (3+8)+(4-9)*2 \,\leadsto\, 11 -5*2 \, \leadsto\, 11 -10 \,\leadsto\, 1 $">
+</DIV><P></P>
+
+<P>
+Ce processus de réduction soulève deux difficultés essentielles : 
+
+<UL>
+<LI>La terminaison. Est-que le processus termine en un nombre fini d'étapes ?
+</LI>
+<LI>La confluence. Si le processus termine, est-que l'expression aboutit à une forme normale unique ?
+</LI>
+</UL>
+<BR>
+<BR>
+La fonction mathématique usuelle est peu adaptée à une étude du processus du calcul. Car elle
+repose en fait sur une définition en <SPAN  CLASS="textit">extension</SPAN> : une fonction mathématique est la 
+description d'une relation d'un ensemble de départ face à son ensemble d'arrivée.
+
+<P>
+Pour modéliser notre processus de calcul, il nous faut une définition en <SPAN  CLASS="textit">intension</SPAN>, 
+c'est-à-dire avec des règles de calcul explicites. Fondé sur
+cette idée, le <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul a été créé par Alonzo Church dans les années 1930.
+Il est maintenant utilisé comme socle de tout langage fonctionnel. 
+Même s'il est  rudimentaire et basé sur un mécanisme simple de réécriture,
+nous verrons qu'il permet d'exprimer toutes les fonctions calculables. Sa <SPAN  CLASS="textit">puissance</SPAN>
+de calcul est similaire aux machines de Turing ou aux fonctions <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img17.svg"
+ ALT="$\mu$"></SPAN>-récursives de Gödel.
+Nous l'étudierons en détails.
+
+<P>
+<BR>
+<BR>
+L'autre processus de calcul est la résolution. Nous l'utilisons chaque fois que nous devons résoudre
+une équation. En résolvant <!-- MATH
+ $x^2+2x-15=0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img18.svg"
+ ALT="$x^2+2x-15=0$"></SPAN>, nous souhaitons que notre processus 
+soit <SPAN  CLASS="textit">complet</SPAN>, c'est-à-dire que nous calculions 
+l'ensemble des valeurs possibles <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img19.svg"
+ ALT="$\{-5; 3\}$"></SPAN>.
+ Nous étudierons également  ce mécanisme, et en particulier l'algorithme d'unification.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node3.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="document.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node1.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html215"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+<B> monter:</B> <A
+ HREF="document.html">Le calcul Réduction et</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node1.html">Table des matières</A>
+ &nbsp; <B>  <A ID="tex2html216"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Liaison lexicale vs liaison dynamique</TITLE>
+<META NAME="description" CONTENT="Liaison lexicale vs liaison dynamique">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node33.html">
+<LINK REL="previous" HREF="node31.html">
+<LINK REL="next" HREF="node33.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node33.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node29.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node31.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html331"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node33.html">Gestion de l'environnement</A>
+<B> monter:</B> <A
+ HREF="node29.html">Un interprète MiniScheme avec</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node31.html">Les étapes Read, Eval,</A>
+ &nbsp; <B>  <A ID="tex2html332"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00423000000000000000">
+Liaison lexicale vs liaison dynamique</A>
+</H2>
+Nous allons utiliser ici  la liaison lexicale (statique), et non dynamique.
+ Cela nous impose de capturer l'environnement existant au moment de la définition de la fonction. 
+Plus précisément, l'environnement est capturé par l'évaluation de la lambda, évaluation dont la valeur est appelée une <SPAN  CLASS="textit">closure</SPAN>
+ou <SPAN  CLASS="textit">fermeture</SPAN>. 
+
+<P>
+<code> Lambda (parametres, expression) -&gt; Closure (parametres, expression, env) </code>    
+
+<P>
+Dans le cas de la liaison dynamique, la fonction est appliquée en utilisant l'environnement courant, 
+et non pas son environnement de définition. Donc pas besoin de fermeture.
+
+<P>
+A ma connaissance, la liaison statique est maintenant utilisée dans la plupart des langages fonctionnels.
+En SCHEME et ML,nous pouvons voir dans l'exemple ci-dessous que l'évaluation de la définition de la
+ lambda <code>inc_x</code> capture la valeur de <code>x</code> .
+
+<P>
+<TABLE class="PAD  BORDER" style="">
+<TR><TD CLASS="LEFT">SCHEME</TD>
+<TD CLASS="LEFT">ML</TD>
+</TR>
+<TR><TD CLASS="LEFT"><code>&gt; (define x 1)</code></TD>
+<TD CLASS="LEFT"><code># let x = 1</code> ;;</TD>
+</TR>
+<TR><TD CLASS="LEFT"><code>&gt; (define inc_x (lambda () (+ x 1)))</code></TD>
+<TD CLASS="LEFT"><code># let inc_x = function () -&gt; x+1 ;;</code></TD>
+</TR>
+<TR><TD CLASS="LEFT"><code>&gt; (inc_x)</code></TD>
+<TD CLASS="LEFT"><code># inc_x ()</code> ;;</TD>
+</TR>
+<TR><TD CLASS="LEFT"><code>2</code></TD>
+<TD CLASS="LEFT"><code>- : int = 2</code></TD>
+</TR>
+<TR><TD CLASS="LEFT"><code>&gt; (let ((x 100)) (inc_x))</code></TD>
+<TD CLASS="LEFT"><code># let x = 100 in inc_x () ;;</code></TD>
+</TR>
+<TR><TD CLASS="LEFT"><code>2</code></TD>
+<TD CLASS="LEFT"><code>- : int = 2</code></TD>
+</TR>
+</TABLE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

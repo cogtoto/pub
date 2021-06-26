@@ -1,0 +1,621 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Représentation en ML</TITLE>
+<META NAME="description" CONTENT="Représentation en ML">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html253"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node9.html">La -réduction faible avec</A>
+<B> monter:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node7.html">Implémentation du parsing en</A>
+ &nbsp; <B>  <A ID="tex2html254"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00320000000000000000">
+Représentation en ML</A>
+</H1>
+
+<P>
+<PRE>
+type terme =
+| Var of string
+| App of terme * terme
+| Lam of variable * terme
+</PRE>
+
+<P>
+Un terme du <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul est donc un type ML composé, avec les constructeurs <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img27.svg"
+ ALT="$Var$"></SPAN>, <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img28.svg"
+ ALT="$App$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img29.svg"
+ ALT="$Lam$"></SPAN>.
+
+<P>
+Par exemple, le terme <!-- MATH
+ $\lambda x.(x y) z$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img30.svg"
+ ALT="$\lambda x.(x y) z $"></SPAN> est representé par la structure:
+
+<P>
+<code>App ((Lam ("x", (App ((Var "x"), (Var "y"))))), (Var "z"))</code>
+
+<P>
+C'est un peu verbeux.
+Voici cependant sa représentation sous la forme d'un arbre syntaxique. Le symbole @ représente ici l'application.
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img31.svg"
+ ALT="\begin{tikzpicture}[level distance=1.5cm,
+level 1/.style={sibling distance=3cm},...
+...ild { node {x} }
+child { node {y} }
+}
+}
+child { node {z} };
+\end{tikzpicture}">
+<BR>
+</DIV>
+
+<P>
+Pour dessiner cet arbre, nous utilisons le très bon package TIKZ qui permet facilement de représenter
+les arbres avec une syntaxe très simple.
+<PRE>
+\node{@}
+child { node {$\lambda $}
+		child { node {x} }
+		child { node {@}
+				child { node {x} }
+				child { node {y} }
+			  }
+	  }
+child { node {z} };
+</PRE>
+
+<P>
+On implémente deux fonctions CAML
+qui permettent  d'afficher une expression de type <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme en code <SPAN CLASS="logo,LaTeX">L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>X</SPAN> ou en code TIKZ.
+
+<P>
+La fonction <code>varLibres</code> retourne les variables libres (ie. non liées) d'un <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme.
+<PRE>
+let rec varLibres lambdaTerm =
+	match lambdaTerm with
+	| Var x -&gt; [ x ]
+	| App (n, m) -&gt; union (varLibres n) (varLibres m)
+	| Lam (x, m) -&gt; remove x (varLibres m)
+</PRE>
+
+<P>
+Par exemple: <!-- MATH
+ $(\lambda x.yxw)(\lambda u.uv) \longmapsto  y,w,v$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img32.svg"
+ ALT="$(\lambda x.yxw)(\lambda u.uv) \longmapsto y,w,v $"></SPAN>
+
+<P>
+<PRE>
+let exemple = App (Lam ("x", App (Var("y"), App (Var("x"),Var("w")))),
+Lam ("u", App (Var ("u"), Var ("v")))) ;;
+varLibres exemple ;;
+- : variable list = ["y"; "w"; "v"]
+</PRE>
+
+<P>
+<P>
+<DIV><B>Définition  <SPAN CLASS="arabic">2</SPAN></B> &nbsp; 
+<I>Un redex ou radical est un terme de la forme <!-- MATH
+ $(\lambda x.M)N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img33.svg"
+ ALT="$(\lambda x.M)N$"></SPAN></I></DIV><P></P>
+On a déjà distingué deux formes possible sur les <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-termes : les <SPAN  CLASS="textit">abstractions</SPAN> <!-- MATH
+ $\lambda x.M$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img34.svg"
+ ALT="$\lambda x.M$"></SPAN> et les
+<SPAN  CLASS="textit">applications</SPAN> <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img35.svg"
+ ALT="$(M N)$"></SPAN>. Un <SPAN  CLASS="textit">redex</SPAN> qui est de la forme <!-- MATH
+ $(\lambda x.M)N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img33.svg"
+ ALT="$(\lambda x.M)N$"></SPAN> est la
+rencontre d'une abstraction et d'une application. Voici son implémentation.
+
+<P>
+<BR>
+<BR>
+<DIV class="CENTER">
+<TABLE class="PAD  BORDER" style="">
+<TR><TD CLASS="CENTER">ML</TD>
+<TD CLASS="LEFT">SCHEME</TD>
+<TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="CENTER">&nbsp;</TD>
+</TR>
+<TR><TD CLASS="CENTER"><SPAN  CLASS="texttt">(function x -&gt; M) N</SPAN></TD>
+<TD CLASS="LEFT"><SPAN  CLASS="texttt">((lambda (x) M) N)</SPAN></TD>
+<TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="CENTER">&nbsp;</TD>
+</TR>
+<TR><TD CLASS="CENTER"><SPAN  CLASS="texttt">let x = N in M</SPAN></TD>
+<TD CLASS="LEFT"><SPAN  CLASS="texttt">(let ((x N)) M)</SPAN></TD>
+<TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="CENTER">&nbsp;</TD>
+</TR>
+<TR><TD CLASS="CENTER"><SPAN  CLASS="texttt">M where x = N</SPAN></TD>
+<TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="CENTER">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+La dernière syntaxe <SPAN  CLASS="texttt">M where x = N</SPAN> a disparu en OCAML. C'est dommage car elle est très élégante.
+Nous essayerons de la reprendre pour notre interprète maison MiniML.
+
+<P>
+<P>
+<DIV><B>Définition  <SPAN CLASS="arabic">3</SPAN></B> &nbsp; 
+<I>La <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction est une opération de substitution. Elle consiste à substituer dans le redex
+<!-- MATH
+ $(\lambda x.M) N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img33.svg"
+ ALT="$(\lambda x.M)N$"></SPAN> les occurrences libres de x dans M par l'argument N.
+On la formalise par la notation suivante:
+</I><P><!-- MATH
+ \begin{displaymath}
+((\lambda x.M) N) \rightarrow _\beta M[x \leftarrow N]
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img36.svg"
+ ALT="$\displaystyle ((\lambda x.M) N) \rightarrow _\beta M[x \leftarrow N]
+$">
+</DIV><P></P></DIV><P></P>
+
+<P>
+Nous pouvons la décrire par les quatre règles d'inférence ci-dessous:
+<P><!-- MATH
+ \begin{displaymath}
+\mathbf{(redex)} : \frac{}{((\lambda x.M)N) \rightarrow M[x \leftarrow N]} \\
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img37.svg"
+ ALT="$\displaystyle \mathbf{(redex)} : \frac{}{((\lambda x.M)N) \rightarrow M[x \leftarrow N]} \\
+$">
+</DIV><P></P>
+<P><!-- MATH
+ \begin{displaymath}
+\mathbf{(abstraction)} : \frac{M \rightarrow M_1}{ \lambda x.M \rightarrow (\lambda x.M_1)}
+\quad \mathbf{(1)} : \frac{M \rightarrow M_1}{(M N) \rightarrow (M_1 N)}
+\quad \mathbf{(2)} : \frac{N \rightarrow N_1}{(M N) \rightarrow (M N_1)}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img38.svg"
+ ALT="$\displaystyle \mathbf{(abstraction)} : \frac{M \rightarrow M_1}{ \lambda x.M \r...
+...1 N)}
+\quad \mathbf{(2)} : \frac{N \rightarrow N_1}{(M N) \rightarrow (M N_1)}
+$">
+</DIV><P></P>
+
+<P>
+<BR>
+<BR>
+Pour l'implémentation, nous nous sommes appuyés sur le code de l'excellent livre <SPAN  CLASS="textit">Programmer avec Scheme</SPAN> 
+de Jacques Chazarain [<A
+ HREF="node114.html#plisp">4</A>].  
+Nous avons adapté son code SCHEME en OCAML. En comparant les deux versions, on s'aperçoit finalement
+que la version OCAML, même si un peu plus concise que la version SCHEME grâce  l'utilisation du <SPAN  CLASS="textit">pattern matching</SPAN>,
+reste très proche de l'original SCHEME.
+
+<P>
+<BR>
+<BR>
+La fonction <SPAN  CLASS="texttt">substituer</SPAN> permet de substituer la variable <SPAN  CLASS="texttt">var</SPAN> par le terme <SPAN  CLASS="texttt">terme</SPAN> dans l'expression <SPAN  CLASS="texttt">exp</SPAN>.
+
+<P>
+<PRE>
+let rec substituer exp var terme =
+	match exp with
+	| Var x -&gt; if x = var then terme else exp
+	| App (n, m) -&gt; App ((substituer n var terme), (substituer m var terme))
+	| Lam (x, m) -&gt; (* pas d'occurence libre on en fait rien *)
+			if not (mem var (varLibres exp))
+			then exp
+			else (* si capture on renome *)
+			if mem x (varLibres terme)
+			then
+				(let newV = renomme x (varLibres terme) in
+					let newCorps = substituer m x (Var newV)
+					in Lam (newV, (substituer newCorps var terme)))
+			else  Lam (x, (substituer m var terme))
+</PRE>
+
+<P>
+Avant de substituer une variable par une autre, nous devons nous assurer qu'il n'y aura pas de phénomène de capture, ie.
+nous assurer qu'une variable libre ne deviendra pas liée, après substitution.
+Dans l'exemple suivant, la variable x qui était libre dans <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img39.svg"
+ ALT="$(z x) $"></SPAN> se retrouve capturée par <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>
+<P><!-- MATH
+ \begin{displaymath}
+\lambda x. (x y)[y \gets (z x)] = \lambda x.(x (z x))
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img40.svg"
+ ALT="$\displaystyle \lambda x. (x y)[y \gets (z x)] = \lambda x.(x (z x)) $">
+</DIV><P></P>
+Pour éviter cela, il faut avant substitution opérer un renommage de la variable liée:
+<P><!-- MATH
+ \begin{displaymath}
+\lambda x_1. (x_1 y)[y \gets (z x)] = \lambda x_1.(x_1 (z x))
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img41.svg"
+ ALT="$\displaystyle \lambda x_1. (x_1 y)[y \gets (z x)] = \lambda x_1.(x_1 (z x)) $">
+</DIV><P></P>
+Ce renommage est appelé <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img42.svg"
+ ALT="$\alpha$"></SPAN>-conversion. On dit que deux termes <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img44.svg"
+ ALT="$N$"></SPAN> sont équivalents modulo <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img42.svg"
+ ALT="$\alpha$"></SPAN>.
+On écrira <!-- MATH
+ $M=_\alpha N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img45.svg"
+ ALT="$M=_\alpha N$"></SPAN>
+
+<P>
+<PRE>
+(** renommer var *)
+let renomme var listeVar =
+	let rec renommeAux j =
+		let varj = var ^ (string_of_int j)
+		in if mem varj listeVar then renommeAux (j + 1) else varj
+	in renommeAux 0
+</PRE>
+
+<P>
+La fonction <SPAN  CLASS="texttt">reduc1Normale</SPAN>  réduit le terme en appliquant la stratégie de réduction normale, c'est-à-dire
+en commencant la réduction par le redex extèrieur, plus précisément le plus à gauche des extèrieurs.
+
+<P>
+<PRE>
+let rec reduc1Normale terme =
+   match terme with
+   | Var x -&gt; raise IRREDUCTIBLE 
+   | Lam (x, m) -&gt; Lam (x, (reduc1Normale m))
+   | App (n, m) -&gt;
+	 if estRedex terme
+		then betaReducRedex terme
+		else
+			try App ((reduc1Normale n), m)
+			with IRREDUCTIBLE   -&gt; App (n, (reduc1Normale m))
+</PRE>
+
+<P>
+Enfin, nous avons une fonction <code>fullReduc</code> qui permet d'itérer l'opération de
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction jusqu'à trouver la forme normale, ou boucler s'il n'y a pas de forme formale.
+On lui impose donc maximum 1000 réductions <A ID="tex2html2"
+  HREF="footnode.html#foot225"><SUP><SPAN CLASS="arabic">1</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A>Elle prend en argument la méthode (ie. la stratégie de réduction) à  utiliser. 
+
+<P>
+<PRE>
+let rec fullReduc terme methode  =
+  let rec loop terme  iter =
+	try
+	 let newterme = methode terme in
+		if (newterme = terme || iter = 0) then newterme
+		else loop newterme (iter - 1)
+	with IRREDUCTIBLE -&gt; terme	
+  in loop terme 1000
+	
+let betaNormal t = fullReduc t reduc1Normale
+</PRE>
+
+<P>
+<P>
+<DIV><B>Théorème  <SPAN CLASS="arabic">1</SPAN></B> &nbsp; 
+<I>La réduction normale appliquée à un terme normalisable aboutit toujours à la forme irréductible du terme.</I></DIV><P></P>
+
+<P>
+Nous avons en plus le théorème suivant (plus précisément son corollaire) qui nous assure que toutes les réductions d'un <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme (qui terminent) aboutissent au même
+terme irréductible.
+
+<P>
+<P>
+<DIV><B>Théorème  <SPAN CLASS="arabic">2</SPAN></B> &nbsp; 
+<I>Théorème de Church-Rosser : la <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction est confluente.</I></DIV><P></P>
+
+<BR>
+<IMG
+ STYLE=""
+ SRC="img46.svg"
+ ALT="\begin{tikzpicture}
+\draw [-latex] (1,1) node[above]{$M$} --node{$*$} (0,0) nod...
+...eta}} M'$\ et $M_2 \overset{*}{\longrightarrow_{\beta}} M'$} ;
+\end{tikzpicture}">
+<BR>
+
+<P>
+<P>
+<DIV><B>Théorème  <SPAN CLASS="arabic">3</SPAN></B> &nbsp; 
+<I>Corollaire du théorème de Church-Rosser 
+<BR>
+Si <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> est normalisable, il existe un unique terme normal, noté <!-- MATH
+ $\overline{M}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img47.svg"
+ ALT="$\overline{M}$"></SPAN> tel 
+	que <!-- MATH
+ $M \overset{*}{\longrightarrow_{\beta}} \overline{M}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img48.svg"
+ ALT="$M \overset{*}{\longrightarrow_{\beta}} \overline{M}$"></SPAN></I></DIV><P></P>
+Un corollaire ne devrait pas nécessiter de preuve car supposée évidente. La voici cependant:
+
+<P>
+<BR>
+<IMG
+ STYLE=""
+ SRC="img49.svg"
+ ALT="\begin{tikzpicture}
+\draw [-latex] (1,1) node[above]{$M$} --node{$*$} (0,0) nod...
+...ormaux donc $M_1=M_3$\ et $M_2=M_3$\ donc $M_1 = M_2$\ .
+} ;
+\end{tikzpicture}">
+<BR>
+
+<P>
+<PRE>
+let t1 = App (Lam ("x",App (Lam ("y", App (Var ("x"), Var ("y"))),Var ("u"))), Var ("z")) ;;
+# fullReduc t1 ;;
+--&gt; ((lambda x . ((lambda y . (xy))u))z)
+--&gt; ((lambda y . (zy))u)
+--&gt; (zu)
+- : unit -&gt; unit = &lt;fun&gt;
+</PRE>
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+(\lambda x . (\lambda y . xy)u)z   \rightarrow _\beta (\lambda y . zy) u  \rightarrow _\beta (zu)
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img50.svg"
+ ALT="$\displaystyle (\lambda x . (\lambda y . xy)u)z \rightarrow _\beta (\lambda y . zy) u \rightarrow _\beta (zu)
+$">
+</DIV><P></P>
+<DIV class="CENTER">
+<TABLE class="PAD  BORDER" style="">
+<TR><TD CLASS="CENTER"><!-- MATH
+ $(\lambda x . (\lambda y . xy)u)z$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img51.svg"
+ ALT="$(\lambda x . (\lambda y . xy)u)z$"></SPAN></TD>
+<TD CLASS="CENTER"><!-- MATH
+ $(\lambda y . zy)u$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img52.svg"
+ ALT="$(\lambda y . zy)u$"></SPAN></TD>
+<TD CLASS="CENTER"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img53.svg"
+ ALT="$(zu)$"></SPAN></TD>
+</TR>
+<TR><TD CLASS="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img54.svg"
+ ALT="\begin{tikzpicture}[level distance=1.5cm,
+level 1/.style={sibling distance=3cm},...
+...hild {node {y }} } } child {node {u }} } } child {node {z }} ;
+\end{tikzpicture}">
+<BR></TD>
+<TD CLASS="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img55.svg"
+ ALT="\begin{tikzpicture}[level distance=1.5cm,
+level 1/.style={sibling distance=3cm},...
+...} child { node {z }} child {node {y }} } }
+child {node {u }} ;
+\end{tikzpicture}">
+<BR></TD>
+<TD CLASS="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img56.svg"
+ ALT="\begin{tikzpicture}[level distance=1.5cm,
+level 1/.style={sibling distance=3cm}, scale=0.6 ]
+\node {@} child { node {z} }
+child { node{u} } ;
+\end{tikzpicture}">
+<BR></TD>
+</TR>
+</TABLE>
+</DIV>
+
+<P>
+<BR>
+<BR>
+<BR>
+Voici un exemple de terme qui ne termine pas et qui enfle.
+<P><!-- MATH
+ \begin{displaymath}
+(\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta (\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx)
+\rightarrow _\beta (\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta \ldots
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img57.svg"
+ ALT="$\displaystyle (\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta (\lambda x.xxx)...
+... x.xxx)(\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta \ldots
+$">
+</DIV><P></P> 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html253"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node9.html">La -réduction faible avec</A>
+<B> monter:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node7.html">Implémentation du parsing en</A>
+ &nbsp; <B>  <A ID="tex2html254"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

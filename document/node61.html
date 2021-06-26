@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Les entiers naturels</TITLE>
+<META NAME="description" CONTENT="Les entiers naturels">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node62.html">
+<LINK REL="previous" HREF="node60.html">
+<LINK REL="next" HREF="node62.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node62.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node60.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node60.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html434"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node62.html">Les additions de Peano</A>
+<B> monter:</B> <A
+ HREF="node60.html">Quelques exemples de programmation</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node60.html">Quelques exemples de programmation</A>
+ &nbsp; <B>  <A ID="tex2html435"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00661000000000000000">
+Les entiers naturels</A>
+</H2>
+Définissons en PROLOG le type des entiers naturels avec la fonction <code>nat</code> d'arité 1, la fonction <code>s</code>
+d'arité 1 et la constante <code>0</code>.
+Nous avons ainsi les 2 règles:
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{l}
+nat(0) \Leftarrow \\
+nat(s(x)) \Leftarrow nat(x)
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img339.svg"
+ ALT="\begin{displaymath}
+\begin{array}{l}
+nat(0) \Leftarrow \\
+nat(s(x)) \Leftarrow nat(x)
+\end{array}\end{displaymath}">
+</DIV><P></P>
+<PRE>
+---------------------------------------------------
+let nat = [ [Func("nat", [Func("0", [])])] ;
+            [Func("nat", [Func("s",[Var("X")])]) ; Func("nat", [Var("X")])] ] ;;
+let but = Func("nat", [Var("X")]) ;; 
+
+prolog but nat ;;
+----------------------------------------------------
+vincent@HP-Notebook:~/workspace vscodium$ ./prolog.byte 
+ X  &lt;-&gt;  0 
+ autre solution 1/2 (1=oui, 2=non) ? :1
+ X  &lt;-&gt; (s 0 )
+ autre solution 1/2 (1=oui, 2=non) ? :1
+ X  &lt;-&gt; (s(s 0 ))
+ autre solution 1/2 (1=oui, 2=non) ? :1
+ X  &lt;-&gt; (s(s(s 0 )))
+ autre solution 1/2 (1=oui, 2=non) ? :2
+vincent@HP-Notebook:~/workspace vscodium$
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

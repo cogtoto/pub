@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>MiniCOQ</TITLE>
+<META NAME="description" CONTENT="MiniCOQ">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node22.html">
+<LINK REL="previous" HREF="node20.html">
+<LINK REL="next" HREF="node22.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html291"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node22.html">Le logique</A>
+<B> monter:</B> <A
+ HREF="node19.html">Les Pure Type Systems</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node20.html">Introduction</A>
+ &nbsp; <B>  <A ID="tex2html292"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00380200000000000000">
+MiniCOQ</A>
+</H3>
+Nous  nous éloignons de la simplicité du <SPAN  CLASS="textit">Pure Type System</SPAN> en surchargeant notre
+ terme algébrique des types suivants :
+
+<UL>
+<LI>Le type <code>Nat</code> avec ses constructeurs <code>0</code> et <code>S</code>
+</LI>
+<LI>Le type de l'égalité <code>Eq</code> avec son unique constructeur <code>Eq_refl</code>
+</LI>
+<LI>Le type <code>And</code> avec son unique constructeur <code>Conj</code> et ses fonctions
+  <code>Proj1</code> et <code>Proj2</code>. L'affichage du type <code>And</code> se fera avec les caractères <code>/\</code>
+</LI>
+<LI>Le type <code>Or</code> avec ses constructeurs <code>Or_introl</code> et <code>Or_intror</code> et sa fonction <code>Case</code>.
+  L'affichage de ce type se fera avec les caractères <code>\/</code>
+</LI>
+<LI>Le type <code>False</code> sans constructeur, mais avec la fonction <code>False_ind(t1,t2)</code> qui se
+  réduit en <code>t1</code> si le type de <code>t2</code> est égal à <code>False</code>  (<SPAN  CLASS="textit">ex falso quodlibet</SPAN>)
+</LI>
+</UL>
+
+<P>
+<BR>
+Démontrons le théorème simple décrit en COQ comme ci-dessous.
+
+<P>
+<BR>
+<IMG
+ STYLE=""
+ SRC="img170.svg"
+ ALT="\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{imp} : \coqdock...
+...ceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}">
+<BR>
+
+<P>
+Nous pouvons représenter la preuve du théorème avec la dérivation suivante:
+
+<BR>
+<P>
+<SPAN CLASS="SCRIPTSIZE">[intros a b c H]((A&rArr#Rightarrow;B)&and#wedge;(A&rArr#Rightarrow;C))&rArr#Rightarrow;(A&rArr#Rightarrow;(B &and#wedge;C))
+ [intros Ha]A &rArr#Rightarrow;(B&and#wedge;C)
+  [split]B &and#wedge;C
+    
+      [apply H1]B [destruct H as (H1 , H2)]A &rArr#Rightarrow;B[(A&rArr#Rightarrow;B) &and#wedge;(A&rArr#Rightarrow;C)] &amp; [A] 
+      &amp; 
+      [apply H2]C [destruct H as (H1 , H2)]A &rArr#Rightarrow;C[(A&rArr#Rightarrow;B) &and#wedge;(A&rArr#Rightarrow;C)] &amp; [A] 
+   
+  
+ 
+</SPAN>
+<BR>
+
+<P>
+Avec notre système PTS, nous codons cela de la manière suivante:
+<PRE>
+let imp = Prod("A", C "Type", Prod ("B", C "Type", Prod ("C", C "Type",
+               Prod ("z", And(Prod("x", V "A", V "B"), Prod ("y", V "A", V "C")), 
+                     Prod ("w", V "A", And (V "B", V "C"))))))
+in print imp ;;
+&gt; πA:Type.πB:Type.π:Type.((A→B)/\(A→C)→(A→B/\C))
+
+let preuve_imp_pts = 
+ Lam("A", Type,
+   Lam("B", Type,
+     Lam("C", Type, 
+      Lam("h", And(Prod("x", V "A", V "B"), Prod("y", V "A", V "C")), 
+       Lam ("x", V "A", Conj (App(Proj1 (V "h"), V "x"), App(Proj2 (V "h"), V "x"))))))) 
+in (print preuve_imp_pts; print_string "\n"; print (check preuve_imp_pts env0))  ;;
+
+&gt; λA:Type.λB:Type.λC:Type.λh:(A→B)/\(A→C).λx:A.conj((proj1(h) x),(proj2(h) x))
+  πA:Type.πB:Type.πC:Type.((A→B)/\(A→C)→(A→B/\C))
+</PRE>
+Nous retrouvons en OCAML la dualité entre le type produit <code>*</code> et le <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img171.svg"
+ ALT="$\wedge$"></SPAN> logique,
+ ainsi qu'entre la flèche fonctionnelle <code>-&gt;</code> et l'implication logique <!-- MATH
+ $\Rightarrow$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img172.svg"
+ ALT="$\Rightarrow$"></SPAN>.
+OCAML infère correctement le type (théorème) depuis le terme (la preuve).
+
+<P>
+<PRE>
+let preuve_imp_ocaml = function h -&gt; (function x -&gt; ((fst h) x, (snd h) x)) ;;
+val preuve_imp_ocaml : ('a -&gt; 'b) * ('a -&gt; 'c) -&gt; 'a -&gt; 'b * 'c
+</PRE>
+
+<P>
+Voici un autre exemple très simple illustrant le type <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img171.svg"
+ ALT="$\wedge$"></SPAN> et les fonctions de construction <code>And</code> et de projections <code>Proj1/2</code>
+
+<P>
+<BR>
+<IMG
+ STYLE=""
+ SRC="img173.svg"
+ ALT="\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{et\_refl}: \coq...
+...oqdockw{Print} \coqdocvar{et\_refl}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}">
+<BR>
+
+<P>
+<PRE>
+let preuve_et_refl = 
+  Lam("A", Type,
+    Lam("B", Type, 
+     Lam("h", And(V "A", V "B"), Conj(Proj2 (V "h"), Proj1 (V "h"))))) 
+  in ( print preuve_et_refl ; print_string "\n"; print(check preuve_et_refl env0)) ;;
+&gt; λA:Type.λB:Type.λh:A/\B.conj(proj2(h) ,proj1(h))
+  πA:Type.πB:Type.(A/\B→B/\A)
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node22.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node20.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html291"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node22.html">Le logique</A>
+<B> monter:</B> <A
+ HREF="node19.html">Les Pure Type Systems</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node20.html">Introduction</A>
+ &nbsp; <B>  <A ID="tex2html292"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

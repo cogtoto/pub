@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Les entiers Church </TITLE>
+<META NAME="description" CONTENT="Les entiers Church ">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node13.html">
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="next" HREF="node13.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html264"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node13.html">Les booléens</A>
+<B> monter:</B> <A
+ HREF="node11.html">Church encoding. Les entiers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node11.html">Church encoding. Les entiers</A>
+ &nbsp; <B>  <A ID="tex2html265"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00351000000000000000">
+Les entiers <SPAN  CLASS="textit">Church</SPAN> </A>
+</H2>
+Les entiers peuvent être représenté de la manière suivante:
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{l}
+0 \equiv \lambda f.\lambda x.x \\
+1 \equiv \lambda f.\lambda x.f x \\
+2 \equiv \lambda f.\lambda x.f (f x) \\
+3 \equiv \lambda f.\lambda x.f (f (f x))
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img98.svg"
+ ALT="\begin{displaymath}
+\begin{array}{l}
+0 \equiv \lambda f.\lambda x.x \\
+1 \equiv...
+...(f x) \\
+3 \equiv \lambda f.\lambda x.f (f (f x))
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+La fonction successeur se définira <!-- MATH
+ $SUCC \equiv \lambda n.\lambda f.\lambda x.f (n f x)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img99.svg"
+ ALT="$SUCC \equiv \lambda n.\lambda f.\lambda x.f (n f x)$"></SPAN>
+Avec notre représentation ML: 
+
+<P>
+<code>Lam("n", Lam("f", Lam("x",App(Var "f", App(App(Var "n", Var "f"), Var "x")))))</code>
+
+<P>
+Exécutons avec la stratégie normale, puis avec la stratégie de réduction faible par valeur:
+
+<P>
+<code># betaNormalPrint (App(succ, un)) ;;</code>
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{ll}
+& (\lambda n . \lambda f . \lambda x . (f((nf)x))\lambda f . \lambda x . (fx))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f((\lambda f . \lambda x . (fx)f)x))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f(\lambda x . (fx)x))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f(fx))   \\
+& Exception: IRREDUCTIBLE.
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img100.svg"
+ ALT="\begin{displaymath}
+\begin{array}{ll}
+&amp; (\lambda n . \lambda f . \lambda x . (f(...
+... \lambda x . (f(fx)) \\
+&amp; Exception: IRREDUCTIBLE.
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+<code># betaValeurPrint (App(succ, un)) ;;</code>
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{ll}
+& (\lambda n . \lambda f . \lambda x . (f((nf)x))\lambda f . \lambda x . (fx))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f((\lambda f . \lambda x . (fx)f)x))   \\
+& Exception: IRREDUCTIBLE.
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img101.svg"
+ ALT="\begin{displaymath}
+\begin{array}{ll}
+&amp; (\lambda n . \lambda f . \lambda x . (f(...
+...mbda x . (fx)f)x)) \\
+&amp; Exception: IRREDUCTIBLE.
+\end{array}
+\end{displaymath}">
+</DIV><P></P>
+Nous n'aboutissons pas au terme <!-- MATH
+ $\lambda f . \lambda x . (f(fx))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img102.svg"
+ ALT="$\lambda f . \lambda x . (f(fx)) $"></SPAN> avec la stratégie par valeur. Nous voyons que le corps de la lambda
+n'est pas évalué. Je suis cependant surpris car je pensais cette stratégie (même si appelée <SPAN  CLASS="textit">faible</SPAN>) parvenait à calculer la
+forme normale.
+
+<P>
+Nous pouvons écrire en OCAML la fonction qui convertit des entiers vers les terms <SPAN  CLASS="textit">Church</SPAN>:
+<PRE>
+let rec int2Church = function
+	| 0 -&gt; Lam("f", Lam("x", Var "x"))
+	| n -&gt; App(succ, int2Church (n-1))
+</PRE>
+
+<P>
+<code># betaNormal (int2Church 3) ;;</code>
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{ll}
+ & (\lambda n . \lambda f . \lambda x . (f((nf)x))(\lambda n . \lambda f . \lambda x . (f((nf)x))(\lambda n . \lambda f . \lambda x . (f((nf)x))\lambda f . \lambda x . x)))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f(((\lambda n . \lambda f . \lambda x . (f((nf)x))(\lambda n . \lambda f . \lambda x . (f((nf)x))\lambda f . \lambda x . x))f)x))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f((\lambda f . \lambda x . (f(((\lambda n . \lambda f . \lambda x . (f((nf)x))\lambda f . \lambda x . x)f)x))f)x))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f(\lambda x . (f(((\lambda n . \lambda f . \lambda x . (f((nf)x))\lambda f . \lambda x . x)f)x))x))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f(f(((\lambda n . \lambda f . \lambda x . (f((nf)x))\lambda f . \lambda x . x)f)x)))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f(f((\lambda f . \lambda x . (f((\lambda f . \lambda x . xf)x))f)x)))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f(f(\lambda x . (f((\lambda f . \lambda x . xf)x))x)))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f(f(f((\lambda f . \lambda x . xf)x))))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f(f(f(\lambda x . xx))))   \\
+\rightarrow _\beta & \lambda f . \lambda x . (f(f(fx)))   \\
+& Exception: IRREDUCTIBLE.
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img103.svg"
+ ALT="\begin{displaymath}
+\begin{array}{ll}
+&amp; (\lambda n . \lambda f . \lambda x . (f...
+...mbda x . (f(f(fx))) \\
+&amp; Exception: IRREDUCTIBLE.
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+L'addition peut être  exprimée par le combinateur <!-- MATH
+ $\lambda m .\lambda n .\lambda f. \lambda x. m f (n f x) x$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img104.svg"
+ ALT="$\lambda m .\lambda n .\lambda f. \lambda x. m f (n f x) x$"></SPAN> 
+
+<P>
+La multiplication peut être exprimée par le combinateur <!-- MATH
+ $\lambda m .\lambda n .\lambda f. \lambda x. m (n f) x$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img105.svg"
+ ALT="$\lambda m .\lambda n .\lambda f. \lambda x. m (n f) x $"></SPAN> 
+
+<P>
+Le prédecesseur peut être exprimé par le combinateur <!-- MATH
+ $\lambda n.\lambda f.\lambda x.n\ (\lambda g.\lambda h.h\ (g\ f))\ (\lambda u.x)\ (\lambda u.u)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img106.svg"
+ ALT="$\lambda n.\lambda f.\lambda x.n\ (\lambda g.\lambda h.h\ (g\ f))\ (\lambda u.x)\ (\lambda u.u) $"></SPAN> 
+
+<P>
+Après avoir défini les termes <code>succ</code> et <code>pred</code>, nous pouvons écrire les deux fonctions suivantes qui &ldquo;jonglent&rdquo;
+entre les entiers ML et les entiers Church.
+<PRE>
+let int2Church n = 
+	let rec aux = function
+	| 0 -&gt; Lam("f", Lam("x", Var "x"))
+	| n -&gt; App(succ, aux (n-1))
+	in betaNormal (aux n)
+
+let rec church2Int  terme = 
+	match terme with
+	| Lam("f", Lam("x", Var "x")) -&gt; 0
+	| _ -&gt; 1 + church2Int (betaNormal(App(pred, terme)))
+
+# church2Int (int2Church 10);;
+- : int = 10
+</PRE>
+
+<P>
+Egalement, nous pouvons représenter directement en ML les entiers <SPAN  CLASS="textit">Church</SPAN> sous forme de fonctionnelles:
+<PRE>
+let zero f x = x
+let un f x = f x
+let deux f x = f (f x)
+
+let succ n f x = f (n f x)
+let add n m f x = n f (m f x)
+
+let to_int n = n (function k -&gt; k + 1) 0
+let rec to_church = function	| 0 -&gt; zero  | n -&gt; succ (to_church (n-1))
+	
+#to_int (add deux (succ (to_church 5))) ;;
+- : int = 8
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Réification et réflexion</TITLE>
+<META NAME="description" CONTENT="Réification et réflexion">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node38.html">
+<LINK REL="next" HREF="node41.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node41.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node39.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html354"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node41.html">L'interprète par continuation</A>
+<B> monter:</B> <A
+ HREF="node37.html">L'auto-interprétation de l'interprète</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node39.html">L'environnement</A>
+ &nbsp; <B>  <A ID="tex2html355"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00442000000000000000">
+Réification et réflexion</A>
+</H2>
+La <SPAN  CLASS="textit">réification</SPAN> est le fait de rendre concrète une chose abstraite.
+Dans le cas de notre tour de Babel, réifier un objet du langage d'implémentation le rendra accessible au langage implémenté.
+On peut citer l'exemple de la fonction <code>eval</code> rendant accessible dans Scheme le process d'évaluation. 
+<code>(eval '</code><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN> <code>) = </code> <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN>
+
+<P>
+L'autre exemple que nous implémenterons est la réification de la continuation courante, mis à disposition
+par la fonction <code>call/cc</code>. Cette fonction prend en argument une lambda avec un seul paramètre qui récupère la
+continuation courante de l'expression en cours d'évaluation.
+<PRE>
+E = (e1 e2 ... (call/cc (lambda (k) ei)) ... en)
+</PRE>
+  Si <code>ei</code> ne fait pas appel à <code>k</code>, alors <code>ei</code> est évaluée normalement, ainsi que <code>E</code>. 
+Dans le cas contraire, <code>k</code> est appelée, liée à la continuation courante. Le résultat de <code>ei</code> est ainsi rendue
+à cette continuation capturée <code>(e1 ... [] ... en)</code>. Autrement écrit <code>k = (lambda(v) (e1 ... v ... en))</code>
+<PRE>
+(+ 5 (call/cc (lambda (k) (* 2 (k 8)))))  = 12
+</PRE> 
+
+<P>
+L'environnement <code>global-env</code> partagé avec les différents interprètes <!-- MATH
+ $\mathcal{I}_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img200.svg"
+ ALT="$\mathcal{I}_i$"></SPAN> de notre tour de babel est aussi considéré
+comme un environnement réifié. L'environnement du langage d'implémentation est ici mis à disposition aux langages implémentés.
+
+<P>
+La <SPAN  CLASS="textit">réflection</SPAN> peut être vue comme l'opération inverse de la réification.
+Elle permet la mise à disposition dans le langage d'implémentation un objet du langage implémenté.
+Comme exemple, citons la fonction <code>quote</code> qui n'évalue pas son argument et le rend tel quel. <code>quote</code> est
+ une primitive du langage Scheme dans le 
+sens où il n'est pas possible  de redéfinir cette fonction avec les autre éléments du langage.
+Avec l'implémentation de l'interprète <!-- MATH
+ $\mathcal{I}_R$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img201.svg"
+ ALT="$\mathcal{I}_R$"></SPAN> permettant les opérations de réflection et réification,
+ cela deviendra possible. 
+
+<P>
+Pour faire court, la réflection est une opération d'abstraction ; la réification est l'application d'une abstraction.
+Ce sont ainsi deux opérations réciproques. 
+Voici ce que nous donne pour information la définition du terme <SPAN  CLASS="textit">abstraction</SPAN> recherché dans notre dictionnaire.
+<P>
+<DIV><B>Définition  <SPAN CLASS="arabic">6</SPAN></B> &nbsp; 
+<I>L'abstraction désigne le produit de l'opération qui consiste à isoler par la pensée une ou plusieurs qualités d'un objet
+  concret pour en former une représentation intellectuelle
+</I>
+<P></DIV><P></P>
+
+<P>
+<BR>
+<BR>
+
+<P>
+<TABLE class="PAD  BORDER" style="">
+<TR><TD CLASS="CENTER">réification</TD>
+<TD CLASS="CENTER">program vers data</TD>
+<TD CLASS="CENTER"><code>((reifier-to-cloture proc) (cdr e) r k)</code></TD>
+</TR>
+<TR><TD CLASS="CENTER">réflection</TD>
+<TD CLASS="CENTER">data vers program</TD>
+<TD CLASS="CENTER"><code>(cloture-to-reifier (lambda (e r k) exp))</code></TD>
+</TR>
+</TABLE>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Sous-sections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html356"
+  HREF="node41.html">L'interprète par continuation </A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node41.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node37.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node39.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html354"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node41.html">L'interprète par continuation</A>
+<B> monter:</B> <A
+ HREF="node37.html">L'auto-interprétation de l'interprète</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node39.html">L'environnement</A>
+ &nbsp; <B>  <A ID="tex2html355"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

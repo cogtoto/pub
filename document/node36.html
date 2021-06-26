@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>LISP mis en abyme</TITLE>
+<META NAME="description" CONTENT="LISP mis en abyme">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node35.html">
+<LINK REL="next" HREF="node37.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node37.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node34.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node35.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html341"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node37.html">L'auto-interprétation de l'interprète</A>
+<B> monter:</B> <A
+ HREF="node34.html">Un interprète LISP avec</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node35.html">La mise en abyme</A>
+ &nbsp; <B>  <A ID="tex2html342"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00430200000000000000">
+LISP mis en abyme</A>
+</H3> 
+C'est ici un exercice assez classique.
+Nous avons fait le choix d'un interprète avec liaison dynamique.
+Nous aurons ainsi l'évaluation suivante retournant 13 et non 10.
+<PRE>
+	((evaluate  
+	'(let ((a 1))
+	  (let ((f (lambda (b) (+ b a)))) 
+		 (let ((a 3)) (f 10)))
+	)) env)
+</PRE>
+En outre, il n'est pas nécessaire d'avoir un mécanisme de point fixe ou d'environnement récursif pour
+l'appel d'une fonction récusrsive. C'est l'un des avantages de la liaison dynamique.
+<PRE>
+((evaluate
+ '(let ((fact (lambda (n) (if (= n 0) 1 (* n (fact (- n 1)))))))
+   (fact 6)))
+ env)
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

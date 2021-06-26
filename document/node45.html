@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Compilation basique vers une machine à pile</TITLE>
+<META NAME="description" CONTENT="Compilation basique vers une machine à pile">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node47.html">
+<LINK REL="previous" HREF="node43.html">
+<LINK REL="next" HREF="node46.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node46.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node44.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html375"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node46.html">Certification de la compilation</A>
+<B> monter:</B> <A
+ HREF="node42.html">La compilation</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node44.html">La correspondance de Curry-Howard</A>
+ &nbsp; <B>  <A ID="tex2html376"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00520000000000000000">
+Compilation basique vers une machine à pile</A>
+</H1>
+Nous utilisons l'implémentation ci-dessous pour la représentation des piles sous
+formes de listes mutables.
+<PRE>
+type 'a pile = 'a list ref ;;
+let empiler x p = p := x :: !p ;;
+
+exception Vide ;;
+
+let depiler p =  
+	match !p with
+  | [] -&gt; raise Vide
+  |x::t -&gt; p:=t ; x ;;
+
+let sommet p =
+	match !p with
+	| [] -&gt; raise Vide
+	| x::t -&gt; x  ;;
+</PRE>
+
+<P>
+La machine à pile exécutera les instructions suivantes:
+<BR><code>["EMPILER"; "nombre"],["ADD"], ["SUB"], ["MUL"], ["STOP"]</code>
+
+<P>
+La lecture d'une instruction est réalisée par la fonction <SPAN  CLASS="texttt">fetch</SPAN>. Cette
+fonction parcourt de manière linéaire le code représenté par un <SPAN  CLASS="textit">array</SPAN>.
+Chaque <SPAN  CLASS="texttt">fetch</SPAN> incrémente la variable <code>pc</code> qui représente le
+<SPAN  CLASS="textit">program counter</SPAN>.
+
+<P>
+<PRE>
+exception Erreur ;;
+	
+let executer code =
+	let pc = ref 0 in
+	let pile = ref [] in
+	let fetch code  =
+	begin
+		pc := !pc + 1 ; 
+		Array.get code (!pc - 1) 
+	end 
+	in
+	let rec exec () =
+		let instr = fetch code in
+		match instr with
+		| ["EMPILER"; n] -&gt; ( empiler (int_of_string n) pile ; exec () )
+		| ["ADD"] -&gt; let v2 = depiler pile in let v1 = depiler pile in 
+		            ( empiler (v1 + v2) pile ; exec () )
+		| ["SUB"] -&gt; let v2 = depiler pile in let v1 = depiler pile in
+		            ( empiler (v1 - v2) pile ; exec () )
+		| ["MUL"] -&gt; let v2 = depiler pile in let v1 = depiler pile in
+		            ( empiler (v1 * v2) pile ; exec () )
+		| ["STOP"] -&gt; print_int (sommet pile)
+		| _ -&gt; raise Erreur
+	in exec ()
+</PRE>
+
+<P>
+Voici l'exécution de la machine à pile:
+<PRE>
+let code = [| ["EMPILER"; "10"] ;["EMPILER"; "15"] ; ["ADD"] ;
+						  ["EMPILER"; "4"] ; ["MUL"] ; ["STOP"] |] ;;
+						  
+# executer code ;;
+# 100- : unit = ()
+</PRE>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Sous-sections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html377"
+  HREF="node46.html">Certification de la compilation avec le langage COQ</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

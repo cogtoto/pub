@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Les étapes Read, Eval, Print</TITLE>
+<META NAME="description" CONTENT="Les étapes Read, Eval, Print">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node32.html">
+<LINK REL="previous" HREF="node30.html">
+<LINK REL="next" HREF="node32.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node29.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html329"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node32.html">Liaison lexicale vs liaison</A>
+<B> monter:</B> <A
+ HREF="node29.html">Un interprète MiniScheme avec</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node30.html">L'évaluation</A>
+ &nbsp; <B>  <A ID="tex2html330"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00422000000000000000">
+Les étapes Read, Eval, Print</A>
+</H2>
+L'interpréte présente trois étapes que l'on décrit souvent avec l'acronyme <SPAN  CLASS="textit">REPL</SPAN> :
+Read, Eval, Print, Loop
+
+<P>
+L'étape <SPAN  CLASS="textit">READ</SPAN>  sera effectuée avec les moteurs ocamllex et ocmalyacc.
+Cette étape va lire la saisie clavier et construire l'arbre syntaxique des expressions SCHEME.
+
+<P>
+Voici quelques exemples d'arbres syntaxiques générés avec Yacc.
+Ces arbres syntaxiques sont à nouveau dessinés avec le package Tikz et nous avons développé une petite
+fonction qui parcourt l'expression et génère le code Tikz.
+
+<P>
+<code>(moins 4 3)</code>
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img193.svg"
+ ALT="\begin{tikzpicture}[level distance=1.5cm]
+\node {call} child {node {var} child {...
+...node {exp list} child { node {4 }} child { node {3 } }}
+;
+\par
+\end{tikzpicture}">
+<BR>
+</DIV>
+
+<P>
+<code>(if #t (plus 4 5) (moins 3 2))</code>
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img194.svg"
+ ALT="\begin{tikzpicture}[ level 1/.style={sibling distance=3cm},
+level 2/.style={sibl...
+...de {exp list} child { node {3 }} child { node {2 }} } }
+;
+\par
+\end{tikzpicture}">
+<BR>
+</DIV>
+
+<P>
+Et enfin une expression let <code>(let ((a 2) (b 3)) (plus a b))</code>
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img195.svg"
+ ALT="\begin{tikzpicture}[ level 1/.style={sibling distance=3.5cm},
+level 2/.style={si...
+...ild { node{a} }} child { node {var} child { node{b} }} } } } ;
+\end{tikzpicture}">
+<BR>
+</DIV>
+
+<P>
+L'étape <SPAN  CLASS="textit">EVAL</SPAN> va parcourir l'arbre syntaxique de l'expression, traiter cette expression et
+en exprimer une valeur modélisée avex le type <code>value</code>
+
+<P>
+La fonction <code>eval</code> est une fonction prenant comme arguments une expression de type <code>ast</code> et un environnement.
+Elle retourne une valeur de type <code>exp</code>. Voici sa signature: 
+<BR><code>val eval : ast -&gt; env -&gt; exp = &lt;fun&gt;</code>
+
+<P>
+L'étape <SPAN  CLASS="textit">PRINT</SPAN> n'est autre que la fonction d'affichage finale de l'interprète.
+Une fois cette étape finie, l'interprète boucle sur l'étape initiale <SPAN  CLASS="textit">READ</SPAN>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

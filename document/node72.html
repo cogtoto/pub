@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>La machine de Turing</TITLE>
+<META NAME="description" CONTENT="La machine de Turing">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node73.html">
+<LINK REL="previous" HREF="node71.html">
+<LINK REL="next" HREF="node73.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node73.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node71.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html466"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node73.html">La thèse de Church</A>
+<B> monter:</B> <A
+ HREF="node70.html">La calculabilité</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node71.html">Les fonctions récursives</A>
+ &nbsp; <B>  <A ID="tex2html467"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00720000000000000000">
+La machine de Turing</A>
+</H1>
+Une machine de Turing est un automate à  état (<SPAN  CLASS="textit">state machine</SPAN>) qui a la
+capacité de lire puis  d'enregistrer un caractère sur une bande de longueur
+infinie. 
+
+<P>
+La machine change d'état sur la base de trois éléments: l'état courant,
+le caractère lu de la bande et une table externe de transition. La table de
+transition est externe à  la bande et elle est statique.
+ L'action résultante est un changement potentiel d'état, une écriture de
+ caractère sur la bande et un déplacement à  droite ou à  gauche de la tête de
+ lecture.
+
+<P>
+Nous implémentons cela avec le concept de <SPAN  CLASS="textit">box</SPAN> présenté dans le chapitre
+précédent. La lambda va encapsuler l'état courant, la position de la tête de
+lecture, la bande et la table de transition.
+La table de transition est modélisée par une a-liste d'a-listes.
+La première a-liste permet de faire matcher l'état courant.
+La seconde a-liste permet de faire matcher le caractère lu.
+Ces deux informations combinées fournissent  le triplet de sortie
+<code>(état_suivant, caractère_écrit, direction)</code>
+
+<P>
+<PRE>
+let matable = [ ("q0" , [ ("&gt;", ("q1", "X", "G")) ;
+								  ("&lt;", ("q0", "&lt;", "D")) ; 
+								  (" ", ("q2", " ", "G")) ;
+								  ("X", ("q0", "X",	"D")) ]) ;
+			       ("q1" , [ ("&gt;", ("q1", "&gt;", "G")) ;
+			                 ("&lt;", ("q0", "X", "D")) ;
+			                 (" ", ("qf", "non", "G")) ;
+			                 ("X", ("q1", "X", "G")) ]) ;
+			       ("q2" , [ ("&gt;", ("q2", "&gt;", "G")) ;
+			                 ("&lt;", ("qf", "non", "G")) ;
+			                 (" ", ("qf", "oui", "G")) ;
+			                 ("X", ("q2", "X", "G")) ]) ;
+			   ] ;;
+</PRE>
+
+<P>
+Cette table de transition va nous permettre de vérifier le bon parenthésage
+d'une expression en entrée fournie sur la bande représentée par une liste 
+<code>let mabande =   [" "; "&lt;"; "&gt;"; " "]</code>
+
+<P>
+L'état <code>q0</code> va rechercher une parenthèse <code>&gt;</code> en allant vers la droite.
+
+<P>
+L'état <code>q1</code> va rechercher une parenthèse <code>&lt;</code> en allant vers la gauche.
+
+<P>
+L'état <code>q2</code> va rechercher une parenthèse <code>&gt;</code> en allant vers la gauche.
+
+<P>
+Les parenthèses matchées sont remplacées par le caractère <code>X</code>.
+Le passage à  l'état final <code>qf</code> est accompagné par l'écriture <code>oui</code> ou
+<code>non</code> sur la bande suivant si l'expression est ou non correctement parenthésée.
+
+<P>
+<PRE>
+let make_turing table etat0 position0 bande0 =
+	let etat = ref etat0 in
+	let position = ref position0 in
+	let bande = ref bande0 in
+	let fct_transition state input = assoc input (assoc state table) in
+	let lire () = nth !bande !position in
+	let deplacer = function 
+		| "G" -&gt; if (!position = 0) then (bande := " " :: !bande) else (position := !position - 1) 
+    | "D" -&gt; 
+	   begin
+		  position := !position + 1 ;
+		  if ((lire ()) = " ") then (bande := !bande @ (" ":: []))
+   	 end
+		| _ -&gt; raise Erreur
+	in
+	let rec liste_tail liste pos =
+	  match pos with
+	  | 0 -&gt; liste
+	  | n -&gt; liste_tail (tl liste) (pos - 1)
+  in
+  let rec liste_tete liste pos =
+	  match pos with
+	  | 0 -&gt; []
+  	| n -&gt; (hd liste) :: liste_tete (tl liste) (pos - 1)
+  in
+	let ecrire symb =
+	bande := (liste_tete !bande !position) @ (symb :: []) @ ( liste_tail (tl !bande) !position)
+	in
+	 fun instruction -&gt;
+		match instruction with
+		| "executer" -&gt; 
+			let (e, s, d) = fct_transition !etat (lire ()) in
+	    	begin
+		      ecrire s ;
+		      deplacer d;
+		      etat := e ;
+					if (!etat = "qf") then raise Final 
+	      end 
+		| "reset" -&gt; begin etat := etat0 ; bande := bande0; position := position0 end
+		| "affiche"  -&gt; 
+			   begin print_string "etat:" ; print_string !etat ; 
+				       print_string "  position:"; print_int !position ; 
+							 print_string "  lire:"; print_string (lire ()) ;
+							 print_string "  bande:  "; print_liste !bande
+	       end	
+		| _ -&gt; raise Erreur
+		
+let executer_turing turing trace =
+	let rec iterer () =
+		turing "executer" ; if trace then turing "affiche"; iterer () 
+	in
+	begin
+	 turing "reset" ;
+	 try
+	  iterer () 
+	 with Final -&gt; turing "affiche"
+	 end
+</PRE>
+
+<P>
+Voici le résultat sur l'expression <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img411.svg"
+ ALT="$&lt;&gt; $"></SPAN>
+<PRE>
+# let turing_par = make_turing matable etatinit posinit  [" "; "&lt;"; "&gt;"; " "]  ;;
+# executer_turing turing_par true ;;
+
+etat:q0  position:2  lire:&gt;  bande:   &lt;&gt; 
+etat:q1  position:1  lire:&lt;  bande:   &lt;X 
+etat:q0  position:2  lire:X  bande:   XX 
+etat:q0  position:3  lire:   bande:   XX  
+etat:q2  position:2  lire:X  bande:   XX  
+etat:q2  position:1  lire:X  bande:   XX  
+etat:q2  position:0  lire:   bande:   XX  
+etat:qf  position:0  lire:   bande:   ouiXX
+</PRE>
+
+<P>
+Et voici le résultat sur l'expression <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img412.svg"
+ ALT="$&lt;&lt;&gt;&lt;&gt; $"></SPAN>
+<PRE>
+# let turing_par = make_turing matable etatinit posinit  [" "; "&lt;"; "&lt;"; "&gt;"; "&lt;"; "&gt;"; " "] ;;
+# executer_turing turing_par true ;;
+
+etat:q0  position:2  lire:&lt;  bande:   &lt;&lt;&gt;&lt;&gt; 
+etat:q0  position:3  lire:&gt;  bande:   &lt;&lt;&gt;&lt;&gt; 
+etat:q1  position:2  lire:&lt;  bande:   &lt;&lt;X&lt;&gt; 
+etat:q0  position:3  lire:X  bande:   &lt;XX&lt;&gt; 
+etat:q0  position:4  lire:&lt;  bande:   &lt;XX&lt;&gt; 
+etat:q0  position:5  lire:&gt;  bande:   &lt;XX&lt;&gt; 
+etat:q1  position:4  lire:&lt;  bande:   &lt;XX&lt;X 
+etat:q0  position:5  lire:X  bande:   &lt;XXXX 
+etat:q0  position:6  lire:   bande:   &lt;XXXX  
+etat:q2  position:5  lire:X  bande:   &lt;XXXX  
+etat:q2  position:4  lire:X  bande:   &lt;XXXX  
+etat:q2  position:3  lire:X  bande:   &lt;XXXX  
+etat:q2  position:2  lire:X  bande:   &lt;XXXX  
+etat:q2  position:1  lire:&lt;  bande:   &lt;XXXX  
+etat:qf  position:0  lire:   bande:   nonXXXX
+</PRE>
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node73.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node71.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html466"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node73.html">La thèse de Church</A>
+<B> monter:</B> <A
+ HREF="node70.html">La calculabilité</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node71.html">Les fonctions récursives</A>
+ &nbsp; <B>  <A ID="tex2html467"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

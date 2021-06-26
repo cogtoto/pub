@@ -1,0 +1,518 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Compilation des -termes en termes applicatifs</TITLE>
+<META NAME="description" CONTENT="Compilation des -termes en termes applicatifs">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node45.html">
+<LINK REL="previous" HREF="node42.html">
+<LINK REL="next" HREF="node44.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html370"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node44.html">La correspondance de Curry-Howard</A>
+<B> monter:</B> <A
+ HREF="node42.html">La compilation</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node42.html">La compilation</A>
+ &nbsp; <B>  <A ID="tex2html371"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00510000000000000000">
+Compilation des <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-termes en termes applicatifs</A>
+</H1>
+Il existe un formalisme appelé <SPAN  CLASS="textit">Logique Combinatoire</SPAN> qui permet de construire
+un calcul sans variables liées. 
+C'est surprenant, mais ces variables liées qui sont introduites par abstraction puis éliminées par application
+ne sont finalement pas essentielles pour le calcul.
+
+<P>
+Comment traduire une abstraction en termes applicatifs ? 
+Nous allons définir une traduction <!-- MATH
+ $M\mapsto  M_@$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img208.svg"
+ ALT="$M\mapsto M_@$"></SPAN> , ainsi qu'une traduction en sens inverse
+<!-- MATH
+ $A\mapsto A_\lambda$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img209.svg"
+ ALT="$A\mapsto A_\lambda$"></SPAN>.
+
+<P>
+L'idée est de partir sur les règles de traduction suivantes :
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{lcl}
+	\lceil \lambda x . x \rceil &=& I \\
+	\lceil \lambda x . M \rceil &=& K M \quad (x \notin M) \\
+	\lceil \lambda x . M N \rceil &=& S \lceil \lambda x . M \rceil \lceil \lambda x . N \rceil \quad (x \in M,N) \\
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img210.svg"
+ ALT="\begin{displaymath}
+\begin{array}{lcl}
+\lceil \lambda x . x \rceil &amp;=&amp; I \\
+\...
+...l \lceil \lambda x . N \rceil \quad (x \in M,N) \\
+\end{array}\end{displaymath}">
+</DIV><P></P>
+où <!-- MATH
+ $\lceil T \rceil$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img211.svg"
+ ALT="$\lceil T \rceil$"></SPAN> représente le <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img212.svg"
+ ALT="$T$"></SPAN> sans lambda abstraction. 
+
+<P>
+Nous serions tentés de vouloir faire directement la traduction en utilisant ces règles.
+Il nous faut cependant passer par un opérateur d'abstraction <!-- MATH
+ $A \mapsto [x].A$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img213.svg"
+ ALT="$A \mapsto [x].A$"></SPAN> qui permettra de "supprimer" toutes 
+les lambdas en profondeur dans le <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme, puis seulement ensuite, nous pourrons utiliser les trois règles ci-dessous:
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{lcl}
+	{[x]}  . x   &\equiv & I \\
+	{[x]} .  A   &\equiv & K A \quad (x \notin A) \\
+	{[x]}  . A B &\equiv & S ([x] . A)([x] . B)  \quad (x \in A,B) \\
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img214.svg"
+ ALT="\begin{displaymath}
+\begin{array}{lcl}
+{[x]} . x &amp;\equiv &amp; I \\
+{[x]} . A &amp;\e...
+...\equiv &amp; S ([x] . A)([x] . B) \quad (x \in A,B) \\
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+Les combinateurs <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img215.svg"
+ ALT="$I, K$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img216.svg"
+ ALT="$S$"></SPAN> sont définis comme ceci:
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{ccc}
+	I &=& \lambda x . x \\
+	K &=& \lambda x y . x \\
+	S &=& \lambda x y z . x z (y z) \\
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img217.svg"
+ ALT="\begin{displaymath}
+\begin{array}{ccc}
+I &amp;=&amp; \lambda x . x \\
+K &amp;=&amp; \lambda x y . x \\
+S &amp;=&amp; \lambda x y z . x z (y z) \\
+\end{array}
+\end{displaymath}">
+</DIV><P></P>
+
+<P>
+Et voici la définition de la traduction des <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-termes en termes applicatifs.
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{lcl}
+	 (x)_@  &\equiv & x \\
+	(PQ)_@  &\equiv & (P)_@ (Q)_@ \\
+	(\lambda x.M)_@  &\equiv & [x] .(M)_@   \\
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img218.svg"
+ ALT="\begin{displaymath}
+\begin{array}{lcl}
+(x)_@ &amp;\equiv &amp; x \\
+(PQ)_@ &amp;\equiv &amp; ...
+...(Q)_@ \\
+(\lambda x.M)_@ &amp;\equiv &amp; [x] .(M)_@ \\
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+Dans la définition de notre type applicatif <code>ski</code>, nous incluons aussi notre opérateur <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img219.svg"
+ ALT="$[x].A$"></SPAN> 
+avec le constructeur <code>Op</code>.
+
+<P>
+<PRE>
+type ski = 
+| Varia of string
+| I
+| K
+| S
+| Appl of ski*ski 
+| Op of string * ski ;;
+
+exception SkiExec
+
+let rec lambda_ski = function
+| Lam(x, t) -&gt; lambda_ski_op (Op(x, lambda_ski t))
+| Var(x) -&gt; Varia(x)
+| App(m,n) -&gt; Appl(lambda_ski m, lambda_ski n) 
+and lambda_ski_op = function
+| Op(x,Varia y) when x=y -&gt; I 
+| Op(x, t) when not (mem x (var t)) -&gt; Appl(K, t) 
+| Op(x, Appl(m, n))  when (mem x (var m)) || (mem x (var n)) 
+	  -&gt; Appl(Appl(S, (lambda_ski_op (Op(x,m)))), (lambda_ski_op (Op(x,n)))) 
+| _ -&gt; raise SkiErreur
+</PRE>
+A titre d'exemple, traduisons notre combinateur <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img220.svg"
+ ALT="$y$"></SPAN> en termes applicatifs:
+<PRE>
+utop # print_ski (lambda_ski y) ;;
+((S((S((S(KS))((S(KK))I)))(K((SI)I))))((S((S(KS))((S(KK))I)))(K((SI)I))))
+</PRE>
+Une fois le code compilé, son exécution sera réalisée avec les règles de réécriture :
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{ccc}
+	Ix &\longrightarrow & x \\
+	Kxy &\longrightarrow & x \\
+	Sxyz &\longrightarrow & x z (y z)	\\
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img221.svg"
+ ALT="\begin{displaymath}
+\begin{array}{ccc}
+Ix &amp;\longrightarrow &amp; x \\
+Kxy &amp;\longr...
+...ow &amp; x \\
+Sxyz &amp;\longrightarrow &amp; x z (y z) \\
+\end{array}
+\end{displaymath}">
+</DIV><P></P>
+Voici une première version de l'exécution de ces règles de réécriture. Ce code un est peu bourrin car on appelle
+la fonction tant que le terme n'est pas réduit.
+<PRE>
+let rec exec_aux = function
+| Appl(I, x) -&gt; exec_aux x
+| Appl(Appl(K, x), y) -&gt; exec_aux x
+| Appl(Appl(Appl(S,x),y),z) -&gt; Appl(Appl(exec_aux x, exec_aux z), Appl(exec_aux y,exec_aux z))
+| Appl(x,y) -&gt; Appl(exec_aux x, exec_aux y)
+| Varia x -&gt; Varia x
+| I -&gt; I
+| K -&gt; K
+| S -&gt; S
+| _ -&gt; raise SkiErreur 
+and  exec t =
+let r = exec_aux t in
+	if r=t then r else exec_aux r
+</PRE>
+
+<P>
+Voici une version plus élégante qui retourne la forme réduite.
+<PRE>
+let rec ski_norm m =
+match m with
+| S | K | I -&gt; m
+| Varia x -&gt; m
+| Appl (m0, m1) -&gt;
+match ski_norm m0 with
+| I -&gt; ski_norm m1
+| Appl (K, m') -&gt; m'
+| Appl (Appl (S, m3), m2) -&gt; ski_norm (Appl (Appl (m3, m1), Appl (m2, m1)))
+| autre -&gt; Appl (autre, ski_norm m1);;
+</PRE>
+
+<P>
+La traduction en sens inverse <!-- MATH
+ $A \mapsto A_\lambda$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img209.svg"
+ ALT="$A\mapsto A_\lambda$"></SPAN> se fait naturellement par la fonction ML ci-dessous:
+<PRE>
+let rec ski_lambda = function
+| I -&gt; Lam("x", Var "x")
+| K -&gt; Lam("x", Lam("y", Var "x"))
+| S -&gt; Lam("x", Lam("y", Lam("z", App(App(Var "x", Var "z"), App(Var "y", Var "z")))))
+| Varia(x) -&gt; Var(x)
+| Appl(m,n) -&gt; App(ski_lambda m,ski_lambda n)
+| _ -&gt; raise SkiErreur
+</PRE>
+
+<P>
+Utilisons l'exemple de la factorielle, exemple complexe car il comporte les représentations en <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-termes
+du combinateur <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img72.svg"
+ ALT="$Y$"></SPAN>, de la condition <SPAN  CLASS="textit">if-then-else</SPAN>, des entiers <SPAN  CLASS="textit">Church</SPAN> ainsi que les opérations
+<SPAN  CLASS="textit">plus, moins, mult</SPAN>.<A ID="tex2html10"
+  HREF="footnode.html#foot1249"><SUP><SPAN CLASS="arabic">3</SPAN>.<SPAN CLASS="arabic">1</SPAN></SUP></A><PRE>
+print_terme (betaNormal (ski_lambda (exec (lambda_ski (App(fact, trois)))))) ;;
+λz.λz0.z (z (z (z (z (z z0) ) ) ) ) - : unit = ()
+</PRE>
+
+<P>
+Nous avons les deux propriétés suivantes que nous ne démontrerons pas.
+
+<OL>
+<LI>Si <!-- MATH
+ $A \overset{*}{\longrightarrow_{\beta}}B$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img222.svg"
+ ALT="$A \overset{*}{\longrightarrow_{\beta}}B$"></SPAN>, alors <!-- MATH
+ $A_\lambda \overset{*}{\longrightarrow_{\beta}}B_\lambda$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img223.svg"
+ ALT="$A_\lambda \overset{*}{\longrightarrow_{\beta}}B_\lambda$"></SPAN> 
+<BR></LI>
+<LI><!-- MATH
+ $(M_@)_\lambda \overset{*}{\longrightarrow_{\beta}}M$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img224.svg"
+ ALT="$(M_@)_\lambda \overset{*}{\longrightarrow_{\beta}}M $"></SPAN> 
+<BR></LI>
+</OL>
+
+<P>
+Cependant, nous aurons parfois <!-- MATH
+ $M \longrightarrow_\beta N$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img225.svg"
+ ALT="$M \longrightarrow_\beta N$"></SPAN> sans que <!-- MATH
+ $M_@ \longrightarrow_@ N_@$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img226.svg"
+ ALT="$M_@ \longrightarrow_@ N_@$"></SPAN>
+
+<P>
+Par exemple <!-- MATH
+ $SK \overset{*}{\longrightarrow_{\beta}}0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img227.svg"
+ ALT="$SK \overset{*}{\longrightarrow_{\beta}}0$"></SPAN> mais <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img228.svg"
+ ALT="$SK$"></SPAN> est irréductible pour <!-- MATH
+ $\longrightarrow_@$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img229.svg"
+ ALT="$\longrightarrow_@$"></SPAN>
+<PRE>
+utop # betaNormalPrint sk ;;
+[1] -&gt; λx.λy.λz.x z (y z)  λx.λy.x
+[2] -&gt; λy.λz.λx.λy.x z (y z) 
+[3] -&gt; λy.λz.λy.z (y z) 
+[4] -&gt; λy.λz.z
+- : unit -&gt; unit = &lt;fun&gt;	
+
+utop # exec (Appl(S,K)) ;;
+- : ski = Appl (S, K)
+</PRE>
+
+<P>
+D'autre part, on n'a pas nécessairement <!-- MATH
+ $(A_\lambda)_@ =_@ A$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img230.svg"
+ ALT="$(A_\lambda)_@ =_@ A$"></SPAN>.
+
+<P>
+Par exemple <!-- MATH
+ $(K_\lambda)_@ \equiv S(KK)I$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img231.svg"
+ ALT="$(K_\lambda)_@ \equiv S(KK)I$"></SPAN> ne se réduit pas en <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img232.svg"
+ ALT="$K$"></SPAN>.
+<PRE>
+utop # exec (lambda_ski k) ;;
+- : ski = Appl (Appl (S, Appl (K, K)), I)
+
+betaNormalPrint (App(App(s, App (k, k)), i)) ;;
+[1] -&gt; λx.λy.λz.x z (y z)  (λx.λy.x λx.λy.x)  λx.x
+[2] -&gt; λy.λz.λx.λy.x λx.λy.x z (y z)  λx.x
+[3] -&gt; λz.λx.λy.x λx.λy.x z (λx.x z) 
+[4] -&gt; λz.λy.λx.λy.x z (λx.x z) 
+[5] -&gt; λz.λx.λy.x (λx.x z) 
+[6] -&gt; λz.λy.λx.x z
+[7] -&gt; λz.λy.z
+- : unit -&gt; unit = &lt;fun&gt;
+</PRE>
+On peut constater que <!-- MATH
+ $(SKK)x \overset{*}{\longrightarrow_{\beta}}x$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img233.svg"
+ ALT="$(SKK)x \overset{*}{\longrightarrow_{\beta}}x $"></SPAN>, donc le terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img234.svg"
+ ALT="$SKK$"></SPAN> joue le même rôle
+que la constante <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img235.svg"
+ ALT="$I$"></SPAN>. 
+<PRE>
+let skk = Appl(Appl(S,K),K) ;;
+exec (Appl(skk, Varia "x")) ;;
+- : ski = Varia "x"
+</PRE>
+ou plus directement en CAML:
+<PRE>
+utop # 
+let k x y = x
+and s x y z = (x z (y z)) 
+  in (s k k) "toto ";;
+- : string = "toto "
+</PRE>
+La base combinatoire <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img236.svg"
+ ALT="$\{S,K\}$"></SPAN> suffit donc au <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul. 
+Une base à un seul élément existerait même...
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Sous-sections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><UL>
+<LI><A ID="tex2html372"
+  HREF="node44.html">La correspondance de Curry-Howard</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node44.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node42.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node42.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html370"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node44.html">La correspondance de Curry-Howard</A>
+<B> monter:</B> <A
+ HREF="node42.html">La compilation</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node42.html">La compilation</A>
+ &nbsp; <B>  <A ID="tex2html371"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Le produit de Wallis</TITLE>
+<META NAME="description" CONTENT="Le produit de Wallis">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node105.html">
+<LINK REL="previous" HREF="node103.html">
+<LINK REL="next" HREF="node105.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node105.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node98.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node103.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html592"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node105.html">L'intégrale</A>
+<B> monter:</B> <A
+ HREF="node98.html">Approximation du nombre</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node103.html">La loi des grands</A>
+ &nbsp; <B>  <A ID="tex2html593"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION008104000000000000000">
+Le produit de Wallis</A>
+</H2>
+Pour introduire le produit infini de Wallis, nous partons du fait que tout polynome
+de degré <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img205.svg"
+ ALT="$n$"></SPAN> s'écrivant <!-- MATH
+ $f(x) = a_n x^n + a_{n-1} x^{n-1}+ \dots + a_1 x + a_0$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img590.svg"
+ ALT="$f(x) = a_n x^n + a_{n-1} x^{n-1}+ \dots + a_1 x + a_0$"></SPAN> peut se décomposer en :
+<P><!-- MATH
+ \begin{displaymath}
+f(x) = a_n(x-x_1)(x-x_2)\dots(x-x_n)
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img591.svg"
+ ALT="$\displaystyle f(x) = a_n(x-x_1)(x-x_2)\dots(x-x_n)$">
+</DIV><P></P>
+Et en factorisant ce produit par <!-- MATH
+ $x_1.x_2\dots x_n$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img592.svg"
+ ALT="$x_1.x_2\dots x_n$"></SPAN>, nous pouvons écrire :
+<P><!-- MATH
+ \begin{displaymath}
+f(x) = C (1-\frac{x}{x_1})(1-\frac{x}{x_2})\dots(1-\frac{x}{x_n})
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img593.svg"
+ ALT="$\displaystyle f(x) = C (1-\frac{x}{x_1})(1-\frac{x}{x_2})\dots(1-\frac{x}{x_n}) $">
+</DIV><P></P> 
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img135.svg"
+ ALT="$C$"></SPAN> est ici une constante égale à <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img594.svg"
+ ALT="$a_0$"></SPAN>, que nous avons calculé en posant <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img595.svg"
+ ALT="$x=0$"></SPAN>.
+
+<P>
+Euler aurait démontré que cette décomposition vraie pour les polynomes l'est également pour la fonction <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img596.svg"
+ ALT="$\sin(x)$"></SPAN>, et plus
+particulièrement <!-- MATH
+ $\sin(\pi x)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img597.svg"
+ ALT="$\sin(\pi x)$"></SPAN>. Nous avons <!-- MATH
+ $\sin(\pi\ n)=0\ \forall n \in \mathbb{Z}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img598.svg"
+ ALT="$\sin(\pi\ n)=0\ \forall n \in \mathbb{Z}$"></SPAN>
+<P><!-- MATH
+ \begin{displaymath}
+\sin (\pi x) = \pi x (1-\frac{x^2}{1^2})(1-\frac{x^2}{2^2})(1-\frac{x^2}{3^2})(1-\frac{x^2}{4^2})\dots
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img599.svg"
+ ALT="$\displaystyle \sin (\pi x) = \pi x (1-\frac{x^2}{1^2})(1-\frac{x^2}{2^2})(1-\frac{x^2}{3^2})(1-\frac{x^2}{4^2})\dots $">
+</DIV><P></P>
+Et donc pour <!-- MATH
+ $x=\frac{1}{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img600.svg"
+ ALT="$x=\frac{1}{2}$"></SPAN>, nous avons :
+<P><!-- MATH
+ \begin{displaymath}
+\sin (\frac{\pi}{2}) = 1 = \frac{\pi}{2} (1-\frac{1}{2^2.1^2}) (1-\frac{1}{2^2.3^2}) (1-\frac{1}{2^2.4^2}) \dots
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img601.svg"
+ ALT="$\displaystyle \sin (\frac{\pi}{2}) = 1 = \frac{\pi}{2} (1-\frac{1}{2^2.1^2}) (1-\frac{1}{2^2.3^2}) (1-\frac{1}{2^2.4^2}) \dots $">
+</DIV><P></P>
+Si nous écrivons 
+<P><!-- MATH
+ \begin{displaymath}
+1-\frac{1}{2^2.n^2} = \frac{(2n-1)(2n+1)}{2n.2n}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img602.svg"
+ ALT="$\displaystyle 1-\frac{1}{2^2.n^2} = \frac{(2n-1)(2n+1)}{2n.2n} $">
+</DIV><P></P>
+Nous obtenons le produit de Wallis :
+
+<P>
+<P><!-- MATH
+ \begin{displaymath}
+\frac{\pi}{2} = ( \frac{2}{1}.\frac{2}{3} ) . (\frac{4}{2}.\frac{4}{5} ).(\frac{6}{5}.\frac{6}{7} ).(\frac{8}{7}.\frac{8}{9} ) . ...  =  \prod_{n=1}^\infty \frac{2n.2n}{(2n-1).(2n+1)} = \prod_{n=1}^\infty \frac{4n^2}{4n^2-1}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img603.svg"
+ ALT="$\displaystyle \frac{\pi}{2} = ( \frac{2}{1}.\frac{2}{3} ) . (\frac{4}{2}.\frac{...
+...=1}^\infty \frac{2n.2n}{(2n-1).(2n+1)} = \prod_{n=1}^\infty \frac{4n^2}{4n^2-1}$">
+</DIV><P></P>
+<BR>
+<BR>	
+<PRE>
+let rec from i = Cons ((4. *. i**2. ) /. (4. *. i**2. -. 1.), fun () -&gt; from (i +. 1.)) ;;
+let wallis = from 1. ;;
+
+let rec mult n s acc =
+	if n=0 then acc
+	else  mult (n-1) (tl s) (acc *. (hd s)) ;;
+</PRE>
+Le produit converge ici rapidement vers <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img604.svg"
+ ALT="$\pi /2$"></SPAN>. Nous multiplions les cinquantes premiers millions 
+de notre liste infinie <code>wallis</code>.
+<PRE>
+utop # 
+2. *. mult 5000000 wallis 1. ;;
+- : float = 3.14159249652297845
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

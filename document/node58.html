@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>L'unification des termes</TITLE>
+<META NAME="description" CONTENT="L'unification des termes">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node59.html">
+<LINK REL="previous" HREF="node55.html">
+<LINK REL="next" HREF="node59.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node59.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node57.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html425"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node59.html">Un mini PROLOG</A>
+<B> monter:</B> <A
+ HREF="node52.html">La résolution</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node57.html">La réécriture et l'arithmétique</A>
+ &nbsp; <B>  <A ID="tex2html426"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00640000000000000000">
+L'unification des termes</A>
+</H1>
+Un interprète PROLOG peut être considéré comme une machine à unifier.
+
+<P>
+Définissons d'abord l'opération d'unification de deux termes.
+Un unificateur de deux termes <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img319.svg"
+ ALT="$t_1$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img320.svg"
+ ALT="$t_2$"></SPAN> est une substitution <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img302.svg"
+ ALT="$\sigma$"></SPAN> telle que <!-- MATH
+ $\sigma t_1 = \sigma t_2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img321.svg"
+ ALT="$\sigma t_1 = \sigma t_2$"></SPAN>
+
+<P>
+Soit <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img322.svg"
+ ALT="$E$"></SPAN>, un système d'équations, on peut définir des transformations <!-- MATH
+ $E_{1} \rightarrow _t   E_{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img323.svg"
+ ALT="$E_{1} \rightarrow _t E_{2} $"></SPAN>
+entre systèmes d'équations. On note le symbole <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img324.svg"
+ ALT="$\bot$"></SPAN> qui représente un système sans solution.
+Résoudre <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img325.svg"
+ ALT="$E_0$"></SPAN> consiste à appliquer une suite de transformations <!-- MATH
+ $E_{0} \rightarrow _*   E_{n}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img326.svg"
+ ALT="$E_{0} \rightarrow _* E_{n} $"></SPAN> de sorte que
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img327.svg"
+ ALT="$E_{n}$"></SPAN> soit en forme résolue, ou bien <!-- MATH
+ $E_{n} = \bot$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img328.svg"
+ ALT="$E_{n} = \bot$"></SPAN>
+
+<P>
+Nous avons six types de transformations possibles: 
+
+<P>
+<TABLE class="PAD " style="">
+<TR><TD CLASS="LEFT">décomposition</TD>
+<TD CLASS="LEFT"><!-- MATH
+ $E \cup \{ f M_1 \dots M_r = f N_1 \dots N_r \} \rightarrow   E \cup \{ M_1 = N_1 , \dots ,M_r = N_r \}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img329.svg"
+ ALT="$E \cup \{ f M_1 \dots M_r = f N_1 \dots N_r \} \rightarrow E \cup \{ M_1 = N_1 , \dots ,M_r = N_r \} $"></SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT">effacement</TD>
+<TD CLASS="LEFT"><!-- MATH
+ $E \cup \{ M=M \} \rightarrow   E$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img330.svg"
+ ALT="$E \cup \{ M=M \} \rightarrow E $"></SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT">élimination</TD>
+<TD CLASS="LEFT"><!-- MATH
+ $E \cup \{ x=M \} \rightarrow  E[x:=M] \cup \{ x=M \}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img331.svg"
+ ALT="$E \cup \{ x=M \} \rightarrow E[x:=M] \cup \{ x=M \}$"></SPAN> si <!-- MATH
+ $M \notin X, x \notin var(M)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img332.svg"
+ ALT="$M \notin X, x \notin var(M)$"></SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT">inversion</TD>
+<TD CLASS="LEFT"><!-- MATH
+ $E \cup \{ M=x \}  \rightarrow  E \cup \{ x=M \}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img333.svg"
+ ALT="$E \cup \{ M=x \} \rightarrow E \cup \{ x=M \}$"></SPAN> si <!-- MATH
+ $M \notin X$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img334.svg"
+ ALT="$M \notin X$"></SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT">conflit</TD>
+<TD CLASS="LEFT"><!-- MATH
+ $E \cup \{ f M = g M\} \rightarrow   \bot$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img335.svg"
+ ALT="$E \cup \{ f M = g M\} \rightarrow \bot $"></SPAN> si <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img336.svg"
+ ALT="$f \neq g $"></SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT">cycle</TD>
+<TD CLASS="LEFT"><!-- MATH
+ $E \cup \{ x=M \} \rightarrow  \bot$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img337.svg"
+ ALT="$E \cup \{ x=M \} \rightarrow \bot $"></SPAN> si <!-- MATH
+ $x \in var(M)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img338.svg"
+ ALT="$x \in var(M)$"></SPAN></TD>
+</TR>
+</TABLE>
+
+<P>
+<BR>
+<BR>
+
+<P>
+La difficulté de cet algorithme est  sa condition d'arrêt. 
+ Si aucune règle ne peut plus s'appliquer sur les éléments du système d'équations, alors l'algorithme doit s'arrêter et son résultat est
+la substitution unifiant les deux termes initiaux.
+Avec une seule fonction parcourant le système d'équations, représentés en OCAML par le type <code>(term * term) list</code>,
+je pense que ce n'est pas possible. Je me suis là aussi un peu cassé les cheveux.
+Voici mon code avec deux fonctions:
+<PRE>
+let rec  unifier equation =
+match equation with
+| (Var(x),Var(y)) -&gt; if x=y then [] else [(Var(x), Var(y))] 
+| (Func(f1,l1),Func(f2, l2)) -&gt; if f1 = f2 &amp;&amp; List.length l1 = List.length l2 
+	then unifierliste (List.combine l1 l2)
+	else raise Impossible
+| (Func(m,n),Var(x)) -&gt; unifier (Var(x), Func(m,n)) 
+| (Var(x), Func(m,n)) -&gt; if (mem (Var(x)) (listevar (Func(m,n)))) 
+	then raise Impossible
+	else [(Var(x), Func(m,n)) ] 
+and unifierliste = function
+| [] -&gt; []
+| (x,y)::t -&gt;
+	let t2 = unifierliste t in
+	let t1 = unifier ((substituer x t2 ),(substituer y t2)) in
+	t1 @ t2
+</PRE>
+
+<P>
+On retrouve dans la fonction <code>unifier</code>, qui travaille uniquement sur une paire de terme, les différentes règles
+de l'algorithme. La fonction <code>unifierliste</code> va unifier sa première paire en utilisant la substitution trouvée dans le reste
+de l'équation. C'est un bel exemple de récursivité qui nous dépasse très souvent... 
+Ce bout de code vient du site de l'université de Cornell.
+
+<P>
+Voici un autre exemple moins proche de l'algorithme présenté.
+<PRE>
+let unifier t1 t2 =
+  let rec unificateur t1 t2 =
+    match (t1,t2) with
+    | (Var(x), _)  -&gt; 
+      begin
+        if t1 = t2 then [] 
+        else if (mem t1 (listevar t2)) then raise Impossible
+             else [(t1, t2)]
+      end		  
+    | (_, Var(x)) -&gt; unificateur t2 t1
+    | (Func(x, l1), Func(y, l2)) -&gt; if x&lt;&gt;y then raise Impossible
+      else (unifliste l1 l2 [])
+  and unifliste l1 l2 sigma =
+    match (l1, l2) with
+    | ([], _) -&gt; sigma
+    | (h1::t1, h2::t2) -&gt;
+      begin
+        let sigma1 = (unificateur h1 h2) in
+        unifliste (map (function terme -&gt; (substituer terme sigma1)) t1)
+          (map (function terme -&gt; (substituer terme sigma1)) t2)
+          (compose_subst sigma sigma1)
+      end		
+    | _ -&gt; raise Impossible
+  in unificateur t1 t2
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node59.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node57.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html425"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node59.html">Un mini PROLOG</A>
+<B> monter:</B> <A
+ HREF="node52.html">La résolution</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node57.html">La réécriture et l'arithmétique</A>
+ &nbsp; <B>  <A ID="tex2html426"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

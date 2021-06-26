@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Le crible</TITLE>
+<META NAME="description" CONTENT="Le crible">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node90.html">
+<LINK REL="previous" HREF="node88.html">
+<LINK REL="next" HREF="node90.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node90.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node88.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html553"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node90.html">Le produit d'Euler aka</A>
+<B> monter:</B> <A
+ HREF="node88.html">Les nombres premiers. L'algorithme</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node88.html">Les nombres premiers. L'algorithme</A>
+ &nbsp; <B>  <A ID="tex2html554"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00890100000000000000">
+Le crible</A>
+</H3>
+<PRE>
+type 'a stream = Cons of 'a * (unit -&gt; 'a stream) ;;
+let hd (Cons (h, _)) = h ;;
+let tl (Cons (_, tf)) = tf () ;;
+
+let rec take n s =
+	if n=0 then []
+	else hd s :: take (n-1) (tl s) 
+
+let rec entiers x = Cons(x, fun() -&gt; entiers(x+1)) 
+
+let rec filtre m (Cons(x,l)) =
+	if x mod m = 0 then filtre m (l()) 
+	else Cons(x, fun() -&gt; (filtre m (l()))) 
+
+let rec crible (Cons(x,l)) = Cons(x, fun()-&gt; crible(filtre x (l())))
+
+let premiers = crible(entiers 2) ;;
+</PRE>
+<PRE>
+utop # take 100 premiers ;;
+- : int list =
+[2; 3; 5; 7; 11; 13; 17; 19; 23; 29; 31; 37; 41; 43; 47; 53; 59; 61; 67; 71;
+ 73; 79; 83; 89; 97; 101; 103; 107; 109; 113; 127; 131; 137; 139; 149; 151;
+ 157; 163; 167; 173; 179; 181; 191; 193; 197; 199; 211; 223; 227; 229; 233;
+ 239; 241; 251; 257; 263; 269; 271; 277; 281; 283; 293; 307; 311; 313; 317;
+ 331; 337; 347; 349; 353; 359; 367; 373; 379; 383; 389; 397; 401; 409; 419;
+ 421; 431; 433; 439; 443; 449; 457; 461; 463; 467; 479; 487; 491; 499; 503;
+ 509; 521; 523; 541]
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

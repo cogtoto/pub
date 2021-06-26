@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Calcul de en fonction de </TITLE>
+<META NAME="description" CONTENT="Calcul de en fonction de ">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node100.html">
+<LINK REL="next" HREF="node102.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node102.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node99.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node100.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html586"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node102.html">La série alternée de</A>
+<B> monter:</B> <A
+ HREF="node99.html">La méthode des polygones</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node100.html">Calcul de en fonction</A>
+ &nbsp; <B>  <A ID="tex2html587"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION008101200000000000000">
+Calcul de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img10.svg"
+ ALT="$p'_n$"></SPAN> en fonction de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img9.svg"
+ ALT="$p_n$"></SPAN></A>
+</H3>
+Les polygones inscrits et cirsconscrits étant deux polygones semblables, nous avons :
+<P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img569.svg"
+ ALT="$\displaystyle \frac{p'_n}{p_n}$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img570.svg"
+ ALT="$\displaystyle = \frac{R}{a_n}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img571.svg"
+ ALT="$\displaystyle \Leftrightarrow p'_n$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img572.svg"
+ ALT="$\displaystyle = p_n . \frac{R}{a_n}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img571.svg"
+ ALT="$\displaystyle \Leftrightarrow p'_n$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img573.svg"
+ ALT="$\displaystyle = p_n . \frac{2R}{\sqrt{4R^2 - c_n^2}}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img571.svg"
+ ALT="$\displaystyle \Leftrightarrow p'_n$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img574.svg"
+ ALT="$\displaystyle = \frac{2nRp_n}{\sqrt{4n^2 R^2 - p_n^2}}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+Soit pour <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img544.svg"
+ ALT="$2R=1$"></SPAN>
+<P><!-- MATH
+ \begin{displaymath}
+\boxed{ p'_n = \frac{np_n}{\sqrt{n^2-p_n^2}} }
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img575.svg"
+ ALT="$\displaystyle \boxed{ p'_n = \frac{np_n}{\sqrt{n^2-p_n^2}} } $">
+</DIV><P></P>
+
+<P>
+<BR>
+<IMG
+ STYLE=""
+ SRC="img576.svg"
+ ALT="\begin{tikzpicture}
+\par
+\tikzmath{\n = 4;
+\p4 = {2*sqrt(2)};
+\q4 = {\n * \p4...
+... &lt; \q64 $\ \\
+% $ n=128 \rightarrow \p128 &lt; \q128 $ \\
+} ;
+\end{tikzpicture}">
+<BR>
+
+<P>
+<BR>
+<BR>
+<BR>
+Depuis la formule <!-- MATH
+ $p_{2n}^2 = 2n (n - \sqrt{n^2-p_n^2})$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img577.svg"
+ ALT="$p_{2n}^2 = 2n (n - \sqrt{n^2-p_n^2}) $"></SPAN> et sachant que <!-- MATH
+ $p_n = n.c_n$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img578.svg"
+ ALT="$p_n = n.c_n$"></SPAN>, 
+nous pouvons en déduire :
+<P><!-- MATH
+ \begin{displaymath}
+c_{2n} = \sqrt{2-\sqrt{4-c_n^2}}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img579.svg"
+ ALT="$\displaystyle c_{2n} = \sqrt{2-\sqrt{4-c_n^2}} $">
+</DIV><P></P>
+
+<P>
+Pour un carré de rayon <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img268.svg"
+ ALT="$1$"></SPAN>, nous avons <!-- MATH
+ $c_4=\sqrt{2}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img580.svg"
+ ALT="$c_4=\sqrt{2}$"></SPAN>. Ainsi <!-- MATH
+ $c_8= \sqrt{2-\sqrt{2}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img581.svg"
+ ALT="$c_8= \sqrt{2-\sqrt{2}}$"></SPAN>
+
+<P>
+De même, <!-- MATH
+ $c_{16}=\sqrt{2-\sqrt{2+\sqrt{2}}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img582.svg"
+ ALT="$c_{16}=\sqrt{2-\sqrt{2+\sqrt{2}}} $"></SPAN> et <!-- MATH
+ $c_{32}=\sqrt{2-\sqrt{2+\sqrt{2+\sqrt2}}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img583.svg"
+ ALT="$c_{32}=\sqrt{2-\sqrt{2+\sqrt{2+\sqrt2}}} $"></SPAN>
+
+<P>
+Comme formule générique, nous obtenons ainsi avec <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img584.svg"
+ ALT="$n-1$"></SPAN> racines imbriquées :
+<P><!-- MATH
+ \begin{displaymath}
+c_{2^n}=\sqrt{2-\sqrt{2+\sqrt{2+\sqrt{2+\sqrt{2+\dots}}}}}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img585.svg"
+ ALT="$\displaystyle c_{2^n}=\sqrt{2-\sqrt{2+\sqrt{2+\sqrt{2+\sqrt{2+\dots}}}}}$">
+</DIV><P></P> 
+
+<P>
+Quand <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img205.svg"
+ ALT="$n$"></SPAN> tend vers l'infini, le <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img586.svg"
+ ALT="$2^n$"></SPAN>-gone tend vers le cercle. D'où :
+<P><!-- MATH
+ \begin{displaymath}
+2^n \sqrt{2-\sqrt{2+\sqrt{2+\sqrt{2+\sqrt{2+\dots}}}}} \rightarrow \pi\ quand\ m \rightarrow \infty
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img587.svg"
+ ALT="$\displaystyle 2^n \sqrt{2-\sqrt{2+\sqrt{2+\sqrt{2+\sqrt{2+\dots}}}}} \rightarrow \pi\ quand\ m \rightarrow \infty $">
+</DIV><P></P>
+
+<P>
+Nous pourrons nous référer à [<A
+ HREF="node114.html#wm">16</A>]
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

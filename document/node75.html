@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Quelques fonctions sur les listes</TITLE>
+<META NAME="description" CONTENT="Quelques fonctions sur les listes">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node76.html">
+<LINK REL="previous" HREF="node74.html">
+<LINK REL="next" HREF="node76.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node76.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node74.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node74.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html511"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node76.html">Les listes mutables</A>
+<B> monter:</B> <A
+ HREF="node74.html">Annexes / Divers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node74.html">Annexes / Divers</A>
+ &nbsp; <B>  <A ID="tex2html512"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00810000000000000000">
+Quelques fonctions sur les listes</A>
+</H1>
+
+<P>
+<SPAN CLASS="FOOTNOTESIZE"></SPAN><TABLE class="PAD  BORDER" style="">
+<TR><TD CLASS="LEFT"><SPAN CLASS="FOOTNOTESIZE">
+SCHEME </SPAN></TD>
+<TD CLASS="LEFT"><SPAN CLASS="FOOTNOTESIZE"> OCAML </SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT"><SPAN CLASS="FOOTNOTESIZE">  
+</SPAN><TABLE   STYLE="width:413;">
+<TR><TD>
+<PRE>
+(define (somme l)
+ (if (null? l)
+   0
+   (+ (car l) (somme (cdr l)))))
+</PRE></TD></TR>
+</TABLE><SPAN CLASS="FOOTNOTESIZE">
+</SPAN></TD>
+<TD CLASS="LEFT"><SPAN CLASS="FOOTNOTESIZE">
+</SPAN><TABLE   STYLE="width:413;">
+<TR><TD>
+<PRE>
+let rec somme l =
+  match l with
+  | [] -&gt; 0
+  | hd::tl -&gt; hd + somme(tl)
+</PRE></TD></TR>
+</TABLE><SPAN CLASS="FOOTNOTESIZE"> </SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT"><SPAN CLASS="FOOTNOTESIZE">  
+</SPAN><TABLE   STYLE="width:413;">
+<TR><TD><PRE>
+f car (f car (... (f car acc)...))
+
+(define (foldright f acc l)
+ (if (null? l)
+  acc
+  (f (car l) (foldright f acc (cdr l)))))
+</PRE></TD></TR>
+</TABLE><SPAN CLASS="FOOTNOTESIZE">
+</SPAN></TD>
+<TD CLASS="LEFT"><SPAN CLASS="FOOTNOTESIZE">
+</SPAN><TABLE   STYLE="width:413;">
+<TR><TD><PRE>
+f hd (f hd (... (f hd acc)...))
+
+let rec foldright f acc l =
+  match l with
+  | [] -&gt; acc
+  | hd::tl -&gt; f hd (foldright f acc tl)
+</PRE></TD></TR>
+</TABLE><SPAN CLASS="FOOTNOTESIZE"> </SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT"><SPAN CLASS="FOOTNOTESIZE">  
+</SPAN><TABLE   STYLE="width:413;">
+<TR><TD>
+<PRE>
+f (... (f (f acc car) car)...) car)
+
+(define (foldleft f acc l)
+ (if (null? l)
+  acc
+  (foldleft f (f (car l) acc) (cdr l))))
+</PRE></TD></TR>
+</TABLE><SPAN CLASS="FOOTNOTESIZE">
+</SPAN></TD>
+<TD CLASS="LEFT"><SPAN CLASS="FOOTNOTESIZE">
+</SPAN><TABLE   STYLE="width:413;">
+<TR><TD>
+<PRE>
+f (... (f (f acc hd) hd)...) hd)
+
+let rec foldleft f acc l =
+  match l with
+  | [] -&gt; acc
+  | hd::tl -&gt; foldleft f (f acc hd) tl
+</PRE></TD></TR>
+</TABLE><SPAN CLASS="FOOTNOTESIZE"> </SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT"><SPAN CLASS="FOOTNOTESIZE">  
+</SPAN><TABLE   STYLE="width:413;">
+<TR><TD>
+<PRE>
+(foldleft * 1 '(1 2 3 4))
+-&gt; 24
+</PRE></TD></TR>
+</TABLE><SPAN CLASS="FOOTNOTESIZE">
+</SPAN></TD>
+<TD CLASS="LEFT"><SPAN CLASS="FOOTNOTESIZE">
+</SPAN><TABLE   STYLE="width:442;">
+<TR><TD>
+<PRE>
+# foldleft ( * ) 1 [1;2;3;4] ;;
+- : int = 24
+</PRE></TD></TR>
+</TABLE><SPAN CLASS="FOOTNOTESIZE"> 
+</SPAN>
+<P>
+<SPAN CLASS="FOOTNOTESIZE"></SPAN></TD>
+</TR>
+</TABLE><SPAN CLASS="FOOTNOTESIZE">
+</SPAN>
+<P>
+<SPAN CLASS="FOOTNOTESIZE"></SPAN>
+<BR><HR>
+
+</BODY>
+</HTML>

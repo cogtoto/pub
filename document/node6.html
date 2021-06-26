@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Analyse syntaxique avec menhir</TITLE>
+<META NAME="description" CONTENT="Analyse syntaxique avec menhir">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html249"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node7.html">Implémentation du parsing en</A>
+<B> monter:</B> <A
+ HREF="node4.html">Définition, champ lexical et</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node5.html">Analyse lexicale avec ocamllex</A>
+ &nbsp; <B>  <A ID="tex2html250"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00312000000000000000">
+Analyse syntaxique avec menhir</A>
+</H2>
+Nous définissons ici la grammaire du <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul.
+Nous retrouvons les constructeurs du type ML associés à chacune des règles de la grammaire.
+Ces constructeurs seront préenté dans la section qui suit.
+
+<P>
+<PRE>
+/* file: lambdagrammar.mly */
+%{
+open Terme
+%}
+
+%token &lt;string&gt; VARIABLE
+%token LAMBDA PARLEFT PARRIGHT POINT
+%token NEWLINE
+
+%start exp
+%type &lt;Terme.terme&gt; exp
+
+%% /* Grammar rules and actions follow */
+exp:      VARIABLE	{ Var($1) }
+| PARLEFT exp exp PARRIGHT		{ App($2, $3)}
+| LAMBDA VARIABLE POINT exp		{ Lam($2, $4) }
+;
+%%
+</PRE>
+
+<P>
+Plus exactement, nous avons modifié cette grammaire <SPAN  CLASS="textit">naïve</SPAN> pour la
+rendre non ambiguë et assurer l'associativité à gauche des
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-applications.
+En effet: 
+<P><!-- MATH
+ \begin{displaymath}
+M N O P = (((M N) O) P)
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img25.svg"
+ ALT="$\displaystyle M N O P = (((M N) O) P) $">
+</DIV><P></P>
+<PRE>
+%% 
+line:  exp NEWLINE { $1 }
+;
+
+exp: LAMBDA VARIABLE POINT exp		{ Lam($2, $4) }
+		 | app {$1}
+;
+
+app:  atome {$1}
+		 | app atome { App($1, $2) }
+;
+
+atome: PARLEFT exp PARRIGHT {$2}
+       | VARIABLE {Var($1)}
+;		
+%%
+</PRE>
+Nous obtenons ainsi:
+<PRE>
+$ ./lambda.out
+&gt;&gt; m n o p
+App(App(App(Var "m" ,Var "n" ),Var "o" ),Var "p" )
+
+&gt;&gt; lambda f . (lambda x . f(x x)) (lambda x. f(x x))
+Lam("f",App(Lam("x",App(Var "f" ,App(Var "x" ,Var "x" ))),
+				Lam("x",App(Var "f" ,App(Var "x" ,Var "x" )))))
+</PRE>
+
+<P>
+La compilation de ce fichier <code>.mly</code> va générer une fonction dont le nom
+est celui de l'axiome de notre grammaire (ici <code>exp</code>). Cette fonction prend deux arguments: la fonction de l'analyseur lexical qui génère les tokens et l'input. Elle rend le type
+des expressions utilisées commes actions dans la grammaire.
+<PRE>
+val exp :   (Lexing.lexbuf  -&gt; token) -&gt; Lexing.lexbuf -&gt; Terme.terme
+</PRE>
+
+<P>
+Si le langage analysé n'est pas reconnu par la grammaire, l'exception <code>Parse_error</code> est levée.
+ <BR><HR>
+
+</BODY>
+</HTML>

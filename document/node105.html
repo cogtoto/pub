@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>L'intégrale </TITLE>
+<META NAME="description" CONTENT="L'intégrale ">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node104.html">
+<LINK REL="next" HREF="node106.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node106.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node98.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node104.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html594"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node106.html">Poésies</A>
+<B> monter:</B> <A
+ HREF="node98.html">Approximation du nombre</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node104.html">Le produit de Wallis</A>
+ &nbsp; <B>  <A ID="tex2html595"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION008105000000000000000">
+L'intégrale <!-- MATH
+ $\int_0^1 \frac{1}{1+x^2} dx$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img605.svg"
+ ALT="$\int_0^1 \frac{1}{1+x^2} dx$"></SPAN></A>
+</H2>
+<BR>
+<IMG
+ STYLE=""
+ SRC="img606.svg"
+ ALT="\begin{tikzpicture}
+\draw[-&gt;] (-0.5, 0) -- (1.5, 0) node[right] {$x$};
+\draw[-...
+...\frac{1}{1+(\frac{i}{n})^2} = \frac{\pi}{4}\end{displaymath}};
+\end{tikzpicture}">
+<BR>
+
+<P>
+<PRE>
+let f x = 1. /. (1. +. x**2.)
+
+let rec somme n i acc =
+  if i &gt; n then (1./. n) *. acc 
+  else somme n (i +. 1.)  (acc +. (f (i /. n))) ;;
+
+utop # 
+ 4. *. somme 900000000. 0. 0. ;;
+ - : float = 3.14159265692298773
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

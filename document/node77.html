@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Les listes infinies ou streams</TITLE>
+<META NAME="description" CONTENT="Les listes infinies ou streams">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node78.html">
+<LINK REL="previous" HREF="node76.html">
+<LINK REL="next" HREF="node78.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node78.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node74.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node76.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html515"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node78.html">Le module Graphics d'OCAML,</A>
+<B> monter:</B> <A
+ HREF="node74.html">Annexes / Divers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node76.html">Les listes mutables</A>
+ &nbsp; <B>  <A ID="tex2html516"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00830000000000000000">
+Les listes infinies ou <SPAN  CLASS="textit">streams</SPAN></A>
+</H1>	
+Les <SPAN  CLASS="textit">streams</SPAN> sont des listes infinies.
+
+<P>
+Pour pouvoir les représenter, nous utilisons le fait que le corps d'une lambda n'est pas évalué, 
+comme nous l'avons vu en <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul avec la
+stratégie de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction faible.
+Une lambda <code>fun()-&gt;2*2</code> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <code>- : unit -&gt; int = &lt;fun&gt;</code> est en fait considérée 
+comme une <SPAN  CLASS="textit">valeur</SPAN>. Seul son appel provoquera l'évaluation de la lambda
+<code>(fun() -&gt; 2*2) ()</code> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">   <code>- : int = 4</code>
+
+<P>
+Un <SPAN  CLASS="textit">stream</SPAN> sera ainsi représenté comme une liste, mais dont le <code>cdr</code> ne pointera plus directement 
+sur une liste, mais sera une fonction dont le corps sera la liste. L'évaluation du <code>cdr</code> est ainsi retardé.
+
+<P>
+<PRE>
+type 'a stream = Cons of 'a * (unit -&gt; 'a stream) ;;
+let hd (Cons (h, _)) = h ;;
+let tl (Cons (_, tf)) = tf () ;;
+
+let rec from n = Cons (n, fun () -&gt; from (n+1));;
+let entiers = from 0 ;;
+let rec take n s =
+  if n=0 then []
+  else hd s :: take (n-1) (tl s) ;;
+
+# take 30 entiers
+- : int list =
+[0; 1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 13; 14; 15; 16; 17; 18; 19; 20;
+ 21; 22; 23; 24; 25; 26; 27; 28; 29]
+</PRE>
+
+<P>
+Nous pouvons aussi modéliser la fraction continue représentant <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img12.svg"
+ ALT="$\sqrt {2}$"></SPAN> :
+<P></P>
+<DIV CLASS="displaymath"><!-- MATH
+ \begin{equation*}
+\sqrt{2} = 1 + \cfrac{1}{2
++ \cfrac{1}{2
++ \cfrac{1}{...
+ } } }
+\end{equation*}
+ -->
+<TABLE CLASS="equation*" >
+<TR>
+<TD  style="text-align:center;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img416.svg"
+ ALT="$\displaystyle \sqrt{2} = 1 + \cfrac{1}{2
++ \cfrac{1}{2
++ \cfrac{1}{...
+} } }$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+Voici le code OCAML. Je n'ai pas trouvé manière plus élégante pour exprimer le stream.
+<PRE>
+let rec square2 iter =
+  if (iter = 1) then 1.
+  else
+  1. +. ( 1. /. ( 1. +. square2 (iter - 1)))
+
+let rec racine2cons n = Cons(square2 n, fun () -&gt; racine2cons (n+1))
+
+let rec racine2stream = racine2cons 1
+  in take 10 racine2stream ;;
+
+- : float list =
+[1.; 1.5; 1.4; 1.41666666666666674; 1.4137931034482758; 1.41428571428571437;
+ 1.41420118343195256; 1.41421568627450989; 1.41421319796954315;
+ 1.41421362489486957]
+</PRE>
+Nous voyons la convergence très rapide de la fraction continue.
+
+<P>
+Cependant, le calcul OCAML est très inefficace, car chaque nouvel élément de la liste recalcule la totalité de la fraction continue
+en passant par la fonction <code>square2 iter</code>. Si nous essayons par exemple de calculer les <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img417.svg"
+ ALT="$10000$"></SPAN> premiers éléments du stream, cela prend sur ma machine une
+dizaine de seconde. 
+
+<P>
+En utilisant le module <code>Lazy</code> d'OCAML, nous pouvons utiliser le mécanisme de <SPAN  CLASS="textit">mémoisation</SPAN>. Les valeurs du stream ne seront pas recalculées au 
+2ème appel.
+<PRE>
+open Lazy ;;
+let racine2_10000 = take 10000 racine2stream  (* environ 10 secondes à chaque appel *)
+
+let racine2_10000_lazy = lazy (take 10000 racine2stream) ;;
+let racine2_force = force racine2_10000_lazy ;; (* uniquement long au 1er appel *)
+</PRE> 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node78.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node74.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node76.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html515"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node78.html">Le module Graphics d'OCAML,</A>
+<B> monter:</B> <A
+ HREF="node74.html">Annexes / Divers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node76.html">Les listes mutables</A>
+ &nbsp; <B>  <A ID="tex2html516"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

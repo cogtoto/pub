@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>L'algorithme RSA</TITLE>
+<META NAME="description" CONTENT="L'algorithme RSA">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node97.html">
+<LINK REL="previous" HREF="node95.html">
+<LINK REL="next" HREF="node97.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node97.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node95.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html567"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node97.html">Le code</A>
+<B> monter:</B> <A
+ HREF="node88.html">Les nombres premiers. L'algorithme</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node95.html">L'inverse modulaire</A>
+ &nbsp; <B>  <A ID="tex2html568"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00890800000000000000">
+L'algorithme RSA</A>
+</H3>
+
+<P>
+Soient <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img517.svg"
+ ALT="$p&gt;1$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img518.svg"
+ ALT="$q&gt;1$"></SPAN> deux nombres premiers distincts, <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img519.svg"
+ ALT="$n=pq$"></SPAN> leur produit,
+ <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img520.svg"
+ ALT="$e$"></SPAN> un nombre premier avec 
+<!-- MATH
+ $\varphi(n) = (p−1)(q−1)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img521.svg"
+ ALT="$\varphi(n) = (p−1)(q−1)$"></SPAN> et <!-- MATH
+ $d = e^{−1} \mod{(p−1)(q−1)}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img522.svg"
+ ALT="$d = e^{−1} \mod{(p−1)(q−1)}$"></SPAN>.
+
+<P>
+Pour tout entier positif <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img523.svg"
+ ALT="$m&lt;n$"></SPAN>, on a <!-- MATH
+ $m^{ed} ≡ m \mod n$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img524.svg"
+ ALT="$m^{ed} ≡ m \mod n$"></SPAN>
+
+<P>
+La clé publique  est le couple <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img525.svg"
+ ALT="$P=(n,e)$"></SPAN>,
+la clé secrète est le couple <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img526.svg"
+ ALT="$S=(n,d)$"></SPAN>.
+
+<P>
+<SPAN  CLASS="textit">Raisonnement:</SPAN>
+
+<P>
+<!-- MATH
+ $ed≡1 \mod (p−1)(q−1)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img527.svg"
+ ALT="$ed≡1 \mod (p−1)(q−1)$"></SPAN>, donc il existe <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img528.svg"
+ ALT="$k$"></SPAN> tel que <!-- MATH
+ $ed=1+k(p−1)(q−1)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img529.svg"
+ ALT="$ed=1+k(p−1)(q−1)$"></SPAN>.
+
+<P>
+Si <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img314.svg"
+ ALT="$m$"></SPAN> n’est pas multiple de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img185.svg"
+ ALT="$p$"></SPAN> ni de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img530.svg"
+ ALT="$q$"></SPAN>, 
+d’après le petit théorème de Fermat,
+<P><!-- MATH
+ \begin{displaymath}
+\begin{cases}
+  m^{ed}= m^{1+k(p−1)(q−1)} = m (m^{p-1})^{k(q-1)} \equiv m \mod p \\
+\par
+m^{ed}= m^{1+k(p−1)(q−1)} = m (m^{q-1})^{k(q-1)} \equiv m \mod q
+\end{cases}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img531.svg"
+ ALT="\begin{displaymath}
+\begin{cases}
+m^{ed}= m^{1+k(p−1)(q−1)} = m (m^{p-1})^{...
+...��1)(q−1)} = m (m^{q-1})^{k(q-1)} \equiv m \mod q
+\end{cases}\end{displaymath}">
+</DIV><P></P>
+et si <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img314.svg"
+ ALT="$m$"></SPAN> est un multiple de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img185.svg"
+ ALT="$p$"></SPAN>, <!-- MATH
+ $m≡0 \mod p$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img532.svg"
+ ALT="$m≡0 \mod p$"></SPAN> et <!-- MATH
+ $m^{ed}≡0 \mod p$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img533.svg"
+ ALT="$m^{ed}≡0 \mod p$"></SPAN> (de même avec <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img530.svg"
+ ALT="$q$"></SPAN>).
+
+<P>
+L’entier <!-- MATH
+ $u^{ed}−m$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img534.svg"
+ ALT="$u^{ed}−m$"></SPAN> est donc un multiple de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img185.svg"
+ ALT="$p$"></SPAN> et de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img530.svg"
+ ALT="$q$"></SPAN>, qui sont premiers distincts, 
+ donc un multiple de leur produit <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img535.svg"
+ ALT="$pq=n$"></SPAN>
+
+<P>
+Donc, pour tout entier <!-- MATH
+ $m, m^{ed} ≡ m \mod n$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img536.svg"
+ ALT="$m, m^{ed} ≡ m \mod n$"></SPAN>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

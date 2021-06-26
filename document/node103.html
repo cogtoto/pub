@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>La loi des grands nombres</TITLE>
+<META NAME="description" CONTENT="La loi des grands nombres">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node104.html">
+<LINK REL="previous" HREF="node102.html">
+<LINK REL="next" HREF="node104.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node104.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node98.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node102.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html590"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node104.html">Le produit de Wallis</A>
+<B> monter:</B> <A
+ HREF="node98.html">Approximation du nombre</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node102.html">La série alternée de</A>
+ &nbsp; <B>  <A ID="tex2html591"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION008103000000000000000">
+La loi des grands nombres</A>
+</H2>
+Sur un tirage aléatoire de coordonnées <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img537.svg"
+ ALT="$(x,y)$"></SPAN> avec <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img20.svg"
+ ALT="$x$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img220.svg"
+ ALT="$y$"></SPAN> compris entre <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img538.svg"
+ ALT="$-1$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img268.svg"
+ ALT="$1$"></SPAN>,
+il y a  <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN> chances sur 4 que le tirage tombe dans le cercle de rayon 1.
+<DIV class="CENTER">
+<BR>
+<BR>
+<BR>
+<IMG
+ STYLE=""
+ SRC="img589.svg"
+ ALT="\begin{tikzpicture}
+\draw [dotted] (-1,0) -- (1,0) ;
+\draw [dotted] (0,-1) -- ...
+...de[text width=6cm] at(-4,0){comme un jeu de fléchettes\dots};
+\end{tikzpicture}">
+<BR>
+</DIV> 
+
+<P>
+Le résultat des tirages est stocké sur notre liste "infinie". Nous effectuons cinq millions de tirage qui nous
+permettent d'obtenir une valeur approchée de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN> avec les deux premières décimales exactes.
+<PRE>
+let gen() = 
+let x = if Random.bool () then Random.float 1. else (-. Random.float 1.) in
+let y = if Random.bool () then Random.float 1. else (-. Random.float 1.) in
+if (x ** 2. +. y ** 2. &lt;= 1.) then 1.0 else 0.0 ;;
+
+let rec from i = Cons (gen(), fun () -&gt; from (i + 1)) ;;
+
+let rec sum n s acc =
+if n=0 then acc
+else  sum (n-1) (tl s) (acc +. (hd s)) ;;
+  
+4. *. (sum 5000000  tirage 0. /. 5000000.) ;;
+- : float = 3.142153
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

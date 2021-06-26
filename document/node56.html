@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Le filtrage</TITLE>
+<META NAME="description" CONTENT="Le filtrage">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node57.html">
+<LINK REL="previous" HREF="node55.html">
+<LINK REL="next" HREF="node57.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node57.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node55.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node55.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html421"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node57.html">La réécriture et l'arithmétique</A>
+<B> monter:</B> <A
+ HREF="node55.html">Filtrage et réécriture</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node55.html">Filtrage et réécriture</A>
+ &nbsp; <B>  <A ID="tex2html422"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00631000000000000000">
+Le filtrage</A>
+</H2>
+Soient deux termes <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img300.svg"
+ ALT="$M'$"></SPAN> appartenant à <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img301.svg"
+ ALT="$T_X$"></SPAN>, le filtrage consiste à trouver une substitution <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img302.svg"
+ ALT="$\sigma$"></SPAN>
+telle que <!-- MATH
+ $\sigma M = M'$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img303.svg"
+ ALT="$\sigma M = M'$"></SPAN>. Autrement dit, il faut trouver les valeurs à donner aux variables de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> pour que celui-ci
+soit égal <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img300.svg"
+ ALT="$M'$"></SPAN>.
+
+<P>
+On appelle <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> le <SPAN  CLASS="textit">pattern</SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img300.svg"
+ ALT="$M'$"></SPAN> l'<SPAN  CLASS="textit">instance</SPAN>.
+Nous implémentons cela comme ci-dessous :
+<PRE>
+type terme = 
+  | Var of string
+  | Func of string * terme list
+
+exception Impossible
+
+let rec filtre_termes lt1 lt2 sigma =
+  match (lt1,lt2) with
+    | ([], _)  -&gt; sigma
+    | (_, []) -&gt;  sigma
+    | _ -&gt; 
+     begin
+	  let sigma1 = filtre (hd(lt1)) (hd(lt2)) sigma in
+	  filtre_termes (tl(lt1)) (tl(lt2)) sigma1
+    end 
+and filtre m n sigma =
+  match (m,n) with
+	| (Func(f,_), Func(g, _)) when f &lt;&gt; g -&gt; raise Impossible
+	| (Var(x), n) -&gt; 
+		begin
+		try let var_val = assoc (Var(x)) sigma in
+			if var_val = n then sigma else raise Impossible
+		with Not_found -&gt; (Var(x), n)::sigma
+		end 
+	| (Func(f,f1), Func(g,g1)) -&gt; filtre_termes f1 g1 sigma 
+	| _ -&gt; raise Impossible
+
+let f1 = Func("f", [Var "x"; Func("g", [Var "y"; Var "z"]); Func("h", [Var "x"])]) ;;
+let f2 = Func("f", [Func("a",[]); Func("g", [Func("h", [Var "x"]); Func("b", [])]); Func("h", [Func ("a", [])])]) ;;
+imprime_sigma (filtre f1 f2 []) ;;
+=&gt;&gt;&gt;
+z &lt;-&gt;  b 
+y &lt;-&gt; (h x )
+x &lt;-&gt;  a 
+- : unit = ()
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

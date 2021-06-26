@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Les additions de Peano</TITLE>
+<META NAME="description" CONTENT="Les additions de Peano">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node63.html">
+<LINK REL="previous" HREF="node61.html">
+<LINK REL="next" HREF="node63.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node63.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node60.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node61.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html436"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node63.html">La base généalogique</A>
+<B> monter:</B> <A
+ HREF="node60.html">Quelques exemples de programmation</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node61.html">Les entiers naturels</A>
+ &nbsp; <B>  <A ID="tex2html437"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00662000000000000000">
+Les additions de Peano</A>
+</H2>
+Nous pouvons modéliser les additions avec l'arithmétique de Peano en utilisant les deux propositions suivantes:
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{l}
+	add(x, 0, x) \Leftarrow \\
+	add(x, s(y), s(z)) \Leftarrow  add(x,y,z)
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img340.svg"
+ ALT="\begin{displaymath}
+\begin{array}{l}
+add(x, 0, x) \Leftarrow \\
+add(x, s(y), s(z)) \Leftarrow add(x,y,z)
+\end{array}\end{displaymath}">
+</DIV><P></P>
+Puis demandons à notre mini Prolog de résoudre l'équation <!-- MATH
+ $add(x,y, s(s(s(0))))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img341.svg"
+ ALT="$add(x,y, s(s(s(0))))$"></SPAN>
+<PRE>
+(* les entiers de peano *)
+let peano = [ [Func("add", [Var("x"); Func("0", []); Var("x")]) ] ;
+				[Func("add", [Var("x");  Func("S", [Var("y")]) ; Func("S", [Var("z")])]) ;
+				Func("add", [Var("x"); Var("y"); Var("z")])]
+			] ;;
+
+let but1 = Func("add", [Var("x") ; Var("y") ; Func("S", [Func("S", [Func("S", [Func("0", [])])])])]) ;; 
+
+vincent@HP-Notebook:~/vsc$ ./prolog.byte 
+ x  &lt;-&gt; (S(S(S 0 ))) y  &lt;-&gt;  0 
+ autre solution 1/2 (1=oui, 2=non) ? :1
+ x  &lt;-&gt; (S(S 0 )) y  &lt;-&gt; (S 0 )
+ autre solution 1/2 (1=oui, 2=non) ? :1
+ x  &lt;-&gt; (S 0 ) y  &lt;-&gt; (S(S 0 ))
+ autre solution 1/2 (1=oui, 2=non) ? :1
+ x  &lt;-&gt;  0  y  &lt;-&gt; (S(S(S 0 )))
+ autre solution 1/2 (1=oui, 2=non) ? :1
+vincent@HP-Notebook:~/vsc$
+</PRE>
+<BR><HR>
+
+</BODY>
+</HTML>

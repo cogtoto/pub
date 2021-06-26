@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>L'implémentation en OCAML</TITLE>
+<META NAME="description" CONTENT="L'implémentation en OCAML">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node50.html">
+<LINK REL="next" HREF="node52.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node52.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node50.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html392"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node52.html">La résolution</A>
+<B> monter:</B> <A
+ HREF="node47.html">Compilation du LISP vers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node50.html">La table de transition</A>
+ &nbsp; <B>  <A ID="tex2html393"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00530400000000000000">
+L'implémentation en OCAML</A>
+</H3>
+
+<P>
+<SPAN CLASS="FOOTNOTESIZE"></SPAN><PRE>
+let rec compile envc exp codesuivant  =
+  match exp with
+  | Atom (Entier n) -&gt; CONST n :: codesuivant
+  | Var s -&gt; ACCESS (adresse s envc) :: codesuivant
+  | Call (f, args) -&gt; compile_call envc f args codesuivant
+  | Let (decl,expl) -&gt; compile_let envc decl expl codesuivant 
+  | If (cond, exp1, exp2) -&gt; compile_if envc cond exp1 exp2 codesuivant
+  | Lambda (parl, bodyl) -&gt; compile_lambda envc parl bodyl codesuivant
+  | _ -&gt; raise (Erreur "compile")
+
+and compile_lambda envc parl bodyl codesuivant =
+  (CLOSURE ((compile (parl::envc) (hd bodyl)  [RTS])) ) :: codesuivant 
+
+and compile_if envc cond exp1 exp2 codesuivant =
+   let code_si = compile envc exp1 codesuivant
+   and code_sinon = compile envc exp2 codesuivant
+in compile envc cond ( BRANCH(code_si,  code_sinon) :: codesuivant ) 
+
+and compile_call envc f args codesuivant  =
+match f with 
+ | Var "+" -&gt; compile_app  envc args  (ADD :: codesuivant)
+ | Var  "-"  -&gt; compile_app  envc args  (SUB :: codesuivant)
+ | Var  "="  -&gt; compile_app  envc args  (CMP :: codesuivant)
+ | _ -&gt; compile_larg envc args (compile envc f (JSR :: codesuivant))
+ 
+and
+compile_app envc args codesuivant =
+  if args = [] then codesuivant
+  else  compile envc (hd args) (compile_app envc (tl args) codesuivant) 
+and compile_let envc decl expl codesuivant =
+  let lvar = map fst decl
+  in let lexp = map snd decl
+  in compile envc (Call(Lambda(lvar, expl),lexp)) codesuivant 
+and compile_larg envc lexp codesuivant =
+  let rec aux lexp codesuivant =
+    match lexp with
+    | [] -&gt; codesuivant
+    | a::b -&gt; aux b (compile envc a (ARG::codesuivant))
+  in NIL::(aux lexp codesuivant)
+    
+let rec exe s e c d =
+  if (List.length c) = 0 then hd s
+  else
+    match (hd c) with
+  | ADD -&gt;  let Entier(n2) = hd (hd s) and Entier(n1) = hd (hd (tl s)) in
+              exe ([Entier(n1+n2)]:: (tl (tl s))) e (tl c) d  
+  | SUB -&gt;  let Entier(n2) = hd (hd s) and Entier(n1) = hd (hd (tl s)) in
+              exe ([Entier(n1-n2)]:: (tl (tl s))) e (tl c) d  
+  | CMP -&gt;  let Entier(n2) = hd (hd s) and Entier(n1) = hd (hd (tl s)) in 
+                exe ([Booleen(n1=n2)]:: (tl (tl s))) e (tl c) d   
+  | CONST n -&gt;  exe ([Entier n]::s)  e (tl c) d
+  | NIL -&gt;  exe ([]::s) e (tl c) d 
+  | ARG -&gt;    let v1 = hd s
+              in let v2 = hd (tl s)
+                in  exe ((v1 @ v2)::(tl (tl s))) e (tl c) d
+  | ACCESS sy -&gt;  exe ([lire_env sy e]::s) e (List.tl c) d
+  | BRANCH(code_si, code_sinon) -&gt;
+          let v = hd (hd s) in 
+                if (v = Booleen(true)) then exe (tl s) e (code_si @ (tl c)) d 
+                else exe (tl s) e ( code_sinon @ (tl c)) d 
+  | CLOSURE(fonc) -&gt;  exe ([CLOS(fonc,e)]::s) e (tl c) d
+  | JSR -&gt; let CLOS(corps, e0) = hd (hd s) in
+            let larg = hd (tl s) in 
+              exe [] (larg::e) corps ((ENVEXE(tl (tl s), e, (tl c)))::d) 
+  | RTS -&gt; let ENVEXE(s1, e1, c1) = hd d 
+            and v = hd s in
+            exe (v::s1) e1 c1 (tl d)
+</PRE><SPAN CLASS="FOOTNOTESIZE"></SPAN>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Implémentation du parsing en mode récursif descendant</TITLE>
+<META NAME="description" CONTENT="Implémentation du parsing en mode récursif descendant">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html251"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node8.html">Représentation en ML</A>
+<B> monter:</B> <A
+ HREF="node4.html">Définition, champ lexical et</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node6.html">Analyse syntaxique avec menhir</A>
+ &nbsp; <B>  <A ID="tex2html252"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00313000000000000000">
+Implémentation du parsing en mode <SPAN  CLASS="textit">récursif descendant</SPAN></A>
+</H2>
+
+<P>
+Si nous voulons nous passer d'un outil tel que ocamlyacc ou menhir, nous pouvons très facilement implémenter un parser
+ de manière récursive en partant depuis la racine (l'axiome des règles de notre grammaire) et en appelant de manière récursive les
+ régles suivantes en fonction du caractère lu.
+
+<P>
+On modifiera légèrement la grammaire comme ci-dessous pour faciliter le travail.
+
+<P>
+<BR>
+<BR>
+<TABLE class="PAD " style="">
+<TR><TH CLASS="LEFT"><SPAN  CLASS="textit">exprule</SPAN></TH>
+<TD CLASS="LEFT"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img26.svg"
+ ALT="$::=$"></SPAN></TD>
+<TD CLASS="LEFT">| <code>VARIABLE</code></TD>
+</TR>
+<TR><TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="LEFT">| <code>PARLEFT</code>   <SPAN  CLASS="textit">parrule</SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="LEFT">| <code>NEWLINE</code></TD>
+</TR>
+<TR><TH CLASS="LEFT"><SPAN  CLASS="textit">parrule</SPAN></TH>
+<TD CLASS="LEFT"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img26.svg"
+ ALT="$::=$"></SPAN></TD>
+<TD CLASS="LEFT">| <code>LAMBDA</code>  <SPAN  CLASS="textit">lambdarule</SPAN></TD>
+</TR>
+<TR><TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="LEFT">| <SPAN  CLASS="textit">apprule</SPAN></TD>
+</TR>
+<TR><TH CLASS="LEFT"><SPAN  CLASS="textit">lambdarule</SPAN></TH>
+<TD CLASS="LEFT"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img26.svg"
+ ALT="$::=$"></SPAN></TD>
+<TD CLASS="LEFT"><code>VARIABLE</code>  <code>POINT</code>  <SPAN  CLASS="textit">exprule</SPAN>  <code>PARRIGHT</code></TD>
+</TR>
+<TR><TH CLASS="LEFT"><SPAN  CLASS="textit">apprule</SPAN></TH>
+<TD CLASS="LEFT"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img26.svg"
+ ALT="$::=$"></SPAN></TD>
+<TD CLASS="LEFT"><SPAN  CLASS="textit">exprule</SPAN> <SPAN  CLASS="textit">exprule</SPAN>  <code>PARRIGHT</code></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+
+<P>
+Cela imposera cependant la saisie systématique des <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-termes avec des parenthèses autour des abstractions et des applications.
+De même, nous n'aurons plus la facilité syntaxique de l'associativité à gauche des applications et de l'associativité à droite
+du corps des abstractions.
+Je ne sais pas si une telle grammaire peut être conçue pour une analyse en mode
+récursif descendant.
+Je pense que non (après m'être un peu cassé les cheveux là-dessus...)
+
+<P>
+Voici le code associé.
+<PRE>
+exception Fin
+exception Erreur of string
+	
+let _ =
+	let lexbuf = Lexing.from_channel stdin in
+				
+	let rec exprule courant =
+		match courant with
+		| VARIABLE(x) -&gt; Var(x)
+		| PARLEFT -&gt; parrule (lexana lexbuf)
+		| NEWLINE -&gt; raise Fin
+		| _ -&gt;  raise (Erreur "exprule")
+		
+		and parrule courant =
+			  match courant with
+				| LAMBDA -&gt; lambdarule courant
+				| _ -&gt; apprule courant
+		 
+		and apprule courant =
+				let op1 = exprule courant in
+			   let op2 = exprule (lexana lexbuf) in
+				let suivant = lexana lexbuf in (* consume PARRIGHT*)
+				match suivant with 
+					| PARRIGHT -&gt;  App(op1, op2) 
+					| _ -&gt; raise (Erreur "apprule")
+		 
+		and lambdarule courant =
+			  let var = lexana lexbuf in 
+				let _ = lexana lexbuf in  (* consume POINT *)
+				let corps = exprule(lexana lexbuf) in
+				let _ =  lexana lexbuf (* consume PARRIGHT *) in
+				match var with 
+					| VARIABLE(x) -&gt; Lam(x, corps)
+					| _ -&gt; raise (Erreur "lambdarule")
+			
+		in (betaNormalPrint (exprule (lexana lexbuf)); flush stdout)
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html251"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node8.html">Représentation en ML</A>
+<B> monter:</B> <A
+ HREF="node4.html">Définition, champ lexical et</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node6.html">Analyse syntaxique avec menhir</A>
+ &nbsp; <B>  <A ID="tex2html252"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

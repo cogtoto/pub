@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Le code</TITLE>
+<META NAME="description" CONTENT="Le code">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node96.html">
+<LINK REL="next" HREF="node98.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node98.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node96.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html569"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node98.html">Approximation du nombre</A>
+<B> monter:</B> <A
+ HREF="node88.html">Les nombres premiers. L'algorithme</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node96.html">L'algorithme RSA</A>
+ &nbsp; <B>  <A ID="tex2html570"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00890900000000000000">
+Le code</A>
+</H3>
+ <PRE>
+open List
+open Random 
+
+let p = 61 and q = 53 ;;
+let n = p*q ;;
+let phi = (p-1)*(q-1) ;; (* phi=3233 *)
+let m = 65 ;;
+
+let rec pgcd a b =
+  if b = 0 then a 
+  else pgcd b (a mod b)
+
+let rec calcule_e p q =
+  let e = Random.int ((p-1)*(q-1))
+    in if pgcd e ((p-1)*(q-1)) = 1 then e
+      else calcule_e p q  
+
+let rec euclide a b = 
+  if b = 0 then ( a , 1 , 0 ) 
+    else 
+    begin
+        let (d', u', v') = euclide b (a mod b)
+        in (d', v', u' - (a / b) * v' )
+    end
+
+let calcule_d p q e =
+    let(_, u ,_) = euclide e (( p-1)*(q-1)) in
+      u mod ((p-1)*(q-1))
+
+let rec pow a m = function
+  | 0 -&gt; 1 mod m
+  | 1 -&gt; a mod m
+  | n -&gt; 
+    let b = pow a m (n / 2) in
+    b * b * (if n mod 2 = 0 then 1 else a) mod m
+  ;;    
+
+let e = calcule_e p q  ;;
+let d = calcule_d p q e ;;
+
+crypt (crypt m e n) d n;;
+
+let factor n =
+  let rec aux n k l =
+    if n &lt; k/2 then l
+    else if (n mod k) = 0 then aux (n/k) k (k::l)
+    else if (k=2) then aux n 3 l 
+    else aux n (k+2) l
+in rev (aux n 2 [])
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

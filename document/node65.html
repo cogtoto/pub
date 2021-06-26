@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Confluence et paires critiques</TITLE>
+<META NAME="description" CONTENT="Confluence et paires critiques">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node66.html">
+<LINK REL="previous" HREF="node64.html">
+<LINK REL="next" HREF="node66.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node66.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node64.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html447"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node66.html">Terminaison</A>
+<B> monter:</B> <A
+ HREF="node64.html">L'algorithme de complétion de</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node64.html">L'algorithme de complétion de</A>
+ &nbsp; <B>  <A ID="tex2html448"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00671000000000000000">
+Confluence et paires critiques</A>
+</H2>
+Le lemme de Newman nous dit qu'un système de réécriture noethérien (qui termine) est confluent 
+ssi il est localement confluent.
+
+<P>
+La situation générale se présente comme cela:
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img342.svg"
+ ALT="\begin{tikzpicture}
+\draw [-latex] (0.7,0.8) node[above right] {$s$}-- node[left...
+... node[right]{$l_2 \rightarrow r_2$} (2,0) node[below]{$t_2$} ;
+\end{tikzpicture}">
+<BR>
+</DIV>
+La confluence locale sera assurée si nous trouvons un terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img4.svg"
+ ALT="$t$"></SPAN> tel que 
+<!-- MATH
+ $t_1 \overset{*}{\rightarrow} t \overset{*}{\leftarrow} t_2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img343.svg"
+ ALT="$t_1 \overset{*}{\rightarrow} t \overset{*}{\leftarrow} t_2$"></SPAN> 
+
+<P>
+Nous avons ainsi 2 règles <!-- MATH
+ $l_1 \rightarrow r_1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img344.svg"
+ ALT="$l_1 \rightarrow r_1$"></SPAN> et <!-- MATH
+ $l_2 \rightarrow r_2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img345.svg"
+ ALT="$l_2 \rightarrow r_2$"></SPAN>. Cela donne par définition de la réécriture :
+<P><!-- MATH
+ \begin{displaymath}
+s|_{p_1} = \sigma_1 l_1\ avec\ t_1=s[\sigma_1 r_1]_{p_1}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img346.svg"
+ ALT="$\displaystyle s\vert _{p_1} = \sigma_1 l_1\ avec\ t_1=s[\sigma_1 r_1]_{p_1} $">
+</DIV><P></P>
+<P><!-- MATH
+ \begin{displaymath}
+s|_{p_2} = \sigma_2 l_2\ avec\ t_2=s[\sigma_2 r_2]_{p_2}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img347.svg"
+ ALT="$\displaystyle s\vert _{p_2} = \sigma_2 l_2\ avec\ t_2=s[\sigma_2 r_2]_{p_2} $">
+</DIV><P></P>
+
+<P>
+On montre facilement (de manière visuelle) que nous pouvons trouver 
+<!-- MATH
+ $t_1 \overset{*}{\rightarrow} t \overset{*}{\leftarrow} t_2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img343.svg"
+ ALT="$t_1 \overset{*}{\rightarrow} t \overset{*}{\leftarrow} t_2$"></SPAN> lorsque
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img348.svg"
+ ALT="$p_1$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img349.svg"
+ ALT="$p_2$"></SPAN> ne se chevauchent pas. Et lorsqu'il y a chevauchement, on peut également trouver 
+<!-- MATH
+ $t_1 \overset{*}{\rightarrow} t \overset{*}{\leftarrow} t_2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img343.svg"
+ ALT="$t_1 \overset{*}{\rightarrow} t \overset{*}{\leftarrow} t_2$"></SPAN> si la position de <!-- MATH
+ $\sigma_2 l_2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img350.svg"
+ ALT="$\sigma_2 l_2$"></SPAN> dans <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img351.svg"
+ ALT="$l_1$"></SPAN> 
+ est une variable.
+
+<P>
+<BR>
+Sinon, il y a un chevauchement <SPAN  CLASS="textit">critique</SPAN> :
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img352.svg"
+ ALT="\begin{tikzpicture}
+\draw (0,0) -- (2,0) -- (1,2) node[above]{$\sigma_1 l_1$} -...
+... ;
+\draw [red] (0.9,0.9) node {$\sigma_2 r_2$} ;
+\end{scope} \end{tikzpicture}">
+<BR>
+</DIV>
+
+<P>
+Posons <!-- MATH
+ $\theta =  \sigma_1 \cup \sigma_2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img353.svg"
+ ALT="$\theta = \sigma_1 \cup \sigma_2$"></SPAN>, l'unificateur principal de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img354.svg"
+ ALT="$\sigma_1$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img355.svg"
+ ALT="$\sigma_2$"></SPAN>.
+	Nous appelerons la paire des deux termes en bleu et rouge
+	 une <SPAN  CLASS="textit">paire critique</SPAN> <!-- MATH
+ $<\theta r_1, (\theta l_1)[\theta r_2]_p >$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img356.svg"
+ ALT="$&lt;\theta r_1, (\theta l_1)[\theta r_2]_p &gt; $"></SPAN>
+	 Si deux règles génèrent une paire critique, on dit qu'elles se superposent.
+     L'existence de paires critiques est un signe d'ambiguïté du système de réécriture.
+
+<P>
+Si ces paires critiques sont joignable, le système de réécriture est alors localement confluent.
+	 <P>
+<DIV><B>Théorème  <SPAN CLASS="arabic">4</SPAN></B> (Knuth-Bendix)  &nbsp; 
+<I>Un système de réécriture noethérien est confluent si ses paires critiques sont joignables.
+	</I></DIV><P></P>
+
+<PRE>
+let superpose l1 l2 =
+let rec super l1 l2 occ =
+	match occ with
+	| a::b -&gt; 
+	begin
+		try 
+		let t = cut a l1 in
+		match t with 
+		| Var _ -&gt; raise Impossible
+		| _ -&gt; let sigma = unifier ((cut a l1), l2)
+				in (a, sigma)
+		with Impossible -&gt; super l1 l2 b 
+	end
+| [] -&gt; raise Impossible
+in super l1 l2 (occurences 0 l1)
+
+let rec cp (l1,r1) (l2,r2) =
+  let (oc, sigma) = superpose l1 l2 in
+  ((substituer  r1 sigma), (greffe oc (substituer l1 sigma) (substituer r2 sigma))) ;;
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node66.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node64.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html447"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node66.html">Terminaison</A>
+<B> monter:</B> <A
+ HREF="node64.html">L'algorithme de complétion de</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node64.html">L'algorithme de complétion de</A>
+ &nbsp; <B>  <A ID="tex2html448"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

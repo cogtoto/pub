@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>La compilation code</TITLE>
+<META NAME="description" CONTENT="La compilation code">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node50.html">
+<LINK REL="previous" HREF="node48.html">
+<LINK REL="next" HREF="node50.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node50.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node47.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node48.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html388"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node50.html">La table de transition</A>
+<B> monter:</B> <A
+ HREF="node47.html">Compilation du LISP vers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node48.html">La machine SECD</A>
+ &nbsp; <B>  <A ID="tex2html389"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00530200000000000000">
+La compilation <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img6.svg"
+ ALT="$C: exp$"></SPAN> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <SPAN  CLASS="texttt">code</SPAN></A>
+</H3>
+
+  <SPAN  CLASS="texttt">c</SPAN> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <SPAN  CLASS="texttt">CONST</SPAN><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img246.svg"
+ ALT="$(c)$"></SPAN> 
+<BR>  <SPAN  CLASS="texttt">n</SPAN> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <SPAN  CLASS="texttt">ACCESS</SPAN><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img247.svg"
+ ALT="$(n)$"></SPAN> 
+<BR>  <SPAN  CLASS="texttt">(+ a1 a2)</SPAN> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <!-- MATH
+ $C(a_1); C(a_2);$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img248.svg"
+ ALT="$C(a_1); C(a_2);$"></SPAN> <SPAN  CLASS="texttt">ADD</SPAN> 
+<BR>  <SPAN  CLASS="texttt">(- a1 a2)</SPAN> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <!-- MATH
+ $C(a_1); C(a_2);$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img248.svg"
+ ALT="$C(a_1); C(a_2);$"></SPAN> <SPAN  CLASS="texttt">SUB</SPAN> 
+<BR>  <SPAN  CLASS="texttt">(= a1 a2)</SPAN> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <!-- MATH
+ $C(a_1); C(a_2);$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img248.svg"
+ ALT="$C(a_1); C(a_2);$"></SPAN> <SPAN  CLASS="texttt">CMP</SPAN> 
+<BR>  <SPAN  CLASS="texttt">((lambda (v1...vn) body) e1...en)</SPAN> 
+    <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <SPAN  CLASS="texttt">NIL;</SPAN> <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img249.svg"
+ ALT="$C(v_1)$"></SPAN><SPAN  CLASS="texttt">;ARG;</SPAN><!-- MATH
+ $\dots C(v_n)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img250.svg"
+ ALT="$\dots C(v_n)$"></SPAN><SPAN  CLASS="texttt">;ARG;CLOSURE</SPAN><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img251.svg"
+ ALT="$(C(body)$"></SPAN><SPAN  CLASS="texttt">;RTS</SPAN><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img252.svg"
+ ALT="$)$"></SPAN><SPAN  CLASS="texttt">;JSR</SPAN> 
+<BR>
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

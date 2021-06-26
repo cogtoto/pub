@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Système de réécriture noethérien</TITLE>
+<META NAME="description" CONTENT="Système de réécriture noethérien">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node67.html">
+<LINK REL="next" HREF="node69.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node69.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node66.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node67.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html455"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node69.html">Complétion de Knuth-Bendix</A>
+<B> monter:</B> <A
+ HREF="node66.html">Terminaison</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node67.html">Indécidabilité de la terminaison</A>
+ &nbsp; <B>  <A ID="tex2html456"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00672200000000000000">
+Système de réécriture noethérien</A>
+</H3>
+Un système de réécriture est noethérien si et seulement s'il existe un ordre bien fondé
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img364.svg"
+ ALT="$\succ$"></SPAN> sur l'ensemble des termes tel que
+<table width="90%">	<tr><td align="right" valign="top">i)</td><td valign="top">&nbsp;<!-- MATH
+ $\sigma P \succ \sigma Q$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img365.svg"
+ ALT="$\sigma P \succ \sigma Q$"></SPAN> pour toute règle <!-- MATH
+ $(P,Q) \in \mathcal{R}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img366.svg"
+ ALT="$(P,Q) \in \mathcal{R}$"></SPAN> et toute substitution <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img302.svg"
+ ALT="$\sigma$"></SPAN>
+	</td></tr>
+<tr><td align="right" valign="top">ii)</td><td valign="top">&nbsp;<!-- MATH
+ $M_i \succ M'_i$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img367.svg"
+ ALT="$M_i \succ M'_i$"></SPAN> entraîne <!-- MATH
+ $fM_1\dots M_i \dots M_n \succ fM_1\dots M'_i \dots M_n$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img368.svg"
+ ALT="$fM_1\dots M_i \dots M_n \succ fM_1\dots M'_i \dots M_n $"></SPAN></td></tr></table>
+
+<P>
+On dit que <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img364.svg"
+ ALT="$\succ$"></SPAN> est clos par substitution, et qu'il est compatible avec <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img254.svg"
+ ALT="$\Sigma$"></SPAN>.
+<BR>
+En pratique, on utilise une fonction externe <!-- MATH
+ $h : T_\Sigma [X] \rightarrow \mathbb{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img369.svg"
+ ALT="$h : T_\Sigma [X] \rightarrow \mathbb{N} $"></SPAN> et la relation d'ordre <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img370.svg"
+ ALT="$&gt;$"></SPAN> sur 
+<!-- MATH
+ $\mathbb{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img371.svg"
+ ALT="$\mathbb{N}$"></SPAN>.
+
+<P>
+Pour un terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img4.svg"
+ ALT="$t$"></SPAN> et une variable <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img20.svg"
+ ALT="$x$"></SPAN> , on note <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img372.svg"
+ ALT="$\vert t\vert$"></SPAN> le cardinal de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img4.svg"
+ ALT="$t$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img373.svg"
+ ALT="$\vert t\vert _x$"></SPAN> le nombre
+d'occurrences de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img20.svg"
+ ALT="$x$"></SPAN> dans <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img4.svg"
+ ALT="$t$"></SPAN>. On définit un ordre strict <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img364.svg"
+ ALT="$\succ$"></SPAN> sur <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img374.svg"
+ ALT="$T[X]$"></SPAN> par :
+<P><!-- MATH
+ \begin{displaymath}
+s > t \Leftrightarrow  |s| > |t|\ et\  \forall x \in X, |s|_x ≥ |t|_x
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img375.svg"
+ ALT="$\displaystyle s &gt; t \Leftrightarrow \vert s\vert &gt; \vert t\vert\ et\ \forall x \in X, \vert s\vert _x ≥ \vert t\vert _x $">
+</DIV><P></P>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

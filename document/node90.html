@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Le produit d'Euler aka le produit eulérien</TITLE>
+<META NAME="description" CONTENT="Le produit d'Euler aka le produit eulérien">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node91.html">
+<LINK REL="previous" HREF="node89.html">
+<LINK REL="next" HREF="node91.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node91.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node88.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node89.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html555"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node91.html">Les nombres premiers jumeaux</A>
+<B> monter:</B> <A
+ HREF="node88.html">Les nombres premiers. L'algorithme</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node89.html">Le crible</A>
+ &nbsp; <B>  <A ID="tex2html556"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00890200000000000000">
+Le produit d'Euler aka le produit eulérien</A>
+</H3>
+La fonction zêta est égale au produit eulérien
+<P><!-- MATH
+ \begin{displaymath}
+\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{i=1}^\infty \frac{1}{1-p_i^{-s}} = \prod_{i=1}^\infty \frac{p_i^s}{p_i^s-1}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img488.svg"
+ ALT="$\displaystyle \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{i=1}^\infty \frac{1}{1-p_i^{-s}} = \prod_{i=1}^\infty \frac{p_i^s}{p_i^s-1} $">
+</DIV><P></P>
+
+<P>
+Exemple pour <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img489.svg"
+ ALT="$s=1$"></SPAN> avec la suite harmonique
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{ccc}
+1+ \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} +...  &=  \frac{1}{1-\frac{1}{2}} .\frac{1}{1-\frac{1}{3}}.\frac{1}{1-\frac{1}{5}}.\frac{1}{1-\frac{1}{7}}. (...) \\[\bigskipamount]
+&= \frac{2.3.5.7.11.13.17.19...}{1.2.4.6.10.12.16.18...}
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img490.svg"
+ ALT="\begin{displaymath}
+\begin{array}{ccc}
+1+ \frac{1}{2} + \frac{1}{3} + \frac{1}{4...
+...ac{2.3.5.7.11.13.17.19...}{1.2.4.6.10.12.16.18...}
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+Démontrons cela
+<P><!-- MATH
+ \begin{displaymath}
+\zeta(1) = 1+ \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5}+ \frac{1}{6}+ \frac{1}{7} +  \frac{1}{8} +...
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img491.svg"
+ ALT="$\displaystyle \zeta(1) = 1+ \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5}+ \frac{1}{6}+ \frac{1}{7} + \frac{1}{8} +... $">
+</DIV><P></P>
+
+<P>
+Divisons par 2
+<P><!-- MATH
+ \begin{displaymath}
+\frac{\zeta(1)}{2} = \frac{1}{2}+\frac{1}{4}+\frac{1}{6}+\frac{1}{8}+\frac{1}{10}+\frac{1}{12} + \frac{1}{14}+ \frac{1}{16}+...
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img492.svg"
+ ALT="$\displaystyle \frac{\zeta(1)}{2} = \frac{1}{2}+\frac{1}{4}+\frac{1}{6}+\frac{1}{8}+\frac{1}{10}+\frac{1}{12} + \frac{1}{14}+ \frac{1}{16}+... $">
+</DIV><P></P>
+
+<P>
+La différence de ces 2 équations donne:
+<P><!-- MATH
+ \begin{displaymath}
+\zeta(1).(1-\frac{1}{2}) = 1 + \frac{1}{3}+\frac{1}{5}+\frac{1}{7}+\frac{1}{9}+\frac{1}{11}+\frac{1}{13}+ ...
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img493.svg"
+ ALT="$\displaystyle \zeta(1).(1-\frac{1}{2}) = 1 + \frac{1}{3}+\frac{1}{5}+\frac{1}{7}+\frac{1}{9}+\frac{1}{11}+\frac{1}{13}+ ... $">
+</DIV><P></P>
+
+<P>
+Divisons par 3
+<P><!-- MATH
+ \begin{displaymath}
+\frac{1}{3}.(1-\frac{1}{2}).\zeta(1) = \frac{1}{3} + \frac{1}{9}+\frac{1}{15}+\frac{1}{21}+\frac{1}{27}+ \frac{1}{33}+ \frac{1}{39}+...
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img494.svg"
+ ALT="$\displaystyle \frac{1}{3}.(1-\frac{1}{2}).\zeta(1) = \frac{1}{3} + \frac{1}{9}+\frac{1}{15}+\frac{1}{21}+\frac{1}{27}+ \frac{1}{33}+ \frac{1}{39}+... $">
+</DIV><P></P>
+
+<P>
+La différence donne:
+<P><!-- MATH
+ \begin{displaymath}
+(1-\frac{1}{3}).(1-\frac{1}{2}).\zeta(1) = 1 + \frac{1}{5} + \frac{1}{7}+\frac{1}{11}+\frac{1}{13}+ ...
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img495.svg"
+ ALT="$\displaystyle (1-\frac{1}{3}).(1-\frac{1}{2}).\zeta(1) = 1 + \frac{1}{5} + \frac{1}{7}+\frac{1}{11}+\frac{1}{13}+ ... $">
+</DIV><P></P>
+
+<P>
+Divisons par 5
+<P><!-- MATH
+ \begin{displaymath}
+\frac{1}{5}.(1-\frac{1}{3}).(1-\frac{1}{2}).\zeta(1) =    \frac{1}{5} + \frac{1}{25}+\frac{1}{35}+\frac{1}{55}+ ...
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img496.svg"
+ ALT="$\displaystyle \frac{1}{5}.(1-\frac{1}{3}).(1-\frac{1}{2}).\zeta(1) = \frac{1}{5} + \frac{1}{25}+\frac{1}{35}+\frac{1}{55}+ ... $">
+</DIV><P></P>
+
+<P>
+La différence donne:
+<P><!-- MATH
+ \begin{displaymath}
+(1-\frac{1}{5}).(1-\frac{1}{3}).(1-\frac{1}{2}).\zeta(1) = 1 + \frac{1}{7}+\frac{1}{11}+\frac{1}{13}+...
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img497.svg"
+ ALT="$\displaystyle (1-\frac{1}{5}).(1-\frac{1}{3}).(1-\frac{1}{2}).\zeta(1) = 1 + \frac{1}{7}+\frac{1}{11}+\frac{1}{13}+... $">
+</DIV><P></P>
+
+<P>
+Nous pouvons poursuivre sur le principe du crible d'Erathostène
+<P><!-- MATH
+ \begin{displaymath}
+\ldots(1-\frac{1}{5}).(1-\frac{1}{3}).(1-\frac{1}{2}).\zeta(1) = 1
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img498.svg"
+ ALT="$\displaystyle \ldots(1-\frac{1}{5}).(1-\frac{1}{3}).(1-\frac{1}{2}).\zeta(1) = 1 $">
+</DIV><P></P>
+
+<P>
+D'où :
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{ccc}
+\zeta(1) &=& \frac{1}{(1-\frac{1}{2}).(1-\frac{1}{3}).(1-\frac{1}{5})\ldots} \\[\bigskipamount]
+\zeta(1) &=& \frac{1}{\frac{1}{2}.\frac{2}{3}.\frac{4}{5}\ldots} 		\\[\bigskipamount]
+\zeta(1) &=&  \frac{2.3.5.7.11.13.17.19...}{1.2.4.6.10.12.16.18...} \\[\bigskipamount]
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img499.svg"
+ ALT="\begin{displaymath}
+\begin{array}{ccc}
+\zeta(1) &amp;=&amp; \frac{1}{(1-\frac{1}{2}).(1-...
+....19...}{1.2.4.6.10.12.16.18...} \\ [\bigskipamount]
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+Le numérateur est le produit de l'ensemble des nombres premiers.
+Le dénominateur est le produit de l'ensemble des nombres premiers moins 1.
+
+<P>
+Exemple pour <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img500.svg"
+ ALT="$s=2$"></SPAN> avec la suite carrée
+<P><!-- MATH
+ \begin{displaymath}
+1+ \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + ...  =  \frac{1}{1-\frac{1}{4}} .\frac{1}{1-\frac{1}{9}}.\frac{1}{1-\frac{1}{25}}.\frac{1}{1-\frac{1}{49}}. (...)
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img501.svg"
+ ALT="$\displaystyle 1+ \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + ... = \frac{1}{1-\f...
+...rac{1}{1-\frac{1}{9}}.\frac{1}{1-\frac{1}{25}}.\frac{1}{1-\frac{1}{49}}. (...) $">
+</DIV><P></P>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

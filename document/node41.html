@@ -1,0 +1,514 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>L'interprète par continuation </TITLE>
+<META NAME="description" CONTENT="L'interprète par continuation ">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node40.html">
+<LINK REL="next" HREF="node42.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node42.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node40.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node40.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html357"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node42.html">La compilation</A>
+<B> monter:</B> <A
+ HREF="node40.html">Réification et réflexion</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node40.html">Réification et réflexion</A>
+ &nbsp; <B>  <A ID="tex2html358"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00442100000000000000">
+L'interprète par continuation </A>
+</H3>
+La fonction d'évaluation sera enrichie pour prendre trois arguments, le programme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN> à évaluer, l'environnement 
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img188.svg"
+ ALT="$\rho$"></SPAN> et la continuation <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img202.svg"
+ ALT="$\kappa$"></SPAN> 
+<DIV class="CENTER">
+<code>(eval</code> <!-- MATH
+ $\pi\ \rho\ \kappa$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img203.svg"
+ ALT="$\pi\ \rho\ \kappa$"></SPAN> <code>)</code> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">   <code>valeur</code>
+
+</DIV>
+
+<P>
+Nous reprenons ici le code de l'excellent article <SPAN  CLASS="textit">a Simple Reflective Interpreter</SPAN> [<A
+ HREF="node114.html#reflective">18</A>]
+La fonction <code>evaluate</code> implémente un interprète Lisp en mode CPS de manière très naturelle.
+La valeur ajoutée de l'article est la modélisation des fonctions. Trois types sont disponibles et 
+distinguées par un tag dans l'environnement.
+
+<OL>
+<LI>Les fonctions utilisateurs <code>(cloture (parl) exp env)</code>
+</LI>
+<LI>Les fonctions réifiées <code>(reifier (e r k ) exp )</code>
+</LI>
+<LI>Les fonctions primitives <code>(primitive nom )</code>
+</LI>
+</OL>
+L'application d'une fonction utilisateur se fait de manière classique par une évaluation du corps
+de la lambda sur un environnement étendu aux nouvelles liaisons entre paramètres et arguments préalablement évalués.
+
+<P>
+Une fonction réifiée prend trois paramètres <code>e</code>, <code>r</code> et <code>k</code>.
+
+<UL>
+<LI><code>e</code> est lié à la liste des arguments non évalués de l'application.
+</LI>
+<LI><code>r</code> est lié à l'environnement de l'interprète évaluant l'application.
+</LI>
+<LI><code>k</code> est lié à la continuation de l'interprète évaluant l'application.
+</LI>
+</UL>
+Ainsi, nous avons un contrôle <SPAN  CLASS="textit">complet</SPAN> de la fonction réifiée : contrôle du corps de la fonction et des arguments
+non encore évalués par l'interprète sous-jacent, mais aussi la possibilité d'accéder à l'environnement et à la continuation
+courante. En bref, no limit, on peut tout définir...
+
+<P>
+Les fonctions <code>callcc</code> et <code>quote</code> seront très simplement codées de la manière suivante:
+<PRE>
+(define callcc (cloture-to-reifier (lambda (e r k) ((evaluate (car e) r id) k))))
+(define quote (cloture-to-reifier (lambda (e r k) (k (car e) ))))
+</PRE>
+
+<P>
+Dès le niveau 1 de notre tour, c'est-à-dire lorsque la fonction <code>evaluate</code> n'est plus évaluée par Scheme 
+mais par elle-même, les formes spéciales <code>if, quote, begin, define</code> sont représentées par des fonctions réifiées.
+La fonction d'évaluation peut ainsi être réduite à son strict minimum :
+<PRE>
+(define evaluate
+  (lambda (e r k)
+    ((if (pair? e)
+        (if (equal? (car e) 'lambda)
+            eval-abstraction
+            eval-application)
+        (if (or (or (number? e) (string? e)) (boolean? e))
+            eval-constante
+            eval-variable))  
+     e r k )))
+</PRE>
+
+<P>
+<TABLE   STYLE="width:610;">
+<TR><TD>
+  La fonction <code>openloop</code> peut être lancée à volonté et peut créer une succession 
+  de  nouveaux étages dans notre tour de babel.
+  Comme dans l'épisode biblique du livre de la Genèse[<A
+ HREF="node114.html#genese">1</A>], 
+  la faculté d'avoir un langage commun permet la construction
+  d'une tour de hauteur potentiellement infinie.
+   Nous nous retrouvons nous-même grisés par cette tour <SPAN  CLASS="textit">dont la tête touche les cieux</SPAN>
+  (ἡ κεφαλὴ ἔσται ἕως τοῦ οὐρανοῦ). Nous citons ici la Septante (LXX).
+
+<P>
+L'enthousiasme de pouvoir
+  monter dans les étages doit cependant être tempéré. Le fait d'être à l'étage 
+  <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img204.svg"
+ ALT="$n+1$"></SPAN> n'apporte rien par rapport à l'étage <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img205.svg"
+ ALT="$n$"></SPAN>. L'application <code>eval</code> est idempotente car 
+  <!-- MATH
+ $\forall \pi$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img206.svg"
+ ALT="$\forall \pi$"></SPAN> <code>(eval '</code><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN><code>)</code> <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img207.svg"
+ ALT="$=$"></SPAN> <code>(eval (eval '</code> <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN><code>))</code>.
+  Autrement dit, la valeur <code>(eval'</code><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN><code>)</code> est un point fixe de <code>eval</code>.
+
+<P>
+</TD></TR>
+</TABLE>
+  
+  <TABLE   STYLE="width:290;">
+<TR><TD>
+    
+<DIV class="CENTER"><A ID="1204"></A>
+<TABLE WIDTH="290">
+<CAPTION class="BOTTOM"><STRONG>Figure 2.2:</STRONG>
+Bruegel</CAPTION>
+<TR><TD><IMG
+  WIDTH="252" HEIGHT="202" STYLE=""
+ SRC="./bruegel.jpg"
+ ALT="Image bruegel">
+      
+      <DIV class="CENTER"></DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+</TD></TR>
+</TABLE>
+
+<P>
+<BR>
+<BR>
+
+<P>
+ΓΕΝΕΣΙΣ     11 
+<BR>
+1. Καὶ ἦν πᾶσα ἡ γῆ χεῖλος ἕν, καὶ φωνὴ μία πᾶσιν. 
+<BR>   (...) 
+<BR>
+9. διὰ τοῦτο ἐκλήθη τὸ ὄνομα αὐτῆς Σύγχυσις, ὅτι ἐκεῖ συνέχεεν κύριος τὰ χείλη πάσης τῆς γῆς.
+
+<SPAN  CLASS="textit">
+  Toute la terre avait alors une même parole ; il y avait une seule langue pour tous. 
+<BR>  À cause de cela, ce lieu fut appelé Babel (confusion), parce que là le Seigneur confondit les langues de toute la terre.
+</SPAN>
+
+<P>
+<BR>
+<BR>
+En pratique, malheureusement dès le niveau 3 de notre tour, les temps d'évaluation deviennent abominablement longs sur 
+notre interprète  maison implémenté en OCAML.
+Plusieurs minutes sont requises pour le calcul de la factorielle de cinq au niveau 3 de la tour.
+C'est un peux plus rapide avec DrRacket, mais pas tellement. Le poids des sous-couches d'interprétation est lourd.
+Dieu ne nous disperse pas ici par la confusion des langages, mais par la limitation de notre puissance de calcul .
+
+<P>
+Voici le code complet de l'interprète au niveau 1. La fonction d'évaluation n'utilise pas ici
+les réifications des fonctions <code>if, quote, begin</code>.
+
+<P>
+<SPAN CLASS="FOOTNOTESIZE"></SPAN><PRE>
+(define evaluate
+  (lambda (e r k)
+    ((if (not (pair? e))
+          (if (or (or (number? e) (string? e)) (boolean? e))
+              eval-constante
+              eval-variable)
+          (if (equal? (car e) 'quote)
+              eval-quote
+              (if (equal? (car e) 'if)
+               eval-if
+                (if (equal? (car e) 'begin)
+               eval-begin
+               (if (equal? (car e) 'define)
+                   eval-assign
+                   (if (equal? (car e) 'lambda)
+                       eval-abstraction
+                       eval-application))))))
+     e r k )))
+
+(define eval-constante
+  (lambda (e r k)
+    (k e)))
+
+(define eval-quote
+  (lambda (e r k)
+    (k (cadr e))))
+
+(define eval-variable
+  (lambda (e r k)
+   (get-pair e r
+   (lambda (success-pair)
+    (k (cdr success-pair)))
+    (lambda ()
+    (wrong "symbol not bound " e)))))
+
+(define eval-if
+  (lambda (e r k)
+    (evaluate (cadr e) r
+              (lambda (v)
+                (if v
+                    (evaluate (caddr e) r k)
+                    (evaluate (cadddr e) r k))))))
+
+(define eval-assign
+     (lambda (e r k)
+       (evaluate (caddr e) r
+                 (lambda (v)
+                   (get-pair (cadr e) r
+                             (lambda (success-pair)
+                               (begin
+                               (set-cdr! success-pair v)
+                               (k (void)) ))
+                             (lambda ()
+                               (begin
+                              (set-cdr! global-env (cons (car global-env)(cdr global-env)))
+                              (set-car! global-env (cons (cadr e) v))
+                              (k (void)))))))))
+
+(define eval-define
+  (lambda (e r k)
+      (evaluate (caddr e) r
+			(lambda (v) 
+			(update! (cadr e) r v))))) 
+
+(define eval-abstraction
+  (lambda (e r k)
+  (k (make-function (cadr e) (caddr e) r))))
+					
+(define get-pair
+  (lambda (id r success failure)
+    (find-pair id r
+               success
+               (lambda ()
+                 (find-pair
+                    id global-env success failure) )) ))
+
+(define find-pair
+  (lambda (elt alist success failure)
+    ( (lambda (assq-result)
+        (if assq-result
+            (success assq-result)
+            (failure)) )
+      (assq elt alist) ) ) )
+
+(define make-function
+  (lambda (varl corps r)
+     (list 'cloture varl corps r)))
+
+(define eval-application
+  (lambda (e r k)
+       (evaluate (car e) r
+              (lambda (proc)
+                (if (equal? (car proc) 'reifier)
+                    ((reifier-to-cloture proc) (cdr e) r k)
+                    (evlis (cdr e) r
+                       (lambda (args)
+                         (apply-procedure proc args k))))))))
+
+(define evlis
+  (lambda (e r k)
+    (if (null? e)
+        (k '())
+        (evaluate (car e) r
+                  (lambda (v)
+                    (evlis (cdr e) r
+                           (lambda (w)
+                            (k (cons v w)))))))))
+
+(define eval-begin
+  (lambda (e r k)
+    (eprogn (cdr e) r k)))
+
+(define eprogn
+  (lambda (e r k)
+   (if (null? (cdr e))
+       (evaluate (car e) r k)
+       (evaluate (car e) r (lambda (v)
+                             (eprogn (cdr e) r k))))))
+
+(define extend
+  (lambda (env variables values)
+        (if (or (null? variables) (null? values))
+            env
+            (cons (cons (car variables) (car values))
+                  (extend env (cdr variables) (cdr values))))))
+         
+(define apply-procedure
+  (lambda (proc args k)
+    (if (equal? (car proc) 'cloture)
+        (eprogn (list (caddr proc))
+                (extend (cadddr proc) (cadr proc) args)
+                k)
+        (k (apply-primitive (cadr proc) args))))) 
+
+(define apply-primitive
+  (lambda (name args)
+    (if (equal? name 'car)
+        (car (car args))
+     (if (equal? name 'or)
+        (or (car args) (cadr args))
+    (if (equal? name 'cdr)
+        (cdr (car args))
+    (if (equal? name 'cons)
+        (cons (car args) (cadr args))
+    (if (equal? name 'set-car!)
+        (set-car! (car args) (cadr args))
+    (if (equal? name 'set-cdr!)
+        (set-cdr! (car args) (cadr args))
+    (if (equal? name 'memq)
+        (memq (car args) (cadr args))
+    (if (equal? name 'assq)
+        (assq (car args) (cadr args))    
+    (if (equal? name '=)
+        (= (car args) (cadr args))
+    (if (equal? name '+)
+        (+ (car args) (cadr args))
+    (if (equal? name '-)
+        (- (car args) (cadr args))
+    (if (equal? name '*)
+        (* (car args) (cadr args))
+    (if (equal? name 'null?)
+        (null? (car args))
+    (if (equal? name 'not)
+        (not (car args))    
+    (if (equal? name 'symbol?)
+        (symbol? (car args))
+    (if (equal? name 'list)
+        args
+    (if (equal? name 'pair?)
+        (pair? (car args))
+    (if (equal? name 'read)
+        (if (null? args) (read) (read (car args)))
+    (if (equal? name 'eof-object?)
+        (eof-object? (car args))
+    (if (equal? name 'close-input-port)
+        (close-input-port (car args))
+    (if (equal? name 'newline)
+        (newline)
+    (if (equal? name 'equal?)
+        (equal? (car args) (cadr args)) 
+    (if (equal? name 'write)
+        (write (car args))
+    (if (equal? name 'display)
+        (display (car args))
+    (if (equal? name 'load)
+        (load (car args)) 
+    (if (equal? name 'number?)
+        (number? (car args))   
+    (if (equal? name 'string?)
+        (string? (car args))   
+    (if (equal? name 'boolean?)
+        (boolean? (car args))   
+     "erreur apply primitive"))))))))))))))))))))))))))))))
+
+(define mapper
+  (lambda (f l)
+    (if (null? l)
+        '()
+        (cons (f (car l)) (mapper f (cdr l))))))
+
+(define primitive-identifiers
+  (lambda ()
+    '(placeholder car cdr cons + - * = set-car! set-cdr! memq assq null? equal? newline  
+      display read symbol? list pair? not load or number? string? boolean?)))
+
+(define make-primitive
+  (lambda (op)
+    (list 'primitive op)))
+
+(define reifier-to-cloture
+  (lambda (reifier)
+    (cons 'cloture (cdr reifier))))
+
+(define cloture-to-reifier
+  (lambda (cloture)
+    (cons 'reifier (cdr cloture))))
+
+(define make-reifier
+  (lambda (formals body r)
+    (list 'reifier formals body r)))
+
+(define global-env '())
+
+(define initialize-global-env
+  (lambda ()
+     (define global-env
+      (extend global-env 
+          (primitive-identifiers)
+          (mapper make-primitive
+                  (primitive-identifiers)))))) 
+
+(define openloop
+  (lambda (read-prompt write-prompt)
+    (begin 
+    (display read-prompt)
+    (evaluate (read) '()
+              (lambda (v)
+                (begin
+                (display write-prompt)
+                (if (equal? v (void))
+                  "rien a afficher"
+                  (display v))
+                (newline)
+                (openloop read-prompt write-prompt)))))))
+
+(define babel
+  (lambda ()
+       (begin
+       (set-car! global-env (cons 'global-env global-env ))
+       (openloop "i0 " "i0 "))))
+</PRE><SPAN CLASS="FOOTNOTESIZE"></SPAN>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node42.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node40.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node40.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html357"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node42.html">La compilation</A>
+<B> monter:</B> <A
+ HREF="node40.html">Réification et réflexion</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node40.html">Réification et réflexion</A>
+ &nbsp; <B>  <A ID="tex2html358"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

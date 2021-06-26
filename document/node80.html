@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Utilisation de METAFONT</TITLE>
+<META NAME="description" CONTENT="Utilisation de METAFONT">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node81.html">
+<LINK REL="previous" HREF="node78.html">
+<LINK REL="next" HREF="node81.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node81.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node74.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node79.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html522"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node81.html">The boxes</A>
+<B> monter:</B> <A
+ HREF="node74.html">Annexes / Divers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node79.html">L'ensemble de Mandelbrot</A>
+ &nbsp; <B>  <A ID="tex2html523"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00850000000000000000">
+Utilisation de <SPAN CLASS="logo-Metafont">M<SMALL>ETAFONT</SMALL></SPAN></A>
+</H1>
+<SPAN CLASS="logo-Metafont">M<SMALL>ETAFONT</SMALL></SPAN> est un langage créé par D. Knuth [<A
+ HREF="node114.html#mf">10</A>]. Il permet le
+design de nouvelles fontes de manière très élégante sous forme d'équations.
+La programmation se fait principalement de manière déclarative.
+
+<P>
+Je me suis  amusé ici à créer le symbole  <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}"> que j'ai souvent
+utilisé dans cet article, principalement dans la section sur le <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul. 
+
+<P>
+
+<DIV class="CENTER"><A ID="2182"></A>
+<TABLE>
+<CAPTION class="BOTTOM"><STRONG>Figure:</STRONG>
+<IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}"> </CAPTION>
+<TR><TD>
+<DIV class="CENTER">	
+	<IMG
+  WIDTH="202" HEIGHT="174" STYLE=""
+ SRC="./imp.png"
+ ALT="Image imp">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+Voici le bout de code qui a permis de définir ce symbole:
+<PRE>
+%file name: beta.mf
+
+beginchar("D",15pt#,10pt#,3pt#);
+% proportion ligne vs triangle 3/4 1/4
+prop:=3/4;
+
+y1=h-d; y2=1/5h-d; y3=4/5h-d; 
+y4=2/5h-d; y5=3/5h-d; y6=1/2h-d;  
+y7=3/4h-d; y8=1/4h-d; y9=h/2-d;
+
+x1=0; x2=1/5*prop*w; x3=2/5*prop*w;
+x4=3/5*prop*w; x5=4/5*prop*w; x6=prop*w;
+x7=x8=x6; x9=w;
+
+pickup pencircle scaled 0.3pt;
+draw z1{right}..tension 6..z2{right}..tension 5..z3{right}
+     ..tension 4..z4{right}..tension 4..z5{right}..tension 3..z6;
+draw z7--z8--z9--cycle; 
+labels(range 1 thru 9);
+endchar;
+end
+</PRE>
+
+<P>
+Nous avons également représenté notre fractale <IMG
+ STYLE=""
+ SRC="img428.svg"
+ ALT="{\lettersnow S\hspace{0.2cm}}">avec le langage <SPAN CLASS="logo-Metafont">M<SMALL>ETAFONT</SMALL></SPAN>.
+Cela s'écrit très facilement, car le langage de Knuth permet l'utilisation
+de macros récursives.
+
+<P>
+<PRE>
+%file name: snow.mf
+%mode_setup;
+%shape for the character S
+
+i:=1;
+
+def dessine(expr debut, fin) =
+z[i]=debut;
+z[i+1]=1/3[debut, fin];
+z[i+2]= (z[i+1]-z[i]) rotated 60 shifted z[i+1];
+z[i+3] = 2/3[debut, fin] ;
+z[i+4] = fin ;  
+pickup pencircle scaled 0.1pt;
+draw z[i]--z[i+1]--z[i+2]--z[i+3]--z[i+4];
+i:=i+5;
+enddef;
+
+def motif (expr debut, fin, n) =
+if (n=1):dessine(debut,fin) else: 
+	motif(debut, 1/3[debut,fin], n-1) ;
+	motif(1/3[debut,fin],
+		(1/3[debut,fin] - debut) rotated 60 shifted (1/3[debut,fin]), n-1) ;
+	motif((1/3[debut,fin] - debut) rotated 60 shifted (1/3[debut,fin]),
+		(1/3[debut,fin] -debut) shifted (1/3[debut,fin]), n-1) ;
+	motif((1/3[debut,fin] - debut) shifted (1/3[debut,fin]), fin, n-1) ;
+fi;
+enddef;
+
+beginchar("S",15pt#,15pt#,5pt#); "The snowflake" ;
+motif((0,0), (w/2,h),4);
+motif((w/2,h), (w,0),4);
+motif((w,0), (0,0),4);
+endchar;
+end
+</PRE>
+
+<P>
+Voici le résultat:
+
+<DIV class="CENTER"><A ID="2190"></A>
+<TABLE>
+<CAPTION class="BOTTOM"><STRONG>Figure:</STRONG>
+<IMG
+ STYLE=""
+ SRC="img428.svg"
+ ALT="{\lettersnow S\hspace{0.2cm}}"></CAPTION>
+<TR><TD>
+<DIV class="CENTER">	
+	<IMG
+  WIDTH="202" HEIGHT="238" STYLE=""
+ SRC="./snow.png"
+ ALT="Image snow">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

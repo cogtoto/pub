@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>La base généalogique</TITLE>
+<META NAME="description" CONTENT="La base généalogique">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node62.html">
+<LINK REL="next" HREF="node64.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node64.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node60.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node62.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html438"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node64.html">L'algorithme de complétion de</A>
+<B> monter:</B> <A
+ HREF="node60.html">Quelques exemples de programmation</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node62.html">Les additions de Peano</A>
+ &nbsp; <B>  <A ID="tex2html439"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00663000000000000000">
+La base généalogique</A>
+</H2>
+<PRE>
+(* généalogie *)
+let grecs = [ [Func("mere", [Func("gaia",[]);Func("chronos",[]) ] ) ] ;
+				[Func("mere", [Func("rhea",[]);Func("zeus",[]) ] ) ] ;
+				[Func("mere", [Func("rhea",[]);Func("hades",[]) ] ) ] ;
+				[Func("pere", [Func("zeus",[]);Func("pollux",[]) ] ) ] ;
+				[Func("pere", [Func("ourance",[]);Func("chronos",[]) ] ) ] ;
+				[Func("pere", [Func("chronos",[]);Func("zeus",[]) ] ) ] ;
+				[Func("pere", [Func("zeus",[]);Func("helene",[]) ] ) ] ;
+				[Func("pere", [Func("zeux",[]);Func("castor",[]) ] ) ] ;
+				[Func("pere", [Func("gaia",[]);Func("chronos",[]) ] ) ] ;
+				[Func("parent", [Var("x"); Var("y")]) ; Func("pere", [Var("x"); Var("y")]) ]  ;
+				[Func("parent", [Var("x"); Var("y")]) ; Func("mere", [Var("x"); Var("y")]) ]  ;
+				[Func("gd-parent", [Var("i"); Var("k")]) ; Func("parent", [Var("i"); Var("j")]) ; 
+				 Func("parent", [Var("j"); Var("k")])] ;
+				[Func("frere", [Var("y"); Var("z")]) ; Func("parent", [Var("x"); Var("y")]) ; 
+				 Func("parent", [Var("x"); Var("z")])]  							
+			] ;;
+
+let but = Func("gd-parent", [Func("chronos", []) ; Var("x")]) ;;
+	
+vincent@HP-Notebook:~/vsc$ ./prolog.byte 
+	x  &lt;-&gt;  pollux 
+	autre solution 1/2 (1=oui, 2=non) ? :1
+	x  &lt;-&gt;  helene 
+	autre solution 1/2 (1=oui, 2=non) ? :1
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

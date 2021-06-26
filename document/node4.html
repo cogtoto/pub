@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Définition, champ lexical et syntaxique</TITLE>
+<META NAME="description" CONTENT="Définition, champ lexical et syntaxique">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html242"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node5.html">Analyse lexicale avec ocamllex</A>
+<B> monter:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+ &nbsp; <B>  <A ID="tex2html243"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00310000000000000000">
+Définition, champ lexical et syntaxique</A>
+</H1>
+Le <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul est un système formel très rudimentaire. Il n'utilise que  
+peu de moyens : le symbole <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>, des variables et des parenthèses. Il n'a
+qu'une seule règle de calcul, la <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction, qui modélise le passage d'un
+argument à une fonction.
+
+<P>
+<P>
+<DIV><B>Définition  <SPAN CLASS="arabic">1</SPAN></B> &nbsp; 
+<I>Un <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme est défini par induction de la manière suivante:
+</I>
+<UL>
+<LI>Une  variable <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img20.svg"
+ ALT="$x$"></SPAN> est un <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme.
+</LI>
+<LI>Une abstraction <!-- MATH
+ $\lambda x.terme$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img21.svg"
+ ALT="$\lambda x.terme$"></SPAN> est un <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme.
+</LI>
+<LI>Une application <!-- MATH
+ $(terme1 \ terme2)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img22.svg"
+ ALT="$(terme1 \ terme2)$"></SPAN> est un <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme.
+</LI>
+</UL></DIV><P></P>
+
+<P>
+Exemple de lambda terme:
+<P><!-- MATH
+ \begin{displaymath}
+( \lambda x. xy ) (x z u)
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img23.svg"
+ ALT="$\displaystyle ( \lambda x. xy ) (x z u) $">
+</DIV><P></P>
+
+<P>
+Voici le champ lexical des <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-termes:
+
+<P>
+<BR>
+token = <TABLE class="PAD " style="">
+<TR><TD CLASS="LEFT">|</TD>
+<TD CLASS="LEFT"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN></TD>
+<TD CLASS="LEFT"><code>LAMBDA</code></TD>
+</TR>
+<TR><TD CLASS="LEFT">|</TD>
+<TD CLASS="LEFT">'.'</TD>
+<TD CLASS="LEFT"><code>POINT</code></TD>
+</TR>
+<TR><TD CLASS="LEFT">|</TD>
+<TD CLASS="LEFT"><!-- MATH
+ $[ a-z ] [ a-z\  0-9 ]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img24.svg"
+ ALT="$[ a-z ] [ a-z\ 0-9 ]$"></SPAN> *</TD>
+<TD CLASS="LEFT"><code>VARIABLE</code></TD>
+</TR>
+<TR><TD CLASS="LEFT">|</TD>
+<TD CLASS="LEFT">'('</TD>
+<TD CLASS="LEFT"><code>PARLEFT</code></TD>
+</TR>
+<TR><TD CLASS="LEFT">|</TD>
+<TD CLASS="LEFT">')'</TD>
+<TD CLASS="LEFT"><code>PARRIGHT</code></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+
+<P>
+Voici la grammaire des <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-termes, en utilisant les terminaux définis
+avant :
+
+<P>
+<BR>
+<TABLE class="PAD " style="">
+<TR><TH CLASS="LEFT"><SPAN  CLASS="textit">terme</SPAN> ::=</TH>
+<TD CLASS="LEFT">|</TD>
+<TD CLASS="LEFT"><code>VARIABLE</code></TD>
+</TR>
+<TR><TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="LEFT">|</TD>
+<TD CLASS="LEFT"><code>PARLEFT</code>  <SPAN  CLASS="textit">terme</SPAN>  <SPAN  CLASS="textit">terme</SPAN>  <code>PARRIGHT</code></TD>
+</TR>
+<TR><TD CLASS="LEFT">&nbsp;</TD>
+<TD CLASS="LEFT">|</TD>
+<TD CLASS="LEFT"><code>LAMBDA</code>  <code>VARIABLE</code>   .  <SPAN  CLASS="textit">terme</SPAN></TD>
+</TR>
+</TABLE>
+<BR>
+
+<P>
+Nous utiliserons ocamllex et menhir, qui est la version moderne de ocamlyacc, pour l'analyse lexical et syntaxique des termes
+du <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Sous-sections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html244"
+  HREF="node5.html">Analyse lexicale avec ocamllex</A>
+<LI><A ID="tex2html245"
+  HREF="node6.html">Analyse syntaxique avec menhir</A>
+<LI><A ID="tex2html246"
+  HREF="node7.html">Implémentation du parsing en mode <SPAN  CLASS="textit">récursif descendant</SPAN></A>
+</UL>
+<!--End of Table of Child-Links-->
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html242"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node5.html">Analyse lexicale avec ocamllex</A>
+<B> monter:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+ &nbsp; <B>  <A ID="tex2html243"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

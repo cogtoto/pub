@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>The boxes</TITLE>
+<META NAME="description" CONTENT="The boxes">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node82.html">
+<LINK REL="previous" HREF="node80.html">
+<LINK REL="next" HREF="node82.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node82.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node74.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node80.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html524"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node82.html">Les modules OCAML. Modélisation</A>
+<B> monter:</B> <A
+ HREF="node74.html">Annexes / Divers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node80.html">Utilisation de METAFONT</A>
+ &nbsp; <B>  <A ID="tex2html525"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00860000000000000000">
+The boxes</A>
+</H1>
+Nous avons vu comment représenter un environnement comme une liste
+d'associations avec des paires <code>variable.valeur</code>.
+Une autre méthode est d'utiliser le principe de <SPAN  CLASS="textit">box</SPAN> qui encapsule la
+valeur dans une lambda. La <SPAN  CLASS="textit">box</SPAN> est une lambda qui prend une valeur à  sa
+création. Puis elle réagit à  deux messages qui permettent respectivement
+d'afficher la valeur capturée ou de la modifier avec la procédure <code>set!</code>
+
+<P>
+Voici l'implémentation en Scheme:
+<PRE>
+(define (box value)
+  (lambda (msg)
+    (case msg
+      ("get" value)
+      ("set" (lambda (new-value) (set! value new-value))))))
+
+(define (make-box value)
+  (box value))
+
+(define maboite (make-box 4))
+(maboite "get")
+((maboite "set") 5)
+</PRE>
+
+<P>
+En CAML, nous pouvons rédiger le code ci-dessous:
+<PRE>
+exception Erreur
+
+let box value0 =
+	let value = ref value0 in
+	fun message -&gt;
+		match message with
+		| "get" -&gt; (fun any -&gt; print_int !value)
+		| "set" -&gt; (fun newvalue -&gt; (value := newvalue ; print_int !value ))
+		| "reset"-&gt; (fun any -&gt; (value := value0 ; print_int !value))
+		| _ -&gt; raise Erreur
+		
+		
+let maboite = box 5 ;;
+(maboite "get") 0 ;;
+(maboite "set") 1976 ;;
+(maboite "get") 0 ;;
+(maboite "reset") 0 ;;
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,513 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Introduction</TITLE>
+<META NAME="description" CONTENT="Introduction">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node21.html">
+<LINK REL="previous" HREF="node19.html">
+<LINK REL="next" HREF="node21.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html289"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node21.html">MiniCOQ</A>
+<B> monter:</B> <A
+ HREF="node19.html">Les Pure Type Systems</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node19.html">Les Pure Type Systems</A>
+ &nbsp; <B>  <A ID="tex2html290"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00380100000000000000">
+Introduction</A>
+</H3>
+Le <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul simplement typé que nous nommons <!-- MATH
+ $\lambda _\rightarrow$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img133.svg"
+ ALT="$\lambda _\rightarrow$"></SPAN> ne permet
+de représenter des fonctions que des termes vers les termes. De manière générale, nous souhaiterions
+pouvoir modéliser :
+
+<UL>
+<LI>Fonction des termes vers les termes 
+</LI>
+<LI>Fonction des types vers les termes pour permettre le polymorphisme
+</LI>
+<LI>Fonction des types vers les types pour avoir des constructeurs de type 
+</LI>
+<LI>Fonction des termes vers les types pour avoir des types dépendants
+</LI>
+</UL>
+Nous reprenons ici le très bon formalisme de Barendregt [<A
+ HREF="node114.html#baren">3</A>]
+<P>
+<DIV><B>Définition  <SPAN CLASS="arabic">5</SPAN></B> &nbsp; 
+<I>La syntaxe est la suivante :
+  </I><P><!-- MATH
+ \begin{displaymath}
+\mathcal{T} ::= V \,|\, C \,|\,\mathcal{T} \,| \,\mathcal{T}
+  \,|\, \lambda V:\mathcal{T}.\mathcal{T} \,|\, \Pi V : \mathcal{T}.\mathcal{T}
+  
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img134.svg"
+ ALT="$\displaystyle \mathcal{T} ::= V \,\vert\, C \,\vert\,\mathcal{T} \,\vert \,\mat...
+..., \lambda V:\mathcal{T}.\mathcal{T} \,\vert\, \Pi V : \mathcal{T}.\mathcal{T}
+$">
+</DIV><P></P><I>
+  <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img135.svg"
+ ALT="$C$"></SPAN> est l'ensemble des deux constantes : <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img136.svg"
+ ALT="$*$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img137.svg"
+ ALT="$\square$"></SPAN> 
+<BR>  <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img138.svg"
+ ALT="$V$"></SPAN> est un ensemble fini de variables 
+<BR>  <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN> est l'opération d'abstraction 
+<BR>  <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img139.svg"
+ ALT="$\Pi$"></SPAN> est l'opérateur produit permettant de matérialiser le type dépendant </I></DIV><P></P>
+Il n'y a donc pas de distinction entre les termes et les types. Chaque terme est typé, chaque type est typé, avec un système pyramidal
+infini.
+
+<P>
+Nous utiliserons le formalisme <SPAN  CLASS="textit">à la Church</SPAN>.
+Chaque terme est annoté de son type, contrairement au <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul simplement typé 
+<SPAN  CLASS="textit">à la Curry</SPAN> que nous
+avons présenté précedemment où les termes étaient libres de type et un mécanisme d'inférence de 
+type permettait ensuite d'associer à chaque terme un type.
+
+<P>
+L'environnement de type <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img114.svg"
+ ALT="$\Gamma$"></SPAN> est défini par :
+<P><!-- MATH
+ \begin{displaymath}
+\Gamma ::= \emptyset\ |\  \Gamma, x:\mathcal{T}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img140.svg"
+ ALT="$\displaystyle \Gamma ::= \emptyset\ \vert\ \Gamma, x:\mathcal{T} $">
+</DIV><P></P>
+Nous avons les règles de réduction suivantes:
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{l}
+ \dfrac {}{(\lambda x:A.B)~C\to _{\beta }B[C/x]} \\[1cm]
+\par
+\dfrac {B\to _{\beta }B'}{\lambda x:A.B\to _{\beta }\lambda x:A.B'} \\[1cm]
+\par
+\dfrac {A\to _{\beta }A'}{\lambda x:A.B\to _{\beta }\lambda x:A'.B} \\[1cm]
+\par
+\dfrac {B\to _{\beta }B'}{\Pi x:A.B\to _{\beta }\Pi x:A.B'} \\[1cm]
+\par
+\dfrac {A\to _{\beta }A'}{\Pi x:A.B\to _{\beta }\Pi x:A'.B} \\[1cm]
+\par
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img141.svg"
+ ALT="\begin{displaymath}
+\begin{array}{l}
+\dfrac {}{(\lambda x:A.B)~C\to _{\beta }B[...
+...A'}{\Pi x:A.B\to _{\beta }\Pi x:A'.B} \\ [1cm]
+\par
+\end{array}\end{displaymath}">
+</DIV><P></P>
+Nous avons les règles de typage suivantes.
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{l}
+\par
+\dfrac {}{\vdash *:\square }\quad {\text{(Axiom)}}\\[1cm]
+\par
+\dfrac {\Gamma \vdash A:s\quad x{\text{ does not occur in }}\Gamma }{\Gamma ,x:A\vdash x:A}\quad {\text{(Start)}}\\[1cm]
+\par
+\dfrac {\Gamma \vdash A:B\quad \Gamma \vdash C:s}{\Gamma ,x:C\vdash A:B}\quad {\text{(Weakening)}}\\[1cm]
+\par
+\dfrac {\Gamma \vdash C:\Pi x:A.B\quad \Gamma \vdash a:A}{\Gamma \vdash Ca:B[a/x]}\quad {\text{(Application)}}\\[1cm]
+\par
+\dfrac {\Gamma \vdash A:B\quad B=_{\beta }B'\quad \Gamma \vdash B':s}{\Gamma \vdash A:B'}\quad {\text{(Conversion)}}\\[1cm]
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img142.svg"
+ ALT="\begin{displaymath}
+\begin{array}{l}
+\par
+\dfrac {}{\vdash *:\square }\quad {\te...
+...mma \vdash A:B'}\quad {\text{(Conversion)}}\\ [1cm]
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+Soit la paire <!-- MATH
+ $( s 1 , s 2 )$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img143.svg"
+ ALT="$( s 1 , s 2 ) $"></SPAN>, nous avons les deux règles ci-dessous:
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{l}
+\par
+\dfrac {\Gamma \vdash A:s_{1}\quad \Gamma ,x:A\vdash B:s_{2}}{\Gamma \vdash \Pi x:A.B:s_{2}}\quad {\text{(Product)}} \\[1cm]
+\par
+\dfrac {\Gamma \vdash A:s_{1}\quad \Gamma ,x:A\vdash b:B\quad \Gamma ,x:A\vdash B:s_{2}}{\Gamma \vdash \lambda x:A.b:\Pi x:A.B}\quad {\text{(Abstraction)}}
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img144.svg"
+ ALT="\begin{displaymath}
+\begin{array}{l}
+\par
+\dfrac {\Gamma \vdash A:s_{1}\quad \Ga...
+...lambda x:A.b:\Pi x:A.B}\quad {\text{(Abstraction)}}
+\end{array}\end{displaymath}">
+</DIV><P></P>
+<BR>
+<BR>
+
+<P>
+Le système <SPAN  CLASS="textit">PTS</SPAN> respecte les propriétés suivantes:
+
+<OL>
+<LI>La propriété de Church-Rosser :  <!-- MATH
+ $M\to _{\beta }N\  \text{et}\ M\to _{\beta }N'\ \text{alors il existe}\ N''
+     \ \text{tel que}\\
+      N\ \to _{\beta }^{*}N'' \text{ et } N'\to _{\beta }^{*}N''$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img145.svg"
+ ALT="$M\to _{\beta }N\ $">&nbsp; &nbsp;et<IMG
+ STYLE=""
+ SRC="img146.svg"
+ ALT="$\ M\to _{\beta }N'\ $">&nbsp; &nbsp;alors il existe<IMG
+ STYLE=""
+ SRC="img147.svg"
+ ALT="$\ N''
+\ $">&nbsp; &nbsp;tel que<IMG
+ STYLE=""
+ SRC="img148.svg"
+ ALT="$\\
+N\ \to _{\beta }^{*}N''$">&nbsp; &nbsp; et&nbsp;<IMG
+ STYLE=""
+ SRC="img149.svg"
+ ALT="$N'\to _{\beta }^{*}N''$"></SPAN> 
+<BR></LI>
+<LI>La propriété de réduction : <!-- MATH
+ $\Gamma \vdash M:T\  \text{et}\
+    M\to _{\beta }M' \ \text{alors}\  \Gamma \vdash M':T $
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img150.svg"
+ ALT="$\Gamma \vdash M:T\ $">&nbsp; &nbsp;et<IMG
+ STYLE=""
+ SRC="img151.svg"
+ ALT="$\
+M\to _{\beta }M' \ $">&nbsp; &nbsp;alors<IMG
+ STYLE=""
+ SRC="img152.svg"
+ ALT="$\ \Gamma \vdash M':T $"></SPAN> 
+<BR></LI>
+<LI>L'unicité des types : <!-- MATH
+ $\Gamma \vdash A:B \ \text{et}\ \Gamma \vdash A:B' \ \text{alors}\ B=_{\beta }B'$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img153.svg"
+ ALT="$\Gamma \vdash A:B \ $">&nbsp; &nbsp;et<IMG
+ STYLE=""
+ SRC="img154.svg"
+ ALT="$\ \Gamma \vdash A:B' \ $">&nbsp; &nbsp;alors<IMG
+ STYLE=""
+ SRC="img155.svg"
+ ALT="$\ B=_{\beta }B'$"></SPAN> 
+<BR></LI>
+</OL>
+
+<P>
+Pour pouvoir éprouver notre système PTS, nous ajoutons les constantes suivantes à notre environnement <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img114.svg"
+ ALT="$\Gamma$"></SPAN>
+<P><!-- MATH
+ \begin{displaymath}
+\Gamma = \{ (*:\square) ;\ (\text{nat}:*) ;\ (O:nat) ;\ (\text{succ}:\Pi x:\text{nat}.\text{nat}) \}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img156.svg"
+ ALT="$\displaystyle \Gamma = \{ (*:\square) ;\ ($">nat<IMG
+ STYLE=""
+ SRC="img157.svg"
+ ALT="$\displaystyle :*) ;\ (O:nat) ;\ ($">succ<IMG
+ STYLE=""
+ SRC="img158.svg"
+ ALT="$\displaystyle :\Pi x:$">nat<IMG
+ STYLE=""
+ SRC="img159.svg"
+ ALT="$\displaystyle .$">nat<IMG
+ STYLE=""
+ SRC="img160.svg"
+ ALT="$\displaystyle ) \} $">
+</DIV><P></P>
+
+<P>
+Voici quelques exemples interprétés par OCAML ci-dessous. Nous avons simplifié l'affichage
+du type <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img161.svg"
+ ALT="$\Pi x:A.B$"></SPAN> par <!-- MATH
+ $A\rightarrow B$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img162.svg"
+ ALT="$A\rightarrow B$"></SPAN> si <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img20.svg"
+ ALT="$x$"></SPAN> n'est pas une variable libre de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img163.svg"
+ ALT="$B$"></SPAN>.
+
+<P>
+Nous utilisons pour l'affichage OCAML les caractères UTF-8 :  <code>λ, π, →</code>
+
+<P>
+<PRE>
+(*  Polymorphisme   *)
+let id = Lam("A", C "*", Lam("x", V "A", V "x")) ;;
+let id_nat = App(id, C "nat") ;;
+let zero = App(id_nat, C "O") ;;
+
+id = λA:*.λx:A.x
+id nat = λA:*.λx:A.x nat
+
+print_terme (typage id env0) 
+πA:*.A→A
+
+print_terme (reduc id_nat) ;;
+λx:nat.x
+
+print_terme zero ;;
+λA:*.λx:A.x nat O
+print_terme zero ;;
+print_terme (typage zero env0) ;;
+nat
+
+print_terme (fullReduc zero) ;;
+O
+
+(* Les entiers *)
+let entiers = Prod ("X", C "*",  Prod ("x", V "X", Prod ("y", Prod ("z", V "X", V "X"), V "X")))
+utop # print_terme entiers;;
+πX:*.(X→((X→X)→X))
+
+let zero =  Lam("X", C "*", Lam("x", V "X", Lam ("y", Prod("z", V "X", V "X"), V "x")))
+
+let succ = Lam ("n", entiers, Lam ("X", C "*", Lam ("x", V "X", Lam ("y", Prod("z", V "X", V "X"),
+               App(V "y", App (App(App(V "n", V "X"), V "x"), V "y") )))))
+
+utop # print_terme (fullReduc trois) ;;
+λX:*.λx:X.λy:(X→X).y (y (y x) ) 
+
+(*twice*)
+utop # print_terme twice ;;
+λA:*.λf:(A→A).λa:A.f (f a) 
+
+utop # print_terme (typage twice env0) ;;
+πA:*.((A→A)→(A→A))
+
+let plus2  = App(App(twice, entiers), succ) ;;
+print_terme (fullReduc (App(plus2, trois))) ;
+λX:*.λx:X.λy:(X→X).y (y (y (y (y x) ) ) )
+</PRE>
+Le type produit pourra être défini de la manière suivante :
+
+<P>
+Si <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img164.svg"
+ ALT="$U$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img138.svg"
+ ALT="$V$"></SPAN> sont des types, alors 
+<P><!-- MATH
+ \begin{displaymath}
+U\times V = \Pi X.(U\rightarrow V \rightarrow X)\rightarrow X
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img165.svg"
+ ALT="$\displaystyle U\times V = \Pi X.(U\rightarrow V \rightarrow X)\rightarrow X$">
+</DIV><P></P>
+<P><!-- MATH
+ \begin{displaymath}
+<u,v> = \lambda X:*.\lambda x:(U \rightarrow V \rightarrow X). x u v
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img166.svg"
+ ALT="$\displaystyle &lt;u,v&gt; = \lambda X:*.\lambda x:(U \rightarrow V \rightarrow X). x u v $">
+</DIV><P></P> 
+
+<P>
+Prenons par exemple le couple d'entiers <!-- MATH
+ $<100, 101>$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img167.svg"
+ ALT="$&lt;100, 101&gt;$"></SPAN>, nous le modélisons par 
+<PRE>
+let prod_100_101 = 
+  Lam("X", C "nat", 
+    Lam("x", Prod("z", C "nat", 
+:w
+     (Prod ("w", C "nat", V "X" ))),App (App (V "x", N 100), N 101))) ;;
+print (typage prod_100_101 env0) ;;
+πX:nat.((nat→(nat→X))→X)
+</PRE>
+
+<P>
+Les projections sont définies par 
+<P><!-- MATH
+ \begin{displaymath}
+\pi^1 t = t\ U (\lambda x:U.\lambda y:V. x) \text{  et  } \pi^2 t = t\ U (\lambda x:U.\lambda y:V. y)
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img168.svg"
+ ALT="$\displaystyle \pi^1 t = t\ U (\lambda x:U.\lambda y:V. x)$">&nbsp; &nbsp; et &nbsp;<IMG
+ STYLE=""
+ SRC="img169.svg"
+ ALT="$\displaystyle \pi^2 t = t\ U (\lambda x:U.\lambda y:V. y)$">
+</DIV><P></P>
+<PRE>
+let proj1 = 
+  Lam("t", (typage prod_uv env0), 
+    App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "x"))))
+ in print (fullReduc (App (proj1, prod_100_101)))
+
+let proj2 = 
+  Lam("t", (typage prod_uv env0),
+    App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "y"))))
+in print (fullReduc (App (proj2, prod_uv)))
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node21.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node19.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html289"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node21.html">MiniCOQ</A>
+<B> monter:</B> <A
+ HREF="node19.html">Les Pure Type Systems</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node19.html">Les Pure Type Systems</A>
+ &nbsp; <B>  <A ID="tex2html290"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

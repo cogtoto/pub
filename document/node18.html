@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Inférence de type d'un terme </TITLE>
+<META NAME="description" CONTENT="Inférence de type d'un terme ">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node17.html">
+<LINK REL="next" HREF="node19.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node19.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node16.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node17.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html278"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node19.html">Les Pure Type Systems</A>
+<B> monter:</B> <A
+ HREF="node16.html">Le -calcul simplement typé</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node17.html">Implémentation</A>
+ &nbsp; <B>  <A ID="tex2html279"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00370200000000000000">
+Inférence de type d'un terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img4.svg"
+ ALT="$t$"></SPAN></A>
+</H3>
+Prenons l'exemple du terme 
+<!-- MATH
+ $\mathtt{apply} \equiv \lambda f . \lambda x .fx$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img121.svg"
+ ALT="$\mathtt{apply} \equiv \lambda f . \lambda x .fx$"></SPAN>
+
+<P>
+L'algorithme d'inférence se déroule en quatre temps.
+
+<P>
+
+<OL>
+<LI>Assignation préliminaire de types ou variables de types à chaque sous-terme de l'expression.
+  Pour cela, nous parcourons  l'arbre du terme en y affectant à chaque variable liée une variable de type, ainsi qu'à
+  chaque sous-terme. Ce parcours nous rend en sortie une aliste comprenant l'occurence et la variable de type associée <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img122.svg"
+ ALT="$\alpha_i$"></SPAN>
+ <DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img123.svg"
+ ALT="\begin{tikzpicture}[level distance=1.5cm,
+level 1/.style={sibling distance=2cm}...
+...node {@}
+child { node {$f$} }
+child { node {$x$} }
+}
+}
+;
+\end{tikzpicture}">
+<BR> 
+<BR>
+<IMG
+ STYLE=""
+ SRC="img124.svg"
+ ALT="\begin{tikzpicture}[level distance=1.5cm,
+level 1/.style={sibling distance=3cm}...
+...1,\alpha_f)$\ } }
+child { node {$(222, \alpha_x)$} }
+}
+}
+;
+\end{tikzpicture}">
+<BR>
+</DIV>
+
+<P>
+</LI>
+<LI>Collecte des contraintes avec la fonction <!-- MATH
+ $T: \mathrm{terme} \mapsto \mathrm{type}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img125.svg"
+ ALT="$T: \mathrm{terme} \mapsto \mathrm{type}$"></SPAN> 
+    
+<UL>
+<LI>Pour une abstraction :  <!-- MATH
+ $e = \lambda x.e_1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img126.svg"
+ ALT="$e = \lambda x.e_1 $"></SPAN> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <!-- MATH
+ $T(e) = T(x) \rightarrow T(e_1)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img128.svg"
+ ALT="$T(e) = T(x) \rightarrow T(e_1) $"></SPAN>
+</LI>
+<LI>Pour une application :  <!-- MATH
+ $e = e_1 e_2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img129.svg"
+ ALT="$e = e_1 e_2$"></SPAN> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <!-- MATH
+ $T(e_1) = T(e_2) \rightarrow T(e)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img130.svg"
+ ALT="$T(e_1) = T(e_2) \rightarrow T(e) $"></SPAN>
+</LI>
+<LI>Pour l'application de l'addition  : <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img131.svg"
+ ALT="$e=e_1+e_2$"></SPAN> <IMG
+ STYLE=""
+ SRC="img127.svg"
+ ALT="{\letterimp D}">  <!-- MATH
+ $T(e)= T(e_1) = T(e_2) = \mathtt{int}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img132.svg"
+ ALT="$T(e)= T(e_1) = T(e_2) = \mathtt{int} $"></SPAN>
+</LI>
+</UL>  
+
+<P>
+<PRE>
+utop#  t ;;
+- : terme = Lam ("f", Lam ("x", App (Var "f", Var "x")))
+
+utop# hm t ;;
+- : (ltype * ltype) list =
+[(Vart "alpha_1", Fleche (Vart "alpha_f", Vart "alpha_2"));
+ (Vart "alpha_f", Vart "alpha_f");
+ (Vart "alpha_2", Fleche (Vart "alpha_x", Vart "alpha_3"));
+ (Vart "alpha_x", Vart "alpha_x");
+ (Vart "alpha_f", Fleche (Vart "alpha_x", Vart "alpha_3"));
+ (Vart "alpha_f", Vart "alpha_f"); (Vart "alpha_x", Vart "alpha_x")]
+</PRE>
+
+<P>
+</LI>
+<LI>Unification de ces constraintes afin de trouver la substitution la plus générale si l'expression est typable. 
+  Dans le cas contraire, échec. Nous utilisons l'algorithme d'unification que nous détaillerons dans un chapitre suivant.
+
+<P>
+</LI>
+<LI>Nous appliquons cette substitution à la variable de type initialement affectée au terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img4.svg"
+ ALT="$t$"></SPAN>, à l'étape 1.
+<PRE>
+  - : ltype = Fleche (Fleche (Vart "alpha_x", Vart "alpha_3"),
+                      Fleche (Vart "alpha_x", Vart "alpha_3"))
+</PRE>
+</LI>
+</OL>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

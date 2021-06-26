@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>La notation de de Bruijn</TITLE>
+<META NAME="description" CONTENT="La notation de de Bruijn">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node16.html">
+<LINK REL="previous" HREF="node11.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html270"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node16.html">Le -calcul simplement typé</A>
+<B> monter:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node14.html">La fonction factorielle</A>
+ &nbsp; <B>  <A ID="tex2html271"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00360000000000000000">
+La notation de <SPAN  CLASS="textit">de Bruijn</SPAN></A>
+</H1>
+
+<SPAN  CLASS="textit">What's in a name ? That which we call a rose 
+<BR>
+By any other name would smell as sweet.</SPAN>[<A
+ HREF="node114.html#WS">17</A>] 
+<BR>
+Citation reprise par Xavier Leroy dans
+	   son excellent cours au collège de France 
+<BR>
+<P>
+<BR>
+<BR>
+Le mécanisme de capture d'une variable libre par une lambda, qui nous oblige à faire de manière fastidieuse
+du renommage ponctuel de variables, est dû au fait qu'il y a un partage possible entre les noms des variables
+libres et des variables liées. 
+
+<P>
+Pour éviter cela, nous pouvons utiliser une autre représentation du <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-terme. Le principe est
+de nommer les variables liées par un indice indiquant la profondeur de leurs liens (ou autrement dit la
+hauteur de leurs liaisons).
+
+<P>
+L'arbre syntaxique sera alors défini par :
+
+<OL>
+<LI>les feuilles qui correspondent à des variables libres ou liées, représentées par un indice
+</LI>
+<LI>le noeud unaire <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>
+</LI>
+<LI>le noeud binaire <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img108.svg"
+ ALT="$@$"></SPAN>
+</LI>
+</OL>
+
+<P>
+<PRE>
+type tbruijn =
+	| Va of int
+	| La of tbruijn 
+	| Ap of tbruijn * tbruijn
+</PRE>
+
+<P>
+Soit le terme <!-- MATH
+ $M=\lambda x.x(\lambda y. yx)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img109.svg"
+ ALT="$M=\lambda x.x(\lambda y. yx)$"></SPAN>, indiquons en exposant la hauteur de la liaison
+de chaque variable liée : <!-- MATH
+ $M=\lambda x.x^0(\lambda y. y^0x^1)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img110.svg"
+ ALT="$M=\lambda x.x^0(\lambda y. y^0x^1)$"></SPAN>
+
+<DIV class="CENTER"><A ID="508"></A>
+<TABLE>
+<CAPTION class="BOTTOM"><STRONG>Figure:</STRONG>
+Représentation du terme <!-- MATH
+ $\lambda x.x(\lambda y. yx)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img3.svg"
+ ALT="$\lambda x.x(\lambda y. yx)$"></SPAN></CAPTION>
+<TR><TD><IMG
+ STYLE=""
+ SRC="img111.svg"
+ ALT="\begin{figure}\centering\begin{tikzpicture}[scale=0.5]
+\node{$\lambda$}
+chil...
+...node {@}
+child {node {0}}
+child {node {1}}}}} ;
+\end{tikzpicture}\end{figure}"></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Pour les variables libres, nous pouvons aussi utiliser un indice pour les nommer.
+Soit un ensemble de variables libres <!-- MATH
+ ${x_1, x_2, x_3,\dots, x_n}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img112.svg"
+ ALT="${x_1, x_2, x_3,\dots, x_n}$"></SPAN> nous les nommerons en ajoutant 
+à leur indice <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img113.svg"
+ ALT="$i$"></SPAN> la profondeur jusqu'à la racine. Les indices des variables libres seront
+ donc toujours supérieur à ceux des variables liées sur leurs branches. Cependant, avec cette notation une
+ même variable libre avec plusieurs occurences dans un terme pourra avoir des indices différents.
+
+<P>
+Nous avons maintenant une représentation <SPAN  CLASS="textit">canonique</SPAN> : deux termes sont <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img42.svg"
+ ALT="$\alpha$"></SPAN>-équivalents
+ si et seulement si leurs représentations en de de Bruijn sont égales.
+
+<P>
+Voici une fonction d'implémentation <code>t2b</code> transformant des termes en termes de de Bruijn.
+<PRE>
+let reste s = int_of_string(sub s 1 ((String.length s)-1)) ;;
+
+let add_env var env =
+	(var,0)::map (fun pp -&gt; (fst(pp),(1 + snd(pp)))) env ;;
+
+let t2b terme =
+	let l = varLibres terme in
+	let rec terme_to_bruijn t env hauteur =
+	match t with
+	| Var x -&gt; if (mem x l) then Va((reste x) + hauteur) else Va(assoc x env)
+	| App (n1, n2) -&gt; Ap (terme_to_bruijn n1 env hauteur, terme_to_bruijn n2 env hauteur) 
+	| Lam (x, c) -&gt; La (terme_to_bruijn c (add_env x env) (hauteur+1) )
+	in terme_to_bruijn terme [] 0
+
+let decalage d t =
+	let rec aux p = function
+	| Ap (t1,t2) -&gt; Ap (aux p t1, aux p t2) 
+	| La (t) -&gt; La (aux (p+1) t)
+	| Va (i) when i&lt;p -&gt; Va(i)
+	| Va(i) -&gt; Va (i+d)
+	in aux 0 t
+
+let beta_b (La u) t =
+	let rec aux p = function
+	| Ap (u1,u2) -&gt; Ap (aux p u1, aux p u2)
+	| La (v) -&gt; La (aux (p+1) v)
+	| Va (i)  when i=p -&gt; decalage p t (*on rend t décalé de la profondeur d'abstr p*)
+	| Va (i)  when i&lt;p -&gt; Va (i) (*i est lié, on la rend tel quel *)
+	| Va (i) -&gt; Va (i-1) (* on décrèmente la variable libre car la betareduc supprime une lamdda*)
+	in aux 0 u ;;
+
+let rec normale_bruijn  = function
+	| Va x -&gt; raise IRREDUCTIBLE
+	| La n -&gt; La (normale_bruijn n)
+	| Ap (La n, m) -&gt; beta_b (La n) m
+	| Ap (n,m) -&gt; try Ap (normale_bruijn  n, m)
+	with IRREDUCTIBLE -&gt; Ap (n, normale_bruijn  m)
+
+let rec reduc_bruijn t =
+	try reduc_bruijn (normale_bruijn t)
+	with IRREDUCTIBLE -&gt; t
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node3.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html270"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node16.html">Le -calcul simplement typé</A>
+<B> monter:</B> <A
+ HREF="node3.html">Le -calcul et la</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node14.html">La fonction factorielle</A>
+ &nbsp; <B>  <A ID="tex2html271"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

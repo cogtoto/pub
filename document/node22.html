@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Le logique</TITLE>
+<META NAME="description" CONTENT="Le logique">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node23.html">
+<LINK REL="previous" HREF="node21.html">
+<LINK REL="next" HREF="node23.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node23.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node21.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html293"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node23.html">L'égalité</A>
+<B> monter:</B> <A
+ HREF="node19.html">Les Pure Type Systems</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node21.html">MiniCOQ</A>
+ &nbsp; <B>  <A ID="tex2html294"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00380300000000000000">
+Le <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img5.svg"
+ ALT="$\lor $"></SPAN> logique</A>
+</H3>
+
+<P>
+<BR>
+<IMG
+ STYLE=""
+ SRC="img174.svg"
+ ALT="\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{or\_elim}: \coq...
+...docvar{hb}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\end{coqdoccode}">
+<BR>
+<PRE>
+(* fonction générée en COQ*)
+  or_elim = 
+ fun (a b c : Prop) (h1 : a -&gt; c) (h2 : b -&gt; c) (h3 : a \/ b) =&gt;
+ match h3 with
+  | or_introl ha =&gt; h1 ha
+  | or_intror hb =&gt; h2 hb
+ end
+     : forall a b c : Prop, (a -&gt; c) -&gt; (b -&gt; c) -&gt; a \/ b -&gt; c  
+
+(* fonction OCAML *)
+let preuve_or_elim =
+  Lam("A", Type,
+    Lam("B", Type,
+      Lam ("C", Type,
+        Lam("h1", Prod("x", V "A", V "C"),
+          Lam("h2", Prod("y", V "B", V "C"),
+            Lam("h3", Or(V "A", V "B"), 
+              Case(V "h3", V "h1", V "h2"))))))) 
+  in (print preuve_or_elim ; print_newline() ;
+      print (check preuve_or_elim env0)) ;;
+&gt; λA:Type.λB:Type.λC:Type.λh1:(A→C).λh2:(B→C).λh3:A\/B.case(h3, h1, h2)
+  πA:Type.πB:Type.πC:Type.((A→C)→((B→C)→(A\/B→C)))
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

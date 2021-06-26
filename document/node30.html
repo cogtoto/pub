@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>L'évaluation</TITLE>
+<META NAME="description" CONTENT="L'évaluation">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node31.html">
+<LINK REL="previous" HREF="node29.html">
+<LINK REL="next" HREF="node31.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node31.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node29.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node29.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html327"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node31.html">Les étapes Read, Eval,</A>
+<B> monter:</B> <A
+ HREF="node29.html">Un interprète MiniScheme avec</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node29.html">Un interprète MiniScheme avec</A>
+ &nbsp; <B>  <A ID="tex2html328"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00421000000000000000">
+L'évaluation</A>
+</H2>
+Le <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul repose sur un mécanisme de substitution permettant de réduire les termes et
+aboutir à une forme normale. En programmation fonctionnelle, au lieu de réduire un terme, on
+l'évaluera. Un terme non fermé ne pourra être évalué que dans un environnement où ses 
+variables libres ont une liaison. Nous avons les définitions suivantes:
+
+<UL>
+<LI>Une <SPAN  CLASS="textit">liaison</SPAN> est un couple <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img182.svg"
+ ALT="$(x,v)$"></SPAN> où <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img20.svg"
+ ALT="$x$"></SPAN> est une variable et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img183.svg"
+ ALT="$v$"></SPAN> est une valeur.
+</LI>
+<LI>Un <SPAN  CLASS="textit">environnement</SPAN> est une liste de liaison
+</LI>
+<LI>Une <SPAN  CLASS="textit">fermeture</SPAN> est un couple <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img184.svg"
+ ALT="$(M,\rho)$"></SPAN> où <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> est un terme et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img185.svg"
+ ALT="$p$"></SPAN> un environnement 
+	comportant une liaison pour chaque variable libre de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN>.
+</LI>
+<LI>Une <SPAN  CLASS="textit">valeur</SPAN> est une fermeture <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img186.svg"
+ ALT="$(M,p)$"></SPAN> avec <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> de forme normale.
+</LI>
+</UL>
+On formalise l'évaluation par la règle de jugement <!-- MATH
+ $\rho \vdash M \rightarrow v$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img187.svg"
+ ALT="$\rho \vdash M \rightarrow v$"></SPAN>. Elle exprime
+que dans l'environnement <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img188.svg"
+ ALT="$\rho$"></SPAN>, le terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> a pour valeur <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img183.svg"
+ ALT="$v$"></SPAN>.
+
+<P>
+La règle d'évaluation de l'appel par valeur se formalise ainsi comme suit:
+<P><!-- MATH
+ \begin{displaymath}
+(App_v): \frac{\rho \vdash M \rightarrow (\lambda x M^{'} , \rho ^{'} )
+		\ \ \ \ \ \rho \vdash N \rightarrow v \ \ \ \ \ (x,v);\rho ^{'} \vdash M^{'} \rightarrow v^{'} }
+		 { \rho \vdash M N \rightarrow v^{'} }
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img189.svg"
+ ALT="$\displaystyle (App_v): \frac{\rho \vdash M \rightarrow (\lambda x M^{'} , \rho ...
+...o ^{'} \vdash M^{'} \rightarrow v^{'} }
+{ \rho \vdash M N \rightarrow v^{'} }
+$">
+</DIV><P></P>
+
+<P>
+L'évaluation de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img190.svg"
+ ALT="$M^{'}$"></SPAN> le corps de la lambda se fait dans l'environnement <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img191.svg"
+ ALT="$\rho ^{'}$"></SPAN> augmenté 
+d'une liaison due du passage de paramètre. C'est la caractéristique de la liaison lexicale.
+Pour  une liaison dynamique, l'évaluation du corps de la lambda se fera  dans l'environnement
+courant <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img188.svg"
+ ALT="$\rho$"></SPAN>
+
+<P>
+Dans le cadre d'une implémentation en ML, l'erreur à ne pas faire (et que j'ai malheureusement faite initialement) et de
+représenter la valeur d'une évaluation avec un type différent de l'expression à évaluer.
+La puissance de Lisp repose sur  cette uniformité entre programmme et valeur. Nous utiliserons cette caractéristique pour
+implémenter un interprète Lisp en Lisp.
+
+<P>
+Voici la séquence du code, depuis le stream en entrée de l'analyseur lexical jusqu'à la sortie de l'évaluateur <code>eval</code>.
+J'ai  fait le choix d'avoir une représentation intermédiaire <code>ast</code> permettant de modéliser l'arbre syntaxique, et de faciliter
+le processus d'évaluation.
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img192.svg"
+ ALT="\begin{tikzpicture}
+\node (A) at (-1,0) {stream};
+\node (B) at (2,0) {token};
+...
+...rint}} (P) ;
+\draw[dotted] (C) -- node {\textit{print}} (Q) ;
+\end{tikzpicture}">
+<BR>
+</DIV>
+
+<P>
+Voici le code OCAML des type abstrait <code>exp</code>, <code>ast</code> et <code>env</code> :
+
+<P>
+<PRE>
+type exp =
+| Booleen of bool
+| Symbole of string
+| Mot of string
+| Entier of int
+| Nil
+| Paire of exp ref * exp ref
+| Closure of string list * ast list * (env ref)
+and ast =
+| Atom of exp
+| Var of string
+| If of ast * ast * ast
+| Cond of (ast * ast) list
+| And of ast list
+| Or of ast list
+| Call of ast * ast list
+| Call0 of ast    (* procedure sans argument *)
+| Lambda of string list * ast list   
+| Let of (string * ast) list * ast list
+| Letrec of (string * ast) list * ast list
+| Define of string * ast
+| Begin of ast list
+| Apply of ast * ast list
+| Quote of exp
+and env = (string * exp) list
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node31.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node29.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node29.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html327"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node31.html">Les étapes Read, Eval,</A>
+<B> monter:</B> <A
+ HREF="node29.html">Un interprète MiniScheme avec</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node29.html">Un interprète MiniScheme avec</A>
+ &nbsp; <B>  <A ID="tex2html328"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

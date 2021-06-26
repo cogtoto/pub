@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Les modules OCAML. Modélisation d'un monoïde</TITLE>
+<META NAME="description" CONTENT="Les modules OCAML. Modélisation d'un monoïde">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node83.html">
+<LINK REL="previous" HREF="node81.html">
+<LINK REL="next" HREF="node83.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node83.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node74.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node81.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html526"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node83.html">Machine Learning and Neural</A>
+<B> monter:</B> <A
+ HREF="node74.html">Annexes / Divers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node81.html">The boxes</A>
+ &nbsp; <B>  <A ID="tex2html527"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00870000000000000000">
+Les modules OCAML. Modélisation d'un monoïde</A>
+</H1>
+Un monoïde est une structure algébrique qui possède une loi de composition
+interne associative et un élément neutre.
+Représentons cette structure en OCAML, en définissant un module.
+Nous reprenons ici l'excellent article 
+https://blog.derniercri.io/observons-une-premiere-structure-algebrique-appliquee-a-linformatique-le-monoide/
+<PRE>
+module type MONOID =
+sig
+type t
+val ( &lt;+&gt; ) : t -&gt; t -&gt; t
+val neutral : t	
+end
+
+module String_monoid : MONOID with type t = string  =
+struct
+type t = string
+let ( &lt;+&gt; ) = (^)
+let neutral = ""
+end
+
+String_monoid.("abc" &lt;+&gt; "def" &lt;+&gt; neutral)
+-&gt; String_monoid.t = "abcdef"
+</PRE>
+
+<P>
+En algèbre, un morphisme (ou homomorphisme) est une application entre deux structures algébriques
+de même espèce.
+
+<P>
+Pour les  monoïdes, un morphisme est une application 
+<!-- MATH
+ $f:(M,*,e)\longrightarrow (M',\star ,e')$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img429.svg"
+ ALT="$f:(M,*,e)\longrightarrow (M',\star ,e')$"></SPAN> , entre deux monoïdes <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img430.svg"
+ ALT="$(M,*,e)$"></SPAN> et 
+<!-- MATH
+ $(M',\star , e')$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img431.svg"
+ ALT="$(M',\star , e')$"></SPAN> qui vérifie :
+
+<UL>
+<LI><!-- MATH
+ $\forall (g,h)\in M^{2},~f(g*h)=f(g)\star f(h)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img432.svg"
+ ALT="$\forall (g,h)\in M^{2},~f(g*h)=f(g)\star f(h)$"></SPAN>
+</LI>
+<LI><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img433.svg"
+ ALT="$f(e)=e'$"></SPAN>
+</LI>
+</UL>
+<PRE>
+#load "Str.cma"
+
+let count  t =  split (regexp " ") t   |&gt; List.length ;;
+
+let pageA = "Hello World "
+let pageB = "Foo bar "
+let pageC = "O Caml " ;;
+
+count String_monoid.(pageA &lt;+&gt; pageB &lt;+&gt;  pageC) ;;
+count(String_monoid.(pageA)) + count(String_monoid.(pageB)) + count(String_monoid.(pageC));;
+</PRE>
+Nous avons ici utilisé l'opérateur <code>|&gt;</code> défini comme suit <code>let ( |&gt; ) x f = f x</code>
+
+<P>
+Cette fonction <code>count</code> est ainsi un morphisme entre le monoïde <code>String_monoid</code> et 
+le monoïde des entiers (avec <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img434.svg"
+ ALT="$+$"></SPAN> comme fonction de composition interne et <SPAN CLASS="MATH">0</SPAN>
+comme élément neutre)
+<BR><HR>
+
+</BODY>
+</HTML>

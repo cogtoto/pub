@@ -1,0 +1,412 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Les fonctions récursives</TITLE>
+<META NAME="description" CONTENT="Les fonctions récursives">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node72.html">
+<LINK REL="previous" HREF="node70.html">
+<LINK REL="next" HREF="node72.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node72.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node70.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html464"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node72.html">La machine de Turing</A>
+<B> monter:</B> <A
+ HREF="node70.html">La calculabilité</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node70.html">La calculabilité</A>
+ &nbsp; <B>  <A ID="tex2html465"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00710000000000000000">
+Les fonctions récursives</A>
+</H1>
+Commençons  par définir les fonctions récursives <SPAN  CLASS="textit">primitives</SPAN> telles que formalisées par
+Gödel.
+
+<P>
+Un ensemble <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img322.svg"
+ ALT="$E$"></SPAN> de fonctions numériques de <!-- MATH
+ $\mathbb{N}^p$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img376.svg"
+ ALT="$\mathbb{N}^p$"></SPAN> dans <!-- MATH
+ $\mathbb{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img371.svg"
+ ALT="$\mathbb{N}$"></SPAN> est dit :
+<table width="90%">	<tr><td align="right" valign="top">i)</td><td valign="top">&nbsp;clos par composition si pour tout <!-- MATH
+ $h, g_1, \dots,g_p \in E$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img377.svg"
+ ALT="$h, g_1, \dots,g_p \in E$"></SPAN>, si on définit <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img63.svg"
+ ALT="$f$"></SPAN> par
+	 <P><!-- MATH
+ \begin{displaymath}
+f(n)=h(g_1(n), \dots, g_p(n))
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img378.svg"
+ ALT="$\displaystyle f(n)=h(g_1(n), \dots, g_p(n))$">
+</DIV><P></P>
+alors <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img379.svg"
+ ALT="$f \in E$"></SPAN>
+	</td></tr>
+<tr><td align="right" valign="top">ii)</td><td valign="top">&nbsp;clos par récursion primitive si pour tout <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img380.svg"
+ ALT="$h,g \in E$"></SPAN>, si on définit <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img63.svg"
+ ALT="$f$"></SPAN> par
+	<P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img381.svg"
+ ALT="$\displaystyle f(0,n)$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img382.svg"
+ ALT="$\displaystyle = g(n)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img383.svg"
+ ALT="$\displaystyle f(m+1, n)$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img384.svg"
+ ALT="$\displaystyle = h(f(m,n),m,n)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+alors <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img379.svg"
+ ALT="$f \in E$"></SPAN></td></tr></table>
+
+Les fonctions de base sont la constante <!-- MATH
+ $0 : \mathbb{N} \rightarrow \mathbb{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img385.svg"
+ ALT="$0 : \mathbb{N} \rightarrow \mathbb{N}$"></SPAN>, le successeur 
+<!-- MATH
+ $s :\mathbb{N} \rightarrow \mathbb{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img386.svg"
+ ALT="$s :\mathbb{N} \rightarrow \mathbb{N}$"></SPAN>, les projections <!-- MATH
+ $pr_k^i : \mathbb{N}^k \rightarrow \mathbb{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img387.svg"
+ ALT="$pr_k^i : \mathbb{N}^k \rightarrow \mathbb{N}$"></SPAN>
+
+<P>
+Les fonctions récursives primitives sont les éléments du plus petit ensemble <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img322.svg"
+ ALT="$E$"></SPAN> contenant les
+fonctions de base et clos par composition et récursion primitive.
+
+<P>
+La quasi totalité des fonctions est récursive primitive. Considérons par exemple l'addition.
+<P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img388.svg"
+ ALT="$\displaystyle 0 + y$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img389.svg"
+ ALT="$\displaystyle = y$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img390.svg"
+ ALT="$\displaystyle s(x) + y$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img391.svg"
+ ALT="$\displaystyle = s(x+y)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+Autrement dit :
+<P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img392.svg"
+ ALT="$\displaystyle + (0, y)$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img393.svg"
+ ALT="$\displaystyle = g(y)\ $">&nbsp; &nbsp;avec<IMG
+ STYLE=""
+ SRC="img394.svg"
+ ALT="$\displaystyle \ g=pr_1^1 (y)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img395.svg"
+ ALT="$\displaystyle + (s(x), y)$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img396.svg"
+ ALT="$\displaystyle = h (+(x, y), x, y)\ $">&nbsp; &nbsp;avec<IMG
+ STYLE=""
+ SRC="img397.svg"
+ ALT="$\displaystyle \ h=s \circ pr_3^1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+Voici un opérateur de récursion primitive en ML
+<PRE>
+let rec_prim g h = 
+let rec f m n = 
+	if m=0 then g n 
+	else h (f (m-1) n) (m-1) n
+in f
+</PRE>
+Nous pouvons ainsi exprimer la fonction <code>add</code> :
+<PRE>
+let s n = n+1 ;;
+let pr_11 n = n ;;
+let pr_31 x y z =  x ;;
+let g y = pr_11 y ;;
+let h x y z =  s (pr_31 x y z);;
+
+let add = rec_prim g h ;;
+
+utop # add 5 8 ;;
+- : int = 13
+</PRE>
+Toute fonction récursive primitive peut s'écrire avec une simple boucle <code>for</code>.
+Le nombre d'itérations est déterminé ; il ne dépend pas d'une condition d'évaluation du programme.
+Ainsi, nous pouvons code de la manière suivante :
+<PRE>
+let add x y =
+	let r = ref (g y) in
+	(for i=1 to x do r := h !r i y done ; 
+	 !r
+	)
+</PRE>
+Existe-t'il des fonctions caculables qui ne sont pas primitives récursives ?
+La réponse est oui. Notamment toute fonction qui ne termine pas (boucle <code>while</code> infinie)
+ne pourra s'écrire en fonction récursive primitive.
+Il est cependant beaucoup plus complexe d'identifier des fonctions qui terminent et qui soient non récursives primitives.
+La fonction d'<SPAN  CLASS="textit">Ackermann</SPAN> est traditionnelement donnée en exemple, bien que cette fonction n'a pas
+de réalité pratique...
+
+<P>
+La fonction d’Ackermann <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img398.svg"
+ ALT="$A$"></SPAN> est définie sur <!-- MATH
+ $\mathbb{N} × \mathbb{N}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img399.svg"
+ ALT="$\mathbb{N} × \mathbb{N}$"></SPAN> par : 
+<BR><!-- MATH
+ $A(0, p) = p + 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img400.svg"
+ ALT="$A(0, p) = p + 1$"></SPAN> pour <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img401.svg"
+ ALT="$p ≥ 0$"></SPAN> 
+<BR><!-- MATH
+ $A(n, 0) = A(n − 1, 1)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img402.svg"
+ ALT="$A(n, 0) = A(n − 1, 1)$"></SPAN> pour <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img403.svg"
+ ALT="$n ≥ 1$"></SPAN> 
+<BR><!-- MATH
+ $A(n, p) = A(n − 1, A(n, p − 1))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img404.svg"
+ ALT="$A(n, p) = A(n − 1, A(n, p − 1))$"></SPAN> si <!-- MATH
+ $n ≥ 1, p ≥ 1$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img405.svg"
+ ALT="$n ≥ 1, p ≥ 1$"></SPAN> 
+<BR>
+<P>
+<PRE>
+let rec ack = function
+	| (0,p) -&gt; p+1
+	| (n,0) -&gt; ack (n-1, 1)
+	| (n,p) -&gt; ack (n-1, ack (n, p-1))
+</PRE>
+
+<P>
+La fonction d’Ackermann croît très rapidement, en particulier <!-- MATH
+ $n \rightarrow A(n, n)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img406.svg"
+ ALT="$n \rightarrow A(n, n)$"></SPAN> croît
+plus rapidement que n’importe quelle fonction polynôme ou exponentielle.
+
+<P>
+Gödel a ainsi introduit un troisième critère permettant d'étendre le scope de définition des
+fonctions numériques au-delà des fonctions récursives primitives. C'est le critère
+de clôture par minimisation totale.
+
+<P>
+Nous dirons qu'un ensemble <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img322.svg"
+ ALT="$E$"></SPAN> de fonctions numériques est clos par minimisation si
+pour tout <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img407.svg"
+ ALT="$g \in E$"></SPAN>, tel que pour chaque <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img205.svg"
+ ALT="$n$"></SPAN>, il existe <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img185.svg"
+ ALT="$p$"></SPAN> tel que <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img408.svg"
+ ALT="$g(n,p)=0$"></SPAN>, si on définit
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img63.svg"
+ ALT="$f$"></SPAN> par
+<P><!-- MATH
+ \begin{displaymath}
+f(n) = min\{p\in \mathbb{N} ; g(n,p) = 0   \}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img409.svg"
+ ALT="$\displaystyle f(n) = min\{p\in \mathbb{N} ; g(n,p) = 0 \} $">
+</DIV><P></P>
+alors <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img379.svg"
+ ALT="$f \in E$"></SPAN>. On notera <!-- MATH
+ $f =\mu p [g(.,p)=0]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img410.svg"
+ ALT="$f =\mu p [g(.,p)=0]$"></SPAN>.
+
+<P>
+Les  <SPAN  CLASS="textit">fonctions récursives</SPAN> sont les éléments du plus petit ensemble de fonctions
+numériques contenant les fonctions de base et clos par composition, récursion primitive et 
+minimisation totale.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node72.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node70.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node70.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html464"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node72.html">La machine de Turing</A>
+<B> monter:</B> <A
+ HREF="node70.html">La calculabilité</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node70.html">La calculabilité</A>
+ &nbsp; <B>  <A ID="tex2html465"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

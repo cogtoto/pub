@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Les listes mutables</TITLE>
+<META NAME="description" CONTENT="Les listes mutables">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node77.html">
+<LINK REL="previous" HREF="node75.html">
+<LINK REL="next" HREF="node77.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node77.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node74.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node75.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html513"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node77.html">Les listes infinies ou</A>
+<B> monter:</B> <A
+ HREF="node74.html">Annexes / Divers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node75.html">Quelques fonctions sur les</A>
+ &nbsp; <B>  <A ID="tex2html514"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00820000000000000000">
+Les listes mutables</A>
+</H1>
+
+<P>
+En SCHEME, nous avons les fonctions <code>set-car!</code> et <code>set-cdr!</code> qui nous permettent de modifier physiquement
+ le car et le cdr d'un doublet.
+Nous pouvons par exemple définir la liste circulaire <code>(a b c a b c ...)</code>
+<PRE>
+(define maliste (list 'a 'b 'c))
+(set-cdr! (cddr maliste) maliste)
+ maliste
+ -&gt; #0= (a b c . #0#)
+</PRE>
+L'affichage de la liste infine provient de l'interprète DrRacket.
+
+<P>
+Essayons de reproduire cela en OCAML
+(de manière intuitive et sûrement très maladroite...)
+<PRE>
+exception Listenulle
+type liste = Nil | Cons of int ref * liste ref ;;
+
+let set_car d v =
+	match d with
+	| Nil -&gt; raise Listenulle
+	| Cons(car,cdr) -&gt; car:=v  ;;
+	
+let set_cdr d v =
+	match d with
+	| Nil -&gt; raise Listenulle
+	| Cons(car,cdr) -&gt; cdr:=v ;;
+	
+let  cdr l =
+ match l with
+ | Nil -&gt; raise Listenulle
+ | Cons(tete, reste) when !reste &lt;&gt; Nil -&gt; reste
+
+let maliste = Cons(ref 1 , ref ( Cons (ref 2, ref ( Cons (ref 3, ref Nil))) ))
+set_cdr (!cdr !(cdr maliste)) maliste ;;
+
+# maliste;;
+- : liste =
+Cons ({contents = 1},
+ {contents =
+   Cons ({contents = 2},
+    {contents =
+      Cons ({contents = 3},
+       {contents =
+         Cons ({contents = 1},
+          {contents =
+            Cons ({contents = 2},
+             {contents =
+               Cons ({contents = 3},
+               	...
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

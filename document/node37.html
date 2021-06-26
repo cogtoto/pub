@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>L'auto-interprétation de l'interprète</TITLE>
+<META NAME="description" CONTENT="L'auto-interprétation de l'interprète">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node34.html">
+<LINK REL="next" HREF="node38.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node38.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node27.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node36.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html343"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node38.html">La tour de Babel</A>
+<B> monter:</B> <A
+ HREF="node27.html">L'interprétation</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node36.html">LISP mis en abyme</A>
+ &nbsp; <B>  <A ID="tex2html344"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00440000000000000000">
+L'auto-interprétation de l'interprète</A>
+</H1>
+En rendant explicite la procédure <code>eval</code> et ses acolytes <code>evlis, invoke, ...</code> dans l'environnement
+<code>env</code> , la procédure <code>evaluate</code> pourra être évaluée par elle-même. Le premier argument évalué de la fonction
+est le symbole <code>env</code>. Ce symbole devra être contenu dans l'environnement <code>env</code>, c'est-à-dire dans lui-même...
+
+<P>
+Nous avons <code>(eval '(eval '</code><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN> <code> env) env)</code> <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img198.svg"
+ ALT="$\equiv$"></SPAN> 
+ <code>(evaluate '</code><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img7.svg"
+ ALT="$\pi $"></SPAN> <code> env)</code> 
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Sous-sections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html345"
+  HREF="node38.html">La tour de Babel</A>
+<UL>
+<LI><A ID="tex2html346"
+  HREF="node39.html">L'environnement</A>
+</UL>
+<BR>
+<LI><A ID="tex2html347"
+  HREF="node40.html">Réification et réflexion</A>
+<UL>
+<LI><A ID="tex2html348"
+  HREF="node41.html">L'interprète par continuation </A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

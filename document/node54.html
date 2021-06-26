@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>La substitution</TITLE>
+<META NAME="description" CONTENT="La substitution">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node55.html">
+<LINK REL="previous" HREF="node53.html">
+<LINK REL="next" HREF="node55.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node55.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node53.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html415"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node55.html">Filtrage et réécriture</A>
+<B> monter:</B> <A
+ HREF="node52.html">La résolution</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node53.html">Représentation des termes finis</A>
+ &nbsp; <B>  <A ID="tex2html416"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00620000000000000000">
+La substitution</A>
+</H1>
+Une substitution est une application <!-- MATH
+ $\theta : X \rightarrow T_{X \cup \Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img288.svg"
+ ALT="$\theta : X \rightarrow T_{X \cup \Sigma} $"></SPAN>
+
+<P>
+Le domaine de substitution est l'ensemble des variables de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img256.svg"
+ ALT="$X$"></SPAN> telles que <!-- MATH
+ $\theta (x) \neq x$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img289.svg"
+ ALT="$\theta (x) \neq x$"></SPAN>
+On dit aussi que l'application <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img290.svg"
+ ALT="$\theta$"></SPAN> est l'identité <SPAN  CLASS="textit">presque</SPAN> partout, i.e sauf sur une partie finie
+de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img256.svg"
+ ALT="$X$"></SPAN>.
+Considérons le domaine de <!-- MATH
+ $\theta = \{x_1, ..., x_n\}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img291.svg"
+ ALT="$\theta = \{x_1, ..., x_n\}$"></SPAN>, alors <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img290.svg"
+ ALT="$\theta$"></SPAN> est représenté par l'ensemble
+des couples (variable, terme) <!-- MATH
+ $\{(x_1, \theta (x_1)), ...,(x_n, \theta (x_n) \}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img292.svg"
+ ALT="$\{(x_1, \theta (x_1)), ...,(x_n, \theta (x_n) \} $"></SPAN>
+
+<P>
+Nous avons par induction:
+
+<UL>
+<LI><!-- MATH
+ $\hat{\theta} c = c$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img293.svg"
+ ALT="$\hat{\theta} c = c$"></SPAN>, si <!-- MATH
+ $c \in \Sigma$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img258.svg"
+ ALT="$c \in \Sigma$"></SPAN> d'arité 1
+</LI>
+<LI><!-- MATH
+ $\hat{\theta} (f M_1 \dots M_n) = f(\hat{\theta} M_1 \dots \hat{\theta} M_n )$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img294.svg"
+ ALT="$\hat{\theta} (f M_1 \dots M_n) = f(\hat{\theta} M_1 \dots \hat{\theta} M_n )$"></SPAN>, si <!-- MATH
+ $f \in \Sigma$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img261.svg"
+ ALT="$f \in \Sigma$"></SPAN> d'arité <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img205.svg"
+ ALT="$n$"></SPAN> 
+</LI>
+<LI><!-- MATH
+ $\hat{\theta} x = \theta (x)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img295.svg"
+ ALT="$\hat{\theta} x = \theta (x)$"></SPAN> si <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img264.svg"
+ ALT="$x \in X$"></SPAN>
+</LI>
+</UL>
+La fonction  <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img290.svg"
+ ALT="$\theta$"></SPAN> s'étend ainsi en une fonction <!-- MATH
+ $\hat{\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img296.svg"
+ ALT="$\hat{\theta}$"></SPAN> (mais que nous appelerons aussi <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img290.svg"
+ ALT="$\theta$"></SPAN>)
+ de  <!-- MATH
+ $T_{X \cup \Sigma} \rightarrow T_{X \cup \Sigma}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img297.svg"
+ ALT="$T_{X \cup \Sigma} \rightarrow T_{X \cup \Sigma} $"></SPAN>.
+<!-- MATH
+ $\hat{\theta}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img296.svg"
+ ALT="$\hat{\theta}$"></SPAN> est l'unique fonction telle que <!-- MATH
+ $\forall x \in X, \hat{\theta}x = \theta (x)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img298.svg"
+ ALT="$\forall x \in X, \hat{\theta}x = \theta (x)$"></SPAN>
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img299.svg"
+ ALT="\begin{tikzpicture}[scale=2]
+\draw [-latex] (0,0) node[above left]{$X$} -- node[...
+... [-latex, dotted] (0,-1) --node[right]{$\hat{\theta}$} (1,0) ;
+\end{tikzpicture}">
+<BR>
+</DIV>
+
+<P>
+Voici un exemple d'implémentation de la substitution en OCAML:
+<PRE>
+let valeur_subst sigma var =
+  try assoc var sigma
+  with Not_found -&gt; var
+
+let rec substituer terme sigma  =
+  match terme with
+  | Var(x) -&gt; (valeur_subst sigma terme)
+  | Func(f, []) -&gt; Func(f, []) 
+  | Func(f, args) -&gt; Func(f, (map (function t -&gt; (substituer t sigma)) args))
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

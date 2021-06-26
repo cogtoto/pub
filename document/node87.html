@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Fonctions d'activation</TITLE>
+<META NAME="description" CONTENT="Fonctions d'activation">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node86.html">
+<LINK REL="next" HREF="node88.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node88.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node83.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node86.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html540"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node88.html">Les nombres premiers. L'algorithme</A>
+<B> monter:</B> <A
+ HREF="node83.html">Machine Learning and Neural</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node86.html">Calcul matriciel</A>
+ &nbsp; <B>  <A ID="tex2html541"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00884000000000000000">
+Fonctions d'activation</A>
+</H2>
+
+<P>
+Pour la fonction d'activation, ici appelée <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img302.svg"
+ ALT="$\sigma$"></SPAN>, nous utiliserons pour la première couche la fonction <!-- MATH
+ $relu(x) = max(o,x)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img479.svg"
+ ALT="$relu(x) = max(o,x)$"></SPAN>
+
+<P>
+Pour la seconde couche, nous utiliserons la fonction sigmoid <!-- MATH
+ $f(x)= \frac{1}{1+e^{-x}}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img480.svg"
+ ALT="$f(x)= \frac{1}{1+e^{-x}}$"></SPAN>
+
+<P>
+
+<DIV class="CENTER"><A ID="2383"></A>
+<TABLE>
+<CAPTION class="BOTTOM"><STRONG>Figure 6.5:</STRONG>
+La fonction sigmoid</CAPTION>
+<TR><TD>
+<DIV class="CENTER">
+<IMG
+  WIDTH="252" HEIGHT="252" STYLE=""
+ SRC="./sigmoid.png"
+ ALT="Image sigmoid">
+</DIV></TD></TR>
+</TABLE>
+</DIV>
+
+<P>
+Voici le code en R:
+
+<P>
+<PRE>
+# the activation function
+sigmoid &lt;- function(x) {
+	1.0 / (1.0 + exp(-x))
+}
+
+x=seq(0,10,0.1)
+plot(x, sigmoid(x), type="l") 
+
+# the derivative of the activation function
+sigmoid_derivative &lt;- function(x) {
+	sigmoid(x) * (1.0 - sigmoid(x))
+}
+</PRE>
+
+<P>
+Calculons la dérivée de la fonction <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img458.svg"
+ ALT="$LOSS$"></SPAN> en fonction de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img481.svg"
+ ALT="$W^2$"></SPAN> 
+
+<P>
+<P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img482.svg"
+ ALT="$\displaystyle \frac{\delta LOSS}{\delta W_2}$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img483.svg"
+ ALT="$\displaystyle =\frac{\delta LOSS}{\delta \hat{Y}} . \frac{\delta \hat{Y}}{\delta Z_2}. \frac{\delta Z_2}{\delta W_2 }$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">1</SPAN>)</TD></TR>
+<TR >
+<TD>&nbsp;</TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img484.svg"
+ ALT="$\displaystyle = 2(\hat{Y}-Y) . \sigma ^\prime (Z_2) . LAYER_1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+(<SPAN CLASS="arabic">6</SPAN>.<SPAN CLASS="arabic">2</SPAN>)</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<!-- MATH
+ $2(\hat{Y}-Y)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img463.svg"
+ ALT="$2(\hat{Y}-Y)$"></SPAN> est une matrice de dimension <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img464.svg"
+ ALT="$(150, 10)$"></SPAN>
+
+<P>
+<!-- MATH
+ $\sigma ^\prime (Z_2)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img465.svg"
+ ALT="$\sigma ^\prime (Z_2)$"></SPAN> est une matrice de dimension <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img464.svg"
+ ALT="$(150, 10)$"></SPAN>
+
+<P>
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img485.svg"
+ ALT="$LAYER_1$"></SPAN> est une matrice de dimension <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img469.svg"
+ ALT="$(150,32)$"></SPAN>
+
+<P>
+Le calcul matriciel qui sera fait est <!-- MATH
+ $t(LAYER_1)* (2(\hat{Y}-Y) . \sigma ^\prime (Z_2))$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img486.svg"
+ ALT="$t(LAYER_1)* (2(\hat{Y}-Y) . \sigma ^\prime (Z_2))$"></SPAN>, où <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img136.svg"
+ ALT="$*$"></SPAN> est le produit matriciel et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img472.svg"
+ ALT="$.$"></SPAN> le produit d'Hadamard.
+Le résultat donne une matrice de dimension <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img467.svg"
+ ALT="$(32,10)$"></SPAN> qui est de même dimension que <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img466.svg"
+ ALT="$W_2$"></SPAN>
+<P><!-- MATH
+ \begin{displaymath}
+t(150,32) * (150,10).(150.10) = (32,150)*(150,10)=(32,10)
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img487.svg"
+ ALT="$\displaystyle t(150,32) * (150,10).(150.10) = (32,150)*(150,10)=(32,10)
+$">
+</DIV><P></P>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

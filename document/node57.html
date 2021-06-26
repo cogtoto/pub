@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>La réécriture et l'arithmétique de Peano</TITLE>
+<META NAME="description" CONTENT="La réécriture et l'arithmétique de Peano">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node56.html">
+<LINK REL="next" HREF="node58.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node58.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node55.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node56.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html423"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node58.html">L'unification des termes</A>
+<B> monter:</B> <A
+ HREF="node55.html">Filtrage et réécriture</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node56.html">Le filtrage</A>
+ &nbsp; <B>  <A ID="tex2html424"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00632000000000000000">
+La réécriture et l'arithmétique de Peano</A>
+</H2>
+Le mécanisme de réécriture, très simple à comprendre conceptuellement, est un peu plus difficile
+à formaliser proprement.
+
+<P>
+Un système de <SPAN  CLASS="textit">réécriture</SPAN> est  composé d'une signature <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img254.svg"
+ ALT="$\Sigma$"></SPAN> et d'un ensemble de règles
+<!-- MATH
+ $\mathcal{R}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img304.svg"
+ ALT="$\mathcal{R}$"></SPAN> représenté par des couples <!-- MATH
+ $(P,Q) \in T_\Sigma [X] \times  T_\Sigma [X]$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img305.svg"
+ ALT="$(P,Q) \in T_\Sigma [X] \times T_\Sigma [X]$"></SPAN>.
+
+<P>
+Les couples <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img306.svg"
+ ALT="$(P,Q)$"></SPAN> sont notés <!-- MATH
+ $P \longrightarrow Q$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img307.svg"
+ ALT="$P \longrightarrow Q$"></SPAN>
+
+<P>
+Si nous avons un filtre <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img302.svg"
+ ALT="$\sigma$"></SPAN> tel que <!-- MATH
+ $\sigma P = M|_u$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img308.svg"
+ ALT="$\sigma P = M\vert _u$"></SPAN>, alors le terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> se 
+réécrit en un terme <!-- MATH
+ $M[\sigma Q]_u$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img309.svg"
+ ALT="$M[\sigma Q]_u$"></SPAN> par l'application de la règle <!-- MATH
+ $P \longrightarrow Q$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img307.svg"
+ ALT="$P \longrightarrow Q$"></SPAN> 
+à l'occurence <!-- MATH
+ $u \in \mathcal{O}(M)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img271.svg"
+ ALT="$u \in \mathcal{O}(M) $"></SPAN> 
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img310.svg"
+ ALT="\begin{tikzpicture}
+\draw (0,0) -- (2,0) -- (1,2) node[above]{$M$} --cycle ;
+\dr...
+...dotted] (0.75,0.75) -- (2,0.75) node[right]{$u$} ;
+\end{scope}\end{tikzpicture}">
+<BR>
+</DIV>
+
+<P>
+CAML est «déjà» une machine à faire du filtrage et de la réécriture. 
+L'application d'une fonction <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img311.svg"
+ ALT="$P$"></SPAN> à son argument <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img312.svg"
+ ALT="$Q$"></SPAN> est modélisé par le redex
+<!-- MATH
+ $(\lambda m P)Q \longrightarrow \theta P$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img313.svg"
+ ALT="$(\lambda m P)Q \longrightarrow \theta P$"></SPAN> où <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img314.svg"
+ ALT="$m$"></SPAN> est le pattern et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img290.svg"
+ ALT="$\theta$"></SPAN> le filtre de
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img314.svg"
+ ALT="$m$"></SPAN> vers <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img312.svg"
+ ALT="$Q$"></SPAN>, c'est-à-dire <!-- MATH
+ $\theta m = Q$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img315.svg"
+ ALT="$\theta m = Q$"></SPAN>.	
+
+<P>
+Il est ainsi simple de programmer en OCAML une fonction de réécriture.
+Appliquons cela sur l'arithmétique de Peano.
+
+<P>
+Peano a reconstruit la théorie des
+entiers à partir de la fonction successeur. On se donne uniquement le symbole
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img216.svg"
+ ALT="$S$"></SPAN> d'arité 1 et le symbole de constante 0.
+Les entiers sont les termes de la forme <!-- MATH
+ $0, S0, SS0, SSS0 \ldots$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img316.svg"
+ ALT="$0, S0, SS0, SSS0 \ldots$"></SPAN>
+Nous pouvons implémenter cela en OCAM avec le type abstrait <code>peano</code>
+<PRE>
+type peano = 
+	| Zero
+	| Succ of peano
+	| Plus of peano * peano
+	| Mult of peano * peano
+
+let un = Succ Zero ;;
+let deux = Succ (Succ Zero) ;;
+let trois = Succ (Succ (Succ Zero)) ;;
+</PRE>
+
+<P>
+Puis nous avons les quatre règles de réécriture suivante:
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{ll}
+(r_1) & (+\ x\ 0) \rightarrow x \\
+(r_2) & (+\  x\ (S\ y)) \to (S\ (+x\ y)) \\
+(r_3) & (*\ x\ 0) \to 0 \\
+(r_4) & (*\ x\ (S\ y)) \to (+\ y\ (* x\ y)) \\
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img317.svg"
+ ALT="\begin{displaymath}
+\begin{array}{ll}
+(r_1) &amp; (+\ x\ 0) \rightarrow x \\
+(r_2) ...
+...\\
+(r_4) &amp; (*\ x\ (S\ y)) \to (+\ y\ (* x\ y)) \\
+\end{array}\end{displaymath}">
+</DIV><P></P>
+Ces quatre règles sont implémentées par la fonction <code>réduire</code> ci-dessous:
+<PRE>
+let rec reduire = function
+	| Plus (p, Zero) -&gt; reduire p
+	| Plus (p1 , (Succ p2)) -&gt; Succ ( reduire ((Plus (reduire p1, reduire p2))) )
+	| Mult (p, Zero) -&gt; Zero
+	| Mult (p1, (Succ p2)) 
+	    -&gt; reduire (Plus (reduire p1, reduire ((Mult (reduire p1, reduire p2))) ))
+	| _ as p -&gt; p 
+
+let rec peano_entier = function
+	| Zero -&gt; 0
+	| Succ p -&gt; 1 + (peano_entier p)
+	| any -&gt; peano_entier (reduire any)
+	
+peano_entier (Plus ( Mult(deux, trois), trois));;
+</PRE>
+
+<P>
+Essayons maintenant d'implémenter le mécanisme de réécriture en utilisation le type 
+<SPAN  CLASS="textit">terme</SPAN> que nous avons précedemment présenté, ainsi que la fonction de filtrage <code>filtre</code> et 
+la fonction du substitution <code>substituer</code>.
+
+<P>
+Nous avons fait simple avec cette méthode naïve qui utilise les trois fonctions ci-dessous :
+
+<UL>
+<LI>La première <code>rewrite</code> utilise la fonction <code>filtre</code> pour chercher une substitution
+	égalisant notre terme avec la partie gauche de la règle de substitution. Si cette substitution est trouveée, la 
+	fonction retourne la partie droite de la règle appliquée à la substitution. Dans le cas contraire, la fonction
+	est appelée récursivement sur l'ensemble des arguments du terme.
+</LI>
+<LI>La seconde <code>rewriteall</code> déroule l'ensemble des règles représentées par une liste de paires <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img318.svg"
+ ALT="$(l,r)$"></SPAN> tant
+	que la réécriture ne modifie par le terme.
+</LI>
+<LI>La troisième <code>rewrite_bourrin</code> itère la fonction précédente tant que l'on peut réduire le terme.
+	Désolé pour cette méthode bourrin, mais ça fonctionne...
+</LI>
+</UL>
+
+<P>
+<PRE>
+let rec rewrite t l r =
+match t with
+| Var(_) | Func(_,[]) -&gt; t
+| Func(f, listet)  -&gt; 
+	try let subst = filtre l t [] in
+		substituer r subst 
+	with Impossible -&gt; Func(f, map (function t -&gt; (rewrite t l r)) listet)
+and rewriteall lregles t =
+	match lregles with
+	| [] -&gt; t
+	| (l,r) ::reste -&gt; 
+		let t1 = (rewrite t l r) in
+			if t1=t then rewriteall reste t 
+			else t1
+and rewrite_bourrin t lregles =
+	let t1 = rewriteall lregles t in
+	if t1=t then t
+	else rewrite_bourrin t1 lregles
+</PRE>
+
+<P>
+Les quatre règles de Peano sont modélisées de la façon suivante :
+<PRE>
+let peano = [
+(Func("+", [Var "x"; Func("0", [])]), Var "x") ;
+(Func("+", [Var "x"; Func("S", [Var "y"])])), Func("S", [Func("+", [Var "x"; Var "y"])]) ;
+(Func("*", [Var "x"; Func("0", [])]), Func("0", [])) ;
+(Func("*", [Var "x"; Func("S", [Var "y"])])), Func("+", [Var "x"; Func("*", [Var "x"; Var "y"])]) ;
+]
+</PRE>
+
+<P>
+Nous pouvons ainsi calculer la valeur 16 :
+<PRE>
+let un = Func("S", [Func("0", [])]) ;;
+let deux = Func("+", [un; un]) ;;
+let quatre = Func("*", [deux;deux]) ;;
+let seize = Func("*", [quatre;quatre]) ;;
+
+rewrite_bourrin seize peano ;;
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node58.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node55.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node56.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html423"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node58.html">L'unification des termes</A>
+<B> monter:</B> <A
+ HREF="node55.html">Filtrage et réécriture</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node56.html">Le filtrage</A>
+ &nbsp; <B>  <A ID="tex2html424"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

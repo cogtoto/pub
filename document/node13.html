@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Les booléens </TITLE>
+<META NAME="description" CONTENT="Les booléens ">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node14.html">
+<LINK REL="previous" HREF="node12.html">
+<LINK REL="next" HREF="node14.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html266"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node14.html">La fonction factorielle</A>
+<B> monter:</B> <A
+ HREF="node11.html">Church encoding. Les entiers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node12.html">Les entiers Church</A>
+ &nbsp; <B>  <A ID="tex2html267"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00352000000000000000">
+Les booléens </A>
+</H2>
+Nous pourrons les représenter de la façon suivante. On y ajoute le prédicat IsZero.
+<P><!-- MATH
+ \begin{displaymath}
+\begin{array}{ll}
+\operatorname {true} &\equiv \lambda a.\lambda b.a \\
+\operatorname {false} &\equiv \lambda a.\lambda b.b \\
+\operatorname {and} &\equiv \lambda p.\lambda q.p\ q\ p\\
+\operatorname {or} &\equiv \lambda p.\lambda q.p\ p\ q\\
+\operatorname {not} &\equiv \lambda p.p\ (\lambda a.\lambda b.b)\ (\lambda a.\lambda b.a)=\lambda p.p\operatorname {false} \operatorname {true} \\
+\operatorname {if} &\equiv \lambda p.\lambda a.\lambda b.p\ a\ b  \\
+\operatorname{IsZero} &\equiv  \lambda n.n\ (\lambda x.\operatorname{false})\ \operatorname{true}
+\end{array}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img107.svg"
+ ALT="\begin{displaymath}
+\begin{array}{ll}
+\operatorname {true} &amp;\equiv \lambda a.\la...
+...lambda x.\operatorname{false})\ \operatorname{true}
+\end{array}\end{displaymath}">
+</DIV><P></P>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

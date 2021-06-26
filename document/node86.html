@@ -1,0 +1,376 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Calcul matriciel</TITLE>
+<META NAME="description" CONTENT="Calcul matriciel">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node87.html">
+<LINK REL="previous" HREF="node85.html">
+<LINK REL="next" HREF="node87.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node87.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node83.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node85.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html538"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node87.html">Fonctions d'activation</A>
+<B> monter:</B> <A
+ HREF="node83.html">Machine Learning and Neural</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node85.html">Un peu de théorie</A>
+ &nbsp; <B>  <A ID="tex2html539"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00883000000000000000">
+Calcul matriciel</A>
+</H2>
+
+<P>
+Cela donne le calcul matriciel ci-dessous:
+<SPAN CLASS="FOOTNOTESIZE"></SPAN><P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img440.svg"
+ ALT="$\displaystyle \begin{pmatrix}
+x_{1,1} &amp; x_{1,2} &amp; \cdots &amp; x_{1,784} \\
+x_{2,1...
+...ts &amp; \vdots \\
+w^1_{784,1} &amp; w^1_{784,2} &amp; \cdots &amp; w^1_{784,32}
+\end{pmatrix}$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img441.svg"
+ ALT="$\displaystyle =
+\begin{pmatrix}
+z^1_{1,1} &amp; z^1_{1,2} &amp; \cdots &amp; z^1_{1,32} \\ ...
+...ts &amp; \vdots \\
+z^1_{150,1} &amp; z^1_{150,2} &amp; \cdots &amp; z^1_{150,32}
+\end{pmatrix}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img442.svg"
+ ALT="$\displaystyle \sigma(
+\begin{pmatrix}
+z^1_{1,1} &amp; z^1_{1,2} &amp; \cdots &amp; z^1_{1,3...
+...ddots &amp; \vdots \\
+w^2_{32,1} &amp; w^2_{32,2} &amp; \cdots &amp; w^2_{32,10}
+\end{pmatrix}$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img443.svg"
+ ALT="$\displaystyle =
+\begin{pmatrix}
+z^2_{1,1} &amp; z^2_{1,2} &amp; \cdots &amp; z^2_{1,10} \\ ...
+...ts &amp; \vdots \\
+z^2_{150,1} &amp; z^2_{150,2} &amp; \cdots &amp; z^2_{150,10}
+\end{pmatrix}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img444.svg"
+ ALT="$\displaystyle \sigma(
+\begin{pmatrix}
+z^2_{1,1} &amp; z^2_{1,2} &amp; \cdots &amp; z^2_{1,1...
+...s &amp; \vdots \\
+z^2_{150,1} &amp; z^2_{150,2} &amp; \cdots &amp; z^2_{150,10}
+\end{pmatrix})$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img445.svg"
+ ALT="$\displaystyle =
+\begin{pmatrix}
+\hat{y}_{1,1} &amp; \hat{y}_{1,2} &amp; \cdots &amp; \hat{y...
+...\\
+\hat{y}_{150,1} &amp; \hat{y}_{150,2} &amp; \cdots &amp; \hat{y}_{150,10}
+\end{pmatrix}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P><SPAN CLASS="FOOTNOTESIZE">
+</SPAN><P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img446.svg"
+ ALT="$\displaystyle LOSS(Y, \hat{Y})$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img447.svg"
+ ALT="$\displaystyle = \sum (
+\begin{pmatrix}
+\hat{y}_{1,1} &amp; \hat{y}_{1,2} &amp; \cdots &amp;...
+...ddots &amp; \vdots \\
+y_{150,1} &amp; y_{150,2} &amp; \cdots &amp; y_{150,10}
+\end{pmatrix})^2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P><SPAN CLASS="FOOTNOTESIZE">
+</SPAN>
+<P>
+<SPAN CLASS="FOOTNOTESIZE"></SPAN><P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img448.svg"
+ ALT="$\displaystyle Z_1$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img449.svg"
+ ALT="$\displaystyle = X.W_1$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img450.svg"
+ ALT="$\displaystyle LAYER_1$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img451.svg"
+ ALT="$\displaystyle = \sigma (Z_1)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img452.svg"
+ ALT="$\displaystyle Z_2$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img453.svg"
+ ALT="$\displaystyle = LAYER_1 * W_2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img454.svg"
+ ALT="$\displaystyle \hat{Y}$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img455.svg"
+ ALT="$\displaystyle = \sigma (Z_2)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img456.svg"
+ ALT="$\displaystyle LOSS$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img457.svg"
+ ALT="$\displaystyle = (\hat{Y} -Y)^2$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P><SPAN CLASS="FOOTNOTESIZE"></SPAN>
+
+<P>
+Calculons la dérivée de la fonction <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img458.svg"
+ ALT="$LOSS$"></SPAN> en fonction de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img459.svg"
+ ALT="$W^1$"></SPAN>
+
+<P>
+<P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img460.svg"
+ ALT="$\displaystyle \frac{\delta LOSS}{\delta W_1}$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img461.svg"
+ ALT="$\displaystyle =\frac{\delta LOSS}{\delta \hat{Y}} . \frac{\delta \hat{Y}}{\delt...
+...ta LAYER_1 }.\frac{\delta LAYER_1}{\delta Z_1 }. \frac{\delta Z_1}{\delta W_1 }$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD>&nbsp;</TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img462.svg"
+ ALT="$\displaystyle = 2(\hat{Y}-Y) . \sigma ^\prime (Z_2) . W_2 . \sigma ^\prime (Z_1). X$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+<!-- MATH
+ $2(\hat{Y}-Y)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img463.svg"
+ ALT="$2(\hat{Y}-Y)$"></SPAN> est une matrice de dimension <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img464.svg"
+ ALT="$(150, 10)$"></SPAN>
+
+<P>
+<!-- MATH
+ $\sigma ^\prime (Z_2)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img465.svg"
+ ALT="$\sigma ^\prime (Z_2)$"></SPAN> est une matrice de dimension <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img464.svg"
+ ALT="$(150, 10)$"></SPAN>
+
+<P>
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img466.svg"
+ ALT="$W_2$"></SPAN> est une matrice de dimension <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img467.svg"
+ ALT="$(32,10)$"></SPAN>
+
+<P>
+<!-- MATH
+ $\sigma ^\prime (Z_1)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img468.svg"
+ ALT="$\sigma ^\prime (Z_1)$"></SPAN> est une matrice de dimension <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img469.svg"
+ ALT="$(150,32)$"></SPAN>
+
+<P>
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img256.svg"
+ ALT="$X$"></SPAN> est une matrice de dimension <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img470.svg"
+ ALT="$(150,784)$"></SPAN>
+
+<P>
+Le calcul matriciel qui sera fait est <!-- MATH
+ $t(X)* \{ (2(\hat{Y}-Y) . \sigma ^\prime (Z^2) * t(W^2). \sigma ^\prime (Z^1)\}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img471.svg"
+ ALT="$t(X)* \{ (2(\hat{Y}-Y) . \sigma ^\prime (Z^2) * t(W^2). \sigma ^\prime (Z^1)\}$"></SPAN>, où <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img136.svg"
+ ALT="$*$"></SPAN> est le produit matriciel et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img472.svg"
+ ALT="$.$"></SPAN> le produit d'Hadamard.
+Le résultat donne une matrice de dimension <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img473.svg"
+ ALT="$(784,32)$"></SPAN> qui est de même dimension que <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img474.svg"
+ ALT="$W_1$"></SPAN>
+<P></P>
+<DIV CLASS="displaymath"><TABLE CLASS="equation" >
+<TR >
+<TD  style="text-align:right;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img475.svg"
+ ALT="$\displaystyle t(150,784)* \{(150,10).(150,10)*t(32,10).(150,32))\}$"></SPAN></TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img476.svg"
+ ALT="$\displaystyle = (784,150) * \{(150,10)*(10,32).(150,32)\}$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD>&nbsp;</TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img477.svg"
+ ALT="$\displaystyle = (784,150)*(150,32)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR >
+<TD>&nbsp;</TD>
+<TD  style="text-align:left;"><SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img478.svg"
+ ALT="$\displaystyle =(784,32)$"></SPAN></TD>
+<TD  CLASS="eqno" style="text-align:right">
+&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE></DIV>
+<P></P>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node87.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node83.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node85.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html538"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node87.html">Fonctions d'activation</A>
+<B> monter:</B> <A
+ HREF="node83.html">Machine Learning and Neural</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node85.html">Un peu de théorie</A>
+ &nbsp; <B>  <A ID="tex2html539"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

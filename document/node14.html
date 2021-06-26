@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>La fonction factorielle</TITLE>
+<META NAME="description" CONTENT="La fonction factorielle">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="next" HREF="node15.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html268"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node15.html">La notation de de</A>
+<B> monter:</B> <A
+ HREF="node11.html">Church encoding. Les entiers</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node13.html">Les booléens</A>
+ &nbsp; <B>  <A ID="tex2html269"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00353000000000000000">
+La fonction factorielle</A>
+</H2>
+Nous pouvons l'exprimer de manière assez simple. La difficulté est de manipuler toujours les applications avec un seul argument, en version
+<SPAN  CLASS="textit">curryfiées</SPAN>.
+Nous appliquons le combinateur <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img72.svg"
+ ALT="$Y$"></SPAN> associé à la stratégie de réduction normale.
+Attention à ne pas réduire telle quelle la fonction <code>fact</code>. La réduction serait infinie comme on l'a vu précedemment. Seul la présence
+d'un argument permet d'aboutir à la forme normale.
+
+<P>
+Cette forme normale constitue notre <SPAN  CLASS="textit">valeur</SPAN> (au sens d'un langage interprété).
+<PRE>
+let fact =
+  App (y,
+    (Lam ("f",
+       (Lam ("n",
+          (App ((App ((App (si, (App (isZero, (Var "n"))))), un)),
+             (App ((App (mult, (Var "n"))),
+                (App ((Var "f"), (App (pred, (Var "n"))))))))))))))
+
+# church2Int (betaNormal (App(fact, int2Church 4)));;
+- : int = 24
+</PRE>
+Nous n'afficherons pas les réductions ici. Le calcul de la factorielle de 3 nécessite 705 <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réductions. 
+La factorielle de 5 en nécessite plus de 28000...
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

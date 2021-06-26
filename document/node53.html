@@ -1,0 +1,465 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Représentation des termes finis</TITLE>
+<META NAME="description" CONTENT="Représentation des termes finis">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node54.html">
+<LINK REL="previous" HREF="node52.html">
+<LINK REL="next" HREF="node54.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node54.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node52.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html413"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node54.html">La substitution</A>
+<B> monter:</B> <A
+ HREF="node52.html">La résolution</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node52.html">La résolution</A>
+ &nbsp; <B>  <A ID="tex2html414"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00610000000000000000">
+Représentation des termes finis</A>
+</H1>
+Nous reprenons ici le très bon formalisme du livre de <SPAN  CLASS="textit">Lalement</SPAN> [<A
+ HREF="node114.html#lalement">11</A>].
+
+<P>
+Les symboles de constante <code>true</code>, <code>158</code>, les symboles de fonctions unaires <code>not</code>, <code>+</code>,
+les symboles de fonctions binaires <code>or</code>, etc. constituent la signature <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img254.svg"
+ ALT="$\Sigma$"></SPAN> du langage.
+Si <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img63.svg"
+ ALT="$f$"></SPAN> est d'arité <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img255.svg"
+ ALT="$n \geq 1$"></SPAN>, alors <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img63.svg"
+ ALT="$f$"></SPAN> est un symbole fonctionnel, et si <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img63.svg"
+ ALT="$f$"></SPAN> est d'arité <SPAN CLASS="MATH">0</SPAN>, <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img63.svg"
+ ALT="$f$"></SPAN> est un symbole de constante.
+Nous ajoutons à <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img254.svg"
+ ALT="$\Sigma$"></SPAN> un ensemble <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img256.svg"
+ ALT="$X$"></SPAN> de symboles de variables.
+
+<P>
+L'ensemble des termes <!-- MATH
+ $T_{\Sigma \cup X}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img257.svg"
+ ALT="$T_{\Sigma \cup X}$"></SPAN> est défini de la manière suivante:
+
+<UL>
+<LI>si <!-- MATH
+ $c \in \Sigma$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img258.svg"
+ ALT="$c \in \Sigma$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img259.svg"
+ ALT="$c$"></SPAN> d'arité <SPAN CLASS="MATH">0</SPAN>, alors <!-- MATH
+ $c \in T_{\Sigma \cup X}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img260.svg"
+ ALT="$c \in T_{\Sigma \cup X}$"></SPAN> 
+</LI>
+<LI>si <!-- MATH
+ $f \in \Sigma$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img261.svg"
+ ALT="$f \in \Sigma$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img63.svg"
+ ALT="$f$"></SPAN> d'arité <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img255.svg"
+ ALT="$n \geq 1$"></SPAN> avec <!-- MATH
+ $M_1, \dots, M_n \in T_{\Sigma \cup X}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img262.svg"
+ ALT="$M_1, \dots, M_n \in T_{\Sigma \cup X}$"></SPAN>, alors <!-- MATH
+ $f M_1 ... M_n \in T_{\Sigma \cup X}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img263.svg"
+ ALT="$f M_1 ... M_n \in T_{\Sigma \cup X}$"></SPAN>
+</LI>
+<LI>si <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img264.svg"
+ ALT="$x \in X$"></SPAN>, alors <!-- MATH
+ $x \in T_{\Sigma \cup X}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img265.svg"
+ ALT="$x \in T_{\Sigma \cup X}$"></SPAN>
+</LI>
+</UL>
+
+<P>
+Nous pouvons représenter les termes en OCAML avec le type abstrait suivant:
+<PRE>
+	type terme = 
+	| Var of string
+	| Func of string * terme list
+</PRE>
+
+<P>
+En fait, quasiment tous les objets que nous manipulerons pourront être modélisés par des termes.
+Prenons l'exemple suivant pour définir le <SPAN  CLASS="textit">type</SPAN> des entiers naturels à partir de la signature <!-- MATH
+ $\Sigma = \{0, S\}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img266.svg"
+ ALT="$\Sigma = \{0, S\}$"></SPAN>
+Les symboles <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img267.svg"
+ ALT="$O$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img216.svg"
+ ALT="$S$"></SPAN> sont respectivement d'arité <SPAN CLASS="MATH">0</SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img268.svg"
+ ALT="$1$"></SPAN>.
+Nous avons ainsi : <P><!-- MATH
+ \begin{displaymath}
+T_\Sigma = \{0, S0, SS0, SSS0, ... \}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img269.svg"
+ ALT="$\displaystyle T_\Sigma = \{0, S0, SS0, SSS0, ... \} $">
+</DIV><P></P>
+En OCAML, nous pourrons écrire:
+<PRE>
+type entiers = Zero | S of entiers
+</PRE>
+En Prolog:
+<PRE>
+entiers(zero).
+entiers(s(X)) :- entiers(X)
+</PRE>
+En Coq:
+<BR>
+<IMG
+ STYLE=""
+ SRC="img270.svg"
+ ALT="\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdoc...
+...coqdocvar{entiers} .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\end{coqdoccode}">
+<BR>
+Les termes se représentent naturellement sous forme d'arbres.
+
+<P>
+Prenons par exemple le terme <code>Func("f", [Func("g", [Var "x"; Var "y"]); Var "z"])</code>
+Il sera représenté par l'arbre ci-dessous annoté de ses occurences <!-- MATH
+ $u \in \mathcal{O}(M)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img271.svg"
+ ALT="$u \in \mathcal{O}(M) $"></SPAN> :
+<DIV class="CENTER">
+<BR>
+<IMG
+ STYLE=""
+ SRC="img272.svg"
+ ALT="\begin{tikzpicture}[level distance=1.5cm,
+level 1/.style={sibling distance=3cm}...
+...child { node {y\ $(u=12)$} }
+}
+child { node {z\ $(u=2)$} }
+;
+\end{tikzpicture}">
+<BR>
+</DIV>
+Pour tout terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN>, on définit:
+
+<UL>
+<LI>L'ensemble <!-- MATH
+ $\mathcal{O}(M)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img273.svg"
+ ALT="$\mathcal{O}(M)$"></SPAN> des occurences de M
+</LI>
+<LI>Le symbole <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img274.svg"
+ ALT="$M(u)$"></SPAN> en <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img275.svg"
+ ALT="$u$"></SPAN> pour <!-- MATH
+ $u \in \mathcal{O}(M)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img271.svg"
+ ALT="$u \in \mathcal{O}(M) $"></SPAN>
+</LI>
+<LI>Le sous-terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img276.svg"
+ ALT="$M\vert _u$"></SPAN> de <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> en <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img275.svg"
+ ALT="$u$"></SPAN>, pour <!-- MATH
+ $u \in \mathcal{O}(M)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img271.svg"
+ ALT="$u \in \mathcal{O}(M) $"></SPAN>
+</LI>
+</UL>
+Dans le cas où <!-- MATH
+ $M = c \in \Sigma$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img277.svg"
+ ALT="$M = c \in \Sigma$"></SPAN>, alors <!-- MATH
+ $\mathcal{O}(M) = \{\epsilon\}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img278.svg"
+ ALT="$\mathcal{O}(M) = \{\epsilon\}$"></SPAN>, <!-- MATH
+ $M(\epsilon)=c$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img279.svg"
+ ALT="$M(\epsilon)=c$"></SPAN>, <!-- MATH
+ $M|_\epsilon=c$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img280.svg"
+ ALT="$M\vert _\epsilon=c$"></SPAN>
+
+<P>
+<BR>
+<BR>
+
+<P>
+Dans le cas où <!-- MATH
+ $M = f M_1\dots M_n$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img281.svg"
+ ALT="$M = f M_1\dots M_n$"></SPAN>, alors :
+<P><!-- MATH
+ \begin{displaymath}
+\mathcal{O}(M) = \{\epsilon\} \cup \bigcup_{i=1}^n i. \mathcal{O}(M_i)
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img282.svg"
+ ALT="$\displaystyle \mathcal{O}(M) = \{\epsilon\} \cup \bigcup_{i=1}^n i. \mathcal{O}(M_i)$">
+</DIV><P></P>
+Avec les égalités suivantes pour les sous-termes <!-- MATH
+ $M|_\epsilon = f$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img283.svg"
+ ALT="$M\vert _\epsilon = f$"></SPAN> et <!-- MATH
+ $M|_{i.u}=M_i|_u$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img284.svg"
+ ALT="$M\vert _{i.u}=M_i\vert _u $"></SPAN> 
+<BR>
+et de manière équivalente pour les symboles <!-- MATH
+ $M(\epsilon) = f$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img285.svg"
+ ALT="$M(\epsilon) = f$"></SPAN> et <!-- MATH
+ $M(i.u)=M_i(u)$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img286.svg"
+ ALT="$M(i.u)=M_i(u) $"></SPAN>
+
+<P>
+Nous implémentons cela avec un peu de difficulté pour les conversions 
+<code>string</code> vers <code>int</code> nécessaire à la manipulation des occurences <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img275.svg"
+ ALT="$u$"></SPAN>. 
+On considère ici qu'un arbre ne peut avoir plus de 9 fils, donc un seul digit permet de définir le numéro du noeud associé.
+<PRE>
+open String
+
+let rec occurences i terme  =
+match terme with
+|Var _ | Func(_, []) -&gt;  [i]
+|Func (_, m) -&gt;  [i] @ occur_liste 1 i  m 
+and occur_liste  c  i lterme =
+match lterme with
+| [] -&gt; []
+| a::b -&gt; (occurences (int_of_string((string_of_int(i)^(string_of_int c)))) a) 
+          @ occur_liste (c+1) i b
+
+let reste s =
+  if (length s) &lt;= 1 then "0"
+  else sub s 1 ((length s) -1)
+
+let string_of_char = String.make 1 ;;
+
+let rec cut i terme =
+  match terme with
+  | Var _ | Func(_, []) when i=0 -&gt; terme
+  | Func(f, lt) -&gt; if i=0 then terme 
+                   else subterme (int_of_string(string_of_char((string_of_int i).[0])))
+                                 (int_of_string(reste (string_of_int i)))
+                                 lt
+  | _ -&gt; raise Impossible
+and subterme i u ltermes =
+  match ltermes with
+  | hd::tl -&gt; if (i=1) then  cut u hd else  subterme (i-1) u tl
+  | [] -&gt; raise Impossible
+</PRE>
+Nous pouvons aussi définir l'opération de <SPAN  CLASS="textit">greffe</SPAN> à une occurence <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img275.svg"
+ ALT="$u$"></SPAN> donnée. Nous utiliserons
+l'écriture <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img287.svg"
+ ALT="$M[N]_u$"></SPAN> pour signifier que le terme <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img43.svg"
+ ALT="$M$"></SPAN> reçoit à l'occurence <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img275.svg"
+ ALT="$u$"></SPAN> son greffon <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img44.svg"
+ ALT="$N$"></SPAN>.
+<PRE>
+let rec greffe i terme greffon =
+match terme with
+| Var _ | Func(_, []) when i=0 -&gt; greffon
+| Func(f, lt) -&gt; if i=0 then greffon 
+				 else Func(f, greffeltermes (int_of_string(string_of_char((string_of_int i).[0]))) 
+				  			                (int_of_string(reste (string_of_int i)))  
+								            lt
+								            greffon)
+| _ -&gt; raise Impossible
+and greffeltermes i u ltermes greffon =
+match ltermes with
+| hd::tl -&gt; if (i=1) then  (greffe u hd greffon)::tl  
+            else hd::(greffeltermes (i-1) u tl greffon)
+| [] -&gt; raise Impossible
+</PRE>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node54.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node52.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node52.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html413"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node54.html">La substitution</A>
+<B> monter:</B> <A
+ HREF="node52.html">La résolution</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node52.html">La résolution</A>
+ &nbsp; <B>  <A ID="tex2html414"
+  HREF="node1.html">Table des matières</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

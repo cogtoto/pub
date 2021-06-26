@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Complétion de Knuth-Bendix</TITLE>
+<META NAME="description" CONTENT="Complétion de Knuth-Bendix">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node66.html">
+<LINK REL="next" HREF="node70.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node70.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node64.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node68.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html457"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node70.html">La calculabilité</A>
+<B> monter:</B> <A
+ HREF="node64.html">L'algorithme de complétion de</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node68.html">Système de réécriture noethérien</A>
+ &nbsp; <B>  <A ID="tex2html458"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00673000000000000000">
+Complétion de Knuth-Bendix</A>
+</H2>
+Nous pourrons ici nous référer au livre très didactique <SPAN  CLASS="textit">Term Rewriting and All That</SPAN>[<A
+ HREF="node114.html#rewriting">6</A>]
+<PRE>
+let rec super_liste l1 l2 occ =
+ match occ with
+ | a::b -&gt; 
+	begin
+	 try 
+	 let t = cut a l1 in
+	 match t with 
+	 | Var _ -&gt; raise Impossible
+	 | _ -&gt; let sigma = unifier ((cut a l1), l2)
+ 				in (a, sigma)
+	 with Impossible -&gt; super_liste l1 l2 b 
+	 end
+ | [] -&gt; raise Impossible
+  
+let superpose_liste (l1,r1) (l2,r2) =
+let rec superpose_liste_aux l1 l2 occ = (* rend liste des occurences et substitution *)
+	if   alpha_equiv (l1,r1) (l2,r2) then 
+		try
+		let (oc, sigma) = super_liste l1 (rename l2 l1) (remove 0 occ) (* retire 0 car occurence triviale si alpha_equiv *)
+		in 
+		begin
+			print_string "superposition à l'occurence "; print_int oc ;  print_string "\n" ;
+			print_string "sur le termes l1 :" ; imprime l1 ; print_string "\n" ;
+			print_string "sur le terme l2 :" ; imprime l2 ; print_string "\n" ;
+			print_string "avec la substitution :"; imprime_sigma sigma; print_string "\n" ;
+		(oc, sigma)::superpose_liste_aux l1 l2 (remove oc occ)
+		end
+		with Impossible -&gt; []
+	else 
+	try
+	let (oc, sigma) = super_liste l1 (rename l2 l1) occ
+		in 
+		begin print_string "superposition à l'occurence "; print_int oc ;  print_string "\n" ;
+			print_string "sur le terme l1 :" ; imprime l1 ; print_string "\n" ;
+			print_string "sur le terme l2 :" ; imprime l2 ; print_string "\n" ;
+			print_string "avec la substitution :"; imprime_sigma sigma; print_string "\n" ;
+			(oc, sigma)::superpose_liste_aux l1 l2 (remove oc occ)
+		end
+	with Impossible -&gt; []
+in superpose_liste_aux l1 l2 (occurences l1) ;;
+</PRE>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

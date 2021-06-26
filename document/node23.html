@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>L'égalité</TITLE>
+<META NAME="description" CONTENT="L'égalité">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="next" HREF="node24.html">
+<LINK REL="previous" HREF="node22.html">
+<LINK REL="next" HREF="node24.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node24.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node19.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node22.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html295"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node24.html">Le faux</A>
+<B> monter:</B> <A
+ HREF="node19.html">Les Pure Type Systems</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node22.html">Le logique</A>
+ &nbsp; <B>  <A ID="tex2html296"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00380400000000000000">
+L'égalité</A>
+</H3>
+Prouvons que <!-- MATH
+ $\forall n \in \mathtt{Nat}, (\lambda n.2\  n) = 2$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img175.svg"
+ ALT="$\forall n \in \mathtt{Nat}, (\lambda n.2\ n) = 2$"></SPAN>
+<PRE>
+let th = Prod("n", Nat, Eq(Nat, App(cst2, V "n"), S (S O) )) 
+  in print th;;
+&gt; πn:nat.eq(nat, (λn:nat.2 n), 2)
+
+let proof = Lam("n", Nat, Eq_refl(Nat, App(cst2, V "n"))) in 
+  (print proof ; print_newline() ;
+   print (check proof env0) ; print_newline() ; 
+   print (fullReduc (check proof env0)))  ;;
+&gt; λn:nat.eq _refl(nat, (λn:nat.2 n))
+  πn:nat.eq(nat, (λn:nat.2 n), (λn:nat.2 n))
+  (nat→eq(nat, 2, 2))
+</PRE>
+Rappelons la règle de conversion ci-dessous :
+<P><!-- MATH
+ \begin{displaymath}
+\frac{\Gamma ⊢ t:A \ \ \     \Gamma ⊢ B:s \ \ \     A=_\beta B}{\Gamma ⊢ t:B}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img176.svg"
+ ALT="$\displaystyle \frac{\Gamma ⊢ t:A \ \ \ \Gamma ⊢ B:s \ \ \ A=_\beta B}{\Gamma ⊢ t:B}
+$">
+</DIV><P></P>
+Ainsi, un terme peut avoir plusieurs types.
+
+<P>
+La preuve <code>λn:nat.eq _refl(nat, (λn:nat.2 n))</code> est preuve de :
+
+<UL>
+<LI><code>πn:nat.eq(nat, (λn:nat.2 n), (λn:nat.2 n))</code>
+</LI>
+<LI><code>πn:nat.eq(nat, (λn:nat.2 n), 2)</code>
+</LI>
+<LI><code>(nat→eq(nat, 2, 2))</code>
+</LI>
+</UL>
+Nous constatons que la preuve n'exhibe pas le process calculatoire de la <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img2.svg"
+ ALT="$\beta $"></SPAN>-réduction.
+Le théorème est ici prouvé par calcul et non par raisonnement. Ces considérations philosophiques sont bien développées
+par Henri Poincaré[<A
+ HREF="node114.html#poincare">14</A>]
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

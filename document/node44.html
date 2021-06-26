@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>La correspondance de Curry-Howard</TITLE>
+<META NAME="description" CONTENT="La correspondance de Curry-Howard">
+<META NAME="keywords" CONTENT="document">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
+
+<LINK REL="STYLESHEET" HREF="document.css">
+
+<LINK REL="previous" HREF="node43.html">
+<LINK REL="next" HREF="node45.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node45.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node43.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node43.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html373"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> suivant:</B> <A
+ HREF="node45.html">Compilation basique vers une</A>
+<B> monter:</B> <A
+ HREF="node43.html">Compilation des -termes en</A>
+<B> pr&eacute;c&eacute;dent:</B> <A
+ HREF="node43.html">Compilation des -termes en</A>
+ &nbsp; <B>  <A ID="tex2html374"
+  HREF="node1.html">Table des matières</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H3><A ID="SECTION00510100000000000000">
+La correspondance de Curry-Howard</A>
+</H3>
+Dans un <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul typé, les types des combinateurs <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img232.svg"
+ ALT="$K$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img216.svg"
+ ALT="$S$"></SPAN> correspondent aux deux axiomes
+des systèmes hilbertiens :
+<P><!-- MATH
+ \begin{displaymath}
+S : (\phi \Rightarrow (\chi \Rightarrow \psi)) \Rightarrow ((\phi \Rightarrow \chi) \Rightarrow(\phi \Rightarrow \psi))
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img237.svg"
+ ALT="$\displaystyle S : (\phi \Rightarrow (\chi \Rightarrow \psi)) \Rightarrow ((\phi \Rightarrow \chi) \Rightarrow(\phi \Rightarrow \psi))
+$">
+</DIV><P></P>
+<P><!-- MATH
+ \begin{displaymath}
+K : \phi \Rightarrow (\psi \Rightarrow \phi)
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img238.svg"
+ ALT="$\displaystyle K : \phi \Rightarrow (\psi \Rightarrow \phi)
+$">
+</DIV><P></P>
+L'inférence de type OCAML nous donne en effet 
+<code>k : 'a -&gt; 'b -&gt; 'a</code> et  
+<BR><code> s : ('a -&gt; 'b -&gt; 'c) -&gt; ('a -&gt; 'b) -&gt; 'a -&gt; 'c</code>
+<DIV class="CENTER">
+</DIV>
+<DIV class="CENTER">
+<IMG
+ STYLE=""
+ SRC="img239.svg"
+ ALT="\begin{figure}\begin{tabular}{\vert c\vert c\vert} \hline
+\textit{logique combi...
+...�se \\
+type d'une variable &amp; hypothèse \\ \hline
+\end{tabular}
+\end{figure}">
+</DIV>
+<DIV class="CENTER">
+</DIV>
+
+<P>
+L'unique règle d'inférence, la règle du modus ponens, est ainsi modélisée par l'application
+<P><!-- MATH
+ \begin{displaymath}
+(App) : \frac{\phi \Rightarrow \psi \ \ \phi}{\psi}
+\end{displaymath}
+ -->
+</P>
+<DIV CLASS="displaymath">
+<IMG
+ STYLE=""
+ SRC="img240.svg"
+ ALT="$\displaystyle (App) : \frac{\phi \Rightarrow \psi \ \ \phi}{\psi} $">
+</DIV><P></P>
+
+<P>
+Dans le système hilbertien, il n'y a pas de règle d'introduction 
+<!-- MATH
+ $(I_\Rightarrow) : \frac{[\phi]\ \ \chi}{\phi \Rightarrow \chi}$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img241.svg"
+ ALT="$(I_\Rightarrow) : \frac{[\phi]\ \ \chi}{\phi \Rightarrow \chi}$"></SPAN> qui équivalait à une abstraction 
+<!-- MATH
+ $\lambda x^\phi.y^\psi$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img242.svg"
+ ALT="$\lambda x^\phi.y^\psi $"></SPAN>
+
+<P>
+Le modus ponens et les axiomes permettent de simuler <!-- MATH
+ $(I_\Rightarrow )$
+ -->
+<SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img243.svg"
+ ALT="$(I_\Rightarrow )$"></SPAN> de la même façon que 
+l'abstraction du <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img1.svg"
+ ALT="$\lambda $"></SPAN>-calcul est simulée à l'aide des constantes <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img216.svg"
+ ALT="$S$"></SPAN> et <SPAN CLASS="MATH"><IMG
+ STYLE=""
+ SRC="img232.svg"
+ ALT="$K$"></SPAN> en logique combinatoire.
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>
