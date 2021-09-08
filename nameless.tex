@@ -1,0 +1,1379 @@
+\documentclass[12pt]{report}
+\usepackage[]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% coqdoc -latex nameless.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{nameless}{Library }{nameless}
+
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Set Implicit Arguments}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{LibLN}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\section{Definitions}
+
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Grammars}
+
+
+
+ Grammar of types. We have two constructors, one for type variables
+    and one for arrow types of the form \coqdocvar{T1} \ensuremath{\rightarrow} \coqdocvar{T2}.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{typ} : \coqdockw{Set} :=\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{typ\_var}   : \coqdocvar{var} \ensuremath{\rightarrow} \coqdocvar{typ}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{typ\_arrow} : \coqdocvar{typ} \ensuremath{\rightarrow} \coqdocvar{typ} \ensuremath{\rightarrow} \coqdocvar{typ}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Grammar of pre-terms. We use a locally nameless representation for the
+    simply-typed lambda calculus, where bound variables are represented as 
+    natural numbers (de Bruijn indices) and free variables are represented as
+    atoms. The type \coqdocvar{var}, defined in the library LibLN\_Var, represents
+    'names' or 'atoms'. One central assumption is that it is always possible
+    to generate an atom fresh for any given finite set of atoms (lemma 
+    \coqdocvar{var\_fresh}). 
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{trm} : \coqdockw{Set} :=\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_bvar} : \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{trm}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_fvar} : \coqdocvar{var} \ensuremath{\rightarrow} \coqdocvar{trm}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_abs}  : \coqdocvar{trm} \ensuremath{\rightarrow} \coqdocvar{trm}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_app}  : \coqdocvar{trm} \ensuremath{\rightarrow} \coqdocvar{trm} \ensuremath{\rightarrow} \coqdocvar{trm}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+We declare the constructors for indices and variables to be coercions. 
+    That way, if Coq sees a nat where it expects an exp, it will implicitly 
+    insert an application of bvar; and similarly for atoms. In real metatheory
+    developments, we usually do not need such coercions. However, they will
+    be very useful for carrying out examples in this tutorial. 
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Coercion} \coqdocvar{trm\_bvar} : \coqdocvar{nat} >-> \coqdocvar{trm}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Coercion} \coqdocvar{trm\_fvar} : \coqdocvar{var} >-> \coqdocvar{trm}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+For example, we can encode the expression (\symbol{92}x. Y x) as below.
+    Because ``Y'' is free variable in this term, we need to assume an atom 
+    for this name.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Parameter} \coqdocvar{Y} : \coqdocvar{var}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{demo\_rep1} := \coqdocvar{trm\_abs} (\coqdocvar{trm\_app} \coqdocvar{Y} 0).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Another example: the encoding of (\symbol{92}x. \symbol{92}y. (y x)) \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{demo\_rep2} := \coqdocvar{trm\_abs} (\coqdocvar{trm\_abs} (\coqdocvar{trm\_app} 0 1)).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Exercise: convert the following lambda calculus term to locally 
+    nameless representation: \symbol{92}s. \symbol{92}z. s(s z) \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{demo\_two} := \coqdocvar{trm\_abs} (\coqdocvar{trm\_abs} (\coqdocvar{trm\_app} 1 (\coqdocvar{trm\_app} 1 0))).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+There are two important advantages of the locally nameless
+    representation:
+
+\begin{itemize}
+\item  Alpha-equivalent terms have a unique representation, 
+       we're always working up to alpha-equivalence.
+
+\item  Operations such as free variable substitution and free
+       variable calculation have simple recursive definitions
+      (and therefore are simple to reason about).
+
+\end{itemize}
+
+
+    Weighed against these advantages are two drawbacks:
+
+\begin{itemize}
+\item  The \coqdocvar{trm} datatype admits terms, such as \coqdocvar{trm\_abs} 3, where
+       indices are unbound. 
+       A term is called ``locally closed'' when it contains 
+       no unbound indices. 
+
+\item  We must define *both* bound variable \& free variable 
+       substitution and reason about how these operations 
+       interact with eachother.
+
+\end{itemize}
+
+
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Opening}
+
+
+
+ Opening replaces an index with a term. It corresponds to informal
+    substitution for a bound variable, such as in the rule for beta
+    reduction. Note that only ``dangling'' indices (those that do not
+    refer to any abstraction) can be opened. Opening has no effect for
+    terms that are locally closed.
+
+
+    Natural numbers are just an inductive datatype with two
+    constructors: O and S, defined in Coq.Init.Datatypes.
+
+
+    We make several simplifying assumptions in defining \coqdocvar{open\_rec}.
+    First, we assume that the argument \coqdocvar{u} is locally closed.  This
+    assumption simplifies the implementation since we do not need to
+    shift indices in \coqdocvar{u} when passing under a binder.  Second, we
+    assume that this function is initially called with index zero and
+    that zero is the only unbound index in the term.  This eliminates
+    the need to possibly subtract one in the case of indices.
+
+
+    There is no need to worry about variable capture because bound
+    variables are indices.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{open\_rec} (\coqdocvar{k} : \coqdocvar{nat}) (\coqdocvar{u} : \coqdocvar{trm}) (\coqdocvar{t} : \coqdocvar{trm}) \{\coqdockw{struct} \coqdocvar{t}\} : \coqdocvar{trm} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{t} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_bvar} \coqdocvar{i}    \ensuremath{\Rightarrow} \coqdocvar{If} \coqdocvar{k} = \coqdocvar{i} \coqdockw{then} \coqdocvar{u} \coqdockw{else} (\coqdocvar{trm\_bvar} \coqdocvar{i})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_fvar} \coqdocvar{x}    \ensuremath{\Rightarrow} \coqdocvar{trm\_fvar} \coqdocvar{x}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_abs} \coqdocvar{t1}    \ensuremath{\Rightarrow} \coqdocvar{trm\_abs} (\coqdocvar{open\_rec} (\coqdocvar{S} \coqdocvar{k}) \coqdocvar{u} \coqdocvar{t1})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_app} \coqdocvar{t1} \coqdocvar{t2} \ensuremath{\Rightarrow} \coqdocvar{trm\_app} (\coqdocvar{open\_rec} \coqdocvar{k} \coqdocvar{u} \coqdocvar{t1}) (\coqdocvar{open\_rec} \coqdocvar{k} \coqdocvar{u} \coqdocvar{t2})\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Many common applications of opening replace index zero with an
+    expression or variable.  The following definition provides a
+    convenient shorthand for such uses.  Note that the order of
+    arguments is switched relative to the definition above.  For
+    example, (\coqdocvar{open} \coqdocvar{e} \coqdocvar{x}) can be read as ``substitute the variable \coqdocvar{x}
+    for index 0 in \coqdocvar{e}'' and ``open \coqdocvar{e} with the variable \coqdocvar{x}.''
+    Recall that the coercions above let us write \coqdocvar{x} in place of
+    (\coqdocvar{fvar} \coqdocvar{x}).
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{open} \coqdocvar{t} \coqdocvar{u} := \coqdocvar{open\_rec} 0 \coqdocvar{u} \coqdocvar{t}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+We define notations for \coqdocvar{open\_rec} and \coqdocvar{open}. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Notation} "\{ k \~{}> u \} t" := (\coqdocvar{open\_rec} \coqdocvar{k} \coqdocvar{u} \coqdocvar{t}) (\coqdoctac{at} \coqdockw{level} 67).\coqdoceol
+\coqdocnoindent
+\coqdockw{Notation} "t \^{}\^{} u" := (\coqdocvar{open} \coqdocvar{t} \coqdocvar{u}) (\coqdoctac{at} \coqdockw{level} 67).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+We also define a notation for the specialization of \coqdocvar{open} to
+    the case where the argument is a free variable. This notation
+    is not needed when \coqdocvar{trm\_fvar} is declared as a coercion like
+    we do in this tutorial, but it is very handy when we don't want
+    to have such a coercion. (Coercions are very convenient for
+    simple developments, but they can make things very obscur when
+    it comes to scaling up to larger developments.)  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Notation} "t \^{} x" := (\coqdocvar{open} \coqdocvar{t} (\coqdocvar{trm\_fvar} \coqdocvar{x})).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+This next demo shows the operation of \coqdocvar{open}.  For example, the
+   locally nameless representation of the term (\symbol{92}y. (\symbol{92}x. (y x)) y)
+   is \coqdocvar{abs} (\coqdocvar{app} (\coqdocvar{abs} (\coqdocvar{app} 1 0)) 0). To look at the body
+   without the outer abstraction, we need to replace the indices that
+   refer to that abstraction with a name.
+   Therefore, we show that we can open the body of the abstraction
+   above with Y to produce \coqdocvar{app} (\coqdocvar{abs} (\coqdocvar{app} \coqdocvar{Y} 0)) \coqdocvar{Y}).
+   The tactic \coqdocvar{case\_if} is used to simplify conditionals.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{demo\_open} :\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{open} (\coqdocvar{trm\_app} (\coqdocvar{trm\_abs} (\coqdocvar{trm\_app} 1 0)) 0) \coqdocvar{Y} =\coqdoceol
+\coqdocindent{3.50em}
+(\coqdocvar{trm\_app} (\coqdocvar{trm\_abs} (\coqdocvar{trm\_app} \coqdocvar{Y} 0)) \coqdocvar{Y}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{unfold} \coqdocvar{open}. \coqdoctac{unfold} \coqdocvar{open\_rec}. \coqdocvar{case\_if}. \coqdocvar{case\_if}. \coqdocvar{case\_if}. \coqdoctac{auto}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Local closure}
+
+
+
+ Recall that \coqdocvar{trm} admits terms that contain unbound indices. 
+    We say that a term is locally closed, 
+    when no indices appearing in it are unbound.  The proposition 
+    \coqdocvar{term} \coqdocvar{e} holds when an expression \coqdocvar{e} is locally closed.
+
+
+    The inductive definition below formalizes local closure such that
+    the resulting induction principle serves as the structural
+    induction principle over (locally closed) expressions.  In
+    particular, unlike induction for type \coqdocvar{trm}, there is no cases
+    for bound variables.  Thus, the induction principle corresponds more
+    closely to informal practice than the one arising from the
+    definition of pre-terms.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{term} : \coqdocvar{trm} \ensuremath{\rightarrow} \coqdockw{Prop} :=\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{term\_var} : \coqdockw{\ensuremath{\forall}} \coqdocvar{x},\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{term} (\coqdocvar{trm\_fvar} \coqdocvar{x})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{term\_abs} : \coqdockw{\ensuremath{\forall}} \coqdocvar{L} \coqdocvar{t1},\coqdoceol
+\coqdocindent{3.00em}
+(\coqdockw{\ensuremath{\forall}} \coqdocvar{x}, \coqdocvar{x} \symbol{92}\coqdocvar{notin} \coqdocvar{L} \ensuremath{\rightarrow} \coqdocvar{term} (\coqdocvar{t1} \^{} \coqdocvar{x})) \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{term} (\coqdocvar{trm\_abs} \coqdocvar{t1})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{term\_app} : \coqdockw{\ensuremath{\forall}} \coqdocvar{t1} \coqdocvar{t2},\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{term} \coqdocvar{t1} \ensuremath{\rightarrow} \coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{term} \coqdocvar{t2} \ensuremath{\rightarrow} \coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{term} (\coqdocvar{trm\_app} \coqdocvar{t1} \coqdocvar{t2}).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+For tactics to work well, it is very important that lists of
+    names to avoid, such as \coqdocvar{L}, appear as first argument of the
+    constructors. 
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Semantics}
+
+
+
+ We now define the semantics of our call-by-value lambda calculus. 
+    We define values and small-step reduction. Note the hypotheses 
+    which ensure that the relations hold only for locally closed terms. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{value} : \coqdocvar{trm} \ensuremath{\rightarrow} \coqdockw{Prop} :=\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{value\_abs} : \coqdockw{\ensuremath{\forall}} \coqdocvar{t1}, \coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{term} (\coqdocvar{trm\_abs} \coqdocvar{t1}) \ensuremath{\rightarrow} \coqdocvar{value} (\coqdocvar{trm\_abs} \coqdocvar{t1}).\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdoctac{red} : \coqdocvar{trm} \ensuremath{\rightarrow} \coqdocvar{trm} \ensuremath{\rightarrow} \coqdockw{Prop} :=\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{red\_beta} : \coqdockw{\ensuremath{\forall}} \coqdocvar{t1} \coqdocvar{t2},\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{term} (\coqdocvar{trm\_abs} \coqdocvar{t1}) \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{value} \coqdocvar{t2} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdoctac{red} (\coqdocvar{trm\_app} (\coqdocvar{trm\_abs} \coqdocvar{t1}) \coqdocvar{t2}) (\coqdocvar{t1} \^{}\^{} \coqdocvar{t2})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{red\_app\_1} : \coqdockw{\ensuremath{\forall}} \coqdocvar{t1} \coqdocvar{t1'} \coqdocvar{t2},\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{term} \coqdocvar{t2} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdoctac{red} \coqdocvar{t1} \coqdocvar{t1'} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdoctac{red} (\coqdocvar{trm\_app} \coqdocvar{t1} \coqdocvar{t2}) (\coqdocvar{trm\_app} \coqdocvar{t1'} \coqdocvar{t2})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{red\_app\_2} : \coqdockw{\ensuremath{\forall}} \coqdocvar{t1} \coqdocvar{t2} \coqdocvar{t2'},\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{value} \coqdocvar{t1} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdoctac{red} \coqdocvar{t2} \coqdocvar{t2'} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdoctac{red} (\coqdocvar{trm\_app} \coqdocvar{t1} \coqdocvar{t2}) (\coqdocvar{trm\_app} \coqdocvar{t1} \coqdocvar{t2'}).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+We use the notation \coqdocvar{t} --> \coqdocvar{t'} to denote small step reduction. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Notation} "t --> t'" := (\coqdoctac{red} \coqdocvar{t} \coqdocvar{t'}) (\coqdoctac{at} \coqdockw{level} 68).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Environments}
+
+
+
+ Environments are isomorphic to association lists (lists of pairs of
+    keys and values) whose keys are \coqdocvar{var}s.  To print environments in a
+    pretty way and, in particular, to ensure that new bindings are added
+    to the right of existing environments, we do not use the type \coqdocvar{list}
+    directly but instead use an abstract data type called \coqdocvar{env}. More
+    precisely, the type \coqdocvar{env} \coqdocvar{A} is isomorphic to \coqdocvar{list} (\coqdocvar{var} \ensuremath{\times} \coqdocvar{A}).
+    Environments are defined in the file \coqdocvar{LibEnv}. 
+
+
+    Here, environments bind \coqdocvar{var}s to \coqdocvar{typ}s. So, we define \coqdocvar{ctx} as a
+    shorthand for \coqdocvar{env} \coqdocvar{typ}. 
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{ctx} := \coqdocvar{env} \coqdocvar{typ}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+If \coqdocvar{E} and \coqdocvar{F} are two contexts, then \coqdocvar{E} \& \coqdocvar{F} denotes their 
+    concatenation. If \coqdocvar{x} is a variable and \coqdocvar{T} is a type, then 
+    \coqdocvar{x} \ensuremath{\lnot} \coqdocvar{T} denotes a singleton environment where \coqdocvar{x} is bound to \coqdocvar{T}.
+    In particular, \coqdocvar{E} \& \coqdocvar{x} \ensuremath{\lnot} \coqdocvar{T} denotes a context \coqdocvar{E} extended 
+    with a binding from \coqdocvar{x} to \coqdocvar{T}. The empty environment is 
+    called \coqdocvar{empty}.
+
+
+ The function \coqdocvar{dom} computes the domain of an environment,
+    returning a finite set of \coqdocvar{var}s. \begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+The unary predicate \coqdocvar{ok} holds when each atom is bound at most
+    once in an environment. This property is defined inductively. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocemptyline
+\end{coqdoccode}
+The ternary predicate \coqdocvar{binds} holds when a given binding is
+    present in an environment.  More specifically, \coqdocvar{binds} \coqdocvar{x} \coqdocvar{T} \coqdocvar{E} holds
+    when the last binding of \coqdocvar{x} binds \coqdocvar{x} to the type \coqdocvar{T}. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Typing}
+
+
+
+ The definition of the typing relation is straightforward.  In
+    order to ensure that the relation holds for only well-formed
+    environments, we check in the \coqdocvar{typing\_var} case that the
+    environment is \coqdocvar{ok}.  The structure of typing derivations
+    implicitly ensures that the relation holds only for locally closed
+    expressions.  Finally, note the use of cofinite quantification in
+    the \coqdocvar{typing\_abs} case. 
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Reserved Notation} "E |= t \~{}: T" (\coqdoctac{at} \coqdockw{level} 69).\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{typing} : \coqdocvar{ctx} \ensuremath{\rightarrow} \coqdocvar{trm} \ensuremath{\rightarrow} \coqdocvar{typ} \ensuremath{\rightarrow} \coqdockw{Prop} :=\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{typing\_var} : \coqdockw{\ensuremath{\forall}} \coqdocvar{E} \coqdocvar{x} \coqdocvar{T},\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{ok} \coqdocvar{E} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{binds} \coqdocvar{x} \coqdocvar{T} \coqdocvar{E} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{E} |= (\coqdocvar{trm\_fvar} \coqdocvar{x}) \~{}: \coqdocvar{T}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{typing\_abs} : \coqdockw{\ensuremath{\forall}} \coqdocvar{L} \coqdocvar{E} \coqdocvar{U} \coqdocvar{T} \coqdocvar{t1},\coqdoceol
+\coqdocindent{3.00em}
+(\coqdockw{\ensuremath{\forall}} \coqdocvar{x}, \coqdocvar{x} \symbol{92}\coqdocvar{notin} \coqdocvar{L} \ensuremath{\rightarrow} \coqdoceol
+\coqdocindent{4.00em}
+(\coqdocvar{E} \& \coqdocvar{x} \ensuremath{\lnot} \coqdocvar{U}) |= \coqdocvar{t1} \^{} \coqdocvar{x} \~{}: \coqdocvar{T}) \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{E} |= (\coqdocvar{trm\_abs} \coqdocvar{t1}) \~{}: (\coqdocvar{typ\_arrow} \coqdocvar{U} \coqdocvar{T})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{typing\_app} : \coqdockw{\ensuremath{\forall}} \coqdocvar{S} \coqdocvar{T} \coqdocvar{E} \coqdocvar{t1} \coqdocvar{t2},\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{E} |= \coqdocvar{t1} \~{}: (\coqdocvar{typ\_arrow} \coqdocvar{S} \coqdocvar{T}) \ensuremath{\rightarrow} \coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{E} |= \coqdocvar{t2} \~{}: \coqdocvar{S} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{E} |= (\coqdocvar{trm\_app} \coqdocvar{t1} \coqdocvar{t2}) \~{}: \coqdocvar{T}\coqdoceol
+\coqdocnoindent
+\coqdoceol
+\coqdocnoindent
+\coqdockw{where} "E |= t \~{}: T" := (\coqdocvar{typing} \coqdocvar{E} \coqdocvar{t} \coqdocvar{T}).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Statement of theorems}
+
+
+
+ At this point we can state the theorems that we want to prove.
+    Preservation states that if a well-typed term takes a reduction
+    step then it produces another well-typed term.
+    Progress states that a well-typed term is either a value or it 
+    can take a step of reduction. 
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{preservation\_statement} := \coqdockw{\ensuremath{\forall}} \coqdocvar{E} \coqdocvar{t} \coqdocvar{t'} \coqdocvar{T},\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{E} |= \coqdocvar{t} \~{}: \coqdocvar{T} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{t} --> \coqdocvar{t'} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{E} |= \coqdocvar{t'} \~{}: \coqdocvar{T}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{progress\_statement} := \coqdockw{\ensuremath{\forall}} \coqdocvar{t} \coqdocvar{T}, \coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{empty} |= \coqdocvar{t} \~{}: \coqdocvar{T} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{2.50em}
+\coqdocvar{value} \coqdocvar{t} \coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{\lor} \coqdoctac{\ensuremath{\exists}} \coqdocvar{t'}, \coqdocvar{t} --> \coqdocvar{t'}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+We here reach the end the ``trusted base''. If we got definitions wrong
+    above that point, then we might not be proving what we intend to.
+    If, however, we got the definitions right, then no matter how ugly
+    our proofs might be, if we reach the Qed of the two theorems that
+    we have stated, then we know that our type system is sound.
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\section{Infrastructure}
+
+
+
+ Before we start getting into the proofs, we need to set up a few
+    more things.
+
+\begin{itemize}
+\item  functions definining free variables and substitution,
+
+\item  tactics to pick fresh names and to handle freshness-related goals,
+
+\item  a few axioms about the behavior of operations on terms.
+
+\end{itemize}
+
+
+    We will purposely introduce some axioms, so that we can go straight
+    to the proofs that we are interested in. Once we are finished with
+    the main proofs, we will do a second pass in order to turn the 
+    axioms into proper lemmas.
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Free variables}
+
+
+
+ The function \coqdocvar{fv}, defined below, calculates the set of free
+    variables in an expression.  Because we are using locally nameless
+    representation, where bound variables are represented as indices,
+    any name we see is a free variable of a term.  In particular, this
+    makes the \coqdocvar{trm\_abs} case simple.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{fv} (\coqdocvar{t} : \coqdocvar{trm}) \{\coqdockw{struct} \coqdocvar{t}\} : \coqdocvar{vars} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{t} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_bvar} \coqdocvar{i}    \ensuremath{\Rightarrow} \symbol{92}\{\}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_fvar} \coqdocvar{x}    \ensuremath{\Rightarrow} \symbol{92}\{\coqdocvar{x}\}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_abs} \coqdocvar{t1}    \ensuremath{\Rightarrow} (\coqdocvar{fv} \coqdocvar{t1})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_app} \coqdocvar{t1} \coqdocvar{t2} \ensuremath{\Rightarrow} (\coqdocvar{fv} \coqdocvar{t1}) \symbol{92}\coqdocvar{u} (\coqdocvar{fv} \coqdocvar{t2})\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Substitution}
+
+
+
+ Substitution replaces a free variable with a term.  The definition
+    below is simple for two reasons:
+
+\begin{itemize}
+\item  Because bound variables are represented using indices, there
+        is no need to worry about variable capture.
+
+\item  We assume that the term being substituted in is locally
+        closed.  Thus, there is no need to shift indices when
+        passing under a binder.
+
+\end{itemize}
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdoctac{subst} (\coqdocvar{z} : \coqdocvar{var}) (\coqdocvar{u} : \coqdocvar{trm}) (\coqdocvar{t} : \coqdocvar{trm}) \{\coqdockw{struct} \coqdocvar{t}\} : \coqdocvar{trm} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{t} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_bvar} \coqdocvar{i}    \ensuremath{\Rightarrow} \coqdocvar{trm\_bvar} \coqdocvar{i}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_fvar} \coqdocvar{x}    \ensuremath{\Rightarrow} \coqdocvar{If} \coqdocvar{x} = \coqdocvar{z} \coqdockw{then} \coqdocvar{u} \coqdockw{else} (\coqdocvar{trm\_fvar} \coqdocvar{x})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_abs} \coqdocvar{t1}    \ensuremath{\Rightarrow} \coqdocvar{trm\_abs} (\coqdoctac{subst} \coqdocvar{z} \coqdocvar{u} \coqdocvar{t1})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{trm\_app} \coqdocvar{t1} \coqdocvar{t2} \ensuremath{\Rightarrow} \coqdocvar{trm\_app} (\coqdoctac{subst} \coqdocvar{z} \coqdocvar{u} \coqdocvar{t1}) (\coqdoctac{subst} \coqdocvar{z} \coqdocvar{u} \coqdocvar{t2})\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+We define a notation for free variable substitution that mimics
+    standard mathematical notation. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Notation} "[ z \~{}> u ] t" := (\coqdoctac{subst} \coqdocvar{z} \coqdocvar{u} \coqdocvar{t}) (\coqdoctac{at} \coqdockw{level} 68).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Below is a demo. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Parameter} \coqdocvar{Z} : \coqdocvar{var}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{demo\_subst1}:  [\coqdocvar{Y} \~{}> \coqdocvar{Z}] (\coqdocvar{trm\_abs} (\coqdocvar{trm\_app} 0 \coqdocvar{Y})) = (\coqdocvar{trm\_abs} (\coqdocvar{trm\_app} 0 \coqdocvar{Z})).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}. \coqdoctac{simpl}. \coqdocvar{case\_if}. \coqdoctac{auto}. \coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Tactics}
+
+
+
+ When picking a fresh atom or applying a rule that uses cofinite
+    quantification, choosing a set of atoms to be fresh for can be
+    tedious.  In practice, it is simpler to use a tactic to choose the
+    set to be as large as possible.
+
+
+    The first tactic we define, \coqdocvar{gather\_vars}, is used to collect
+    together all the atoms in the context.  It relies on an auxiliary
+    tactic from \coqdocvar{LibLN\_Tactics}, \coqdocvar{gather\_vars\_with}, which collects
+    together the atoms appearing in objects of a certain type.  The argument 
+    to \coqdocvar{gather\_vars\_with} is a function that should return the set of
+    vars appearing in its argument. 
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{gather\_vars} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{let} \coqdocvar{A} := \coqdocvar{gather\_vars\_with} (\coqdockw{fun} \coqdocvar{x} : \coqdocvar{vars} \ensuremath{\Rightarrow} \coqdocvar{x}) \coqdoctac{in}\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{let} \coqdocvar{B} := \coqdocvar{gather\_vars\_with} (\coqdockw{fun} \coqdocvar{x} : \coqdocvar{var} \ensuremath{\Rightarrow} \symbol{92}\{\coqdocvar{x}\}) \coqdoctac{in}\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{let} \coqdocvar{C} := \coqdocvar{gather\_vars\_with} (\coqdockw{fun} \coqdocvar{x} : \coqdocvar{ctx} \ensuremath{\Rightarrow} \coqdocvar{dom} \coqdocvar{x}) \coqdoctac{in}\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{let} \coqdocvar{D} := \coqdocvar{gather\_vars\_with} (\coqdockw{fun} \coqdocvar{x} : \coqdocvar{trm} \ensuremath{\Rightarrow} \coqdocvar{fv} \coqdocvar{x}) \coqdoctac{in}\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{constr}:(\coqdocvar{A} \symbol{92}\coqdocvar{u} \coqdocvar{B} \symbol{92}\coqdocvar{u} \coqdocvar{C} \symbol{92}\coqdocvar{u} \coqdocvar{D}).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+The tactic \coqdocvar{pick\_fresh\_gen} \coqdocvar{L} \coqdocvar{x} creates a new atom fresh 
+    from \coqdocvar{L} and called \coqdocvar{x}. Using the tactic \coqdocvar{gather\_vars},
+    we can automate the construction of \coqdocvar{L}. The tactic
+    \coqdocvar{pick\_fresh} \coqdocvar{x} creates a new atom called \coqdocvar{x} that is fresh
+    for ``everything'' in the context.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{pick\_fresh} \coqdocvar{x} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{let} \coqdocvar{L} := \coqdocvar{gather\_vars} \coqdoctac{in} (\coqdocvar{pick\_fresh\_gen} \coqdocvar{L} \coqdocvar{x}).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+The tactic \coqdocvar{apply\_fresh} \coqdocvar{T} \coqdockw{as} \coqdocvar{y} takes a lemma T of the form 
+    \coqdockw{\ensuremath{\forall}} \coqdocvar{L} ..., (\coqdockw{\ensuremath{\forall}} \coqdocvar{x}, \coqdocvar{x} \symbol{92}\coqdocvar{notin} \coqdocvar{L}, \coqdocvar{P} \coqdocvar{x}) \ensuremath{\rightarrow} ... \ensuremath{\rightarrow} \coqdocvar{Q}.
+    and applies it by instantiating L as the set of variables 
+    occuring in the context (L is computed using \coqdocvar{gather\_vars}).
+    Moreover, for each subgoal of the form \coqdockw{\ensuremath{\forall}} \coqdocvar{x}, \coqdocvar{x} \symbol{92}\coqdocvar{notin} \coqdocvar{L}, \coqdocvar{P} \coqdocvar{x}
+    being generated, the tactic automatically introduces the name \coqdocvar{x} 
+    as well as the hypothesis \coqdocvar{x} \symbol{92}\coqdocvar{notin} \coqdocvar{L}.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Tactic Notation} "apply\_fresh" \coqdockw{constr}(\coqdocvar{T}) "as" \coqdocvar{ident}(\coqdocvar{x}) :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{apply\_fresh\_base} \coqdocvar{T} \coqdocvar{gather\_vars} \coqdocvar{x}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+The tactic \coqdocvar{apply\_fresh}\ensuremath{\times} \coqdocvar{T} \coqdockw{as} \coqdocvar{y} is the same as 
+    \coqdocvar{apply\_fresh} \coqdocvar{T} \coqdockw{as} \coqdocvar{y} except that it calls \coqdoctac{intuition} \coqdoctac{eauto}
+    subsequently. It is also possible to call \coqdocvar{apply\_fresh}
+    without specifying the name that should be used.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Tactic Notation} "apply\_fresh" "*" \coqdockw{constr}(\coqdocvar{T}) "as" \coqdocvar{ident}(\coqdocvar{x}) :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{apply\_fresh} \coqdocvar{T} \coqdockw{as} \coqdocvar{x}; \coqdoctac{auto}\ensuremath{\times}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Tactic Notation} "apply\_fresh" \coqdockw{constr}(\coqdocvar{T}) :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{apply\_fresh\_base} \coqdocvar{T} \coqdocvar{gather\_vars} \coqdocvar{ltac\_no\_arg}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Tactic Notation} "apply\_fresh" "*" \coqdockw{constr}(\coqdocvar{T}) :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{apply\_fresh} \coqdocvar{T}; \coqdocvar{auto\_star}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Automation}
+
+
+
+ Automation is crucial for avoiding to have hundreds of subgoals to
+    handle by hand. For the tactics \coqdoctac{auto} and \coqdoctac{eauto} to be able to
+    derive proof automatically, we need to give explicitely the list of
+    lemmas that the proof search algorithm should try to exploit.
+    The command \coqdockw{Hint} \coqdockw{Resolve} \coqdocvar{lemma} adds a given lemma to the database
+    of proof search. The command \coqdockw{Hint} \coqdockw{Constructors} \coqdocvar{ind} is equivalent
+    to invoking \coqdockw{Hint} \coqdockw{Resolve} on all of the constructors of the inductive
+    type \coqdocvar{ind}. We use \coqdockw{Hint} \coqdockw{Constructors} for all our inductively-defined
+    predicates.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Hint Constructors} \coqdocvar{term} \coqdocvar{value} \coqdoctac{red}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Axiomatization of the infrastructure}
+
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Module} \coqdocvar{AxiomatizedVersion}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+At the point, we introduce two simple axioms and skip the many
+    uninteresting auxiliary lemmas that would be required to prove them.
+
+
+    The first axiom states that substitution for a variable \coqdocvar{x} 
+    commutes with the operation of opening with another variable \coqdocvar{y}.
+
+
+    The second axiom states that the opening of a term \coqdocvar{t} with a 
+    term \coqdocvar{u} can be decomposed in two steps: first opening \coqdocvar{t} with
+    a variable \coqdocvar{x}, and second substituting \coqdocvar{u} for \coqdocvar{x}.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Axiom} \coqdocvar{subst\_open\_var} : \coqdockw{\ensuremath{\forall}} \coqdocvar{x} \coqdocvar{y} \coqdocvar{u} \coqdocvar{t},\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{y} \ensuremath{\not=} \coqdocvar{x} \ensuremath{\rightarrow} \coqdocvar{term} \coqdocvar{u} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+([\coqdocvar{x} \~{}> \coqdocvar{u}]\coqdocvar{t}) \^{} \coqdocvar{y} = [\coqdocvar{x} \~{}> \coqdocvar{u}] (\coqdocvar{t} \^{} \coqdocvar{y}).\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Axiom} \coqdocvar{subst\_intro} : \coqdockw{\ensuremath{\forall}} \coqdocvar{x} \coqdocvar{t} \coqdocvar{u}, \coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{x} \symbol{92}\coqdocvar{notin} (\coqdocvar{fv} \coqdocvar{t}) \ensuremath{\rightarrow} \coqdocvar{term} \coqdocvar{u} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{t} \^{}\^{} \coqdocvar{u} = [\coqdocvar{x} \~{}> \coqdocvar{u}](\coqdocvar{t} \^{} \coqdocvar{x}).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+In order to focus our complete attention on the interesting proofs
+    first, we add a meta-axiom to tell Coq that it should admit any
+    subgoal related to well-formedness, i.e., any goal of the form
+    \coqdocvar{term} \coqdocvar{t} or \coqdocvar{ok} \coqdocvar{E}. We will remove these axioms later on.
+    This meta-axiom takes the form of a hint whose action is \coqdocvar{skip}.
+    This hint will be triggered whenever we call \coqdoctac{auto}. The \coqdocvar{skip}
+    tactics simply admits the current goal. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Local Hint Extern} 1 (\coqdocvar{term} \coqdocvar{\_}) \ensuremath{\Rightarrow} \coqdocvar{skip}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Local Hint Extern} 1 (\coqdocvar{ok} \coqdocvar{\_}) \ensuremath{\Rightarrow} \coqdocvar{skip}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+It might also be useful to add an extra meta-axiom, to get rid of
+    all the freshness-related subgoals. We do not need here, though. 
+
+
+    \coqdockw{Hint} \coqdockw{Extern} 1 (\coqdocvar{\_} \symbol{92}\coqdocvar{notin} \coqdocvar{\_}) \ensuremath{\Rightarrow} \coqdocvar{skip}
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\section{Proofs}
+
+
+
+ Weakening states that if an expression is typeable in some
+    environment, then it is typeable in any well-formed extension of
+    that environment.  This property is needed to prove the
+    substitution lemma.
+
+
+    As stated below, this lemma is not directly proveable.  The natural
+    way to try proving this lemma proceeds by induction on the typing
+    derivation for \coqdocvar{t}.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{typing\_weaken\_0} : \coqdockw{\ensuremath{\forall}} \coqdocvar{E} \coqdocvar{F} \coqdocvar{t} \coqdocvar{T},\coqdoceol
+\coqdocindent{1.50em}
+\coqdocvar{E} |= \coqdocvar{t} \~{}: \coqdocvar{T} \ensuremath{\rightarrow} \coqdoceol
+\coqdocindent{1.50em}
+\coqdocvar{ok} (\coqdocvar{E} \& \coqdocvar{F}) \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{E} \& \coqdocvar{F}) |= \coqdocvar{t} \~{}: \coqdocvar{T}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typ}. \coqdoctac{induction} \coqdocvar{Typ}; \coqdoctac{intros} \coqdocvar{Ok}; \coqdoctac{subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_var}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{apply\_fresh}\ensuremath{\times} \coqdocvar{typing\_abs} \coqdockw{as} \coqdocvar{y}. \coqdocnoindent
+\coqdocvar{Admitted}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+We are stuck in the \coqdocvar{typing\_abs} case because the induction
+    hypothesis \coqdocvar{H0} applies only when we weaken the environment at its
+    head.  In this case, however, we need to weaken the environment in
+    the middle; compare the conclusion at the point where we are stuck
+    to the hypothesis \coqdocvar{H}, which comes from the given typing derivation.
+
+
+    We can obtain a more useful induction hypothesis by changing the
+    statement to insert new bindings into the middle of the
+    environment, instead of at the head.  However, the proof still
+    gets stuck, as can be seen by examining each of the cases in
+    the proof below. 
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{typing\_weaken\_2} : \coqdockw{\ensuremath{\forall}} \coqdocvar{G} \coqdocvar{E} \coqdocvar{F} \coqdocvar{t} \coqdocvar{T},\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{E} \& \coqdocvar{G}) |= \coqdocvar{t} \~{}: \coqdocvar{T} \ensuremath{\rightarrow} \coqdoceol
+\coqdocindent{1.50em}
+\coqdocvar{ok} (\coqdocvar{E} \& \coqdocvar{F} \& \coqdocvar{G}) \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{E} \& \coqdocvar{F} \& \coqdocvar{G}) |= \coqdocvar{t} \~{}: \coqdocvar{T}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typ}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{gen\_eq} \coqdocvar{H}: (\coqdocvar{E} \& \coqdocvar{G}). \coqdocvar{gen} \coqdocvar{G}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{Typ}; \coqdoctac{intros} \coqdocvar{G} \coqdocvar{EQ} \coqdocvar{Ok}; \coqdoctac{subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_var}. \coqdoctac{apply}\ensuremath{\times} \coqdocvar{binds\_weaken}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{let} \coqdocvar{L} := \coqdocvar{gather\_vars} \coqdoctac{in} \coqdocvar{sets} \coqdocvar{L'}: \coqdocvar{L}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply} (@\coqdocvar{typing\_abs} \coqdocvar{L'}).\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intros} \coqdocvar{y} \coqdocvar{Fry}. \coqdoctac{subst} \coqdocvar{L'}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{rewrite} \ensuremath{\leftarrow} \coqdocvar{concat\_assoc}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply} \coqdocvar{H0}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{auto}. \coqdocindent{2.00em}
+\coqdoctac{rewrite} \coqdocvar{concat\_assoc}. \coqdoctac{auto}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{rewrite} \coqdocvar{concat\_assoc}. \coqdoctac{auto}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_app}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Using the tactic \coqdocvar{apply\_fresh} introduced earlier, as well as
+    the tactic \coqdocvar{apply\_ih\_bind} which is specialized for applying an
+    induction hypothesis up to rewriting of associativity in contexts,
+    we obtain a nice and short proof. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{typing\_weaken} : \coqdockw{\ensuremath{\forall}} \coqdocvar{G} \coqdocvar{E} \coqdocvar{F} \coqdocvar{t} \coqdocvar{T},\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{E} \& \coqdocvar{G}) |= \coqdocvar{t} \~{}: \coqdocvar{T} \ensuremath{\rightarrow} \coqdoceol
+\coqdocindent{1.50em}
+\coqdocvar{ok} (\coqdocvar{E} \& \coqdocvar{F} \& \coqdocvar{G}) \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{E} \& \coqdocvar{F} \& \coqdocvar{G}) |= \coqdocvar{t} \~{}: \coqdocvar{T}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typ}. \coqdocvar{gen\_eq} \coqdocvar{H}: (\coqdocvar{E} \& \coqdocvar{G}). \coqdocvar{gen} \coqdocvar{G}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{Typ}; \coqdoctac{intros} \coqdocvar{G} \coqdocvar{EQ} \coqdocvar{Ok}; \coqdoctac{subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_var}. \coqdoctac{apply}\ensuremath{\times} \coqdocvar{binds\_weaken}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{apply\_fresh}\ensuremath{\times} \coqdocvar{typing\_abs} \coqdockw{as} \coqdocvar{y}. \coqdocvar{apply\_ih\_bind}\ensuremath{\times} \coqdocvar{H0}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_app}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Proving that typing is preserved by substitution involves very
+    similar techniques. The only non trivial part concerns the case
+    analysis in the variable case. For that, we use the tactics
+    \coqdocvar{binds\_get} and \coqdocvar{binds\_cases} which extract information from
+    \coqdocvar{binds} hypotheses. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{typing\_subst\_1} : \coqdockw{\ensuremath{\forall}} \coqdocvar{F} \coqdocvar{E} \coqdocvar{t} \coqdocvar{T} \coqdocvar{z} \coqdocvar{u} \coqdocvar{U},\coqdoceol
+\coqdocindent{1.00em}
+(\coqdocvar{E} \& \coqdocvar{z} \ensuremath{\lnot} \coqdocvar{U} \& \coqdocvar{F}) |= \coqdocvar{t} \~{}: \coqdocvar{T} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{E} |= \coqdocvar{u} \~{}: \coqdocvar{U} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+(\coqdocvar{E} \& \coqdocvar{F}) |= [\coqdocvar{z} \~{}> \coqdocvar{u}]\coqdocvar{t} \~{}: \coqdocvar{T}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typt} \coqdocvar{Typu}. \coqdocvar{gen\_eq} \coqdocvar{G}: (\coqdocvar{E} \& \coqdocvar{z} \ensuremath{\lnot} \coqdocvar{U} \& \coqdocvar{F}). \coqdocvar{gen} \coqdocvar{F}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{Typt}; \coqdoctac{intros} \coqdocvar{G} \coqdocvar{Equ}; \coqdoctac{subst}; \coqdoctac{simpl} \coqdoctac{subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{case\_var}. \coqdocindent{2.00em}
+\coqdocvar{binds\_get} \coqdocvar{H0}. \coqdocindent{3.00em}
+\coqdocvar{lets} \coqdocvar{M}: (@\coqdocvar{typing\_weaken} \coqdocvar{empty} \coqdocvar{E} \coqdocvar{G} \coqdocvar{u} \coqdocvar{U}).\coqdoceol
+\coqdocindent{3.00em}
+\coqdoctac{do} 2 \coqdoctac{rewrite} \coqdocvar{concat\_empty\_r} \coqdoctac{in} \coqdocvar{M}.\coqdoceol
+\coqdocindent{3.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{M}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdocvar{binds\_cases} \coqdocvar{H0}.\coqdoceol
+\coqdocindent{3.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_var}. \coqdocindent{3.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_var}. \coqdocindent{1.00em}
+\coqdocvar{apply\_fresh} \coqdocvar{typing\_abs} \coqdockw{as} \coqdocvar{y}.\coqdoceol
+\coqdocindent{1.50em}
+\coqdoctac{rewrite}\ensuremath{\times} \coqdocvar{subst\_open\_var}. \coqdocvar{apply\_ih\_bind}\ensuremath{\times} \coqdocvar{H0}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_app}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+As we have seen in the proof above, specializing lemmas 
+    on empty environments can be quite tedious. Fortunately,
+    the metatheory library includes tactic that greatly helps.
+    Calling \coqdocvar{apply\_empty} \coqdocvar{lemma} is almost equivalent to calling
+    \coqdoctac{apply} (@\coqdocvar{lemma} \coqdocvar{empty}) except that it rewrites away the
+    empty environments on the fly. The proof becomes as follows.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{typing\_subst} : \coqdockw{\ensuremath{\forall}} \coqdocvar{F} \coqdocvar{E} \coqdocvar{t} \coqdocvar{T} \coqdocvar{z} \coqdocvar{u} \coqdocvar{U},\coqdoceol
+\coqdocindent{1.00em}
+(\coqdocvar{E} \& \coqdocvar{z} \ensuremath{\lnot} \coqdocvar{U} \& \coqdocvar{F}) |= \coqdocvar{t} \~{}: \coqdocvar{T} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{E} |= \coqdocvar{u} \~{}: \coqdocvar{U} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+(\coqdocvar{E} \& \coqdocvar{F}) |= [\coqdocvar{z} \~{}> \coqdocvar{u}]\coqdocvar{t} \~{}: \coqdocvar{T}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typt} \coqdocvar{Typu}. \coqdocvar{gen\_eq} \coqdocvar{G}: (\coqdocvar{E} \& \coqdocvar{z} \ensuremath{\lnot} \coqdocvar{U} \& \coqdocvar{F}). \coqdocvar{gen} \coqdocvar{F}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{Typt}; \coqdoctac{intros} \coqdocvar{G} \coqdocvar{Equ}; \coqdoctac{subst}; \coqdoctac{simpl} \coqdoctac{subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{case\_var}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdocvar{binds\_get} \coqdocvar{H0}. \coqdocvar{apply\_empty}\ensuremath{\times} \coqdocvar{typing\_weaken}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdocvar{binds\_cases} \coqdocvar{H0}; \coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_var}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{apply\_fresh} \coqdocvar{typing\_abs} \coqdockw{as} \coqdocvar{y}.\coqdoceol
+\coqdocindent{1.50em}
+\coqdoctac{rewrite}\ensuremath{\times} \coqdocvar{subst\_open\_var}. \coqdocvar{apply\_ih\_bind}\ensuremath{\times} \coqdocvar{H0}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_app}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+The proof of preservation appears below.
+    Proof sketch: By induction on the typing derivation for \coqdocvar{t}.
+
+
+
+\begin{itemize}
+\item  \coqdocvar{typing\_var} case: Variables don't step.
+
+
+
+\item  \coqdocvar{typing\_abs} case: Abstractions don't step.
+
+
+
+\item  \coqdocvar{typing\_app} case: By case analysis on how \coqdocvar{t} steps. The
+        \coqdocvar{eval\_beta} case is interesting, since it follows by the
+        substitution lemma.  The others follow directly from the
+        induction hypotheses. 
+\end{itemize}
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{preservation\_result} : \coqdocvar{preservation\_statement}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typ}. \coqdocvar{gen} \coqdocvar{t'}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{Typ}; \coqdoctac{intros} \coqdocvar{t'} \coqdocvar{Red}; \coqdocvar{inversions} \coqdocvar{Red}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{inversions} \coqdocvar{Typ1}. \coqdocvar{pick\_fresh} \coqdocvar{x}. \coqdoctac{rewrite}\ensuremath{\times} (@\coqdocvar{subst\_intro} \coqdocvar{x}).\coqdoceol
+\coqdocindent{1.50em}
+\coqdocvar{apply\_empty}\ensuremath{\times} \coqdocvar{typing\_subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_app}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_app}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+The proof of progress appears below.
+    Proof sketch: By induction on the typing derivation for \coqdocvar{t}.
+
+
+
+\begin{itemize}
+\item  \coqdocvar{typing\_var} case: Can't happen; the empty environment
+        doesn't bind anything.
+
+
+
+\item  \coqdocvar{typing\_abs} case: Abstractions are values.
+
+
+
+\item  \coqdocvar{typing\_app} case: Applications reduce.  The result follows
+        from an exhaustive case analysis on whether the two components
+        of the application step or are values and the fact that a
+        value must be an abstraction. 
+\end{itemize}
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{progress\_result} : \coqdocvar{progress\_statement}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typ}. \coqdocvar{gen\_eq} \coqdocvar{E}: (\coqdocvar{empty}:\coqdocvar{ctx}). \coqdocvar{lets} \coqdocvar{Typ'}: \coqdocvar{Typ}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{Typ}; \coqdoctac{intros}; \coqdoctac{subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{false}\ensuremath{\times} \coqdocvar{binds\_empty\_inv}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{left}\ensuremath{\times}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{right}. \coqdoctac{destruct}\ensuremath{\lnot} \coqdocvar{IHTyp1} \coqdockw{as} [\coqdocvar{Val1} \ensuremath{|} [\coqdocvar{t1'} \coqdocvar{Red1}]].\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{destruct}\ensuremath{\lnot} \coqdocvar{IHTyp2} \coqdockw{as} [\coqdocvar{Val2} \ensuremath{|} [\coqdocvar{t2'} \coqdocvar{Red2}]].\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{inversions} \coqdocvar{Typ1}; \coqdocvar{inversions} \coqdocvar{Val1}. \coqdoctac{\ensuremath{\exists}}\ensuremath{\times} (\coqdocvar{t0} \^{}\^{} \coqdocvar{t2}).\coqdoceol
+\coqdocindent{3.00em}
+\coqdoctac{\ensuremath{\exists}}\ensuremath{\times} (\coqdocvar{trm\_app} \coqdocvar{t1} \coqdocvar{t2'}).\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{\ensuremath{\exists}}\ensuremath{\times} (\coqdocvar{trm\_app} \coqdocvar{t1'} \coqdocvar{t2}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqdocvar{AxiomatizedVersion}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\section{Removing all axioms}
+
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Module} \coqdocvar{CompleteVersion}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+At this point we come back to the infrastructure part and try
+    to prove all remaining axioms and meta-axioms. We will need to
+    re-check all our proofs. This is usually done in-place in the
+    file, however in this tutorial we have copy-pasted all the proofs.
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Proving the two axioms}
+
+
+
+ We first set up four lemmas, and then we can prove our two axioms. 
+
+ The first lemma is a technical auxiliary lemma which do not 
+    want and do not need to read. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{open\_rec\_term\_core} :\coqdockw{\ensuremath{\forall}} \coqdocvar{t} \coqdocvar{j} \coqdocvar{v} \coqdocvar{i} \coqdocvar{u}, \coqdocvar{i} \ensuremath{\not=} \coqdocvar{j} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+\{\coqdocvar{j} \~{}> \coqdocvar{v}\}\coqdocvar{t} = \{\coqdocvar{i} \~{}> \coqdocvar{u}\}(\{\coqdocvar{j} \~{}> \coqdocvar{v}\}\coqdocvar{t}) \ensuremath{\rightarrow} \coqdocvar{t} = \{\coqdocvar{i} \~{}> \coqdocvar{u}\}\coqdocvar{t}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{t}; \coqdocvar{introv} \coqdocvar{Neq} \coqdocvar{Equ}; \coqdocvar{simpls}; \coqdoctac{inversion}\ensuremath{\times} \coqdocvar{Equ}; \coqdocvar{fequals}\ensuremath{\times}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{case\_nat}\ensuremath{\times}. \coqdocvar{case\_nat}\ensuremath{\times}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Substitution on indices is identity on well-formed terms. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{open\_rec\_term} : \coqdockw{\ensuremath{\forall}} \coqdocvar{t} \coqdocvar{u},\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{term} \coqdocvar{t} \ensuremath{\rightarrow} \coqdockw{\ensuremath{\forall}} \coqdocvar{k}, \coqdocvar{t} = \{\coqdocvar{k} \~{}> \coqdocvar{u}\}\coqdocvar{t}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} 1; \coqdoctac{intros}; \coqdoctac{simpl}; \coqdocvar{fequals}\ensuremath{\times}. \coqdocvar{unfolds} \coqdocvar{open}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{pick\_fresh} \coqdocvar{x}. \coqdoctac{apply}\ensuremath{\times} (@\coqdocvar{open\_rec\_term\_core} \coqdocvar{t1} 0 (\coqdocvar{trm\_fvar} \coqdocvar{x})).\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Substitution for a fresh name is identity. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{subst\_fresh} : \coqdockw{\ensuremath{\forall}} \coqdocvar{x} \coqdocvar{t} \coqdocvar{u}, \coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{x} \symbol{92}\coqdocvar{notin} \coqdocvar{fv} \coqdocvar{t} \ensuremath{\rightarrow}  [\coqdocvar{x} \~{}> \coqdocvar{u}] \coqdocvar{t} = \coqdocvar{t}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}. \coqdoctac{intros}. \coqdoctac{induction} \coqdocvar{t}; \coqdocvar{simpls}; \coqdocvar{fequals}\ensuremath{\times}. \coqdocvar{case\_var}\ensuremath{\times}. \coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Substitution distributes on the open operation. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{subst\_open} : \coqdockw{\ensuremath{\forall}} \coqdocvar{x} \coqdocvar{u} \coqdocvar{t1} \coqdocvar{t2}, \coqdocvar{term} \coqdocvar{u} \ensuremath{\rightarrow} \coqdoceol
+\coqdocindent{1.00em}
+[\coqdocvar{x} \~{}> \coqdocvar{u}] (\coqdocvar{t1} \^{}\^{} \coqdocvar{t2}) = ([\coqdocvar{x} \~{}> \coqdocvar{u}]\coqdocvar{t1}) \^{}\^{} ([\coqdocvar{x} \~{}> \coqdocvar{u}]\coqdocvar{t2}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intros}. \coqdoctac{unfold} \coqdocvar{open}. \coqdoctac{generalize} 0.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{t1}; \coqdoctac{intros}; \coqdoctac{simpl}; \coqdocvar{fequals}\ensuremath{\times}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{case\_nat}\ensuremath{\times}. \coqdocvar{case\_var}\ensuremath{\times}. \coqdoctac{apply}\ensuremath{\times} \coqdocvar{open\_rec\_term}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Substitution and open\_var for distinct names commute. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{subst\_open\_var} : \coqdockw{\ensuremath{\forall}} \coqdocvar{x} \coqdocvar{y} \coqdocvar{u} \coqdocvar{t}, \coqdocvar{y} \ensuremath{\not=} \coqdocvar{x} \ensuremath{\rightarrow} \coqdocvar{term} \coqdocvar{u} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+([\coqdocvar{x} \~{}> \coqdocvar{u}]\coqdocvar{t}) \^{} \coqdocvar{y} = [\coqdocvar{x} \~{}> \coqdocvar{u}] (\coqdocvar{t} \^{} \coqdocvar{y}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}. \coqdocvar{introv} \coqdocvar{Neq} \coqdocvar{Wu}. \coqdoctac{rewrite}\ensuremath{\times} \coqdocvar{subst\_open}. \coqdoctac{simpl}. \coqdocvar{case\_var}\ensuremath{\times}. \coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Opening up an abstraction of body \coqdocvar{t} with a term \coqdocvar{u} is the same as opening
+  up the abstraction with a fresh name \coqdocvar{x} and then substituting \coqdocvar{u} for \coqdocvar{x}. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{subst\_intro} : \coqdockw{\ensuremath{\forall}} \coqdocvar{x} \coqdocvar{t} \coqdocvar{u}, \coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{x} \symbol{92}\coqdocvar{notin} (\coqdocvar{fv} \coqdocvar{t}) \ensuremath{\rightarrow} \coqdocvar{term} \coqdocvar{u} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{t} \^{}\^{} \coqdocvar{u} = [\coqdocvar{x} \~{}> \coqdocvar{u}](\coqdocvar{t} \^{} \coqdocvar{x}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Fr} \coqdocvar{Wu}. \coqdoctac{rewrite}\ensuremath{\times} \coqdocvar{subst\_open}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{rewrite}\ensuremath{\times} \coqdocvar{subst\_fresh}. \coqdoctac{simpl}. \coqdocvar{case\_var}\ensuremath{\times}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Preservation of local closure}
+
+
+
+ The goal of this section is to set up the appropriate lemmas 
+    for proving goals of the form \coqdocvar{term} \coqdocvar{t}. First, we defined a
+    predicate capturing that a term \coqdocvar{t} is the body of a locally
+    closed abstraction. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{body} \coqdocvar{t} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{\ensuremath{\exists}} \coqdocvar{L}, \coqdockw{\ensuremath{\forall}} \coqdocvar{x}, \coqdocvar{x} \symbol{92}\coqdocvar{notin} \coqdocvar{L} \ensuremath{\rightarrow} \coqdocvar{term} (\coqdocvar{t} \^{} \coqdocvar{x}).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+We then show how to introduce and eliminate \coqdocvar{body} \coqdocvar{t}. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{term\_abs\_to\_body} : \coqdockw{\ensuremath{\forall}} \coqdocvar{t1}, \coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{term} (\coqdocvar{trm\_abs} \coqdocvar{t1}) \ensuremath{\rightarrow} \coqdocvar{body} \coqdocvar{t1}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}. \coqdoctac{intros}. \coqdoctac{unfold} \coqdocvar{body}. \coqdoctac{inversion}\ensuremath{\times} \coqdocvar{H}. \coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{body\_to\_term\_abs} : \coqdockw{\ensuremath{\forall}} \coqdocvar{t1}, \coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{body} \coqdocvar{t1} \ensuremath{\rightarrow} \coqdocvar{term} (\coqdocvar{trm\_abs} \coqdocvar{t1}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}. \coqdoctac{intros}. \coqdoctac{inversion}\ensuremath{\times} \coqdocvar{H}. \coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Hint Resolve} \coqdocvar{term\_abs\_to\_body} \coqdocvar{body\_to\_term\_abs}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+We prove that terms are stable by substitution \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{subst\_term} : \coqdockw{\ensuremath{\forall}} \coqdocvar{t} \coqdocvar{z} \coqdocvar{u},\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{term} \coqdocvar{u} \ensuremath{\rightarrow} \coqdocvar{term} \coqdocvar{t} \ensuremath{\rightarrow} \coqdocvar{term} ([\coqdocvar{z} \~{}> \coqdocvar{u}]\coqdocvar{t}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} 2; \coqdocvar{simpls}\ensuremath{\times}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{case\_var}\ensuremath{\times}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{apply\_fresh} \coqdocvar{term\_abs}. \coqdoctac{rewrite}\ensuremath{\times} \coqdocvar{subst\_open\_var}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Hint Resolve} \coqdocvar{subst\_term}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+We prove that opening a body with a term gives a term \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{open\_term} : \coqdockw{\ensuremath{\forall}} \coqdocvar{t} \coqdocvar{u},\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{body} \coqdocvar{t} \ensuremath{\rightarrow} \coqdocvar{term} \coqdocvar{u} \ensuremath{\rightarrow} \coqdocvar{term} (\coqdocvar{t} \^{}\^{} \coqdocvar{u}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intros}. \coqdoctac{destruct} \coqdocvar{H}. \coqdocvar{pick\_fresh} \coqdocvar{y}. \coqdoctac{rewrite}\ensuremath{\times} (@\coqdocvar{subst\_intro} \coqdocvar{y}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Hint Resolve} \coqdocvar{open\_term}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Regularity of relations}
+
+
+
+ The last step to set up the infrastructure consists in proving
+    that relations are ``regular''. For example, a typing relation can 
+    hold only if the environment has no duplicated keys and the term 
+    involved is locally-closed. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{typing\_regular} : \coqdockw{\ensuremath{\forall}} \coqdocvar{E} \coqdocvar{e} \coqdocvar{T},\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{typing} \coqdocvar{E} \coqdocvar{e} \coqdocvar{T} \ensuremath{\rightarrow} \coqdocvar{ok} \coqdocvar{E} \ensuremath{\land} \coqdocvar{term} \coqdocvar{e}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{split}; \coqdoctac{induction}\ensuremath{\times} \coqdocvar{H}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{pick\_fresh} \coqdocvar{y}. \coqdocvar{forwards}\ensuremath{\lnot} : (\coqdocvar{H0} \coqdocvar{y}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+Similarly, the value predicate only holds on locally-closed terms. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{value\_regular} : \coqdockw{\ensuremath{\forall}} \coqdocvar{e},\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{value} \coqdocvar{e} \ensuremath{\rightarrow} \coqdocvar{term} \coqdocvar{e}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}. \coqdoctac{induction} 1; \coqdoctac{auto}\ensuremath{\times}. \coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+A reduction relation only holds on pairs of locally-closed terms. \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{red\_regular} : \coqdockw{\ensuremath{\forall}} \coqdocvar{e} \coqdocvar{e'},\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{red} \coqdocvar{e} \coqdocvar{e'} \ensuremath{\rightarrow} \coqdocvar{term} \coqdocvar{e} \ensuremath{\land} \coqdocvar{term} \coqdocvar{e'}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}. \coqdoctac{induction} 1; \coqdoctac{auto}\ensuremath{\times} \coqdocvar{value\_regular}. \coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+The strength of automation comes from the following custom hints.
+    They are easy to set up because the follow a very regular pattern.
+    These hints indicate that to prove a goal of the form \coqdocvar{ok} \coqdocvar{E},
+    it suffices to find in the goal an hypothesis of the form
+    \coqdocvar{typing} \coqdocvar{E} \coqdocvar{t} \coqdocvar{T} and to exploit the regularity lemma \coqdocvar{typing\_regular}
+    to prove the goal. Similarly, properties of the form \coqdocvar{term} \coqdocvar{t}
+    can be extracted out of typing or reduction or value judgments.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Hint Extern} 1 (\coqdocvar{ok} ?\coqdocvar{E}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdockw{goal} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{H}: \coqdocvar{typing} \coqdocvar{E} \coqdocvar{\_} \coqdocvar{\_} \ensuremath{\vdash} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{apply} (\coqdocvar{proj1} (\coqdocvar{typing\_regular} \coqdocvar{H}))\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Hint Extern} 1 (\coqdocvar{term} ?\coqdocvar{t}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdockw{goal} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{H}: \coqdocvar{typing} \coqdocvar{\_} \coqdocvar{t} \coqdocvar{\_} \ensuremath{\vdash} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{apply} (\coqdocvar{proj2} (\coqdocvar{typing\_regular} \coqdocvar{H}))\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{H}: \coqdoctac{red} \coqdocvar{t} \coqdocvar{\_} \ensuremath{\vdash} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{apply} (\coqdocvar{proj1} (\coqdocvar{red\_regular} \coqdocvar{H}))\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{H}: \coqdoctac{red} \coqdocvar{\_} \coqdocvar{t} \ensuremath{\vdash} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{apply} (\coqdocvar{proj2} (\coqdocvar{red\_regular} \coqdocvar{H}))\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{H}: \coqdocvar{value} \coqdocvar{t} \ensuremath{\vdash} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdoctac{apply} (\coqdocvar{value\_regular} \coqdocvar{H})\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\subsection{Checking that the main proofs still type-check}
+
+
+
+ We conclude our development by showing that, with the appropriate
+    hints being set up, we can recompile our proofs without changing 
+    any single character in them.
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{typing\_weaken} : \coqdockw{\ensuremath{\forall}} \coqdocvar{G} \coqdocvar{E} \coqdocvar{F} \coqdocvar{t} \coqdocvar{T},\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{E} \& \coqdocvar{G}) |= \coqdocvar{t} \~{}: \coqdocvar{T} \ensuremath{\rightarrow} \coqdoceol
+\coqdocindent{1.50em}
+\coqdocvar{ok} (\coqdocvar{E} \& \coqdocvar{F} \& \coqdocvar{G}) \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.50em}
+(\coqdocvar{E} \& \coqdocvar{F} \& \coqdocvar{G}) |= \coqdocvar{t} \~{}: \coqdocvar{T}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typ}. \coqdocvar{gen\_eq} \coqdocvar{H}: (\coqdocvar{E} \& \coqdocvar{G}). \coqdocvar{gen} \coqdocvar{G}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{Typ}; \coqdoctac{intros} \coqdocvar{G} \coqdocvar{EQ} \coqdocvar{Ok}; \coqdoctac{subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_var}. \coqdoctac{apply}\ensuremath{\times} \coqdocvar{binds\_weaken}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{apply\_fresh}\ensuremath{\times} \coqdocvar{typing\_abs} \coqdockw{as} \coqdocvar{y}. \coqdocvar{apply\_ih\_bind}\ensuremath{\times} \coqdocvar{H0}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_app}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{typing\_subst} : \coqdockw{\ensuremath{\forall}} \coqdocvar{F} \coqdocvar{E} \coqdocvar{t} \coqdocvar{T} \coqdocvar{z} \coqdocvar{u} \coqdocvar{U},\coqdoceol
+\coqdocindent{1.00em}
+(\coqdocvar{E} \& \coqdocvar{z} \ensuremath{\lnot} \coqdocvar{U} \& \coqdocvar{F}) |= \coqdocvar{t} \~{}: \coqdocvar{T} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{E} |= \coqdocvar{u} \~{}: \coqdocvar{U} \ensuremath{\rightarrow}\coqdoceol
+\coqdocindent{1.00em}
+(\coqdocvar{E} \& \coqdocvar{F}) |= [\coqdocvar{z} \~{}> \coqdocvar{u}]\coqdocvar{t} \~{}: \coqdocvar{T}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typt} \coqdocvar{Typu}. \coqdocvar{gen\_eq} \coqdocvar{G}: (\coqdocvar{E} \& \coqdocvar{z} \ensuremath{\lnot} \coqdocvar{U} \& \coqdocvar{F}). \coqdocvar{gen} \coqdocvar{F}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{Typt}; \coqdoctac{intros} \coqdocvar{G} \coqdocvar{Equ}; \coqdoctac{subst}; \coqdoctac{simpl} \coqdoctac{subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{case\_var}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdocvar{binds\_get} \coqdocvar{H0}. \coqdocvar{apply\_empty}\ensuremath{\times} \coqdocvar{typing\_weaken}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdocvar{binds\_cases} \coqdocvar{H0}; \coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_var}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{apply\_fresh} \coqdocvar{typing\_abs} \coqdockw{as} \coqdocvar{y}.\coqdoceol
+\coqdocindent{1.50em}
+\coqdoctac{rewrite}\ensuremath{\times} \coqdocvar{subst\_open\_var}. \coqdocvar{apply\_ih\_bind}\ensuremath{\times} \coqdocvar{H0}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_app}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{preservation\_result} : \coqdocvar{preservation\_statement}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typ}. \coqdocvar{gen} \coqdocvar{t'}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{Typ}; \coqdoctac{intros} \coqdocvar{t'} \coqdocvar{Red}; \coqdocvar{inversions} \coqdocvar{Red}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{inversions} \coqdocvar{Typ1}. \coqdocvar{pick\_fresh} \coqdocvar{x}. \coqdoctac{rewrite}\ensuremath{\times} (@\coqdocvar{subst\_intro} \coqdocvar{x}).\coqdoceol
+\coqdocindent{1.50em}
+\coqdocvar{apply\_empty}\ensuremath{\times} \coqdocvar{typing\_subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_app}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply}\ensuremath{\times} \coqdocvar{typing\_app}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{progress\_result} : \coqdocvar{progress\_statement}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{introv} \coqdocvar{Typ}. \coqdocvar{gen\_eq} \coqdocvar{E}: (\coqdocvar{empty}:\coqdocvar{ctx}). \coqdocvar{lets} \coqdocvar{Typ'}: \coqdocvar{Typ}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{induction} \coqdocvar{Typ}; \coqdoctac{intros}; \coqdoctac{subst}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdocvar{false}\ensuremath{\times} \coqdocvar{binds\_empty\_inv}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{left}\ensuremath{\times}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{right}. \coqdoctac{destruct}\ensuremath{\lnot} \coqdocvar{IHTyp1} \coqdockw{as} [\coqdocvar{Val1} \ensuremath{|} [\coqdocvar{t1'} \coqdocvar{Red1}]].\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{destruct}\ensuremath{\lnot} \coqdocvar{IHTyp2} \coqdockw{as} [\coqdocvar{Val2} \ensuremath{|} [\coqdocvar{t2'} \coqdocvar{Red2}]].\coqdoceol
+\coqdocindent{3.00em}
+\coqdocvar{inversions} \coqdocvar{Typ1}; \coqdocvar{inversions} \coqdocvar{Val1}. \coqdoctac{\ensuremath{\exists}}\ensuremath{\times} (\coqdocvar{t0} \^{}\^{} \coqdocvar{t2}).\coqdoceol
+\coqdocindent{3.00em}
+\coqdoctac{\ensuremath{\exists}}\ensuremath{\times} (\coqdocvar{trm\_app} \coqdocvar{t1} \coqdocvar{t2'}).\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{\ensuremath{\exists}}\ensuremath{\times} (\coqdocvar{trm\_app} \coqdocvar{t1'} \coqdocvar{t2}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqdocvar{CompleteVersion}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+\end{document}

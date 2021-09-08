@@ -391,7 +391,6 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmbx10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmbx8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmbx6.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr9.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmr12.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmr10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmr7.tfm
@@ -413,6 +412,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7
 INPUT /home/vincent/vsc/DrawingHands.jpg
 INPUT /home/vincent/vsc/DrawingHands.jpg
 INPUT /home/vincent/vsc/DrawingHands.jpg
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr9.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmr9.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmr5.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/lmmi9.tfm
@@ -427,6 +427,9 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm1
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmbxi10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/lm/ot1lmtt.fd
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/lm/ot1lmtt.fd
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmtt10.tfm
@@ -439,6 +442,8 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cbfonts/gttn1000.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-33.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-33.def
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmtt8.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmtt12.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-32.def
@@ -494,8 +499,6 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libr
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmtt12.tfm
 INPUT /home/vincent/vsc/document.bbl
 INPUT /home/vincent/vsc/document.bbl
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/knuth-lib/logosl10.tfm

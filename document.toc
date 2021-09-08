@@ -12,101 +12,111 @@
 \contentsline {subsection}{\numberline {1.5.2}Les bool\IeC {\'e}ens }{24}{subsection.1.5.2}%
 \contentsline {subsection}{\numberline {1.5.3}La fonction factorielle}{24}{subsection.1.5.3}%
 \contentsline {section}{\numberline {1.6}La notation de \textit {de Bruijn}}{25}{section.1.6}%
-\contentsline {section}{\numberline {1.7}Le $\lambda $-calcul simplement typ\IeC {\'e}}{27}{section.1.7}%
-\contentsline {subsubsection}{Impl\IeC {\'e}mentation}{27}{section*.3}%
-\contentsline {subsubsection}{Inf\IeC {\'e}rence de type d'un terme $t$}{28}{section*.4}%
-\contentsline {section}{\numberline {1.8}Les \textit {Pure Type Systems}}{29}{section.1.8}%
-\contentsline {subsubsection}{Introduction}{29}{section*.5}%
-\contentsline {subsubsection}{MiniCOQ}{32}{section*.6}%
-\contentsline {subsubsection}{Le $\lor $ logique}{34}{section*.7}%
-\contentsline {subsubsection}{L'\IeC {\'e}galit\IeC {\'e}}{35}{section*.8}%
-\contentsline {subsubsection}{Le faux}{35}{section*.9}%
-\contentsline {subsubsection}{Le point fixe}{36}{section*.10}%
-\contentsline {subsubsection}{La logique classique}{36}{section*.11}%
-\contentsline {chapter}{\numberline {2}L'interpr\IeC {\'e}tation}{39}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introduction}{39}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Un interpr\IeC {\`e}te MiniScheme avec OCAML}{39}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}L'\IeC {\'e}valuation}{39}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Les \IeC {\'e}tapes Read, Eval, Print}{41}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Liaison lexicale vs liaison dynamique}{42}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}Gestion de l'environnement}{43}{subsection.2.2.4}%
-\contentsline {section}{\numberline {2.3}Un interpr\IeC {\`e}te LISP avec le nouvel interpr\IeC {\`e}te MiniScheme \ldots }{45}{section.2.3}%
-\contentsline {subsubsection}{La mise en abyme}{45}{section*.12}%
-\contentsline {subsubsection}{LISP mis en abyme}{45}{section*.13}%
-\contentsline {section}{\numberline {2.4}L'auto-interpr\IeC {\'e}tation de l'interpr\IeC {\`e}te}{46}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}La tour de Babel}{46}{subsection.2.4.1}%
-\contentsline {subsubsection}{L'environnement}{46}{section*.14}%
-\contentsline {subsection}{\numberline {2.4.2}R\IeC {\'e}ification et r\IeC {\'e}flexion}{47}{subsection.2.4.2}%
-\contentsline {subsubsection}{L'interpr\IeC {\`e}te par continuation }{48}{section*.15}%
-\contentsline {chapter}{\numberline {3}La compilation}{55}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Compilation des $\lambda $-termes en termes applicatifs}{55}{section.3.1}%
-\contentsline {subsubsection}{La correspondance de Curry-Howard}{58}{section*.16}%
-\contentsline {section}{\numberline {3.2}Compilation basique vers une machine \IeC {\`a} pile}{59}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Certification de la compilation avec le langage COQ}{60}{subsection.3.2.1}%
-\contentsline {section}{\numberline {3.3}Compilation du LISP vers une machine abstraite}{63}{section.3.3}%
-\contentsline {subsubsection}{La machine SECD}{63}{section*.17}%
-\contentsline {subsubsection}{La compilation $C: exp$\ {\letterimp D}\hspace {0.1cm}\ \texttt {code}}{63}{section*.18}%
-\contentsline {subsubsection}{La table de transition de la machine SECD}{63}{section*.19}%
-\contentsline {subsubsection}{L'impl\IeC {\'e}mentation en OCAML}{64}{section*.20}%
-\contentsline {chapter}{\numberline {4}La r\IeC {\'e}solution}{67}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Repr\IeC {\'e}sentation des termes finis}{67}{section.4.1}%
-\contentsline {section}{\numberline {4.2}La substitution}{69}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Filtrage et r\IeC {\'e}\IeC {\'e}criture}{70}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Le filtrage}{70}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}La r\IeC {\'e}\IeC {\'e}criture et l'arithm\IeC {\'e}tique de Peano}{71}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}L'unification des termes}{73}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Un mini PROLOG}{75}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Quelques exemples de programmation en PROLOG}{76}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Les entiers naturels}{76}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Les additions de Peano}{76}{subsection.4.6.2}%
-\contentsline {subsection}{\numberline {4.6.3}La base g\IeC {\'e}n\IeC {\'e}alogique}{77}{subsection.4.6.3}%
-\contentsline {section}{\numberline {4.7}L'algorithme de compl\IeC {\'e}tion de Knuth-Bendix}{77}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Confluence et paires critiques}{77}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Terminaison}{79}{subsection.4.7.2}%
-\contentsline {subsubsection}{Ind\IeC {\'e}cidabilit\IeC {\'e} de la terminaison dans le cas "g\IeC {\'e}n\IeC {\'e}ral"}{79}{section*.21}%
-\contentsline {subsubsection}{Syst\IeC {\`e}me de r\IeC {\'e}\IeC {\'e}criture noeth\IeC {\'e}rien}{79}{section*.22}%
-\contentsline {subsection}{\numberline {4.7.3}Compl\IeC {\'e}tion de Knuth-Bendix}{79}{subsection.4.7.3}%
-\contentsline {chapter}{\numberline {5}La calculabilit\IeC {\'e}}{81}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Les fonctions r\IeC {\'e}cursives}{81}{section.5.1}%
-\contentsline {section}{\numberline {5.2}La machine de Turing}{83}{section.5.2}%
-\contentsline {section}{\numberline {5.3}La th\IeC {\`e}se de Church}{85}{section.5.3}%
-\contentsline {chapter}{\numberline {6}Annexes / Divers}{87}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Quelques fonctions sur les listes}{87}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Les listes mutables}{87}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Les listes infinies ou \textit {streams}}{88}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Le module Graphics d'OCAML, les fractales}{90}{section.6.4}%
-\contentsline {subsubsection}{L'ensemble de Mandelbrot}{92}{section*.23}%
-\contentsline {section}{\numberline {6.5}Utilisation de \textlogo {META}\-\textlogo {FONT}\spacefactor \@m {}}{93}{section.6.5}%
-\contentsline {section}{\numberline {6.6}The boxes}{95}{section.6.6}%
-\contentsline {section}{\numberline {6.7}Les modules OCAML. Mod\IeC {\'e}lisation d'un mono\IeC {\"\i }de}{96}{section.6.7}%
-\contentsline {section}{\numberline {6.8}Machine Learning and Neural Networks}{97}{section.6.8}%
-\contentsline {subsection}{\numberline {6.8.1}Introduction}{97}{subsection.6.8.1}%
-\contentsline {subsection}{\numberline {6.8.2}Un peu de th\IeC {\'e}orie}{97}{subsection.6.8.2}%
-\contentsline {subsection}{\numberline {6.8.3}Calcul matriciel}{98}{subsection.6.8.3}%
-\contentsline {subsection}{\numberline {6.8.4}Fonctions d'activation}{99}{subsection.6.8.4}%
-\contentsline {section}{\numberline {6.9}Les nombres premiers. L'algorithme RSA}{100}{section.6.9}%
-\contentsline {subsubsection}{Le crible}{100}{section*.24}%
-\contentsline {subsubsection}{Le produit d'Euler aka le produit eul\IeC {\'e}rien}{100}{section*.25}%
-\contentsline {subsubsection}{Les nombres premiers jumeaux et la constante de Brun}{102}{section*.26}%
-\contentsline {subsubsection}{Le petit th\IeC {\'e}or\IeC {\`e}me de Fermat}{102}{section*.27}%
-\contentsline {subsubsection}{Le th\IeC {\'e}or\IeC {\`e}me d'Euler}{102}{section*.28}%
-\contentsline {subsubsection}{Le th\IeC {\'e}or\IeC {\`e}me de Bezout}{103}{section*.29}%
-\contentsline {subsubsection}{L'inverse modulaire}{103}{section*.30}%
-\contentsline {subsubsection}{L'algorithme RSA}{103}{section*.31}%
-\contentsline {subsubsection}{Le code}{103}{section*.32}%
-\contentsline {section}{\numberline {6.10}Approximation du nombre $\pi $ }{104}{section.6.10}%
-\contentsline {subsection}{\numberline {6.10.1}La m\IeC {\'e}thode des polygones}{105}{subsection.6.10.1}%
-\contentsline {subsubsection}{Calcul de $p_{2n}$ en fonction de $p_n$}{105}{section*.33}%
-\contentsline {subsubsection}{Calcul de $p'_n$ en fonction de $p_n$}{106}{section*.34}%
-\contentsline {subsection}{\numberline {6.10.2}La s\IeC {\'e}rie altern\IeC {\'e}e de Leibniz}{107}{subsection.6.10.2}%
-\contentsline {subsection}{\numberline {6.10.3}La loi des grands nombres}{108}{subsection.6.10.3}%
-\contentsline {subsection}{\numberline {6.10.4}Le produit de Wallis}{108}{subsection.6.10.4}%
-\contentsline {subsection}{\numberline {6.10.5}L'int\IeC {\'e}grale $\DOTSI \intop \ilimits@ _0^1 \frac {1}{1+x^2} dx$}{109}{subsection.6.10.5}%
-\contentsline {section}{\numberline {6.11}Po\IeC {\'e}sies}{110}{section.6.11}%
-\contentsline {section}{\numberline {6.12}L'irrationalit\IeC {\'e} de $\sqrt {2}$}{110}{section.6.12}%
-\contentsline {section}{\numberline {6.13}D\IeC {\'e}monstration non constructive}{110}{section.6.13}%
-\contentsline {section}{\numberline {6.14}L'hyperbole $xy=1$}{111}{section.6.14}%
-\contentsline {section}{\numberline {6.15}L'exponentielle}{111}{section.6.15}%
-\contentsline {section}{\numberline {6.16}Les fonctions $\qopname \relax o{sin}\frac {1}{x}$ et $x . \qopname \relax o{sin}\frac {1}{x}$ }{112}{section.6.16}%
-\contentsline {section}{\numberline {6.17}Srivanasa Ramanujan}{112}{section.6.17}%
-\contentsline {section}{\numberline {6.18}L'alphabet grec. Extraits du nouveau testament}{113}{section.6.18}%
+\contentsline {chapter}{\numberline {2}Le $\lambda $-calcul simplement typ\IeC {\'e} et les Pure Type Systems}{29}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Le $\lambda $-calcul simplement typ\IeC {\'e}}{29}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Pr\IeC {\'e}sentation}{29}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Impl\IeC {\'e}mentation en COQ}{29}{subsection.2.1.2}%
+\contentsline {subsubsection}{Repr\IeC {\'e}sentation des types et des termes}{29}{section*.3}%
+\contentsline {subsubsection}{Opening}{30}{section*.4}%
+\contentsline {subsubsection}{La s\IeC {\'e}mantique}{30}{section*.5}%
+\contentsline {subsubsection}{La gestion de l'environnement et du contexte}{31}{section*.6}%
+\contentsline {subsubsection}{Le typage}{31}{section*.7}%
+\contentsline {subsubsection}{Th\IeC {\'e}or\IeC {\`e}me de pr\IeC {\'e}servation}{32}{section*.8}%
+\contentsline {subsubsection}{Th\IeC {\'e}or\IeC {\`e}me de la progression}{32}{section*.9}%
+\contentsline {subsubsection}{La substitution}{32}{section*.10}%
+\contentsline {subsection}{\numberline {2.1.3}Inf\IeC {\'e}rence de type}{33}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Les \textit {Pure Type Systems}}{35}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Introduction}{35}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}MiniCOQ}{38}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Le $\lor $ logique}{40}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}L'\IeC {\'e}galit\IeC {\'e}}{41}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Le faux}{42}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Le point fixe}{43}{subsection.2.2.6}%
+\contentsline {subsection}{\numberline {2.2.7}La logique classique}{43}{subsection.2.2.7}%
+\contentsline {chapter}{\numberline {3}L'interpr\IeC {\'e}tation}{45}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{45}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Un interpr\IeC {\`e}te MiniScheme avec OCAML}{45}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}L'\IeC {\'e}valuation}{45}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Les \IeC {\'e}tapes Read, Eval, Print}{47}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Liaison lexicale vs liaison dynamique}{48}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Gestion de l'environnement}{49}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Un interpr\IeC {\`e}te LISP avec le nouvel interpr\IeC {\`e}te MiniScheme \ldots }{51}{section.3.3}%
+\contentsline {subsubsection}{La mise en abyme}{51}{section*.11}%
+\contentsline {subsubsection}{LISP mis en abyme}{51}{section*.12}%
+\contentsline {section}{\numberline {3.4}L'auto-interpr\IeC {\'e}tation de l'interpr\IeC {\`e}te}{52}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}La tour de Babel}{52}{subsection.3.4.1}%
+\contentsline {subsubsection}{L'environnement}{52}{section*.13}%
+\contentsline {subsection}{\numberline {3.4.2}R\IeC {\'e}ification et r\IeC {\'e}flexion}{53}{subsection.3.4.2}%
+\contentsline {subsubsection}{L'interpr\IeC {\`e}te par continuation }{54}{section*.14}%
+\contentsline {chapter}{\numberline {4}La compilation}{61}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Compilation des $\lambda $-termes en termes applicatifs}{61}{section.4.1}%
+\contentsline {subsubsection}{La correspondance de Curry-Howard}{64}{section*.15}%
+\contentsline {section}{\numberline {4.2}Compilation basique vers une machine \IeC {\`a} pile}{65}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Certification de la compilation avec le langage COQ}{66}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}Compilation du LISP vers une machine abstraite}{69}{section.4.3}%
+\contentsline {subsubsection}{La machine SECD}{69}{section*.16}%
+\contentsline {subsubsection}{La compilation $C: exp$\ {\letterimp D}\hspace {0.1cm}\ \texttt {code}}{69}{section*.17}%
+\contentsline {subsubsection}{La table de transition de la machine SECD}{69}{section*.18}%
+\contentsline {subsubsection}{L'impl\IeC {\'e}mentation en OCAML}{70}{section*.19}%
+\contentsline {chapter}{\numberline {5}La r\IeC {\'e}solution}{73}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Repr\IeC {\'e}sentation des termes finis}{73}{section.5.1}%
+\contentsline {section}{\numberline {5.2}La substitution}{75}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Filtrage et r\IeC {\'e}\IeC {\'e}criture}{76}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Le filtrage}{76}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}La r\IeC {\'e}\IeC {\'e}criture et l'arithm\IeC {\'e}tique de Peano}{77}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}L'unification des termes}{79}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Un mini PROLOG}{81}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Quelques exemples de programmation en PROLOG}{82}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Les entiers naturels}{82}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Les additions de Peano}{82}{subsection.5.6.2}%
+\contentsline {subsection}{\numberline {5.6.3}La base g\IeC {\'e}n\IeC {\'e}alogique}{83}{subsection.5.6.3}%
+\contentsline {section}{\numberline {5.7}L'algorithme de compl\IeC {\'e}tion de Knuth-Bendix}{83}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Confluence et paires critiques}{83}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Terminaison}{85}{subsection.5.7.2}%
+\contentsline {subsubsection}{Ind\IeC {\'e}cidabilit\IeC {\'e} de la terminaison dans le cas "g\IeC {\'e}n\IeC {\'e}ral"}{85}{section*.20}%
+\contentsline {subsubsection}{Syst\IeC {\`e}me de r\IeC {\'e}\IeC {\'e}criture noeth\IeC {\'e}rien}{85}{section*.21}%
+\contentsline {subsection}{\numberline {5.7.3}Compl\IeC {\'e}tion de Knuth-Bendix}{85}{subsection.5.7.3}%
+\contentsline {chapter}{\numberline {6}La calculabilit\IeC {\'e}}{87}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Les fonctions r\IeC {\'e}cursives}{87}{section.6.1}%
+\contentsline {section}{\numberline {6.2}La machine de Turing}{89}{section.6.2}%
+\contentsline {section}{\numberline {6.3}La th\IeC {\`e}se de Church}{91}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Annexes / Divers}{93}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Quelques fonctions sur les listes}{93}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Les listes mutables}{93}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Les listes infinies ou \textit {streams}}{94}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Le module Graphics d'OCAML, les fractales}{96}{section.7.4}%
+\contentsline {subsubsection}{L'ensemble de Mandelbrot}{98}{section*.22}%
+\contentsline {section}{\numberline {7.5}Utilisation de \textlogo {META}\-\textlogo {FONT}\spacefactor \@m {}}{99}{section.7.5}%
+\contentsline {section}{\numberline {7.6}The boxes}{101}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Les modules OCAML. Mod\IeC {\'e}lisation d'un mono\IeC {\"\i }de}{102}{section.7.7}%
+\contentsline {section}{\numberline {7.8}Machine Learning and Neural Networks}{103}{section.7.8}%
+\contentsline {subsection}{\numberline {7.8.1}Introduction}{103}{subsection.7.8.1}%
+\contentsline {subsection}{\numberline {7.8.2}Un peu de th\IeC {\'e}orie}{103}{subsection.7.8.2}%
+\contentsline {subsection}{\numberline {7.8.3}Calcul matriciel}{104}{subsection.7.8.3}%
+\contentsline {subsection}{\numberline {7.8.4}Fonctions d'activation}{105}{subsection.7.8.4}%
+\contentsline {section}{\numberline {7.9}Les nombres premiers. L'algorithme RSA}{106}{section.7.9}%
+\contentsline {subsubsection}{Le crible}{106}{section*.23}%
+\contentsline {subsubsection}{Le produit d'Euler aka le produit eul\IeC {\'e}rien}{106}{section*.24}%
+\contentsline {subsubsection}{Les nombres premiers jumeaux et la constante de Brun}{108}{section*.25}%
+\contentsline {subsubsection}{Le petit th\IeC {\'e}or\IeC {\`e}me de Fermat}{108}{section*.26}%
+\contentsline {subsubsection}{Le th\IeC {\'e}or\IeC {\`e}me d'Euler}{108}{section*.27}%
+\contentsline {subsubsection}{Le th\IeC {\'e}or\IeC {\`e}me de Bezout}{109}{section*.28}%
+\contentsline {subsubsection}{L'inverse modulaire}{109}{section*.29}%
+\contentsline {subsubsection}{L'algorithme RSA}{109}{section*.30}%
+\contentsline {subsubsection}{Le code}{109}{section*.31}%
+\contentsline {section}{\numberline {7.10}Approximation du nombre $\pi $ }{110}{section.7.10}%
+\contentsline {subsection}{\numberline {7.10.1}La m\IeC {\'e}thode des polygones}{111}{subsection.7.10.1}%
+\contentsline {subsubsection}{Calcul de $p_{2n}$ en fonction de $p_n$}{111}{section*.32}%
+\contentsline {subsubsection}{Calcul de $p'_n$ en fonction de $p_n$}{112}{section*.33}%
+\contentsline {subsection}{\numberline {7.10.2}La s\IeC {\'e}rie altern\IeC {\'e}e de Leibniz}{113}{subsection.7.10.2}%
+\contentsline {subsection}{\numberline {7.10.3}La loi des grands nombres}{114}{subsection.7.10.3}%
+\contentsline {subsection}{\numberline {7.10.4}Le produit de Wallis}{114}{subsection.7.10.4}%
+\contentsline {subsection}{\numberline {7.10.5}L'int\IeC {\'e}grale $\DOTSI \intop \ilimits@ _0^1 \frac {1}{1+x^2} dx$}{115}{subsection.7.10.5}%
+\contentsline {section}{\numberline {7.11}Po\IeC {\'e}sies}{116}{section.7.11}%
+\contentsline {section}{\numberline {7.12}L'irrationalit\IeC {\'e} de $\sqrt {2}$}{116}{section.7.12}%
+\contentsline {section}{\numberline {7.13}D\IeC {\'e}monstration non constructive}{116}{section.7.13}%
+\contentsline {section}{\numberline {7.14}L'hyperbole $xy=1$}{117}{section.7.14}%
+\contentsline {section}{\numberline {7.15}L'exponentielle}{117}{section.7.15}%
+\contentsline {section}{\numberline {7.16}Les fonctions $\qopname \relax o{sin}\frac {1}{x}$ et $x . \qopname \relax o{sin}\frac {1}{x}$ }{118}{section.7.16}%
+\contentsline {section}{\numberline {7.17}Srivanasa Ramanujan}{118}{section.7.17}%
+\contentsline {section}{\numberline {7.18}L'alphabet grec. Extraits du nouveau testament}{119}{section.7.18}%

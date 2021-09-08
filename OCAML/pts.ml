@@ -569,4 +569,4 @@ let exf = Lam ("x", False, I)
 in (print exf ; print_newline() ; print (check exf env0)) ;;
 
 
-(* operateur existentiel *)
+ 

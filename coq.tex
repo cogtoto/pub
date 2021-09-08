@@ -1,0 +1,119 @@
+\documentclass[12pt]{report}
+\usepackage[]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% coqdoc -latex coq.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{coq}{Library }{coq}
+
+\begin{coqdoccode}
+\end{coqdoccode}
+COQ en COQ 
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{String} \coqdocvar{List} \coqdocvar{PeanoNat}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Open} \coqdockw{Scope} \coqdocvar{string\_scope}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Open} \coqdockw{Scope} \coqdocvar{list\_scope}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Import} \coqdocvar{ListNotations}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+définition du $\lambda$-terme 
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{terme} : \coqdockw{Set} :=\coqdoceol
+\coqdocindent{0.50em}
+\ensuremath{|} \coqdocvar{V} : \coqdocvar{string} \ensuremath{\rightarrow} \coqdocvar{terme}\coqdoceol
+\coqdocindent{0.50em}
+\ensuremath{|} \coqdocvar{C} : \coqdocvar{string} \ensuremath{\rightarrow} \coqdocvar{terme} \coqdoceol
+\coqdocindent{0.50em}
+\ensuremath{|} \coqdocvar{App} : \coqdocvar{terme} \ensuremath{\rightarrow} \coqdocvar{terme} \ensuremath{\rightarrow} \coqdocvar{terme} \coqdoceol
+\coqdocindent{0.50em}
+\ensuremath{|} \coqdocvar{Lam} :  \coqdocvar{string} \ensuremath{\rightarrow} \coqdocvar{terme} \ensuremath{\rightarrow} \coqdocvar{terme} \ensuremath{\rightarrow} \coqdocvar{terme} .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{t} : \coqdocvar{terme} :=  \coqdocvar{Lam} "x" (\coqdocvar{C} "type") (\coqdocvar{V} "x").\coqdoceol
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{env} : \coqdocvar{list} (\coqdocvar{string}\ensuremath{\times}\coqdocvar{string}) := ("a","1") :: ("b","2") :: ("c","3") :: \coqdocvar{nil} .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{mem}  (\coqdocvar{x}:\coqdocvar{string}) (\coqdocvar{l}:\coqdocvar{list} \coqdocvar{string}) : \coqdocvar{bool} :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{l} \coqdockw{with}\coqdoceol
+\coqdocindent{0.50em}
+\ensuremath{|} \coqdocvar{nil} \ensuremath{\Rightarrow} \coqdocvar{false}\coqdoceol
+\coqdocindent{0.50em}
+\ensuremath{|} \coqdocvar{h}::\coqdocvar{t} \ensuremath{\Rightarrow} \coqdockw{if} \coqdocvar{h}=?\coqdocvar{x} \coqdockw{then} \coqdocvar{true} \coqdockw{else} \coqdocvar{mem} \coqdocvar{x} \coqdocvar{t} \coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Check} \coqdocvar{hd}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Print} \coqdocvar{hd}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{hd} (1::2::3::\coqdocvar{nil}))\coqdoceol
+\coqdocnoindent
+.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{union} (\coqdocvar{l1} \coqdocvar{l2}: \coqdocvar{list} \coqdocvar{string}) : \coqdocvar{list} \coqdocvar{string} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{l1} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqdocvar{a1}::\coqdocvar{r1} \ensuremath{\Rightarrow} \coqdockw{if} \coqdocvar{mem} \coqdocvar{a1} \coqdocvar{l2} \coqdockw{then} \coqdocvar{union} \coqdocvar{r1} \coqdocvar{l2}\coqdoceol
+\coqdocindent{8.00em}
+\coqdockw{else}  \coqdocvar{a1} :: (\coqdocvar{union} \coqdocvar{r1} \coqdocvar{l2})\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqdocvar{nil} \ensuremath{\Rightarrow} \coqdocvar{l2}\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{remove} (\coqdocvar{var}:\coqdocvar{string}) (\coqdocvar{l}: \coqdocvar{list} \coqdocvar{string}) : \coqdocvar{list} \coqdocvar{string} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{l} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{h}::\coqdocvar{t} \ensuremath{\Rightarrow} \coqdockw{if} \coqdocvar{h} =? \coqdocvar{var} \coqdockw{then} \coqdocvar{remove} \coqdocvar{var} \coqdocvar{t}\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{else} \coqdocvar{h}::(\coqdocvar{remove} \coqdocvar{var} \coqdocvar{t})\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{nil} \ensuremath{\Rightarrow} \coqdocvar{nil}\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{varLibres} (\coqdocvar{lambdaTerm}:\coqdocvar{terme}) : \coqdocvar{list} \coqdocvar{string} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{lambdaTerm} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{V} \coqdocvar{x} \ensuremath{\Rightarrow} [ \coqdocvar{x} ]\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{C} \coqdocvar{\_} \ensuremath{\Rightarrow} []\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{App} \coqdocvar{n} \coqdocvar{m} \ensuremath{\Rightarrow} \coqdocvar{union} (\coqdocvar{varLibres} \coqdocvar{n}) (\coqdocvar{varLibres} \coqdocvar{m})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{Lam} \coqdocvar{x} \coqdocvar{tx} \coqdocvar{m} \ensuremath{\Rightarrow} \coqdocvar{union} (\coqdocvar{remove} \coqdocvar{x} (\coqdocvar{varLibres} \coqdocvar{m})) (\coqdocvar{remove} \coqdocvar{x} (\coqdocvar{varLibres} \coqdocvar{tx}))\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{remove} "a" ["b"; "c"; "a"]).\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} \coqdocvar{union} ("a"::"b"::"c"::\coqdocvar{nil}) ("a"::"z"::"q"::\coqdocvar{nil}) .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Check} [1;2;3].\coqdoceol
+\end{coqdoccode}
+\end{document}

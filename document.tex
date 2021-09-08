@@ -114,13 +114,10 @@ argument à une fonction.
 Un $\lambda $-terme est défini par induction de la manière suivante:
 \begin{itemize}
   \item Une  variable $x$ est un $\lambda$-terme.
-  \item Une abstraction $\lambda x.terme$ est un $\lambda$-terme.
-  \item Une application $(terme1 \ terme2)$ est un $\lambda$-terme.
+  \item Si $t$ est un $\lambda$-terme, l'abstraction $\lambda x.t$ est un $\lambda$-terme.
+  \item Si $t_1$ et $t_2$ sont des $\lambda$-termes, l'application $(t_1 \ t_2)$ est un $\lambda$-terme.
 \end{itemize}
 \end{definition}
-
-Exemple de lambda terme:
-$$ ( \lambda x. xy ) (x z u)  $$
 
 Voici le champ lexical des $\lambda $-termes:
 
@@ -502,7 +499,7 @@ let rec reduc1Normale terme =
 
 Enfin, nous avons une fonction \verb+fullReduc+ qui permet d'itérer l'opération de
 $\beta$-réduction jusqu'à trouver la forme normale, ou boucler s'il n'y a pas de forme formale.
-On lui impose donc maximum 1000 réductions \footnote{La fonction STOP de mon toplevel sous Eclipse ne marche pas\ldots}
+On lui impose donc maximum 1000 réductions. 
 Elle prend en argument la méthode (ie. la stratégie de réduction) à  utiliser. 
 
 \begin{Verbatim}
@@ -1180,8 +1177,28 @@ let rec reduc_bruijn t =
 	with IRREDUCTIBLE -> t 
 \end{Verbatim}
 
+Représenter l'ensemble des variables (libres et liées) par un indice de profondeur rend le terme très peu lisible.
+La représentation la plus commode semble finalement être d'utiliser la notation de \textit{de Bruijn}  pour les variables liées
+ et continuer
+à nommer les variables libres par des lettres.
+
+Cela impose dans la définition inductive du terme de distinguer les variables libres des variables liées.
+
+Par exemple en COQ:
+\begin{Verbatim}
+Inductive terme : Set :=
+  | bvar : nat -> terme
+  | fvar : string -> terme
+  | abs  : terme -> terme
+  | app  : terme -> terme -> terme.
+\end{Verbatim}
+
+\chapter{Le $\lambda$-calcul simplement typé et les Pure Type Systems}
 \section{Le $\lambda$-calcul simplement typé}
-\subsubsection{Implémentation}
+\subsection{Présentation}
+Un terme comme $\lambda x.xx$ n'a pas de sens en mathématiques. Comment $x$ peut être à la fois un argument et la fonction qu'on
+lui applique ? Le $\lambda$-calcul typé introduit des types simples permettant de distinguer les fonctions des variables.
+
 Un contexte, ou environnement de typage $\Gamma$, est un ensemble de paires de la forme 
 $( x , \tau )$  où $x$ est une variable et $\tau$ un type.
  Un jugement de typage est un triplet $\Gamma \vdash t:\tau$  \\
@@ -1193,9 +1210,217 @@ $( x , \tau )$  où $x$ est une variable et $\tau$ un type.
   \mathrm{si}\ \Gamma \vdash u:\tau _{1}\rightarrow \tau _{2}\ \mathrm{et}\ \Gamma \vdash v:\tau _{1},\  
     \mathrm{alors}\  \Gamma \vdash uv:\tau _{2} \\ 
 \end{gather*}
-  
-Afin de jouer avec ce $\lambda$-calcul typé, nous introduisons la constante de type \verb+Int+.
 
+\subsection{Implémentation en COQ}
+\subsubsection{Représentation des types et des termes}
+Pour les types, nous avons deux constructeurs, un pour les types de variable and un
+ pour les types des abstractions: le type flèche de la forme  $T_1 \rightarrow T_2$.
+
+\begin{Verbatim}
+Inductive typ : Set :=
+  | typ_var   : string -> typ
+  | typ_arrow : typ -> typ -> typ.
+\end{Verbatim}
+
+Pour les termes, nous utilisons la \textit{locally namless representation}
+Les variables liées sont représentées par les indices de \textit{de Bruijn} et les variables 
+libres par des chaînes de caractères.
+\begin{Verbatim}
+Inductive terme : Set :=
+  | bvar : nat -> terme
+  | fvar : string -> terme
+  | abs  : terme -> terme
+  | app  : terme -> terme -> terme.
+
+Coercion bvar : nat >-> terme.
+Coercion fvar : string >-> terme.
+\end{Verbatim}
+Voici un exemple avec le terme $t_2 = \lambda x.\lambda y. (y x)) $
+
+\verb+Definition t2 := abs (abs (app 0 1)).+
+
+\subsubsection{Opening}
+L'\textit{opening} remplace un indice par un terme. 
+Cela correspond à la substitution d'une variable liée, telle qu'appliquée lors de la 
+$\beta$-réduction.
+
+\begin{Verbatim}
+Fixpoint open_rec (k : nat) (u : terme) (t : terme) {struct t} : terme :=
+  match t with
+  | bvar i    => if k =? i then u else (bvar i)
+  | fvar x    => fvar x
+  | abs t1    => abs (open_rec (S k) u t1)
+  | app t1 t2 => app (open_rec k u t1) (open_rec k u t2)
+  end.
+
+Definition open t u := open_rec 0 u t.
+
+Notation "{ k ~> u } t" := (open_rec k u t) (at level 67).
+Notation "t ^^ u" := (open t u) (at level 67).
+Notation "t ^ x" := (open t (fvar x)).
+
+Lemma demo_open :
+  open (app (abs (app 1 0)) 0) "Y" =
+       (app (abs (app "Y" 0)) "Y").
+Proof.
+  unfold open. unfold open_rec. auto.
+Qed.
+\end{Verbatim}
+
+\subsubsection{La sémantique} 
+Nous définissons la sémantique de la réduction avec appel par valeur.
+
+\begin{Verbatim}
+Inductive valeur : terme -> Prop :=
+  | valeur_abs : forall (t1: terme), valeur (abs t1).
+
+Inductive red : terme -> terme -> Prop :=
+  | red_beta : forall (t1 t2:terme),
+      valeur t2 ->
+      red (app (abs t1) t2) (t1 ^^ t2)
+  | red_app_1 : forall t1 t1' t2 :terme,
+      red t1 t1' ->
+      red (app t1 t2) (app t1' t2)
+  | red_app_2 : forall t1 t2 t2' :terme,
+      valeur t1 ->
+      red t2 t2' ->
+      red (app t1 t2) (app t1 t2').
+
+\end{Verbatim}
+Nous utilisons la notation \verb+t --> t'+ pour la réduction en une étape.
+
+\begin{Verbatim}
+Notation "t --> t'" := (red t t') (at level 68).
+\end{Verbatim}
+
+\subsubsection{La gestion de l'environnement et du contexte}
+    
+\begin{Verbatim}
+Definition ctx := list (string * typ).
+Open Scope list_scope.
+Module ListNotations.
+Notation " [ ] " := nil : list_scope.
+Notation " [ x ] " := (cons x nil) : list_scope.
+Notation " [ x ; .. ; y ] " := (cons x .. (cons y nil) ..) : list_scope.
+Notation " s1 & s2 " := (Datatypes.app s1 s2) (at level 67)  : list_scope.
+End ListNotations.
+
+Import ListNotations.
+Definition e1 :ctx := [ ("v1", typ_var "entier") ].
+Definition e2 :ctx := [ ("v2", typ_var "entier") ].
+
+Compute e1 & e2 .
+\end{Verbatim}
+
+\subsubsection{Le typage} 
+
+ If $E$ and $F$ are two contexts, then $E\ \& F$ denotes their 
+    concatenation. If $x$ is a variable and $T$ is a type, then 
+    $(x ~ T)$ denotes a singleton environment where $x$ is bound to $T$.
+    In particular, $E\ \& x ~ T$ denotes a context $E$ extended 
+    with a binding from $x$ to $T$. The empty environment is 
+    called $empty$.
+
+The ternary predicate $binds$ holds when a given binding is
+    present in an environment.  
+
+\begin{Verbatim}
+Fixpoint binds (x:string) (T:typ) (E:ctx) {struct E} : Prop :=
+  match E with
+  | [] => False
+  | (v,t) :: r => (x=v /\ T=t) \/ binds x T r
+end.
+
+Compute binds "v1" (typ_var "entier") e1.
+Compute e1.
+
+Theorem b1 : binds "v1" (typ_var "entier") e1.
+Proof.
+  simpl.
+  left.
+  auto.
+Qed.
+
+Reserved Notation "E |= t ~: T" (at level 69).
+
+Inductive typing : ctx -> terme -> typ -> Prop :=
+  | typing_var : forall E x T,
+      binds x T E ->
+      E |= (fvar x) ~: T
+  | typing_abs : forall  E U T t1,
+      forall x,  
+        (E & [(x , U)] |= t1 ^ x ~: T) ->
+      E |= (abs t1) ~: (typ_arrow U T)
+  | typing_app : forall S T E t1 t2,
+      E |= t1 ~: (typ_arrow S T) -> 
+      E |= t2 ~: S ->
+      E |= (app t1 t2) ~: T
+
+where "E |= t ~: T" := (typing E t T).
+\end{Verbatim}
+
+\subsubsection{Théorème de préservation}
+Nous définissons le théorème de préservation du type.
+\begin{Verbatim}
+Definition preservation_statement := forall E t t' T,
+  E |= t ~: T ->
+  t --> t' ->
+  E |= t' ~: T.
+\end{Verbatim}
+
+\subsubsection{Théorème de la progression}
+Le théorème de la progression nous dit que si un terme ne se réduit plus, alors c'est une \textit{valeur}.
+\begin{Verbatim}
+Definition progress_statement := forall t T, 
+  nil |= t ~: T ->
+     valeur t 
+  \/ exists t', t --> t'.
+\end{Verbatim}
+
+
+\subsubsection{La substitution}
+\begin{Verbatim}
+Fixpoint mem  (x:string) (l:list string) : bool :=
+ match l with
+ | nil => false
+ | h::t => if h=?x then true else mem x t 
+ end.
+
+Fixpoint union (l1 l2: list string) : list string :=
+  match l1 with
+    | a1::r1 => if mem a1 l2 then union r1 l2
+                else  a1 :: (union r1 l2)
+    | nil => l2
+    end.
+
+Fixpoint fv (t : terme) {struct t} : list string :=
+  match t with
+  | bvar i    => nil
+  | fvar x    => [x]
+  | abs t1    => (fv t1)
+  | app t1 t2 => (union (fv t1) (fv t2))
+  end.
+
+Fixpoint subst (z : string) (u : terme) (t : terme) {struct t} : terme :=
+  match t with
+  | bvar i    => bvar i
+  | fvar x    => if x =? z then u else (fvar x)
+  | abs t1    => abs (subst z u t1)
+  | app t1 t2 => app (subst z u t1) (subst z u t2)
+  end.
+
+Notation "[ z ~> u ] t" := (subst z u t) (at level 68).
+
+Lemma demo_subst1:  ["Y" ~> "Z"] (abs (app 0 "Y")) = (abs (app 0 "Z")).
+Proof.
+  simpl.
+  auto.
+Qed.
+\end{Verbatim}
+
+\subsection{Inférence de type}
+Pour présenter un système d'inférence de type, nous introduisons la constante de type \verb+Int+ à notre $lambda$-calcul
+simplement typé.
 
 \begin{Verbatim}
 type ltype = 
@@ -1214,10 +1439,8 @@ type terme =
   | Plus of terme * terme
 \end{Verbatim}
 
-\subsubsection{Inférence de type d'un terme $t$}
 Prenons l'exemple du terme 
 $\mathtt{apply} \equiv \lambda f . \lambda x .fx$
-
 
 L'algorithme d'inférence se déroule en quatre temps.
 
@@ -1256,15 +1479,12 @@ L'algorithme d'inférence se déroule en quatre temps.
 \end{tikzpicture} 
 \end{center}
 
-
-
   \item Collecte des contraintes avec la fonction $T: \mathrm{terme} \mapsto \mathrm{type}$ 
     \begin{itemize}
       \item Pour une abstraction :  $e = \lambda x.e_1 $ \imp\ $T(e) = T(x) \rightarrow T(e_1) $
       \item Pour une application :  $e = e_1 e_2$ \imp\ $T(e_1) = T(e_2) \rightarrow T(e) $
       \item Pour l'application de l'addition  : $e=e_1+e_2$ \imp\ $T(e)= T(e_1) = T(e_2) = \mathtt{int} $
     \end{itemize}  
-
 
 \begin{Verbatim}
 utop#  t ;;
@@ -1291,7 +1511,7 @@ utop# hm t ;;
 \end{enumerate}
 
 \section{Les \textit{Pure Type Systems}}
-  \subsubsection{Introduction}
+  \subsection{Introduction}
 Le $\lambda$-calcul simplement typé que nous nommons $\lambda _\rightarrow$ ne permet
 de représenter des fonctions que des termes vers les termes. De manière générale, nous souhaiterions
 pouvoir modéliser :
@@ -1470,7 +1690,7 @@ let proj2 =
 in print (fullReduc (App (proj2, prod_uv)))
 \end{Verbatim}
 
-\subsubsection{MiniCOQ}
+\subsection{MiniCOQ}
 Nous  nous éloignons de la simplicité du \textit{Pure Type System} en surchargeant notre
  terme algébrique des types suivants :
 \begin{itemize}
@@ -1601,9 +1821,13 @@ let preuve_et_refl =
 > λA:Type.λB:Type.λh:A/\B.conj(proj2(h) ,proj1(h))
   πA:Type.πB:Type.(A/\B→B/\A)
 \end{Verbatim}
+Ou tout simplement en OCAML avec l'inférence de type:
+\begin{Verbatim}
+utop # let preuve_et_refl = function h -> (snd h, fst h) ;;
+val preuve_et_refl : 'a * 'b -> 'b * 'a = <fun>
+\end{Verbatim}
 
-
-\subsubsection{Le $\lor$ logique}
+\subsection{Le $\lor$ logique}
 
 \begin{coqdoccode}
 \coqdocnoindent
@@ -1622,8 +1846,8 @@ let preuve_et_refl =
 \coqdockw{Qed}.\coqdoceol
 \end{coqdoccode}
 \begin{Verbatim}
-(* fonction générée en COQ*)
-  or_elim = 
+(* fonction générée en COQ *)
+ or_elim = 
  fun (a b c : Prop) (h1 : a -> c) (h2 : b -> c) (h3 : a \/ b) =>
  match h3 with
   | or_introl ha => h1 ha
@@ -1646,7 +1870,18 @@ let preuve_or_elim =
   πA:Type.πB:Type.πC:Type.((A→C)→((B→C)→(A\/B→C)))
 \end{Verbatim}
 
-\subsubsection{L'égalité}
+En OCAML, nous introduisons le type algébrique ci-dessous pour matérialiser le \verb+or+ logique
+\begin{Verbatim}
+type ('a, 'b) ou = Left of 'a | Right of 'b	
+
+let or_elim = fun h1 h2 h3 ->
+ match h3 with
+  | Left a -> h1 a
+  | Right b -> h2 b ;;
+val or_elim : ('a -> 'b) -> ('c -> 'b) -> ('a, 'c) ou -> 'b = <fun>
+\end{Verbatim}
+
+\subsection{L'égalité}
 Prouvons que $\forall n \in \mathtt{Nat}, (\lambda n.2\  n) = 2$
 \begin{Verbatim}
 let th = Prod("n", Nat, Eq(Nat, App(cst2, V "n"), S (S O) )) 
@@ -1677,7 +1912,7 @@ Nous constatons que la preuve n'exhibe pas le process calculatoire de la $\beta$
 Le théorème est ici prouvé par calcul et non par raisonnement. Ces considérations philosophiques sont bien développées
 par Henri Poincaré\cite{poincare}
 
-\subsubsection{Le faux}
+\subsection{Le faux}
 \begin{Verbatim}
 let exf = Lam ("x", False, I) (* ex falso quodlibet *)
   in (print exf ; print_newline() ; print (check exf env0)) ;;
@@ -1732,7 +1967,25 @@ in  (print preuve_impl ; print_newline() ;
   πA:Type.πB:Type.(~A\/B→(A→B))
 \end{Verbatim}
 
-\subsubsection{Le point fixe}
+Dans un langage comme OCAML, le type \verb+faux+ est un type sans constructeur.
+Il est \textit{inhabité}. La preuve de la régle du modus tollens s'écrira de la manière suivante:
+\begin{Verbatim}
+type faux = | ;;
+
+let modus_tollens (hfq:'q->faux) (hpq:'p->'q) (hp:'p) =
+  hfq (hpq hp)
+\end{Verbatim}
+Voici le même théorème en COQ :
+\begin{Verbatim}
+Theorem modus_tollens: forall (p q:Prop), (q->False)-> (p->q) -> (p->False).
+Proof.
+	intros p q Hfq Hpq Hp.
+        generalize (Hpq Hp).
+        exact Hfq.
+Qed.
+\end{Verbatim}
+
+\subsection{Le point fixe}
 Nous surchargeons notre terme algébrique de l'opérateur de point fixe \verb+Y of terme+ qui
 se réduit en \verb+Y t+ \imp\ \verb+t (Y t)+
 \begin{Verbatim}
@@ -1753,7 +2006,7 @@ print (fullReduc (App(fac, S (S (S (S (S O))))))) ;;
 > 120
 \end{Verbatim}
 
-\subsubsection{La logique classique}
+\subsection{La logique classique}
 Sous l'angle de la correspondance de Curry-Howard, notre système se base sur la logique intuitionniste.
 C'est-à-dire que toute proposition a une preuve constructive.
  Autrement dit, le type correspondant à la proposition est habité par un terme de notre système PTS.
