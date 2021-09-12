@@ -26,7 +26,6 @@
 \usepackage{coqdoc}
 \usepackage{proof}
 \fvset{tabsize=2}
-
 \newfont{\letterimp}{beta}
 \newcommand{\imp}{{\letterimp D}\hspace{0.1cm}}
 \newfont{\lettersnow}{snow}
@@ -1913,6 +1912,7 @@ Le théorème est ici prouvé par calcul et non par raisonnement. Ces considéra
 par Henri Poincaré\cite{poincare}
 
 \subsection{Le faux}
+
 \begin{Verbatim}
 let exf = Lam ("x", False, I) (* ex falso quodlibet *)
   in (print exf ; print_newline() ; print (check exf env0)) ;;
@@ -1968,7 +1968,7 @@ in  (print preuve_impl ; print_newline() ;
 \end{Verbatim}
 
 Dans un langage comme OCAML, le type \verb+faux+ est un type sans constructeur.
-Il est \textit{inhabité}. La preuve de la régle du modus tollens s'écrira de la manière suivante:
+Il est \textit{inhabité}. La preuve de la règle du modus tollens s'écrira de la manière suivante :
 \begin{Verbatim}
 type faux = | ;;
 
@@ -1983,6 +1983,13 @@ Proof.
         generalize (Hpq Hp).
         exact Hfq.
 Qed.
+\end{Verbatim}
+Nous pouvons décrire le \textit{ex falso quodlibet} en OCAML comme suit :
+\begin{Verbatim}
+type faux = | ;;
+type vrai = I ;;
+
+let exfalsoquodlibet = fun (f:faux) ->  I;;
 \end{Verbatim}
 
 \subsection{Le point fixe}
@@ -4096,6 +4103,103 @@ vincent@HP-Notebook:~/vsc$ ./prolog.byte
  autre solution 1/2 (1=oui, 2=non) ? :1
 vincent@HP-Notebook:~/vsc$ 
 \end{Verbatim}
+\subsection{Programmation "logique" en COQ}
+L'utilisation des types dépendants en COQ nous permet également de définir
+les relations PROLOG.
+\begin{coqdoccode}
+	
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{entier} :=\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{O}: \coqdocvar{entier}\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{S}: \coqdocvar{entier} \ensuremath{\rightarrow} \coqdocvar{entier}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{somme} (\coqdocvar{e1} \coqdocvar{e2}:\coqdocvar{entier}):\coqdocvar{entier} :=\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{match} \coqdocvar{e1} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{O} \ensuremath{\Rightarrow} \coqdocvar{e2}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{e1} \ensuremath{\Rightarrow} \coqdocvar{S} (\coqdocvar{somme} \coqdocvar{e1} \coqdocvar{e2})\coqdoceol
+\coqdocindent{1.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{somme\_O} : \coqdockw{\ensuremath{\forall}} \coqdocvar{e}:\coqdocvar{entier}, \coqdocvar{somme} \coqdocvar{e} \coqdocvar{O} = \coqdocvar{e}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{intro} \coqdocvar{e}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{induction} \coqdocvar{e}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{simpl}. \coqdoctac{reflexivity}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{simpl}. \coqdoctac{rewrite} \coqdocvar{IHe}. \coqdoctac{reflexivity}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{somme\_S} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{e1} \coqdocvar{e2}:\coqdocvar{entier}), \coqdocvar{somme} \coqdocvar{e1} (\coqdocvar{S} \coqdocvar{e2})= \coqdocvar{S} (\coqdocvar{somme} \coqdocvar{e1} \coqdocvar{e2}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{intros}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{induction} \coqdocvar{e1}. \coqdoctac{simpl}. \coqdoctac{reflexivity}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{simpl}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{rewrite} \coqdocvar{IHe1}. \coqdoctac{reflexivity}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} \coqdocvar{somme} (\coqdocvar{S} \coqdocvar{O}) (\coqdocvar{S} \coqdocvar{O}).\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{sommeProlog} : \coqdocvar{entier} \ensuremath{\rightarrow} \coqdocvar{entier} \ensuremath{\rightarrow} \coqdocvar{entier} \ensuremath{\rightarrow} \coqdockw{Prop} :=\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{SommeO}: \coqdockw{\ensuremath{\forall}} \coqdocvar{x}, \coqdocvar{sommeProlog} \coqdocvar{x} \coqdocvar{O} \coqdocvar{x}\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{SommeS}: \coqdockw{\ensuremath{\forall}} \coqdocvar{x} \coqdocvar{y} \coqdocvar{z}, \coqdocvar{sommeProlog} \coqdocvar{x} \coqdocvar{y} \coqdocvar{z} \ensuremath{\rightarrow} \coqdocvar{sommeProlog} \coqdocvar{x} (\coqdocvar{S} \coqdocvar{y}) (\coqdocvar{S} \coqdocvar{z}).\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Example} \coqdocvar{un\_plus\_un} : \coqdocvar{sommeProlog} (\coqdocvar{S} \coqdocvar{O}) (\coqdocvar{S} \coqdocvar{O}) (\coqdocvar{S} (\coqdocvar{S} \coqdocvar{O})).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{SommeS}. \coqdoctac{apply} \coqdocvar{SommeO}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{somme\_deux\_entiers} : \coqdockw{\ensuremath{\forall}} \coqdocvar{e1} \coqdocvar{e2}, \coqdocvar{sommeProlog} \coqdocvar{e1} \coqdocvar{e2} (\coqdocvar{somme} \coqdocvar{e1} \coqdocvar{e2}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{intros} \coqdocvar{e1} \coqdocvar{e2}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{induction} \coqdocvar{e2}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{rewrite} \coqdocvar{somme\_O}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{apply} \coqdocvar{SommeO}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{rewrite} \coqdocvar{somme\_S}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{apply} \coqdocvar{SommeS}.\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{exact} \coqdocvar{IHe2}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocindent{4.00em}
+\end{coqdoccode}
+
 \subsection{La base généalogique}
 \begin{Verbatim}
 (* généalogie *)
