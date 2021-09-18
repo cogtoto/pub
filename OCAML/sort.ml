@@ -148,3 +148,18 @@ let rec mul_list l1 l2 =
   | [] -> []
   | x :: xs -> x * hd l2 :: mul_list xs l2 ;;
   
+let rec even_members l =
+  match l with
+  | [] -> []
+  | x :: [] -> []
+  | x1 :: x2 :: xs -> x2 :: even_members xs ;;
+
+let rec odd_members l =
+  match l with
+  | [] -> []
+  | x :: xs -> x :: even_members xs ;;
+
+
+
+  
+

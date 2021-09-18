@@ -36,3 +36,4 @@ Definition Tri_spec (f : list nat -> list nat) :=
   forall l, let l' := f l in Triée l' .
   
  Check leb.
+ 
