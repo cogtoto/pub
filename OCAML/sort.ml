@@ -159,7 +159,22 @@ let rec odd_members l =
   | [] -> []
   | x :: xs -> x :: even_members xs ;;
 
+let rec merge l1 l2 =
+  match l1,l2 with
+  | ([],l2) -> l2
+  | (l1, []) -> l1
+  | _ ->
+    if  hd l1 <= hd l2 then hd l1 :: merge (tl l1) l2
+    else hd l2 :: merge l1 (tl l2)
+  ;;  
+
+let rec sort l =
+  match l with
+  | [] -> []
+  | x :: [] -> [x]
+  | _ -> let l1 = even_members l in
+          let l2 = odd_members l in
+           merge (sort l1) (sort l2) ;;
 
 
-  
 
