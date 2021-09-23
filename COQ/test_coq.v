@@ -26,3 +26,5 @@ Qed.
 
 Print length_nplus1
 .
+
+Print int_list_ind.
