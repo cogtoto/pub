@@ -1,0 +1,1453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>STLC</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library STLC</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Set Implicit Arguments</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">LibLN</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1"></a><h1 class="section">Definitions</h1>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab2"></a><h2 class="section">Grammars</h2>
+
+<div class="paragraph"> </div>
+
+ Grammar of types. We have two constructors, one for type variables
+    and one for arrow types of the form <span class="inlinecode"><span class="id" title="var">T1</span></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="var">T2</span></span>.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">typ</span> : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" title="var">typ_var</span>   : <span class="id" title="var">var</span> -&gt; <span class="id" title="var">typ</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">typ_arrow</span> : <span class="id" title="var">typ</span> -&gt; <span class="id" title="var">typ</span> -&gt; <span class="id" title="var">typ</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Grammar of pre-terms. We use a locally nameless representation for the
+    simply-typed lambda calculus, where bound variables are represented as 
+    natural numbers (de Bruijn indices) and free variables are represented as
+    atoms. The type <span class="inlinecode"><span class="id" title="var">var</span></span>, defined in the library LibLN_Var, represents
+    'names' or 'atoms'. One central assumption is that it is always possible
+    to generate an atom fresh for any given finite set of atoms (lemma 
+    <span class="inlinecode"><span class="id" title="var">var_fresh</span></span>). 
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">trm</span> : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_bvar</span> : <span class="id" title="var">nat</span> -&gt; <span class="id" title="var">trm</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_fvar</span> : <span class="id" title="var">var</span> -&gt; <span class="id" title="var">trm</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_abs</span>  : <span class="id" title="var">trm</span> -&gt; <span class="id" title="var">trm</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_app</span>  : <span class="id" title="var">trm</span> -&gt; <span class="id" title="var">trm</span> -&gt; <span class="id" title="var">trm</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We declare the constructors for indices and variables to be coercions. 
+    That way, if Coq sees a nat where it expects an exp, it will implicitly 
+    insert an application of bvar; and similarly for atoms. In real metatheory
+    developments, we usually do not need such coercions. However, they will
+    be very useful for carrying out examples in this tutorial. 
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Coercion</span> <span class="id" title="var">trm_bvar</span> : <span class="id" title="var">nat</span> &gt;-&gt; <span class="id" title="var">trm</span>.<br/>
+<span class="id" title="keyword">Coercion</span> <span class="id" title="var">trm_fvar</span> : <span class="id" title="var">var</span> &gt;-&gt; <span class="id" title="var">trm</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+For example, we can encode the expression (\x. Y x) as below.
+    Because "Y" is free variable in this term, we need to assume an atom 
+    for this name.
+ 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <span class="id" title="var">Y</span> : <span class="id" title="var">var</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">demo_rep1</span> := <span class="id" title="var">trm_abs</span> (<span class="id" title="var">trm_app</span> <span class="id" title="var">Y</span> 0).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Another example: the encoding of (\x. \y. (y x)) 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">demo_rep2</span> := <span class="id" title="var">trm_abs</span> (<span class="id" title="var">trm_abs</span> (<span class="id" title="var">trm_app</span> 0 1)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Exercise: convert the following lambda calculus term to locally 
+    nameless representation: \s. \z. s(s z) 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">demo_two</span> := <span class="id" title="var">trm_abs</span> (<span class="id" title="var">trm_abs</span> (<span class="id" title="var">trm_app</span> 1 (<span class="id" title="var">trm_app</span> 1 0))).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+There are two important advantages of the locally nameless
+    representation:
+<ul class="doclist">
+<li> Alpha-equivalent terms have a unique representation, 
+       we're always working up to alpha-equivalence.
+
+</li>
+<li> Operations such as free variable substitution and free
+       variable calculation have simple recursive definitions
+      (and therefore are simple to reason about).
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    Weighed against these advantages are two drawbacks:
+<ul class="doclist">
+<li> The <span class="inlinecode"><span class="id" title="var">trm</span></span> datatype admits terms, such as <span class="inlinecode"><span class="id" title="var">trm_abs</span></span> <span class="inlinecode">3</span>, where
+       indices are unbound. 
+       A term is called "locally closed" when it contains 
+       no unbound indices. 
+
+</li>
+<li> We must define *both* bound variable &amp; free variable 
+       substitution and reason about how these operations 
+       interact with eachother.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab3"></a><h2 class="section">Opening</h2>
+
+<div class="paragraph"> </div>
+
+ Opening replaces an index with a term. It corresponds to informal
+    substitution for a bound variable, such as in the rule for beta
+    reduction. Note that only "dangling" indices (those that do not
+    refer to any abstraction) can be opened. Opening has no effect for
+    terms that are locally closed.
+
+<div class="paragraph"> </div>
+
+    Natural numbers are just an inductive datatype with two
+    constructors: O and S, defined in Coq.Init.Datatypes.
+
+<div class="paragraph"> </div>
+
+    We make several simplifying assumptions in defining <span class="inlinecode"><span class="id" title="var">open_rec</span></span>.
+    First, we assume that the argument <span class="inlinecode"><span class="id" title="var">u</span></span> is locally closed.  This
+    assumption simplifies the implementation since we do not need to
+    shift indices in <span class="inlinecode"><span class="id" title="var">u</span></span> when passing under a binder.  Second, we
+    assume that this function is initially called with index zero and
+    that zero is the only unbound index in the term.  This eliminates
+    the need to possibly subtract one in the case of indices.
+
+<div class="paragraph"> </div>
+
+    There is no need to worry about variable capture because bound
+    variables are indices.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">open_rec</span> (<span class="id" title="var">k</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">u</span> : <span class="id" title="var">trm</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">trm</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">t</span>} : <span class="id" title="var">trm</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_bvar</span> <span class="id" title="var">i</span>    =&gt; <span class="id" title="var">If</span> <span class="id" title="var">k</span> = <span class="id" title="var">i</span> <span class="id" title="keyword">then</span> <span class="id" title="var">u</span> <span class="id" title="keyword">else</span> (<span class="id" title="var">trm_bvar</span> <span class="id" title="var">i</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_fvar</span> <span class="id" title="var">x</span>    =&gt; <span class="id" title="var">trm_fvar</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>    =&gt; <span class="id" title="var">trm_abs</span> (<span class="id" title="var">open_rec</span> (<span class="id" title="var">S</span> <span class="id" title="var">k</span>) <span class="id" title="var">u</span> <span class="id" title="var">t1</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_app</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span> =&gt; <span class="id" title="var">trm_app</span> (<span class="id" title="var">open_rec</span> <span class="id" title="var">k</span> <span class="id" title="var">u</span> <span class="id" title="var">t1</span>) (<span class="id" title="var">open_rec</span> <span class="id" title="var">k</span> <span class="id" title="var">u</span> <span class="id" title="var">t2</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Many common applications of opening replace index zero with an
+    expression or variable.  The following definition provides a
+    convenient shorthand for such uses.  Note that the order of
+    arguments is switched relative to the definition above.  For
+    example, <span class="inlinecode">(<span class="id" title="var">open</span></span> <span class="inlinecode"><span class="id" title="var">e</span></span> <span class="inlinecode"><span class="id" title="var">x</span>)</span> can be read as "substitute the variable <span class="inlinecode"><span class="id" title="var">x</span></span>
+    for index <span class="inlinecode">0</span> in <span class="inlinecode"><span class="id" title="var">e</span></span>" and "open <span class="inlinecode"><span class="id" title="var">e</span></span> with the variable <span class="inlinecode"><span class="id" title="var">x</span></span>."
+    Recall that the coercions above let us write <span class="inlinecode"><span class="id" title="var">x</span></span> in place of
+    <span class="inlinecode">(<span class="id" title="var">fvar</span></span> <span class="inlinecode"><span class="id" title="var">x</span>)</span>.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">open</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span> := <span class="id" title="var">open_rec</span> 0 <span class="id" title="var">u</span> <span class="id" title="var">t</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We define notations for <span class="inlinecode"><span class="id" title="var">open_rec</span></span> and <span class="inlinecode"><span class="id" title="var">open</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Notation</span> &quot;{ k ~&gt; u } t" := (<span class="id" title="var">open_rec</span> <span class="id" title="var">k</span> <span class="id" title="var">u</span> <span class="id" title="var">t</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 67).<br/>
+<span class="id" title="keyword">Notation</span> &quot;t ^^ u" := (<span class="id" title="var">open</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 67).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We also define a notation for the specialization of <span class="inlinecode"><span class="id" title="var">open</span></span> to
+    the case where the argument is a free variable. This notation
+    is not needed when <span class="inlinecode"><span class="id" title="var">trm_fvar</span></span> is declared as a coercion like
+    we do in this tutorial, but it is very handy when we don't want
+    to have such a coercion. (Coercions are very convenient for
+    simple developments, but they can make things very obscur when
+    it comes to scaling up to larger developments.)  
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Notation</span> &quot;t ^ x" := (<span class="id" title="var">open</span> <span class="id" title="var">t</span> (<span class="id" title="var">trm_fvar</span> <span class="id" title="var">x</span>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This next demo shows the operation of <span class="inlinecode"><span class="id" title="var">open</span></span>.  For example, the
+   locally nameless representation of the term (\y. (\x. (y x)) y)
+   is <span class="inlinecode"><span class="id" title="var">abs</span></span> <span class="inlinecode">(<span class="id" title="var">app</span></span> <span class="inlinecode">(<span class="id" title="var">abs</span></span> <span class="inlinecode">(<span class="id" title="var">app</span></span> <span class="inlinecode">1</span> <span class="inlinecode">0))</span> <span class="inlinecode">0)</span>. To look at the body
+   without the outer abstraction, we need to replace the indices that
+   refer to that abstraction with a name.
+   Therefore, we show that we can open the body of the abstraction
+   above with Y to produce <span class="inlinecode"><span class="id" title="var">app</span></span> <span class="inlinecode">(<span class="id" title="var">abs</span></span> <span class="inlinecode">(<span class="id" title="var">app</span></span> <span class="inlinecode"><span class="id" title="var">Y</span></span> <span class="inlinecode">0))</span> <span class="inlinecode"><span class="id" title="var">Y</span>)</span>.
+   The tactic <span class="inlinecode"><span class="id" title="var">case_if</span></span> is used to simplify conditionals.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">demo_open</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="var">open</span> (<span class="id" title="var">trm_app</span> (<span class="id" title="var">trm_abs</span> (<span class="id" title="var">trm_app</span> 1 0)) 0) <span class="id" title="var">Y</span> =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">trm_app</span> (<span class="id" title="var">trm_abs</span> (<span class="id" title="var">trm_app</span> <span class="id" title="var">Y</span> 0)) <span class="id" title="var">Y</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">open</span>. <span class="id" title="tactic">unfold</span> <span class="id" title="var">open_rec</span>. <span class="id" title="var">case_if</span>. <span class="id" title="var">case_if</span>. <span class="id" title="var">case_if</span>. <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab4"></a><h2 class="section">Local closure</h2>
+
+<div class="paragraph"> </div>
+
+ Recall that <span class="inlinecode"><span class="id" title="var">trm</span></span> admits terms that contain unbound indices. 
+    We say that a term is locally closed, 
+    when no indices appearing in it are unbound.  The proposition 
+    <span class="inlinecode"><span class="id" title="var">term</span></span> <span class="inlinecode"><span class="id" title="var">e</span></span> holds when an expression <span class="inlinecode"><span class="id" title="var">e</span></span> is locally closed.
+
+<div class="paragraph"> </div>
+
+    The inductive definition below formalizes local closure such that
+    the resulting induction principle serves as the structural
+    induction principle over (locally closed) expressions.  In
+    particular, unlike induction for type <span class="inlinecode"><span class="id" title="var">trm</span></span>, there is no cases
+    for bound variables.  Thus, the induction principle corresponds more
+    closely to informal practice than the one arising from the
+    definition of pre-terms.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">term</span> : <span class="id" title="var">trm</span> -&gt; <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" title="var">term_var</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">term</span> (<span class="id" title="var">trm_fvar</span> <span class="id" title="var">x</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">term_abs</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">L</span> <span class="id" title="var">t1</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span>, <span class="id" title="var">x</span> \<span class="id" title="var">notin</span> <span class="id" title="var">L</span> -&gt; <span class="id" title="var">term</span> (<span class="id" title="var">t1</span> ^ <span class="id" title="var">x</span>)) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">term</span> (<span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">term_app</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">term</span> <span class="id" title="var">t1</span> -&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">term</span> <span class="id" title="var">t2</span> -&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">term</span> (<span class="id" title="var">trm_app</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+For tactics to work well, it is very important that lists of
+    names to avoid, such as <span class="inlinecode"><span class="id" title="var">L</span></span>, appear as first argument of the
+    constructors. 
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab5"></a><h2 class="section">Semantics</h2>
+
+<div class="paragraph"> </div>
+
+ We now define the semantics of our call-by-value lambda calculus. 
+    We define values and small-step reduction. Note the hypotheses 
+    which ensure that the relations hold only for locally closed terms. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">value</span> : <span class="id" title="var">trm</span> -&gt; <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" title="var">value_abs</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">t1</span>, <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">term</span> (<span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>) -&gt; <span class="id" title="var">value</span> (<span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="tactic">red</span> : <span class="id" title="var">trm</span> -&gt; <span class="id" title="var">trm</span> -&gt; <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" title="var">red_beta</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">term</span> (<span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">value</span> <span class="id" title="var">t2</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span> (<span class="id" title="var">trm_app</span> (<span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>) <span class="id" title="var">t2</span>) (<span class="id" title="var">t1</span> ^^ <span class="id" title="var">t2</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">red_app_1</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">t1</span> <span class="id" title="var">t1'</span> <span class="id" title="var">t2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">term</span> <span class="id" title="var">t2</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span> <span class="id" title="var">t1</span> <span class="id" title="var">t1'</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span> (<span class="id" title="var">trm_app</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span>) (<span class="id" title="var">trm_app</span> <span class="id" title="var">t1'</span> <span class="id" title="var">t2</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">red_app_2</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span> <span class="id" title="var">t2'</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">value</span> <span class="id" title="var">t1</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span> <span class="id" title="var">t2</span> <span class="id" title="var">t2'</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span> (<span class="id" title="var">trm_app</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span>) (<span class="id" title="var">trm_app</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2'</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We use the notation <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode">--&gt;</span> <span class="inlinecode"><span class="id" title="var">t'</span></span> to denote small step reduction. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Notation</span> &quot;t --&gt; t'" := (<span class="id" title="tactic">red</span> <span class="id" title="var">t</span> <span class="id" title="var">t'</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 68).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab6"></a><h2 class="section">Environments</h2>
+
+<div class="paragraph"> </div>
+
+ Environments are isomorphic to association lists (lists of pairs of
+    keys and values) whose keys are <span class="inlinecode"><span class="id" title="var">var</span></span>s.  To print environments in a
+    pretty way and, in particular, to ensure that new bindings are added
+    to the right of existing environments, we do not use the type <span class="inlinecode"><span class="id" title="var">list</span></span>
+    directly but instead use an abstract data type called <span class="inlinecode"><span class="id" title="var">env</span></span>. More
+    precisely, the type <span class="inlinecode"><span class="id" title="var">env</span></span> <span class="inlinecode"><span class="id" title="var">A</span></span> is isomorphic to <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode">(<span class="id" title="var">var</span></span> <span class="inlinecode">*</span> <span class="inlinecode"><span class="id" title="var">A</span>)</span>.
+    Environments are defined in the file <span class="inlinecode"><span class="id" title="var">LibEnv</span></span>. 
+
+<div class="paragraph"> </div>
+
+    Here, environments bind <span class="inlinecode"><span class="id" title="var">var</span></span>s to <span class="inlinecode"><span class="id" title="var">typ</span></span>s. So, we define <span class="inlinecode"><span class="id" title="var">ctx</span></span> as a
+    shorthand for <span class="inlinecode"><span class="id" title="var">env</span></span> <span class="inlinecode"><span class="id" title="var">typ</span></span>. 
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">ctx</span> := <span class="id" title="var">env</span> <span class="id" title="var">typ</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If <span class="inlinecode"><span class="id" title="var">E</span></span> and <span class="inlinecode"><span class="id" title="var">F</span></span> are two contexts, then <span class="inlinecode"><span class="id" title="var">E</span></span> <span class="inlinecode">&amp;</span> <span class="inlinecode"><span class="id" title="var">F</span></span> denotes their 
+    concatenation. If <span class="inlinecode"><span class="id" title="var">x</span></span> is a variable and <span class="inlinecode"><span class="id" title="var">T</span></span> is a type, then 
+    <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">~</span> <span class="inlinecode"><span class="id" title="var">T</span></span> denotes a singleton environment where <span class="inlinecode"><span class="id" title="var">x</span></span> is bound to <span class="inlinecode"><span class="id" title="var">T</span></span>.
+    In particular, <span class="inlinecode"><span class="id" title="var">E</span></span> <span class="inlinecode">&amp;</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">~</span> <span class="inlinecode"><span class="id" title="var">T</span></span> denotes a context <span class="inlinecode"><span class="id" title="var">E</span></span> extended 
+    with a binding from <span class="inlinecode"><span class="id" title="var">x</span></span> to <span class="inlinecode"><span class="id" title="var">T</span></span>. The empty environment is 
+    called <span class="inlinecode"><span class="id" title="var">empty</span></span>.
+
+<div class="paragraph"> </div>
+
+ The function <span class="inlinecode"><span class="id" title="var">dom</span></span> computes the domain of an environment,
+    returning a finite set of <span class="inlinecode"><span class="id" title="var">var</span></span>s. 
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+The unary predicate <span class="inlinecode"><span class="id" title="var">ok</span></span> holds when each atom is bound at most
+    once in an environment. This property is defined inductively. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The ternary predicate <span class="inlinecode"><span class="id" title="var">binds</span></span> holds when a given binding is
+    present in an environment.  More specifically, <span class="inlinecode"><span class="id" title="var">binds</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">T</span></span> <span class="inlinecode"><span class="id" title="var">E</span></span> holds
+    when the last binding of <span class="inlinecode"><span class="id" title="var">x</span></span> binds <span class="inlinecode"><span class="id" title="var">x</span></span> to the type <span class="inlinecode"><span class="id" title="var">T</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab7"></a><h2 class="section">Typing</h2>
+
+<div class="paragraph"> </div>
+
+ The definition of the typing relation is straightforward.  In
+    order to ensure that the relation holds for only well-formed
+    environments, we check in the <span class="inlinecode"><span class="id" title="var">typing_var</span></span> case that the
+    environment is <span class="inlinecode"><span class="id" title="var">ok</span></span>.  The structure of typing derivations
+    implicitly ensures that the relation holds only for locally closed
+    expressions.  Finally, note the use of cofinite quantification in
+    the <span class="inlinecode"><span class="id" title="var">typing_abs</span></span> case. 
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Reserved Notation</span> &quot;E |= t ~: T" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 69).<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">typing</span> : <span class="id" title="var">ctx</span> -&gt; <span class="id" title="var">trm</span> -&gt; <span class="id" title="var">typ</span> -&gt; <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" title="var">typing_var</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">E</span> <span class="id" title="var">x</span> <span class="id" title="var">T</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ok</span> <span class="id" title="var">E</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">binds</span> <span class="id" title="var">x</span> <span class="id" title="var">T</span> <span class="id" title="var">E</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">E</span> |= (<span class="id" title="var">trm_fvar</span> <span class="id" title="var">x</span>) ~: <span class="id" title="var">T</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">typing_abs</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">L</span> <span class="id" title="var">E</span> <span class="id" title="var">U</span> <span class="id" title="var">T</span> <span class="id" title="var">t1</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">forall</span> <span class="id" title="var">x</span>, <span class="id" title="var">x</span> \<span class="id" title="var">notin</span> <span class="id" title="var">L</span> -&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">x</span> ~ <span class="id" title="var">U</span>) |= <span class="id" title="var">t1</span> ^ <span class="id" title="var">x</span> ~: <span class="id" title="var">T</span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">E</span> |= (<span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>) ~: (<span class="id" title="var">typ_arrow</span> <span class="id" title="var">U</span> <span class="id" title="var">T</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">typing_app</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">S</span> <span class="id" title="var">T</span> <span class="id" title="var">E</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">E</span> |= <span class="id" title="var">t1</span> ~: (<span class="id" title="var">typ_arrow</span> <span class="id" title="var">S</span> <span class="id" title="var">T</span>) -&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">E</span> |= <span class="id" title="var">t2</span> ~: <span class="id" title="var">S</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">E</span> |= (<span class="id" title="var">trm_app</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span>) ~: <span class="id" title="var">T</span><br/>
+<br/>
+<span class="id" title="keyword">where</span> &quot;E |= t ~: T" := (<span class="id" title="var">typing</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab8"></a><h2 class="section">Statement of theorems</h2>
+
+<div class="paragraph"> </div>
+
+ At this point we can state the theorems that we want to prove.
+    Preservation states that if a well-typed term takes a reduction
+    step then it produces another well-typed term.
+    Progress states that a well-typed term is either a value or it 
+    can take a step of reduction. 
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">preservation_statement</span> := <span class="id" title="keyword">forall</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="var">t'</span> <span class="id" title="var">T</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">E</span> |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id" title="var">t</span> --&gt; <span class="id" title="var">t'</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id" title="var">E</span> |= <span class="id" title="var">t'</span> ~: <span class="id" title="var">T</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">progress_statement</span> := <span class="id" title="keyword">forall</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span>, <br/>
+&nbsp;&nbsp;<span class="id" title="var">empty</span> |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">value</span> <span class="id" title="var">t</span> <br/>
+&nbsp;&nbsp;\/ <span class="id" title="tactic">exists</span> <span class="id" title="var">t'</span>, <span class="id" title="var">t</span> --&gt; <span class="id" title="var">t'</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We here reach the end the "trusted base". If we got definitions wrong
+    above that point, then we might not be proving what we intend to.
+    If, however, we got the definitions right, then no matter how ugly
+    our proofs might be, if we reach the Qed of the two theorems that
+    we have stated, then we know that our type system is sound.
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab9"></a><h1 class="section">Infrastructure</h1>
+
+<div class="paragraph"> </div>
+
+ Before we start getting into the proofs, we need to set up a few
+    more things.
+<ul class="doclist">
+<li> functions definining free variables and substitution,
+
+</li>
+<li> tactics to pick fresh names and to handle freshness-related goals,
+
+</li>
+<li> a few axioms about the behavior of operations on terms.
+
+</li>
+</ul>
+
+<div class="paragraph"> </div>
+
+    We will purposely introduce some axioms, so that we can go straight
+    to the proofs that we are interested in. Once we are finished with
+    the main proofs, we will do a second pass in order to turn the 
+    axioms into proper lemmas.
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab10"></a><h2 class="section">Free variables</h2>
+
+<div class="paragraph"> </div>
+
+ The function <span class="inlinecode"><span class="id" title="var">fv</span></span>, defined below, calculates the set of free
+    variables in an expression.  Because we are using locally nameless
+    representation, where bound variables are represented as indices,
+    any name we see is a free variable of a term.  In particular, this
+    makes the <span class="inlinecode"><span class="id" title="var">trm_abs</span></span> case simple.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">fv</span> (<span class="id" title="var">t</span> : <span class="id" title="var">trm</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">t</span>} : <span class="id" title="var">vars</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_bvar</span> <span class="id" title="var">i</span>    =&gt; \{}<br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_fvar</span> <span class="id" title="var">x</span>    =&gt; \{<span class="id" title="var">x</span>}<br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>    =&gt; (<span class="id" title="var">fv</span> <span class="id" title="var">t1</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_app</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span> =&gt; (<span class="id" title="var">fv</span> <span class="id" title="var">t1</span>) \<span class="id" title="var">u</span> (<span class="id" title="var">fv</span> <span class="id" title="var">t2</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab11"></a><h2 class="section">Substitution</h2>
+
+<div class="paragraph"> </div>
+
+ Substitution replaces a free variable with a term.  The definition
+    below is simple for two reasons:
+<ul class="doclist">
+<li> Because bound variables are represented using indices, there
+        is no need to worry about variable capture.
+
+</li>
+<li> We assume that the term being substituted in is locally
+        closed.  Thus, there is no need to shift indices when
+        passing under a binder.
+
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="tactic">subst</span> (<span class="id" title="var">z</span> : <span class="id" title="var">var</span>) (<span class="id" title="var">u</span> : <span class="id" title="var">trm</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">trm</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">t</span>} : <span class="id" title="var">trm</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_bvar</span> <span class="id" title="var">i</span>    =&gt; <span class="id" title="var">trm_bvar</span> <span class="id" title="var">i</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_fvar</span> <span class="id" title="var">x</span>    =&gt; <span class="id" title="var">If</span> <span class="id" title="var">x</span> = <span class="id" title="var">z</span> <span class="id" title="keyword">then</span> <span class="id" title="var">u</span> <span class="id" title="keyword">else</span> (<span class="id" title="var">trm_fvar</span> <span class="id" title="var">x</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>    =&gt; <span class="id" title="var">trm_abs</span> (<span class="id" title="tactic">subst</span> <span class="id" title="var">z</span> <span class="id" title="var">u</span> <span class="id" title="var">t1</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">trm_app</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span> =&gt; <span class="id" title="var">trm_app</span> (<span class="id" title="tactic">subst</span> <span class="id" title="var">z</span> <span class="id" title="var">u</span> <span class="id" title="var">t1</span>) (<span class="id" title="tactic">subst</span> <span class="id" title="var">z</span> <span class="id" title="var">u</span> <span class="id" title="var">t2</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We define a notation for free variable substitution that mimics
+    standard mathematical notation. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Notation</span> &quot;[ z ~&gt; u ] t" := (<span class="id" title="tactic">subst</span> <span class="id" title="var">z</span> <span class="id" title="var">u</span> <span class="id" title="var">t</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 68).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Below is a demo. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Parameter</span> <span class="id" title="var">Z</span> : <span class="id" title="var">var</span>.<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">demo_subst1</span>:  [<span class="id" title="var">Y</span> ~&gt; <span class="id" title="var">Z</span>] (<span class="id" title="var">trm_abs</span> (<span class="id" title="var">trm_app</span> 0 <span class="id" title="var">Y</span>)) = (<span class="id" title="var">trm_abs</span> (<span class="id" title="var">trm_app</span> 0 <span class="id" title="var">Z</span>)).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="var">case_if</span>. <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab12"></a><h2 class="section">Tactics</h2>
+
+<div class="paragraph"> </div>
+
+ When picking a fresh atom or applying a rule that uses cofinite
+    quantification, choosing a set of atoms to be fresh for can be
+    tedious.  In practice, it is simpler to use a tactic to choose the
+    set to be as large as possible.
+
+<div class="paragraph"> </div>
+
+    The first tactic we define, <span class="inlinecode"><span class="id" title="var">gather_vars</span></span>, is used to collect
+    together all the atoms in the context.  It relies on an auxiliary
+    tactic from <span class="inlinecode"><span class="id" title="var">LibLN_Tactics</span></span>, <span class="inlinecode"><span class="id" title="var">gather_vars_with</span></span>, which collects
+    together the atoms appearing in objects of a certain type.  The argument 
+    to <span class="inlinecode"><span class="id" title="var">gather_vars_with</span></span> is a function that should return the set of
+    vars appearing in its argument. 
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">gather_vars</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">A</span> := <span class="id" title="var">gather_vars_with</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> : <span class="id" title="var">vars</span> =&gt; <span class="id" title="var">x</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">B</span> := <span class="id" title="var">gather_vars_with</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> : <span class="id" title="var">var</span> =&gt; \{<span class="id" title="var">x</span>}) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">C</span> := <span class="id" title="var">gather_vars_with</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> : <span class="id" title="var">ctx</span> =&gt; <span class="id" title="var">dom</span> <span class="id" title="var">x</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">D</span> := <span class="id" title="var">gather_vars_with</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> : <span class="id" title="var">trm</span> =&gt; <span class="id" title="var">fv</span> <span class="id" title="var">x</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">constr</span>:(<span class="id" title="var">A</span> \<span class="id" title="var">u</span> <span class="id" title="var">B</span> \<span class="id" title="var">u</span> <span class="id" title="var">C</span> \<span class="id" title="var">u</span> <span class="id" title="var">D</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The tactic <span class="inlinecode"><span class="id" title="var">pick_fresh_gen</span></span> <span class="inlinecode"><span class="id" title="var">L</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> creates a new atom fresh 
+    from <span class="inlinecode"><span class="id" title="var">L</span></span> and called <span class="inlinecode"><span class="id" title="var">x</span></span>. Using the tactic <span class="inlinecode"><span class="id" title="var">gather_vars</span></span>,
+    we can automate the construction of <span class="inlinecode"><span class="id" title="var">L</span></span>. The tactic
+    <span class="inlinecode"><span class="id" title="var">pick_fresh</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> creates a new atom called <span class="inlinecode"><span class="id" title="var">x</span></span> that is fresh
+    for "everything" in the context.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">pick_fresh</span> <span class="id" title="var">x</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">L</span> := <span class="id" title="var">gather_vars</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">pick_fresh_gen</span> <span class="id" title="var">L</span> <span class="id" title="var">x</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The tactic <span class="inlinecode"><span class="id" title="var">apply_fresh</span></span> <span class="inlinecode"><span class="id" title="var">T</span></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> takes a lemma T of the form 
+    <span class="inlinecode"><span class="id" title="keyword">forall</span></span> <span class="inlinecode"><span class="id" title="var">L</span></span> <span class="inlinecode">...,</span> <span class="inlinecode">(<span class="id" title="keyword">forall</span></span> <span class="inlinecode"><span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">\<span class="id" title="var">notin</span></span> <span class="inlinecode"><span class="id" title="var">L</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span>)</span> <span class="inlinecode">-&gt;</span> <span class="inlinecode">...</span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><span class="id" title="var">Q</span>.</span>
+    and applies it by instantiating L as the set of variables 
+    occuring in the context (L is computed using <span class="inlinecode"><span class="id" title="var">gather_vars</span></span>).
+    Moreover, for each subgoal of the form <span class="inlinecode"><span class="id" title="keyword">forall</span></span> <span class="inlinecode"><span class="id" title="var">x</span>,</span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">\<span class="id" title="var">notin</span></span> <span class="inlinecode"><span class="id" title="var">L</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>
+    being generated, the tactic automatically introduces the name <span class="inlinecode"><span class="id" title="var">x</span></span> 
+    as well as the hypothesis <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">\<span class="id" title="var">notin</span></span> <span class="inlinecode"><span class="id" title="var">L</span></span>.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Tactic Notation</span> "apply_fresh" <span class="id" title="keyword">constr</span>(<span class="id" title="var">T</span>) "as" <span class="id" title="var">ident</span>(<span class="id" title="var">x</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">apply_fresh_base</span> <span class="id" title="var">T</span> <span class="id" title="var">gather_vars</span> <span class="id" title="var">x</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The tactic <span class="inlinecode"><span class="id" title="var">apply_fresh</span>*</span> <span class="inlinecode"><span class="id" title="var">T</span></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> is the same as 
+    <span class="inlinecode"><span class="id" title="var">apply_fresh</span></span> <span class="inlinecode"><span class="id" title="var">T</span></span> <span class="inlinecode"><span class="id" title="keyword">as</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> except that it calls <span class="inlinecode"><span class="id" title="tactic">intuition</span></span> <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
+    subsequently. It is also possible to call <span class="inlinecode"><span class="id" title="var">apply_fresh</span></span>
+    without specifying the name that should be used.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Tactic Notation</span> "apply_fresh" "*" <span class="id" title="keyword">constr</span>(<span class="id" title="var">T</span>) "as" <span class="id" title="var">ident</span>(<span class="id" title="var">x</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">apply_fresh</span> <span class="id" title="var">T</span> <span class="id" title="keyword">as</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">auto</span>*.<br/>
+<span class="id" title="keyword">Tactic Notation</span> "apply_fresh" <span class="id" title="keyword">constr</span>(<span class="id" title="var">T</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">apply_fresh_base</span> <span class="id" title="var">T</span> <span class="id" title="var">gather_vars</span> <span class="id" title="var">ltac_no_arg</span>.<br/>
+<span class="id" title="keyword">Tactic Notation</span> "apply_fresh" "*" <span class="id" title="keyword">constr</span>(<span class="id" title="var">T</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">apply_fresh</span> <span class="id" title="var">T</span>; <span class="id" title="var">auto_star</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab13"></a><h2 class="section">Automation</h2>
+
+<div class="paragraph"> </div>
+
+ Automation is crucial for avoiding to have hundreds of subgoals to
+    handle by hand. For the tactics <span class="inlinecode"><span class="id" title="tactic">auto</span></span> and <span class="inlinecode"><span class="id" title="tactic">eauto</span></span> to be able to
+    derive proof automatically, we need to give explicitely the list of
+    lemmas that the proof search algorithm should try to exploit.
+    The command <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Resolve</span></span> <span class="inlinecode"><span class="id" title="var">lemma</span></span> adds a given lemma to the database
+    of proof search. The command <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Constructors</span></span> <span class="inlinecode"><span class="id" title="var">ind</span></span> is equivalent
+    to invoking <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Resolve</span></span> on all of the constructors of the inductive
+    type <span class="inlinecode"><span class="id" title="var">ind</span></span>. We use <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Constructors</span></span> for all our inductively-defined
+    predicates.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Hint Constructors</span> <span class="id" title="var">term</span> <span class="id" title="var">value</span> <span class="id" title="tactic">red</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab14"></a><h2 class="section">Axiomatization of the infrastructure</h2>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Module</span> <span class="id" title="var">AxiomatizedVersion</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+At the point, we introduce two simple axioms and skip the many
+    uninteresting auxiliary lemmas that would be required to prove them.
+
+<div class="paragraph"> </div>
+
+    The first axiom states that substitution for a variable <span class="inlinecode"><span class="id" title="var">x</span></span> 
+    commutes with the operation of opening with another variable <span class="inlinecode"><span class="id" title="var">y</span></span>.
+
+<div class="paragraph"> </div>
+
+    The second axiom states that the opening of a term <span class="inlinecode"><span class="id" title="var">t</span></span> with a 
+    term <span class="inlinecode"><span class="id" title="var">u</span></span> can be decomposed in two steps: first opening <span class="inlinecode"><span class="id" title="var">t</span></span> with
+    a variable <span class="inlinecode"><span class="id" title="var">x</span></span>, and second substituting <span class="inlinecode"><span class="id" title="var">u</span></span> for <span class="inlinecode"><span class="id" title="var">x</span></span>.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Axiom</span> <span class="id" title="var">subst_open_var</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">u</span> <span class="id" title="var">t</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">y</span> &lt;&gt; <span class="id" title="var">x</span> -&gt; <span class="id" title="var">term</span> <span class="id" title="var">u</span> -&gt;<br/>
+&nbsp;&nbsp;([<span class="id" title="var">x</span> ~&gt; <span class="id" title="var">u</span>]<span class="id" title="var">t</span>) ^ <span class="id" title="var">y</span> = [<span class="id" title="var">x</span> ~&gt; <span class="id" title="var">u</span>] (<span class="id" title="var">t</span> ^ <span class="id" title="var">y</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Axiom</span> <span class="id" title="var">subst_intro</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span>, <br/>
+&nbsp;&nbsp;<span class="id" title="var">x</span> \<span class="id" title="var">notin</span> (<span class="id" title="var">fv</span> <span class="id" title="var">t</span>) -&gt; <span class="id" title="var">term</span> <span class="id" title="var">u</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id" title="var">t</span> ^^ <span class="id" title="var">u</span> = [<span class="id" title="var">x</span> ~&gt; <span class="id" title="var">u</span>](<span class="id" title="var">t</span> ^ <span class="id" title="var">x</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+In order to focus our complete attention on the interesting proofs
+    first, we add a meta-axiom to tell Coq that it should admit any
+    subgoal related to well-formedness, i.e., any goal of the form
+    <span class="inlinecode"><span class="id" title="var">term</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> or <span class="inlinecode"><span class="id" title="var">ok</span></span> <span class="inlinecode"><span class="id" title="var">E</span></span>. We will remove these axioms later on.
+    This meta-axiom takes the form of a hint whose action is <span class="inlinecode"><span class="id" title="var">skip</span></span>.
+    This hint will be triggered whenever we call <span class="inlinecode"><span class="id" title="tactic">auto</span></span>. The <span class="inlinecode"><span class="id" title="var">skip</span></span>
+    tactics simply admits the current goal. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Local Hint Extern</span> 1 (<span class="id" title="var">term</span> <span class="id" title="var">_</span>) =&gt; <span class="id" title="var">skip</span>.<br/>
+<span class="id" title="keyword">Local Hint Extern</span> 1 (<span class="id" title="var">ok</span> <span class="id" title="var">_</span>) =&gt; <span class="id" title="var">skip</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+It might also be useful to add an extra meta-axiom, to get rid of
+    all the freshness-related subgoals. We do not need here, though. 
+
+<div class="paragraph"> </div>
+
+    <span class="inlinecode"><span class="id" title="keyword">Hint</span></span> <span class="inlinecode"><span class="id" title="keyword">Extern</span></span> <span class="inlinecode">1</span> <span class="inlinecode">(<span class="id" title="var">_</span></span> <span class="inlinecode">\<span class="id" title="var">notin</span></span> <span class="inlinecode"><span class="id" title="var">_</span>)</span> <span class="inlinecode">=&gt;</span> <span class="inlinecode"><span class="id" title="var">skip</span></span>
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab15"></a><h1 class="section">Proofs</h1>
+
+<div class="paragraph"> </div>
+
+ Weakening states that if an expression is typeable in some
+    environment, then it is typeable in any well-formed extension of
+    that environment.  This property is needed to prove the
+    substitution lemma.
+
+<div class="paragraph"> </div>
+
+    As stated below, this lemma is not directly proveable.  The natural
+    way to try proving this lemma proceeds by induction on the typing
+    derivation for <span class="inlinecode"><span class="id" title="var">t</span></span>.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">typing_weaken_0</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">E</span> <span class="id" title="var">F</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span>,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">E</span> |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span> -&gt; <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">ok</span> (<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span>) |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typ</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">Typ</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">Ok</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_var</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">apply_fresh</span>* <span class="id" title="var">typing_abs</span> <span class="id" title="keyword">as</span> <span class="id" title="var">y</span>. <span class="id" title="var">Admitted</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We are stuck in the <span class="inlinecode"><span class="id" title="var">typing_abs</span></span> case because the induction
+    hypothesis <span class="inlinecode"><span class="id" title="var">H0</span></span> applies only when we weaken the environment at its
+    head.  In this case, however, we need to weaken the environment in
+    the middle; compare the conclusion at the point where we are stuck
+    to the hypothesis <span class="inlinecode"><span class="id" title="var">H</span></span>, which comes from the given typing derivation.
+
+<div class="paragraph"> </div>
+
+    We can obtain a more useful induction hypothesis by changing the
+    statement to insert new bindings into the middle of the
+    environment, instead of at the head.  However, the proof still
+    gets stuck, as can be seen by examining each of the cases in
+    the proof below. 
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">typing_weaken_2</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">G</span> <span class="id" title="var">E</span> <span class="id" title="var">F</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span>,<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">G</span>) |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span> -&gt; <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">ok</span> (<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span> &amp; <span class="id" title="var">G</span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span> &amp; <span class="id" title="var">G</span>) |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typ</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">gen_eq</span> <span class="id" title="var">H</span>: (<span class="id" title="var">E</span> &amp; <span class="id" title="var">G</span>). <span class="id" title="var">gen</span> <span class="id" title="var">G</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Typ</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">G</span> <span class="id" title="var">EQ</span> <span class="id" title="var">Ok</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_var</span>. <span class="id" title="tactic">apply</span>* <span class="id" title="var">binds_weaken</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">L</span> := <span class="id" title="var">gather_vars</span> <span class="id" title="tactic">in</span> <span class="id" title="var">sets</span> <span class="id" title="var">L'</span>: <span class="id" title="var">L</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (@<span class="id" title="var">typing_abs</span> <span class="id" title="var">L'</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">y</span> <span class="id" title="var">Fry</span>. <span class="id" title="tactic">subst</span> <span class="id" title="var">L'</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- <span class="id" title="var">concat_assoc</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">auto</span>. &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">concat_assoc</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">concat_assoc</span>. <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_app</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Using the tactic <span class="inlinecode"><span class="id" title="var">apply_fresh</span></span> introduced earlier, as well as
+    the tactic <span class="inlinecode"><span class="id" title="var">apply_ih_bind</span></span> which is specialized for applying an
+    induction hypothesis up to rewriting of associativity in contexts,
+    we obtain a nice and short proof. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">typing_weaken</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">G</span> <span class="id" title="var">E</span> <span class="id" title="var">F</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span>,<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">G</span>) |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span> -&gt; <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">ok</span> (<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span> &amp; <span class="id" title="var">G</span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span> &amp; <span class="id" title="var">G</span>) |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typ</span>. <span class="id" title="var">gen_eq</span> <span class="id" title="var">H</span>: (<span class="id" title="var">E</span> &amp; <span class="id" title="var">G</span>). <span class="id" title="var">gen</span> <span class="id" title="var">G</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Typ</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">G</span> <span class="id" title="var">EQ</span> <span class="id" title="var">Ok</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_var</span>. <span class="id" title="tactic">apply</span>* <span class="id" title="var">binds_weaken</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">apply_fresh</span>* <span class="id" title="var">typing_abs</span> <span class="id" title="keyword">as</span> <span class="id" title="var">y</span>. <span class="id" title="var">apply_ih_bind</span>* <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_app</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Proving that typing is preserved by substitution involves very
+    similar techniques. The only non trivial part concerns the case
+    analysis in the variable case. For that, we use the tactics
+    <span class="inlinecode"><span class="id" title="var">binds_get</span></span> and <span class="inlinecode"><span class="id" title="var">binds_cases</span></span> which extract information from
+    <span class="inlinecode"><span class="id" title="var">binds</span></span> hypotheses. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">typing_subst_1</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">F</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span> <span class="id" title="var">z</span> <span class="id" title="var">u</span> <span class="id" title="var">U</span>,<br/>
+&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">z</span> ~ <span class="id" title="var">U</span> &amp; <span class="id" title="var">F</span>) |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id" title="var">E</span> |= <span class="id" title="var">u</span> ~: <span class="id" title="var">U</span> -&gt;<br/>
+&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span>) |= [<span class="id" title="var">z</span> ~&gt; <span class="id" title="var">u</span>]<span class="id" title="var">t</span> ~: <span class="id" title="var">T</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typt</span> <span class="id" title="var">Typu</span>. <span class="id" title="var">gen_eq</span> <span class="id" title="var">G</span>: (<span class="id" title="var">E</span> &amp; <span class="id" title="var">z</span> ~ <span class="id" title="var">U</span> &amp; <span class="id" title="var">F</span>). <span class="id" title="var">gen</span> <span class="id" title="var">F</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Typt</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">G</span> <span class="id" title="var">Equ</span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">case_var</span>. &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">binds_get</span> <span class="id" title="var">H0</span>. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lets</span> <span class="id" title="var">M</span>: (@<span class="id" title="var">typing_weaken</span> <span class="id" title="var">empty</span> <span class="id" title="var">E</span> <span class="id" title="var">G</span> <span class="id" title="var">u</span> <span class="id" title="var">U</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">do</span> 2 <span class="id" title="tactic">rewrite</span> <span class="id" title="var">concat_empty_r</span> <span class="id" title="tactic">in</span> <span class="id" title="var">M</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">M</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">binds_cases</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_var</span>. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_var</span>. &nbsp;&nbsp;<span class="id" title="var">apply_fresh</span> <span class="id" title="var">typing_abs</span> <span class="id" title="keyword">as</span> <span class="id" title="var">y</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span>* <span class="id" title="var">subst_open_var</span>. <span class="id" title="var">apply_ih_bind</span>* <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_app</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+As we have seen in the proof above, specializing lemmas 
+    on empty environments can be quite tedious. Fortunately,
+    the metatheory library includes tactic that greatly helps.
+    Calling <span class="inlinecode"><span class="id" title="var">apply_empty</span></span> <span class="inlinecode"><span class="id" title="var">lemma</span></span> is almost equivalent to calling
+    <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode">(@<span class="id" title="var">lemma</span></span> <span class="inlinecode"><span class="id" title="var">empty</span>)</span> except that it rewrites away the
+    empty environments on the fly. The proof becomes as follows.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">typing_subst</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">F</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span> <span class="id" title="var">z</span> <span class="id" title="var">u</span> <span class="id" title="var">U</span>,<br/>
+&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">z</span> ~ <span class="id" title="var">U</span> &amp; <span class="id" title="var">F</span>) |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id" title="var">E</span> |= <span class="id" title="var">u</span> ~: <span class="id" title="var">U</span> -&gt;<br/>
+&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span>) |= [<span class="id" title="var">z</span> ~&gt; <span class="id" title="var">u</span>]<span class="id" title="var">t</span> ~: <span class="id" title="var">T</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typt</span> <span class="id" title="var">Typu</span>. <span class="id" title="var">gen_eq</span> <span class="id" title="var">G</span>: (<span class="id" title="var">E</span> &amp; <span class="id" title="var">z</span> ~ <span class="id" title="var">U</span> &amp; <span class="id" title="var">F</span>). <span class="id" title="var">gen</span> <span class="id" title="var">F</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Typt</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">G</span> <span class="id" title="var">Equ</span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">case_var</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">binds_get</span> <span class="id" title="var">H0</span>. <span class="id" title="var">apply_empty</span>* <span class="id" title="var">typing_weaken</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">binds_cases</span> <span class="id" title="var">H0</span>; <span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_var</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">apply_fresh</span> <span class="id" title="var">typing_abs</span> <span class="id" title="keyword">as</span> <span class="id" title="var">y</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span>* <span class="id" title="var">subst_open_var</span>. <span class="id" title="var">apply_ih_bind</span>* <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_app</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The proof of preservation appears below.
+    Proof sketch: By induction on the typing derivation for <span class="inlinecode"><span class="id" title="var">t</span></span>.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">typing_var</span></span> case: Variables don't step.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">typing_abs</span></span> case: Abstractions don't step.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">typing_app</span></span> case: By case analysis on how <span class="inlinecode"><span class="id" title="var">t</span></span> steps. The
+        <span class="inlinecode"><span class="id" title="var">eval_beta</span></span> case is interesting, since it follows by the
+        substitution lemma.  The others follow directly from the
+        induction hypotheses. 
+
+</li>
+</ul>
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">preservation_result</span> : <span class="id" title="var">preservation_statement</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typ</span>. <span class="id" title="var">gen</span> <span class="id" title="var">t'</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Typ</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">t'</span> <span class="id" title="var">Red</span>; <span class="id" title="var">inversions</span> <span class="id" title="var">Red</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">inversions</span> <span class="id" title="var">Typ1</span>. <span class="id" title="var">pick_fresh</span> <span class="id" title="var">x</span>. <span class="id" title="tactic">rewrite</span>* (@<span class="id" title="var">subst_intro</span> <span class="id" title="var">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">apply_empty</span>* <span class="id" title="var">typing_subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_app</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_app</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The proof of progress appears below.
+    Proof sketch: By induction on the typing derivation for <span class="inlinecode"><span class="id" title="var">t</span></span>.
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> <span class="inlinecode"><span class="id" title="var">typing_var</span></span> case: Can't happen; the empty environment
+        doesn't bind anything.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">typing_abs</span></span> case: Abstractions are values.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> <span class="inlinecode"><span class="id" title="var">typing_app</span></span> case: Applications reduce.  The result follows
+        from an exhaustive case analysis on whether the two components
+        of the application step or are values and the fact that a
+        value must be an abstraction. 
+
+</li>
+</ul>
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">progress_result</span> : <span class="id" title="var">progress_statement</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typ</span>. <span class="id" title="var">gen_eq</span> <span class="id" title="var">E</span>: (<span class="id" title="var">empty</span>:<span class="id" title="var">ctx</span>). <span class="id" title="var">lets</span> <span class="id" title="var">Typ'</span>: <span class="id" title="var">Typ</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Typ</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">false</span>* <span class="id" title="var">binds_empty_inv</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">left</span>*.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">right</span>. <span class="id" title="tactic">destruct</span>~ <span class="id" title="var">IHTyp1</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">Val1</span> | [<span class="id" title="var">t1'</span> <span class="id" title="var">Red1</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span>~ <span class="id" title="var">IHTyp2</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">Val2</span> | [<span class="id" title="var">t2'</span> <span class="id" title="var">Red2</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">inversions</span> <span class="id" title="var">Typ1</span>; <span class="id" title="var">inversions</span> <span class="id" title="var">Val1</span>. <span class="id" title="tactic">exists</span>* (<span class="id" title="var">t0</span> ^^ <span class="id" title="var">t2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span>* (<span class="id" title="var">trm_app</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2'</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span>* (<span class="id" title="var">trm_app</span> <span class="id" title="var">t1'</span> <span class="id" title="var">t2</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">AxiomatizedVersion</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab16"></a><h1 class="section">Removing all axioms</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Module</span> <span class="id" title="var">CompleteVersion</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+At this point we come back to the infrastructure part and try
+    to prove all remaining axioms and meta-axioms. We will need to
+    re-check all our proofs. This is usually done in-place in the
+    file, however in this tutorial we have copy-pasted all the proofs.
+
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab17"></a><h2 class="section">Proving the two axioms</h2>
+
+<div class="paragraph"> </div>
+
+ We first set up four lemmas, and then we can prove our two axioms. 
+<div class="paragraph"> </div>
+
+ The first lemma is a technical auxiliary lemma which do not 
+    want and do not need to read. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">open_rec_term_core</span> :<span class="id" title="keyword">forall</span> <span class="id" title="var">t</span> <span class="id" title="var">j</span> <span class="id" title="var">v</span> <span class="id" title="var">i</span> <span class="id" title="var">u</span>, <span class="id" title="var">i</span> &lt;&gt; <span class="id" title="var">j</span> -&gt;<br/>
+&nbsp;&nbsp;{<span class="id" title="var">j</span> ~&gt; <span class="id" title="var">v</span>}<span class="id" title="var">t</span> = {<span class="id" title="var">i</span> ~&gt; <span class="id" title="var">u</span>}({<span class="id" title="var">j</span> ~&gt; <span class="id" title="var">v</span>}<span class="id" title="var">t</span>) -&gt; <span class="id" title="var">t</span> = {<span class="id" title="var">i</span> ~&gt; <span class="id" title="var">u</span>}<span class="id" title="var">t</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">t</span>; <span class="id" title="var">introv</span> <span class="id" title="var">Neq</span> <span class="id" title="var">Equ</span>; <span class="id" title="var">simpls</span>; <span class="id" title="tactic">inversion</span>* <span class="id" title="var">Equ</span>; <span class="id" title="var">fequals</span>*.<br/>
+&nbsp;&nbsp;<span class="id" title="var">case_nat</span>*. <span class="id" title="var">case_nat</span>*.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Substitution on indices is identity on well-formed terms. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">open_rec_term</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">term</span> <span class="id" title="var">t</span> -&gt; <span class="id" title="keyword">forall</span> <span class="id" title="var">k</span>, <span class="id" title="var">t</span> = {<span class="id" title="var">k</span> ~&gt; <span class="id" title="var">u</span>}<span class="id" title="var">t</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> 1; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="var">fequals</span>*. <span class="id" title="var">unfolds</span> <span class="id" title="var">open</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">pick_fresh</span> <span class="id" title="var">x</span>. <span class="id" title="tactic">apply</span>* (@<span class="id" title="var">open_rec_term_core</span> <span class="id" title="var">t1</span> 0 (<span class="id" title="var">trm_fvar</span> <span class="id" title="var">x</span>)).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Substitution for a fresh name is identity. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">subst_fresh</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span>, <br/>
+&nbsp;&nbsp;<span class="id" title="var">x</span> \<span class="id" title="var">notin</span> <span class="id" title="var">fv</span> <span class="id" title="var">t</span> -&gt;  [<span class="id" title="var">x</span> ~&gt; <span class="id" title="var">u</span>] <span class="id" title="var">t</span> = <span class="id" title="var">t</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">t</span>; <span class="id" title="var">simpls</span>; <span class="id" title="var">fequals</span>*. <span class="id" title="var">case_var</span>*. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Substitution distributes on the open operation. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">subst_open</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">u</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2</span>, <span class="id" title="var">term</span> <span class="id" title="var">u</span> -&gt; <br/>
+&nbsp;&nbsp;[<span class="id" title="var">x</span> ~&gt; <span class="id" title="var">u</span>] (<span class="id" title="var">t1</span> ^^ <span class="id" title="var">t2</span>) = ([<span class="id" title="var">x</span> ~&gt; <span class="id" title="var">u</span>]<span class="id" title="var">t1</span>) ^^ ([<span class="id" title="var">x</span> ~&gt; <span class="id" title="var">u</span>]<span class="id" title="var">t2</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <span class="id" title="var">open</span>. <span class="id" title="tactic">generalize</span> 0.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">t1</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="var">fequals</span>*.<br/>
+&nbsp;&nbsp;<span class="id" title="var">case_nat</span>*. <span class="id" title="var">case_var</span>*. <span class="id" title="tactic">apply</span>* <span class="id" title="var">open_rec_term</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Substitution and open_var for distinct names commute. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">subst_open_var</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">u</span> <span class="id" title="var">t</span>, <span class="id" title="var">y</span> &lt;&gt; <span class="id" title="var">x</span> -&gt; <span class="id" title="var">term</span> <span class="id" title="var">u</span> -&gt;<br/>
+&nbsp;&nbsp;([<span class="id" title="var">x</span> ~&gt; <span class="id" title="var">u</span>]<span class="id" title="var">t</span>) ^ <span class="id" title="var">y</span> = [<span class="id" title="var">x</span> ~&gt; <span class="id" title="var">u</span>] (<span class="id" title="var">t</span> ^ <span class="id" title="var">y</span>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="var">introv</span> <span class="id" title="var">Neq</span> <span class="id" title="var">Wu</span>. <span class="id" title="tactic">rewrite</span>* <span class="id" title="var">subst_open</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="var">case_var</span>*. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Opening up an abstraction of body <span class="inlinecode"><span class="id" title="var">t</span></span> with a term <span class="inlinecode"><span class="id" title="var">u</span></span> is the same as opening
+  up the abstraction with a fresh name <span class="inlinecode"><span class="id" title="var">x</span></span> and then substituting <span class="inlinecode"><span class="id" title="var">u</span></span> for <span class="inlinecode"><span class="id" title="var">x</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">subst_intro</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span>, <br/>
+&nbsp;&nbsp;<span class="id" title="var">x</span> \<span class="id" title="var">notin</span> (<span class="id" title="var">fv</span> <span class="id" title="var">t</span>) -&gt; <span class="id" title="var">term</span> <span class="id" title="var">u</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id" title="var">t</span> ^^ <span class="id" title="var">u</span> = [<span class="id" title="var">x</span> ~&gt; <span class="id" title="var">u</span>](<span class="id" title="var">t</span> ^ <span class="id" title="var">x</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Fr</span> <span class="id" title="var">Wu</span>. <span class="id" title="tactic">rewrite</span>* <span class="id" title="var">subst_open</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span>* <span class="id" title="var">subst_fresh</span>. <span class="id" title="tactic">simpl</span>. <span class="id" title="var">case_var</span>*.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab18"></a><h2 class="section">Preservation of local closure</h2>
+
+<div class="paragraph"> </div>
+
+ The goal of this section is to set up the appropriate lemmas 
+    for proving goals of the form <span class="inlinecode"><span class="id" title="var">term</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>. First, we defined a
+    predicate capturing that a term <span class="inlinecode"><span class="id" title="var">t</span></span> is the body of a locally
+    closed abstraction. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">body</span> <span class="id" title="var">t</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exists</span> <span class="id" title="var">L</span>, <span class="id" title="keyword">forall</span> <span class="id" title="var">x</span>, <span class="id" title="var">x</span> \<span class="id" title="var">notin</span> <span class="id" title="var">L</span> -&gt; <span class="id" title="var">term</span> (<span class="id" title="var">t</span> ^ <span class="id" title="var">x</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We then show how to introduce and eliminate <span class="inlinecode"><span class="id" title="var">body</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">term_abs_to_body</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">t1</span>, <br/>
+&nbsp;&nbsp;<span class="id" title="var">term</span> (<span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>) -&gt; <span class="id" title="var">body</span> <span class="id" title="var">t1</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <span class="id" title="var">body</span>. <span class="id" title="tactic">inversion</span>* <span class="id" title="var">H</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">body_to_term_abs</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">t1</span>, <br/>
+&nbsp;&nbsp;<span class="id" title="var">body</span> <span class="id" title="var">t1</span> -&gt; <span class="id" title="var">term</span> (<span class="id" title="var">trm_abs</span> <span class="id" title="var">t1</span>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">inversion</span>* <span class="id" title="var">H</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">term_abs_to_body</span> <span class="id" title="var">body_to_term_abs</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We prove that terms are stable by substitution 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">subst_term</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">t</span> <span class="id" title="var">z</span> <span class="id" title="var">u</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">term</span> <span class="id" title="var">u</span> -&gt; <span class="id" title="var">term</span> <span class="id" title="var">t</span> -&gt; <span class="id" title="var">term</span> ([<span class="id" title="var">z</span> ~&gt; <span class="id" title="var">u</span>]<span class="id" title="var">t</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> 2; <span class="id" title="var">simpls</span>*.<br/>
+&nbsp;&nbsp;<span class="id" title="var">case_var</span>*.<br/>
+&nbsp;&nbsp;<span class="id" title="var">apply_fresh</span> <span class="id" title="var">term_abs</span>. <span class="id" title="tactic">rewrite</span>* <span class="id" title="var">subst_open_var</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">subst_term</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We prove that opening a body with a term gives a term 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">open_term</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">body</span> <span class="id" title="var">t</span> -&gt; <span class="id" title="var">term</span> <span class="id" title="var">u</span> -&gt; <span class="id" title="var">term</span> (<span class="id" title="var">t</span> ^^ <span class="id" title="var">u</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span>. <span class="id" title="var">pick_fresh</span> <span class="id" title="var">y</span>. <span class="id" title="tactic">rewrite</span>* (@<span class="id" title="var">subst_intro</span> <span class="id" title="var">y</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Hint Resolve</span> <span class="id" title="var">open_term</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab19"></a><h2 class="section">Regularity of relations</h2>
+
+<div class="paragraph"> </div>
+
+ The last step to set up the infrastructure consists in proving
+    that relations are "regular". For example, a typing relation can 
+    hold only if the environment has no duplicated keys and the term 
+    involved is locally-closed. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">typing_regular</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">E</span> <span class="id" title="var">e</span> <span class="id" title="var">T</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">typing</span> <span class="id" title="var">E</span> <span class="id" title="var">e</span> <span class="id" title="var">T</span> -&gt; <span class="id" title="var">ok</span> <span class="id" title="var">E</span> /\ <span class="id" title="var">term</span> <span class="id" title="var">e</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">induction</span>* <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">pick_fresh</span> <span class="id" title="var">y</span>. <span class="id" title="var">forwards</span>~ : (<span class="id" title="var">H0</span> <span class="id" title="var">y</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Similarly, the value predicate only holds on locally-closed terms. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">value_regular</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">e</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">value</span> <span class="id" title="var">e</span> -&gt; <span class="id" title="var">term</span> <span class="id" title="var">e</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">induction</span> 1; <span class="id" title="tactic">auto</span>*. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+A reduction relation only holds on pairs of locally-closed terms. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">red_regular</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">e</span> <span class="id" title="var">e'</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">red</span> <span class="id" title="var">e</span> <span class="id" title="var">e'</span> -&gt; <span class="id" title="var">term</span> <span class="id" title="var">e</span> /\ <span class="id" title="var">term</span> <span class="id" title="var">e'</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">induction</span> 1; <span class="id" title="tactic">auto</span>* <span class="id" title="var">value_regular</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The strength of automation comes from the following custom hints.
+    They are easy to set up because the follow a very regular pattern.
+    These hints indicate that to prove a goal of the form <span class="inlinecode"><span class="id" title="var">ok</span></span> <span class="inlinecode"><span class="id" title="var">E</span></span>,
+    it suffices to find in the goal an hypothesis of the form
+    <span class="inlinecode"><span class="id" title="var">typing</span></span> <span class="inlinecode"><span class="id" title="var">E</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">T</span></span> and to exploit the regularity lemma <span class="inlinecode"><span class="id" title="var">typing_regular</span></span>
+    to prove the goal. Similarly, properties of the form <span class="inlinecode"><span class="id" title="var">term</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span>
+    can be extracted out of typing or reduction or value judgments.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Hint Extern</span> 1 (<span class="id" title="var">ok</span> ?<span class="id" title="var">E</span>) =&gt;<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">H</span>: <span class="id" title="var">typing</span> <span class="id" title="var">E</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">apply</span> (<span class="id" title="var">proj1</span> (<span class="id" title="var">typing_regular</span> <span class="id" title="var">H</span>))<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Hint Extern</span> 1 (<span class="id" title="var">term</span> ?<span class="id" title="var">t</span>) =&gt;<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">H</span>: <span class="id" title="var">typing</span> <span class="id" title="var">_</span> <span class="id" title="var">t</span> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">apply</span> (<span class="id" title="var">proj2</span> (<span class="id" title="var">typing_regular</span> <span class="id" title="var">H</span>))<br/>
+&nbsp;&nbsp;| <span class="id" title="var">H</span>: <span class="id" title="tactic">red</span> <span class="id" title="var">t</span> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">apply</span> (<span class="id" title="var">proj1</span> (<span class="id" title="var">red_regular</span> <span class="id" title="var">H</span>))<br/>
+&nbsp;&nbsp;| <span class="id" title="var">H</span>: <span class="id" title="tactic">red</span> <span class="id" title="var">_</span> <span class="id" title="var">t</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">apply</span> (<span class="id" title="var">proj2</span> (<span class="id" title="var">red_regular</span> <span class="id" title="var">H</span>))<br/>
+&nbsp;&nbsp;| <span class="id" title="var">H</span>: <span class="id" title="var">value</span> <span class="id" title="var">t</span> |- <span class="id" title="var">_</span> =&gt; <span class="id" title="tactic">apply</span> (<span class="id" title="var">value_regular</span> <span class="id" title="var">H</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab20"></a><h2 class="section">Checking that the main proofs still type-check</h2>
+
+<div class="paragraph"> </div>
+
+ We conclude our development by showing that, with the appropriate
+    hints being set up, we can recompile our proofs without changing 
+    any single character in them.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">typing_weaken</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">G</span> <span class="id" title="var">E</span> <span class="id" title="var">F</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span>,<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">G</span>) |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span> -&gt; <br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">ok</span> (<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span> &amp; <span class="id" title="var">G</span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span> &amp; <span class="id" title="var">G</span>) |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typ</span>. <span class="id" title="var">gen_eq</span> <span class="id" title="var">H</span>: (<span class="id" title="var">E</span> &amp; <span class="id" title="var">G</span>). <span class="id" title="var">gen</span> <span class="id" title="var">G</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Typ</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">G</span> <span class="id" title="var">EQ</span> <span class="id" title="var">Ok</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_var</span>. <span class="id" title="tactic">apply</span>* <span class="id" title="var">binds_weaken</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">apply_fresh</span>* <span class="id" title="var">typing_abs</span> <span class="id" title="keyword">as</span> <span class="id" title="var">y</span>. <span class="id" title="var">apply_ih_bind</span>* <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_app</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">typing_subst</span> : <span class="id" title="keyword">forall</span> <span class="id" title="var">F</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span> <span class="id" title="var">z</span> <span class="id" title="var">u</span> <span class="id" title="var">U</span>,<br/>
+&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">z</span> ~ <span class="id" title="var">U</span> &amp; <span class="id" title="var">F</span>) |= <span class="id" title="var">t</span> ~: <span class="id" title="var">T</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id" title="var">E</span> |= <span class="id" title="var">u</span> ~: <span class="id" title="var">U</span> -&gt;<br/>
+&nbsp;&nbsp;(<span class="id" title="var">E</span> &amp; <span class="id" title="var">F</span>) |= [<span class="id" title="var">z</span> ~&gt; <span class="id" title="var">u</span>]<span class="id" title="var">t</span> ~: <span class="id" title="var">T</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typt</span> <span class="id" title="var">Typu</span>. <span class="id" title="var">gen_eq</span> <span class="id" title="var">G</span>: (<span class="id" title="var">E</span> &amp; <span class="id" title="var">z</span> ~ <span class="id" title="var">U</span> &amp; <span class="id" title="var">F</span>). <span class="id" title="var">gen</span> <span class="id" title="var">F</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Typt</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">G</span> <span class="id" title="var">Equ</span>; <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">case_var</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">binds_get</span> <span class="id" title="var">H0</span>. <span class="id" title="var">apply_empty</span>* <span class="id" title="var">typing_weaken</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">binds_cases</span> <span class="id" title="var">H0</span>; <span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_var</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">apply_fresh</span> <span class="id" title="var">typing_abs</span> <span class="id" title="keyword">as</span> <span class="id" title="var">y</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span>* <span class="id" title="var">subst_open_var</span>. <span class="id" title="var">apply_ih_bind</span>* <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_app</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">preservation_result</span> : <span class="id" title="var">preservation_statement</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typ</span>. <span class="id" title="var">gen</span> <span class="id" title="var">t'</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Typ</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">t'</span> <span class="id" title="var">Red</span>; <span class="id" title="var">inversions</span> <span class="id" title="var">Red</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">inversions</span> <span class="id" title="var">Typ1</span>. <span class="id" title="var">pick_fresh</span> <span class="id" title="var">x</span>. <span class="id" title="tactic">rewrite</span>* (@<span class="id" title="var">subst_intro</span> <span class="id" title="var">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">apply_empty</span>* <span class="id" title="var">typing_subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_app</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>* <span class="id" title="var">typing_app</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">progress_result</span> : <span class="id" title="var">progress_statement</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">introv</span> <span class="id" title="var">Typ</span>. <span class="id" title="var">gen_eq</span> <span class="id" title="var">E</span>: (<span class="id" title="var">empty</span>:<span class="id" title="var">ctx</span>). <span class="id" title="var">lets</span> <span class="id" title="var">Typ'</span>: <span class="id" title="var">Typ</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Typ</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">false</span>* <span class="id" title="var">binds_empty_inv</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">left</span>*.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">right</span>. <span class="id" title="tactic">destruct</span>~ <span class="id" title="var">IHTyp1</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">Val1</span> | [<span class="id" title="var">t1'</span> <span class="id" title="var">Red1</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span>~ <span class="id" title="var">IHTyp2</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">Val2</span> | [<span class="id" title="var">t2'</span> <span class="id" title="var">Red2</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">inversions</span> <span class="id" title="var">Typ1</span>; <span class="id" title="var">inversions</span> <span class="id" title="var">Val1</span>. <span class="id" title="tactic">exists</span>* (<span class="id" title="var">t0</span> ^^ <span class="id" title="var">t2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span>* (<span class="id" title="var">trm_app</span> <span class="id" title="var">t1</span> <span class="id" title="var">t2'</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exists</span>* (<span class="id" title="var">trm_app</span> <span class="id" title="var">t1'</span> <span class="id" title="var">t2</span>).<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">CompleteVersion</span>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

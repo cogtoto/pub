@@ -92,7 +92,6 @@ nous verrons qu'il permet d'exprimer toutes les fonctions calculables. Sa \texti
 de calcul est similaire aux machines de Turing ou aux fonctions $\mu$-récursives de Gödel.
 Nous l'étudierons en détails.
 
-
 \vspace{0.3cm}
 L'autre processus de calcul est la résolution. Nous l'utilisons chaque fois que nous devons résoudre
 une équation. En résolvant $x^2+2x-15=0$, nous souhaitons que notre processus 
@@ -100,7 +99,56 @@ soit \textit{complet}, c'est-à-dire que nous calculions
 l'ensemble des valeurs possibles $\{-5; 3\}$.
  Nous étudierons également  ce mécanisme, et en particulier l'algorithme d'unification.
 
+\vspace{0.3cm}
+Enfin, nous aborderons la correspondante bluffante de la programmation fonctionnelle avec la logique. 
+C'est la correspondance de Curry-Howard. \\
+Avec un langage de programmation typé comme OCAML où toute expression a un type, nous pouvons
+rapprocher une expression comme étant  la preuve (ou plutôt une des preuves possibles) de son type. 
+Le mécanisme strict de typage nous assure de la cohérence de l'expression avec son type.
+Nous avons alors le rapprochement suivant:
 
+\begin{center}
+\begin{tabular}[]{|c|c|}
+  \hline
+  expression & preuve \\
+  \hline
+  type & proposition \\
+  \hline
+\end{tabular}
+
+\end{center}
+Nous sommes ici dans une logique constructive, démontrer une proposition revient à exhiber la preuve, c'est-à-dire 
+une expression ayant pour type la proposition.
+Ainsi, le principe du tiers-exclus $P \vee  \neg P$ ne peut être ici démontré.
+
+Le type faux est un type inhabité, donc nous le définissons sans constructeur : \verb+ type faux = | +
+
+Nous pouvons par exemple prouver le théorème du modus tollens : \\
+
+\verb+let modus_tollens (hfq:'q->faux) (hpq:'p->'q) (hp:'p) = hfq (hpq hp)+  \\
+Le type de cette expression est  \verb+('q -> faux) -> ('p -> 'q) -> 'p -> faux+  \\
+
+Dans un langage proposant un système de types plus évolué comme COQ, le faux peut être exprimé 
+par le type $\forall p:P, p$. Ce type est également inhabité. Supposer le faux permettra de démontrer 
+n'importe quelle proposition.
+
+\begin{Verbatim}
+Theorem faux : forall P:Prop, P.
+Admitted.
+
+Theorem absurdité : 1=2.
+Proof.
+    exact (faux (1=2)). 
+Qed.
+\end{Verbatim}
+
+La correspondance de Curry-Howard montre toute son étendue dans le calcul des constructions. 
+Nous montrerons plusieurs exemples significatifs.
+
+\vspace{0.3cm}
+Bonne lecture !
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Le $\lambda$-calcul et la réduction}
 
 \section{Définition, champ lexical et syntaxique}

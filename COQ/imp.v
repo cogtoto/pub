@@ -35,6 +35,7 @@ exact h3.
 Show Proof.
 Qed.
 
+
 Print or.
 
 Theorem or_elim: forall (a b c:Prop), (a->c)->(b->c)->(a\/b)->c.
@@ -68,36 +69,67 @@ Qed.
 
 Print my_I.
 
-Fixpoint somme_1_n (n : nat): nat :=
-  match n with
-  | O => O
-  | S n' => n + somme_1_n n'
-  end.
-
-Compute somme_1_n 5 .
-
-Require Import Omega.
-
-Theorem th_somme_1_n : forall (n:nat), 2*(somme_1_n n) = n*(n+1).
+Theorem equiv1: my_True -> True.
 Proof.
-  intros. simpl. 
-  induction n.
-  assert (som0 : forall (n:nat), somme_1_n n + 0 = somme_1_n n).
-  admit.
-  rewrite -> som0.
-  simpl. reflexivity.
-  
-  assert (soms0 : forall (n:nat), somme_1_n (S n) + 0 = somme_1_n n).
-  admit.
-
-  rewrite -> soms0.
-  simpl.
-  
-
-  assert (sommen1 : somme_1_n (n+1)= n+1+somme_1_n n).
-
-  admit.
-  rewrite -> sommen1.
+unfold my_True.
+intros.
+exact I.
 Qed.
 
-Print th_somme_1_n.
+Print equiv1.
+
+Theorem equiv2: True -> my_True .
+Proof.
+intros.
+unfold my_True.
+exact my_I.
+Qed.
+
+Inductive binaire :=
+| Oui :binaire
+| Non :binaire.
+
+Print binaire_ind.
+
+Print my_I.
+
+Inductive even : nat -> Prop :=
+| ev_0 : even O 
+| ev_SS : forall (n:nat), even n -> even (S (S n)).
+
+
+Print even_ind.
+
+Theorem quatrepair : even 4.
+Proof.
+  Show Proof.
+    apply ev_SS.
+    Show Proof.
+      apply ev_SS.
+      apply ev_0.
+      Show Proof.
+      Qed.
+
+
+Definition add1 : nat->nat. 
+Proof.
+  intros n.
+  Show Proof.
+  apply S.
+
+  Show Proof.
+  exact n.
+  Qed.
+  
+  Theorem faux : forall P:Prop, P.
+  Proof.
+  Admitted.
+
+Compute faux (1=2).
+
+Theorem absurdité : 1=2.
+Proof.
+  exact (faux (1=2)).
+Qed.
+Print absurdité.:w
+:

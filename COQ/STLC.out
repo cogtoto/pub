@@ -1,0 +1,21 @@
+\BOOKMARK [0][-]{chapter.1}{Library STLC}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Definitions}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{Grammars}{section.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.2}{Opening}{section.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.1.3}{Local closure}{section.1.1}% 5
+\BOOKMARK [2][-]{subsection.1.1.4}{Semantics}{section.1.1}% 6
+\BOOKMARK [2][-]{subsection.1.1.5}{Environments}{section.1.1}% 7
+\BOOKMARK [2][-]{subsection.1.1.6}{Typing}{section.1.1}% 8
+\BOOKMARK [2][-]{subsection.1.1.7}{Statement of theorems}{section.1.1}% 9
+\BOOKMARK [1][-]{section.1.2}{Infrastructure}{chapter.1}% 10
+\BOOKMARK [2][-]{subsection.1.2.1}{Free variables}{section.1.2}% 11
+\BOOKMARK [2][-]{subsection.1.2.2}{Substitution}{section.1.2}% 12
+\BOOKMARK [2][-]{subsection.1.2.3}{Tactics}{section.1.2}% 13
+\BOOKMARK [2][-]{subsection.1.2.4}{Automation}{section.1.2}% 14
+\BOOKMARK [2][-]{subsection.1.2.5}{Axiomatization of the infrastructure}{section.1.2}% 15
+\BOOKMARK [1][-]{section.1.3}{Proofs}{chapter.1}% 16
+\BOOKMARK [1][-]{section.1.4}{Removing all axioms}{chapter.1}% 17
+\BOOKMARK [2][-]{subsection.1.4.1}{Proving the two axioms}{section.1.4}% 18
+\BOOKMARK [2][-]{subsection.1.4.2}{Preservation of local closure}{section.1.4}% 19
+\BOOKMARK [2][-]{subsection.1.4.3}{Regularity of relations}{section.1.4}% 20
+\BOOKMARK [2][-]{subsection.1.4.4}{Checking that the main proofs still type-check}{section.1.4}% 21

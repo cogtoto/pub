@@ -18,4 +18,5 @@ let or_comm o = match o with
   | Or_intror o2  -> Or_introl o2
 
 
-
+let modus_tollens (hfq:'q->faux) (hpq:'p->'q) (hp:'p) = 
+hfq (hpq hp) ;;

@@ -6,6 +6,7 @@ Inductive int_list : Set :=
 | cons : forall (x : nat), forall (xs : int_list), int_list
 .
 
+
 Print int_list.
 Print int_list_rec.
 
@@ -15,16 +16,31 @@ match l with
 | cons _ xs => 1 + length xs
 end.
 
-Theorem length_nplus1: forall (n:nat) (l:int_list), length (cons n l) = 1 + length l.
+Theorem toujours_vrai: True.
 Proof.
-intros n l.
-induction l.
-simpl. reflexivity.
-simpl. reflexivity.
+exact I.
 Qed.
 
+Print toujours_vrai.
 
-Print length_nplus1
-.
+Theorem length_nil : length nil = O.
+Proof.
+    simpl.
+    reflexivity.
+Qed.
 
-Print int_list_ind.
+Theorem faux : forall P:Prop, P.
+Proof.
+Admitted.
+
+Theorem absurdité : 1=2.
+Proof.
+    exact (faux (1=2)). 
+Qed.
+
+Print absurdité.
+
+
+    
+
+
