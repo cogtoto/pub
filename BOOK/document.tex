@@ -32,6 +32,12 @@
 \newcommand{\snow}{{\lettersnow S\hspace{0.2cm}}}
 \newcommand{\trans}{\overset{*}{\longrightarrow_{\beta}}}
 
+
+\newcommand*{\textgreek}[1]{%
+	\foreignlanguage{greek}{#1}%
+}
+\newcommand*{\tg}[1]{\textgreek{#1}}
+
 \title{Le calcul \\
      Réduction et résolution \\
 	 Exemples en Scheme, ML et COQ \\ \vspace{1cm}
@@ -102,23 +108,23 @@ l'ensemble des valeurs possibles $\{-5; 3\}$.
 \vspace{0.3cm}
 Enfin, nous aborderons la correspondante bluffante de la programmation fonctionnelle avec la logique. 
 C'est la correspondance de Curry-Howard. \\
-Avec un langage de programmation typé comme OCAML où toute expression a un type, nous pouvons
-rapprocher une expression comme étant  la preuve (ou plutôt une des preuves possibles) de son type. 
-Le mécanisme strict de typage nous assure de la cohérence de l'expression avec son type.
+Avec un langage de programmation typé comme OCAML où tout terme a un type, nous pouvons
+considérer un terme comme étant  la preuve (ou plutôt une des preuves possibles) de son type. 
+Le mécanisme strict de typage nous assure de la cohérence du terme avec son type.
 Nous avons alors le rapprochement suivant:
 
 \begin{center}
 \begin{tabular}[]{|c|c|}
   \hline
-  expression & preuve \\
+  terme & preuve \\
   \hline
   type & proposition \\
   \hline
 \end{tabular}
 
 \end{center}
-Nous sommes ici dans une logique constructive, démontrer une proposition revient à exhiber la preuve, c'est-à-dire 
-une expression ayant pour type la proposition.
+Nous sommes ici dans une logique constructive, démontrer une proposition revient à exhiber une preuve, c'est-à-dire 
+un terme ayant pour type la proposition.
 Ainsi, le principe du tiers-exclus $P \vee  \neg P$ ne peut être ici démontré.
 
 Le type faux est un type inhabité, donc nous le définissons sans constructeur : \verb+ type faux = | +
@@ -142,8 +148,10 @@ Proof.
 Qed.
 \end{Verbatim}
 
-La correspondance de Curry-Howard montre toute son étendue dans le calcul des constructions. 
-Nous montrerons plusieurs exemples significatifs.
+La correspondance de Curry-Howard montre toute son étendue dans le calcul des constructions, qui 
+considère les types comme des termes de premier ordre et permet ainsi de modéliser des types dépendants.
+COQ implémente ce formalisme.
+Nous en montrerons plusieurs exemples significatifs.
 
 \vspace{0.3cm}
 Bonne lecture !
@@ -6042,6 +6050,32 @@ utop #
 	Agneau de Dieu, vois, prends pitié de ce que nous sommes. \\
 \end{verse}
 
+\section{Les fractions continues}
+
+$$
+\frac{32}{7} = 4+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{3}}}
+$$
+
+
+\begin{Verbatim}
+let cont a b =
+  let rec aux acc a b =
+    if a mod b = 0 then
+      a::acc
+    else  aux ((a / b)::acc) b (a mod b)
+  in rev (aux [] a b) ;;
+
+(* 
+[4;1;1:3]
+4+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{3}}}
+*)
+
+let rec print = function
+  | [] -> ""
+  | h::[] -> string_of_int h 
+  | h::t ->  string_of_int(h) ^ " + \\cfrac{1}{" ^ print t ^ "}" ;;
+\end{Verbatim}
+
 \section{L'irrationalité de $\sqrt{2}$}
 \begin{tikzpicture}[scale=2]
 	\draw[->] (0, 0) -- (2, 0) node[right] {$x$};
@@ -6159,7 +6193,8 @@ print_string (f_latex 1 10) ;;
 \end{Verbatim}
 $$3 = 1\sqrt{1 + 2\sqrt{1 + 3\sqrt{1 + 4\sqrt{1 + 5\sqrt{1 + 6\sqrt{1 + 7\sqrt{1 + 8\sqrt{1 + 9\sqrt{1 + 10\sqrt{1 + \ldots}}}}}}}}}}
 $$
-\section{L'alphabet grec. Extraits du nouveau testament}
+\section{Le grec ancien}
+\subsection{L'alphabet grec}
 \[
 \begin{array}{cccccccccccccccccccccccc}
  \alpha & \beta &\gamma &  \delta & \epsilon & \zeta & \eta &\theta & \iota &\kappa &\lambda & \mu & \nu & \xi & o & \pi & \rho & \sigma & \tau & 
@@ -6168,6 +6203,14 @@ $$
  \end{array}
  \]
 
+\subsection{Les mathématiques grecques}
+\begin{tabular}{c | c}
+ j'apprends & \tg{mathano} \\
+ l'étude, la leçon & \tg{to mathema} \\
+ l'étude par excellence & \tg{ta mathematija} \\
+\end{tabular}
+
+\subsection{Extraits du nouveau testament}
  \begin{center}
 \begin{tikzpicture}
   \draw [line width=0.7mm, smooth, tension=1] plot coordinates{(0,0) (1,-0.5) (2.1, 0) (2.5, 0.55)} ;
@@ -6191,7 +6234,6 @@ $$
 
 Eirene umin !
 }
-courtesy of the Greek alphabet
 
 \bibliographystyle{plain}
 \bibliography{book} 
