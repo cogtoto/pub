@@ -1,0 +1,48 @@
+\documentclass[12pt]{report}
+\usepackage[]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% coqdoc -latex test.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{test}{Library }{test}
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Section} \coqdocvar{excluded\_middle}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Variables} \coqdocvar{A} : \coqdockw{Prop}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{il\_n\_est\_pas\_vrai\_que\_le\_tiers\_exclus\_est\_faux}: \ensuremath{\lnot} \ensuremath{\lnot} (\~{}\coqdocvar{A} \ensuremath{\lor} \coqdocvar{A}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{unfold} \coqdocvar{not}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intro} \coqdocvar{H}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply} \coqdocvar{H}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{left}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intro} \coqdocvar{H1}.\coqdoceol
+\coqdocemptyline
+\coqdocindent{1.00em}
+\coqdoctac{apply} \coqdocvar{H}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{right}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqdocvar{excluded\_middle}.\coqdoceol
+\end{coqdoccode}
+\end{document}

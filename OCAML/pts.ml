@@ -40,8 +40,8 @@ type terme =
  | Egal of terme*terme
  (* type True et unique constructeur I, False et fonction d'induction false_ind *)
  | True 
- | False
  | I  
+ | False
  | False_ind of terme*terme (* application de x:False -> terme *)
  | Type (* le type de Nat, Bool et Type *)
 

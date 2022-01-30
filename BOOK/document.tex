@@ -2136,6 +2136,48 @@ let proof_peirce =
 \end{Verbatim}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Ainsi, le tiers-exclus n'est pas démontrable en logique classique. Cependant, on peut
+démontrer en logique intuitionniste qu'il n'est pas vrai que le tiers-exclus soit faux.
+C'est-à-dire que l'on ne peut démontrer $P$, mais $\lnot\ \lnot P$
+
+Voici la démonstration en COQ.
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Section} \coqdocvar{excluded\_middle}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Variables} \coqdocvar{A} : \coqdockw{Prop}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{il\_n\_est\_pas\_vrai\_que\_le\_tiers\_exclus\_est\_faux}: \ensuremath{\lnot} \ensuremath{\lnot} (\~{}\coqdocvar{A} \ensuremath{\lor} \coqdocvar{A}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{unfold} \coqdocvar{not}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intro} \coqdocvar{H}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{apply} \coqdocvar{H}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{left}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{intro} \coqdocvar{H1}.\coqdoceol
+\coqdocemptyline
+\coqdocindent{1.00em}
+\coqdoctac{apply} \coqdocvar{H}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{right}.\coqdoceol
+\coqdocindent{1.00em}
+\coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqdocvar{excluded\_middle}.\coqdoceol
+\end{coqdoccode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
 \chapter{L'interprétation}
 
 \section{Introduction}

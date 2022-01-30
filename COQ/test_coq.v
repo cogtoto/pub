@@ -100,14 +100,98 @@ Qed.
 Print plus_grand.
 Section toto.
 
-Variable A:Prop.
-
-Check A.
-Variable a:A.
-Check a.
 
 Compute 2+2.
 
+Check nat_ind.
 
+Check (fun x:nat => x = x).
+
+Check (O=O).
+Check eq_refl O.
+
+Theorem negaln: forall (n:nat), n=n.
+Proof.
+    intros.
+    induction n.
+    reflexivity.
+    reflexivity.
+Qed.
+
+Print negaln.
+
+Compute (nat_ind (fun n:nat => (n = n)) (eq_refl O) (fun (n:nat) (_ : n=n) => (eq_refl (S n)))).
+  
+
+Check nat_ind.
+
+Theorem nplus0: forall n:nat, n+0 = n.
+Proof.
+    intros.
+    induction n.
+    reflexivity.
+   simpl.
+  rewrite -> IHn.
+  reflexivity.
+Qed.
+
+Print nplus0.
+
+
+Inductive ma_liste : Type :=
+| vide : ma_liste
+| const : forall (x : nat), forall (xs : ma_liste), ma_liste
+.
+
+Definition l1 := const 1 (const 2 (const 3 vide)).
+
+Print l1.
+Print ma_liste_ind.
+
+Inductive bin:Type :=
+| one : bin
+| two : bin
+.
+
+Print bin_ind.
+
+Print nat_ind.
+
+Fixpoint F (P:nat-> Prop) (casdebase: P O) (casrecursif : forall n:nat, (P n -> P( S n))) (n:nat) :=
+    match n with
+    | O =>  casdebase
+    | S k =>  casrecursif k (F P casdebase casrecursif k)
+    end.
     
+ 
+Check F.
+
+
+Fixpoint sum_n (n:nat):= 
+    match n with
+    | O => 0
+    | S k => n + sum_n k
+    end.
+
+Compute sum_n (S (S (S O))).
+
+Theorem sum_n_first_terms: forall (n:nat), sum_n (S n) = (S n) + sum_n n.
+Proof.
+    intros.
+    induction n.
+    simpl.
+    reflexivity.
+
+    rewrite -> IHn.
+    simpl.
+    reflexivity.
+Qed.
+
+
+
+
+Print eq_ind_r.
+
+
+
 
