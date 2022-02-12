@@ -15,3 +15,19 @@ Proof.
 Qed.
 
 End excluded_middle.
+
+Locate "<=".
+Print ex_intro.
+
+Theorem plus_grand : forall n, exists m, m > n.
+Proof.
+	intros.
+	exists (S n).
+	unfold ">".
+	unfold "<".
+	apply le_n.
+Qed.
+
+Print plus_grand.
+
+

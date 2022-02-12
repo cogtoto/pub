@@ -51,18 +51,15 @@ Proof.
 	exact IHe2.
 Qed.
 
-Lemma somme_prolog_o : forall e1, sommeProlog e1 O e1.
-Proof.
-	intro e1.
-	induction e1.
-	apply SommeO.
-	apply SommeS.
+Definition PtoBool (P:Prop) := bool 
+match P with
+| true => I
+| false => end.
 
 
-Theorem somme_deux_entiers' : forall e1 e2 e3, sommeProlog e1 e2 e3 -> e3 = somme e1 e2 .
-intros.
-induction e2.
-rewrite somme_O.
+
+
+
 
 
 
