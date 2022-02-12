@@ -975,6 +975,16 @@ Je ne peux reproduire cela en SCHEME:
   given: 1
 \end{Verbatim}
 
+%% la diagonale de Cantor %%
+Le théorème de Cantor nous dit qu'il n'y a pas de fonction surjective 
+$f: \mathbb{N} \rightarrow ( \mathbb{N} \rightarrow \mathbb{B}) $.
+
+Autrement dit, le cardinal des parties de $\mathbb{N}$ est strictement plus grand que $\mathbb{N}$.
+Démontrons cela.
+
+Soit $f(m,n) = 1$ si $m \in X_n$ et $0$ sinon.
+Considérons la fonction $h(x) = f(x,x)$
+
 \section{\textit{Church} encoding. Les entiers et les booléens en $\lambda$-calcul}
 \subsection{Les entiers \textit{Church} }
 Les entiers peuvent être représenté de la manière suivante:
@@ -2140,6 +2150,9 @@ let proof_peirce =
 Ainsi, le tiers-exclus n'est pas démontrable en logique classique. Cependant, on peut
 démontrer en logique intuitionniste qu'il n'est pas vrai que le tiers-exclus soit faux.
 C'est-à-dire que l'on ne peut démontrer $P$, mais $\lnot\ \lnot P$
+
+Il est surprenant de constater que "nier deux fois" est équivalent à "affirmer" en logique classique, mais est plus
+faible en logique intuitionniste.
 
 Voici la démonstration en COQ.
 

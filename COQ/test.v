@@ -14,4 +14,18 @@ Proof.
   assumption.
 Qed.
 
+Theorem consequentia_mirabilis : ~~ ((~A -> A) -> A). 
+Proof.
+  unfold not.
+  intros.
+  apply H.
+  intro H1.
+  apply H1.
+  intro.
+  apply H.
+  intro.
+  assumption.
+Qed.
+
 End excluded_middle.
+
