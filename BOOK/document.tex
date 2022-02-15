@@ -711,7 +711,7 @@ $$
 $$
 \end{itemize}
 
-\section{La récursivité et le point fixe}
+\section{La récursivité, le point fixe et la diagonale de Cantor}
 
 What else is a loop but a way of representing an endless process in a finite way?
 \cite{god}
@@ -975,6 +975,150 @@ Je ne peux reproduire cela en SCHEME:
   given: 1
 \end{Verbatim}
 
+%% la diagonale de Cantor %%
+Le théorème de Cantor nous dit qu'il n'y a pas de fonction surjective 
+$f: \mathbb{N} \rightarrow ( \mathbb{N} \rightarrow \mathbb{B}) $.
+Autrement dit, le cardinal des parties de $\mathbb{N}$ est strictement plus grand que le cardinal de $\mathbb{N}$.
+Démontrons cela. \\
+Soient $X_0, X_1, \ldots, X_n$ les parties de $\mathbb{N}$  \\
+Soit $f(m,n) = true$ si $m \in X_n$ et $false$ sinon. \\
+Soit $g :\mathbb{B} \rightarrow \mathbb{B}$ la fonction sans point fixe telle que $g(false)=true$ et $g(true)=false$. \\
+Considérons la fonction $h: \mathbb{N} \rightarrow \mathbb{B}$ telle que $h(x) = g(f(x,x))$
+Supposons $f$ surjective donc $\exists a, f(a)= h \Leftrightarrow  f(a,a) = h(a) = g(f(a,a))$ 
+Cela est impossible car $g$ n'admet pas de point fixe par définition.
+
+Ainsi $f$ n'est pas surjective. \qedsymbol
+
+Voici la représentation matricielle de la fonction $f(x,y)$. Les valeurs $true$ et $false$ sont représentées par $1$ et $0$.
+La colonne est la valeur de $x$ et la ligne est la valeur de $y$.
+
+\begin{bmatrix}
+ 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 &  ... &     \\ 
+ \mathbf{1} & 0 & 0 & 1 & 0 & 1 & 0 & 1 &  ... &   X_0 \\
+ 0 & \mathbf{0} & 0 & 1 & 0 & 0 & 0 & 0 &  ... &   X_1 \\
+ 1 & 0 & \mathbf{1} & 1 & 1 & 1 & 1 & 0 &  ... &   X_2 \\
+ 1 & 0 & 0 & \mathbf{1} & 0 & 1 & 0 & 0 &  ... &   X_3 \\
+ 0 & 0 & 0 & 1 & \mathbf{0} & 1 & 0 & 0 &  ... &   X_4 \\
+ 0 & 0 & 0 & 0 & 0 & \mathbf{1} & 0 & 1 &  ... &   X_5 \\
+ 0 & 0 & 0 & 1 & 1 & 0 & \mathbf{1} & 0 &  ... &   X_6 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \mathbf{0} &  ... &   X_7 \\
+   &   &   &   &   & \vdots &  &  &\ddots  \\
+\end{bmatrix}
+$\Rightarrow_{g(f(x,x))}$
+\begin{bmatrix}
+ 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 &  ... &     \\ 
+ \mathbf{0} & 0 & 0 & 1 & 0 & 1 & 0 & 1 &  ... &   X_0 \\
+ 0 & \mathbf{1} & 0 & 1 & 0 & 0 & 0 & 0 &  ... &   X_1 \\
+ 1 & 0 & \mathbf{0} & 1 & 1 & 1 & 1 & 0 &  ... &   X_2 \\
+ 1 & 0 & 0 & \mathbf{0} & 0 & 1 & 0 & 0 &  ... &   X_3 \\
+ 0 & 0 & 0 & 1 & \mathbf{1} & 1 & 0 & 0 &  ... &   X_4 \\
+ 0 & 0 & 0 & 0 & 0 & \mathbf{0} & 0 & 1 &  ... &   X_5 \\
+ 0 & 0 & 0 & 1 & 1 & 0 & \mathbf{0} & 0 &  ... &   X_6 \\
+ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \mathbf{1} &  ... &   X_7 \\
+   &   &   &   &   & \vdots &  &  &\ddots  \\
+\end{bmatrix}
+
+
+\vspace{0.5cm}
+
+Voici la démonstration formelle en COQ.
+\\
+
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{Bool}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Section} \coqdocvar{Cantor}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{negb\_prop} : \coqdockw{\ensuremath{\forall}} \coqdocvar{a}:\coqdocvar{bool}, \coqdocvar{negb} \coqdocvar{a} =\coqdocvar{a} \ensuremath{\rightarrow} \coqdocvar{False}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{intros}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{unfold} \coqdocvar{negb} \coqdoctac{in} \coqdocvar{H}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{induction} \coqdocvar{a}. \coqdoctac{inversion} \coqdocvar{H}. \coqdoctac{inversion} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{surjective} \{\coqdocvar{X}:\coqdockw{Type}\} (\coqdocvar{f} : \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{X}) : \coqdockw{Prop} := \coqdockw{\ensuremath{\forall}} \coqdocvar{y}, \coqdoctac{\ensuremath{\exists}} \coqdocvar{x}, \coqdocvar{f} \coqdocvar{x} = \coqdocvar{y}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{cantor} : \ensuremath{\lnot} \coqdoctac{\ensuremath{\exists}} \coqdocvar{f} : \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{bool}, \coqdocvar{surjective} \coqdocvar{f}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{intros} [\coqdocvar{f} \coqdocvar{SURJ}].\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{pose} (\coqdocvar{g} := \coqdockw{fun} \coqdocvar{b} \ensuremath{\Rightarrow} \coqdocvar{negb} \coqdocvar{b} ).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+soit $h$ la diagonalisation négative de la mort 
+
+\begin{coqdoccode}
+\coqdocindent{2.00em}
+\coqdoctac{pose} (\coqdocvar{h} := \coqdockw{fun} \coqdocvar{x} \ensuremath{\Rightarrow} \coqdocvar{g} (\coqdocvar{f} \coqdocvar{x} \coqdocvar{x})).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+on applique l'hypothèse de surjection de $f$ sur $h$
+
+ \begin{coqdoccode}
+\coqdocindent{2.00em}
+\coqdoctac{destruct} (\coqdocvar{SURJ} \coqdocvar{h}) \coqdockw{as} [\coqdocvar{x} \coqdocvar{B}].\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{assert} (\coqdocvar{C}: \coqdocvar{h} \coqdocvar{x} = \coqdocvar{f} \coqdocvar{x} \coqdocvar{x}).\coqdoceol
+\coqdocindent{2.00em}
+\{\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{rewrite} \coqdocvar{B}. \coqdoctac{reflexivity}.\coqdoceol
+\coqdocindent{2.00em}
+\}\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{unfold} \coqdocvar{h} \coqdoctac{in} \coqdocvar{C}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{unfold} \coqdocvar{g} \coqdoctac{in} \coqdocvar{C}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{apply} \coqdocvar{negb\_prop} \coqdoctac{in} \coqdocvar{C}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqdocvar{Cantor}.\coqdoceol
+\end{coqdoccode}
+
+Que vient faire Cantor sur ce chapitre décrivant les opérateurs de point fixes du $\lambda$-calcul ?
+Le mécanisme de la diagonalisation nous permet de retrouver l'opérateur de point fixe
+ $\lambda g.(\lambda.g(xx))(\lambda.g(xx)$
+Nous pourrons nous reférer à l'ouvrage de Jean-Yves Girard, \textit{Le Point Aveugle}
+\cite{girard}
+
+Voyons cela.
+
+Prenons la fonction identité $f = \lambda x.x$. Considérons cette fonction identité
+pouvant prendre en argument une abstraction et rendant une abstraction pour se rapprocher
+de notre fonction $f$ précédente de type $A \rightarrow (A \rightarrow B)$
+
+Cette fonction est bien surjective. Donc par la contraposée du théorème de Cantor, 
+quel que soit $h$, nous aurons un $a$ tel que  $f a = h$, et ce $a$ pourra être $h$.
+Par diagonalisation : $ f a a = h a = h h $
+
+Considérons $h = \lambda x.g((f x) x)$ pour un terme $g$ quelconque.
+$f$ est la fonction identité, donc $h= \lambda x.g(x x)$
+$$ h h = \lambda x.g(x x) \lambda x.g(x x)$$
+$$ h h = g (h h)$$
+L'opérateur de point fixe est ainsi $Y=\lambda g.(\lambda x.g(x x) \lambda x.g(x x))$.
+Aucun terme n'est donc sans point fixe dans le $\lambda$-calcul à la différence de l'exemple précédent où notre
+fonction de $\mathbb{B} \rightarrow \mathbb{B}$ n'avait pas de point fixe.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\textit{Church} encoding. Les entiers et les booléens en $\lambda$-calcul}
 \subsection{Les entiers \textit{Church} }
 Les entiers peuvent être représenté de la manière suivante:
@@ -2140,6 +2284,9 @@ let proof_peirce =
 Ainsi, le tiers-exclus n'est pas démontrable en logique classique. Cependant, on peut
 démontrer en logique intuitionniste qu'il n'est pas vrai que le tiers-exclus soit faux.
 C'est-à-dire que l'on ne peut démontrer $P$, mais $\lnot\ \lnot P$
+
+Il est surprenant de constater que "nier deux fois" est équivalent à "affirmer" en logique classique, mais est plus
+faible en logique intuitionniste.
 
 Voici la démonstration en COQ.
 

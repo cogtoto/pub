@@ -1,0 +1,127 @@
+\documentclass[12pt]{report}
+\usepackage[]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% coqdoc -latex miniML.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{miniML}{Library }{miniML}
+
+\begin{coqdoccode}
+\end{coqdoccode}
+miniML 
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{String}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Open} \coqdockw{Scope} \coqdocvar{string\_scope}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+représentation des termes 
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{terme} :=\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{Vrai} : \coqdocvar{terme}\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{Faux} : \coqdocvar{terme}\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{Var} : \coqdocvar{string} \ensuremath{\rightarrow} \coqdocvar{terme}\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{Nb} : \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{terme}\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{Et} : \coqdocvar{terme} \ensuremath{\rightarrow} \coqdocvar{terme} \ensuremath{\rightarrow} \coqdocvar{terme} .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{valeur} : \coqdocvar{terme} \ensuremath{\rightarrow} \coqdockw{Prop} := \coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{Nb\_v} : \coqdockw{\ensuremath{\forall}} \coqdocvar{n}:\coqdocvar{nat}, \coqdocvar{valeur} (\coqdocvar{Nb} \coqdocvar{n})\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{Vrai\_v} : \coqdocvar{valeur} \coqdocvar{Vrai}\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{Faux\_va}:  \coqdocvar{valeur} \coqdocvar{Faux}\coqdoceol
+\coqdocnoindent
+.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+représentation de l'environnement \symbol{92}\coqdocvar{Gamma} 
+\begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{env\_init} (\coqdocvar{ident}:\coqdocvar{string}):\coqdocvar{terme} :=\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{match} \coqdocvar{ident} \coqdockw{with}\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} "x" \ensuremath{\Rightarrow} \coqdocvar{Nb} 1\coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} "v" \ensuremath{\Rightarrow} \coqdocvar{Vrai} \coqdoceol
+\coqdocindent{2.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{Faux}\coqdoceol
+\coqdocindent{2.00em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+la sémantique 
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Inductive} \coqdocvar{sem}: \coqdocvar{terme} \ensuremath{\rightarrow} \coqdocvar{terme} \ensuremath{\rightarrow} \coqdockw{Prop}  :=\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{r\_vrai} : \coqdocvar{sem} \coqdocvar{Vrai} \coqdocvar{Vrai}\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{r\_faux} : \coqdocvar{sem} \coqdocvar{Faux} \coqdocvar{Faux}\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{r\_nb} : \coqdockw{\ensuremath{\forall}} \coqdocvar{n}:\coqdocvar{nat}, \coqdocvar{sem} (\coqdocvar{Nb} \coqdocvar{n}) (\coqdocvar{Nb} \coqdocvar{n})\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{r\_var} : \coqdockw{\ensuremath{\forall}} \coqdocvar{x}:\coqdocvar{string}, \coqdocvar{sem} (\coqdocvar{Var} \coqdocvar{x}) (\coqdocvar{env\_init} \coqdocvar{x})\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{r1\_et} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{e1} \coqdocvar{e2}:\coqdocvar{terme}) , \coqdocvar{sem} \coqdocvar{e1} \coqdocvar{Faux}  \ensuremath{\rightarrow} \coqdocvar{sem} (\coqdocvar{Et} \coqdocvar{e1} \coqdocvar{e2}) \coqdocvar{Faux}\coqdoceol
+\coqdocnoindent
+\ensuremath{|} \coqdocvar{r2\_et} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{e1} \coqdocvar{e2} \coqdocvar{v2}:\coqdocvar{terme}) , \coqdocvar{sem} \coqdocvar{e1} \coqdocvar{Vrai}  \ensuremath{\rightarrow} \coqdocvar{sem} \coqdocvar{e2} \coqdocvar{v2} \ensuremath{\rightarrow} \coqdocvar{valeur} \coqdocvar{v2} \ensuremath{\rightarrow} \coqdocvar{sem} (\coqdocvar{Et} \coqdocvar{e1} \coqdocvar{e2}) \coqdocvar{v2}\coqdoceol
+\coqdocnoindent
+.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma}  \coqdocvar{test1} : \coqdocvar{sem} (\coqdocvar{Var} "x") (\coqdocvar{Nb} 1) .\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{r\_var}. \coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Hint Constructors} \coqdocvar{sem} \coqdocvar{valeur} .\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{test3} : \coqdocvar{sem} (\coqdocvar{Et} \coqdocvar{Vrai} \coqdocvar{Faux}) \coqdocvar{Faux} .\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{r2\_et}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{auto}. \coqdoctac{auto}. \coqdoctac{auto}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{test2} : \coqdocvar{sem} (\coqdocvar{Et} \coqdocvar{Vrai} (\coqdocvar{Et} (\coqdocvar{Var} "z") \coqdocvar{Vrai})) \coqdocvar{Faux}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{r2\_et}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{auto}. \coqdoctac{apply} \coqdocvar{r1\_et}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{r\_var}. \coqdoctac{auto}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{test4} : \coqdocvar{sem} (\coqdocvar{Et} \coqdocvar{Vrai} (\coqdocvar{Et} (\coqdocvar{Var} "v") \coqdocvar{Vrai})) \coqdocvar{Vrai}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{r2\_et}. \coqdoctac{repeat} \coqdoctac{auto}. \coqdoctac{apply} \coqdocvar{r2\_et}. \coqdoctac{apply} \coqdocvar{r\_var}. \coqdoctac{auto}. \coqdoctac{auto}. \coqdoctac{auto}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Print} \coqdocvar{test4}.\coqdoceol
+\end{coqdoccode}
+\end{document}

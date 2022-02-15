@@ -1,0 +1,78 @@
+\documentclass[12pt]{report}
+\usepackage[]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% coqdoc -latex cantor.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{cantor}{Library }{cantor}
+
+\begin{coqdoccode}
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{Bool}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Section} \coqdocvar{Cantor}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{negb\_prop} : \coqdockw{\ensuremath{\forall}} \coqdocvar{a}:\coqdocvar{bool}, \coqdocvar{negb} \coqdocvar{a} =\coqdocvar{a} \ensuremath{\rightarrow} \coqdocvar{False}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{intros}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{unfold} \coqdocvar{negb} \coqdoctac{in} \coqdocvar{H}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{induction} \coqdocvar{a}. \coqdoctac{inversion} \coqdocvar{H}. \coqdoctac{inversion} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{surjective} \{\coqdocvar{X}:\coqdockw{Type}\} (\coqdocvar{f} : \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{X}) : \coqdockw{Prop} := \coqdockw{\ensuremath{\forall}} \coqdocvar{y}, \coqdoctac{\ensuremath{\exists}} \coqdocvar{x}, \coqdocvar{f} \coqdocvar{x} = \coqdocvar{y}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{cantor} : \ensuremath{\lnot} \coqdoctac{\ensuremath{\exists}} \coqdocvar{f} : \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{bool}, \coqdocvar{surjective} \coqdocvar{f}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{intros} [\coqdocvar{f} \coqdocvar{SURJ}].\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{pose} (\coqdocvar{g} := \coqdockw{fun} \coqdocvar{b} \ensuremath{\Rightarrow} \coqdocvar{negb} \coqdocvar{b} ).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+soit h la diagonalisation négative de la mort \begin{coqdoccode}
+\coqdocindent{2.00em}
+\coqdoctac{pose} (\coqdocvar{h} := \coqdockw{fun} \coqdocvar{x} \ensuremath{\Rightarrow} \coqdocvar{g} (\coqdocvar{f} \coqdocvar{x} \coqdocvar{x})).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+on applique l'hypothèse de surjection de f sur h \begin{coqdoccode}
+\coqdocindent{2.00em}
+\coqdoctac{destruct} (\coqdocvar{SURJ} \coqdocvar{h}) \coqdockw{as} [\coqdocvar{x} \coqdocvar{B}].\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{assert} (\coqdocvar{C}: \coqdocvar{h} \coqdocvar{x} = \coqdocvar{f} \coqdocvar{x} \coqdocvar{x}).\coqdoceol
+\coqdocindent{2.00em}
+\{\coqdoceol
+\coqdocindent{4.00em}
+\coqdoctac{rewrite} \coqdocvar{B}. \coqdoctac{reflexivity}.\coqdoceol
+\coqdocindent{2.00em}
+\}\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{unfold} \coqdocvar{h} \coqdoctac{in} \coqdocvar{C}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{unfold} \coqdocvar{g} \coqdoctac{in} \coqdocvar{C}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{apply} \coqdocvar{negb\_prop} \coqdoctac{in} \coqdocvar{C}.\coqdoceol
+\coqdocindent{2.00em}
+\coqdoctac{assumption}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{End} \coqdocvar{Cantor}.\coqdoceol
+\end{coqdoccode}
+\end{document}

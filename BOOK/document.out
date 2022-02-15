@@ -5,7 +5,7 @@
 \BOOKMARK [2][-]{subsection.1.1.3}{Impl\351mentation du parsing en mode r\351cursif descendant}{section.1.1}% 5
 \BOOKMARK [1][-]{section.1.2}{Repr\351sentation en ML}{chapter.1}% 6
 \BOOKMARK [1][-]{section.1.3}{La -r\351duction faible avec appel par valeur}{chapter.1}% 7
-\BOOKMARK [1][-]{section.1.4}{La r\351cursivit\351 et le point fixe}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.4}{La r\351cursivit\351, le point fixe et la diagonale de Cantor}{chapter.1}% 8
 \BOOKMARK [1][-]{section.1.5}{Church encoding. Les entiers et les bool\351ens en -calcul}{chapter.1}% 9
 \BOOKMARK [2][-]{subsection.1.5.1}{Les entiers Church }{section.1.5}% 10
 \BOOKMARK [2][-]{subsection.1.5.2}{Les bool\351ens }{section.1.5}% 11

@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2020/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2020)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: document.aux
 The style file: plain.bst
@@ -15,6 +15,8 @@ Warning--empty publisher in baren
 Warning--empty year in baren
 Warning--empty publisher in gide
 Warning--empty year in gide
+Warning--can't use both author and editor fields in girard
+Warning--empty publisher in girard
 Warning--empty publisher in vh
 Warning--empty year in vh
 Warning--empty publisher in lalement
@@ -23,45 +25,45 @@ Warning--empty publisher in poincare
 Warning--empty publisher in WS
 Warning--empty year in WS
 Warning--empty publisher in reflective
-You've used 19 entries,
+You've used 20 entries,
             2118 wiz_defined-function locations,
-            580 strings with 5210 characters,
-and the built_in function-call counts, 4163 in all, are:
-= -- 347
-> -- 145
+            585 strings with 5279 characters,
+and the built_in function-call counts, 4384 in all, are:
+= -- 365
+> -- 152
 < -- 1
-+ -- 63
-- -- 42
-* -- 203
-:= -- 712
-add.period$ -- 50
-call.type$ -- 19
-change.case$ -- 59
++ -- 66
+- -- 44
+* -- 216
+:= -- 749
+add.period$ -- 53
+call.type$ -- 20
+change.case$ -- 62
 chr.to.int$ -- 0
-cite$ -- 35
-duplicate$ -- 224
-empty$ -- 421
-format.name$ -- 42
-if$ -- 872
+cite$ -- 38
+duplicate$ -- 236
+empty$ -- 443
+format.name$ -- 44
+if$ -- 917
 int.to.chr$ -- 0
-int.to.str$ -- 19
-missing$ -- 35
-newline$ -- 91
-num.names$ -- 36
-pop$ -- 170
+int.to.str$ -- 20
+missing$ -- 37
+newline$ -- 96
+num.names$ -- 38
+pop$ -- 178
 preamble$ -- 1
-purify$ -- 58
+purify$ -- 61
 quote$ -- 0
-skip$ -- 115
+skip$ -- 121
 stack$ -- 0
-substring$ -- 97
-swap$ -- 21
+substring$ -- 102
+swap$ -- 23
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 40
-warning$ -- 16
-while$ -- 36
-width$ -- 21
-write$ -- 171
-(There were 18 warnings)
+type$ -- 42
+warning$ -- 18
+while$ -- 38
+width$ -- 22
+write$ -- 180
+(There were 20 warnings)
