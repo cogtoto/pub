@@ -988,10 +988,12 @@ Supposons $f$ surjective donc $\exists a, f(a)= h \Leftrightarrow  f(a,a) = h(a)
 Cela est impossible car $g$ n'admet pas de point fixe par définition.
 
 Ainsi $f$ n'est pas surjective. \qedsymbol
+\vspace{0.5cm}
 
 Voici la représentation matricielle de la fonction $f(x,y)$. Les valeurs $true$ et $false$ sont représentées par $1$ et $0$.
 La colonne est la valeur de $x$ et la ligne est la valeur de $y$.
 
+\[
 \begin{bmatrix}
  0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 &  ... &     \\ 
  \mathbf{1} & 0 & 0 & 1 & 0 & 1 & 0 & 1 &  ... &   X_0 \\
@@ -1004,7 +1006,7 @@ La colonne est la valeur de $x$ et la ligne est la valeur de $y$.
  0 & 0 & 0 & 0 & 0 & 0 & 0 & \mathbf{0} &  ... &   X_7 \\
    &   &   &   &   & \vdots &  &  &\ddots  \\
 \end{bmatrix}
-$\Rightarrow_{g(f(x,x))}$
+\Rightarrow_{g(f(x,x))}
 \begin{bmatrix}
  0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 &  ... &     \\ 
  \mathbf{0} & 0 & 0 & 1 & 0 & 1 & 0 & 1 &  ... &   X_0 \\
@@ -1017,6 +1019,7 @@ $\Rightarrow_{g(f(x,x))}$
  0 & 0 & 0 & 0 & 0 & 0 & 0 & \mathbf{1} &  ... &   X_7 \\
    &   &   &   &   & \vdots &  &  &\ddots  \\
 \end{bmatrix}
+\]
 
 
 \vspace{0.5cm}
@@ -1268,14 +1271,12 @@ let fact =
 Nous n'afficherons pas les réductions ici. Le calcul de la factorielle de 3 nécessite 705 $\beta$-réductions. 
 La factorielle de 5 en nécessite plus de 28000\ldots
 
-
 \section{La notation de \textit{de Bruijn}}
 \noindent
 \textit{What's in a name ? That which we call a rose \\
 	   By any other name would smell as sweet.}\cite{WS} \\
 	   Citation reprise par Xavier Leroy dans
 	   son excellent cours au collège de France \\
-
 
 \vspace{0.4cm}
 Le mécanisme de capture d'une variable libre par une lambda, qui nous oblige à faire de manière fastidieuse
@@ -4546,6 +4547,7 @@ let rec cp (l1,r1) (l2,r2) =
   ((substituer  r1 sigma), (greffe oc (substituer l1 sigma) (substituer r2 sigma))) ;;  
 \end{Verbatim}
 
+
 \subsection{Terminaison}
 \subsubsection{Indécidabilité de la terminaison dans le cas "général"}
 Soient $a_1,a_2 ,a_3 , \dots$ une numérotation de tous les algorithmes.
@@ -4555,6 +4557,17 @@ Pour tout $i$, $diag(i)$ termine ssi $a_i$ ne termine pas.
 Mais il y a un $a_j$ tel que $diag = a_j$ . Nous avons donc
 $diag(j)$ termine ssi $a_j$ ne termine pas, ce qui donne
 $a_j$ termine ssi $a_j$ ne termine pas.
+
+
+
+De manière peut-être plus formelle, en mettant en évidence la diagonalisation négative de Cantor :
+
+Soit $f(x,y)$ la fonction de terminaison de l'algorithme $a_x$ sur l'entrée $y$.
+On peut définir $f(x,y)$ comme $f(x,y) = 1$ si $a_x$ termine sur $y$ et $0$ sinon.
+Soit $g$ telle que $g(0) = 1$ et $g(1) = 0$ 
+Considérons $h(i) = g(f(i,i))$.
+Alors on a $f(a,a) = h(a) = g(f(a,a)) \neq f(a,a)$ car $g$ n'admet pas de point fixe.
+C'est-à-dire que l'on ne peut décider si l'algorithme $a_a$ termine sur lui-même. 
 
 \subsubsection{Système de réécriture noethérien}
 Un système de réécriture est noethérien si et seulement s'il existe un ordre bien fondé
