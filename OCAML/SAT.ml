@@ -1,6 +1,7 @@
 (* SAT *)
 open List ;;
 exception Erreur ;;
+exception NotFound of string ;;
 
 type 'a bin_tree =
 | Leaf of 'a
@@ -49,6 +50,7 @@ let cons_uniq xs x = if List.mem x xs then xs else x :: xs
 
 let remove xs = (List.fold_left cons_uniq [] xs)
 
+
 let recup_litteral c = 
 let rec recup_aux l = 
  match l with
@@ -57,18 +59,86 @@ let rec recup_aux l =
 | [] -> []
 in recup_aux (remove (flatten c))
 
-(* sat prend une cnf et rend (bool*env)   *)
+(*************************)
+(* propagation unitaire *)
+(*************************)
+(* cherche liste de clauses unitaires dans une cnf *)
+let find_units_cnf c = 
+let rec find_units_cnf_aux c acc =
+  let find_unit_clause d =
+    match d with 
+    | P a::[] -> P a 
+    | _ -> raise (NotFound "find_unit_clause") 
+  in
+  match c with
+  | [] -> acc
+  | hd::tl -> try find_units_cnf_aux tl ((find_unit_clause hd)::acc) 
+              with (NotFound "find_unit_clause") -> find_units_cnf_aux tl acc
+in find_units_cnf_aux c []
+;;
+let find_units_cnf2 c = 
+  let rec find_units_cnf_aux c acc =
+    let find_unit_clause d =
+      match d with 
+      | P a::[] -> a 
+      | _ -> raise (NotFound "find_unit_clause") 
+    in
+    match c with
+    | [] -> acc
+    | hd::tl -> try find_units_cnf_aux tl ((find_unit_clause hd)::acc) 
+                with (NotFound "find_unit_clause") -> find_units_cnf_aux tl acc
+  in find_units_cnf_aux c []
+  ;;
+let init_env c =
+  let rec trs u =
+    match u with
+    | P a::tl -> (a,true)::trs tl
+    | _ -> []
+  in trs (find_units_cnf c) ;;
 
+
+let popo = [[P "a"; P "b"] ; [N "a"; P "c"]; [P "a"]; [P "z"]] in find_units_cnf popo ;;
+(* retire literale unitaire d'une clause *)
+let rec retire_unit (unit:lit) (clause:disj) =
+  match clause with
+  | hd::t1::t2 -> 
+      begin
+      match hd with 
+       | P a -> if mem unit clause then [] else clause
+       | N a -> retire_unit unit (t1::t2)
+      end
+  | _ -> clause
+;;
+
+let rec propag_unitaire c =
+  let units = find_units_cnf c 
+  in 
+  let rec propag_unitaire_aux c units =
+  match units with 
+    | [] -> c
+    | hd::tl -> propag_unitaire_aux (map (retire_unit hd) c) tl 
+in  let res = propag_unitaire_aux c units
+in if c=res then (filter (fun x -> not (x=[])) c) else propag_unitaire res ;;
+
+(* on propage jusqu'à l'obtention d'un point fixe *)
+
+let popo = [[P "a"; P "b"] ; [N "a"; P "c"]; [N "c"; P "d"]; [P "a"]] in propag_unitaire popo ;;
+
+let diff l1 l2 = List.filter (fun x -> not (List.mem x l2)) l1
+
+(* sat prend une cnf et rend (bool*env)   *)
 let sat c : (bool*env) =
   let rec sat_aux c liste_litt e : (bool*env)  = 
    if eval_cnf e c then (true,e) 
    else     
+    let c' = propag_unitaire c in
     match liste_litt with
-    | hd::tl -> let (b1, e1) = sat_aux c tl ((hd,true)::e) in
+    | hd::tl -> let (b1, e1) = sat_aux c' tl ((hd,true)::e) in
                 if b1 then (b1,e1) 
-                else sat_aux c tl ((hd, false)::e)
+                else sat_aux c' tl ((hd, false)::e)
     | [] -> (false, [])
-   in sat_aux c (recup_litteral c) [] ;;
+   in sat_aux c (diff (recup_litteral c) (find_units_cnf2 c)) (init_env c) ;;
+
 
 (* method to print model *)
 let print_model (ml:env) =
@@ -87,7 +157,45 @@ begin
  if b then print_string "succès\n" else print_string "échec\n" ;
  print_model  e
 end
+;;
+
+let minisudok1 = [ [P "x122"]; [P "x133"]; [P "x144"]; [P "x155"] ; [P "x166"]; [P "x177"]; [P "x188"]; [P "x199"]];;
+let minic1 = [ [P "x111"; P "x121"; P "x131"; P "x141"; P "x151"; P "x161"; P "x171"; P "x181"; P "x191"] ]@
+         [ [P "x112"; P "x122"; P "x132"; P "x142"; P "x152"; P "x162"; P "x172"; P "x182"; P "x192"] ]@
+         [ [P "x113"; P "x123"; P "x133"; P "x143"; P "x153"; P "x163"; P "x173"; P "x183"; P "x193"] ]@
+         [ [P "x114"; P "x124"; P "x134"; P "x144"; P "x154"; P "x164"; P "x174"; P "x184"; P "x194"] ]@
+         [ [P "x115"; P "x125"; P "x135"; P "x145"; P "x155"; P "x165"; P "x175"; P "x185"; P "x195"] ]@
+         [ [P "x116"; P "x126"; P "x136"; P "x146"; P "x156"; P "x166"; P "x176"; P "x186"; P "x196"] ]@
+         [ [P "x117"; P "x127"; P "x137"; P "x147"; P "x157"; P "x167"; P "x177"; P "x187"; P "x197"] ]@
+         [ [P "x118"; P "x128"; P "x138"; P "x148"; P "x158"; P "x168"; P "x178"; P "x188"; P "x198"] ]@
+         [ [P "x119"; P "x129"; P "x139"; P "x149"; P "x159"; P "x169"; P "x179"; P "x189"; P "x199"] ] ;;
+let minid =[[ N "x111";N "x112"];[N "x111";N "x113"];[N "x111";N "x114"];[N "x111";N "x115"];[N "x111";N "x116"];[N "x111";N "x117"];[N "x111";N "x118"];[N "x111";N "x119"];          
+          [ N "x121";N "x122"];[N "x121";N "x123"];[N "x121";N "x124"];[N "x121";N "x125"];[N "x121";N "x126"];[N "x121";N "x127"];[N "x121";N "x128"];[N "x121";N "x129"];          
+          [ N "x131";N "x132"];[N "x131";N "x133"];[N "x131";N "x134"];[N "x131";N "x135"];[N "x131";N "x136"];[N "x131";N "x137"];[N "x131";N "x138"];[N "x131";N "x139"];          
+          [ N "x141";N "x142"];[N "x141";N "x143"];[N "x141";N "x144"];[N "x141";N "x145"];[N "x141";N "x146"];[N "x141";N "x147"];[N "x141";N "x148"];[N "x141";N "x149"];          
+          [ N "x151";N "x152"];[N "x151";N "x153"];[N "x151";N "x154"];[N "x151";N "x155"];[N "x151";N "x156"];[N "x151";N "x157"];[N "x151";N "x158"];[N "x151";N "x159"];         
+          [ N "x161";N "x162"];[N "x161";N "x163"];[N "x161";N "x164"];[N "x161";N "x165"];[N "x161";N "x166"];[N "x161";N "x167"];[N "x161";N "x168"];[N "x161";N "x169"];          
+          [ N "x171";N "x172"];[N "x171";N "x173"];[N "x171";N "x174"];[N "x171";N "x175"];[N "x171";N "x176"];[N "x171";N "x177"];[N "x171";N "x178"];[N "x171";N "x179"];          
+          [ N "x181";N "x182"];[N "x181";N "x183"];[N "x181";N "x184"];[N "x181";N "x185"];[N "x181";N "x186"];[N "x181";N "x187"];[N "x181";N "x188"];[N "x181";N "x189"];          
+          [ N "x191";N "x192"];[N "x191";N "x193"];[N "x191";N "x194"];[N "x191";N "x195"];[N "x191";N "x196"];[N "x191";N "x197"];[N "x191";N "x198"];[N "x191";N "x199"]] ;;
+
+  print_sudoku (sat ( minisudok1   @ minic1 @ minid)) ;;
+let foo = minisudok1   @ minic1 @ minid ;;
+
+(*
+let sudok1 = 
+  [[P "x115"]; [P "x123"]; [P "x157"];
+   [P "x216"]; [P "x241"]; [P "x259"];[P "x265"]; 
+   [P "x329"]; [P "x338"]; [P "x386"]; 
+   [P "x418"]; [P "x456"]; [P "x493"]; 
+   [P "x514"]; [P "x548"]; [P "x563"]; [P "x591"] ;
+   [P "x617"]; [P "x652"]; [P "x696"]; 
+   [P "x726"]; [P "x772"]; [P "x788"]; 
+   [P "x844"]; [P "x851"]; [P "x869"]; [P "x895"] ;
+   [P "x958"]; [P "x987"]; [P "x999"]] ;;
                 
+                
+
 (* contrainte ligne *)
 let c1 = [ [P "x111"; P "x121"; P "x131"; P "x141"; P "x151"; P "x161"; P "x171"; P "x181"; P "x191"] ]@
          [ [P "x112"; P "x122"; P "x132"; P "x142"; P "x152"; P "x162"; P "x172"; P "x182"; P "x192"] ]@
@@ -438,9 +546,11 @@ let d =[[ N "x111";N "x112"];[N "x111";N "x113"];[N "x111";N "x114"];[N "x111";N
           [ N "x981";N "x982"];[N "x981";N "x983"];[N "x981";N "x984"];[N "x981";N "x985"];[N "x981";N "x986"];[N "x981";N "x987"];[N "x981";N "x988"];[N "x981";N "x989"];          
           [ N "x991";N "x992"];[N "x991";N "x993"];[N "x991";N "x994"];[N "x991";N "x995"];[N "x991";N "x996"];[N "x991";N "x997"];[N "x991";N "x998"];[N "x991";N "x999"];          
 ] in 
-print_sudoku (sat ((c1 @ c2 @ c3 @ c4 @ c5 @ c6 @ c7 @ c8 @ c9 @
+ print_sudoku (sat (
+                    c1 @ c2 @ c3 @ c4 @ c5 @ c6 @ c7 @ c8 @ c9 @
                     b1 @ b2 @ b3 @ b4 @ b5 @ b6 @ b7 @ b8 @ b9 @
                     a1 @ a2 @ a3 @ a4 @ a5 @ a6 @ a7 @ a8 @ a9 @
-                    d))) ;;
+                    d)) ;;
 
 
+*)
