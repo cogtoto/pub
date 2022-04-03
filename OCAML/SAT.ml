@@ -1,21 +1,16 @@
 (* SAT *)
 open List ;;
+open Constraints ;;   
 exception Erreur ;;
 exception NotFound of string ;;
 
-type 'a bin_tree =
-| Leaf of 'a
-| Node of 'a * 'a bin_tree * 'a bin_tree
-
-type atome =  string ;;
+(*type atome =  string ;;
 type env = (atome * bool) list ;;
-
-
 type lit =  P of atome | N of atome ;;
 
 type disj = lit list ;; 
-
 type cnf = disj list ;;
+*)
 
 let eval a e = 
   try List.assoc a e 
@@ -28,10 +23,6 @@ let eval_lit e = function
 let eval_disj e d = fold_left ( || ) false (map (eval_lit e) d)  ;;
 
 let eval_cnf e c = fold_left ( && ) true (map (eval_disj e) c)  ;;
-
-let e = [("x", true); ("y", false)] ;;
-(*let cnf_1 =[ [P "x"; N "x"]; [ N "y"]; [P "y"] ] ;;  *)
-eval_cnf e  [[P "popo"]; [P "x"; N "x"]; [N "y"; P "y"]] ;;
 
 let rec filtre elt l =
   match l with
@@ -50,14 +41,13 @@ let cons_uniq xs x = if List.mem x xs then xs else x :: xs
 
 let remove xs = (List.fold_left cons_uniq [] xs)
 
-
 let recup_litteral c = 
 let rec recup_aux l = 
  match l with
 | P s::tl -> s::recup_aux tl
 | N s::tl -> s::recup_aux tl
 | [] -> []
-in recup_aux (remove (flatten c))
+in remove (recup_aux (remove (flatten c)))
 
 (*************************)
 (* propagation unitaire *)
@@ -68,6 +58,7 @@ let rec find_units_cnf_aux c acc =
   let find_unit_clause d =
     match d with 
     | P a::[] -> P a 
+    | N a::[] -> N a 
     | _ -> raise (NotFound "find_unit_clause") 
   in
   match c with
@@ -76,11 +67,13 @@ let rec find_units_cnf_aux c acc =
               with (NotFound "find_unit_clause") -> find_units_cnf_aux tl acc
 in find_units_cnf_aux c []
 ;;
+
 let find_units_cnf2 c = 
   let rec find_units_cnf_aux c acc =
     let find_unit_clause d =
       match d with 
       | P a::[] -> a 
+      | N a::[] -> a
       | _ -> raise (NotFound "find_unit_clause") 
     in
     match c with
@@ -93,22 +86,32 @@ let init_env c =
   let rec trs u =
     match u with
     | P a::tl -> (a,true)::trs tl
-    | _ -> []
+    | N a::tl -> (a,false)::trs tl
+    | _  -> []
   in trs (find_units_cnf c) ;;
 
+let extend_env c e =
+  let rec trs u acc =
+    match u with
+    | P a::tl ->trs tl (cons_uniq acc (a,true))
+    | N a::tl ->trs tl (cons_uniq acc (a,false))
+    | _  -> acc
+  in trs (find_units_cnf c) e ;;
 
-let popo = [[P "a"; P "b"] ; [N "a"; P "c"]; [P "a"]; [P "z"]] in find_units_cnf popo ;;
 (* retire literale unitaire d'une clause *)
 let rec retire_unit (unit:lit) (clause:disj) =
-  match clause with
-  | hd::t1::t2 -> 
+  let rec retire_unit_aux u c =
+  match c with
+  | hd::tl -> 
       begin
       match hd with 
-       | P a -> if mem unit clause then [] else clause
-       | N a -> retire_unit unit (t1::t2)
+       | P a -> if mem unit clause then [] 
+                else if unit = N a then retire_unit_aux unit tl else hd::retire_unit_aux unit tl
+       | N a -> if mem unit clause then [] 
+                else if unit = P a then retire_unit_aux unit tl else hd::retire_unit_aux unit tl
       end
-  | _ -> clause
-;;
+  | _ -> c
+  in if length clause = 1 then clause else retire_unit_aux unit clause;; 
 
 let rec propag_unitaire c =
   let units = find_units_cnf c 
@@ -119,71 +122,66 @@ let rec propag_unitaire c =
     | hd::tl -> propag_unitaire_aux (map (retire_unit hd) c) tl 
 in  let res = propag_unitaire_aux c units
 in if c=res then (filter (fun x -> not (x=[])) c) else propag_unitaire res ;;
-
 (* on propage jusqu'à l'obtention d'un point fixe *)
-
-let popo = [[P "a"; P "b"] ; [N "a"; P "c"]; [N "c"; P "d"]; [P "a"]] in propag_unitaire popo ;;
 
 let diff l1 l2 = List.filter (fun x -> not (List.mem x l2)) l1
 
-(* sat prend une cnf et rend (bool*env)   *)
+let compare (l1,b1) (l2,b2) = if (String.sub l1 1 2) = (String.sub l2 1 2) then 0
+                              else if (String.sub l1 1 2) <= (String.sub l2 1 2)  then 1 else -1 
+
+let print_model ml =
+let rec print_model_aux (ml:env) =
+    match  ml with 
+    | (sym, b)::tl -> 
+        if (String.sub sym 2 1)="9" then 
+           if b then print_model_aux tl  ^ (String.sub sym 3 1) ^ "\n" else print_model_aux tl 
+      else if  (String.sub sym 2 1)="3" || (String.sub sym 2 1)="6"  then 
+           if b then print_model_aux tl  ^ (String.sub sym 3 1) ^ "|"  else print_model_aux tl  
+      else 
+           if b then print_model_aux tl  ^ (String.sub sym 3 1) else print_model_aux tl  
+    | [] -> ""
+in print_model_aux (List.sort compare ml) 
+
+(* sat prend une cnf et rend (bool*env) *)
 let sat c : (bool*env) =
   let rec sat_aux c liste_litt e : (bool*env)  = 
-   if eval_cnf e c then (true,e) 
-   else     
     let c' = propag_unitaire c in
-    match liste_litt with
-    | hd::tl -> let (b1, e1) = sat_aux c' tl ((hd,true)::e) in
+    let e' = extend_env c' e in
+      if eval_cnf e' c' then (true,e') 
+      else 
+        let liste_litt' = (diff (recup_litteral c') (find_units_cnf2 c')) in
+        match liste_litt' with 
+         | hd::tl -> let (b1, e1) = sat_aux ([P hd]::c') tl ((hd,true)::e') in
                 if b1 then (b1,e1) 
-                else sat_aux c' tl ((hd, false)::e)
-    | [] -> (false, [])
-   in sat_aux c (diff (recup_litteral c) (find_units_cnf2 c)) (init_env c) ;;
+                else sat_aux ([N hd]::c') tl ((hd, false)::e')
+         | [] -> (false, [])
+   in sat_aux c  (diff (recup_litteral c) (find_units_cnf2 c)) (init_env c) ;;
 
-
-(* method to print model *)
-let print_model (ml:env) =
-  List.fold_left
-    (fun _ (sym, b) ->
-      if b then print_string (String.sub sym 3 1) else print_string "0 ";
-    ) () ml 
-    ;;
-
- (* sat [[P "a"; P "b"]; [ P "b"; P "c"]] ;; *)
- 
-(* sudoku x_234 = pos lifne 2 colonne 3 chiffre 4 *)
-(* printing env *)
 let print_sudoku (b,e) =
 begin
  if b then print_string "succès\n" else print_string "échec\n" ;
- print_model  e
+ print_string (print_model  e)
 end
 ;;
 
-let minisudok1 = [ [P "x122"]; [P "x133"]; [P "x144"]; [P "x155"] ; [P "x166"]; [P "x177"]; [P "x188"]; [P "x199"]];;
-let minic1 = [ [P "x111"; P "x121"; P "x131"; P "x141"; P "x151"; P "x161"; P "x171"; P "x181"; P "x191"] ]@
-         [ [P "x112"; P "x122"; P "x132"; P "x142"; P "x152"; P "x162"; P "x172"; P "x182"; P "x192"] ]@
-         [ [P "x113"; P "x123"; P "x133"; P "x143"; P "x153"; P "x163"; P "x173"; P "x183"; P "x193"] ]@
-         [ [P "x114"; P "x124"; P "x134"; P "x144"; P "x154"; P "x164"; P "x174"; P "x184"; P "x194"] ]@
-         [ [P "x115"; P "x125"; P "x135"; P "x145"; P "x155"; P "x165"; P "x175"; P "x185"; P "x195"] ]@
-         [ [P "x116"; P "x126"; P "x136"; P "x146"; P "x156"; P "x166"; P "x176"; P "x186"; P "x196"] ]@
-         [ [P "x117"; P "x127"; P "x137"; P "x147"; P "x157"; P "x167"; P "x177"; P "x187"; P "x197"] ]@
-         [ [P "x118"; P "x128"; P "x138"; P "x148"; P "x158"; P "x168"; P "x178"; P "x188"; P "x198"] ]@
-         [ [P "x119"; P "x129"; P "x139"; P "x149"; P "x159"; P "x169"; P "x179"; P "x189"; P "x199"] ] ;;
-let minid =[[ N "x111";N "x112"];[N "x111";N "x113"];[N "x111";N "x114"];[N "x111";N "x115"];[N "x111";N "x116"];[N "x111";N "x117"];[N "x111";N "x118"];[N "x111";N "x119"];          
-          [ N "x121";N "x122"];[N "x121";N "x123"];[N "x121";N "x124"];[N "x121";N "x125"];[N "x121";N "x126"];[N "x121";N "x127"];[N "x121";N "x128"];[N "x121";N "x129"];          
-          [ N "x131";N "x132"];[N "x131";N "x133"];[N "x131";N "x134"];[N "x131";N "x135"];[N "x131";N "x136"];[N "x131";N "x137"];[N "x131";N "x138"];[N "x131";N "x139"];          
-          [ N "x141";N "x142"];[N "x141";N "x143"];[N "x141";N "x144"];[N "x141";N "x145"];[N "x141";N "x146"];[N "x141";N "x147"];[N "x141";N "x148"];[N "x141";N "x149"];          
-          [ N "x151";N "x152"];[N "x151";N "x153"];[N "x151";N "x154"];[N "x151";N "x155"];[N "x151";N "x156"];[N "x151";N "x157"];[N "x151";N "x158"];[N "x151";N "x159"];         
-          [ N "x161";N "x162"];[N "x161";N "x163"];[N "x161";N "x164"];[N "x161";N "x165"];[N "x161";N "x166"];[N "x161";N "x167"];[N "x161";N "x168"];[N "x161";N "x169"];          
-          [ N "x171";N "x172"];[N "x171";N "x173"];[N "x171";N "x174"];[N "x171";N "x175"];[N "x171";N "x176"];[N "x171";N "x177"];[N "x171";N "x178"];[N "x171";N "x179"];          
-          [ N "x181";N "x182"];[N "x181";N "x183"];[N "x181";N "x184"];[N "x181";N "x185"];[N "x181";N "x186"];[N "x181";N "x187"];[N "x181";N "x188"];[N "x181";N "x189"];          
-          [ N "x191";N "x192"];[N "x191";N "x193"];[N "x191";N "x194"];[N "x191";N "x195"];[N "x191";N "x196"];[N "x191";N "x197"];[N "x191";N "x198"];[N "x191";N "x199"]] ;;
+let rec print_liste = function
+| hd::tl -> (print_string hd ; print_string "; "; print_liste tl)
+| _ -> () ;;
 
-  print_sudoku (sat ( minisudok1   @ minic1 @ minid)) ;;
-let foo = minisudok1   @ minic1 @ minid ;;
 
-(*
-let sudok1 = 
+let sudok1 =[ 
+[P "x116"]; [P "x121"]; [P "x135"];[P "x148"];[P "x154"];[P "x169"];[P "x177"];[P "x183"];[P "x192"];
+[P "x213"]; [P "x228"]; [P "x237"];[P "x242"];[P "x255"];[P "x261"];[P "x279"];[P "x284"];[P "x296"];
+[P "x312"]; [P "x329"]; [P "x334"];[P "x343"];[P "x357"];[P "x366"];[P "x375"];[P "x381"];[P "x398"];
+[P "x414"]; [P "x423"]; [P "x432"];[P "x449"];[P "x458"];[P "x467"];[P "x471"];[P "x486"];[P "x495"];
+[P "x515"]; [P "x526"]; [P "x531"];[P "x544"];[P "x553"];[P "x562"];[P "x578"];[P "x589"];[P "x597"];
+[P "x618"]; [P "x627"]; [P "x639"];[P "x646"];[P "x651"];[P "x665"];[P "x674"];[P "x682"];[P "x693"];
+[P "x711"]; [P "x724"]; [P "x738"];[P "x747"];[P "x756"];[P "x763"];[P "x772"];[P "x785"];[P "x799"];
+[P "x819"]; [P "x825"]; [P "x836"];[P "x841"];[P "x852"];[P "x868"];[P "x873"];[P "x887"];[P "x894"];
+[P "x917"]; [P "x922"]; [P "x933"];[P "x945"];[P "x959"];[P "x964"];[P "x978"];[P "x988"]] ;; (* ;[P "x991"]];;*) 
+
+
+let sudok2 = 
   [[P "x115"]; [P "x123"]; [P "x157"];
    [P "x216"]; [P "x241"]; [P "x259"];[P "x265"]; 
    [P "x329"]; [P "x338"]; [P "x386"]; 
@@ -194,363 +192,106 @@ let sudok1 =
    [P "x844"]; [P "x851"]; [P "x869"]; [P "x895"] ;
    [P "x958"]; [P "x987"]; [P "x999"]] ;;
                 
-                
 
-(* contrainte ligne *)
-let c1 = [ [P "x111"; P "x121"; P "x131"; P "x141"; P "x151"; P "x161"; P "x171"; P "x181"; P "x191"] ]@
-         [ [P "x112"; P "x122"; P "x132"; P "x142"; P "x152"; P "x162"; P "x172"; P "x182"; P "x192"] ]@
-         [ [P "x113"; P "x123"; P "x133"; P "x143"; P "x153"; P "x163"; P "x173"; P "x183"; P "x193"] ]@
-         [ [P "x114"; P "x124"; P "x134"; P "x144"; P "x154"; P "x164"; P "x174"; P "x184"; P "x194"] ]@
-         [ [P "x115"; P "x125"; P "x135"; P "x145"; P "x155"; P "x165"; P "x175"; P "x185"; P "x195"] ]@
-         [ [P "x116"; P "x126"; P "x136"; P "x146"; P "x156"; P "x166"; P "x176"; P "x186"; P "x196"] ]@
-         [ [P "x117"; P "x127"; P "x137"; P "x147"; P "x157"; P "x167"; P "x177"; P "x187"; P "x197"] ]@
-         [ [P "x118"; P "x128"; P "x138"; P "x148"; P "x158"; P "x168"; P "x178"; P "x188"; P "x198"] ]@
-         [ [P "x119"; P "x129"; P "x139"; P "x149"; P "x159"; P "x169"; P "x179"; P "x189"; P "x199"] ] ;;
+   (*
+let c1 = [[P "x111"; P "x112"; P "x113"; P "x114"; P "x115"; P "x116"; P "x117"; P "x118"; P "x119"];
+          [P "x121"; P "x122"; P "x123"; P "x124"; P "x125"; P "x126"; P "x127"; P "x128"; P "x129"];
+          [P "x131"; P "x132"; P "x133"; P "x134"; P "x135"; P "x136"; P "x137"; P "x138"; P "x139"];
+          [P "x141"; P "x142"; P "x143"; P "x144"; P "x145"; P "x146"; P "x147"; P "x148"; P "x149"];
+          [P "x151"; P "x152"; P "x153"; P "x154"; P "x155"; P "x156"; P "x157"; P "x158"; P "x159"];
+          [P "x161"; P "x162"; P "x163"; P "x164"; P "x165"; P "x166"; P "x167"; P "x168"; P "x169"];
+          [P "x171"; P "x172"; P "x173"; P "x174"; P "x175"; P "x176"; P "x177"; P "x178"; P "x179"];
+          [P "x181"; P "x182"; P "x183"; P "x184"; P "x185"; P "x186"; P "x187"; P "x188"; P "x189"];
+          [P "x191"; P "x192"; P "x193"; P "x194"; P "x195"; P "x196"; P "x197"; P "x198"; P "x199"]];;
 
-let c2 = [ [P "x211"; P "x221"; P "x231"; P "x241"; P "x251"; P "x261"; P "x271"; P "x281"; P "x291"] ]@
-         [ [P "x212"; P "x222"; P "x232"; P "x242"; P "x252"; P "x262"; P "x272"; P "x282"; P "x292"] ]@
-         [ [P "x213"; P "x223"; P "x233"; P "x243"; P "x253"; P "x263"; P "x273"; P "x283"; P "x293"] ]@
-         [ [P "x214"; P "x224"; P "x234"; P "x244"; P "x254"; P "x264"; P "x274"; P "x284"; P "x294"] ]@
-         [ [P "x215"; P "x225"; P "x235"; P "x245"; P "x255"; P "x265"; P "x275"; P "x285"; P "x295"] ]@
-         [ [P "x216"; P "x226"; P "x236"; P "x246"; P "x256"; P "x266"; P "x276"; P "x286"; P "x296"] ]@
-         [ [P "x217"; P "x227"; P "x237"; P "x247"; P "x257"; P "x267"; P "x277"; P "x287"; P "x297"] ]@
-         [ [P "x218"; P "x228"; P "x238"; P "x248"; P "x258"; P "x268"; P "x278"; P "x288"; P "x298"] ]@
-         [ [P "x219"; P "x229"; P "x239"; P "x249"; P "x259"; P "x269"; P "x279"; P "x289"; P "x299"] ] ;;
+let c2 = [[N "x111"; N "x121"];[N "x111"; N "x131"]; [N "x111"; N "x141"];[N "x111"; N "x151"];[N "x111"; N "x161"];[N "x111"; N "x171"];[N "x111"; N "x181"];[N "x111"; N "x191"];
+          [N "x121"; N "x131"];[N "x121"; N "x141"]; [N "x121"; N "x151"];[N "x121"; N "x161"];[N "x121"; N "x171"];[N "x121"; N "x181"];[N "x121"; N "x191"];
+          [N "x131"; N "x141"];[N "x131"; N "x151"]; [N "x131"; N "x161"];[N "x131"; N "x171"];[N "x131"; N "x181"];[N "x131"; N "x191"];
+          [N "x141"; N "x151"];[N "x141"; N "x161"]; [N "x141"; N "x171"];[N "x141"; N "x181"];[N "x141"; N "x191"];
+          [N "x151"; N "x161"];[N "x151"; N "x171"]; [N "x151"; N "x181"];[N "x151"; N "x191"];
+          [N "x161"; N "x171"];[N "x161"; N "x181"]; [N "x161"; N "x191"];
+          [N "x171"; N "x181"];[N "x171"; N "x191"];
+          [N "x181"; N "x191"];
 
-let c3 = [ [P "x311"; P "x321"; P "x331"; P "x341"; P "x351"; P "x361"; P "x371"; P "x381"; P "x391"] ]@
-         [ [P "x312"; P "x322"; P "x332"; P "x342"; P "x352"; P "x362"; P "x372"; P "x382"; P "x392"] ]@
-         [ [P "x313"; P "x323"; P "x333"; P "x343"; P "x353"; P "x363"; P "x373"; P "x383"; P "x393"] ]@
-         [ [P "x314"; P "x324"; P "x334"; P "x344"; P "x354"; P "x364"; P "x374"; P "x384"; P "x394"] ]@
-         [ [P "x315"; P "x325"; P "x335"; P "x345"; P "x355"; P "x365"; P "x375"; P "x385"; P "x395"] ]@
-         [ [P "x316"; P "x326"; P "x336"; P "x346"; P "x356"; P "x366"; P "x376"; P "x386"; P "x396"] ]@
-         [ [P "x317"; P "x327"; P "x337"; P "x347"; P "x357"; P "x367"; P "x377"; P "x387"; P "x397"] ]@
-         [ [P "x318"; P "x328"; P "x338"; P "x348"; P "x358"; P "x368"; P "x378"; P "x388"; P "x398"] ]@
-         [ [P "x319"; P "x329"; P "x339"; P "x349"; P "x359"; P "x369"; P "x379"; P "x389"; P "x399"] ] ;;
-let c4 = [ [P "x411"; P "x421"; P "x431"; P "x441"; P "x451"; P "x461"; P "x471"; P "x481"; P "x491"] ]@
-         [ [P "x412"; P "x422"; P "x432"; P "x442"; P "x452"; P "x462"; P "x472"; P "x482"; P "x492"] ]@
-         [ [P "x413"; P "x423"; P "x433"; P "x443"; P "x453"; P "x463"; P "x473"; P "x483"; P "x493"] ]@
-         [ [P "x114"; P "x424"; P "x434"; P "x444"; P "x454"; P "x464"; P "x474"; P "x484"; P "x494"] ]@
-         [ [P "x415"; P "x425"; P "x435"; P "x445"; P "x455"; P "x465"; P "x475"; P "x485"; P "x495"] ]@
-         [ [P "x416"; P "x426"; P "x436"; P "x446"; P "x456"; P "x466"; P "x476"; P "x486"; P "x496"] ]@
-         [ [P "x417"; P "x427"; P "x437"; P "x447"; P "x457"; P "x467"; P "x477"; P "x487"; P "x497"] ]@
-         [ [P "x418"; P "x428"; P "x438"; P "x448"; P "x458"; P "x468"; P "x478"; P "x488"; P "x498"] ]@
-         [ [P "x419"; P "x429"; P "x439"; P "x449"; P "x459"; P "x469"; P "x479"; P "x489"; P "x499"] ] ;;
+[N "x112"; N "x122"];[N "x112"; N "x132"]; [N "x112"; N "x142"];[N "x112"; N "x152"];[N "x112"; N "x162"];[N "x112"; N "x172"];[N "x112"; N "x182"];[N "x112"; N "x192"];
+          [N "x122"; N "x132"];[N "x122"; N "x142"]; [N "x122"; N "x152"];[N "x122"; N "x162"];[N "x122"; N "x172"];[N "x122"; N "x182"];[N "x122"; N "x192"];
+          [N "x132"; N "x142"];[N "x132"; N "x152"]; [N "x132"; N "x162"];[N "x132"; N "x172"];[N "x132"; N "x182"];[N "x132"; N "x192"];
+          [N "x142"; N "x152"];[N "x142"; N "x162"]; [N "x142"; N "x172"];[N "x142"; N "x182"];[N "x142"; N "x192"];
+          [N "x152"; N "x162"];[N "x152"; N "x172"]; [N "x152"; N "x182"];[N "x152"; N "x192"];
+          [N "x162"; N "x172"];[N "x162"; N "x182"]; [N "x162"; N "x192"];
+          [N "x172"; N "x182"];[N "x172"; N "x192"];
+          [N "x182"; N "x192"];
 
-let c5 = [ [P "x511"; P "x521"; P "x531"; P "x541"; P "x551"; P "x561"; P "x571"; P "x581"; P "x591"] ]@
-         [ [P "x512"; P "x522"; P "x532"; P "x542"; P "x552"; P "x562"; P "x572"; P "x582"; P "x592"] ]@
-         [ [P "x513"; P "x523"; P "x533"; P "x543"; P "x553"; P "x563"; P "x573"; P "x583"; P "x593"] ]@
-         [ [P "x514"; P "x524"; P "x534"; P "x544"; P "x554"; P "x564"; P "x574"; P "x584"; P "x594"] ]@
-         [ [P "x515"; P "x525"; P "x535"; P "x545"; P "x555"; P "x565"; P "x575"; P "x585"; P "x595"] ]@
-         [ [P "x516"; P "x526"; P "x536"; P "x546"; P "x556"; P "x566"; P "x576"; P "x586"; P "x596"] ]@
-         [ [P "x517"; P "x527"; P "x537"; P "x547"; P "x557"; P "x567"; P "x577"; P "x587"; P "x597"] ]@
-         [ [P "x518"; P "x528"; P "x538"; P "x548"; P "x558"; P "x568"; P "x578"; P "x588"; P "x598"] ]@
-         [ [P "x519"; P "x529"; P "x539"; P "x549"; P "x559"; P "x569"; P "x579"; P "x589"; P "x599"] ] ;;
-let c6 = [ [P "x611"; P "x621"; P "x631"; P "x641"; P "x651"; P "x661"; P "x671"; P "x681"; P "x691"] ]@
-         [ [P "x612"; P "x622"; P "x632"; P "x642"; P "x652"; P "x662"; P "x672"; P "x682"; P "x692"] ]@
-         [ [P "x613"; P "x623"; P "x633"; P "x643"; P "x653"; P "x663"; P "x673"; P "x683"; P "x693"] ]@
-         [ [P "x614"; P "x624"; P "x634"; P "x644"; P "x654"; P "x664"; P "x674"; P "x684"; P "x694"] ]@
-         [ [P "x615"; P "x625"; P "x635"; P "x645"; P "x655"; P "x665"; P "x675"; P "x685"; P "x695"] ]@
-         [ [P "x616"; P "x626"; P "x636"; P "x646"; P "x656"; P "x666"; P "x676"; P "x686"; P "x696"] ]@
-         [ [P "x617"; P "x627"; P "x637"; P "x647"; P "x657"; P "x667"; P "x677"; P "x687"; P "x697"] ]@
-         [ [P "x618"; P "x628"; P "x638"; P "x648"; P "x658"; P "x668"; P "x678"; P "x688"; P "x698"] ]@
-         [ [P "x619"; P "x629"; P "x639"; P "x649"; P "x659"; P "x669"; P "x679"; P "x689"; P "x699"] ] ;;
-let c7 = [ [P "x711"; P "x721"; P "x731"; P "x741"; P "x751"; P "x761"; P "x771"; P "x781"; P "x791"] ]@
-         [ [P "x712"; P "x722"; P "x732"; P "x742"; P "x752"; P "x762"; P "x772"; P "x782"; P "x792"] ]@
-         [ [P "x713"; P "x723"; P "x733"; P "x743"; P "x753"; P "x763"; P "x773"; P "x783"; P "x793"] ]@
-         [ [P "x714"; P "x724"; P "x734"; P "x744"; P "x754"; P "x764"; P "x774"; P "x784"; P "x794"] ]@
-         [ [P "x715"; P "x725"; P "x735"; P "x745"; P "x755"; P "x765"; P "x775"; P "x785"; P "x795"] ]@
-         [ [P "x716"; P "x726"; P "x736"; P "x746"; P "x756"; P "x766"; P "x776"; P "x786"; P "x796"] ]@
-         [ [P "x717"; P "x727"; P "x737"; P "x747"; P "x757"; P "x767"; P "x777"; P "x787"; P "x797"] ]@
-         [ [P "x718"; P "x728"; P "x738"; P "x748"; P "x758"; P "x768"; P "x778"; P "x788"; P "x798"] ]@
-         [ [P "x719"; P "x729"; P "x739"; P "x749"; P "x759"; P "x769"; P "x779"; P "x789"; P "x799"] ] ;;
-let c8 = [ [P "x811"; P "x821"; P "x831"; P "x841"; P "x851"; P "x861"; P "x871"; P "x881"; P "x891"] ]@
-         [ [P "x812"; P "x822"; P "x832"; P "x842"; P "x852"; P "x862"; P "x872"; P "x882"; P "x892"] ]@
-         [ [P "x813"; P "x823"; P "x833"; P "x843"; P "x853"; P "x863"; P "x873"; P "x883"; P "x893"] ]@
-         [ [P "x814"; P "x824"; P "x834"; P "x844"; P "x854"; P "x864"; P "x874"; P "x884"; P "x894"] ]@
-         [ [P "x815"; P "x825"; P "x835"; P "x845"; P "x855"; P "x865"; P "x875"; P "x885"; P "x895"] ]@
-         [ [P "x816"; P "x826"; P "x836"; P "x846"; P "x856"; P "x866"; P "x876"; P "x886"; P "x896"] ]@
-         [ [P "x817"; P "x827"; P "x837"; P "x847"; P "x857"; P "x867"; P "x877"; P "x887"; P "x897"] ]@
-         [ [P "x818"; P "x828"; P "x838"; P "x848"; P "x858"; P "x868"; P "x878"; P "x888"; P "x898"] ]@
-         [ [P "x819"; P "x829"; P "x839"; P "x849"; P "x859"; P "x869"; P "x879"; P "x889"; P "x899"] ] ;;
-let c9 = [ [P "x911"; P "x921"; P "x931"; P "x941"; P "x951"; P "x961"; P "x971"; P "x981"; P "x991"] ]@
-         [ [P "x912"; P "x922"; P "x932"; P "x942"; P "x952"; P "x962"; P "x972"; P "x982"; P "x992"] ]@
-         [ [P "x913"; P "x923"; P "x933"; P "x943"; P "x953"; P "x963"; P "x973"; P "x983"; P "x993"] ]@
-         [ [P "x914"; P "x924"; P "x934"; P "x944"; P "x954"; P "x964"; P "x974"; P "x984"; P "x994"] ]@
-         [ [P "x915"; P "x925"; P "x935"; P "x945"; P "x955"; P "x965"; P "x975"; P "x985"; P "x995"] ]@
-         [ [P "x916"; P "x926"; P "x936"; P "x946"; P "x956"; P "x966"; P "x976"; P "x986"; P "x996"] ]@
-         [ [P "x917"; P "x927"; P "x937"; P "x947"; P "x957"; P "x967"; P "x977"; P "x987"; P "x997"] ]@
-         [ [P "x918"; P "x928"; P "x938"; P "x948"; P "x958"; P "x968"; P "x978"; P "x988"; P "x998"] ]@
-         [ [P "x919"; P "x929"; P "x939"; P "x949"; P "x959"; P "x969"; P "x979"; P "x989"; P "x999"] ] ;;
+          [N "x113"; N "x123"];[N "x113"; N "x133"]; [N "x113"; N "x143"];[N "x113"; N "x153"];[N "x113"; N "x163"];[N "x113"; N "x173"];[N "x113"; N "x183"];[N "x113"; N "x193"];
+          [N "x123"; N "x133"];[N "x123"; N "x143"]; [N "x123"; N "x153"];[N "x123"; N "x163"];[N "x123"; N "x173"];[N "x123"; N "x183"];[N "x123"; N "x193"];
+          [N "x133"; N "x143"];[N "x133"; N "x153"]; [N "x133"; N "x163"];[N "x133"; N "x173"];[N "x133"; N "x183"];[N "x133"; N "x193"];
+          [N "x143"; N "x153"];[N "x143"; N "x163"]; [N "x143"; N "x173"];[N "x143"; N "x183"];[N "x143"; N "x193"];
+          [N "x153"; N "x163"];[N "x153"; N "x173"]; [N "x153"; N "x183"];[N "x153"; N "x193"];
+          [N "x163"; N "x173"];[N "x163"; N "x183"]; [N "x163"; N "x193"];
+          [N "x173"; N "x183"];[N "x173"; N "x193"];
+          [N "x183"; N "x193"];
 
-(* contrainte colonne *)
-let b1 = [ [P "x111"; P "x211"; P "x311"; P "x411"; P "x511"; P "x611"; P "x711"; P "x811"; P "x911"] ]@
-         [ [P "x121"; P "x221"; P "x321"; P "x421"; P "x521"; P "x621"; P "x721"; P "x821"; P "x921"] ]@
-         [ [P "x131"; P "x231"; P "x331"; P "x431"; P "x531"; P "x631"; P "x731"; P "x831"; P "x931"] ]@
-         [ [P "x141"; P "x241"; P "x341"; P "x441"; P "x541"; P "x641"; P "x741"; P "x841"; P "x941"] ]@
-         [ [P "x151"; P "x251"; P "x351"; P "x451"; P "x551"; P "x651"; P "x751"; P "x851"; P "x951"] ]@
-         [ [P "x161"; P "x261"; P "x361"; P "x461"; P "x561"; P "x661"; P "x761"; P "x861"; P "x961"] ]@
-         [ [P "x171"; P "x271"; P "x371"; P "x471"; P "x571"; P "x671"; P "x771"; P "x871"; P "x971"] ]@
-         [ [P "x181"; P "x281"; P "x381"; P "x481"; P "x581"; P "x681"; P "x781"; P "x881"; P "x981"] ]@
-         [ [P "x191"; P "x291"; P "x391"; P "x491"; P "x591"; P "x691"; P "x791"; P "x891"; P "x991"] ] ;;
-let b2 = [ [P "x112"; P "x212"; P "x312"; P "x412"; P "x512"; P "x612"; P "x712"; P "x812"; P "x912"] ]@
-         [ [P "x122"; P "x222"; P "x322"; P "x422"; P "x522"; P "x622"; P "x722"; P "x822"; P "x922"] ]@
-         [ [P "x132"; P "x232"; P "x332"; P "x432"; P "x532"; P "x632"; P "x732"; P "x832"; P "x932"] ]@
-         [ [P "x142"; P "x242"; P "x342"; P "x442"; P "x542"; P "x642"; P "x742"; P "x842"; P "x942"] ]@
-         [ [P "x152"; P "x252"; P "x352"; P "x452"; P "x552"; P "x652"; P "x752"; P "x852"; P "x952"] ]@
-         [ [P "x162"; P "x262"; P "x362"; P "x462"; P "x562"; P "x662"; P "x762"; P "x862"; P "x962"] ]@
-         [ [P "x172"; P "x272"; P "x372"; P "x472"; P "x572"; P "x672"; P "x772"; P "x872"; P "x972"] ]@
-         [ [P "x182"; P "x282"; P "x382"; P "x482"; P "x582"; P "x682"; P "x782"; P "x882"; P "x982"] ]@
-         [ [P "x192"; P "x292"; P "x392"; P "x492"; P "x592"; P "x692"; P "x792"; P "x892"; P "x992"] ] ;;
-let b3 = [ [P "x113"; P "x213"; P "x313"; P "x413"; P "x513"; P "x613"; P "x713"; P "x813"; P "x913"] ]@
-         [ [P "x123"; P "x223"; P "x323"; P "x423"; P "x523"; P "x623"; P "x723"; P "x823"; P "x923"] ]@
-         [ [P "x133"; P "x233"; P "x333"; P "x433"; P "x533"; P "x633"; P "x733"; P "x833"; P "x933"] ]@
-         [ [P "x143"; P "x243"; P "x343"; P "x443"; P "x543"; P "x643"; P "x743"; P "x843"; P "x943"] ]@
-         [ [P "x153"; P "x253"; P "x353"; P "x453"; P "x553"; P "x653"; P "x753"; P "x853"; P "x953"] ]@
-         [ [P "x163"; P "x263"; P "x363"; P "x463"; P "x563"; P "x663"; P "x763"; P "x863"; P "x963"] ]@
-         [ [P "x173"; P "x273"; P "x373"; P "x473"; P "x573"; P "x673"; P "x773"; P "x873"; P "x973"] ]@
-         [ [P "x183"; P "x283"; P "x383"; P "x483"; P "x583"; P "x683"; P "x783"; P "x883"; P "x983"] ]@
-         [ [P "x193"; P "x293"; P "x393"; P "x493"; P "x593"; P "x693"; P "x793"; P "x893"; P "x993"] ] ;;
-let b4 = [ [P "x114"; P "x214"; P "x314"; P "x414"; P "x514"; P "x614"; P "x714"; P "x814"; P "x914"] ]@
-         [ [P "x124"; P "x224"; P "x324"; P "x424"; P "x524"; P "x624"; P "x724"; P "x824"; P "x924"] ]@
-         [ [P "x134"; P "x234"; P "x334"; P "x434"; P "x534"; P "x634"; P "x734"; P "x834"; P "x934"] ]@
-         [ [P "x144"; P "x244"; P "x344"; P "x444"; P "x544"; P "x644"; P "x744"; P "x844"; P "x944"] ]@
-         [ [P "x154"; P "x254"; P "x354"; P "x454"; P "x554"; P "x654"; P "x754"; P "x854"; P "x954"] ]@
-         [ [P "x164"; P "x264"; P "x364"; P "x464"; P "x564"; P "x664"; P "x764"; P "x864"; P "x964"] ]@
-         [ [P "x174"; P "x274"; P "x374"; P "x474"; P "x574"; P "x674"; P "x774"; P "x874"; P "x974"] ]@
-         [ [P "x184"; P "x284"; P "x384"; P "x484"; P "x584"; P "x684"; P "x784"; P "x884"; P "x984"] ]@
-         [ [P "x194"; P "x294"; P "x394"; P "x494"; P "x594"; P "x694"; P "x794"; P "x894"; P "x994"] ] ;;
-let b5 = [ [P "x115"; P "x215"; P "x315"; P "x415"; P "x515"; P "x615"; P "x715"; P "x815"; P "x915"] ]@
-         [ [P "x125"; P "x225"; P "x325"; P "x425"; P "x525"; P "x625"; P "x725"; P "x825"; P "x925"] ]@
-         [ [P "x135"; P "x235"; P "x335"; P "x435"; P "x535"; P "x635"; P "x735"; P "x835"; P "x935"] ]@
-         [ [P "x145"; P "x245"; P "x345"; P "x445"; P "x545"; P "x645"; P "x745"; P "x845"; P "x945"] ]@
-         [ [P "x155"; P "x255"; P "x355"; P "x455"; P "x555"; P "x655"; P "x755"; P "x855"; P "x955"] ]@
-         [ [P "x165"; P "x265"; P "x365"; P "x465"; P "x565"; P "x665"; P "x765"; P "x865"; P "x965"] ]@
-         [ [P "x175"; P "x275"; P "x375"; P "x475"; P "x575"; P "x675"; P "x775"; P "x875"; P "x975"] ]@
-         [ [P "x185"; P "x285"; P "x385"; P "x485"; P "x585"; P "x685"; P "x785"; P "x885"; P "x985"] ]@
-         [ [P "x195"; P "x295"; P "x395"; P "x495"; P "x595"; P "x695"; P "x795"; P "x895"; P "x995"] ] ;;
-let b6 = [ [P "x116"; P "x216"; P "x316"; P "x416"; P "x516"; P "x616"; P "x716"; P "x816"; P "x916"] ]@
-         [ [P "x126"; P "x226"; P "x326"; P "x426"; P "x526"; P "x626"; P "x726"; P "x826"; P "x926"] ]@
-         [ [P "x136"; P "x236"; P "x336"; P "x436"; P "x536"; P "x636"; P "x736"; P "x836"; P "x936"] ]@
-         [ [P "x146"; P "x246"; P "x346"; P "x446"; P "x546"; P "x646"; P "x746"; P "x846"; P "x946"] ]@
-         [ [P "x156"; P "x256"; P "x356"; P "x456"; P "x556"; P "x656"; P "x756"; P "x856"; P "x956"] ]@
-         [ [P "x166"; P "x266"; P "x366"; P "x466"; P "x566"; P "x666"; P "x766"; P "x866"; P "x966"] ]@
-         [ [P "x176"; P "x276"; P "x376"; P "x476"; P "x576"; P "x676"; P "x776"; P "x876"; P "x976"] ]@
-         [ [P "x186"; P "x286"; P "x386"; P "x486"; P "x586"; P "x686"; P "x786"; P "x886"; P "x986"] ]@
-         [ [P "x196"; P "x296"; P "x396"; P "x496"; P "x596"; P "x696"; P "x796"; P "x896"; P "x996"] ] ;;
-let b7 = [ [P "x117"; P "x217"; P "x317"; P "x417"; P "x517"; P "x617"; P "x717"; P "x817"; P "x917"] ]@
-         [ [P "x127"; P "x227"; P "x327"; P "x427"; P "x527"; P "x627"; P "x727"; P "x827"; P "x927"] ]@
-         [ [P "x137"; P "x237"; P "x337"; P "x437"; P "x537"; P "x637"; P "x737"; P "x837"; P "x937"] ]@
-         [ [P "x147"; P "x247"; P "x347"; P "x447"; P "x547"; P "x647"; P "x747"; P "x847"; P "x947"] ]@
-         [ [P "x157"; P "x257"; P "x357"; P "x457"; P "x557"; P "x657"; P "x757"; P "x857"; P "x957"] ]@
-         [ [P "x167"; P "x267"; P "x367"; P "x467"; P "x567"; P "x667"; P "x767"; P "x867"; P "x967"] ]@
-         [ [P "x177"; P "x277"; P "x377"; P "x477"; P "x577"; P "x677"; P "x777"; P "x877"; P "x977"] ]@
-         [ [P "x187"; P "x287"; P "x387"; P "x487"; P "x587"; P "x687"; P "x787"; P "x887"; P "x987"] ]@
-         [ [P "x197"; P "x297"; P "x397"; P "x497"; P "x597"; P "x697"; P "x797"; P "x897"; P "x997"] ] ;;
-let b8 = [ [P "x118"; P "x218"; P "x318"; P "x418"; P "x518"; P "x618"; P "x718"; P "x818"; P "x918"] ]@
-         [ [P "x128"; P "x228"; P "x328"; P "x428"; P "x528"; P "x628"; P "x728"; P "x828"; P "x928"] ]@
-         [ [P "x138"; P "x238"; P "x338"; P "x438"; P "x538"; P "x638"; P "x738"; P "x838"; P "x938"] ]@
-         [ [P "x148"; P "x248"; P "x348"; P "x448"; P "x548"; P "x648"; P "x748"; P "x848"; P "x948"] ]@
-         [ [P "x158"; P "x258"; P "x358"; P "x458"; P "x558"; P "x658"; P "x758"; P "x858"; P "x958"] ]@
-         [ [P "x168"; P "x268"; P "x368"; P "x468"; P "x568"; P "x668"; P "x768"; P "x868"; P "x968"] ]@
-         [ [P "x178"; P "x278"; P "x378"; P "x478"; P "x578"; P "x678"; P "x778"; P "x878"; P "x978"] ]@
-         [ [P "x188"; P "x288"; P "x388"; P "x488"; P "x588"; P "x688"; P "x788"; P "x888"; P "x988"] ]@
-         [ [P "x198"; P "x298"; P "x398"; P "x498"; P "x598"; P "x698"; P "x798"; P "x898"; P "x998"] ] ;;
-let b9 = [ [P "x119"; P "x219"; P "x319"; P "x419"; P "x519"; P "x619"; P "x719"; P "x819"; P "x919"] ]@
-         [ [P "x129"; P "x229"; P "x329"; P "x429"; P "x529"; P "x629"; P "x729"; P "x829"; P "x929"] ]@
-         [ [P "x139"; P "x239"; P "x339"; P "x439"; P "x539"; P "x639"; P "x739"; P "x839"; P "x939"] ]@
-         [ [P "x149"; P "x249"; P "x349"; P "x449"; P "x549"; P "x649"; P "x749"; P "x849"; P "x949"] ]@
-         [ [P "x159"; P "x259"; P "x359"; P "x459"; P "x559"; P "x659"; P "x759"; P "x859"; P "x959"] ]@
-         [ [P "x169"; P "x269"; P "x369"; P "x469"; P "x569"; P "x669"; P "x769"; P "x869"; P "x969"] ]@
-         [ [P "x179"; P "x279"; P "x379"; P "x479"; P "x579"; P "x679"; P "x779"; P "x879"; P "x979"] ]@
-         [ [P "x189"; P "x289"; P "x389"; P "x489"; P "x589"; P "x689"; P "x789"; P "x889"; P "x989"] ]@
-         [ [P "x199"; P "x299"; P "x399"; P "x499"; P "x599"; P "x699"; P "x799"; P "x899"; P "x999"] ] ;;
+          [N "x114"; N "x124"];[N "x114"; N "x134"]; [N "x114"; N "x144"];[N "x114"; N "x154"];[N "x114"; N "x164"];[N "x114"; N "x174"];[N "x114"; N "x184"];[N "x114"; N "x194"];
+          [N "x124"; N "x134"];[N "x124"; N "x144"]; [N "x124"; N "x154"];[N "x124"; N "x164"];[N "x124"; N "x174"];[N "x124"; N "x184"];[N "x124"; N "x194"];
+          [N "x134"; N "x144"];[N "x134"; N "x154"]; [N "x134"; N "x164"];[N "x134"; N "x174"];[N "x134"; N "x184"];[N "x134"; N "x194"];
+          [N "x144"; N "x154"];[N "x144"; N "x164"]; [N "x144"; N "x174"];[N "x144"; N "x184"];[N "x144"; N "x194"];
+          [N "x154"; N "x164"];[N "x154"; N "x174"]; [N "x154"; N "x184"];[N "x154"; N "x194"];
+          [N "x164"; N "x174"];[N "x164"; N "x184"]; [N "x164"; N "x194"];
+          [N "x174"; N "x184"];[N "x174"; N "x194"];
+          [N "x184"; N "x194"];
 
-(* chaque bloc a tous les nombres entre 1 et 9 *)
-let a1 =  [[ P "x111"; P "x121"; P "x131"; P "x211"; P "x221"; P "x231" ; P "x311"; P "x321"; P "x331" ]] @
-          [[ P "x112"; P "x122"; P "x132"; P "x212"; P "x222"; P "x232" ; P "x312"; P "x322"; P "x332" ]] @
-          [[ P "x113"; P "x123"; P "x133"; P "x213"; P "x223"; P "x233" ; P "x313"; P "x323"; P "x333" ]] @
-          [[ P "x114"; P "x124"; P "x134"; P "x214"; P "x224"; P "x234" ; P "x314"; P "x324"; P "x334" ]] @
-          [[ P "x115"; P "x125"; P "x135"; P "x215"; P "x225"; P "x235" ; P "x315"; P "x325"; P "x335" ]] @
-          [[ P "x116"; P "x126"; P "x136"; P "x216"; P "x226"; P "x236" ; P "x316"; P "x326"; P "x336" ]] @
-          [[ P "x117"; P "x127"; P "x137"; P "x217"; P "x227"; P "x237" ; P "x317"; P "x327"; P "x337" ]] @
-          [[ P "x118"; P "x128"; P "x138"; P "x218"; P "x228"; P "x238" ; P "x318"; P "x328"; P "x338" ]] @
-          [[ P "x119"; P "x129"; P "x139"; P "x219"; P "x229"; P "x239" ; P "x319"; P "x329"; P "x339" ]] ;;
+          [N "x115"; N "x125"];[N "x115"; N "x135"]; [N "x115"; N "x145"];[N "x115"; N "x155"];[N "x115"; N "x165"];[N "x115"; N "x175"];[N "x115"; N "x185"];[N "x115"; N "x195"];
+          [N "x125"; N "x135"];[N "x125"; N "x145"]; [N "x125"; N "x155"];[N "x125"; N "x165"];[N "x125"; N "x175"];[N "x125"; N "x185"];[N "x125"; N "x195"];
+          [N "x135"; N "x145"];[N "x135"; N "x155"]; [N "x135"; N "x165"];[N "x135"; N "x175"];[N "x135"; N "x185"];[N "x135"; N "x195"];
+          [N "x145"; N "x155"];[N "x145"; N "x165"]; [N "x145"; N "x175"];[N "x145"; N "x185"];[N "x145"; N "x195"];
+          [N "x155"; N "x165"];[N "x155"; N "x175"]; [N "x155"; N "x185"];[N "x155"; N "x195"];
+          [N "x165"; N "x175"];[N "x165"; N "x185"]; [N "x165"; N "x195"];
+          [N "x175"; N "x185"];[N "x175"; N "x195"];
+          [N "x185"; N "x195"];
 
-let a2 =  [[ P "x141"; P "x151"; P "x161"; P "x241"; P "x251"; P "x261" ; P "x341"; P "x351"; P "x361" ]] @
-          [[ P "x142"; P "x152"; P "x162"; P "x242"; P "x252"; P "x262" ; P "x342"; P "x352"; P "x362" ]] @
-          [[ P "x143"; P "x153"; P "x163"; P "x243"; P "x253"; P "x263" ; P "x343"; P "x353"; P "x363" ]] @
-          [[ P "x144"; P "x154"; P "x164"; P "x244"; P "x254"; P "x264" ; P "x344"; P "x354"; P "x364" ]] @
-          [[ P "x145"; P "x155"; P "x165"; P "x245"; P "x255"; P "x265" ; P "x345"; P "x355"; P "x365" ]] @
-          [[ P "x146"; P "x156"; P "x166"; P "x246"; P "x256"; P "x266" ; P "x346"; P "x356"; P "x366" ]] @
-          [[ P "x147"; P "x157"; P "x167"; P "x247"; P "x257"; P "x267" ; P "x347"; P "x357"; P "x367" ]] @
-          [[ P "x148"; P "x158"; P "x168"; P "x248"; P "x258"; P "x268" ; P "x348"; P "x358"; P "x368" ]] @
-          [[ P "x149"; P "x159"; P "x169"; P "x249"; P "x259"; P "x269" ; P "x349"; P "x359"; P "x369" ]] ;;
+          [N "x116"; N "x126"];[N "x116"; N "x136"]; [N "x116"; N "x146"];[N "x116"; N "x156"];[N "x116"; N "x166"];[N "x116"; N "x176"];[N "x116"; N "x186"];[N "x116"; N "x196"];
+          [N "x126"; N "x136"];[N "x126"; N "x146"]; [N "x126"; N "x156"];[N "x126"; N "x166"];[N "x126"; N "x176"];[N "x126"; N "x186"];[N "x126"; N "x196"];
+          [N "x136"; N "x146"];[N "x136"; N "x156"]; [N "x136"; N "x166"];[N "x136"; N "x176"];[N "x136"; N "x186"];[N "x136"; N "x196"];
+          [N "x146"; N "x156"];[N "x146"; N "x166"]; [N "x146"; N "x176"];[N "x146"; N "x186"];[N "x146"; N "x196"];
+          [N "x156"; N "x166"];[N "x156"; N "x176"]; [N "x156"; N "x186"];[N "x156"; N "x196"];
+          [N "x166"; N "x176"];[N "x166"; N "x186"]; [N "x166"; N "x196"];
+          [N "x176"; N "x186"];[N "x176"; N "x196"];
+          [N "x186"; N "x196"];
 
-let a3 =  [[ P "x171"; P "x181"; P "x191"; P "x271"; P "x281"; P "x291" ; P "x371"; P "x381"; P "x391" ]] @
-          [[ P "x172"; P "x182"; P "x192"; P "x272"; P "x282"; P "x292" ; P "x372"; P "x382"; P "x392" ]] @
-          [[ P "x173"; P "x183"; P "x193"; P "x273"; P "x283"; P "x293" ; P "x373"; P "x383"; P "x393" ]] @
-          [[ P "x174"; P "x184"; P "x194"; P "x274"; P "x284"; P "x294" ; P "x374"; P "x384"; P "x394" ]] @
-          [[ P "x175"; P "x185"; P "x195"; P "x275"; P "x285"; P "x295" ; P "x375"; P "x385"; P "x395" ]] @
-          [[ P "x176"; P "x186"; P "x196"; P "x276"; P "x286"; P "x296" ; P "x376"; P "x386"; P "x396" ]] @
-          [[ P "x177"; P "x187"; P "x197"; P "x277"; P "x287"; P "x297" ; P "x377"; P "x387"; P "x397" ]] @
-          [[ P "x178"; P "x188"; P "x198"; P "x278"; P "x288"; P "x298" ; P "x378"; P "x388"; P "x398" ]] @
-          [[ P "x179"; P "x189"; P "x199"; P "x279"; P "x289"; P "x299" ; P "x379"; P "x389"; P "x399" ]] ;;
+          [N "x117"; N "x127"];[N "x117"; N "x137"]; [N "x117"; N "x147"];[N "x117"; N "x157"];[N "x117"; N "x167"];[N "x117"; N "x177"];[N "x117"; N "x187"];[N "x117"; N "x197"];
+          [N "x127"; N "x137"];[N "x127"; N "x147"]; [N "x127"; N "x157"];[N "x127"; N "x167"];[N "x127"; N "x177"];[N "x127"; N "x187"];[N "x127"; N "x197"];
+          [N "x137"; N "x147"];[N "x137"; N "x157"]; [N "x137"; N "x167"];[N "x137"; N "x177"];[N "x137"; N "x187"];[N "x137"; N "x197"];
+          [N "x147"; N "x157"];[N "x147"; N "x167"]; [N "x147"; N "x177"];[N "x147"; N "x187"];[N "x147"; N "x197"];
+          [N "x157"; N "x167"];[N "x157"; N "x177"]; [N "x157"; N "x187"];[N "x157"; N "x197"];
+          [N "x167"; N "x177"];[N "x167"; N "x187"]; [N "x167"; N "x197"];
+          [N "x177"; N "x187"];[N "x177"; N "x197"];
+          [N "x187"; N "x197"];
 
-let a4 =  [[ P "x411"; P "x421"; P "x431"; P "x511"; P "x521"; P "x531" ; P "x611"; P "x621"; P "x631" ]] @
-          [[ P "x412"; P "x422"; P "x432"; P "x512"; P "x522"; P "x532" ; P "x612"; P "x622"; P "x632" ]] @
-          [[ P "x413"; P "x423"; P "x433"; P "x513"; P "x523"; P "x533" ; P "x613"; P "x623"; P "x633" ]] @
-          [[ P "x414"; P "x424"; P "x434"; P "x514"; P "x524"; P "x534" ; P "x614"; P "x624"; P "x634" ]] @
-          [[ P "x415"; P "x425"; P "x435"; P "x515"; P "x525"; P "x535" ; P "x615"; P "x625"; P "x635" ]] @
-          [[ P "x416"; P "x426"; P "x436"; P "x516"; P "x526"; P "x536" ; P "x616"; P "x626"; P "x636" ]] @
-          [[ P "x417"; P "x427"; P "x437"; P "x517"; P "x527"; P "x537" ; P "x617"; P "x627"; P "x637" ]] @
-          [[ P "x418"; P "x428"; P "x438"; P "x518"; P "x528"; P "x538" ; P "x618"; P "x628"; P "x638" ]] @
-          [[ P "x419"; P "x429"; P "x439"; P "x519"; P "x529"; P "x539" ; P "x619"; P "x629"; P "x639" ]] ;;
+          [N "x118"; N "x128"];[N "x118"; N "x138"]; [N "x118"; N "x148"];[N "x118"; N "x158"];[N "x118"; N "x168"];[N "x118"; N "x178"];[N "x118"; N "x188"];[N "x118"; N "x198"];
+          [N "x128"; N "x138"];[N "x128"; N "x148"]; [N "x128"; N "x158"];[N "x128"; N "x168"];[N "x128"; N "x178"];[N "x128"; N "x188"];[N "x128"; N "x198"];
+          [N "x138"; N "x148"];[N "x138"; N "x158"]; [N "x138"; N "x168"];[N "x138"; N "x178"];[N "x138"; N "x188"];[N "x138"; N "x198"];
+          [N "x148"; N "x158"];[N "x148"; N "x168"]; [N "x148"; N "x178"];[N "x148"; N "x188"];[N "x148"; N "x198"];
+          [N "x158"; N "x168"];[N "x158"; N "x178"]; [N "x158"; N "x188"];[N "x158"; N "x198"];
+          [N "x168"; N "x178"];[N "x168"; N "x188"]; [N "x168"; N "x198"];
+          [N "x178"; N "x188"];[N "x178"; N "x198"];
+          [N "x188"; N "x198"];
 
-let a5 =  [[ P "x441"; P "x451"; P "x461"; P "x541"; P "x551"; P "x561" ; P "x641"; P "x651"; P "x661" ]] @
-          [[ P "x442"; P "x452"; P "x462"; P "x542"; P "x552"; P "x562" ; P "x642"; P "x652"; P "x662" ]] @
-          [[ P "x443"; P "x453"; P "x463"; P "x543"; P "x553"; P "x563" ; P "x643"; P "x653"; P "x663" ]] @
-          [[ P "x444"; P "x454"; P "x464"; P "x544"; P "x554"; P "x564" ; P "x644"; P "x654"; P "x664" ]] @
-          [[ P "x445"; P "x455"; P "x465"; P "x545"; P "x555"; P "x565" ; P "x645"; P "x655"; P "x665" ]] @
-          [[ P "x446"; P "x456"; P "x466"; P "x546"; P "x556"; P "x566" ; P "x646"; P "x656"; P "x666" ]] @
-          [[ P "x447"; P "x457"; P "x467"; P "x547"; P "x557"; P "x567" ; P "x647"; P "x657"; P "x667" ]] @
-          [[ P "x448"; P "x458"; P "x468"; P "x548"; P "x558"; P "x568" ; P "x648"; P "x658"; P "x668" ]] @
-          [[ P "x449"; P "x459"; P "x469"; P "x549"; P "x559"; P "x569" ; P "x649"; P "x659"; P "x669" ]] ;;
-let a6 =  [[ P "x471"; P "x481"; P "x491"; P "x571"; P "x581"; P "x591" ; P "x671"; P "x681"; P "x691" ]] @
-          [[ P "x472"; P "x482"; P "x492"; P "x572"; P "x582"; P "x592" ; P "x672"; P "x682"; P "x692" ]] @
-          [[ P "x473"; P "x483"; P "x493"; P "x573"; P "x583"; P "x593" ; P "x673"; P "x683"; P "x693" ]] @
-          [[ P "x474"; P "x484"; P "x494"; P "x574"; P "x584"; P "x594" ; P "x674"; P "x684"; P "x694" ]] @
-          [[ P "x475"; P "x485"; P "x495"; P "x575"; P "x585"; P "x595" ; P "x675"; P "x685"; P "x695" ]] @
-          [[ P "x476"; P "x486"; P "x496"; P "x576"; P "x586"; P "x596" ; P "x676"; P "x686"; P "x696" ]] @
-          [[ P "x477"; P "x487"; P "x497"; P "x577"; P "x587"; P "x597" ; P "x677"; P "x687"; P "x697" ]] @
-          [[ P "x478"; P "x488"; P "x498"; P "x578"; P "x588"; P "x598" ; P "x678"; P "x688"; P "x698" ]] @
-          [[ P "x479"; P "x489"; P "x499"; P "x579"; P "x589"; P "x599" ; P "x679"; P "x689"; P "x699" ]] ;;
+          [N "x119"; N "x129"];[N "x119"; N "x139"]; [N "x119"; N "x149"];[N "x119"; N "x159"];[N "x119"; N "x169"];[N "x119"; N "x179"];[N "x119"; N "x189"];[N "x119"; N "x199"];
+          [N "x129"; N "x139"];[N "x129"; N "x149"]; [N "x129"; N "x159"];[N "x129"; N "x169"];[N "x129"; N "x179"];[N "x129"; N "x189"];[N "x129"; N "x199"];
+          [N "x139"; N "x149"];[N "x139"; N "x159"]; [N "x139"; N "x169"];[N "x139"; N "x179"];[N "x139"; N "x189"];[N "x139"; N "x199"];
+          [N "x149"; N "x159"];[N "x149"; N "x169"]; [N "x149"; N "x179"];[N "x149"; N "x189"];[N "x149"; N "x199"];
+          [N "x159"; N "x169"];[N "x159"; N "x179"]; [N "x159"; N "x189"];[N "x159"; N "x199"];
+          [N "x169"; N "x179"];[N "x169"; N "x189"]; [N "x169"; N "x199"];
+          [N "x179"; N "x189"];[N "x179"; N "x199"];
+          [N "x189"; N "x199"]];;
 
-let a7 =  [[ P "x711"; P "x721"; P "x731"; P "x811"; P "x821"; P "x831" ; P "x911"; P "x921"; P "x931" ]] @
-          [[ P "x712"; P "x722"; P "x732"; P "x812"; P "x822"; P "x832" ; P "x912"; P "x922"; P "x932" ]] @
-          [[ P "x713"; P "x723"; P "x733"; P "x813"; P "x823"; P "x833" ; P "x913"; P "x923"; P "x933" ]] @
-          [[ P "x714"; P "x724"; P "x734"; P "x814"; P "x824"; P "x834" ; P "x914"; P "x924"; P "x934" ]] @
-          [[ P "x715"; P "x725"; P "x735"; P "x815"; P "x825"; P "x835" ; P "x915"; P "x925"; P "x935" ]] @
-          [[ P "x716"; P "x726"; P "x736"; P "x816"; P "x826"; P "x836" ; P "x916"; P "x926"; P "x936" ]] @
-          [[ P "x717"; P "x727"; P "x737"; P "x817"; P "x827"; P "x837" ; P "x917"; P "x927"; P "x937" ]] @
-          [[ P "x718"; P "x728"; P "x738"; P "x818"; P "x828"; P "x838" ; P "x918"; P "x928"; P "x938" ]] @
-          [[ P "x719"; P "x729"; P "x739"; P "x819"; P "x829"; P "x839" ; P "x919"; P "x929"; P "x939" ]] ;;
+let mini_sudok = [ [P "x144"];[P "x155"]; [P "x166"];[P "x177"]; [P "x188"]];;
+let c = c1 @ c2 @ mini_sudok ;;
 
-let a8 =  [[ P "x741"; P "x751"; P "x761"; P "x841"; P "x851"; P "x861" ; P "x941"; P "x951"; P "x961" ]] @
-          [[ P "x742"; P "x752"; P "x762"; P "x842"; P "x852"; P "x862" ; P "x942"; P "x952"; P "x962" ]] @
-          [[ P "x743"; P "x753"; P "x763"; P "x843"; P "x853"; P "x863" ; P "x943"; P "x953"; P "x963" ]] @
-          [[ P "x744"; P "x754"; P "x764"; P "x844"; P "x854"; P "x864" ; P "x944"; P "x954"; P "x964" ]] @
-          [[ P "x745"; P "x755"; P "x765"; P "x845"; P "x855"; P "x865" ; P "x945"; P "x955"; P "x965" ]] @
-          [[ P "x746"; P "x756"; P "x766"; P "x846"; P "x856"; P "x866" ; P "x946"; P "x956"; P "x966" ]] @
-          [[ P "x747"; P "x757"; P "x767"; P "x847"; P "x857"; P "x867" ; P "x947"; P "x957"; P "x967" ]] @
-          [[ P "x748"; P "x758"; P "x768"; P "x848"; P "x858"; P "x868" ; P "x948"; P "x958"; P "x968" ]] @
-          [[ P "x749"; P "x759"; P "x769"; P "x849"; P "x859"; P "x869" ; P "x949"; P "x959"; P "x969" ]] ;;
-
-let a9 =  [[ P "x771"; P "x781"; P "x791"; P "x871"; P "x881"; P "x891" ; P "x971"; P "x981"; P "x991" ]] @
-          [[ P "x772"; P "x782"; P "x792"; P "x872"; P "x882"; P "x892" ; P "x972"; P "x982"; P "x992" ]] @
-          [[ P "x773"; P "x783"; P "x793"; P "x873"; P "x883"; P "x893" ; P "x973"; P "x983"; P "x993" ]] @
-          [[ P "x774"; P "x784"; P "x794"; P "x874"; P "x884"; P "x894" ; P "x974"; P "x984"; P "x994" ]] @
-          [[ P "x775"; P "x785"; P "x795"; P "x875"; P "x885"; P "x895" ; P "x975"; P "x985"; P "x995" ]] @
-          [[ P "x776"; P "x786"; P "x796"; P "x876"; P "x886"; P "x896" ; P "x976"; P "x986"; P "x996" ]] @
-          [[ P "x777"; P "x787"; P "x797"; P "x877"; P "x887"; P "x897" ; P "x977"; P "x987"; P "x997" ]] @
-          [[ P "x778"; P "x788"; P "x798"; P "x878"; P "x888"; P "x898" ; P "x978"; P "x988"; P "x998" ]] @
-          [[ P "x779"; P "x789"; P "x799"; P "x879"; P "x889"; P "x899" ; P "x979"; P "x989"; P "x999" ]] ;;
-
-(* each entry has at most one value *)
-let d =[[ N "x111";N "x112"];[N "x111";N "x113"];[N "x111";N "x114"];[N "x111";N "x115"];[N "x111";N "x116"];[N "x111";N "x117"];[N "x111";N "x118"];[N "x111";N "x119"];          
-          [ N "x121";N "x122"];[N "x121";N "x123"];[N "x121";N "x124"];[N "x121";N "x125"];[N "x121";N "x126"];[N "x121";N "x127"];[N "x121";N "x128"];[N "x121";N "x129"];          
-          [ N "x131";N "x132"];[N "x131";N "x133"];[N "x131";N "x134"];[N "x131";N "x135"];[N "x131";N "x136"];[N "x131";N "x137"];[N "x131";N "x138"];[N "x131";N "x139"];          
-          [ N "x141";N "x142"];[N "x141";N "x143"];[N "x141";N "x144"];[N "x141";N "x145"];[N "x141";N "x146"];[N "x141";N "x147"];[N "x141";N "x148"];[N "x141";N "x149"];          
-          [ N "x151";N "x152"];[N "x151";N "x153"];[N "x151";N "x154"];[N "x151";N "x155"];[N "x151";N "x156"];[N "x151";N "x157"];[N "x151";N "x158"];[N "x151";N "x159"];         
-          [ N "x161";N "x162"];[N "x161";N "x163"];[N "x161";N "x164"];[N "x161";N "x165"];[N "x161";N "x166"];[N "x161";N "x167"];[N "x161";N "x168"];[N "x161";N "x169"];          
-          [ N "x171";N "x172"];[N "x171";N "x173"];[N "x171";N "x174"];[N "x171";N "x175"];[N "x171";N "x176"];[N "x171";N "x177"];[N "x171";N "x178"];[N "x171";N "x179"];          
-          [ N "x181";N "x182"];[N "x181";N "x183"];[N "x181";N "x184"];[N "x181";N "x185"];[N "x181";N "x186"];[N "x181";N "x187"];[N "x181";N "x188"];[N "x181";N "x189"];          
-          [ N "x191";N "x192"];[N "x191";N "x193"];[N "x191";N "x194"];[N "x191";N "x195"];[N "x191";N "x196"];[N "x191";N "x197"];[N "x191";N "x198"];[N "x191";N "x199"];          
-
-          [ N "x211";N "x212"];[N "x211";N "x213"];[N "x211";N "x214"];[N "x211";N "x215"];[N "x211";N "x216"];[N "x211";N "x217"];[N "x211";N "x218"];[N "x211";N "x219"];          
-          [ N "x221";N "x222"];[N "x221";N "x223"];[N "x221";N "x224"];[N "x221";N "x225"];[N "x221";N "x226"];[N "x221";N "x227"];[N "x221";N "x228"];[N "x221";N "x229"];          
-          [ N "x231";N "x232"];[N "x231";N "x233"];[N "x231";N "x234"];[N "x231";N "x235"];[N "x231";N "x236"];[N "x231";N "x237"];[N "x231";N "x238"];[N "x231";N "x239"];          
-          [ N "x241";N "x242"];[N "x241";N "x243"];[N "x241";N "x244"];[N "x241";N "x245"];[N "x241";N "x246"];[N "x241";N "x247"];[N "x241";N "x248"];[N "x241";N "x249"];          
-          [ N "x251";N "x252"];[N "x251";N "x253"];[N "x251";N "x254"];[N "x251";N "x255"];[N "x251";N "x256"];[N "x251";N "x257"];[N "x251";N "x258"];[N "x251";N "x259"];         
-          [ N "x261";N "x262"];[N "x261";N "x263"];[N "x261";N "x264"];[N "x261";N "x265"];[N "x261";N "x266"];[N "x261";N "x267"];[N "x261";N "x268"];[N "x261";N "x269"];          
-          [ N "x271";N "x272"];[N "x271";N "x273"];[N "x271";N "x274"];[N "x271";N "x275"];[N "x271";N "x276"];[N "x271";N "x277"];[N "x271";N "x278"];[N "x271";N "x279"];          
-          [ N "x281";N "x282"];[N "x281";N "x283"];[N "x281";N "x284"];[N "x281";N "x285"];[N "x281";N "x286"];[N "x281";N "x287"];[N "x281";N "x288"];[N "x281";N "x289"];          
-          [ N "x291";N "x292"];[N "x291";N "x293"];[N "x291";N "x294"];[N "x291";N "x295"];[N "x291";N "x296"];[N "x291";N "x297"];[N "x291";N "x298"];[N "x291";N "x299"];          
-
-          [ N "x311";N "x312"];[N "x311";N "x313"];[N "x311";N "x314"];[N "x311";N "x315"];[N "x311";N "x316"];[N "x311";N "x317"];[N "x311";N "x318"];[N "x311";N "x319"];          
-          [ N "x321";N "x322"];[N "x321";N "x323"];[N "x321";N "x324"];[N "x321";N "x325"];[N "x321";N "x326"];[N "x321";N "x327"];[N "x321";N "x328"];[N "x321";N "x329"];          
-          [ N "x331";N "x332"];[N "x331";N "x333"];[N "x331";N "x334"];[N "x331";N "x335"];[N "x331";N "x336"];[N "x331";N "x337"];[N "x331";N "x338"];[N "x331";N "x339"];          
-          [ N "x341";N "x342"];[N "x341";N "x343"];[N "x341";N "x344"];[N "x341";N "x345"];[N "x341";N "x346"];[N "x341";N "x347"];[N "x341";N "x348"];[N "x341";N "x349"];          
-          [ N "x351";N "x352"];[N "x351";N "x353"];[N "x351";N "x354"];[N "x351";N "x355"];[N "x351";N "x356"];[N "x351";N "x357"];[N "x351";N "x358"];[N "x351";N "x359"];         
-          [ N "x361";N "x362"];[N "x361";N "x363"];[N "x361";N "x364"];[N "x361";N "x365"];[N "x361";N "x366"];[N "x361";N "x367"];[N "x361";N "x368"];[N "x361";N "x369"];          
-          [ N "x371";N "x372"];[N "x371";N "x373"];[N "x371";N "x374"];[N "x371";N "x375"];[N "x371";N "x376"];[N "x371";N "x377"];[N "x371";N "x378"];[N "x371";N "x379"];          
-          [ N "x381";N "x382"];[N "x381";N "x383"];[N "x381";N "x384"];[N "x381";N "x385"];[N "x381";N "x386"];[N "x381";N "x387"];[N "x381";N "x388"];[N "x381";N "x389"];          
-          [ N "x391";N "x392"];[N "x391";N "x393"];[N "x391";N "x394"];[N "x391";N "x395"];[N "x391";N "x396"];[N "x391";N "x397"];[N "x391";N "x398"];[N "x391";N "x399"];          
-
-          [ N "x411";N "x412"];[N "x411";N "x413"];[N "x411";N "x414"];[N "x411";N "x415"];[N "x411";N "x416"];[N "x411";N "x417"];[N "x411";N "x418"];[N "x411";N "x419"];          
-          [ N "x421";N "x422"];[N "x421";N "x423"];[N "x421";N "x424"];[N "x421";N "x425"];[N "x421";N "x426"];[N "x421";N "x427"];[N "x421";N "x428"];[N "x421";N "x429"];          
-          [ N "x431";N "x432"];[N "x431";N "x433"];[N "x431";N "x434"];[N "x431";N "x435"];[N "x431";N "x436"];[N "x431";N "x437"];[N "x431";N "x438"];[N "x431";N "x439"];          
-          [ N "x441";N "x442"];[N "x441";N "x443"];[N "x441";N "x444"];[N "x441";N "x445"];[N "x441";N "x446"];[N "x441";N "x447"];[N "x441";N "x448"];[N "x441";N "x449"];          
-          [ N "x451";N "x452"];[N "x451";N "x453"];[N "x451";N "x454"];[N "x451";N "x455"];[N "x451";N "x456"];[N "x451";N "x457"];[N "x451";N "x458"];[N "x451";N "x459"];         
-          [ N "x461";N "x462"];[N "x461";N "x463"];[N "x461";N "x464"];[N "x461";N "x465"];[N "x461";N "x466"];[N "x461";N "x467"];[N "x461";N "x468"];[N "x461";N "x469"];          
-          [ N "x471";N "x472"];[N "x471";N "x473"];[N "x471";N "x474"];[N "x471";N "x475"];[N "x471";N "x476"];[N "x471";N "x477"];[N "x471";N "x478"];[N "x471";N "x479"];          
-          [ N "x481";N "x482"];[N "x481";N "x483"];[N "x481";N "x484"];[N "x481";N "x485"];[N "x481";N "x486"];[N "x481";N "x487"];[N "x481";N "x488"];[N "x481";N "x489"];          
-          [ N "x491";N "x492"];[N "x491";N "x493"];[N "x491";N "x494"];[N "x491";N "x495"];[N "x491";N "x496"];[N "x491";N "x497"];[N "x491";N "x498"];[N "x491";N "x499"];          
-
-          [ N "x511";N "x512"];[N "x511";N "x513"];[N "x511";N "x514"];[N "x511";N "x515"];[N "x511";N "x516"];[N "x511";N "x517"];[N "x511";N "x518"];[N "x511";N "x519"];          
-          [ N "x521";N "x522"];[N "x521";N "x523"];[N "x521";N "x524"];[N "x521";N "x525"];[N "x521";N "x526"];[N "x521";N "x527"];[N "x521";N "x528"];[N "x521";N "x529"];          
-          [ N "x531";N "x532"];[N "x531";N "x533"];[N "x531";N "x534"];[N "x531";N "x535"];[N "x531";N "x536"];[N "x531";N "x537"];[N "x531";N "x538"];[N "x531";N "x539"];          
-          [ N "x541";N "x542"];[N "x541";N "x543"];[N "x541";N "x544"];[N "x541";N "x545"];[N "x541";N "x546"];[N "x541";N "x547"];[N "x541";N "x548"];[N "x541";N "x549"];          
-          [ N "x551";N "x552"];[N "x551";N "x553"];[N "x551";N "x554"];[N "x551";N "x555"];[N "x551";N "x556"];[N "x551";N "x557"];[N "x551";N "x558"];[N "x551";N "x559"];         
-          [ N "x561";N "x562"];[N "x561";N "x563"];[N "x561";N "x564"];[N "x561";N "x565"];[N "x561";N "x566"];[N "x561";N "x567"];[N "x561";N "x568"];[N "x561";N "x569"];          
-          [ N "x571";N "x572"];[N "x571";N "x573"];[N "x571";N "x574"];[N "x571";N "x575"];[N "x571";N "x576"];[N "x571";N "x577"];[N "x571";N "x578"];[N "x571";N "x579"];          
-          [ N "x581";N "x582"];[N "x581";N "x583"];[N "x581";N "x584"];[N "x581";N "x585"];[N "x581";N "x586"];[N "x581";N "x587"];[N "x581";N "x588"];[N "x581";N "x589"];          
-          [ N "x591";N "x592"];[N "x591";N "x593"];[N "x591";N "x594"];[N "x591";N "x595"];[N "x591";N "x596"];[N "x591";N "x597"];[N "x591";N "x598"];[N "x591";N "x599"];          
-
-          [ N "x611";N "x612"];[N "x611";N "x613"];[N "x611";N "x614"];[N "x611";N "x615"];[N "x611";N "x616"];[N "x611";N "x617"];[N "x611";N "x618"];[N "x611";N "x619"];          
-          [ N "x621";N "x622"];[N "x621";N "x623"];[N "x621";N "x624"];[N "x621";N "x625"];[N "x621";N "x626"];[N "x621";N "x627"];[N "x621";N "x628"];[N "x621";N "x629"];          
-          [ N "x631";N "x632"];[N "x631";N "x633"];[N "x631";N "x634"];[N "x631";N "x635"];[N "x631";N "x636"];[N "x631";N "x637"];[N "x631";N "x638"];[N "x631";N "x639"];          
-          [ N "x641";N "x642"];[N "x641";N "x643"];[N "x641";N "x644"];[N "x641";N "x645"];[N "x641";N "x646"];[N "x641";N "x647"];[N "x641";N "x648"];[N "x641";N "x649"];          
-          [ N "x651";N "x652"];[N "x651";N "x653"];[N "x651";N "x654"];[N "x651";N "x655"];[N "x651";N "x656"];[N "x651";N "x657"];[N "x651";N "x658"];[N "x651";N "x659"];         
-          [ N "x661";N "x662"];[N "x661";N "x663"];[N "x661";N "x664"];[N "x661";N "x665"];[N "x661";N "x666"];[N "x661";N "x667"];[N "x661";N "x668"];[N "x661";N "x669"];          
-          [ N "x671";N "x672"];[N "x671";N "x673"];[N "x671";N "x674"];[N "x671";N "x675"];[N "x671";N "x676"];[N "x671";N "x677"];[N "x671";N "x678"];[N "x671";N "x679"];          
-          [ N "x681";N "x682"];[N "x681";N "x683"];[N "x681";N "x684"];[N "x681";N "x685"];[N "x681";N "x686"];[N "x681";N "x687"];[N "x681";N "x688"];[N "x681";N "x689"];          
-          [ N "x691";N "x692"];[N "x691";N "x693"];[N "x691";N "x694"];[N "x691";N "x695"];[N "x691";N "x696"];[N "x691";N "x697"];[N "x691";N "x698"];[N "x691";N "x699"];          
-
-          [ N "x711";N "x712"];[N "x711";N "x713"];[N "x711";N "x714"];[N "x711";N "x715"];[N "x711";N "x716"];[N "x711";N "x717"];[N "x711";N "x718"];[N "x711";N "x719"];          
-          [ N "x721";N "x722"];[N "x721";N "x723"];[N "x721";N "x724"];[N "x721";N "x725"];[N "x721";N "x726"];[N "x721";N "x727"];[N "x721";N "x728"];[N "x721";N "x729"];          
-          [ N "x731";N "x732"];[N "x731";N "x733"];[N "x731";N "x734"];[N "x731";N "x735"];[N "x731";N "x736"];[N "x731";N "x737"];[N "x731";N "x738"];[N "x731";N "x739"];          
-          [ N "x741";N "x742"];[N "x741";N "x743"];[N "x741";N "x744"];[N "x741";N "x745"];[N "x741";N "x746"];[N "x741";N "x747"];[N "x741";N "x748"];[N "x741";N "x749"];          
-          [ N "x751";N "x752"];[N "x751";N "x753"];[N "x751";N "x754"];[N "x751";N "x755"];[N "x751";N "x756"];[N "x751";N "x757"];[N "x751";N "x758"];[N "x751";N "x759"];         
-          [ N "x761";N "x762"];[N "x761";N "x763"];[N "x761";N "x764"];[N "x761";N "x765"];[N "x761";N "x766"];[N "x761";N "x767"];[N "x761";N "x768"];[N "x761";N "x769"];          
-          [ N "x771";N "x772"];[N "x771";N "x773"];[N "x771";N "x774"];[N "x771";N "x775"];[N "x771";N "x776"];[N "x771";N "x777"];[N "x771";N "x778"];[N "x771";N "x779"];          
-          [ N "x781";N "x782"];[N "x781";N "x783"];[N "x781";N "x784"];[N "x781";N "x785"];[N "x781";N "x786"];[N "x781";N "x787"];[N "x781";N "x788"];[N "x781";N "x789"];          
-          [ N "x791";N "x792"];[N "x791";N "x793"];[N "x791";N "x794"];[N "x791";N "x795"];[N "x791";N "x796"];[N "x791";N "x797"];[N "x791";N "x798"];[N "x791";N "x799"];          
-
-          [ N "x811";N "x812"];[N "x811";N "x813"];[N "x811";N "x814"];[N "x811";N "x815"];[N "x811";N "x816"];[N "x811";N "x817"];[N "x811";N "x818"];[N "x811";N "x819"];          
-          [ N "x821";N "x822"];[N "x821";N "x823"];[N "x821";N "x824"];[N "x821";N "x825"];[N "x821";N "x826"];[N "x821";N "x827"];[N "x821";N "x828"];[N "x821";N "x829"];          
-          [ N "x831";N "x832"];[N "x831";N "x833"];[N "x831";N "x834"];[N "x831";N "x835"];[N "x831";N "x836"];[N "x831";N "x837"];[N "x831";N "x838"];[N "x831";N "x839"];          
-          [ N "x841";N "x842"];[N "x841";N "x843"];[N "x841";N "x844"];[N "x841";N "x845"];[N "x841";N "x846"];[N "x841";N "x847"];[N "x841";N "x848"];[N "x841";N "x849"];          
-          [ N "x851";N "x852"];[N "x851";N "x853"];[N "x851";N "x854"];[N "x851";N "x855"];[N "x851";N "x856"];[N "x851";N "x857"];[N "x851";N "x858"];[N "x851";N "x859"];         
-          [ N "x861";N "x862"];[N "x861";N "x863"];[N "x861";N "x864"];[N "x861";N "x865"];[N "x861";N "x866"];[N "x861";N "x867"];[N "x861";N "x868"];[N "x861";N "x869"];          
-          [ N "x871";N "x872"];[N "x871";N "x873"];[N "x871";N "x874"];[N "x871";N "x875"];[N "x871";N "x876"];[N "x871";N "x877"];[N "x871";N "x878"];[N "x871";N "x879"];          
-          [ N "x881";N "x882"];[N "x881";N "x883"];[N "x881";N "x884"];[N "x881";N "x885"];[N "x881";N "x886"];[N "x881";N "x887"];[N "x881";N "x888"];[N "x881";N "x889"];          
-          [ N "x891";N "x892"];[N "x891";N "x893"];[N "x891";N "x894"];[N "x891";N "x895"];[N "x891";N "x896"];[N "x891";N "x897"];[N "x891";N "x898"];[N "x891";N "x899"];          
-
-          [ N "x911";N "x912"];[N "x911";N "x913"];[N "x911";N "x914"];[N "x911";N "x915"];[N "x911";N "x916"];[N "x911";N "x917"];[N "x911";N "x918"];[N "x911";N "x919"];          
-          [ N "x921";N "x922"];[N "x921";N "x923"];[N "x921";N "x924"];[N "x921";N "x925"];[N "x921";N "x926"];[N "x921";N "x927"];[N "x921";N "x928"];[N "x921";N "x929"];          
-          [ N "x931";N "x932"];[N "x931";N "x933"];[N "x931";N "x934"];[N "x931";N "x935"];[N "x931";N "x936"];[N "x931";N "x937"];[N "x931";N "x938"];[N "x931";N "x939"];          
-          [ N "x941";N "x942"];[N "x941";N "x943"];[N "x941";N "x944"];[N "x941";N "x945"];[N "x941";N "x946"];[N "x941";N "x947"];[N "x941";N "x948"];[N "x941";N "x949"];          
-          [ N "x951";N "x952"];[N "x951";N "x953"];[N "x951";N "x954"];[N "x951";N "x955"];[N "x951";N "x956"];[N "x951";N "x957"];[N "x951";N "x958"];[N "x951";N "x959"];         
-          [ N "x961";N "x962"];[N "x961";N "x963"];[N "x961";N "x964"];[N "x961";N "x965"];[N "x961";N "x966"];[N "x961";N "x967"];[N "x961";N "x968"];[N "x961";N "x969"];          
-          [ N "x971";N "x972"];[N "x971";N "x973"];[N "x971";N "x974"];[N "x971";N "x975"];[N "x971";N "x976"];[N "x971";N "x977"];[N "x971";N "x978"];[N "x971";N "x979"];          
-          [ N "x981";N "x982"];[N "x981";N "x983"];[N "x981";N "x984"];[N "x981";N "x985"];[N "x981";N "x986"];[N "x981";N "x987"];[N "x981";N "x988"];[N "x981";N "x989"];          
-          [ N "x991";N "x992"];[N "x991";N "x993"];[N "x991";N "x994"];[N "x991";N "x995"];[N "x991";N "x996"];[N "x991";N "x997"];[N "x991";N "x998"];[N "x991";N "x999"];          
-] in 
- print_sudoku (sat (
-                    c1 @ c2 @ c3 @ c4 @ c5 @ c6 @ c7 @ c8 @ c9 @
-                    b1 @ b2 @ b3 @ b4 @ b5 @ b6 @ b7 @ b8 @ b9 @
-                    a1 @ a2 @ a3 @ a4 @ a5 @ a6 @ a7 @ a8 @ a9 @
-                    d)) ;;
-
+print_sudoku ( sat ( c1 @ c2 @ mini_sudok ) )   ;; 
 
 *)
+let c = c1 @ c2 @ c3 @ c4 @ c5 @ sudok1 
+ in  print_sudoku (sat c)  ;; 
+
+                
