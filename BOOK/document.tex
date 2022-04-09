@@ -4631,7 +4631,7 @@ let rec superpose_liste_aux l1 l2 occ = (* rend liste des occurences et substitu
 in superpose_liste_aux l1 l2 (occurences l1) ;;
 \end{Verbatim}
 
-\chapter{La calculabilité}
+\chapter{Calculabilité et complexité}
 
 \section{Les fonctions récursives}
 Commençons  par définir les fonctions récursives \textit{primitives} telles que formalisées par
@@ -4715,10 +4715,8 @@ let rec ack = function
 	| (n,p) -> ack (n-1, ack (n, p-1))
 \end{Verbatim}
 
-
 La fonction d’Ackermann croît très rapidement, en particulier $n \rightarrow A(n, n)$ croît
 plus rapidement que n’importe quelle fonction polynôme ou exponentielle.
-
 
 Gödel a ainsi introduit un troisième critère permettant d'étendre le scope de définition des
 fonctions numériques au-delà des fonctions récursives primitives. C'est le critère
@@ -4898,7 +4896,76 @@ etat:qf  position:0  lire:   bande:   nonXXXX
   $(ii) f$ est récursive sont équivalentes.
 \end{theoreme}
 
+\section{Complexité et théorème de Cook}
+\begin{definition}
+	Un problème est appelé NP-complet s'il vérifie les deux propriétés suivantes :
+	\begin{enumerate}
+		\item Toute solution pourra être vérifiée en temps polynomial
+		\item Tous les problèmes de la classe NP se ramènent à celui-ci via une réduction polynomiale 
+	\end{enumerate}
+\end{definition}
+L'algorithme SAT est significatif car il a été prouvé comme étant \textit{NP-complet}.
+\begin{definition}
+	SAT (satisfaisabilité en logique propositionnelle). \\
+	Instance : une formule conjonctive $\phi \in Prop[X] $ \\
+	Requête : $\phi$ est-elle satisfaisable ? 
+\end{definition}
+\begin{theoreme}
+	(COOK, 1971) - Le problème SAT est NP-complet.
+\end{theoreme}
+\begin{theoreme}
+Conjecture : $P\neq NP$
+\end{theoreme}
 
+\subsection{Implémentation de l'algorithme SAT}
+Pour des raisons d'efficacité, nous utilisons ici un principe de l'algorithme DPLL qui est la \textit{propagation unitaire}.
+L'algorithme recherche des solutions en parcourant l'arbre de recherche en profondeur. Cela s'implémente de manière
+intuitive avec une fonction récursive. L'algorithme s'arrête dès qu'une solution a été trouvée.
+
+\begin{Verbatim}
+let sat c : (bool*env) =
+  let rec sat_aux c liste_litt e : (bool*env)  = 
+    let c' = propag_unitaire c in
+    let e' = extend_env c' e in
+      if eval_cnf e' c' then (true,e') 
+      else 
+        let liste_litt' = (diff (recup_litteral c') (find_units_cnf2 c')) in
+        match liste_litt' with 
+         | hd::tl -> let (b1, e1) = sat_aux ([P hd]::c') tl ((hd,true)::e') in
+                if b1 then (b1,e1) 
+                else sat_aux ([N hd]::c') tl ((hd, false)::e')
+         | [] -> (false, [])
+   in sat_aux c (diff (recup_litteral c) (find_units_cnf2 c)) (init_env c) ;;
+\end{Verbatim}
+
+Voici la fonction de progation unitaire.
+\begin{Verbatim}
+let rec propag_unitaire c =
+  let units = find_units_cnf c 
+  in 
+  let rec propag_unitaire_aux c units =
+  match units with 
+    | [] -> c
+    | hd::tl -> propag_unitaire_aux (map (retire_unit hd) c) tl 
+in  let res = propag_unitaire_aux c units
+in if c=res then (filter (fun x -> not (x=[])) c) else propag_unitaire res ;;
+(* on propage jusqu'à l'obtention d'un point fixe *)
+\end{Verbatim}
+	
+Nous travaillons ici exclusivement sur des clauses normales conjonctives.
+Une clause normale conjonctive est une une conjonction de plusieurs disjonctions de plusieurs littéraux.
+Un littéral est un atome ou la négation d'un atome.
+\begin{Verbatim}
+type atome =  string ;;
+type lit =  P of atome | N of atome ;;
+type disj = lit list ;; 
+type cnf = disj list ;;
+\end{Verbatim}
+
+\subsection{Sudoku - SAT encoding}
+\begin{Verbatim}
+	
+\end{Verbatim}
 \chapter{Annexes / Divers}
 \section{Quelques fonctions sur les listes}
  
