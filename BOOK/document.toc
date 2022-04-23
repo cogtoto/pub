@@ -81,9 +81,10 @@
 \contentsline {section}{\numberline {6.1}Les fonctions r\IeC {\'e}cursives}{91}{section.6.1}%
 \contentsline {section}{\numberline {6.2}La machine de Turing}{93}{section.6.2}%
 \contentsline {section}{\numberline {6.3}La th\IeC {\`e}se de Church}{95}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Complexit\IeC {\'e} et th\IeC {\'e}or\IeC {\`e}me de Cook}{96}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Impl\IeC {\'e}mentation de l'algorithme SAT}{96}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Sudoku - SAT encoding}{97}{subsection.6.4.2}%
+\contentsline {section}{\numberline {6.4}Complexit\IeC {\'e}}{96}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Th\IeC {\'e}or\IeC {\`e}me de Cook}{96}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Impl\IeC {\'e}mentation de l'algorithme SAT}{96}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Sudoku - SAT encoding}{97}{subsection.6.4.3}%
 \contentsline {chapter}{\numberline {7}Annexes / Divers}{99}{chapter.7}%
 \contentsline {section}{\numberline {7.1}Quelques fonctions sur les listes}{99}{section.7.1}%
 \contentsline {section}{\numberline {7.2}Les listes mutables}{99}{section.7.2}%

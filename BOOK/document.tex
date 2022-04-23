@@ -2499,9 +2499,9 @@ level 2/.style={sibling distance=2cm},  level 3/.style={sibling distance=1.5cm}]
 \end{center}
 
 L'étape \textit{EVAL} va parcourir l'arbre syntaxique de l'expression, traiter cette expression et
-en exprimer une valeur mod\'{e}lis\'{e}e avex le type \verb+value+
+en exprimer une valeur mod\'{e}lis\'{e}e avec le type \verb+value+
 
-La fonction \verb+eval+ est une fonction prenant comme arguments une expression de type \verb+ast+ et un environnement.
+La fonction \verb+eval+ est une fonction prenant pour  arguments une expression de type \verb+ast+ et un environnement.
 Elle retourne une valeur de type \verb+exp+. Voici sa signature: \\
 \verb+val eval : ast -> env -> exp = <fun>+
 
@@ -4896,7 +4896,8 @@ etat:qf  position:0  lire:   bande:   nonXXXX
   $(ii) f$ est récursive sont équivalentes.
 \end{theoreme}
 
-\section{Complexité et théorème de Cook}
+\section{Complexité}
+\subsection{Théorème de Cook}
 \begin{definition}
 	Un problème est appelé NP-complet s'il vérifie les deux propriétés suivantes :
 	\begin{enumerate}
@@ -4963,9 +4964,115 @@ type cnf = disj list ;;
 \end{Verbatim}
 
 \subsection{Sudoku - SAT encoding}
+L'algorithme permettant de résoudre les sudokus peut être réalisé par l'algorithme SAT en modélisant
+les contraintes du sodoku sous la forme de clauses propositionnelles. Une variable $s_{xyz}$ représente que la
+case de la ligne $x$ et colonne $y$ porte le nombre $z$.
+\begin{enumerate}
+	\item Contrainte $C_1$. Il y a au moins un nombre pour chaque case 
+	$$ C_1 \triangleq \bigwedge _{x=1}^9  \bigwedge _{y=1}^9 \bigvee  _{z=1}^9 s_{xyz}$$
+
+	\item Contrainte $C_2$.  Chaque nombre apparait au plus une fois dans une ligne
+	$$  C_2 \triangleq \bigwedge _{y=1}^9  \bigwedge _{z=1}^9 \bigwedge _{x=1}^8 \bigwedge _{i=x+1}^9  ( \lnot s_{xyz} \vee \lnot s_{iyz} ) $$
+
+	\item  Contrainte $C_3$. Chaque nombre apparait au plus une fois dans une colonne
+	$$ \ C_3 \triangleq \bigwedge _{y=1}^9  \bigwedge _{z=1}^9 \bigwedge _{y=1}^8 \bigwedge _{i=y+1}^9  ( \lnot s_{xyz} \vee \lnot s_{xiz} ) $$
+
+	\item  Contraintes $C_1$ et $C_5$. Chaque nombre apparait au plus une fois dans une sous-grille 3x3
+	$$ \ C_4 \triangleq \bigwedge _{z=1}^9  \bigwedge _{i=0}^2 \bigwedge _{x=1}^3
+	 \bigwedge _{y=1}^3  \bigwedge _{k=y+1}^3  ( \lnot s_{(3i+x)(3j+y)z} \vee \lnot s_{(3i+x)(3j+k)z} ) $$
+
+	$$ \ C_5 \triangleq \bigwedge _{z=1}^9  \bigwedge _{i=0}^2 \bigwedge _{x=1}^3
+	 \bigwedge _{y=1}^3  \bigwedge _{k=x+1}^3  \bigwedge _{l=1}^3  ( \lnot s_{(3i+x)(3j+y)z} \vee \lnot s_{(3i+k)(3j+l)z} ) $$
+\end{enumerate}
+\begin{tiny}
 \begin{Verbatim}
-	
+let produce_C1 =
+  print_string "let c1 = [";
+  for x=1 to 9 do
+    for y=1 to 9 do
+      print_string "[" ;
+      for z=1 to 9 do
+        print_string ("P \"x"  ^ string_of_int x ^ string_of_int y ^ string_of_int z ^ (if z<>9 then "\"; " else "\"")  )
+      done ;
+      print_string ("]" ^ (if (x=9 && y=9)  then "" else ";") ^ "\n")  ;
+    done
+  done ;
+  print_string "]\n";
+;;
+
+(* C2 Each number appears at most once in each column *)
+let produce_C2 =
+  print_string "let c2 = [";
+  for y=1 to 9 do
+    for z=1 to 9 do
+      for x=1 to 8 do
+        for i=(x+1) to 9 do
+          print_string ("[ N \"x" ^ string_of_int x ^ string_of_int y ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int i ^ string_of_int y ^ string_of_int z  ^ "\"];\n ")
+        done
+      done
+    done
+  done ;
+  print_string "]\n" 
+;;
+
+(* C3 Each number appears at most once in each column *)
+let produce_C3 =
+  print_string "let c3 = [";
+  for x=1 to 9 do
+    for z=1 to 9 do
+      for y=1 to 8 do
+        for i=(y+1) to 9 do
+          print_string ("[ N \"x" ^ string_of_int x ^ string_of_int y ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int x ^ string_of_int i ^ string_of_int z  ^ "\"];\n ")
+        done
+      done
+    done
+  done ;
+  print_string "]\n" 
+;;
+
+(* C4 Each number appears at most once in each 3x3 sub-grid *)
+let produce_C4 =
+  print_string "let c4 = [";
+  for z=1 to 9 do
+    for i=0 to 2 do
+      for j=0 to 2 do
+        for x=1 to 3 do
+          for y=1 to 3 do
+            for k=(y+1) to 3 do
+          print_string ("[ N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+y) ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+k) ^ string_of_int z  ^ "\"];\n ")
+         done
+       done
+     done
+   done 
+  done
+done;
+  print_string "]\n" 
+;;
+let produce_C5 =
+  print_string "let c5 = [";
+  for z=1 to 9 do
+    for i=0 to 2 do
+      for j=0 to 2 do
+        for x=1 to 3 do
+          for y=1 to 3 do
+            for k=(x+1) to 3 do
+              for l=1 to 3 do
+          print_string ("[ N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+y) ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int (3*i+k) ^ string_of_int (3*j+l) ^ string_of_int z  ^ "\"];\n ")
+         done
+       done
+     done
+   done 
+  done
+done
+done; print_string "]\n" 
+;;
 \end{Verbatim}
+\end{tiny}
+
 \chapter{Annexes / Divers}
 \section{Quelques fonctions sur les listes}
  

@@ -168,7 +168,6 @@ let rec print_liste = function
 | hd::tl -> (print_string hd ; print_string "; "; print_liste tl)
 | _ -> () ;;
 
-
 let sudok1 =[ 
 [P "x116"]; [P "x121"]; [P "x135"];[P "x148"];[P "x154"];[P "x169"];[P "x177"];[P "x183"];[P "x192"];
 [P "x213"]; [P "x228"]; [P "x237"];[P "x242"];[P "x255"];[P "x261"];[P "x279"];[P "x284"];[P "x296"];
@@ -179,7 +178,6 @@ let sudok1 =[
 [P "x711"]; [P "x724"]; [P "x738"];[P "x747"];[P "x756"];[P "x763"];[P "x772"];[P "x785"];[P "x799"];
 [P "x819"]; [P "x825"]; [P "x836"];[P "x841"];[P "x852"];[P "x868"];[P "x873"];[P "x887"];[P "x894"];
 [P "x917"]; [P "x922"]; [P "x933"];[P "x945"];[P "x959"];[P "x964"];[P "x978"];[P "x988"]] ;; (* ;[P "x991"]];;*) 
-
 
 let sudok2 = 
   [[P "x115"]; [P "x123"]; [P "x157"];
@@ -192,7 +190,7 @@ let sudok2 =
    [P "x844"]; [P "x851"]; [P "x869"]; [P "x895"] ;
    [P "x958"]; [P "x987"]; [P "x999"]] ;;
                 
-let sudok3 = 
+let sudok3 =  (*difficile*)
   [[P "x128"]; [P "x146"]; [P "x152"];
    [P "x221"]; [P "x243"]; [P "x269"];[P "x272"]; 
    [P "x322"]; [P "x344"]; [P "x393"]; 
@@ -205,5 +203,4 @@ let sudok3 =
                 
 let c = c1 @ c2 @ c3 @ c4 @ c5 @ sudok3 
  in  print_sudoku (sat c)  ;; 
-
                 
