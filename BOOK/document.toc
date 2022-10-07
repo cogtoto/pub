@@ -5,13 +5,14 @@
 \contentsline {subsection}{\numberline {1.1.2}Analyse syntaxique avec menhir}{10}{subsection.1.1.2}%
 \contentsline {subsection}{\numberline {1.1.3}Impl\IeC {\'e}mentation du parsing en mode \textit {r\IeC {\'e}cursif descendant}}{11}{subsection.1.1.3}%
 \contentsline {section}{\numberline {1.2}Repr\IeC {\'e}sentation en ML}{13}{section.1.2}%
-\contentsline {section}{\numberline {1.3}La $\beta $-r\IeC {\'e}duction faible avec appel par valeur}{17}{section.1.3}%
-\contentsline {section}{\numberline {1.4}La r\IeC {\'e}cursivit\IeC {\'e}, le point fixe et la diagonale de Cantor}{18}{section.1.4}%
-\contentsline {section}{\numberline {1.5}\textit {Church} encoding. Les entiers et les bool\IeC {\'e}ens en $\lambda $-calcul}{24}{section.1.5}%
-\contentsline {subsection}{\numberline {1.5.1}Les entiers \textit {Church} }{24}{subsection.1.5.1}%
-\contentsline {subsection}{\numberline {1.5.2}Les bool\IeC {\'e}ens }{26}{subsection.1.5.2}%
-\contentsline {subsection}{\numberline {1.5.3}La fonction factorielle}{26}{subsection.1.5.3}%
-\contentsline {section}{\numberline {1.6}La notation de \textit {de Bruijn}}{26}{section.1.6}%
+\contentsline {section}{\numberline {1.3}D\IeC {\'e}monstration de la confluence du $\lambda $-calcul}{17}{section.1.3}%
+\contentsline {section}{\numberline {1.4}La $\beta $-r\IeC {\'e}duction faible avec appel par valeur}{17}{section.1.4}%
+\contentsline {section}{\numberline {1.5}La r\IeC {\'e}cursivit\IeC {\'e}, le point fixe et la diagonale de Cantor}{18}{section.1.5}%
+\contentsline {section}{\numberline {1.6}\textit {Church} encoding. Les entiers et les bool\IeC {\'e}ens en $\lambda $-calcul}{24}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Les entiers \textit {Church} }{24}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Les bool\IeC {\'e}ens }{26}{subsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.6.3}La fonction factorielle}{26}{subsection.1.6.3}%
+\contentsline {section}{\numberline {1.7}La notation de \textit {de Bruijn}}{26}{section.1.7}%
 \contentsline {chapter}{\numberline {2}Le $\lambda $-calcul simplement typ\IeC {\'e} et les Pure Type Systems}{29}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Le $\lambda $-calcul simplement typ\IeC {\'e}}{29}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Pr\IeC {\'e}sentation}{29}{subsection.2.1.1}%

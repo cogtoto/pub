@@ -325,7 +325,7 @@ De même, nous n'aurons plus la facilité syntaxique de l'associativité à gauc
 du corps des abstractions.
 Je ne sais pas si une telle grammaire peut être conçue pour une analyse en mode
 récursif descendant.
-Je pense que non (après m'être un peu cassé les cheveux là-dessus\ldots)
+Je pense que non (après m'être un peu cassé les cheveux là-dessus... ). 
 
 Voici le code associé.
 \begin{Verbatim}
@@ -660,6 +660,23 @@ Voici un exemple de terme qui ne termine pas et qui enfle.
 $$ (\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta (\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx)
 \rightarrow _\beta (\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta \ldots
 $$  
+
+\section{Démonstration de la confluence du $\lambda$-calcul}
+Le $\lambda$-calcul est bien confluent, c'est-à-dire que pour tout terme $M$, si $M\rightarrow _{*} M_1$ et  $M\rightarrow _{*} M_2$,
+alors il existe $M_3$ tel que $M_1\rightarrow _{*} M_3$ et  $M_2\rightarrow _{*} M_3$.
+
+Cependant, la démonstration pose quelques difficultés techniques.
+
+\begin{enumerate}
+	\item Il est difficile de raisonner par cas sur une relation $\rightarrow _{*}$ qui est la cloture transitive
+	 et réflexive de la réduction en une étape $\rightarrow$
+	\item La réduction en une étape $\rightarrow$ n'a pas la propriété du diamant : pour tout terme $M$,
+	 si $M\rightarrow  M_1$ et  $M\rightarrow M_2$,
+alors il existe $M_3$ tel que $M_1\rightarrow M_3$ et  $M_2\rightarrow M_3$.
+En effet, soit $R$ un redex qui se reduit en $R'$, le terme $(\lambda x.xx) R \rightarrow RR$ ou bien 
+ $(\lambda x.xx) R \rightarrow (\lambda x.xx) R'R'$. Il faudra une ou deux étapes pour arriver à $R'R'$. 
+\end{enumerate}
+
 
 \section{La $\beta$-réduction faible avec appel par valeur}
 Dans un langage fonctionnel comme SCHEME ou ML, il est important de noter que contrairement au $\lambda$-calcul, le corps de la lambda n'est pas \'{e}valu\'{e}. 
@@ -2115,7 +2132,7 @@ let exf = Lam ("x", False, I) (* ex falso quodlibet *)
 > λx:False.I
   (False→True) 
 \end{Verbatim}
-Voici un exemple simple manipulant la négation et la fonction d'induction du faux.
+Voici un exemple simple manipulant la négation et la fonction d'induction du faux.  
 
 \begin{coqdoccode}
 \coqdocnoindent
