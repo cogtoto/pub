@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex document"] 1665163085 "document.aux" "document.bbl" "document" 1665163101
+["bibtex document"] 1668974200 "document.aux" "document.bbl" "document" 1668974363
   "/usr/local/texlive/2020/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "book.bib" 1645035436 2855 8a745d28cbe5c30b234f4699ff71c44f ""
-  "document.aux" 1665163100 21218 352ef5e8f3549ec2ae720c0cac3d8b90 "pdflatex"
+  "book.bib" 1665215178 2982 1be6fb305cfec0b3c384150c4a7e60bc ""
+  "document.aux" 1668974362 22605 1620be6f4e2c9dcbbd2799db5526adbd "pdflatex"
   (generated)
   "document.bbl"
   "document.blg"
-["pdflatex"] 1665163085 "/home/vincent/vsc/BOOK/document.tex" "/home/vincent/vsc/BOOK/document.pdf" "document" 1665163101
-  "/home/vincent/vsc/BOOK/document.aux" 1665163100 21218 352ef5e8f3549ec2ae720c0cac3d8b90 ""
-  "/home/vincent/vsc/BOOK/document.tex" 1665163068 247416 66bdd2b335011c5fb2895d786c6ffe99 ""
+["pdflatex"] 1668974347 "/home/vincent/vsc/BOOK/document.tex" "/home/vincent/vsc/BOOK/document.pdf" "document" 1668974363
+  "/home/vincent/vsc/BOOK/document.aux" 1668974362 22605 1620be6f4e2c9dcbbd2799db5526adbd ""
+  "/home/vincent/vsc/BOOK/document.tex" 1668974346 259949 67fc4aafeeb370a9f29cbe00e491504b ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -310,11 +310,11 @@
   "bretagne3.jpg" 1617289044 196701 7fa9046dcbeedfcc059e7fe049fe4353 ""
   "bruegel.jpg" 1610378322 33477 0adc1a284b646b65ea1e323cc9200ed2 ""
   "coqdoc.sty" 1625476528 5494 d81d07c2738be88569ac158d76b4a72e ""
-  "document.aux" 1665163100 21218 352ef5e8f3549ec2ae720c0cac3d8b90 "pdflatex"
-  "document.bbl" 1665163085 2109 f5e2c2960dfe0551cef92b503f0870f8 "bibtex document"
-  "document.out" 1665163100 7685 13ebf14c9806af59f7b9a10ea7b2f8ed "pdflatex"
-  "document.tex" 1665163068 247416 66bdd2b335011c5fb2895d786c6ffe99 ""
-  "document.toc" 1665163100 12600 70dc0fe72223b8c9a44db01be110f4dc "pdflatex"
+  "document.aux" 1668974362 22605 1620be6f4e2c9dcbbd2799db5526adbd "pdflatex"
+  "document.bbl" 1668974200 2212 5c4174cad0d708294518df45ccc903f4 "bibtex document"
+  "document.out" 1668974362 8401 fc58ae7d6070700c2e05475de1cb62cd "pdflatex"
+  "document.tex" 1668974346 259949 67fc4aafeeb370a9f29cbe00e491504b ""
+  "document.toc" 1668974362 13569 0460efb01db6311ca524ba1465e68b49 "pdflatex"
   "flocon1.pdf" 1590582414 3154 1905a1aecba6b53e873cb0bac156a959 ""
   "flocon2.pdf" 1590582534 3523 5b6274a78e3198a404f3ced012e9b47a ""
   "flocon3.pdf" 1590582542 4029 b2a9dd34a588843f6a2cc24f0b8945f1 ""
@@ -327,10 +327,10 @@
   "snow.png" 1596030070 16909 4cb6489b3fcbb14e8cd6b0d2be9bf4eb ""
   "snow.tfm" 1595950409 64 cbc88c43b563f913e7e7affbd4819a4c ""
   (generated)
+  "document.toc"
   "document.aux"
+  "document.pdf"
+  "/home/vincent/vsc/BOOK/document.pdf"
+  "/home/vincent/vsc/BOOK/document.log"
   "document.log"
   "document.out"
-  "document.toc"
-  "/home/vincent/vsc/BOOK/document.log"
-  "/home/vincent/vsc/BOOK/document.pdf"
-  "document.pdf"

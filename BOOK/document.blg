@@ -13,6 +13,8 @@ Warning--empty publisher in genese
 Warning--empty year in genese
 Warning--empty publisher in baren
 Warning--empty year in baren
+Warning--empty publisher in baren_bible
+Warning--empty year in baren_bible
 Warning--empty publisher in gide
 Warning--empty year in gide
 Warning--can't use both author and editor fields in girard
@@ -25,45 +27,45 @@ Warning--empty publisher in poincare
 Warning--empty publisher in WS
 Warning--empty year in WS
 Warning--empty publisher in reflective
-You've used 20 entries,
+You've used 21 entries,
             2118 wiz_defined-function locations,
-            585 strings with 5279 characters,
-and the built_in function-call counts, 4384 in all, are:
-= -- 365
-> -- 152
+            587 strings with 5335 characters,
+and the built_in function-call counts, 4598 in all, are:
+= -- 381
+> -- 159
 < -- 1
-+ -- 66
-- -- 44
-* -- 216
-:= -- 749
-add.period$ -- 53
-call.type$ -- 20
-change.case$ -- 62
++ -- 70
+- -- 46
+* -- 229
+:= -- 784
+add.period$ -- 55
+call.type$ -- 21
+change.case$ -- 65
 chr.to.int$ -- 0
-cite$ -- 38
-duplicate$ -- 236
-empty$ -- 443
-format.name$ -- 44
-if$ -- 917
+cite$ -- 41
+duplicate$ -- 248
+empty$ -- 465
+format.name$ -- 46
+if$ -- 960
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 37
-newline$ -- 96
-num.names$ -- 38
-pop$ -- 178
+int.to.str$ -- 21
+missing$ -- 39
+newline$ -- 100
+num.names$ -- 40
+pop$ -- 189
 preamble$ -- 1
-purify$ -- 61
+purify$ -- 64
 quote$ -- 0
-skip$ -- 121
+skip$ -- 126
 stack$ -- 0
-substring$ -- 102
-swap$ -- 23
+substring$ -- 108
+swap$ -- 24
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 42
-warning$ -- 18
-while$ -- 38
-width$ -- 22
-write$ -- 180
-(There were 20 warnings)
+type$ -- 44
+warning$ -- 20
+while$ -- 40
+width$ -- 23
+write$ -- 187
+(There were 22 warnings)

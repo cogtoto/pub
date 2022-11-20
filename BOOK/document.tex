@@ -60,7 +60,7 @@
 the active will, the contemplative reason, and the desire for aesthetic perfection.} \cite{wm}
 
 
-C'est sous cet angle de l'esthétique que j'ai voulu ici modestement décrire quelques concepts 
+C'est sous cet angle de l'esthétique que j'ai voulu modestement décrire ici quelques concepts 
  des fondements mathématiques de l'informatique.
 
  \vspace{0.5cm}
@@ -606,12 +606,6 @@ Un corollaire ne devrait pas nécessiter de preuve car supposée évidente. La v
 	 }	  ;
 \end{tikzpicture}
 
-
-
-
-		 
-
-
 \begin{Verbatim}
 let t1 = App (Lam ("x",App (Lam ("y", App (Var ("x"), Var ("y"))),Var ("u"))), Var ("z")) ;;
 # fullReduc t1 ;;
@@ -662,19 +656,178 @@ $$ (\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta (\lambda x.xxx)(\lambda x.x
 $$  
 
 \section{Démonstration de la confluence du $\lambda$-calcul}
-Le $\lambda$-calcul est bien confluent, c'est-à-dire que pour tout terme $M$, si $M\rightarrow _{*} M_1$ et  $M\rightarrow _{*} M_2$,
-alors il existe $M_3$ tel que $M_1\rightarrow _{*} M_3$ et  $M_2\rightarrow _{*} M_3$.
+Comment prouver que le $\lambda$-calcul est bien confluent ? C'est-à-dire que pour tout terme $M$, si $M\twoheadrightarrow M_1$ et
+  $ M\twoheadrightarrow M_2 $,
+alors il existe $M_3$ tel que $M_1\twoheadrightarrow M_3$ et  $M_2\twoheadrightarrow  M_3$.
 
-Cependant, la démonstration pose quelques difficultés techniques.
+La démonstration pose quelques difficultés techniques.
 
 \begin{enumerate}
-	\item Il est difficile de raisonner par cas sur une relation $\rightarrow _{*}$ qui est la cloture transitive
+	\item Il est difficile de raisonner par cas sur une relation $\twoheadrightarrow $
+	 qui est la cloture transitive
 	 et réflexive de la réduction en une étape $\rightarrow$
-	\item La réduction en une étape $\rightarrow$ n'a pas la propriété du diamant : pour tout terme $M$,
+
+	\item La réduction en une étape $\rightarrow$ n'a pas la propriété du diamant. Nous la rappelons : pour tout terme $M$,
 	 si $M\rightarrow  M_1$ et  $M\rightarrow M_2$,
 alors il existe $M_3$ tel que $M_1\rightarrow M_3$ et  $M_2\rightarrow M_3$.
+
 En effet, soit $R$ un redex qui se reduit en $R'$, le terme $(\lambda x.xx) R \rightarrow RR$ ou bien 
- $(\lambda x.xx) R \rightarrow (\lambda x.xx) R'R'$. Il faudra une ou deux étapes pour arriver à $R'R'$. 
+ $(\lambda x.xx) R \rightarrow (\lambda x.xx) R'$. Il faudra une ou deux étapes pour arriver à $R'R'$. 
+
+ \item On démontre facilement (par étude de cas sur la structure du $\lambda$-terme) 
+ la faible confluence de la relation $\beta$, ç-à-d si $M \rightarrow M_1$ et $M \rightarrow M_2$, alors
+ il existe $M_3$ tel que $M_1 \twoheadrightarrow M_3$ et $M_2 \twoheadrightarrow M_3$.
+ Cependant la confluence faible n'implique pas la confluence si la relation n'est pas noetherienne.
+ C'est le cas du lambda calcul qui n'est pas fortement normalisant... 
+Considérons $\Omega \equiv \lambda x.xx $, nous avons une chaîne de réduction infinie $\Omega \rightarrow \Omega \rightarrow \dots $
+
+ \item Cependant, nous pourrons démontrer plus facilement la propriété du parallélogramme: pour tout terme $M$,
+  si $M\rightarrow M_1$ et  $M\twoheadrightarrow  M_2$,
+alors il existe $M_3$ tel que $M_1\twoheadrightarrow  M_3$ et  $M_2\twoheadrightarrow M_3$.
+
+Cette propriété du parallélogramme qui semble plus faible que la confluence lui est en fait équivalente. Cela
+s'explique par le diagramme suivant :
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+	\draw [-latex] (3,3) -- (2,2)  ;
+	\draw [-latex] (3,3) --node{$*$} (6,0)  ;
+	\draw [-latex] (2,2) --node{$*$} (5,-1)  ;
+	\draw [-latex] (6,0) --node{$*$} (5,-1)  ;
+
+	\draw [-latex, dashed] (2,2) -- (1,1) ;
+	\draw [dotted] (1,1) -- (0,0) ;
+	\draw [-latex, dashed] (0,0) -- (-1,-1) ;
+
+	\draw [-latex, dashed] (1,1) --node{$*$}  (4,-2) ;
+	\draw [-latex, dashed] (0,0) -- node{$*$} (3,-3) ;
+	\draw [-latex, dashed] (-1,-1) -- node{$*$} (2,-4) ;
+
+	\draw [-latex, dashed] (5,-1) -- node{$*$} (4,-2) ;
+	\draw [dotted] (4,-2) -- (3,-3) ;
+	\draw [-latex, dashed] (3,-3) -- node{$*$} (2,-4) ;
+\end{tikzpicture}
+\end{center}
+
+\item L'idée de la démonstration est simple : supposons $M \stackrel{\Delta}{\rightarrow} M_1  $ où
+$\Delta$ est un redex de $M$. Si dans la réduction $M\twoheadrightarrow M_2$, on garde la trace de ce qui se passe
+sur $\Delta$, alors en réduisant tous les résidus de $M_2$, on obtiendra $M_3$.
+\end{enumerate}
+
+\subsection{La restriction $\Lambda '$ du $\lambda$-calcul}
+Pour tracer les redex uniquement à réduire, on introduit $\Lambda '$, une restriction du $\lambda$-calcul.
+
+
+$\Lambda '$ est définie de manière inductive comme ci-dessous comme le $\lambda$-calcul avec en addition
+l'expression $((\lambda _i x.M)N)$ pour $i \in \mathbb{N}$
+Ainsi, nous marquons par un indice $i$ le redex que nous voulons tracer.
+Nous définissons également la réduction $\beta '$  qui contient la réduction $\beta$ et y ajoute 
+$(\lambda_i x.M)N \rightarrow M [x:=N]$
+
+Enfin, nous ajoutons la fonction $\phi$ qui réduit uniquement les redex indicés, et non les autres.
+$$\phi ((\lambda _i x.P)Q) \equiv \phi (P) [x:=\phi(Q)]$$
+
+Nous utilisons les notations $M\stackrel{\shortparallel }{\longrightarrow} N$
+et $M\stackrel{\phi } {\longrightarrow}N$
+
+Le pouvoir réducteur de $\beta '$ est le même que $\beta$.
+En outre, on a la propriété suivante : si $M \stackrel{\beta '}{\twoheadrightarrow} N$,
+alors   $\phi(M) \stackrel{\beta}{\longrightarrow} \phi (N)$ 
+
+\subsection{La démonstration}
+Nous présentons ici la démonstration détaillée dans \cite{baren_bible}.
+
+\begin{enumerate}
+	\item Hypothèses: $M\stackrel{\beta}{\twoheadrightarrow} N$ et
+                    $M\stackrel{\beta}{\rightarrow} M'$        
+       \item Cherchons à prouver qu'il existe $N'$ tel que  $N\stackrel{\beta}{\twoheadrightarrow} N'$ 
+et  $M' \stackrel{\beta}{\twoheadrightarrow} N'$ 
+        \item $M'$ est le résultat de la contraction du redex $\Delta$ dans $M$. Soit $\tilde{M} \in \Lambda '$
+        obtenu de $M$ en indexant $\Delta$. Alors, $ \tilde{M} \stackrel{\shortparallel}{\rightarrow} M$ et 
+       $ \tilde{M} \stackrel{\phi}{\rightarrow} M'$ 
+       \item Nous obtenons, l'existence d'un $\tilde{N}$ par $\tilde{M}\stackrel{\beta '}\twoheadrightarrow \tilde{N}$
+       \item Nous obtenons aussi l'existence d'un $N'$ tel que $\tilde{N} \stackrel{\phi}{\twoheadrightarrow} N'$
+       et $N \stackrel{\beta}{\twoheadrightarrow} N'$
+       \item Nous avons de même $M' \stackrel{\beta}{\twoheadrightarrow} N'$
+       \item Nous avons bien trouvé notre terme confluent $N'\ \  \square $
+
+\end{enumerate}
+
+\subsection{Un exemple}
+\begin{enumerate}
+	\item Soit $M \equiv (\lambda x.xx)((\lambda y.z)w)$ , nous avons 
+	$M \stackrel{\beta}{\rightarrow} N' \equiv (\lambda x.xx)z$ et $M \stackrel{\beta}{\rightarrow} N \equiv ((\lambda y.z)w)((\lambda y.z)w)$
+       \item Cherchons  $N'$ tel que  $N\stackrel{\beta}{\twoheadrightarrow} N'$ 
+et  $M' \stackrel{\beta}{\twoheadrightarrow} N'$ 
+	\item  Soit le redex $\Delta$ de $M$ tel que $\Delta \equiv ((\lambda y.z)w)$, alors $\tilde{M} \equiv (\lambda x.xx)((\lambda_1 y.z)w)$
+	Nous avons $\tilde{M}  \stackrel{\phi}{\rightarrow} M' \equiv (\lambda x.xx)z$
+	\item $\tilde{N}$ est obtenu de la même manière que $N$, mais en marquant les résidus de $\Delta$ :
+	 $\tilde{N} \equiv  ((\lambda _1 y.z)w)((\lambda _1 y.z)w)$
+
+	 \item  Nous réduisons maintenant les résidus de $\tilde{N}$ pour obtenir
+	  $\tilde{N}  \stackrel{\phi}{\twoheadrightarrow} zz$ \\
+	  Aussi, nous avons bien également $N \stackrel{\beta}{\twoheadrightarrow} zz$
+
+	 \item Nous avons également $M' \equiv (\lambda x.xx)z \stackrel{\beta}{\rightarrow} zz$
+	 \item Ainsi $N' \equiv zz$
+\end{enumerate}
+
+\subsection{La $\beta$-réduction parallèle}
+Une autre méthode de démonstration de la confluence repose sur l'introduction d'une nouvelle relation $\beta _\parallel $.
+Cette relation va permettre la réduction simultanée de plusieurs redex du $\lambda$-terme.
+
+\begin{definition}
+	La $\beta _\parallel$ réduction repose sur les 4 règles suivantes:
+	\begin{enumerate}
+		\item  
+		$ x \Rightarrow_\beta  x $
+		\item 
+		$ \lambda x.M \Rightarrow_\beta  \lambda x.M' , si\ M \Rightarrow_\beta  M' $
+		\item 
+		$ MN \Rightarrow_\beta  M' N' , \ si\ M  \Rightarrow_\beta  M' 
+		                                               \ et\ N  \Rightarrow_\beta  N'$
+		\item 
+		$ (\lambda x.M)N \Rightarrow_\beta M'[x:=N'] , \ si\ M \Rightarrow_\beta  M' 
+		                                               \ et\ N  \Rightarrow_\beta N'$
+	\end{enumerate}
+
+\end{definition}
+On peut démontrer par induction que cette relation $\beta _\parallel$ respecte la propriété du diamant : si
+$M \Rightarrow M_1,M_2$, alors $\exists N$ tel que $M_1,M_2  \Rightarrow N$.
+
+Cependant, nous allons encore plus simplement montrer qu'il existe un $M^*$ tel que si $M  \Rightarrow N  \forall N$, alors
+$N  \Rightarrow M^*$. Ce $M^*$ sera indépendant de $N$.
+L'idée est que le terme $M^*$ sera obtenu en réduisant simultanément tous les redex présents dans $M$.
+
+
+Soit la fonction $\mathcal{G}$, tel que 
+\begin{align}
+	\mathcal{G}(x)&=x \\
+	\mathcal{G}(\lambda x.M) &= \lambda x.(\mathcal{G}(M)) \\
+	\mathcal{G}(MN)&= \mathcal{G}(M)\mathcal{G}(N), \ si\ M \neq \lambda x.M_1 \\
+	 \mathcal{G}((\lambda x.M)N) &= \mathcal{G}(M)[x:=\mathcal{G}(N)]  
+\end{align}
+Nous pouvons montrer que si $M  \Rightarrow _\beta N, \forall N$, alors
+$N  \Rightarrow  _\beta \mathcal{G}(M)$.
+Par induction sur la relation $M  \Rightarrow _\beta N$  :
+ \begin{enumerate}
+	\item si $M \equiv x$, alors $N \equiv x \equiv \mathcal{G}(x)$
+
+	\item si $M \equiv \lambda x.M_1$, alors $N \equiv \lambda x.N_1$, avec $M_1  \Rightarrow _\beta N_1$. 
+	Par récurrence, $M_1  \Rightarrow _\beta \mathcal{G}(M_1)$, donc $M  \Rightarrow _\beta \lambda x.\mathcal{G}(M)_1 \equiv
+	\mathcal{G(M)}$
+
+	\item si $M\equiv (M_1 M_2)  \Rightarrow _\beta  N $, alors $N \equiv N_1 N_2$ 
+	avec $M_1 \Rightarrow _\beta N_1$ et  $M_2 \Rightarrow _\beta N_2$ , alors nous avons
+	 $N_1 N_2 \Rightarrow _\beta \mathcal{G}(N_1) \mathcal{G}(N_2) \equiv \mathcal{G}(M)$
+
+	 \item si $M\equiv ((\lambda x.M_1)M_2) \Rightarrow _\beta N$, alors 2 sous-cas à considérer :
+	 \subitem 
+	      si $N \equiv (\lambda x.N_1)N_2$, alors $N \Rightarrow _\beta \mathcal{G}(M_1)[x:=\mathcal{G}(M_2)] \equiv \mathcal{G}(M)$
+	 \subitem 
+	      si $N \equiv N_1[x:=N_2]$, alors $N \Rightarrow _\beta \mathcal{G}(M_1)[x:=\mathcal{G}(M_2)] \equiv \mathcal{G}(M)$ 
+
+
 \end{enumerate}
 
 
@@ -936,9 +1089,6 @@ En SCHEME, nous pourrons implémenter ce combinateur $Z$ :
    (lambda (x) (lambda(v) ((f (x x) v))))
    (lambda (x) (lambda(v) ((f (x x) v))))))
 \end{Verbatim}
-
-
-
 
 En ML, le typage ne nous permettra pas de coder un combinateur comme $Y$ ou $Z$.
 
@@ -5090,6 +5240,110 @@ done; print_string "]\n"
 \end{Verbatim}
 \end{tiny}
 
+%%%%%%%%%%%%%%%%%%%%
+\section{Métaprogrammation - récursivité et réflexivité}
+\subsection{Introduction}
+Une fonction récursive en programmation est de la forme
+\begin{center}	
+\begin{Verbatim}
+                                   f(x) = ... f ...
+\end{Verbatim}
+\end{center}
+
+Nous pouvons formaliser cette récursivité syntaxique avec une fonctionnelle $\phi$ de la manière suivante :
+$$
+f(x)=\phi(f,x)
+$$
+Remplaçons $\phi$ par une fonction partielle récursive $g$ et l'argument $f$ de $\phi$ par un indice $n$ qui représente la numérotation 
+du code de $f$. Cette équation est alors transformée en 
+$$ \{n\}(x)=g(n,x)$$
+C'est la forme du théorème de Kleene que nous démontrerons juste après. Ce théorème implique que pour toute fonction $g$,
+il existe un indice $n$ tel que  le programme de $n$ recevant en entrée $x$ calcule le même résultat que $g(n,x)$	
+
+\subsection{Le théorème de Kleene}
+\begin{theoreme}[S-M-N]
+Pour tout indice $s$, il existe une fonction récursive primitive $\rho$ telle que 
+$$ \{s\}(m_1,m_2) = \{\rho(s,m_1)\}m_2 $$
+\end{theoreme}
+
+\begin{theoreme}[Kleene]
+Soit $g$ une fonction partielle récursive de $\mathbb{N}^{k+1}$ dans $\mathbb{N}$, il existe
+$n \in \mathbb{N}$ tel que $\{n\}(x_1, ..., x_k) = g (n,x_1, ...,x_k)$
+\end{theoreme}
+
+En voici  la démonstration constructive. 
+
+Soit la fonction $\rho$ définie précemment de $\mathbb{N}^2 \rightarrow \mathbb{N}.$ \\
+Considérons la fonction $ (t,x_1,...,x_k) \mapsto g(\rho(t,t), x_1, ..., x_k) $,
+il existe  $m \in \mathbb{N}$ tel que $$g(\rho(t,t),x_1, ...,x_k) = \{m\}(t, x_1, ..., x_k)$$ 
+
+Par définition de $\rho$, on a $\{ \rho(m,t)\}(x_1,...,x_k)=\{m\}(t,x_1,...,x_k)$ \\
+Alors $n=\rho(m,m)$ est le point fixe recherché, car
+$g(n,x_1,...,x_k)=\{n\}(x_1,...,x_k)$ \\ $ \Box $
+
+
+\subsection{Un programme Quine}
+Un programme \textit{Quine} est un programme qui affiche son propre code, quelque soit l'entrée qu'il reçoit.
+Le théorème de Kleene assure l'existance de ce type de programme $n$ tel que $\forall x, \{n\}x=n $
+
+Comment construire un tel programme ?
+Appuyons nous sur la démonstration constructive du théorème de Kleene.
+D'après ce théorème, pour toute fonction $g$, il existe $n$ tel que $\{n\}(x)=g(n,x)$. 
+Considérons $g\equiv \lambda nx.n$
+
+
+$g$ ainsi affiche son premier argument $n$ en ignorant son deuxième argument $x$.
+
+Soit la fonction $(t,x) \mapsto g(\rho(t,t),x)$ qui donne $(t,x) \mapsto \rho(t,t)$
+
+
+Il existe $m \in \mathbb{N}$ tel que $\{m\}(t,x)=\rho(t,t)$.
+
+Par définition de $\rho$, on a $\{ \rho(m,t)\}(x)=\{ m \}(t,x)$
+
+
+$n\equiv \rho(m,m)$ est ce point fixe recherché car $ \{ \rho(m,m)\} (x) = \{ m \} (m,x) = n $
+
+Le programme à construire est donc de la forme d'un programme qui prend en entrée la data représentative de son code
+et l'affiche deux fois : son code et la data.
+
+En OCAML, nous pouvons définir un programme Quine par le code suivant:
+\begin{Verbatim}
+	(fun x -> Printf.printf "%s %S" x x) "(fun x -> Printf.printf \"%s %S\" x x)"	
+\end{Verbatim}
+Le programme prend ainsi en argument son propre code en data et l'affiche deux fois: une fois pour le programme 
+et une fois pour la data de manière \textit{quotée}. 
+
+\subsection{Le théorème de Rice}
+\begin{theoreme}[Rice]
+Soit $I_A=\{ x \in \mathbb{N}; \{x\} \in A \}$. A est un ensemble de fonctions partielles récursives. Alors 
+$I_A$ est décidable si et seulement si $A=\emptyset$ ou $A$ est l'ensemble des fonctions partielles récursives.
+\end{theoreme}
+En voici la démonstration par contradiction.
+
+Supposons qu'il existe  des fonctions récursive partielles d'indices $f$ et $g$ telles que $\{f\}\in A$
+ et $\{g\} \notin A$ 
+
+Définissons $h$ tel que :
+$h(x,y)=\{g\}(y)$ si $x \in A$ et 
+$h(x,y)=\{f\}(y)$ si $x \notin A$  
+
+D'après le théorème de Kleene, il existe $e \in \mathbb{N}$ tel que $h(e,y)=\{ e \}(y)$ pour tout $y$.
+
+Est-ce que $\{ e \}$ appartient à l'ensemble $A$ ?
+
+\begin{itemize}
+	\item Si $\{e\} \in A$, $\{e\}(y)=h(x,y)=\{g\}(y)$ 
+	Donc $\{g\}$ devrait appartenir à $A$. Contradiction.
+
+	\item Si $\{e\} \notin A$, $\{e\}(y)=h(x,y)=\{f\}(y)$ 
+	Donc $\{ f\}$ ne devrait appartenir à $A$. Contradiction.
+\end{itemize}
+
+\begin{theoreme}[corollaire, problème de l'arrêt] 
+Soit $x \in \mathbb{N}$, soit $H=\{ n\in \mathbb{N}; \{n\}(x) \downarrow \}$, alors $H$ est indécidable.
+\end{theoreme}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Annexes / Divers}
 \section{Quelques fonctions sur les listes}
  

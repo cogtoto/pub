@@ -12,6 +12,10 @@ Badiou Alain.
 Henk Barendregt.
 \newblock {\em Lambda calculi with types}.
 
+\bibitem{baren_bible}
+Henk Barendregt.
+\newblock {\em The Lambda Calculus, its Syntax and Semantics}.
+
 \bibitem{plisp}
 Jacques Chazarain.
 \newblock {\em Programmer avec Scheme: De la pratique {\`a} la th{\'e}orie}.
