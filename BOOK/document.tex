@@ -881,10 +881,11 @@ $$
 $$
 \end{itemize}
 
-\section{La récursivité, le point fixe et la diagonale de Cantor}
+\section{Récursivité et points fixes} 
 
 What else is a loop but a way of representing an endless process in a finite way?
 \cite{god}
+
 
 \begin{center}
  \begin{tabular}{cc}
@@ -894,7 +895,7 @@ What else is a loop but a way of representing an endless process in a finite way
  \end{tabular}
 \end{center}
 
-
+\subsection{Le point fixe du $\lambda$-calcul} %%
 
 En analyse, le point fixe d'une fonction $f$ est sa valeur $x$ telle que $f(x)=x$
 
@@ -956,14 +957,13 @@ val square2 : int -> float = <fun>
 \end{Verbatim}
 
 
-En $\lambda $-calcul, nous avons un combinateur\footnote{Un combinateur est un $\lambda$-terme comprenant uniquement 
+En $\lambda $-calcul, de manière très surprenante, tout terme a un point fixe !
+Nous avons un combinateur\footnote{Un combinateur est un $\lambda$-terme comprenant uniquement 
 des variables li\'{e}es} qui nous permet de calculer le point fixe de n'importe quel $\lambda $-terme.
 Ce combinateur s'appelle $Y$ . Il est défini par $$ Y=  \lambda f.(\lambda x.f(x x))(\lambda x.f(x x)) $$
 
-
 Ce n'est pas le seul combinateur de point fixe. Voici un autre d\^{u} \`{a} Turing :
  $$\Theta = (\lambda x. \lambda y. (y (x x y))) (\lambda x. \lambda y. (y (x x y)))$$
-
 
 Voici l'arbre syntaxique de $Y$:
 \begin{center}
