@@ -1142,7 +1142,7 @@ Je ne peux reproduire cela en SCHEME:
   given: 1
 \end{Verbatim}
 
-%% la diagonale de Cantor %%
+\subsection{La diagonale de Cantor} %%
 Le théorème de Cantor nous dit qu'il n'y a pas de fonction surjective 
 $f: \mathbb{N} \rightarrow ( \mathbb{N} \rightarrow \mathbb{B}) $.
 Autrement dit, le cardinal des parties de $\mathbb{N}$ est strictement plus grand que le cardinal de $\mathbb{N}$.
@@ -1287,6 +1287,35 @@ L'opérateur de point fixe est ainsi $Y=\lambda g.(\lambda x.g(x x) \lambda x.g(
 Aucun terme n'est donc sans point fixe dans le $\lambda$-calcul à la différence de l'exemple précédent où notre
 fonction de $\mathbb{B} \rightarrow \mathbb{B}$ n'avait pas de point fixe.
 
+\subsection{Le point fixe logique et le théorème d'incomplétude de Gödel} %%
+Il y a une similitude forte entre le point fixe du $\lambda$-calcul et le point fixe \textit{logique}. Voyons cela.
+
+\begin{theoreme}[Le point fixe logique]
+	Soit $T$ une théorie permettant de définir toutes les fonctions récursives.
+	Soit $\psi$ une formule quelconque avec une variable libre. Il existe une proposition $\phi$ telle que
+	$$ T \vdash \phi \leftrightarrow \psi (\ulcorner \phi\urcorner ) $$
+\end{theoreme}
+\begin{proof}
+	Soit la fonction diagonale $d : \mathbb{N} \rightarrow \mathbb{N} $ définie par :
+	$ d(n)= \chi _n(\overline{n})$ où $\chi_n$ est telle que $\sharp \chi =n$ 
+
+
+	$d$ est une fonction récursive donc définissable dans notre théorie $T$. On a donc :
+	$$T \vdash \forall y (\delta(\overline{n}, y)) \leftrightarrow \overline{y}=d(\overline{n})$$
+
+	Soit la formule $\alpha$ telle que $\alpha (x)=\exists y (\delta(x,y) \land \psi(y))$
+	Alors notre point fixe est $\phi = \alpha (\sharp(\alpha))$
+	En effet.
+
+	\begin{align*}
+	 T \vdash \phi & \leftrightarrow \alpha(\sharp (\alpha)) \\
+	                 & \leftrightarrow \exists y (\delta(\sharp (\alpha), y) \land \psi (y)) \\
+	                 & \leftrightarrow \exists y (y=\sharp(\alpha(\sharp(\alpha)))) \land \psi (y)) \\
+	                 & \leftrightarrow \psi (\sharp(\alpha(\sharp(\alpha)))) \\
+	                 & \leftrightarrow \psi (\sharp(\phi)) \\
+	\end{align*}
+
+\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\textit{Church} encoding. Les entiers et les booléens en $\lambda$-calcul}
@@ -4863,10 +4892,27 @@ let add x y =
 	 !r
 	)
 \end{Verbatim}
-Existe-t'il des fonctions caculables qui ne sont pas primitives récursives ?
+Existe-t'il des fonctions calculables qui ne sont pas primitives récursives ?
 La réponse est oui. Notamment toute fonction qui ne termine pas (boucle \verb+while+ infinie)
 ne pourra s'écrire en fonction récursive primitive.
-Il est cependant beaucoup plus complexe d'identifier des fonctions qui terminent et qui soient non récursives primitives.
+
+
+Nous pouvons également montrer par un  argument \textit{diagonal}, qu'il existe des fonctions que nous ne 
+pouvons retrouver dans l'énumération des fonctions primitives récursives.
+\begin{proof}
+	Numérotons l'ensemble des fonctions récursives par l'indice $n$
+
+	Soit $f(n,x)$, la fonction prenant en argument cet indice $n$ et un argument $x$ sur $\mathbb{N}$.
+       
+	Soit la fonction $g(z)=z+1$, considérons la fonction $h(x)=g(f(x,x))=f(x,x)+1$
+
+        S'il existe un indice $a$, tel que $f(a,x)=h(x)$, alors $h(a)=f(a,a)=f(a,a)+1$ ce qui est 
+	impossible. Donc la fonction $h$ n'est pas récursive primitive.
+
+\end{proof}
+
+Il est cependant plus complexe d'identifier de fonctions plus \textit{concrètes}
+ qui terminent et qui soient non récursives primitives.
 La fonction d'\textit{Ackermann} est traditionnelement donnée en exemple, bien que cette fonction n'a pas
 de réalité pratique\dots
 

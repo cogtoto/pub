@@ -1,0 +1,15 @@
+/home/vincent/vsc/CSHARP/app/bin/Debug/net7.0/app
+/home/vincent/vsc/CSHARP/app/bin/Debug/net7.0/app.deps.json
+/home/vincent/vsc/CSHARP/app/bin/Debug/net7.0/app.runtimeconfig.json
+/home/vincent/vsc/CSHARP/app/bin/Debug/net7.0/app.dll
+/home/vincent/vsc/CSHARP/app/bin/Debug/net7.0/app.pdb
+/home/vincent/vsc/CSHARP/app/obj/Debug/net7.0/app.csproj.AssemblyReference.cache
+/home/vincent/vsc/CSHARP/app/obj/Debug/net7.0/app.GeneratedMSBuildEditorConfig.editorconfig
+/home/vincent/vsc/CSHARP/app/obj/Debug/net7.0/app.AssemblyInfoInputs.cache
+/home/vincent/vsc/CSHARP/app/obj/Debug/net7.0/app.AssemblyInfo.cs
+/home/vincent/vsc/CSHARP/app/obj/Debug/net7.0/app.csproj.CoreCompileInputs.cache
+/home/vincent/vsc/CSHARP/app/obj/Debug/net7.0/app.dll
+/home/vincent/vsc/CSHARP/app/obj/Debug/net7.0/refint/app.dll
+/home/vincent/vsc/CSHARP/app/obj/Debug/net7.0/app.pdb
+/home/vincent/vsc/CSHARP/app/obj/Debug/net7.0/app.genruntimeconfig.cache
+/home/vincent/vsc/CSHARP/app/obj/Debug/net7.0/ref/app.dll
