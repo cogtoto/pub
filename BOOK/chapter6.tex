@@ -1,0 +1,563 @@
+\chapter{Calculabilité et complexité}
+
+\section{Les fonctions récursives}
+Commençons  par définir les fonctions récursives \textit{primitives} telles que formalisées par
+Gödel.
+
+Un ensemble $E$ de fonctions numériques de $\mathbb{N}^p$ dans $\mathbb{N}$ est dit :
+\begin{itemize}
+	\item [i)] clos par composition si pour tout $h, g_1, \dots,g_p \in E$, si on définit $f$ par
+	 $$f(n)=h(g_1(n), \dots, g_p(n))$$
+	alors $f \in E$
+	\item [ii)] clos par récursion primitive si pour tout $h,g \in E$, si on définit $f$ par
+	\begin{align*}
+	f(0,n) &= g(n) \\
+	f(m+1, n) &= h(f(m,n),m,n)
+\end{align*}
+alors $f \in E$
+\end{itemize}
+Les fonctions de base sont la constante $0 : \mathbb{N} \rightarrow \mathbb{N}$, le successeur 
+$s :\mathbb{N} \rightarrow \mathbb{N}$, les projections $pr_k^i : \mathbb{N}^k \rightarrow \mathbb{N}$
+
+Les fonctions récursives primitives sont les éléments du plus petit ensemble $E$ contenant les
+fonctions de base et clos par composition et récursion primitive.
+
+La quasi totalité des fonctions est récursive primitive. Considérons par exemple l'addition.
+\begin{align*}
+	0 + y &= y  \\
+	s(x) + y &= s(x+y) 
+\end{align*}
+Autrement dit :
+\begin{align*}
+	+ (0, y) &=  g(y)\ \text{avec}\ g=pr_1^1 (y) \\
+	+ (s(x), y) &= h (+(x, y), x, y)\ \text{avec}\ h=s \circ  pr_3^1
+\end{align*}
+Voici un opérateur de récursion primitive en ML
+\begin{Verbatim}
+let rec_prim g h = 
+let rec f m n = 
+	if m=0 then g n 
+	else h (f (m-1) n) (m-1) n
+in f 
+\end{Verbatim}
+Nous pouvons ainsi exprimer la fonction \verb+add+ :
+\begin{Verbatim}
+let s n = n+1 ;;
+let pr_11 n = n ;;
+let pr_31 x y z =  x ;;
+let g y = pr_11 y ;;
+let h x y z =  s (pr_31 x y z);;
+
+let add = rec_prim g h ;;
+
+utop # add 5 8 ;;
+- : int = 13
+\end{Verbatim}
+Toute fonction récursive primitive peut s'écrire avec une simple boucle \verb+for+.
+Le nombre d'itérations est déterminé ; il ne dépend pas d'une condition d'évaluation du programme.
+Ainsi, nous pouvons code de la manière suivante :
+\begin{Verbatim}
+let add x y =
+	let r = ref (g y) in
+	(for i=1 to x do r := h !r i y done ; 
+	 !r
+	)
+\end{Verbatim}
+Existe-t'il des fonctions calculables qui ne sont pas primitives récursives ?
+La réponse est oui. Notamment toute fonction qui ne termine pas (boucle \verb+while+ infinie)
+ne pourra s'écrire en fonction récursive primitive.
+
+
+Nous pouvons également montrer par un  argument \textit{diagonal}, qu'il existe des fonctions que nous ne 
+pouvons retrouver dans l'énumération des fonctions primitives récursives.
+\begin{proof}
+	Numérotons l'ensemble des fonctions récursives par l'indice $n$
+
+	Soit $f(n,x)$, la fonction prenant en argument cet indice $n$ et un argument $x$ sur $\mathbb{N}$.
+       
+	Soit la fonction $g(z)=z+1$, considérons la fonction $h(x)=g(f(x,x))=f(x,x)+1$
+
+        S'il existe un indice $a$, tel que $f(a,x)=h(x)$, alors $h(a)=f(a,a)=f(a,a)+1$ ce qui est 
+	impossible. Donc la fonction $h$ n'est pas récursive primitive.
+
+\end{proof}
+
+Il est cependant plus complexe d'identifier de fonctions plus \textit{concrètes}
+ qui terminent et qui soient non récursives primitives.
+La fonction d'\textit{Ackermann} est traditionnelement donnée en exemple, bien que cette fonction n'a pas
+de réalité pratique\dots
+
+La fonction d’Ackermann $A$ est définie sur $\mathbb{N} × \mathbb{N}$ par : \\
+$A(0, p) = p + 1$ pour $p ≥ 0$ \\
+$A(n, 0) = A(n − 1, 1)$ pour $n ≥ 1$ \\
+$A(n, p) = A(n − 1, A(n, p − 1))$ si $n ≥ 1, p ≥ 1$ \\ 
+
+\begin{Verbatim}
+let rec ack = function
+	| (0,p) -> p+1
+	| (n,0) -> ack (n-1, 1)
+	| (n,p) -> ack (n-1, ack (n, p-1))
+\end{Verbatim}
+
+La fonction d’Ackermann croît très rapidement, en particulier $n \rightarrow A(n, n)$ croît
+plus rapidement que n’importe quelle fonction polynôme ou exponentielle.
+
+Gödel a ainsi introduit un troisième critère permettant d'étendre le scope de définition des
+fonctions numériques au-delà des fonctions récursives primitives. C'est le critère
+de clôture par minimisation totale.
+
+Nous dirons qu'un ensemble $E$ de fonctions numériques est clos par minimisation si
+pour tout $g \in E$, tel que pour chaque $n$, il existe $p$ tel que $g(n,p)=0$, si on définit
+$f$ par
+$$ f(n) = min\{p\in \mathbb{N} ; g(n,p) = 0   \} $$
+alors $f\in E$. On notera $f =\mu p [g(.,p)=0]$.
+
+Les  \textit{fonctions récursives} sont les éléments du plus petit ensemble de fonctions
+numériques contenant les fonctions de base et clos par composition, récursion primitive et 
+minimisation totale.
+
+\section{La machine de Turing}
+Une machine de Turing est un automate à  état (\textit{state machine}) qui a la
+capacité de lire puis  d'enregistrer un caractère sur une bande de longueur
+infinie. 
+
+La machine change d'état sur la base de trois éléments: l'état courant,
+le caractère lu de la bande et une table externe de transition. La table de
+transition est externe à  la bande et elle est statique.
+ L'action résultante est un changement potentiel d'état, une écriture de
+ caractère sur la bande et un déplacement à  droite ou à  gauche de la tête de
+ lecture.
+
+Nous implémentons cela avec le concept de \textit{box} présenté dans le chapitre
+précédent. La lambda va encapsuler l'état courant, la position de la tête de
+lecture, la bande et la table de transition.
+La table de transition est modélisée par une a-liste d'a-listes.
+La première a-liste permet de faire matcher l'état courant.
+La seconde a-liste permet de faire matcher le caractère lu.
+Ces deux informations combinées fournissent  le triplet de sortie
+\verb+(état_suivant, caractère_écrit, direction)+
+
+\begin{Verbatim}
+let matable = [ ("q0" , [ (">", ("q1", "X", "G")) ;
+								  ("<", ("q0", "<", "D")) ; 
+								  (" ", ("q2", " ", "G")) ;
+								  ("X", ("q0", "X",	"D")) ]) ;
+			       ("q1" , [ (">", ("q1", ">", "G")) ;
+			                 ("<", ("q0", "X", "D")) ;
+			                 (" ", ("qf", "non", "G")) ;
+			                 ("X", ("q1", "X", "G")) ]) ;
+			       ("q2" , [ (">", ("q2", ">", "G")) ;
+			                 ("<", ("qf", "non", "G")) ;
+			                 (" ", ("qf", "oui", "G")) ;
+			                 ("X", ("q2", "X", "G")) ]) ;
+			   ] ;;
+\end{Verbatim}
+
+Cette table de transition va nous permettre de vérifier le bon parenthésage
+d'une expression en entrée fournie sur la bande représentée par une liste 
+\verb+let mabande =   [" "; "<"; ">"; " "]+
+
+L'état \verb+q0+ va rechercher une parenthèse \verb+>+ en allant vers la droite.
+
+L'état \verb+q1+ va rechercher une parenthèse \verb+<+ en allant vers la gauche.
+
+L'état \verb+q2+ va rechercher une parenthèse \verb+>+ en allant vers la gauche.
+
+
+Les parenthèses matchées sont remplacées par le caractère \verb+X+.
+Le passage à  l'état final \verb+qf+ est accompagné par l'écriture \verb+oui+ ou
+\verb+non+ sur la bande suivant si l'expression est ou non correctement parenthésée.
+
+\begin{Verbatim}
+
+let make_turing table etat0 position0 bande0 =
+	let etat = ref etat0 in
+	let position = ref position0 in
+	let bande = ref bande0 in
+	let fct_transition state input = assoc input (assoc state table) in
+	let lire () = nth !bande !position in
+	let deplacer = function 
+		| "G" -> if (!position = 0) then (bande := " " :: !bande) else (position := !position - 1) 
+    | "D" -> 
+	   begin
+		  position := !position + 1 ;
+		  if ((lire ()) = " ") then (bande := !bande @ (" ":: []))
+   	 end
+		| _ -> raise Erreur
+	in
+	let rec liste_tail liste pos =
+	  match pos with
+	  | 0 -> liste
+	  | n -> liste_tail (tl liste) (pos - 1)
+  in
+  let rec liste_tete liste pos =
+	  match pos with
+	  | 0 -> []
+  	| n -> (hd liste) :: liste_tete (tl liste) (pos - 1)
+  in
+	let ecrire symb =
+	bande := (liste_tete !bande !position) @ (symb :: []) @ ( liste_tail (tl !bande) !position)
+	in
+	 fun instruction ->
+		match instruction with
+		| "executer" -> 
+			let (e, s, d) = fct_transition !etat (lire ()) in
+	    	begin
+		      ecrire s ;
+		      deplacer d;
+		      etat := e ;
+					if (!etat = "qf") then raise Final 
+	      end 
+		| "reset" -> begin etat := etat0 ; bande := bande0; position := position0 end
+		| "affiche"  -> 
+			   begin print_string "etat:" ; print_string !etat ; 
+				       print_string "  position:"; print_int !position ; 
+							 print_string "  lire:"; print_string (lire ()) ;
+							 print_string "  bande:  "; print_liste !bande
+	       end	
+		| _ -> raise Erreur
+		
+let executer_turing turing trace =
+	let rec iterer () =
+		turing "executer" ; if trace then turing "affiche"; iterer () 
+	in
+	begin
+	 turing "reset" ;
+	 try
+	  iterer () 
+	 with Final -> turing "affiche"
+	 end 
+
+\end{Verbatim}
+
+Voici le résultat sur l'expression $ <> $
+\begin{Verbatim}
+# let turing_par = make_turing matable etatinit posinit  [" "; "<"; ">"; " "]  ;;
+# executer_turing turing_par true ;;
+
+etat:q0  position:2  lire:>  bande:   <> 
+etat:q1  position:1  lire:<  bande:   <X 
+etat:q0  position:2  lire:X  bande:   XX 
+etat:q0  position:3  lire:   bande:   XX  
+etat:q2  position:2  lire:X  bande:   XX  
+etat:q2  position:1  lire:X  bande:   XX  
+etat:q2  position:0  lire:   bande:   XX  
+etat:qf  position:0  lire:   bande:   ouiXX  
+\end{Verbatim}
+
+Et voici le résultat sur l'expression $ <<><> $
+\begin{Verbatim}
+# let turing_par = make_turing matable etatinit posinit  [" "; "<"; "<"; ">"; "<"; ">"; " "] ;;
+# executer_turing turing_par true ;;
+
+etat:q0  position:2  lire:<  bande:   <<><> 
+etat:q0  position:3  lire:>  bande:   <<><> 
+etat:q1  position:2  lire:<  bande:   <<X<> 
+etat:q0  position:3  lire:X  bande:   <XX<> 
+etat:q0  position:4  lire:<  bande:   <XX<> 
+etat:q0  position:5  lire:>  bande:   <XX<> 
+etat:q1  position:4  lire:<  bande:   <XX<X 
+etat:q0  position:5  lire:X  bande:   <XXXX 
+etat:q0  position:6  lire:   bande:   <XXXX  
+etat:q2  position:5  lire:X  bande:   <XXXX  
+etat:q2  position:4  lire:X  bande:   <XXXX  
+etat:q2  position:3  lire:X  bande:   <XXXX  
+etat:q2  position:2  lire:X  bande:   <XXXX  
+etat:q2  position:1  lire:<  bande:   <XXXX  
+etat:qf  position:0  lire:   bande:   nonXXXX  
+\end{Verbatim}
+\section{La thèse de Church}
+\begin{theoreme}
+	Thèse de Church: toute fonction effectivement calculable est récursive.
+\end{theoreme}
+\begin{theoreme}
+	Thèse forte de Church: si une fonction $f$ est calculable par un algorithme, 
+	alors celui-ci est effectivement transformable en une machine de Turing 
+	calculant $f$
+\end{theoreme}
+\begin{theoreme}
+  Pour $f:\mathbb{N}^p \rightarrow \mathbb{N}$, les propriétés $(i) f$ est $\lambda$-définissable et 
+  $(ii) f$ est récursive sont équivalentes.
+\end{theoreme}
+
+\section{Complexité}
+\subsection{Théorème de Cook}
+\begin{definition}
+	Un problème est appelé NP-complet s'il vérifie les deux propriétés suivantes :
+	\begin{enumerate}
+		\item Toute solution pourra être vérifiée en temps polynomial
+		\item Tous les problèmes de la classe NP se ramènent à celui-ci via une réduction polynomiale 
+	\end{enumerate}
+\end{definition}
+L'algorithme SAT est significatif car il a été prouvé comme étant \textit{NP-complet}.
+\begin{definition}
+	SAT (satisfaisabilité en logique propositionnelle). \\
+	Instance : une formule conjonctive $\phi \in Prop[X] $ \\
+	Requête : $\phi$ est-elle satisfaisable ? 
+\end{definition}
+\begin{theoreme}
+	(COOK, 1971) - Le problème SAT est NP-complet.
+\end{theoreme}
+\begin{theoreme}
+Conjecture : $P\neq NP$
+\end{theoreme}
+
+\subsection{Implémentation de l'algorithme SAT}
+Pour des raisons d'efficacité, nous utilisons ici un principe de l'algorithme DPLL qui est la \textit{propagation unitaire}.
+L'algorithme recherche des solutions en parcourant l'arbre de recherche en profondeur. Cela s'implémente de manière
+intuitive avec une fonction récursive. L'algorithme s'arrête dès qu'une solution a été trouvée.
+
+\begin{Verbatim}
+let sat c : (bool*env) =
+  let rec sat_aux c liste_litt e : (bool*env)  = 
+    let c' = propag_unitaire c in
+    let e' = extend_env c' e in
+      if eval_cnf e' c' then (true,e') 
+      else 
+        let liste_litt' = (diff (recup_litteral c') (find_units_cnf2 c')) in
+        match liste_litt' with 
+         | hd::tl -> let (b1, e1) = sat_aux ([P hd]::c') tl ((hd,true)::e') in
+                if b1 then (b1,e1) 
+                else sat_aux ([N hd]::c') tl ((hd, false)::e')
+         | [] -> (false, [])
+   in sat_aux c (diff (recup_litteral c) (find_units_cnf2 c)) (init_env c) ;;
+\end{Verbatim}
+
+Voici la fonction de progation unitaire.
+\begin{Verbatim}
+let rec propag_unitaire c =
+  let units = find_units_cnf c 
+  in 
+  let rec propag_unitaire_aux c units =
+  match units with 
+    | [] -> c
+    | hd::tl -> propag_unitaire_aux (map (retire_unit hd) c) tl 
+in  let res = propag_unitaire_aux c units
+in if c=res then (filter (fun x -> not (x=[])) c) else propag_unitaire res ;;
+(* on propage jusqu'à l'obtention d'un point fixe *)
+\end{Verbatim}
+	
+Nous travaillons ici exclusivement sur des clauses normales conjonctives.
+Une clause normale conjonctive est une une conjonction de plusieurs disjonctions de plusieurs littéraux.
+Un littéral est un atome ou la négation d'un atome.
+\begin{Verbatim}
+type atome =  string ;;
+type lit =  P of atome | N of atome ;;
+type disj = lit list ;; 
+type cnf = disj list ;;
+\end{Verbatim}
+
+\subsection{Sudoku - SAT encoding}
+L'algorithme permettant de résoudre les sudokus peut être réalisé par l'algorithme SAT en modélisant
+les contraintes du sodoku sous la forme de clauses propositionnelles. Une variable $s_{xyz}$ représente que la
+case de la ligne $x$ et colonne $y$ porte le nombre $z$.
+\begin{enumerate}
+	\item Contrainte $C_1$. Il y a au moins un nombre pour chaque case 
+	$$ C_1 \triangleq \bigwedge _{x=1}^9  \bigwedge _{y=1}^9 \bigvee  _{z=1}^9 s_{xyz}$$
+
+	\item Contrainte $C_2$.  Chaque nombre apparait au plus une fois dans une ligne
+	$$  C_2 \triangleq \bigwedge _{y=1}^9  \bigwedge _{z=1}^9 \bigwedge _{x=1}^8 \bigwedge _{i=x+1}^9  ( \lnot s_{xyz} \vee \lnot s_{iyz} ) $$
+
+	\item  Contrainte $C_3$. Chaque nombre apparait au plus une fois dans une colonne
+	$$ \ C_3 \triangleq \bigwedge _{y=1}^9  \bigwedge _{z=1}^9 \bigwedge _{y=1}^8 \bigwedge _{i=y+1}^9  ( \lnot s_{xyz} \vee \lnot s_{xiz} ) $$
+
+	\item  Contraintes $C_1$ et $C_5$. Chaque nombre apparait au plus une fois dans une sous-grille 3x3
+	$$ \ C_4 \triangleq \bigwedge _{z=1}^9  \bigwedge _{i=0}^2 \bigwedge _{x=1}^3
+	 \bigwedge _{y=1}^3  \bigwedge _{k=y+1}^3  ( \lnot s_{(3i+x)(3j+y)z} \vee \lnot s_{(3i+x)(3j+k)z} ) $$
+
+	$$ \ C_5 \triangleq \bigwedge _{z=1}^9  \bigwedge _{i=0}^2 \bigwedge _{x=1}^3
+	 \bigwedge _{y=1}^3  \bigwedge _{k=x+1}^3  \bigwedge _{l=1}^3  ( \lnot s_{(3i+x)(3j+y)z} \vee \lnot s_{(3i+k)(3j+l)z} ) $$
+\end{enumerate}
+\begin{tiny}
+\begin{Verbatim}
+let produce_C1 =
+  print_string "let c1 = [";
+  for x=1 to 9 do
+    for y=1 to 9 do
+      print_string "[" ;
+      for z=1 to 9 do
+        print_string ("P \"x"  ^ string_of_int x ^ string_of_int y ^ string_of_int z ^ (if z<>9 then "\"; " else "\"")  )
+      done ;
+      print_string ("]" ^ (if (x=9 && y=9)  then "" else ";") ^ "\n")  ;
+    done
+  done ;
+  print_string "]\n";
+;;
+
+(* C2 Each number appears at most once in each column *)
+let produce_C2 =
+  print_string "let c2 = [";
+  for y=1 to 9 do
+    for z=1 to 9 do
+      for x=1 to 8 do
+        for i=(x+1) to 9 do
+          print_string ("[ N \"x" ^ string_of_int x ^ string_of_int y ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int i ^ string_of_int y ^ string_of_int z  ^ "\"];\n ")
+        done
+      done
+    done
+  done ;
+  print_string "]\n" 
+;;
+
+(* C3 Each number appears at most once in each column *)
+let produce_C3 =
+  print_string "let c3 = [";
+  for x=1 to 9 do
+    for z=1 to 9 do
+      for y=1 to 8 do
+        for i=(y+1) to 9 do
+          print_string ("[ N \"x" ^ string_of_int x ^ string_of_int y ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int x ^ string_of_int i ^ string_of_int z  ^ "\"];\n ")
+        done
+      done
+    done
+  done ;
+  print_string "]\n" 
+;;
+
+(* C4 Each number appears at most once in each 3x3 sub-grid *)
+let produce_C4 =
+  print_string "let c4 = [";
+  for z=1 to 9 do
+    for i=0 to 2 do
+      for j=0 to 2 do
+        for x=1 to 3 do
+          for y=1 to 3 do
+            for k=(y+1) to 3 do
+          print_string ("[ N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+y) ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+k) ^ string_of_int z  ^ "\"];\n ")
+         done
+       done
+     done
+   done 
+  done
+done;
+  print_string "]\n" 
+;;
+let produce_C5 =
+  print_string "let c5 = [";
+  for z=1 to 9 do
+    for i=0 to 2 do
+      for j=0 to 2 do
+        for x=1 to 3 do
+          for y=1 to 3 do
+            for k=(x+1) to 3 do
+              for l=1 to 3 do
+          print_string ("[ N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+y) ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int (3*i+k) ^ string_of_int (3*j+l) ^ string_of_int z  ^ "\"];\n ")
+         done
+       done
+     done
+   done 
+  done
+done
+done; print_string "]\n" 
+;;
+\end{Verbatim}
+\end{tiny}
+
+%%%%%%%%%%%%%%%%%%%%
+\section{Métaprogrammation - récursivité et réflexivité}
+\subsection{Introduction}
+Une fonction récursive en programmation est de la forme
+\begin{center}	
+\begin{Verbatim}
+                                   f(x) = ... f ...
+\end{Verbatim}
+\end{center}
+
+Nous pouvons formaliser cette récursivité syntaxique avec une fonctionnelle $\phi$ de la manière suivante :
+$$
+f(x)=\phi(f,x)
+$$
+Remplaçons $\phi$ par une fonction partielle récursive $g$ et l'argument $f$ de $\phi$ par un indice $n$ qui représente la numérotation 
+du code de $f$. Cette équation est alors transformée en 
+$$ \{n\}(x)=g(n,x)$$
+C'est la forme du théorème de Kleene que nous démontrerons juste après. Ce théorème implique que pour toute fonction $g$,
+il existe un indice $n$ tel que  le programme de $n$ recevant en entrée $x$ calcule le même résultat que $g(n,x)$	
+
+\subsection{Le théorème de Kleene}
+\begin{theoreme}[S-M-N]
+Pour tout indice $s$, il existe une fonction récursive primitive $\rho$ telle que 
+$$ \{s\}(m_1,m_2) = \{\rho(s,m_1)\}m_2 $$
+\end{theoreme}
+
+\begin{theoreme}[Kleene]
+Soit $g$ une fonction partielle récursive de $\mathbb{N}^{k+1}$ dans $\mathbb{N}$, il existe
+$n \in \mathbb{N}$ tel que $\{n\}(x_1, ..., x_k) = g (n,x_1, ...,x_k)$
+\end{theoreme}
+
+En voici  la démonstration constructive. 
+
+Soit la fonction $\rho$ définie précédemment de $\mathbb{N}^2 \rightarrow \mathbb{N}.$ \\
+Considérons la fonction $ (t,x_1,...,x_k) \mapsto g(\rho(t,t), x_1, ..., x_k) $,
+il existe  $m \in \mathbb{N}$ tel que $$g(\rho(t,t),x_1, ...,x_k) = \{m\}(t, x_1, ..., x_k)$$ 
+
+Par définition de $\rho$, on a $\{ \rho(m,t)\}(x_1,...,x_k)=\{m\}(t,x_1,...,x_k)$ \\
+Alors $n=\rho(m,m)$ est le point fixe recherché, car
+$g(n,x_1,...,x_k)=\{n\}(x_1,...,x_k)$ \\ $ \Box $
+
+
+\subsection{Un programme Quine}
+Un programme \textit{Quine} est un programme qui affiche son propre code, quelque soit l'entrée qu'il reçoit.
+Le théorème de Kleene assure l'existance de ce type de programme $n$ tel que $\forall x, \{n\}x=n $
+
+Comment construire un tel programme ?
+Appuyons nous sur la démonstration constructive du théorème de Kleene.
+D'après ce théorème, pour toute fonction $g$, il existe $n$ tel que $\{n\}(x)=g(n,x)$. 
+Considérons $g\equiv \lambda nx.n$
+
+
+$g$ ainsi affiche son premier argument $n$ en ignorant son deuxième argument $x$.
+
+Soit la fonction $(t,x) \mapsto g(\rho(t,t),x)$ qui donne $(t,x) \mapsto \rho(t,t)$
+
+
+Il existe $m \in \mathbb{N}$ tel que $\{m\}(t,x)=\rho(t,t)$.
+
+Par définition de $\rho$, on a $\{ \rho(m,t)\}(x)=\{ m \}(t,x)$
+
+
+$n\equiv \rho(m,m)$ est ce point fixe recherché car $ \{ \rho(m,m)\} (x) = \{ m \} (m,x) = n $
+
+Le programme à construire est donc de la forme d'un programme qui prend en entrée la data représentative de son code
+et l'affiche deux fois : son code et la data.
+
+En OCAML, nous pouvons définir un programme Quine par le code suivant:
+\begin{Verbatim}
+	(fun x -> Printf.printf "%s %S" x x) "(fun x -> Printf.printf \"%s %S\" x x)"	
+\end{Verbatim}
+Le programme prend ainsi en argument son propre code en data et l'affiche deux fois: une fois pour le programme 
+et une fois pour la data de manière \textit{quotée}. 
+
+\subsection{Le théorème de Rice}
+\begin{theoreme}[Rice]
+Soit $I_A=\{ x \in \mathbb{N}; \{x\} \in A \}$. A est un ensemble de fonctions partielles récursives. Alors 
+$I_A$ est décidable si et seulement si $A=\emptyset$ ou $A$ est l'ensemble des fonctions partielles récursives.
+\end{theoreme}
+En voici la démonstration par contradiction.
+
+Supposons qu'il existe  des fonctions récursive partielles d'indices $f$ et $g$ telles que $\{f\}\in A$
+ et $\{g\} \notin A$ 
+
+Définissons $h$ tel que :
+$h(x,y)=\{g\}(y)$ si $x \in A$ et 
+$h(x,y)=\{f\}(y)$ si $x \notin A$  
+
+D'après le théorème de Kleene, il existe $e \in \mathbb{N}$ tel que $h(e,y)=\{ e \}(y)$ pour tout $y$.
+
+Est-ce que $\{ e \}$ appartient à l'ensemble $A$ ?
+
+\begin{itemize}
+	\item Si $\{e\} \in A$, $\{e\}(y)=h(x,y)=\{g\}(y)$ 
+	Donc $\{g\}$ devrait appartenir à $A$. Contradiction.
+
+	\item Si $\{e\} \notin A$, $\{e\}(y)=h(x,y)=\{f\}(y)$ 
+	Donc $\{ f\}$ ne devrait appartenir à $A$. Contradiction.
+\end{itemize}
+
+\begin{theoreme}[corollaire, problème de l'arrêt] 
+Soit $x \in \mathbb{N}$, soit $H=\{ n\in \mathbb{N}; \{n\}(x) \downarrow \}$, alors $H$ est indécidable.
+\end{theoreme}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

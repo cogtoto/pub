@@ -1,6 +1,13 @@
 This is BibTeX, Version 0.99d (TeX Live 2020)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
-The top-level auxiliary file: document.aux
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: chapter1.aux
+A level-1 auxiliary file: chapter2.aux
+A level-1 auxiliary file: chapter3.aux
+A level-1 auxiliary file: chapter4.aux
+A level-1 auxiliary file: chapter5.aux
+A level-1 auxiliary file: chapter6.aux
+A level-1 auxiliary file: chapter7.aux
 The style file: plain.bst
 Database file #1: book.bib
 Warning--I'm ignoring gb's extra "author" field
@@ -29,7 +36,7 @@ Warning--empty year in WS
 Warning--empty publisher in reflective
 You've used 21 entries,
             2118 wiz_defined-function locations,
-            587 strings with 5335 characters,
+            594 strings with 5411 characters,
 and the built_in function-call counts, 4598 in all, are:
 = -- 381
 > -- 159
