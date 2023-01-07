@@ -1121,7 +1121,6 @@ val fix : (('a -> 'b) -> 'a -> 'b) -> 'a -> 'b = <fun>
 - : int = 120
 \end{Verbatim}
 Ici aussi, le mécanisme de la ``$\eta$-expansion'' est utilisé.
-Je suis surpris cependant de voir que \verb+fix+ prenant deux arguments est correctement évalué lors de son appel \verb+(fix f)+.
 Je ne peux reproduire cela en SCHEME:
 
 \begin{Verbatim}
@@ -1143,7 +1142,12 @@ Je ne peux reproduire cela en SCHEME:
 \end{Verbatim}
 
 \subsection{La diagonale de Cantor} %%
-Le théorème de Cantor nous dit qu'il n'y a pas de fonction surjective 
+ A la différence du $\lambda$-calcul où tout terme a un point fixe, la recherche de point fixe
+peut amener à des situations paradoxales.
+Voyons cela avec le théorème  de Cantor.
+
+
+Ce théorème nous dit qu'il n'y a pas de fonction surjective 
 $f: \mathbb{N} \rightarrow ( \mathbb{N} \rightarrow \mathbb{B}) $.
 Autrement dit, le cardinal des parties de $\mathbb{N}$ est strictement plus grand que le cardinal de $\mathbb{N}$.
 Démontrons cela. \\
@@ -1263,32 +1267,34 @@ on applique l'hypothèse de surjection de $f$ sur $h$
 \coqdockw{End} \coqdocvar{Cantor}.\coqdoceol
 \end{coqdoccode}
 
-Que vient faire Cantor sur ce chapitre décrivant les opérateurs de point fixes du $\lambda$-calcul ?
-Le mécanisme de la diagonalisation nous permet de retrouver l'opérateur de point fixe
- $\lambda g.(\lambda.g(xx))(\lambda.g(xx)$
 Nous pourrons nous reférer à l'ouvrage de Jean-Yves Girard, \textit{Le Point Aveugle}
 \cite{girard}
 
-Voyons cela.
-
-Prenons la fonction identité $f = \lambda x.x$. Considérons cette fonction identité
-pouvant prendre en argument une abstraction et rendant une abstraction pour se rapprocher
-de notre fonction $f$ précédente de type $A \rightarrow (A \rightarrow B)$
-
-Cette fonction est bien surjective. Donc par la contraposée du théorème de Cantor, 
-quel que soit $h$, nous aurons un $a$ tel que  $f a = h$, et ce $a$ pourra être $h$.
-Par diagonalisation : $ f a a = h a = h h $
-
-Considérons $h = \lambda x.g((f x) x)$ pour un terme $g$ quelconque.
-$f$ est la fonction identité, donc $h= \lambda x.g(x x)$
-$$ h h = \lambda x.g(x x) \lambda x.g(x x)$$
-$$ h h = g (h h)$$
-L'opérateur de point fixe est ainsi $Y=\lambda g.(\lambda x.g(x x) \lambda x.g(x x))$.
-Aucun terme n'est donc sans point fixe dans le $\lambda$-calcul à la différence de l'exemple précédent où notre
-fonction de $\mathbb{B} \rightarrow \mathbb{B}$ n'avait pas de point fixe.
+La construction ci-dessus appliquée sur le $\lambda$-calcul permet de mettre en évidence de 
+manière constructive que tout $\lambda$-terme a un point fixe.
+Considérons la fonction $f \equiv \lambda xy.xy$, l'application $xy$ dénote $x \in y$.
+Soit $g$ une fonction quelconque dont on recherche un point fixe.
+Considérons $h\equiv \lambda x.g(f (x x))=\lambda x.g(x x)$, alors $h h$ est 
+le point fixe recherché car :
+$$
+hh=(\lambda x.g(xx))(\lambda x.g(xx))=g(\lambda x.g(xx)(\lambda x.g(xx)))=g(hh)
+$$
 
 \subsection{Le point fixe logique et le théorème d'incomplétude de Gödel} %%
 Il y a une similitude forte entre le point fixe du $\lambda$-calcul et le point fixe \textit{logique}. Voyons cela.
+
+Nous ne décrirons pas le mécanisme de codage. 
+Nous utiliserons les fonctions suivantes :
+\begin{align*}
+\ulcorner t  \urcorner :& \  terme \rightarrow terme \hspace{1.3cm} \text{la fonction qui donne le code syntaxique d'un terme}\\
+\#  t :& \  terme \rightarrow \mathbb{N} \hspace{2cm} \text{la fonction qui donne le code numérique d'un terme}\\
+\overline{  n } :& \  \mathbb{N} \rightarrow terme \hspace{2cm}  \text{la fonction qui transforme un code numérique
+ en code syntaxique}
+\end{align*}
+
+On notera ainsi $\ulcorner t \urcorner$, le terme $\overline{n}$  si 
+$\# t =n$ . 
+
 
 \begin{theoreme}[Le point fixe logique]
 	Soit $T$ une théorie permettant de définir toutes les fonctions récursives.
@@ -1297,25 +1303,61 @@ Il y a une similitude forte entre le point fixe du $\lambda$-calcul et le point 
 \end{theoreme}
 \begin{proof}
 	Soit la fonction diagonale $d : \mathbb{N} \rightarrow \mathbb{N} $ définie par :
-	$ d(n)= \chi _n(\overline{n})$ où $\chi_n$ est telle que $\sharp \chi =n$ 
-
-
-	$d$ est une fonction récursive donc définissable dans notre théorie $T$. On a donc :
-	$$T \vdash \forall y (\delta(\overline{n}, y)) \leftrightarrow \overline{y}=d(\overline{n})$$
+	$ d(n)= \# \chi _n(\overline{n})$ où $\chi_n$ est telle que $\# \chi =n$. Ainsi $d$ 
+	est une fonction récursive et donc définissable dans notre théorie $T$. On a donc :
+	$$T \vdash \forall y (\delta(\overline{n}, y)) \leftrightarrow y=\overline{d(n)} $$
 
 	Soit la formule $\alpha$ telle que $\alpha (x)=\exists y (\delta(x,y) \land \psi(y))$
-	Alors notre point fixe est $\phi = \alpha (\sharp(\alpha))$
-	En effet.
+	, alors notre point fixe est $\phi = \alpha (\ulcorner \alpha \urcorner )$ \\
+	En effet :
 
 	\begin{align*}
-	 T \vdash \phi & \leftrightarrow \alpha(\sharp (\alpha)) \\
-	                 & \leftrightarrow \exists y (\delta(\sharp (\alpha), y) \land \psi (y)) \\
-	                 & \leftrightarrow \exists y (y=\sharp(\alpha(\sharp(\alpha)))) \land \psi (y)) \\
-	                 & \leftrightarrow \psi (\sharp(\alpha(\sharp(\alpha)))) \\
-	                 & \leftrightarrow \psi (\sharp(\phi)) \\
+	 T \vdash \phi & \leftrightarrow \alpha(\ulcorner \alpha \urcorner ) \\
+	                 & \leftrightarrow \exists y\ (\delta( \ulcorner \alpha \urcorner , y) \land \psi (y)) \\
+	                 & \leftrightarrow \exists y\ (y=\ulcorner \alpha(\ulcorner \alpha  \urcorner)\urcorner \land \psi (y)) \\
+	                 & \leftrightarrow \psi (\ulcorner \alpha(\ulcorner \alpha \urcorner)\urcorner)  \\
+	                 & \leftrightarrow \psi (\ulcorner \phi \urcorner ) \\
 	\end{align*}
-
 \end{proof}
+
+
+La similitude avec le point fixe du $\lambda$-calcul est directe :
+$$
+\begin{array}{c|c}
+ \phi \leftrightarrow \psi (\ulcorner \phi\urcorner ) & p = fp \\
+ \delta(x,y) & \lambda x.xx \\
+ \exists y (\delta(x,y) \land \psi(y)) & \lambda x.f (x x) \\
+ \phi \equiv \alpha(\ulcorner \alpha \urcorner) & p \equiv (\lambda x.f(xx)) (\lambda x.f(xx)) \\
+\end{array}
+$$
+
+\begin{theoreme}[Indécidabilité de l'arithmétique]
+	Soit $T$ une théorique consistance telle que toutes les fonctions récursives
+	y soient $T$-définissables, alors $T$ est essentiellement indécidable.
+\end{theoreme}
+\begin{proof}
+        Soit la formule $th(\ulcorner x \urcorner)$ telle que :
+	\begin{align*}
+	T \vdash th(\ulcorner x \urcorner) \ &\text{ssi $x$ est un théorème de $T$} \\
+	T \vdash \neg th(\ulcorner x \urcorner) \ &\text{ssi $x$ n'est pas un théorème de $T$} \\
+	\end{align*}
+	Reprenons le thèorème du point fixe :
+	 $ T \vdash \phi \leftrightarrow \psi (\ulcorner \phi\urcorner ) $ et appliquons le à
+	 la fonction $\neg th$.
+	 
+	 Nous avons alors l'existence d'un point fixe $G$ tel que
+	  $$T \vdash G \leftrightarrow \neg th (\ulcorner G \urcorner ) $$ 
+
+	  Nous avons la contradiction suivante : $T \vdash G$ ssi $T \vdash th(\ulcorner G \urcorner)$ par définition de $th$
+	  et $T \vdash G$ ssi $T \vdash \neg th (\ulcorner G \urcorner)$ par construction de $G$
+\end{proof}
+
+\begin{theoreme}[Gödel, incomplétude de l'arithmétique]
+	Toute théorie consistante et telle que toutes les fonctions récursives y soient définissables
+	est incomplète.	
+\end{theoreme}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{\textit{Church} encoding. Les entiers et les booléens en $\lambda$-calcul}
@@ -5319,7 +5361,7 @@ $n \in \mathbb{N}$ tel que $\{n\}(x_1, ..., x_k) = g (n,x_1, ...,x_k)$
 
 En voici  la démonstration constructive. 
 
-Soit la fonction $\rho$ définie précemment de $\mathbb{N}^2 \rightarrow \mathbb{N}.$ \\
+Soit la fonction $\rho$ définie précédemment de $\mathbb{N}^2 \rightarrow \mathbb{N}.$ \\
 Considérons la fonction $ (t,x_1,...,x_k) \mapsto g(\rho(t,t), x_1, ..., x_k) $,
 il existe  $m \in \mathbb{N}$ tel que $$g(\rho(t,t),x_1, ...,x_k) = \{m\}(t, x_1, ..., x_k)$$ 
 

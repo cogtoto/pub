@@ -15,10 +15,10 @@
 \contentsline {subsection}{\numberline {1.5.1}Le point fixe du $\lambda $-calcul}{21}{subsection.1.5.1}%
 \contentsline {subsection}{\numberline {1.5.2}La diagonale de Cantor}{25}{subsection.1.5.2}%
 \contentsline {subsection}{\numberline {1.5.3}Le point fixe logique et le th\IeC {\'e}or\IeC {\`e}me d'incompl\IeC {\'e}tude de G\IeC {\"o}del}{26}{subsection.1.5.3}%
-\contentsline {section}{\numberline {1.6}\textit {Church} encoding. Les entiers et les bool\IeC {\'e}ens en $\lambda $-calcul}{27}{section.1.6}%
-\contentsline {subsection}{\numberline {1.6.1}Les entiers \textit {Church} }{27}{subsection.1.6.1}%
+\contentsline {section}{\numberline {1.6}\textit {Church} encoding. Les entiers et les bool\IeC {\'e}ens en $\lambda $-calcul}{28}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Les entiers \textit {Church} }{28}{subsection.1.6.1}%
 \contentsline {subsection}{\numberline {1.6.2}Les bool\IeC {\'e}ens }{29}{subsection.1.6.2}%
-\contentsline {subsection}{\numberline {1.6.3}La fonction factorielle}{29}{subsection.1.6.3}%
+\contentsline {subsection}{\numberline {1.6.3}La fonction factorielle}{30}{subsection.1.6.3}%
 \contentsline {section}{\numberline {1.7}La notation de \textit {de Bruijn}}{30}{section.1.7}%
 \contentsline {chapter}{\numberline {2}Le $\lambda $-calcul simplement typ\IeC {\'e} et les Pure Type Systems}{33}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Le $\lambda $-calcul simplement typ\IeC {\'e}}{33}{section.2.1}%
