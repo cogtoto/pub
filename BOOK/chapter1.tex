@@ -1205,9 +1205,77 @@ $$
 \end{theoreme}
 
 
+\subsection{L'indécidabilité de la $\beta$-conversion} %%
+Ce théorème repose encore sur l'existence d'un point fixe. 
+Sa démonstration est ainsi toujours similaire au théorème d'incomplétude de Gödel ou au 
+théorème de Rice.
+\begin{theoreme}[point fixe du $lambda$-calcul]
+	Pour tout $\lambda$-terme $F$, il existe un point fixe $X$ tel que 
+	$F \ulcorner X \urcorner = X $ 
+\end{theoreme}
+\begin{proof}
+Considérons les fonctions récursives $App$ et $Num$ telles que $App(\#M, \#N)=\#MN$	
+et $Num(n)=\#\ulcorner M \urcorner $. Et considérons les fonctions $\lambda$-équivalentes 
+$\mathbf{App}$ et $\mathbf{Num}$.
+
+Alors, $\mathbf{App}\ulcorner M \urcorner \ulcorner N \urcorner = \ulcorner MN \urcorner$ et 
+$\mathbf{Num}\ulcorner n \urcorner = \ulcorner \ulcorner n \urcorner \urcorner$
+
+Soit $W \equiv \lambda x.F(\mathbf{App}\ x \ (\mathbf{Num}\ x))$, alors notre point fixe est
+ $X\equiv W \ulcorner W \urcorner$
+
+En effet,
+\begin{align*}
+ X=W\ulcorner W \urcorner &= F(\mathbf{App}\ulcorner W \urcorner (\mathbf{Num}\ulcorner W \urcorner)) \\
+			  &= F \ulcorner W \ulcorner W \urcorner \urcorner \\
+			  &= F \ulcorner X \urcorner
+\end{align*}
+
+\end{proof}
+
+\begin{definition}[Ensembles récursivement séparables]
+Deux ensembles $\mathcal{A}$ et $\mathcal{B}$ sont récursivement séparables ssi il existe un 
+ensemble récursif $\mathcal{C}$	tel que $\mathcal{A} \subset \mathcal{C}$ et 
+$\mathcal{B} \cap \mathcal{C} = \varnothing $
+\end{definition}
+
+\begin{definition}[Clôture d'un ensemble de $\lambda$-termes par $\beta$-conversion]
+	Soit $\Lambda$ l'ensemble des $\lambda$-termes. Considérons $\mathcal{A} \subset  \Lambda$, 
+	$\mathcal{A}$ est clos par égalité \textit{closed under equality} si :
+	$$ \forall M, N \in \Lambda, (M \in \mathcal{A}  \ \text{et}\  M=_{\beta}N) \Rightarrow 
+	                              N \in \mathcal{A}$$ 
+\end{definition}
+
+\begin{theoreme}[Indécidabilité de la $\beta$-conversion]
+Soient deux ensembles $\mathcal{A}$ et $\mathcal{B}$ clos par $\beta$-conversion, alors 
+$\mathcal{A}$ et $\mathcal{B}$ ne sont pas récursivement séparables.	
+\end{theoreme}
+
+\begin{proof}
+	Soient $M_\mathcal{A} \in \mathcal{A}$ et  $M_\mathcal{B} \in \mathcal{B}$.
+	Supposons l'existence de $\mathcal{C}$, un ensemble récursif et tel que 
+	$\mathcal{A} \subset \mathcal{C}$ et $\mathcal{B} \cap \mathcal{C} = \varnothing$
+	
+	Soit $F$ la $\lambda$-fonction caractéristique de l'ensemble récursif $\mathcal{C}$,
+	nous avons alors :
+	\begin{align*}
+		M \in \mathcal{C} \Rightarrow F \ulcorner M \urcorner = \ulcorner 0 \urcorner \\
+		M \notin \mathcal{C} \Rightarrow F \ulcorner M \urcorner = \ulcorner 1 \urcorner \\
+	\end{align*}
+	
+	Définissons $G \equiv \lambda x.\text{si\ zero}(Fx) \text{\ alors\ } M_\mathcal{B}
+	\text{\ sinon\ } M_\mathcal{A}$
+
+	D'après le théorème du point fixe, il existe $X$ tel que $G\ulcorner X \urcorner = X$,
+	nous avons alors la contradiction suivante :
+	\begin{align*}
+		X \in \mathcal{C}, G \ulcorner X \urcorner = X = M_\mathcal{B} \Rightarrow X \notin \mathcal{C} \\
+		X \notin \mathcal{C}, G \ulcorner X \urcorner = X = M_\mathcal{A} \Rightarrow X \in \mathcal{C} \\
+	\end{align*}
+\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\textit{Church} encoding. Les entiers et les booléens en $\lambda$-calcul}
+\section{Encoding. Les entiers \textit{Church} et les booléens en $\lambda$-calcul}
 \subsection{Les entiers \textit{Church} }
 Les entiers peuvent être représenté de la manière suivante:
 $$

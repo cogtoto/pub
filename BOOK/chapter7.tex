@@ -3,7 +3,7 @@
  
 \begin{footnotesize}
 \begin{tabular}{l|l} \hline
-SCHEME & OCAML \\ \hline
+\textsc{Scheme} & \textsc{Ocaml} \\ \hline
 \begin{minipage}{2.8in}
 \begin{Verbatim}
 
@@ -111,7 +111,7 @@ Nous pouvons par exemple définir la liste circulaire \verb+(a b c a b c ...)+
 L'affichage de la liste infine provient de l'interprète DrRacket.
 
 
-Essayons de reproduire cela en OCAML
+Essayons de reproduire cela en \textsc{Ocaml}
 (de manière intuitive et sûrement très maladroite\ldots)
 \begin{Verbatim}
 
@@ -190,7 +190,7 @@ Nous pouvons aussi modéliser la fraction continue représentant $\sqrt{2}$ :
 + \cfrac{1}{...
  } } }
 \end{equation*}
-Voici le code OCAML. Je n'ai pas trouvé manière plus élégante pour exprimer le stream.
+Voici le code \textsc{Ocaml}. Je n'ai pas trouvé manière plus élégante pour exprimer le stream.
 \begin{Verbatim}
 let rec square2 iter =
   if (iter = 1) then 1.
@@ -209,11 +209,12 @@ let rec racine2stream = racine2cons 1
 \end{Verbatim}
 Nous voyons la convergence très rapide de la fraction continue.
 
-Cependant, le calcul OCAML est très inefficace, car chaque nouvel élément de la liste recalcule la totalité de la fraction continue
+Cependant, le calcul \textsc{Ocaml} est très inefficace, car chaque nouvel élément de la liste recalcule la totalité de la fraction continue
 en passant par la fonction \verb+square2 iter+. Si nous essayons par exemple de calculer les $10000$ premiers éléments du stream, cela prend sur ma machine une
 dizaine de seconde. 
 
-En utilisant le module \verb+Lazy+ d'OCAML, nous pouvons utiliser le mécanisme de \textit{mémoisation}. Les valeurs du stream ne seront pas recalculées au 
+En utilisant le module \verb+Lazy+ d'\textsc{Ocaml}, nous pouvons utiliser le mécanisme
+ de \textit{mémoisation}. Les valeurs du stream ne seront pas recalculées au 
 2ème appel.
 \begin{Verbatim}
 open Lazy ;;
@@ -225,7 +226,7 @@ let racine2_force = force racine2_10000_lazy ;; (* uniquement long au 1er appel 
 
 
 
-\section{Le module Graphics d'OCAML, les fractales}
+\section{Le module Graphics d'\textsc{Ocaml}, les fractales}
 
 Nous allons ici présenter tres brievement le module Graphics.
 Je reprends le code de Xavier Leroy tiré de son livre \textit{le langage CAML} \cite{caml}.
@@ -496,7 +497,7 @@ let maboite = box 5 ;;
 (maboite "reset") 0 ;;
 \end{Verbatim}
 
-\section{Les modules OCAML. Modélisation d'un monoïde}
+\section{Les modules \textsc{Ocaml}. Modélisation d'un monoïde}
 Un monoïde est une structure algébrique qui possède une loi de composition
 interne associative et un élément neutre.
 Représentons cette structure en OCAML, en définissant un module.
@@ -1336,6 +1337,13 @@ utop #
 	Agneau de Dieu, qui sauves les hommes, \\
 	Agneau de Dieu, qui nous comptes et nous nommes, \\
 	Agneau de Dieu, vois, prends pitié de ce que nous sommes. \\
+\end{verse}
+
+\begin{verse}
+	Demain, dès l'aube, à l'heure où blanchit la campagne, \\
+	Je partirai. Vois-tu, je sais que tu m'attends. \\
+	J'irai par la forêt, j'irai par la montagne. \\
+	Je ne puis demeurer loin de toi plus longtemps. \\
 \end{verse}
 
 \section{Les fractions continues}

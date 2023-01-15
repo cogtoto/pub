@@ -324,6 +324,7 @@ OUTPUT /home/vincent/vsc/BOOK/main.out
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr17.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-0.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-0.def
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/cbfonts-fd/lgrlmr.fd
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/cbfonts-fd/lgrlmr.fd
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cbfonts/grmn1728.tfm
@@ -375,6 +376,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/lmsy10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/mflogo/ulogo.fd
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/mflogo/ulogo.fd
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/knuth-lib/logo10.tfm
@@ -444,8 +446,9 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr6.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmri8.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmri7.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmbxi10.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
 OUTPUT /home/vincent/vsc/BOOK/chapter2.aux
 INPUT /home/vincent/vsc/BOOK/chapter2.tex
 INPUT /home/vincent/vsc/BOOK/chapter2.tex
@@ -502,6 +505,7 @@ INPUT /home/vincent/vsc/BOOK/chapter6.tex
 OUTPUT /home/vincent/vsc/BOOK/chapter7.aux
 INPUT /home/vincent/vsc/BOOK/chapter7.tex
 INPUT /home/vincent/vsc/BOOK/chapter7.tex
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
 INPUT /home/vincent/vsc/BOOK/flocon1.pdf
 INPUT /home/vincent/vsc/BOOK/flocon1.pdf
 INPUT /home/vincent/vsc/BOOK/flocon1.pdf
@@ -537,7 +541,6 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/libraries/shapes/pgflib
 INPUT /home/vincent/vsc/BOOK/main.bbl
 INPUT /home/vincent/vsc/BOOK/main.bbl
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/knuth-lib/logosl10.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmri8.tfm
 INPUT /home/vincent/vsc/BOOK/main.aux
 INPUT /home/vincent/vsc/BOOK/chapter1.aux
 INPUT /home/vincent/vsc/BOOK/chapter1.aux

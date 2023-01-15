@@ -17,7 +17,7 @@ $( x , \tau )$  où $x$ est une variable et $\tau$ un type.
     \mathrm{alors}\  \Gamma \vdash uv:\tau _{2} \\ 
 \end{gather*}
 
-\subsection{Implémentation en COQ}
+\subsection{Implémentation en \textsc{Coq}}
 \subsubsection{Représentation des types et des termes}
 Pour les types, nous avons deux constructeurs, un pour les types de variable and un
  pour les types des abstractions: le type flèche de la forme  $T_1 \rightarrow T_2$.
@@ -496,7 +496,7 @@ let proj2 =
 in print (fullReduc (App (proj2, prod_uv)))
 \end{Verbatim}
 
-\subsection{MiniCOQ}
+\subsection{\textsc{MiniCoq}}
 Nous  nous éloignons de la simplicité du \textit{Pure Type System} en surchargeant notre
  terme algébrique des types suivants :
 \begin{itemize}
@@ -511,7 +511,7 @@ Nous  nous éloignons de la simplicité du \textit{Pure Type System} en surcharg
 \end{itemize}
 
 \vspace{0.2cm}
-Démontrons le théorème simple décrit en COQ comme ci-dessous.
+Démontrons le théorème simple décrit en \textsc{Coq} comme ci-dessous.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -676,7 +676,7 @@ let preuve_or_elim =
   πA:Type.πB:Type.πC:Type.((A→C)→((B→C)→(A\/B→C)))
 \end{Verbatim}
 
-En OCAML, nous introduisons le type algébrique ci-dessous pour matérialiser le \verb+or+ logique
+En \textsc{Ocaml}, nous introduisons le type algébrique ci-dessous pour matérialiser le \verb+or+ logique
 \begin{Verbatim}
 type ('a, 'b) ou = Left of 'a | Right of 'b	
 
@@ -758,7 +758,7 @@ implication =
 \end{coqdoccode}
 
 
-Avec notre implémentation OCAML, cela donne :
+Avec notre implémentation \textsc{Ocaml}, cela donne :
 \begin{Verbatim}
 let preuve_impl =
   Lam("A", Type,
@@ -774,7 +774,7 @@ in  (print preuve_impl ; print_newline() ;
   πA:Type.πB:Type.(~A\/B→(A→B))
 \end{Verbatim}
 
-Dans un langage comme OCAML, le type \verb+faux+ est un type sans constructeur.
+Dans un langage comme \textsc{Ocaml}, le type \verb+faux+ est un type sans constructeur.
 Il est \textit{inhabité}. La preuve de la règle du modus tollens s'écrira de la manière suivante :
 \begin{Verbatim}
 type faux = | ;;
@@ -782,7 +782,7 @@ type faux = | ;;
 let modus_tollens (hfq:'q->faux) (hpq:'p->'q) (hp:'p) =
   hfq (hpq hp)
 \end{Verbatim}
-Voici le même théorème en COQ :
+Voici le même théorème en \textsc{Coq} :
 \begin{Verbatim}
 Theorem modus_tollens: forall (p q:Prop), (q->False)-> (p->q) -> (p->False).
 Proof.
@@ -791,7 +791,7 @@ Proof.
         exact Hfq.
 Qed.
 \end{Verbatim}
-Nous pouvons décrire le \textit{ex falso quodlibet} en OCAML comme suit :
+Nous pouvons décrire le \textit{ex falso quodlibet} en \textsc{Ocaml} comme suit :
 \begin{Verbatim}
 type faux = | ;;
 type vrai = I ;;
@@ -827,7 +827,7 @@ C'est-à-dire que toute proposition a une preuve constructive.
 Avec cette logique nous ne pouvons prouver certains théorèmes comme la loi de Peirce $((A\rightarrow B)\rightarrow A)\rightarrow A$
 
 Pour cela nous devons ajouter l'axiome du tiers-exclus $A \vee \neg A$. 
-Voici comment la loi de Pierce se déduit avec l'axiome du tiers-exclus. En COQ, cela donne:
+Voici comment la loi de Pierce se déduit avec l'axiome du tiers-exclus. En \textsc{Coq}, cela donne:
 
 \begin{coqdoccode}
 \coqdocnoindent
@@ -868,10 +868,10 @@ Voici comment la loi de Pierce se déduit avec l'axiome du tiers-exclus. En COQ,
     : forall A B : Prop, ((A -> B) -> A) -> A
 \end{Verbatim}
 
-Voici notre implémentation dans notre miniCOQ. 
+Voici notre implémentation dans notre \textsc{MiniCoq}. 
 Nous créons un environnement \verb+env_classic+ surchargé par le terme \verb+tiers-exclus+ de type $A \vee \neg A$.
 Nous trichons un peu car le type devrait être polymorphe et donc de la forme $\forall P:\mathtt{Type}, P \vee \neg P$, mais 
-je ne vois pas comment ensuite appliquer cet axiome à une variable \verb+A+. Comment COQ gère \verb+let H0 : A \/ ~ A := classic A+ ? 
+je ne vois pas comment ensuite appliquer cet axiome à une variable \verb+A+. Comment \textsc{Coq} gère \verb+let H0 : A \/ ~ A := classic A+ ? 
 
 \begin{Verbatim}
 let env_classic = [("tiers-exclus",  Or(V "A", App(non, V "A")))] ;;
@@ -900,7 +900,7 @@ C'est-à-dire que l'on ne peut démontrer $P$, mais $\lnot\ \lnot P$
 Il est surprenant de constater que "nier deux fois" est équivalent à "affirmer" en logique classique, mais est plus
 faible en logique intuitionniste.
 
-Voici la démonstration en COQ.
+Voici la démonstration en \textsc{Coq}.
 
 \begin{coqdoccode}
 \coqdocnoindent
