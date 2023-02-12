@@ -56,8 +56,10 @@
 \cite{ab}
 
 
+
 \textit{What is mathematics ? Mathematics as an expression of the human mind reflects
 the active will, the contemplative reason, and the desire for aesthetic perfection.} \cite{wm}
+
 
 
 C'est sous cet angle de l'esthétique que j'ai voulu modestement décrire ici quelques concepts 
@@ -129,7 +131,7 @@ Nous pouvons par exemple prouver le théorème du modus tollens : \\
 \verb+let modus_tollens (hfq:'q->faux) (hpq:'p->'q) (hp:'p) = hfq (hpq hp)+  \\
 Le type de cette expression est  \verb+('q -> faux) -> ('p -> 'q) -> 'p -> faux+  \\
 
-Dans un langage proposant un système de types plus évolué comme COQ, le faux peut être exprimé 
+Dans un langage proposant un système de types plus évolué comme \textsc{Coq}, le faux peut être exprimé 
 par le type $\forall p:P, p$. Ce type est également inhabité. Supposer le faux permettra de démontrer 
 n'importe quelle proposition.
 
@@ -145,7 +147,7 @@ Qed.
 
 La correspondance de Curry-Howard montre toute son étendue dans le calcul des constructions, qui 
 considère les types comme des termes de premier ordre et permet ainsi de modéliser des types dépendants.
-COQ implémente ce formalisme.
+\textsc{Coq} implémente ce formalisme.
 Nous en montrerons plusieurs exemples significatifs.
 
 \vspace{0.3cm}

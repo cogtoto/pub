@@ -3,7 +3,7 @@
 \BOOKMARK [2][-]{subsection.1.1.1}{Analyse lexicale avec ocamllex}{section.1.1}% 3
 \BOOKMARK [2][-]{subsection.1.1.2}{Analyse syntaxique avec menhir}{section.1.1}% 4
 \BOOKMARK [2][-]{subsection.1.1.3}{Impl\351mentation du parsing en mode r\351cursif descendant}{section.1.1}% 5
-\BOOKMARK [1][-]{section.1.2}{Repr\351sentation en ML}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.2}{Repr\351sentation en Ocaml}{chapter.1}% 6
 \BOOKMARK [1][-]{section.1.3}{D\351monstration de la confluence du -calcul}{chapter.1}% 7
 \BOOKMARK [2][-]{subsection.1.3.1}{La restriction ' du -calcul}{section.1.3}% 8
 \BOOKMARK [2][-]{subsection.1.3.2}{La d\351monstration}{section.1.3}% 9
@@ -100,14 +100,16 @@
 \BOOKMARK [2][-]{subsection.7.10.4}{Le produit de Wallis}{section.7.10}% 100
 \BOOKMARK [2][-]{subsection.7.10.5}{L'int\351grale 01 11+x2 dx}{section.7.10}% 101
 \BOOKMARK [1][-]{section.7.11}{Po\351sies}{chapter.7}% 102
-\BOOKMARK [1][-]{section.7.12}{Les fractions continues}{chapter.7}% 103
-\BOOKMARK [1][-]{section.7.13}{L'irrationalit\351 de 2}{chapter.7}% 104
-\BOOKMARK [1][-]{section.7.14}{D\351monstration non constructive}{chapter.7}% 105
-\BOOKMARK [1][-]{section.7.15}{L'hyperbole xy=1}{chapter.7}% 106
-\BOOKMARK [1][-]{section.7.16}{L'exponentielle}{chapter.7}% 107
-\BOOKMARK [1][-]{section.7.17}{Les fonctions sin1x et x . sin1x }{chapter.7}% 108
-\BOOKMARK [1][-]{section.7.18}{Srivanasa Ramanujan}{chapter.7}% 109
-\BOOKMARK [1][-]{section.7.19}{Le grec ancien}{chapter.7}% 110
-\BOOKMARK [2][-]{subsection.7.19.1}{L'alphabet grec}{section.7.19}% 111
-\BOOKMARK [2][-]{subsection.7.19.2}{Les math\351matiques grecques}{section.7.19}% 112
-\BOOKMARK [2][-]{subsection.7.19.3}{Extraits du nouveau testament}{section.7.19}% 113
+\BOOKMARK [1][-]{section.7.12}{Lectures}{chapter.7}% 103
+\BOOKMARK [1][-]{section.7.13}{Les fractions continues}{chapter.7}% 104
+\BOOKMARK [1][-]{section.7.14}{L'irrationalit\351 de 2}{chapter.7}% 105
+\BOOKMARK [1][-]{section.7.15}{D\351monstration non constructive}{chapter.7}% 106
+\BOOKMARK [1][-]{section.7.16}{Le tout est-il plus grand que chacune de ses parties ?}{chapter.7}% 107
+\BOOKMARK [1][-]{section.7.17}{L'hyperbole xy=1}{chapter.7}% 108
+\BOOKMARK [1][-]{section.7.18}{L'exponentielle}{chapter.7}% 109
+\BOOKMARK [1][-]{section.7.19}{Les fonctions sin1x et x . sin1x }{chapter.7}% 110
+\BOOKMARK [1][-]{section.7.20}{Srivanasa Ramanujan}{chapter.7}% 111
+\BOOKMARK [1][-]{section.7.21}{Le grec ancien}{chapter.7}% 112
+\BOOKMARK [2][-]{subsection.7.21.1}{L'alphabet grec}{section.7.21}% 113
+\BOOKMARK [2][-]{subsection.7.21.2}{Les math\351matiques grecques}{section.7.21}% 114
+\BOOKMARK [2][-]{subsection.7.21.3}{Extraits du nouveau testament}{section.7.21}% 115

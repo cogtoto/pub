@@ -32,7 +32,7 @@ Autrement dit :
 	+ (0, y) &=  g(y)\ \text{avec}\ g=pr_1^1 (y) \\
 	+ (s(x), y) &= h (+(x, y), x, y)\ \text{avec}\ h=s \circ  pr_3^1
 \end{align*}
-Voici un opérateur de récursion primitive en ML
+Voici un opérateur de récursion primitive en \textsc{Ocaml}
 \begin{Verbatim}
 let rec_prim g h = 
 let rec f m n = 
@@ -270,6 +270,15 @@ etat:qf  position:0  lire:   bande:   nonXXXX
 \begin{theoreme}
 	Thèse de Church: toute fonction effectivement calculable est récursive.
 \end{theoreme}
+Autrement dit, les fonctions calculables sont exactement les fonctions récursives.
+Il est évident que les fonctions récursives sont bien calculables. C'est dans
+l'autre sens que cette thèse peut nous surprendre. Il met en relation une notion vague, 
+la \textit{calculabilité} à une notion mathématique.
+Par analogie, nous pouvons voir cette thèse comme une théorème physique qui exprime une expérience du
+monde physique en une formule mathématique, 
+comme l'est par exemple la loi universelle de la gravitation (Newton).
+
+
 \begin{theoreme}
 	Thèse forte de Church: si une fonction $f$ est calculable par un algorithme, 
 	alors celui-ci est effectivement transformable en une machine de Turing 
@@ -349,7 +358,7 @@ type cnf = disj list ;;
 
 \subsection{Sudoku - SAT encoding}
 L'algorithme permettant de résoudre les sudokus peut être réalisé par l'algorithme SAT en modélisant
-les contraintes du sodoku sous la forme de clauses propositionnelles. Une variable $s_{xyz}$ représente que la
+les contraintes du sudoku sous la forme de clauses propositionnelles. Une variable $s_{xyz}$ représente que la
 case de la ligne $x$ et colonne $y$ porte le nombre $z$.
 \begin{enumerate}
 	\item Contrainte $C_1$. Il y a au moins un nombre pour chaque case 
@@ -524,7 +533,7 @@ $n\equiv \rho(m,m)$ est ce point fixe recherché car $ \{ \rho(m,m)\} (x) = \{ m
 Le programme à construire est donc de la forme d'un programme qui prend en entrée la data représentative de son code
 et l'affiche deux fois : son code et la data.
 
-En OCAML, nous pouvons définir un programme Quine par le code suivant:
+En \textsc{Ocaml}, nous pouvons définir un programme Quine par le code suivant:
 \begin{Verbatim}
 	(fun x -> Printf.printf "%s %S" x x) "(fun x -> Printf.printf \"%s %S\" x x)"	
 \end{Verbatim}

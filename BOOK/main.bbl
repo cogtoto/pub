@@ -41,12 +41,17 @@ Jean-Yves Girard.
 
 \bibitem{god}
 Douglas~R Hofstadter et~al.
-\newblock {\em G{\"o}del, Escher, Bach: an eternal golden braid}, volume~13.
-\newblock Basic books New York, 1979.
+\newblock {\em G{\"o}del, Escher, Bach: an eternal golden braid}.
+\newblock 1979.
 
 \bibitem{vh}
 Victor Hugo.
 \newblock {\em Les travailleurs de la mer}.
+
+\bibitem{meta}
+Kleene.
+\newblock {\em Introduction to meta-mathematics}.
+\newblock 1950.
 
 \bibitem{mf}
 Donald Knuth.
@@ -67,6 +72,11 @@ Leslie Lamport.
 C.~Lebossé.
 \newblock {\em Géométrie plane}.
 \newblock Fernand Nathan, 1947.
+
+\bibitem{moby}
+Herman Melville.
+\newblock {\em Moby-Dick; or, The Whale}.
+\newblock 1851.
 
 \bibitem{poincare}
 Henri Poincaré.

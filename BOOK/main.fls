@@ -506,6 +506,7 @@ OUTPUT /home/vincent/vsc/BOOK/chapter7.aux
 INPUT /home/vincent/vsc/BOOK/chapter7.tex
 INPUT /home/vincent/vsc/BOOK/chapter7.tex
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsco10.tfm
 INPUT /home/vincent/vsc/BOOK/flocon1.pdf
 INPUT /home/vincent/vsc/BOOK/flocon1.pdf
 INPUT /home/vincent/vsc/BOOK/flocon1.pdf
@@ -574,6 +575,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx12.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx9.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsco10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb

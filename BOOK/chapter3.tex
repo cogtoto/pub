@@ -28,7 +28,7 @@ et réflection de notre méta-interpète. C'est comme une quête philosophique\d
 Pour ces diffèrentes variantes, nous nous inspirons de notre bible sur le langage LISP : \textit{LISP In Small Pieces} de Christian Queinnec.
 \cite{lisp}
 
-\section{Un interprète MiniScheme avec \textsc{Ocaml}}
+\section{Un interprète \textsc{MiniScheme} avec \textsc{Ocaml}}
 
 \subsection{L'évaluation}
 Le $\lambda$-calcul repose sur un mécanisme de substitution permettant de réduire les termes et
@@ -93,7 +93,7 @@ le processus d'évaluation.
 \end{center}
 
 
-Voici le code OCAML des type abstrait \verb+exp+, \verb+ast+ et \verb+env+ :
+Voici le code \textsc{Ocaml} des type abstrait \verb+exp+, \verb+ast+ et \verb+env+ :
 
 \begin{Verbatim}
 type exp =
@@ -306,7 +306,7 @@ let fact = ref (function x -> x) in
   
 \end{enumerate}
 
-\section{Un interprète \textsc{Lisp} avec le nouvel interprète MiniScheme \ldots}
+\section{Un interprète \textsc{Lisp} avec le nouvel interprète \textsc{MiniScheme} \ldots}
 \subsubsection{La mise en abyme}
 
 \begin{tabular} {lll}

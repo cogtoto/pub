@@ -99,7 +99,7 @@ let rec foldleft f acc l =
 \end{footnotesize}
 \section{Les listes mutables}
 
-En SCHEME, nous avons les fonctions \verb+set-car!+ et \verb+set-cdr!+ qui nous permettent de modifier physiquement
+En \textsc{Scheme}, nous avons les fonctions \verb+set-car!+ et \verb+set-cdr!+ qui nous permettent de modifier physiquement
  le car et le cdr d'un doublet.
 Nous pouvons par exemple définir la liste circulaire \verb+(a b c a b c ...)+
 \begin{Verbatim}
@@ -158,7 +158,9 @@ Les \textit{streams} sont des listes infinies.
 
 Pour pouvoir les représenter, nous utilisons le fait que le corps d'une lambda n'est pas évalué, 
 comme nous l'avons vu en $\lambda$-calcul avec la
-stratégie de $\beta$-réduction faible.
+stratégie de la $\beta$-réduction faible.
+
+
 Une lambda \verb+fun()->2*2+\ \imp\ \verb+- : unit -> int = <fun>+ est en fait considérée 
 comme une \textit{valeur}. Seul son appel provoquera l'évaluation de la lambda
 \verb+(fun() -> 2*2) ()+\ \imp\  \verb+- : int = 4+
@@ -187,10 +189,10 @@ Nous pouvons aussi modéliser la fraction continue représentant $\sqrt{2}$ :
 \begin{equation*}
 \sqrt{2} = 1 + \cfrac{1}{2
 + \cfrac{1}{2
-+ \cfrac{1}{...
++ \cfrac{1}{\ddots
  } } }
 \end{equation*}
-Voici le code \textsc{Ocaml}. Je n'ai pas trouvé manière plus élégante pour exprimer le stream.
+Voici le code \textsc{Ocaml}. Je n'ai pas trouvé de manière plus élégante pour exprimer le stream.
 \begin{Verbatim}
 let rec square2 iter =
   if (iter = 1) then 1.
@@ -229,7 +231,7 @@ let racine2_force = force racine2_10000_lazy ;; (* uniquement long au 1er appel 
 \section{Le module Graphics d'\textsc{Ocaml}, les fractales}
 
 Nous allons ici présenter tres brievement le module Graphics.
-Je reprends le code de Xavier Leroy tiré de son livre \textit{le langage CAML} \cite{caml}.
+Je reprends le code de Xavier Leroy tiré de son livre \textit{le langage \textsc{Caml}} \cite{caml}.
 
 \begin{Verbatim}
 open Graphics ;;
@@ -476,7 +478,7 @@ Voici l'implémentation en Scheme:
 ((maboite "set") 5)
 \end{Verbatim}
 
-En CAML, nous pouvons rédiger le code ci-dessous:
+En \textsc{Ocaml}, nous pouvons rédiger le code ci-dessous:
 \begin{Verbatim}
 exception Erreur
 
@@ -500,7 +502,7 @@ let maboite = box 5 ;;
 \section{Les modules \textsc{Ocaml}. Modélisation d'un monoïde}
 Un monoïde est une structure algébrique qui possède une loi de composition
 interne associative et un élément neutre.
-Représentons cette structure en OCAML, en définissant un module.
+Représentons cette structure en \textsc{Ocaml}, en définissant un module.
 Nous reprenons ici l'excellent article 
 https://blog.derniercri.io/observons-une-premiere-structure-algebrique-appliquee-a-linformatique-le-monoide/
 \begin{Verbatim}
@@ -556,7 +558,7 @@ comme élément neutre)
 Nous implémentons en R un réseau de neurones réduit à sa plus simple expression.
 Il n'aura que deux couches de neurones.
 Le langage R est ici commode pour ses opérations natives sur les matrices.
-Nous pourrons voir ensuite comme transposer ce code en OCAML.
+Nous pourrons voir ensuite comme transposer ce code en \textsc{Ocaml}.
 
 Nous entraînerons notre NN sur la base du jeu de test MNIST.
 Le  "training set" contient 60000 exemples, et le "test set" 10000 exemples.
@@ -1183,7 +1185,7 @@ Comme formule générique, nous obtenons ainsi avec $n-1$ racines imbriquées :
 $$c_{2^n}=\sqrt{2-\sqrt{2+\sqrt{2+\sqrt{2+\sqrt{2+\dots}}}}}$$ 
 
 Quand $n$ tend vers l'infini, le $2^n$-gone tend vers le cercle. D'où :
-$$ 2^n \sqrt{2-\sqrt{2+\sqrt{2+\sqrt{2+\sqrt{2+\dots}}}}} \rightarrow \pi\ quand\ m \rightarrow \infty $$
+$$ 2^n \sqrt{2-\sqrt{2+\sqrt{2+\sqrt{2+\sqrt{2+\dots}}}}} \rightarrow \pi\ quand\ n \rightarrow \infty $$
 
 Nous pourrons nous référer à \cite{wm}
 
@@ -1315,9 +1317,6 @@ utop #
  - : float = 3.14159265692298773
 \end{Verbatim}
 
-
-
-
 \section{Poésies}
 \begin{verse}
 	Un soir t'en souvient-il ? Nous voguions en silence ; \\
@@ -1346,6 +1345,12 @@ utop #
 	Je ne puis demeurer loin de toi plus longtemps. \\
 \end{verse}
 
+\section{Lectures}
+Call me Ismaël. \cite{moby}
+
+Some years ago - never mind how long precisely - having little or no money in my purse, 
+and nothing particular to interest me on shore,
+I thought I would sail about a little and see the watery part of the world. 
 \section{Les fractions continues}
 
 $$
@@ -1416,13 +1421,24 @@ Considérons $\sqrt{3}^{\sqrt{2}}$
 
 Si  $\sqrt{3}^{\sqrt{2}} \in \mathbb{Q}$ alors on pose $a = \sqrt{3}$ et $b= \sqrt{2}$
 
-Sinon, on pose $a = \sqrt{3}^{\sqrt{2}}$ et $b=\sqrt{3}$, 
+Sinon, on pose $a = \sqrt{3}^{\sqrt{2}}$ et $b=\sqrt{2}$, 
 de sorte que $ {(\sqrt{3}^{\sqrt{2}})}^{\sqrt{2}} = 3 \in \mathbb{Q} $
 
 
 Mais laquelle des deux est la solution ?
-Faut-il abandonner le principe du \textit{tiers exlus} de nos démonstrations
+Faut-il abandonner le principe du \textit{tiers-exlus} de nos démonstrations
 mathématiques ?
+\section{Le tout est-il plus grand que chacune de ses parties ?}
+Galilée remontait le paradoxe suivant sur les nombres entiers : Chaque entier peut être mappé 
+un à un avec son carré. Pourtant l'ensemble de nombres carrés est intuitivement un sous-ensemble
+des nombres entiers.
+
+
+\begin{tabular}{cccccccccccc}
+1 &2 &3 &4  &5  &6  &7  &8  &9  &10  &11  & \ldots \\  
+1 &4 &9 &16 &25 &36 &49 &64 &81 &100 &121 & \ldots 
+\end{tabular}
+
 \section{L'hyperbole $xy=1$}
 \begin{tikzpicture}
 	\draw[->] (-3, 0) -- (3, 0) node[right] {$x$};
@@ -1431,7 +1447,7 @@ mathématiques ?
 	\draw[domain=-3:-0.3, smooth, variable=\x, blue] plot (\x, {1 / \x});
 	\draw[red] (0.5,0) -- (0.5,2) ;
 	\draw[red] (0,2) -- (0.5,2) node [right] {L'aire du rectangle rouge est égale à 1}  ;
-  \end{tikzpicture}
+\end{tikzpicture}
 
 \section{L'exponentielle}
 \begin{align*}

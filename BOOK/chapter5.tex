@@ -15,7 +15,7 @@ L'ensemble des termes $T_{\Sigma \cup X}$ est défini de la manière suivante:
 	\item si $x \in X$, alors $x \in T_{\Sigma \cup X}$
 \end{itemize}
 
-Nous pouvons représenter les termes en OCAML avec le type abstrait suivant:
+Nous pouvons représenter les termes en \textsc{Ocaml} avec le type abstrait suivant:
 \begin{Verbatim}
 	type terme = 
 	| Var of string
@@ -23,14 +23,21 @@ Nous pouvons représenter les termes en OCAML avec le type abstrait suivant:
 \end{Verbatim}
 
 En fait, quasiment tous les objets que nous manipulerons pourront être modélisés par des termes.
+
+\vspace{.5cm}
+Considérons nos termes préférés : les \textbf{entiers naturels}. 
+D'après Kronecker, \textit{God made the integers, all the work is the rest of man}
+(traduit ici de l'Allemand par Kleene\cite{meta})
+
+
 Prenons l'exemple suivant pour définir le \textit{type} des entiers naturels à partir de la signature $\Sigma = \{0, S\}$
 Les symboles $O$ et $S$ sont respectivement d'arité $0$ et $1$.
 Nous avons ainsi : $$T_\Sigma = \{0, S0, SS0, SSS0, ... \} $$
-En OCAML, nous pourrons écrire:
+En \textsc{Ocaml}, nous pourrons écrire:
 \begin{Verbatim}
 type entiers = Zero | S of entiers 
 \end{Verbatim}
-En Prolog:
+En \textsc{Prolog}:
 \begin{Verbatim}
 entiers(zero).
 entiers(s(X)) :- entiers(X)
@@ -157,7 +164,7 @@ $\hat{\theta}$ est l'unique fonction telle que $\forall x \in X, \hat{\theta}x =
 \end{tikzpicture}
 \end{center}
 
-Voici un exemple d'implémentation de la substitution en OCAML:
+Voici un exemple d'implémentation de la substitution en \textsc{Ocaml}:
 \begin{Verbatim}
 let valeur_subst sigma var =
   try assoc var sigma
@@ -241,13 +248,13 @@ réécrit en un terme $M[\sigma Q]_u$ par l'application de la règle $P \longrig
 \end{tikzpicture}
 \end{center}
 
-CAML est <<déjà>> une machine à faire du filtrage et de la réécriture. 
+\textsc{Ocaml} est <<déjà>> une machine à faire du filtrage et de la réécriture. 
 L'application d'une fonction $P$ à son argument $Q$ est modélisé par le redex
 $(\lambda m P)Q \longrightarrow \theta P$ où $m$ est le pattern et $\theta$ le filtre de
 $m$ vers $Q$, c'est-à-dire $\theta m = Q$.	
 
 
-Il est ainsi simple de programmer en OCAML une fonction de réécriture.
+Il est ainsi simple de programmer en \textsc{Ocaml} une fonction de réécriture.
 Appliquons cela sur l'arithmétique de Peano.
 
 Peano a reconstruit la théorie des
@@ -382,7 +389,7 @@ cycle & $E \cup \{ x=M \} \rightarrow  \bot $ si $x \in var(M)$ \\
 La difficulté de cet algorithme est  sa condition d'arrêt. 
  Si aucune règle ne peut plus s'appliquer sur les éléments du système d'équations, alors l'algorithme doit s'arrêter et son résultat est
 la substitution unifiant les deux termes initiaux.
-Avec une seule fonction parcourant le système d'équations, représentés en OCAML par le type \verb+(term * term) list+,
+Avec une seule fonction parcourant le système d'équations, représentés en \textsc{Ocaml} par le type \verb+(term * term) list+,
 je pense que ce n'est pas possible. Je me suis là aussi un peu cassé les cheveux.
 Voici mon code avec deux fonctions:
 \begin{Verbatim}
@@ -745,7 +752,6 @@ $diag(j)$ termine ssi $a_j$ ne termine pas, ce qui donne
 $a_j$ termine ssi $a_j$ ne termine pas.
 
 
-
 De manière peut-être plus formelle, en mettant en évidence la diagonalisation négative de Cantor :
 
 Soit $f(x,y)$ la fonction de terminaison de l'algorithme $a_x$ sur l'entrée $y$.
@@ -754,6 +760,24 @@ Soit $g$ telle que $g(0) = 1$ et $g(1) = 0$
 Considérons $h(i) = g(f(i,i))$.
 Alors on a $f(a,a) = h(a) = g(f(a,a)) \neq f(a,a)$ car $g$ n'admet pas de point fixe.
 C'est-à-dire que l'on ne peut décider si l'algorithme $a_a$ termine sur lui-même. 
+
+\vspace{0.5cm}
+
+Cela donne en pseudo-code :
+\begin{Verbatim}
+halt(x) = si le programme x s'arrête alors vrai 
+          sinon faux ;
+
+diag(p) = si halt (p) alors boucle()
+          sinon stop() ;
+\end{Verbatim}
+Quel est le comportement de \verb+halt(diag(diag))+ ?
+
+
+S'il répond vrai, alors \verb+diag+ s'arrête alors qu'il est censé boucler par définition de \verb+diag+
+
+
+S'il répond faux, alors \verb+diag+ boucle, alors qu'il est censé s'arrêter par défintion de \verb+diag+
 
 \subsubsection{Système de réécriture noethérien}
 Un système de réécriture est noethérien si et seulement s'il existe un ordre bien fondé
