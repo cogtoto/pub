@@ -225,7 +225,7 @@ Qed.
 \end{Verbatim}
 
 \subsection{Inférence de type}
-Pour présenter un système d'inférence de type, nous introduisons la constante de type \verb+Int+ à notre $lambda$-calcul
+Pour présenter un système d'inférence de type, nous introduisons la constante de type \verb+Int+ à notre $\lambda$-calcul
 simplement typé.
 
 \begin{Verbatim}
@@ -412,10 +412,10 @@ Le système \textit{PTS} respecte les propriétés suivantes:
 Pour pouvoir éprouver notre système PTS, nous ajoutons les constantes suivantes à notre environnement $\Gamma$
 $$\Gamma = \{ (*:\square) ;\ (\text{nat}:*) ;\ (O:nat) ;\ (\text{succ}:\Pi x:\text{nat}.\text{nat}) \} $$
 
-Voici quelques exemples interprétés par OCAML ci-dessous. Nous avons simplifié l'affichage
+Voici quelques exemples interprétés par \textsc{Ocaml} ci-dessous. Nous avons simplifié l'affichage
 du type $\Pi x:A.B$ par $A\rightarrow B$ si $x$ n'est pas une variable libre de $B$.
 
-Nous utilisons pour l'affichage OCAML les caractères UTF-8 :  \verb+λ, π, →+
+Nous utilisons pour l'affichage \textsc{Ocaml} les caractères UTF-8 :  \verb+λ, π, →+
 
 \begin{Verbatim}
 (*  Polymorphisme   *)
@@ -581,9 +581,9 @@ in (print preuve_imp_pts; print_string "\n"; print (check preuve_imp_pts env0)) 
 > λA:Type.λB:Type.λC:Type.λh:(A→B)/\(A→C).λx:A.conj((proj1(h) x),(proj2(h) x))
   πA:Type.πB:Type.πC:Type.((A→B)/\(A→C)→(A→B/\C))
 \end{Verbatim}
-Nous retrouvons en OCAML la dualité entre le type produit \verb+*+ et le $\wedge$ logique,
+Nous retrouvons en \textsc{Ocaml} la dualité entre le type produit \verb+*+ et le $\wedge$ logique,
  ainsi qu'entre la flèche fonctionnelle \verb+->+ et l'implication logique $\Rightarrow$.
-OCAML infère correctement le type (théorème) depuis le terme (la preuve).
+\textsc{Ocaml} infère correctement le type (théorème) depuis le terme (la preuve).
 
 \begin{Verbatim}
 let preuve_imp_ocaml = function h -> (function x -> ((fst h) x, (snd h) x)) ;;
@@ -627,7 +627,7 @@ let preuve_et_refl =
 > λA:Type.λB:Type.λh:A/\B.conj(proj2(h) ,proj1(h))
   πA:Type.πB:Type.(A/\B→B/\A)
 \end{Verbatim}
-Ou tout simplement en OCAML avec l'inférence de type:
+Ou tout simplement en \textsc{Ocaml} avec l'inférence de type:
 \begin{Verbatim}
 utop # let preuve_et_refl = function h -> (snd h, fst h) ;;
 val preuve_et_refl : 'a * 'b -> 'b * 'a = <fun>
