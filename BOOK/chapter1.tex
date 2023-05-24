@@ -251,7 +251,7 @@ child { node {z} };
 \end{tikzpicture}
 \end{center}
 
-Pour dessiner cet arbre, nous utilisons le tr\`{e}s bon package TIKZ qui permet facilement de repr\'{e}senter
+Pour dessiner cet arbre, nous utilisons le tr\`{e}s bon package \textsc{Tikz} qui permet facilement de repr\'{e}senter
 les arbres avec une syntaxe très simple.
 \begin{Verbatim}
 \node{@}
@@ -265,8 +265,8 @@ child { node {$\lambda $}
 child { node {z} };
 \end{Verbatim}
 
-On impl\'{e}mente deux fonctions CAML
-qui permettent  d'afficher une expression de type $\lambda $-terme en code \LaTeX\ ou en code TIKZ.
+On impl\'{e}mente deux fonctions \textsc{Ocaml}
+qui permettent  d'afficher une expression de type $\lambda $-terme en code \LaTeX\ ou en code \textsc{Tikz}.
 
 
 
@@ -307,8 +307,8 @@ ML & SCHEME \\ \hline
 \texttt{M where x = N} &  \\ 
 \end{tabular}
 \end{center}
-La dernière syntaxe \texttt{M where x = N} a disparu en OCAML. C'est dommage car elle est très élégante.
-Nous essayerons de la reprendre pour notre interprète maison MiniML.
+La dernière syntaxe \texttt{M where x = N} a disparu en \textsc{Ocaml}. C'est dommage car elle est très élégante.
+Nous essayerons de la reprendre pour notre interprète maison \textsc{MiniML}.
 
 \begin{definition}
 La $\beta $-r\'{e}duction est une op\'{e}ration de substitution. Elle consiste \`{a} substituer dans le redex
@@ -334,9 +334,9 @@ $$
 \vspace{0.5cm}
 Pour l'implémentation, nous nous sommes appuyés sur le code de l'excellent livre \textit{Programmer avec Scheme} 
 de Jacques Chazarain \cite{plisp}.  
-Nous avons adapté son code SCHEME en OCAML. En comparant les deux versions, on s'aperçoit finalement
-que la version OCAML, même si un peu plus concise que la version SCHEME grâce  l'utilisation du \textit{pattern matching},
-reste très proche de l'original SCHEME.
+Nous avons adapté son code \textsc{Scheme} en \textsc{Ocaml}. En comparant les deux versions, on s'aperçoit finalement
+que la version \textsc{Ocaml}, même si un peu plus concise que la version \textsc{Scheme} grâce  l'utilisation du \textit{pattern matching},
+reste très proche de l'original \textsc{Scheme}.
 
 \vspace{0.5cm}
 La fonction \texttt{substituer} permet de substituer la variable \texttt{var} par le terme \texttt{terme} dans l'expression \texttt{exp}.
@@ -360,7 +360,7 @@ let rec substituer exp var terme =
 
 Avant de substituer une variable par une autre, nous devons nous assurer qu'il n'y aura pas de phénomène de capture, ie.
 nous assurer qu'une variable libre ne deviendra pas liée, après substitution.
-Dans l'exemple suivant, la variable x qui était libre dans $ (z x) $ se retrouve capturée par $\lambda$
+Dans l'exemple suivant, la variable x qui était libre dans $ (z x) $ se retrouve capturée par la lambda.
 $$ \lambda x. (x y)[y \gets (z x)] = \lambda x.(x (z x)) $$
 Pour éviter cela, il faut avant substitution opérer un renommage de la variable liée:
 $$ \lambda x_1. (x_1 y)[y \gets (z x)] = \lambda x_1.(x_1 (z x)) $$
@@ -461,7 +461,6 @@ let t1 = App (Lam ("x",App (Lam ("y", App (Var ("x"), Var ("y"))),Var ("u"))), V
 --> (zu)
 - : unit -> unit = <fun>
 \end{Verbatim}
-
 $$ (\lambda x . (\lambda y . xy)u)z   \rightarrow _\beta (\lambda y . zy) u  \rightarrow _\beta (zu)
 $$
 \begin{center}
@@ -501,6 +500,15 @@ Voici un exemple de terme qui ne termine pas et qui enfle.
 $$ (\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta (\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx)
 \rightarrow _\beta (\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta \ldots
 $$  
+
+Nous pouvons programmer facilement en \textsc{Ocaml} le terme $\Omega \equiv \Delta \Delta \equiv (\lambda x.xx)(\lambda x.xx)$
+qui n'a pas de forme normale.
+\begin{verbatim}
+type terme = | Lam : (terme -> terme) -> terme ;;
+let app t1 t2 = match t1 with | Lam f -> f t2 ;;
+let delta = Lam (fun x -> (app x x)) in app delta delta ;;
+\end{verbatim} 
+
 
 \section{Démonstration de la confluence du $\lambda$-calcul}
 Comment prouver que le $\lambda$-calcul est bien confluent ? C'est-à-dire que pour tout terme $M$, si $M\twoheadrightarrow M_1$ et
@@ -679,7 +687,7 @@ Par induction sur la relation $M  \Rightarrow _\beta N$  :
 
 
 \section{La $\beta$-réduction faible avec appel par valeur}
-Dans un langage fonctionnel comme SCHEME ou ML, il est important de noter que contrairement au $\lambda$-calcul, le corps de la lambda n'est pas \'{e}valu\'{e}. 
+Dans un langage fonctionnel comme \textsc{Scheme} ou \textsc{ML}, il est important de noter que contrairement au $\lambda$-calcul, le corps de la lambda n'est pas \'{e}valu\'{e}. 
 On parle de $\beta$-réduction faible.  
 Autrement dit, la règle suivante n'est pas utilisée:
 $$\mathbf{(abstraction)} : \frac{M \rightarrow M_1}{ \lambda x.M \rightarrow (\lambda x.M_1)}$$
@@ -787,7 +795,7 @@ un point fixe attractif de notre fonction $f$. C'est-à-dire qu'il existe un \te
 $\sqrt{2}$ tel que la suite $ x_0,f(x_0),f(f(x_0)),f(f(f(x_0))),\dots $ converge vers $\sqrt{2}$
 
 
-En \smallcap{Ocaml}, la fonction qui it\`{e}re cette fraction continue peut être codée comme suit. 
+En \textsc{Ocaml}, la fonction qui it\`{e}re cette fraction continue peut être codée comme suit. 
 Nous partons ici de $x_0 =1$. La fraction continue converge très rapidement.
 \begin{Verbatim}
 let rec square2 iter =
@@ -899,7 +907,7 @@ Puis la $\beta$-réduction par valeur va continuer à réduire l'argument
 $(YM)$, là où la $\beta$-réduction normale va d'abord réduire le redex $Mx$
 
 Avec la réduction par valeur, il nous faut donc utiliser un autre combinateur de point fixe\footnote{Nous insistons 
-là-dessus car nous rappelons que les interprètes MiniScheme et MiniML que nous implémenterons utiliseront la $\beta$-réduction faible par valeur.}
+là-dessus car nous rappelons que les interprètes \textsc{MiniScheme} et \textsc{MiniML} que nous implémenterons utiliseront la $\beta$-réduction faible par valeur.}
  que nous appelerons $Z$ 
 $$Z = \lambda f.(\lambda x.f(\lambda v.xxv))(\lambda x.f(\lambda v.xxv)) $$
 
