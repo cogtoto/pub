@@ -798,6 +798,26 @@ type vrai = I ;;
 
 let exfalsoquodlibet = fun (f:faux) ->  I;;
 \end{Verbatim}
+En \textsc{Coq}, le pattern matching sur un type n'ayant aucun constructeur permet de 
+définir une fonction retournant un terme de n'importe quel type.
+
+
+Considérons par exemple la fonction $f$ de type $False \rightarrow 2=3$ :
+\begin{Verbatim}
+Definition f := fun (x:False) => 
+   match x return 2=3 with end.
+\end{Verbatim}
+Cette fonction $f$, est à mon sens, l'expression peu élégante de la correspondance 
+de Curry-Howard. Une fonction ne pouvant matcher son argument peut retourner un type non habité\dots
+
+En \textsc{Ocaml}, je ne pense pas que la syntaxe nous permet d'écrire qu'un pattern matching
+ne retourne rien, nous pouvons cependant boucler indéfiniment :
+\begin{Verbatim} 
+type faux = | ;;
+type farfelu = | ;;
+let rec f (x:faux):farfelu = f x  ;;
+val f : faux -> farfelu = <fun>
+\end{Verbatim}
 
 \subsection{Le point fixe}
 Nous surchargeons notre terme algébrique de l'opérateur de point fixe \verb+Y of terme+ qui

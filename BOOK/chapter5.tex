@@ -479,7 +479,7 @@ let prolog but lregles =
 
 \section{Quelques exemples de programmation en \textsc{Prolog}}
 \subsection{Les entiers naturels}
-Définissons en PROLOG le type des entiers naturels avec la fonction \verb+nat+ d'arité 1, la fonction \verb+s+
+Définissons en \textsc{Prolog} le type des entiers naturels avec la fonction \verb+nat+ d'arité 1, la fonction \verb+s+
 d'arité 1 et la constante \verb+0+.
 Nous avons ainsi les 2 règles:
 $$
@@ -516,7 +516,7 @@ $$
 	add(x, s(y), s(z)) \Leftarrow  add(x,y,z)
 \end{array}
 $$
-Puis demandons à notre mini Prolog de résoudre l'équation $add(x,y, s(s(s(0))))$
+Puis demandons à notre mini \textsc{Prolog} de résoudre l'équation $add(x,y, s(s(s(0))))$
 \begin{Verbatim}
 (* les entiers de peano *)
 let peano = [ [Func("add", [Var("x"); Func("0", []); Var("x")]) ] ;

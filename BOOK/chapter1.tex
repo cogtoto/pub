@@ -534,7 +534,7 @@ En effet, soit $R$ un redex qui se reduit en $R'$, le terme $(\lambda x.xx) R \r
  il existe $M_3$ tel que $M_1 \twoheadrightarrow M_3$ et $M_2 \twoheadrightarrow M_3$.
  Cependant la confluence faible n'implique pas la confluence si la relation n'est pas noetherienne.
  C'est le cas du lambda calcul qui n'est pas fortement normalisant... 
-Considérons $\Omega \equiv \lambda x.xx $, nous avons une chaîne de réduction infinie $\Omega \rightarrow \Omega \rightarrow \dots $
+Considérons $\Omega \equiv (\lambda x.xx) (\lambda x.xx) $, nous avons une chaîne de réduction infinie $\Omega \rightarrow \Omega \rightarrow \dots $
 
  \item Cependant, nous pourrons démontrer plus facilement la propriété du parallélogramme: pour tout terme $M$,
   si $M\rightarrow M_1$ et  $M\twoheadrightarrow  M_2$,

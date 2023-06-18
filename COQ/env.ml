@@ -1,16 +1,5 @@
-type terme = 
-| Lam : (terme -> terme) -> terme
-;;
 
-let app t1 t2 = match t1 with
-| Lam f -> f t2 ;;
-
-let delta = Lam (fun x -> (app x x))
-in app delta delta ;;
-
-
-
-type terme =
+type terme=
 | Var of string
 | Int of int
 | Bool of bool
@@ -72,17 +61,26 @@ let m = Letrec ("m",
                App (App (Var "m", Int 2), Int 1)) 
 ;;
 
+let rec mu a b  =
+  if a=1 then b
+  else b + (mu (a-1) b)  in
+   mu 4 9 ;;
+
+
+
 let mult = Letrec ("mult", 
 
                Lam ("a", Lam ("b",
                 If ( Egal (Var "a",Int 1), 
                      Var "b",
-                     Add (Var "a", App(App (Var "mult", Sub (Var "a", Int 1)), Var "b"  ))))) , 
+                     Add (Var "b", App(App (Var "mult", Sub (Var "a", Int 1)), Var "b"  ))))) , 
 
                App (App (Var "mult", Int 4), Int 9) )
 ;;
 
-let popo = App (Lam ("a", Lam ("b", Egal(Var "a", Var "b"))), Int 1976) 
+let popo = Letrec("m", (Lam ("a", Lam ("b", 
+                     If (Egal(Var "b", Int 1), Int 888, Int 999)))),
+                     App(App(Var "m", Int 5),Int 3)) 
 in eval popo empty_env ;;
 
 eval mult empty_env ;;
