@@ -976,8 +976,7 @@ val fix : (('a -> 'b) -> 'a -> 'b) -> 'a -> 'b = <fun>
 - : int = 120
 \end{Verbatim}
 Ici aussi, le mécanisme de la ``$\eta$-expansion'' est utilisé.
-Je ne peux reproduire cela en SCHEME:
-
+Reproduisons cela en SCHEME :
 \begin{Verbatim}
 (define factabs
   (lambda (f)
@@ -986,15 +985,13 @@ Je ne peux reproduire cela en SCHEME:
           1
           (* n (f (- n 1)))))))
 
-(define y
-  (lambda (f x)
-    (f (y f) x)))
+(define fix
+  (lambda (f) (lambda (x) ((f (fix f)) x))))
 
-(y factabs 5)
-=> y: arity mismatch; the expected number of arguments does not match 
-  expected: 2
-  given: 1
+((fix factabs) 5)
+=> 120
 \end{Verbatim}
+
 
 \subsection{La diagonale de Cantor} %%
  A la différence du $\lambda$-calcul où tout terme a un point fixe, la recherche de point fixe

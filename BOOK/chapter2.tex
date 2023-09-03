@@ -819,6 +819,13 @@ let rec f (x:faux):farfelu = f x  ;;
 val f : faux -> farfelu = <fun>
 \end{Verbatim}
 
+Erreur de ma part, après recherche, nous pouvons bien écrire en \textsc{Ocaml} un pattern matching
+qui ne retourne rien avec le '.' comme ci-dessous :
+\begin{Verbatim}
+let f (x:faux) : farfelu = match x with _ -> . ;;
+val f : faux -> farfelu = <fun>
+\end{Verbatim}
+
 \subsection{Le point fixe}
 Nous surchargeons notre terme algébrique de l'opérateur de point fixe \verb+Y of terme+ qui
 se réduit en \verb+Y t+ \imp\ \verb+t (Y t)+
