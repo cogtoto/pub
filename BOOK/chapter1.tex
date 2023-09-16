@@ -911,6 +911,8 @@ là-dessus car nous rappelons que les interprètes \textsc{MiniScheme} et \texts
  que nous appelerons $Z$ 
 $$Z = \lambda f.(\lambda x.f(\lambda v.xxv))(\lambda x.f(\lambda v.xxv)) $$
 
+
+
 On constate que Z est  $\eta$-équivalent à $Y$. Nous rappelons la définition suivante:
 
 
@@ -918,9 +920,16 @@ On constate que Z est  $\eta$-équivalent à $Y$. Nous rappelons la définition 
 	
 Les termes $(\lambda x.Mx)$ et M sont $\eta$-équivalents. On écrira $(\lambda x.Mx) =_\eta M$
 
-En ML, nous pouvons par exemple dire que \verb+ let g x = f x+ est $\eta$-équivalent à \verb+ let g = f+
-\end{definition}
 
+En \textsc{Coq}, le lemme suivant se démontre par l'utilisation simple
+de la tactique \texttt{reflexivity} car l'expression \texttt{fun x => f x} se 
+réduit en \texttt{f}.
+\begin{Verbatim} 
+Lemma eta : forall (A B:Type) (f:A->B), f = fun x => f x.
+reflexivity.
+Qed.
+\end{Verbatim}
+\end{definition}
 
 Appliquons à nouveau notre exemple avec ce combinateur $Z$ appliqué à $M=\lambda a. \lambda b. b$:
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  8 SEP 2023 20:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  16 SEP 2023 17:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1392,39 +1392,44 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <9> on input line 817.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 817.
- [22] [23] [24]
-Underfull \hbox (badness 10000) in paragraph at lines 1050--1052
+ [22]
+
+LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
+(Font)              using `T1/lmr/m/scsl' instead on input line 924.
+
+[23] [24]
+Underfull \hbox (badness 10000) in paragraph at lines 1059--1061
 
  []
 
 [25] [26]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1213.
+(hyperref)                removing `math shift' on input line 1222.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 1213.
+(hyperref)                removing `\beta' on input line 1222.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1213.
+(hyperref)                removing `math shift' on input line 1222.
 
 [27]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1283.
+(hyperref)                removing `math shift' on input line 1292.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\lambda' on input line 1283.
+(hyperref)                removing `\lambda' on input line 1292.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1283.
+(hyperref)                removing `math shift' on input line 1292.
 
 [28] [29] [30]
-Underfull \hbox (badness 10000) in paragraph at lines 1433--1438
+Underfull \hbox (badness 10000) in paragraph at lines 1442--1447
 
  []
 
@@ -1532,7 +1537,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 318--320
 
  []
 
-<gumpp.jpeg, id=972, 73.7154pt x 96.36pt>
+<gumpp.jpeg, id=974, 73.7154pt x 96.36pt>
 File: gumpp.jpeg Graphic file (type jpg)
 <use gumpp.jpeg>
 Package pdftex.def Info: gumpp.jpeg  used on input line 330.
@@ -1543,7 +1548,7 @@ Overfull \hbox (62.19678pt too wide) in paragraph at lines 389--390
  []
 
 [60] [61]
-<bruegel.jpg, id=995, 301.125pt x 240.9pt>
+<bruegel.jpg, id=997, 301.125pt x 240.9pt>
 File: bruegel.jpg Graphic file (type jpg)
 <use bruegel.jpg>
 Package pdftex.def Info: bruegel.jpg  used on input line 550.
@@ -1663,33 +1668,33 @@ LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 234.
 
 [110]
-<flocon1.pdf, id=1255, 150.5625pt x 138.5175pt>
+<flocon1.pdf, id=1256, 150.5625pt x 138.5175pt>
 File: flocon1.pdf Graphic file (type pdf)
 <use flocon1.pdf>
 Package pdftex.def Info: flocon1.pdf  used on input line 296.
 (pdftex.def)             Requested size: 99.5875pt x 85.3579pt.
-<flocon2.pdf, id=1256, 156.585pt x 136.51pt>
+<flocon2.pdf, id=1257, 156.585pt x 136.51pt>
 File: flocon2.pdf Graphic file (type pdf)
 <use flocon2.pdf>
 Package pdftex.def Info: flocon2.pdf  used on input line 297.
 (pdftex.def)             Requested size: 99.58806pt x 85.35811pt.
-<flocon3.pdf, id=1257, 149.55875pt x 130.4875pt>
+<flocon3.pdf, id=1258, 149.55875pt x 130.4875pt>
 File: flocon3.pdf Graphic file (type pdf)
 <use flocon3.pdf>
 Package pdftex.def Info: flocon3.pdf  used on input line 298.
 (pdftex.def)             Requested size: 99.58539pt x 85.35942pt.
-<flocon4.pdf, id=1258, 139.52126pt x 127.47626pt>
+<flocon4.pdf, id=1259, 139.52126pt x 127.47626pt>
 File: flocon4.pdf Graphic file (type pdf)
 <use flocon4.pdf>
 Package pdftex.def Info: flocon4.pdf  used on input line 299.
 (pdftex.def)             Requested size: 99.58661pt x 85.36195pt.
-<bretagne3.jpg, id=1259, 732.85164pt x 514.3497pt>
+<bretagne3.jpg, id=1260, 732.85164pt x 514.3497pt>
 File: bretagne3.jpg Graphic file (type jpg)
 <use bretagne3.jpg>
 Package pdftex.def Info: bretagne3.jpg  used on input line 305.
 (pdftex.def)             Requested size: 113.81102pt x 79.8725pt.
  [111 </home/vincent/vsc/BOOK/flocon1.pdf> </home/vincent/vsc/BOOK/flocon2.pdf> </home/vincent/vsc/BOOK/flocon3.pdf> </home/vincent/vsc/BOOK/flocon4.pdf> </home/vincent/vsc/BOOK/bretagne3.jpg>]
-<mandelbrot.png, id=1291, 254.9525pt x 227.85126pt>
+<mandelbrot.png, id=1292, 254.9525pt x 227.85126pt>
 File: mandelbrot.png Graphic file (type png)
 <use mandelbrot.png>
 Package pdftex.def Info: mandelbrot.png  used on input line 367.
@@ -1700,13 +1705,13 @@ Underfull \vbox (badness 1831) has occurred while \output is active []
  [112]
 LaTeX Font Info:    Font shape `U/logo/bx/n' in size <14.4> not available
 (Font)              Font shape `U/logo/b/n' tried instead on input line 370.
-<imp.png, id=1300, 573.14125pt x 491.8375pt>
+<imp.png, id=1301, 573.14125pt x 491.8375pt>
 File: imp.png Graphic file (type png)
 <use imp.png>
 Package pdftex.def Info: imp.png  used on input line 381.
 (pdftex.def)             Requested size: 113.81102pt x 97.6603pt.
  [113 </home/vincent/vsc/BOOK/mandelbrot.png> </home/vincent/vsc/BOOK/imp.png>]
-<snow.png, id=1311, 636.3775pt x 750.805pt>
+<snow.png, id=1312, 636.3775pt x 750.805pt>
 File: snow.png Graphic file (type png)
 <use snow.png>
 Package pdftex.def Info: snow.png  used on input line 453.
@@ -1715,7 +1720,7 @@ Package pdftex.def Info: snow.png  used on input line 453.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [117] [118]
-<sigmoid.png, id=1339, 694.595pt x 729.72626pt>
+<sigmoid.png, id=1340, 694.595pt x 729.72626pt>
 File: sigmoid.png Graphic file (type png)
 <use sigmoid.png>
 Package pdftex.def Info: sigmoid.png  used on input line 720.
@@ -1897,18 +1902,18 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 181.
  ) 
 Here is how much of TeX's memory you used:
- 39874 strings out of 480478
- 768655 string characters out of 5899581
+ 39876 strings out of 480478
+ 768683 string characters out of 5899581
  2753653 words of memory out of 5000000
- 54822 multiletter control sequences out of 15000+600000
- 711817 words of font info for 151 fonts, out of 8000000 for 9000
+ 54823 multiletter control sequences out of 15000+600000
+ 712136 words of font info for 152 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,24n,75p,575b,1718s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc} <./snow.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc} <./beta.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/gttn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsco10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /home/vincent/vsc/BOOK/main.pdf (135 pages, 1560181 bytes).
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc} <./snow.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc} <./beta.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/gttn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsco10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on /home/vincent/vsc/BOOK/main.pdf (135 pages, 1577252 bytes).
 PDF statistics:
- 1672 PDF objects out of 1728 (max. 8388607)
- 1454 compressed objects within 15 object streams
+ 1676 PDF objects out of 1728 (max. 8388607)
+ 1457 compressed objects within 15 object streams
  407 named destinations out of 1000 (max. 500000)
  1005 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -448,6 +448,8 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsco10.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmtti10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmr6.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmri8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmri7.tfm
@@ -508,7 +510,6 @@ INPUT /home/vincent/vsc/BOOK/chapter6.tex
 OUTPUT /home/vincent/vsc/BOOK/chapter7.aux
 INPUT /home/vincent/vsc/BOOK/chapter7.tex
 INPUT /home/vincent/vsc/BOOK/chapter7.tex
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsco10.tfm
 INPUT /home/vincent/vsc/BOOK/flocon1.pdf
 INPUT /home/vincent/vsc/BOOK/flocon1.pdf
 INPUT /home/vincent/vsc/BOOK/flocon1.pdf
@@ -603,6 +604,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt12.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt8.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtti10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb
