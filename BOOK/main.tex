@@ -15,7 +15,7 @@
 \usepackage{fancyvrb}
 \usepackage{lscape}
 \usepackage{textcomp}
-\usepackage{textgreek}
+\usepackage[euler]{textgreek}
 \usepackage{lmodern}
 \usepackage{alltt}
 \usepackage{multirow}
@@ -50,6 +50,7 @@
 \maketitle
 \tableofcontents
 
+
 \chapter{\textgreek{Ἐν ἀρχή}, Gn 1.1 et Jn 1.1}
 
 \textit{Aristote considérait les mathématiques comme une discipline, non pas tant de la vérité, que de la beauté.}
@@ -60,9 +61,10 @@
 the active will, the contemplative reason, and the desire for aesthetic perfection.} \cite{wm}
 
 
-
 C'est sous cet angle de l'esthétique que je décrirai  ici quelques concepts 
- des fondements mathématiques de l'informatique.
+ des fondements mathématiques\footnote{\textgreek{\textbf{manj'anw}}: \textit{j'apprends} 
+\textgreek{\textbf{t`o m'ajnma}}: \textit{l'étude} 
+\textgreek{\textbf{t`a majematik'a}}: \textit{les mathématiques, l'étude par excellence}} de l'informatique. \\
 
  \vspace{0.5cm}
 
@@ -72,12 +74,12 @@ décrire l'action de calculer, le processus du calcul.
 Nous identifions deux processus bien distincts appelés la \textbf{réduction} et la \textbf{résolution}.
 La réduction est l'action de réduire séquentiellement une expression en une autre plus simple
 au moyen de règles de réécriture. Lorsque plus aucune règle ne s'applique, l'expression calculée est alors en forme
-\textit{normale}. Cette forme normale correspondra à la \textit{valeur} de notre calcul.
-$$(3+8)+(4-9)*2 \,\leadsto\,  11 -5*2 \, \leadsto\, 11 -10 \,\leadsto\, 1 $$
+\textit{normale}. Cette forme normale correspondra à la \textit{valeur} de notre calcul. \\
+$(3+8)+(4-9)*2$ \,\imp\,  $11 -5*2$ \, \imp\, $11 -10$ \,\imp\, $1$ \\
 
 Ce processus de réduction soulève deux difficultés essentielles : 
 \begin{itemize}
-	\item La terminaison. Est-que le processus termine en un nombre fini d'étapes ?
+	\item La terminaison. Est-ce-que le processus termine en un nombre fini d'étapes ?
 	\item La confluence. Si le processus termine, est-ce-que l'expression aboutit à une forme normale unique ?
 \end{itemize}
 \vspace{0.3cm}

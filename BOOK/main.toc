@@ -144,5 +144,4 @@
 \contentsline {section}{\numberline {8.20}Srivanasa Ramanujan}{133}{section.8.20}%
 \contentsline {section}{\numberline {8.21}Le grec ancien}{134}{section.8.21}%
 \contentsline {subsection}{\numberline {8.21.1}L'alphabet grec}{134}{subsection.8.21.1}%
-\contentsline {subsection}{\numberline {8.21.2}Les math\IeC {\'e}matiques grecques}{134}{subsection.8.21.2}%
-\contentsline {subsection}{\numberline {8.21.3}Extraits du nouveau testament}{134}{subsection.8.21.3}%
+\contentsline {subsection}{\numberline {8.21.2}Extraits du nouveau testament}{134}{subsection.8.21.2}%
