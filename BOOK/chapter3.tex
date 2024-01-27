@@ -62,7 +62,7 @@ La puissance de Lisp repose sur  cette uniformité entre programmme et valeur. N
 implémenter un interprète Lisp en Lisp.
 
 Voici la séquence du code, depuis le stream en entrée de l'analyseur lexical jusqu'à la sortie de l'évaluateur \verb+eval+.
-J'ai  fait le choix d'avoir une représentation intermédiaire \verb+ast+ permettant de modéliser l'arbre syntaxique, et de faciliter
+J'ai fait le choix d'avoir une représentation intermédiaire \verb+ast+ permettant de modéliser l'arbre syntaxique, et de faciliter
 le processus d'évaluation.
 \begin{center}
 \begin{tikzpicture}
@@ -194,12 +194,12 @@ Dans le cas de la liaison dynamique, la fonction est appliqu\'{e}e en utilisant 
 et non pas son environnement de définition. Donc pas besoin de fermeture.
 
 A ma connaissance, la liaison statique est maintenant utilisée dans la plupart des langages fonctionnels.
-En SCHEME et ML,nous pouvons voir dans l'exemple ci-dessous que l'\'{e}valuation de la d\'{e}finition de la
+En \sc{Scheme} et \sc{Ocaml},nous pouvons voir dans l'exemple ci-dessous que l'\'{e}valuation de la d\'{e}finition de la
  lambda \verb+inc_x+ capture la valeur de \verb+x+ .
 
 
 \begin{tabular}{l|l} \hline
-SCHEME & ML \\ \hline 
+\sc{Scheme} & \sc{Ocaml} \\ \hline 
 \verb!> (define x 1)! & \verb+# let x = 1+ ;; \\
 \verb!> (define inc_x (lambda () (+ x 1)))! & \verb!# let inc_x = function () -> x+1 ;;! \\
 \verb!> (inc_x)! & \verb!# inc_x ()! ;; \\ 
