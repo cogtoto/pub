@@ -1,81 +1,48 @@
-This is BibTeX, Version 0.99d (TeX Live 2020)
+This is BibTeX, Version 0.99d (TeX Live 2022/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
-A level-1 auxiliary file: chapter1.aux
-A level-1 auxiliary file: chapter2.aux
-A level-1 auxiliary file: chapter3.aux
-A level-1 auxiliary file: chapter4.aux
-A level-1 auxiliary file: chapter5.aux
-A level-1 auxiliary file: chapter6.aux
-A level-1 auxiliary file: chapter7.aux
-The style file: plain.bst
-Database file #1: book.bib
-Warning--I'm ignoring gb's extra "author" field
---line 49 of file book.bib
-Warning--I'm ignoring wm's extra "author" field
---line 56 of file book.bib
-Warning--to sort, need author, editor, or key in genese
-Warning--empty author and editor in genese
-Warning--empty publisher in genese
-Warning--empty year in genese
-Warning--empty publisher in baren
-Warning--empty year in baren
-Warning--empty publisher in baren_bible
-Warning--empty year in baren_bible
-Warning--empty publisher in gide
-Warning--empty year in gide
-Warning--can't use both author and editor fields in girard
-Warning--empty publisher in girard
-Warning--empty publisher in god
-Warning--empty publisher in vh
-Warning--empty year in vh
-Warning--empty publisher in meta
-Warning--empty publisher in lalement
-Warning--empty publisher in moby
-Warning--can't use both author and editor fields in poincare
-Warning--empty publisher in poincare
-Warning--empty publisher in WS
-Warning--empty year in WS
-Warning--empty publisher in reflective
-You've used 23 entries,
-            2118 wiz_defined-function locations,
-            600 strings with 5483 characters,
-and the built_in function-call counts, 5020 in all, are:
-= -- 415
-> -- 173
+I found no \citation commands---while reading file main.aux
+I found no \bibdata command---while reading file main.aux
+I found no \bibstyle command---while reading file main.aux
+You've used 0 entries,
+            0 wiz_defined-function locations,
+            83 strings with 482 characters,
+and the built_in function-call counts, 0 in all, are:
+= -- 0
+> -- 0
 < -- 0
-+ -- 76
-- -- 50
-* -- 248
-:= -- 856
-add.period$ -- 61
-call.type$ -- 23
-change.case$ -- 71
++ -- 0
+- -- 0
+* -- 0
+:= -- 0
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 46
-duplicate$ -- 272
-empty$ -- 509
-format.name$ -- 50
-if$ -- 1047
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 0
+format.name$ -- 0
+if$ -- 0
 int.to.chr$ -- 0
-int.to.str$ -- 23
-missing$ -- 43
-newline$ -- 110
-num.names$ -- 44
-pop$ -- 209
-preamble$ -- 1
-purify$ -- 70
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 0
+num.names$ -- 0
+pop$ -- 0
+preamble$ -- 0
+purify$ -- 0
 quote$ -- 0
-skip$ -- 137
+skip$ -- 0
 stack$ -- 0
-substring$ -- 118
-swap$ -- 25
+substring$ -- 0
+swap$ -- 0
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 48
-warning$ -- 23
-while$ -- 44
-width$ -- 25
-write$ -- 203
-(There were 25 warnings)
+type$ -- 0
+warning$ -- 0
+while$ -- 0
+width$ -- 0
+write$ -- 0
+(There were 3 error messages)

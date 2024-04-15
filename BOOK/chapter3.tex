@@ -194,7 +194,7 @@ Dans le cas de la liaison dynamique, la fonction est appliqu\'{e}e en utilisant 
 et non pas son environnement de définition. Donc pas besoin de fermeture.
 
 A ma connaissance, la liaison statique est maintenant utilisée dans la plupart des langages fonctionnels.
-En \sc{Scheme} et \sc{Ocaml},nous pouvons voir dans l'exemple ci-dessous que l'\'{e}valuation de la d\'{e}finition de la
+En Scheme et Ocaml, nous pouvons voir dans l'exemple ci-dessous que l'évaluation de la définition de la
  lambda \verb+inc_x+ capture la valeur de \verb+x+ .
 
 
@@ -212,9 +212,9 @@ En \sc{Scheme} et \sc{Ocaml},nous pouvons voir dans l'exemple ci-dessous que l'\
 \subsection{Gestion de l'environnement}
 
 
-Comme indiqu\'{e} en pr\'{e}ambule, plusieurs choix sont possibles pour la mod\'{e}lisation de l'environnement.
-Le choix le plus simple est une repr\'{e}sentation par une liste de paires $variable \leftrightarrow  value$
-Ce choix peut être fait en OCAML par le type natif \verb+list+ ou en utilisant le type concret \verb+Paire of Symbole * lobject+
+Comme indiqué en préambule, plusieurs choix sont possibles pour la modélisation de l'environnement.
+Le choix le plus simple est une représentation par une liste de paires $variable \leftrightarrow  value$
+Ce choix peut être fait en \textsc{Ocaml} par le type natif \verb+list+ ou en utilisant le type concret \verb+Paire of Symbole * lobject+
 
 La principale difficulté est la représentation de fonctions récursives, comme en exemple la factorielle ci-dessous:
 \begin{Verbatim}
