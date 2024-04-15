@@ -2,6 +2,7 @@
 
 open import Agda.Builtin.Nat
 open import Agda.Builtin.List
+open import Agda.Builtin.Equality
 
 toto : Nat → Nat
 toto x = zero
@@ -30,12 +31,13 @@ S x y z = x z (y z)
 I : {A : Set } → A → A
 I x = x
 
-coco = S K I
+simpl : 1 ≡ 1
+simpl = refl
 
+th :  S K I ≡  I
+th = refl  
 
-
-
-
+    
 
 
 
