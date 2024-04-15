@@ -8,95 +8,116 @@
 \@@addtocsec{htoc}{sec8}{0}{\@print{1.2}\quad{}Représentation en ML{}}
 \citation{plisp}
 \@@addtocsec{htoc}{sec9}{0}{\@print{1.3}\quad{}La $\beta$-réduction faible avec appel par valeur{}}
-\@@addtocsec{htoc}{sec10}{0}{\@print{1.4}\quad{}La récursivité et le point fixe{}}
+\@@addtocsec{htoc}{sec10}{0}{\@print{1.4}\quad{}La récursivité, le point fixe et la diagonale de Cantor{}}
 \citation{god}
 \citation{lamport1994latex}
+\citation{girard}
 \@@addtocsec{htoc}{sec11}{0}{\@print{1.5}\quad{}\textit{Church} encoding. Les entiers et les booléens en $\lambda$-calcul{}}
 \@@addtocsec{htoc}{sec12}{1}{\@print{1.5.1}\quad{}Les entiers \textit{Church} {}}
 \@@addtocsec{htoc}{sec13}{1}{\@print{1.5.2}\quad{}Les booléens {}}
 \@@addtocsec{htoc}{sec14}{1}{\@print{1.5.3}\quad{}La fonction factorielle{}}
 \@@addtocsec{htoc}{sec15}{0}{\@print{1.6}\quad{}La notation de \textit{de Bruijn}{}}
 \citation{WS}
-\@@addtocsec{htoc}{sec16}{0}{\@print{1.7}\quad{}Le $\lambda$-calcul simplement typé{}}
-\@@addtocsec{htoc}{sec19}{0}{\@print{1.8}\quad{}Les \textit{Pure Type Systems}{}}
+\@@addtocsec{htoc}{sec16}{-1}{\@print{Chapitre ‍2}\quad{}Le $\lambda$-calcul simplement typé et les Pure Type Systems{}}
+\@@addtocsec{htoc}{sec17}{0}{\@print{2.1}\quad{}Le $\lambda$-calcul simplement typé{}}
+\@@addtocsec{htoc}{sec18}{1}{\@print{2.1.1}\quad{}Présentation{}}
+\@@addtocsec{htoc}{sec19}{1}{\@print{2.1.2}\quad{}Implémentation en COQ{}}
+\@@addtocsec{htoc}{sec28}{1}{\@print{2.1.3}\quad{}Inférence de type{}}
+\@@addtocsec{htoc}{sec29}{0}{\@print{2.2}\quad{}Les \textit{Pure Type Systems}{}}
+\@@addtocsec{htoc}{sec30}{1}{\@print{2.2.1}\quad{}Introduction{}}
 \citation{baren}
+\@@addtocsec{htoc}{sec31}{1}{\@print{2.2.2}\quad{}MiniCOQ{}}
+\@@addtocsec{htoc}{sec32}{1}{\@print{2.2.3}\quad{}Le $\lor$ logique{}}
+\@@addtocsec{htoc}{sec33}{1}{\@print{2.2.4}\quad{}L'égalité{}}
 \citation{poincare}
-\@@addtocsec{htoc}{sec27}{-1}{\@print{Chapitre ‍2}\quad{}L'interprétation{}}
-\@@addtocsec{htoc}{sec28}{0}{\@print{2.1}\quad{}Introduction{}}
+\@@addtocsec{htoc}{sec34}{1}{\@print{2.2.5}\quad{}Le faux{}}
+\@@addtocsec{htoc}{sec35}{1}{\@print{2.2.6}\quad{}Le point fixe{}}
+\@@addtocsec{htoc}{sec36}{1}{\@print{2.2.7}\quad{}La logique classique{}}
+\@@addtocsec{htoc}{sec37}{-1}{\@print{Chapitre ‍3}\quad{}L'interprétation{}}
+\@@addtocsec{htoc}{sec38}{0}{\@print{3.1}\quad{}Introduction{}}
 \citation{lisp}
-\@@addtocsec{htoc}{sec29}{0}{\@print{2.2}\quad{}Un interprète MiniScheme avec OCAML{}}
-\@@addtocsec{htoc}{sec30}{1}{\@print{2.2.1}\quad{}L'évaluation{}}
-\@@addtocsec{htoc}{sec31}{1}{\@print{2.2.2}\quad{}Les étapes Read, Eval, Print{}}
-\@@addtocsec{htoc}{sec32}{1}{\@print{2.2.3}\quad{}Liaison lexicale vs liaison dynamique{}}
-\@@addtocsec{htoc}{sec33}{1}{\@print{2.2.4}\quad{}Gestion de l'environnement{}}
-\@@addtocsec{htoc}{sec34}{0}{\@print{2.3}\quad{}Un interprète LISP avec le nouvel interprète MiniScheme \ldots{}}
+\@@addtocsec{htoc}{sec39}{0}{\@print{3.2}\quad{}Un interprète MiniScheme avec OCAML{}}
+\@@addtocsec{htoc}{sec40}{1}{\@print{3.2.1}\quad{}L'évaluation{}}
+\@@addtocsec{htoc}{sec41}{1}{\@print{3.2.2}\quad{}Les étapes Read, Eval, Print{}}
+\@@addtocsec{htoc}{sec42}{1}{\@print{3.2.3}\quad{}Liaison lexicale vs liaison dynamique{}}
+\@@addtocsec{htoc}{sec43}{1}{\@print{3.2.4}\quad{}Gestion de l'environnement{}}
+\@@addtocsec{htoc}{sec44}{0}{\@print{3.3}\quad{}Un interprète LISP avec le nouvel interprète MiniScheme \ldots{}}
 \citation{gide}
-\@@addtocsec{htoc}{sec37}{0}{\@print{2.4}\quad{}L'auto-interprétation de l'interprète{}}
-\@@addtocsec{htoc}{sec38}{1}{\@print{2.4.1}\quad{}La tour de Babel{}}
-\@@addtocsec{htoc}{sec40}{1}{\@print{2.4.2}\quad{}Réification et réflexion{}}
+\@@addtocsec{htoc}{sec47}{0}{\@print{3.4}\quad{}L'auto-interprétation de l'interprète{}}
+\@@addtocsec{htoc}{sec48}{1}{\@print{3.4.1}\quad{}La tour de Babel{}}
+\@@addtocsec{htoc}{sec50}{1}{\@print{3.4.2}\quad{}Réification et réflexion{}}
 \citation{reflective}
 \citation{genese}
-\@@addtocsec{htoc}{sec42}{-1}{\@print{Chapitre ‍3}\quad{}La compilation{}}
-\@@addtocsec{htoc}{sec43}{0}{\@print{3.1}\quad{}Compilation des $\lambda$-termes en termes applicatifs{}}
-\@@addtocsec{htoc}{sec45}{0}{\@print{3.2}\quad{}Compilation basique vers une machine à pile{}}
-\@@addtocsec{htoc}{sec46}{1}{\@print{3.2.1}\quad{}Certification de la compilation avec le langage COQ{}}
-\@@addtocsec{htoc}{sec47}{0}{\@print{3.3}\quad{}Compilation du LISP vers une machine abstraite{}}
-\@@addtocsec{htoc}{sec52}{-1}{\@print{Chapitre ‍4}\quad{}La résolution{}}
-\@@addtocsec{htoc}{sec53}{0}{\@print{4.1}\quad{}Représentation des termes finis{}}
+\@@addtocsec{htoc}{sec52}{-1}{\@print{Chapitre ‍4}\quad{}La compilation{}}
+\@@addtocsec{htoc}{sec53}{0}{\@print{4.1}\quad{}Compilation des $\lambda$-termes en termes applicatifs{}}
+\@@addtocsec{htoc}{sec55}{0}{\@print{4.2}\quad{}Compilation basique vers une machine à pile{}}
+\@@addtocsec{htoc}{sec56}{1}{\@print{4.2.1}\quad{}Certification de la compilation avec le langage COQ{}}
+\@@addtocsec{htoc}{sec57}{0}{\@print{4.3}\quad{}Compilation du LISP vers une machine abstraite{}}
+\@@addtocsec{htoc}{sec62}{-1}{\@print{Chapitre ‍5}\quad{}La résolution{}}
+\@@addtocsec{htoc}{sec63}{0}{\@print{5.1}\quad{}Représentation des termes finis{}}
 \citation{lalement}
-\@@addtocsec{htoc}{sec54}{0}{\@print{4.2}\quad{}La substitution{}}
-\@@addtocsec{htoc}{sec55}{0}{\@print{4.3}\quad{}Filtrage et réécriture{}}
-\@@addtocsec{htoc}{sec56}{1}{\@print{4.3.1}\quad{}Le filtrage{}}
-\@@addtocsec{htoc}{sec57}{1}{\@print{4.3.2}\quad{}La réécriture et l'arithmétique de Peano{}}
-\@@addtocsec{htoc}{sec58}{0}{\@print{4.4}\quad{}L'unification des termes{}}
-\@@addtocsec{htoc}{sec59}{0}{\@print{4.5}\quad{}Un mini PROLOG{}}
-\@@addtocsec{htoc}{sec60}{0}{\@print{4.6}\quad{}Quelques exemples de programmation en PROLOG{}}
-\@@addtocsec{htoc}{sec61}{1}{\@print{4.6.1}\quad{}Les entiers naturels{}}
-\@@addtocsec{htoc}{sec62}{1}{\@print{4.6.2}\quad{}Les additions de Peano{}}
-\@@addtocsec{htoc}{sec63}{1}{\@print{4.6.3}\quad{}La base généalogique{}}
-\@@addtocsec{htoc}{sec64}{0}{\@print{4.7}\quad{}L'algorithme de complétion de Knuth-Bendix{}}
-\@@addtocsec{htoc}{sec65}{1}{\@print{4.7.1}\quad{}Confluence et paires critiques{}}
-\@@addtocsec{htoc}{sec66}{1}{\@print{4.7.2}\quad{}Terminaison{}}
-\@@addtocsec{htoc}{sec69}{1}{\@print{4.7.3}\quad{}Complétion de Knuth-Bendix{}}
+\@@addtocsec{htoc}{sec64}{0}{\@print{5.2}\quad{}La substitution{}}
+\@@addtocsec{htoc}{sec65}{0}{\@print{5.3}\quad{}Filtrage et réécriture{}}
+\@@addtocsec{htoc}{sec66}{1}{\@print{5.3.1}\quad{}Le filtrage{}}
+\@@addtocsec{htoc}{sec67}{1}{\@print{5.3.2}\quad{}La réécriture et l'arithmétique de Peano{}}
+\@@addtocsec{htoc}{sec68}{0}{\@print{5.4}\quad{}L'unification des termes{}}
+\@@addtocsec{htoc}{sec69}{0}{\@print{5.5}\quad{}Un mini PROLOG{}}
+\@@addtocsec{htoc}{sec70}{0}{\@print{5.6}\quad{}Quelques exemples de programmation en PROLOG{}}
+\@@addtocsec{htoc}{sec71}{1}{\@print{5.6.1}\quad{}Les entiers naturels{}}
+\@@addtocsec{htoc}{sec72}{1}{\@print{5.6.2}\quad{}Les additions de Peano{}}
+\@@addtocsec{htoc}{sec73}{1}{\@print{5.6.3}\quad{}Programmation "logique" en COQ{}}
+\@@addtocsec{htoc}{sec74}{1}{\@print{5.6.4}\quad{}La base généalogique{}}
+\@@addtocsec{htoc}{sec75}{0}{\@print{5.7}\quad{}L'algorithme de complétion de Knuth-Bendix{}}
+\@@addtocsec{htoc}{sec76}{1}{\@print{5.7.1}\quad{}Confluence et paires critiques{}}
+\@@addtocsec{htoc}{sec77}{1}{\@print{5.7.2}\quad{}Terminaison{}}
+\@@addtocsec{htoc}{sec80}{1}{\@print{5.7.3}\quad{}Complétion de Knuth-Bendix{}}
 \citation{rewriting}
-\@@addtocsec{htoc}{sec70}{-1}{\@print{Chapitre ‍5}\quad{}La calculabilité{}}
-\@@addtocsec{htoc}{sec71}{0}{\@print{5.1}\quad{}Les fonctions récursives{}}
-\@@addtocsec{htoc}{sec72}{0}{\@print{5.2}\quad{}La machine de Turing{}}
-\@@addtocsec{htoc}{sec73}{0}{\@print{5.3}\quad{}La thèse de Church{}}
-\@@addtocsec{htoc}{sec74}{-1}{\@print{Chapitre ‍6}\quad{}Annexes / Divers{}}
-\@@addtocsec{htoc}{sec75}{0}{\@print{6.1}\quad{}Quelques fonctions sur les listes{}}
-\@@addtocsec{htoc}{sec76}{0}{\@print{6.2}\quad{}Les listes mutables{}}
-\@@addtocsec{htoc}{sec77}{0}{\@print{6.3}\quad{}Les listes infinies ou \textit{streams}{}}
-\@@addtocsec{htoc}{sec78}{0}{\@print{6.4}\quad{}Le module Graphics d'OCAML, les fractales{}}
+\@@addtocsec{htoc}{sec81}{-1}{\@print{Chapitre ‍6}\quad{}Calculabilité et complexité{}}
+\@@addtocsec{htoc}{sec82}{0}{\@print{6.1}\quad{}Les fonctions récursives{}}
+\@@addtocsec{htoc}{sec83}{0}{\@print{6.2}\quad{}La machine de Turing{}}
+\@@addtocsec{htoc}{sec84}{0}{\@print{6.3}\quad{}La thèse de Church{}}
+\@@addtocsec{htoc}{sec85}{0}{\@print{6.4}\quad{}Complexité{}}
+\@@addtocsec{htoc}{sec86}{1}{\@print{6.4.1}\quad{}Théorème de Cook{}}
+\@@addtocsec{htoc}{sec87}{1}{\@print{6.4.2}\quad{}Implémentation de l'algorithme SAT{}}
+\@@addtocsec{htoc}{sec88}{1}{\@print{6.4.3}\quad{}Sudoku - SAT encoding{}}
+\@@addtocsec{htoc}{sec89}{-1}{\@print{Chapitre ‍7}\quad{}Annexes / Divers{}}
+\@@addtocsec{htoc}{sec90}{0}{\@print{7.1}\quad{}Quelques fonctions sur les listes{}}
+\@@addtocsec{htoc}{sec91}{0}{\@print{7.2}\quad{}Les listes mutables{}}
+\@@addtocsec{htoc}{sec92}{0}{\@print{7.3}\quad{}Les listes infinies ou \textit{streams}{}}
+\@@addtocsec{htoc}{sec93}{0}{\@print{7.4}\quad{}Le module Graphics d'OCAML, les fractales{}}
 \citation{caml}
 \citation{vh}
-\@@addtocsec{htoc}{sec80}{0}{\@print{6.5}\quad{}Utilisation de \MF{}}
+\@@addtocsec{htoc}{sec95}{0}{\@print{7.5}\quad{}Utilisation de \MF{}}
 \citation{mf}
-\@@addtocsec{htoc}{sec81}{0}{\@print{6.6}\quad{}The boxes{}}
-\@@addtocsec{htoc}{sec82}{0}{\@print{6.7}\quad{}Les modules OCAML. Modélisation d'un monoïde{}}
-\@@addtocsec{htoc}{sec83}{0}{\@print{6.8}\quad{}Machine Learning and Neural Networks{}}
-\@@addtocsec{htoc}{sec84}{1}{\@print{6.8.1}\quad{}Introduction{}}
+\@@addtocsec{htoc}{sec96}{0}{\@print{7.6}\quad{}The boxes{}}
+\@@addtocsec{htoc}{sec97}{0}{\@print{7.7}\quad{}Les modules OCAML. Modélisation d'un monoïde{}}
+\@@addtocsec{htoc}{sec98}{0}{\@print{7.8}\quad{}Machine Learning and Neural Networks{}}
+\@@addtocsec{htoc}{sec99}{1}{\@print{7.8.1}\quad{}Introduction{}}
 \citation{deepR}
-\@@addtocsec{htoc}{sec85}{1}{\@print{6.8.2}\quad{}Un peu de théorie{}}
-\@@addtocsec{htoc}{sec86}{1}{\@print{6.8.3}\quad{}Calcul matriciel{}}
-\@@addtocsec{htoc}{sec87}{1}{\@print{6.8.4}\quad{}Fonctions d'activation{}}
-\@@addtocsec{htoc}{sec88}{0}{\@print{6.9}\quad{}Les nombres premiers. L'algorithme RSA{}}
-\@@addtocsec{htoc}{sec98}{0}{\@print{6.10}\quad{}Approximation du nombre $\pi$ {}}
-\@@addtocsec{htoc}{sec99}{1}{\@print{6.10.1}\quad{}La méthode des polygones{}}
+\@@addtocsec{htoc}{sec100}{1}{\@print{7.8.2}\quad{}Un peu de théorie{}}
+\@@addtocsec{htoc}{sec101}{1}{\@print{7.8.3}\quad{}Calcul matriciel{}}
+\@@addtocsec{htoc}{sec102}{1}{\@print{7.8.4}\quad{}Fonctions d'activation{}}
+\@@addtocsec{htoc}{sec103}{0}{\@print{7.9}\quad{}Les nombres premiers. L'algorithme RSA{}}
+\@@addtocsec{htoc}{sec113}{0}{\@print{7.10}\quad{}Approximation du nombre $\pi$ {}}
+\@@addtocsec{htoc}{sec114}{1}{\@print{7.10.1}\quad{}La méthode des polygones{}}
 \citation{gb}
 \citation{wm}
-\@@addtocsec{htoc}{sec102}{1}{\@print{6.10.2}\quad{}La série alternée de Leibniz{}}
-\@@addtocsec{htoc}{sec103}{1}{\@print{6.10.3}\quad{}La loi des grands nombres{}}
-\@@addtocsec{htoc}{sec104}{1}{\@print{6.10.4}\quad{}Le produit de Wallis{}}
-\@@addtocsec{htoc}{sec105}{1}{\@print{6.10.5}\quad{}L'intégrale $\int_0^1 \frac{1}{1+x^2} dx${}}
-\@@addtocsec{htoc}{sec106}{0}{\@print{6.11}\quad{}Poésies{}}
-\@@addtocsec{htoc}{sec107}{0}{\@print{6.12}\quad{}L'irrationalité de $\sqrt{2}${}}
-\@@addtocsec{htoc}{sec108}{0}{\@print{6.13}\quad{}Démonstration non constructive{}}
-\@@addtocsec{htoc}{sec109}{0}{\@print{6.14}\quad{}L'hyperbole $xy=1${}}
-\@@addtocsec{htoc}{sec110}{0}{\@print{6.15}\quad{}L'exponentielle{}}
-\@@addtocsec{htoc}{sec111}{0}{\@print{6.16}\quad{}Les fonctions $\sin \frac{1}{x}$ et $x . \sin \frac{1}{x}$ {}}
-\@@addtocsec{htoc}{sec112}{0}{\@print{6.17}\quad{}Srivanasa Ramanujan{}}
-\@@addtocsec{htoc}{sec113}{0}{\@print{6.18}\quad{}L'alphabet grec. Extraits du nouveau testament{}}
+\@@addtocsec{htoc}{sec117}{1}{\@print{7.10.2}\quad{}La série alternée de Leibniz{}}
+\@@addtocsec{htoc}{sec118}{1}{\@print{7.10.3}\quad{}La loi des grands nombres{}}
+\@@addtocsec{htoc}{sec119}{1}{\@print{7.10.4}\quad{}Le produit de Wallis{}}
+\@@addtocsec{htoc}{sec120}{1}{\@print{7.10.5}\quad{}L'intégrale $\int_0^1 \frac{1}{1+x^2} dx${}}
+\@@addtocsec{htoc}{sec121}{0}{\@print{7.11}\quad{}Poésies{}}
+\@@addtocsec{htoc}{sec122}{0}{\@print{7.12}\quad{}Les fractions continues{}}
+\@@addtocsec{htoc}{sec123}{0}{\@print{7.13}\quad{}L'irrationalité de $\sqrt{2}${}}
+\@@addtocsec{htoc}{sec124}{0}{\@print{7.14}\quad{}Démonstration non constructive{}}
+\@@addtocsec{htoc}{sec125}{0}{\@print{7.15}\quad{}L'hyperbole $xy=1${}}
+\@@addtocsec{htoc}{sec126}{0}{\@print{7.16}\quad{}L'exponentielle{}}
+\@@addtocsec{htoc}{sec127}{0}{\@print{7.17}\quad{}Les fonctions $\sin \frac{1}{x}$ et $x . \sin \frac{1}{x}$ {}}
+\@@addtocsec{htoc}{sec128}{0}{\@print{7.18}\quad{}Srivanasa Ramanujan{}}
+\@@addtocsec{htoc}{sec129}{0}{\@print{7.19}\quad{}Le grec ancien{}}
+\@@addtocsec{htoc}{sec130}{1}{\@print{7.19.1}\quad{}L'alphabet grec{}}
+\@@addtocsec{htoc}{sec131}{1}{\@print{7.19.2}\quad{}Les mathématiques grecques{}}
+\@@addtocsec{htoc}{sec132}{1}{\@print{7.19.3}\quad{}Extraits du nouveau testament{}}
 \bibstyle{plain}
 \bibdata{book}
 \bibcite{genese}{1}
@@ -106,15 +127,16 @@
 \bibcite{deepR}{5}
 \bibcite{rewriting}{6}
 \bibcite{gide}{7}
-\bibcite{god}{8}
-\bibcite{vh}{9}
-\bibcite{mf}{10}
-\bibcite{lalement}{11}
-\bibcite{lamport1994latex}{12}
-\bibcite{gb}{13}
-\bibcite{poincare}{14}
-\bibcite{lisp}{15}
-\bibcite{wm}{16}
-\bibcite{WS}{17}
-\bibcite{reflective}{18}
-\bibcite{caml}{19}
+\bibcite{girard}{8}
+\bibcite{god}{9}
+\bibcite{vh}{10}
+\bibcite{mf}{11}
+\bibcite{lalement}{12}
+\bibcite{lamport1994latex}{13}
+\bibcite{gb}{14}
+\bibcite{poincare}{15}
+\bibcite{lisp}{16}
+\bibcite{wm}{17}
+\bibcite{WS}{18}
+\bibcite{reflective}{19}
+\bibcite{caml}{20}

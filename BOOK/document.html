@@ -233,7 +233,37 @@ L’autre processus de calcul est la résolution. Nous l’utilisons chaque fois
 une équation. En résolvant <span style="font-style:italic">x</span><sup>2</sup>+2<span style="font-style:italic">x</span>−15=0, nous souhaitons que notre processus 
 soit <span style="font-style:italic">complet</span>, c’est-à-dire que nous calculions 
 l’ensemble des valeurs possibles {−5; 3}.
-Nous étudierons également ce mécanisme, et en particulier l’algorithme d’unification.</p>
+Nous étudierons également ce mécanisme, et en particulier l’algorithme d’unification.</p><p>
+Enfin, nous aborderons la correspondante bluffante de la programmation fonctionnelle avec la logique. 
+C’est la correspondance de Curry-Howard. <br>
+Avec un langage de programmation typé comme OCAML où tout terme a un type, nous pouvons
+considérer un terme comme étant la preuve (ou plutôt une des preuves possibles) de son type. 
+Le mécanisme strict de typage nous assure de la cohérence du terme avec son type.
+Nous avons alors le rapprochement suivant:</p><div class="center">
+<table border=1  style="border-spacing:0;" class="cellpadding1"><tr><td style="text-align:center;border:solid 1px;white-space:nowrap" > terme</td><td style="text-align:center;border:solid 1px;white-space:nowrap" >preuve </td></tr>
+<tr><td style="text-align:center;border:solid 1px;white-space:nowrap" > type</td><td style="text-align:center;border:solid 1px;white-space:nowrap" >proposition </td></tr>
+</table></div><p>
+Nous sommes ici dans une logique constructive, démontrer une proposition revient à exhiber une preuve, c’est-à-dire 
+un terme ayant pour type la proposition.
+Ainsi, le principe du tiers-exclus <span style="font-style:italic">P</span> ∨ ¬ <span style="font-style:italic">P</span> ne peut être ici démontré.</p><p>Le type faux est un type inhabité, donc nous le définissons sans constructeur : <code class="verb"> type faux = | </code></p><p>Nous pouvons par exemple prouver le théorème du modus tollens : <br>
+
+<code class="verb">let modus_tollens (hfq:'q-&gt;faux) (hpq:'p-&gt;'q) (hp:'p) = hfq (hpq hp)</code> <br>
+Le type de cette expression est <code class="verb">('q -&gt; faux) -&gt; ('p -&gt; 'q) -&gt; 'p -&gt; faux</code> <br>
+
+Dans un langage proposant un système de types plus évolué comme COQ, le faux peut être exprimé 
+par le type ∀ <span style="font-style:italic">p</span>:<span style="font-style:italic">P</span>, <span style="font-style:italic">p</span>. Ce type est également inhabité. Supposer le faux permettra de démontrer 
+n’importe quelle proposition.</p><pre class="verbatim">Theorem faux : forall P:Prop, P.
+Admitted.
+
+Theorem absurdité : 1=2.
+Proof.
+    exact (faux (1=2)). 
+Qed.
+</pre><p>La correspondance de Curry-Howard montre toute son étendue dans le calcul des constructions, qui 
+considère les types comme des termes de premier ordre et permet ainsi de modéliser des types dépendants.
+COQ implémente ce formalisme.
+Nous en montrerons plusieurs exemples significatifs.</p><p>
+Bonne lecture !</p>
 <!--TOC chapter id="sec3" Le λ-calcul et la réduction-->
 <h1 id="sec3" class="chapter">Chapitre ‍1 Le λ-calcul et la réduction</h1><!--SEC END -->
 <!--TOC section id="sec4" Définition, champ lexical et syntaxique-->
@@ -245,12 +275,10 @@ argument à une fonction.</p><div class="theorem"><span style="font-weight:bold"
 Un </em>λ <em>-terme est défini par induction de la manière suivante:
 </em><ul class="itemize"><li class="li-itemize"><em>
 </em><em>Une variable </em><span style="font-style:italic">x</span><em> est un </em>λ<em>-terme.
-</em></li><li class="li-itemize"><em>Une abstraction </em>λ <span style="font-style:italic">x</span>.<span style="font-style:italic">terme</span><em> est un </em>λ<em>-terme.
-</em></li><li class="li-itemize"><em>Une application </em>(<span style="font-style:italic">terme</span>1  <span style="font-style:italic">terme</span>2)<em> est un </em>λ<em>-terme.
+</em></li><li class="li-itemize"><em>Si </em><span style="font-style:italic">t</span><em> est un </em>λ<em>-terme, l’abstraction </em>λ <span style="font-style:italic">x</span>.<span style="font-style:italic">t</span><em> est un </em>λ<em>-terme.
+</em></li><li class="li-itemize"><em>Si </em><span style="font-style:italic">t</span><sub>1</sub><em> et </em><span style="font-style:italic">t</span><sub>2</sub><em> sont des </em>λ<em>-termes, l’application </em>(<span style="font-style:italic">t</span><sub>1</sub>  <span style="font-style:italic">t</span><sub>2</sub>)<em> est un </em>λ<em>-terme.
 </em></li></ul><em>
-</em></div><p>Exemple de lambda terme:
-</p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">( λ <span style="font-style:italic">x</span>. <span style="font-style:italic">xy</span> ) (<span style="font-style:italic">x</span> <span style="font-style:italic">z</span> <span style="font-style:italic">u</span>)  </td></tr>
-</table><p>Voici le champ lexical des λ -termes:</p><p>
+</em></div><p>Voici le champ lexical des λ -termes:</p><p>
 token = </p><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:left;white-space:nowrap" >|</td><td style="text-align:left;white-space:nowrap" >λ</td><td style="text-align:left;white-space:nowrap" >	 <code class="verb">LAMBDA</code>  </td></tr>
 <tr><td style="text-align:left;white-space:nowrap" >|</td><td style="text-align:left;white-space:nowrap" >’.’</td><td style="text-align:left;white-space:nowrap" > <code class="verb">POINT</code>  </td></tr>
 <tr><td style="text-align:left;white-space:nowrap" >|</td><td style="text-align:left;white-space:nowrap" >[ <span style="font-style:italic">a</span>−<span style="font-style:italic">z</span> ] [ <span style="font-style:italic">a</span>−<span style="font-style:italic">z</span>  0−9 ] *</td><td style="text-align:left;white-space:nowrap" > <code class="verb">VARIABLE</code>  </td></tr>
@@ -363,7 +391,7 @@ De même, nous n’aurons plus la facilité syntaxique de l’associativité à 
 du corps des abstractions.
 Je ne sais pas si une telle grammaire peut être conçue pour une analyse en mode
 récursif descendant.
-Je pense que non (après m’être un peu cassé les cheveux là-dessus…)</p><p>Voici le code associé.
+Je pense que non (après m’être un peu cassé les cheveux là-dessus... ). </p><p>Voici le code associé.
 </p><pre class="verbatim">exception Fin
 exception Erreur of string
  
@@ -533,7 +561,7 @@ en commencant la réduction par le redex extèrieur, plus précisément le plus 
    with IRREDUCTIBLE   -&gt; App (n, (reduc1Normale m)) 
 </pre><p>Enfin, nous avons une fonction <code class="verb">fullReduc</code> qui permet d’itérer l’opération de
 β-réduction jusqu’à trouver la forme normale, ou boucler s’il n’y a pas de forme formale.
-On lui impose donc maximum 1000 réductions <sup><a id="text1" href="#note1">1</a></sup>
+On lui impose donc maximum 1000 réductions. 
 Elle prend en argument la méthode (ie. la stratégie de réduction) à  utiliser. </p><pre class="verbatim">let rec fullReduc terme methode  =
   let rec loop terme  iter =
  try
@@ -664,8 +692,8 @@ réduction normale, qui aboutit toujours à la forme irréductibre
 </table></td></tr>
 </table>
 </li></ul>
-<!--TOC section id="sec10" La récursivité et le point fixe-->
-<h2 id="sec10" class="section">1.4 La récursivité et le point fixe</h2><!--SEC END --><p>What else is a loop but a way of representing an endless process in a finite way?
+<!--TOC section id="sec10" La récursivité, le point fixe et la diagonale de Cantor-->
+<h2 id="sec10" class="section">1.4 La récursivité, le point fixe et la diagonale de Cantor</h2><!--SEC END --><p>What else is a loop but a way of representing an endless process in a finite way?
 [<a href="#god">8</a>]</p><div class="center">
 <table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:center;white-space:nowrap" >	<span class="parbox" style="vertical-align:middle;width:30%"><img src="document001.png"></span></td><td style="text-align:center;white-space:nowrap" >  
 √<span style="text-decoration:overline">2</span> = 1 + 1/1+√<span style="text-decoration:overline">2</span>  </td></tr>
@@ -750,7 +778,7 @@ val square2 : int -&gt; float = &lt;fun&gt;
 # sqrt 2. ;;
 - : float = 1.41421356237309512.
 
-</pre><p>En λ -calcul, nous avons un combinateur<sup><a id="text2" href="#note2">2</a></sup> qui nous permet de calculer le point fixe de n’importe quel λ -terme.
+</pre><p>En λ -calcul, nous avons un combinateur<sup><a id="text1" href="#note1">1</a></sup> qui nous permet de calculer le point fixe de n’importe quel λ -terme.
 Ce combinateur s’appelle <span style="font-style:italic">Y</span> . Il est défini par </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">Y</span>=  λ <span style="font-style:italic">f</span>.(λ <span style="font-style:italic">x</span>.<span style="font-style:italic">f</span>(<span style="font-style:italic">x</span> <span style="font-style:italic">x</span>))(λ <span style="font-style:italic">x</span>.<span style="font-style:italic">f</span>(<span style="font-style:italic">x</span> <span style="font-style:italic">x</span>)) </td></tr>
 </table><p>Ce n’est pas le seul combinateur de point fixe. Voici un autre dû à Turing :
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">Θ = (λ <span style="font-style:italic">x</span>. λ <span style="font-style:italic">y</span>. (<span style="font-style:italic">y</span> (<span style="font-style:italic">x</span> <span style="font-style:italic">x</span> <span style="font-style:italic">y</span>))) (λ <span style="font-style:italic">x</span>. λ <span style="font-style:italic">y</span>. (<span style="font-style:italic">y</span> (<span style="font-style:italic">x</span> <span style="font-style:italic">x</span> <span style="font-style:italic">y</span>)))</td></tr>
@@ -809,7 +837,7 @@ sans réduire le redex <span style="font-style:italic">Mx</span></p><p>En utilis
 </table><p>
 Les étapes ▷ [2] et ▷ [3] sont bien les mêmes sur les deux stratégies. 
 Puis la β-réduction par valeur va continuer à réduire l’argument
-(<span style="font-style:italic">YM</span>), là où la β-réduction normale va d’abord réduire le redex <span style="font-style:italic">Mx</span></p><p>Avec la réduction par valeur, il nous faut donc utiliser un autre combinateur de point fixe<sup><a id="text3" href="#note3">3</a></sup>
+(<span style="font-style:italic">YM</span>), là où la β-réduction normale va d’abord réduire le redex <span style="font-style:italic">Mx</span></p><p>Avec la réduction par valeur, il nous faut donc utiliser un autre combinateur de point fixe<sup><a id="text2" href="#note2">2</a></sup>
 que nous appelerons <span style="font-style:italic">Z</span> 
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">Z</span> = λ <span style="font-style:italic">f</span>.(λ <span style="font-style:italic">x</span>.<span style="font-style:italic">f</span>(λ <span style="font-style:italic">v</span>.<span style="font-style:italic">xxv</span>))(λ <span style="font-style:italic">x</span>.<span style="font-style:italic">f</span>(λ <span style="font-style:italic">v</span>.<span style="font-style:italic">xxv</span>)) </td></tr>
 </table><p>On constate que Z est η-équivalent à <span style="font-style:italic">Y</span>. Nous rappelons la définition suivante:</p><div class="theorem"><span style="font-weight:bold">Définition ‍4</span> <em>
@@ -863,7 +891,129 @@ Je ne peux reproduire cela en SCHEME:</p><pre class="verbatim">(define factabs
 =&gt; y: arity mismatch; the expected number of arguments does not match 
   expected: 2
   given: 1
-</pre>
+</pre><p>Le théorème de Cantor nous dit qu’il n’y a pas de fonction surjective 
+<span style="font-style:italic">f</span>: ℕ → ( ℕ → B) .
+Autrement dit, le cardinal des parties de ℕ est strictement plus grand que le cardinal de ℕ.
+Démontrons cela. <br>
+Soient <span style="font-style:italic">X</span><sub>0</sub>, <span style="font-style:italic">X</span><sub>1</sub>, …, <span style="font-style:italic">X</span><sub><span style="font-style:italic">n</span></sub> les parties de ℕ <br>
+Soit <span style="font-style:italic">f</span>(<span style="font-style:italic">m</span>,<span style="font-style:italic">n</span>) = <span style="font-style:italic">true</span> si <span style="font-style:italic">m</span> ∈ <span style="font-style:italic">X</span><sub><span style="font-style:italic">n</span></sub> et <span style="font-style:italic">false</span> sinon. <br>
+Soit <span style="font-style:italic">g</span> :B → B la fonction sans point fixe telle que <span style="font-style:italic">g</span>(<span style="font-style:italic">false</span>)=<span style="font-style:italic">true</span> et <span style="font-style:italic">g</span>(<span style="font-style:italic">true</span>)=<span style="font-style:italic">false</span>. <br>
+Considérons la fonction <span style="font-style:italic">h</span>: ℕ → B telle que <span style="font-style:italic">h</span>(<span style="font-style:italic">x</span>) = <span style="font-style:italic">g</span>(<span style="font-style:italic">f</span>(<span style="font-style:italic">x</span>,<span style="font-style:italic">x</span>))
+Supposons <span style="font-style:italic">f</span> surjective donc ∃ <span style="font-style:italic">a</span>, <span style="font-style:italic">f</span>(<span style="font-style:italic">a</span>)= <span style="font-style:italic">h</span> ⇔ <span style="font-style:italic">f</span>(<span style="font-style:italic">a</span>,<span style="font-style:italic">a</span>) = <span style="font-style:italic">h</span>(<span style="font-style:italic">a</span>) = <span style="font-style:italic">g</span>(<span style="font-style:italic">f</span>(<span style="font-style:italic">a</span>,<span style="font-style:italic">a</span>)) 
+Cela est impossible car <span style="font-style:italic">g</span> n’admet pas de point fixe par définition.</p><p>Ainsi <span style="font-style:italic">f</span> n’est pas surjective. <br>
+</p><p>Voici la représentation matricielle de la fonction <span style="font-style:italic">f</span>(<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>). Les valeurs <span style="font-style:italic">true</span> et <span style="font-style:italic">false</span> sont représentées par 1 et 0.
+La colonne est la valeur de <span style="font-style:italic">x</span> et la ligne est la valeur de <span style="font-style:italic">y</span>.</p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table class="display"><tr style="vertical-align:middle"><td class="dcell">⎡<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎣</td><td class="dcell"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >2</td><td style="text-align:center;white-space:nowrap" >3</td><td style="text-align:center;white-space:nowrap" >4</td><td style="text-align:center;white-space:nowrap" >5</td><td style="text-align:center;white-space:nowrap" >6</td><td style="text-align:center;white-space:nowrap" >7</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > <span style="font-weight:bold">1</span></td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>0</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">0</span></td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>1</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">1</span></td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>2</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">1</span></td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>3</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">0</span></td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>4</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">1</span></td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>5</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">1</span></td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>6</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">0</span></td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>7</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >⋮</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >⋱  </td></tr>
+</table></td><td class="dcell">⎤<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎦</td></tr>
+</table></td><td class="dcell">
+⇒<sub><span style="font-style:italic">g</span>(<span style="font-style:italic">f</span>(<span style="font-style:italic">x</span>,<span style="font-style:italic">x</span>))</sub>
+</td><td class="dcell"><table class="display"><tr style="vertical-align:middle"><td class="dcell">⎡<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎢<br>
+⎣</td><td class="dcell"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >2</td><td style="text-align:center;white-space:nowrap" >3</td><td style="text-align:center;white-space:nowrap" >4</td><td style="text-align:center;white-space:nowrap" >5</td><td style="text-align:center;white-space:nowrap" >6</td><td style="text-align:center;white-space:nowrap" >7</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > <span style="font-weight:bold">0</span></td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>0</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">1</span></td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>1</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">0</span></td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>2</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">0</span></td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>3</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">1</span></td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>4</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">0</span></td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>5</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">0</span></td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>6</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" > 0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" >0</td><td style="text-align:center;white-space:nowrap" ><span style="font-weight:bold">1</span></td><td style="text-align:center;white-space:nowrap" >...</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span><sub>7</sub> </td></tr>
+<tr><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >⋮</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >&nbsp;</td><td style="text-align:center;white-space:nowrap" >⋱  </td></tr>
+</table></td><td class="dcell">⎤<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎥<br>
+⎦</td></tr>
+</table></td></tr>
+</table><p><br>
+</p><p>Voici la démonstration formelle en COQ.
+<br>
+</p><p>
+Require Import Bool.Section Cantor.Lemma negb_prop : ∀ a:bool, negb a =a → False.Proof.2.00em
+intros.2.00em
+unfold negb in H.2.00em
+induction a. inversion H. inversion H.Qed.Definition surjective {X:Type} (f : nat → X) : Prop := ∀ y, ∃ x, f x = y.Theorem cantor : ¬ ∃ f : nat → nat → bool, surjective f.Proof.2.00em
+intros [f SURJ].2.00em
+pose (g := fun b ⇒ negb b ).
+soit <span style="font-style:italic">h</span> la diagonalisation négative de la mort </p><p>
+2.00em
+pose (h := fun x ⇒ g (f x x)).
+on applique l’hypothèse de surjection de <span style="font-style:italic">f</span> sur <span style="font-style:italic">h</span></p><p>
+2.00em
+destruct (SURJ h) as [x B].2.00em
+assert (C: h x = f x x).2.00em
+{4.00em
+rewrite B. reflexivity.2.00em
+}2.00em
+unfold h in C.2.00em
+unfold g in C.2.00em
+apply negb_prop in C.2.00em
+assumption.Qed.End Cantor.</p><p>Que vient faire Cantor sur ce chapitre décrivant les opérateurs de point fixes du λ-calcul ?
+Le mécanisme de la diagonalisation nous permet de retrouver l’opérateur de point fixe
+λ <span style="font-style:italic">g</span>.(λ.<span style="font-style:italic">g</span>(<span style="font-style:italic">xx</span>))(λ.<span style="font-style:italic">g</span>(<span style="font-style:italic">xx</span>)
+Nous pourrons nous reférer à l’ouvrage de Jean-Yves Girard, <span style="font-style:italic">Le Point Aveugle</span>
+[<a href="#girard"></a>]</p><p>Voyons cela.</p><p>Prenons la fonction identité <span style="font-style:italic">f</span> = λ <span style="font-style:italic">x</span>.<span style="font-style:italic">x</span>. Considérons cette fonction identité
+pouvant prendre en argument une abstraction et rendant une abstraction pour se rapprocher
+de notre fonction <span style="font-style:italic">f</span> précédente de type <span style="font-style:italic">A</span> → (<span style="font-style:italic">A</span> → <span style="font-style:italic">B</span>)</p><p>Cette fonction est bien surjective. Donc par la contraposée du théorème de Cantor, 
+quel que soit <span style="font-style:italic">h</span>, nous aurons un <span style="font-style:italic">a</span> tel que <span style="font-style:italic">f</span> <span style="font-style:italic">a</span> = <span style="font-style:italic">h</span>, et ce <span style="font-style:italic">a</span> pourra être <span style="font-style:italic">h</span>.
+Par diagonalisation :  <span style="font-style:italic">f</span> <span style="font-style:italic">a</span> <span style="font-style:italic">a</span> = <span style="font-style:italic">h</span> <span style="font-style:italic">a</span> = <span style="font-style:italic">h</span> <span style="font-style:italic">h</span> </p><p>Considérons <span style="font-style:italic">h</span> = λ <span style="font-style:italic">x</span>.<span style="font-style:italic">g</span>((<span style="font-style:italic">f</span> <span style="font-style:italic">x</span>) <span style="font-style:italic">x</span>) pour un terme <span style="font-style:italic">g</span> quelconque.
+<span style="font-style:italic">f</span> est la fonction identité, donc <span style="font-style:italic">h</span>= λ <span style="font-style:italic">x</span>.<span style="font-style:italic">g</span>(<span style="font-style:italic">x</span> <span style="font-style:italic">x</span>)
+</p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">h</span> <span style="font-style:italic">h</span> = λ <span style="font-style:italic">x</span>.<span style="font-style:italic">g</span>(<span style="font-style:italic">x</span> <span style="font-style:italic">x</span>) λ <span style="font-style:italic">x</span>.<span style="font-style:italic">g</span>(<span style="font-style:italic">x</span> <span style="font-style:italic">x</span>)</td></tr>
+</table><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">h</span> <span style="font-style:italic">h</span> = <span style="font-style:italic">g</span> (<span style="font-style:italic">h</span> <span style="font-style:italic">h</span>)</td></tr>
+</table><p>
+L’opérateur de point fixe est ainsi <span style="font-style:italic">Y</span>=λ <span style="font-style:italic">g</span>.(λ <span style="font-style:italic">x</span>.<span style="font-style:italic">g</span>(<span style="font-style:italic">x</span> <span style="font-style:italic">x</span>) λ <span style="font-style:italic">x</span>.<span style="font-style:italic">g</span>(<span style="font-style:italic">x</span> <span style="font-style:italic">x</span>)).
+Aucun terme n’est donc sans point fixe dans le λ-calcul à la différence de l’exemple précédent où notre
+fonction de B → B n’avait pas de point fixe.</p>
 <!--TOC section id="sec11" <span style="font-style:italic">Church</span> encoding. Les entiers et les booléens en λ-calcul-->
 <h2 id="sec11" class="section">1.5 <span style="font-style:italic">Church</span> encoding. Les entiers et les booléens en λ-calcul</h2><!--SEC END -->
 <!--TOC subsection id="sec12" Les entiers <span style="font-style:italic">Church</span> -->
@@ -981,7 +1131,8 @@ La factorielle de 5 en nécessite plus de 28000…</p>
 	 By any other name would smell as sweet.</span>[<a href="#WS">17</a>] <br>
 	 Citation reprise par Xavier Leroy dans
 	 son excellent cours au collège de France <br>
-</p><p>
+
+
 Le mécanisme de capture d’une variable libre par une lambda, qui nous oblige à faire de manière fastidieuse
 du renommage ponctuel de variables, est dû au fait qu’il y a un partage possible entre les noms des variables
 libres et des variables liées. </p><p>Pour éviter cela, nous pouvons utiliser une autre représentation du λ-terme. Le principe est
@@ -1058,12 +1209,30 @@ let rec normale_bruijn  = function
 let rec reduc_bruijn t =
  try reduc_bruijn (normale_bruijn t)
  with IRREDUCTIBLE -&gt; t 
+</pre><p>Représenter l’ensemble des variables (libres et liées) par un indice de profondeur rend le terme très peu lisible.
+La représentation la plus commode semble finalement être d’utiliser la notation de <span style="font-style:italic">de Bruijn</span> pour les variables liées
+et continuer
+à nommer les variables libres par des lettres.</p><p>Cela impose dans la définition inductive du terme de distinguer les variables libres des variables liées.</p><p>Par exemple en COQ:
+</p><pre class="verbatim">Inductive terme : Set :=
+  | bvar : nat -&gt; terme
+  | fvar : string -&gt; terme
+  | abs  : terme -&gt; terme
+  | app  : terme -&gt; terme -&gt; terme.
 </pre>
-<!--TOC section id="sec16" Le λ-calcul simplement typé-->
-<h2 id="sec16" class="section">1.7 Le λ-calcul simplement typé</h2><!--SEC END -->
-<!--TOC subsubsection id="sec17" Implémentation-->
-<h4 id="sec17" class="subsubsection">Implémentation</h4><!--SEC END --><p>
-Un contexte, ou environnement de typage Γ, est un ensemble de paires de la forme 
+<!--BEGIN NOTES chapter-->
+<hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
+<a id="note1" href="#text1">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">Un combinateur est un λ-terme comprenant uniquement 
+des variables liées</div></dd><dt class="dt-thefootnotes"><a id="note2" href="#text2">2</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">Nous insistons 
+là-dessus car nous rappelons que les interprètes MiniScheme et MiniML que nous implémenterons utiliseront la β-réduction faible par valeur.</div></dd></dl>
+<!--END NOTES-->
+<!--TOC chapter id="sec16" Le λ-calcul simplement typé et les Pure Type Systems-->
+<h1 id="sec16" class="chapter">Chapitre ‍2 Le λ-calcul simplement typé et les Pure Type Systems</h1><!--SEC END -->
+<!--TOC section id="sec17" Le λ-calcul simplement typé-->
+<h2 id="sec17" class="section">2.1 Le λ-calcul simplement typé</h2><!--SEC END -->
+<!--TOC subsection id="sec18" Présentation-->
+<h3 id="sec18" class="subsection">2.1.1 Présentation</h3><!--SEC END --><p>
+Un terme comme λ <span style="font-style:italic">x</span>.<span style="font-style:italic">xx</span> n’a pas de sens en mathématiques. Comment <span style="font-style:italic">x</span> peut être à la fois un argument et la fonction qu’on
+lui applique ? Le λ-calcul typé introduit des types simples permettant de distinguer les fonctions des variables.</p><p>Un contexte, ou environnement de typage Γ, est un ensemble de paires de la forme 
 ( <span style="font-style:italic">x</span> , τ ) où <span style="font-style:italic">x</span> est une variable et τ un type.
 Un jugement de typage est un triplet Γ ⊢ <span style="font-style:italic">t</span>:τ <br>
 
@@ -1073,7 +1242,187 @@ Le terme <span style="font-style:italic">t</span> sera bien typé dans Γ par le
 <tr><td style="text-align:center;white-space:nowrap" ></td><td style="text-align:center;white-space:nowrap" >  <span style="font-style:italic">si</span> Γ ⊢ <span style="font-style:italic">u</span>:τ <sub>1</sub>→ τ <sub>2</sub> <span style="font-style:italic">et</span> Γ ⊢ <span style="font-style:italic">v</span>:τ <sub>1</sub>,  
 <span style="font-style:italic">alors</span>  Γ ⊢ <span style="font-style:italic">uv</span>:τ <sub>2</sub> </td><td style="text-align:center;white-space:nowrap" ></td></tr>
 </table></td></tr>
-</table><p>Afin de jouer avec ce λ-calcul typé, nous introduisons la constante de type <code class="verb">Int</code>.</p><pre class="verbatim">type ltype = 
+</table>
+<!--TOC subsection id="sec19" Implémentation en COQ-->
+<h3 id="sec19" class="subsection">2.1.2 Implémentation en COQ</h3><!--SEC END -->
+<!--TOC subsubsection id="sec20" Représentation des types et des termes-->
+<h4 id="sec20" class="subsubsection">Représentation des types et des termes</h4><!--SEC END --><p>
+Pour les types, nous avons deux constructeurs, un pour les types de variable and un
+pour les types des abstractions: le type flèche de la forme <span style="font-style:italic">T</span><sub>1</sub> → <span style="font-style:italic">T</span><sub>2</sub>.</p><pre class="verbatim">Inductive typ : Set :=
+  | typ_var   : string -&gt; typ
+  | typ_arrow : typ -&gt; typ -&gt; typ.
+</pre><p>Pour les termes, nous utilisons la <span style="font-style:italic">locally namless representation</span>
+Les variables liées sont représentées par les indices de <span style="font-style:italic">de Bruijn</span> et les variables 
+libres par des chaînes de caractères.
+</p><pre class="verbatim">Inductive terme : Set :=
+  | bvar : nat -&gt; terme
+  | fvar : string -&gt; terme
+  | abs  : terme -&gt; terme
+  | app  : terme -&gt; terme -&gt; terme.
+
+Coercion bvar : nat &gt;-&gt; terme.
+Coercion fvar : string &gt;-&gt; terme.
+</pre><p>
+Voici un exemple avec le terme <span style="font-style:italic">t</span><sub>2</sub> = λ <span style="font-style:italic">x</span>.λ <span style="font-style:italic">y</span>. (<span style="font-style:italic">y</span> <span style="font-style:italic">x</span>)) </p><p><code class="verb">Definition t2 := abs (abs (app 0 1)).</code></p>
+<!--TOC subsubsection id="sec21" Opening-->
+<h4 id="sec21" class="subsubsection">Opening</h4><!--SEC END --><p>
+L’<span style="font-style:italic">opening</span> remplace un indice par un terme. 
+Cela correspond à la substitution d’une variable liée, telle qu’appliquée lors de la 
+β-réduction.</p><pre class="verbatim">Fixpoint open_rec (k : nat) (u : terme) (t : terme) {struct t} : terme :=
+  match t with
+  | bvar i    =&gt; if k =? i then u else (bvar i)
+  | fvar x    =&gt; fvar x
+  | abs t1    =&gt; abs (open_rec (S k) u t1)
+  | app t1 t2 =&gt; app (open_rec k u t1) (open_rec k u t2)
+  end.
+
+Definition open t u := open_rec 0 u t.
+
+Notation "{ k ~&gt; u } t" := (open_rec k u t) (at level 67).
+Notation "t ^^ u" := (open t u) (at level 67).
+Notation "t ^ x" := (open t (fvar x)).
+
+Lemma demo_open :
+  open (app (abs (app 1 0)) 0) "Y" =
+       (app (abs (app "Y" 0)) "Y").
+Proof.
+  unfold open. unfold open_rec. auto.
+Qed.
+</pre>
+<!--TOC subsubsection id="sec22" La sémantique-->
+<h4 id="sec22" class="subsubsection">La sémantique</h4><!--SEC END --><p> 
+Nous définissons la sémantique de la réduction avec appel par valeur.</p><pre class="verbatim">Inductive valeur : terme -&gt; Prop :=
+  | valeur_abs : forall (t1: terme), valeur (abs t1).
+
+Inductive red : terme -&gt; terme -&gt; Prop :=
+  | red_beta : forall (t1 t2:terme),
+      valeur t2 -&gt;
+      red (app (abs t1) t2) (t1 ^^ t2)
+  | red_app_1 : forall t1 t1' t2 :terme,
+      red t1 t1' -&gt;
+      red (app t1 t2) (app t1' t2)
+  | red_app_2 : forall t1 t2 t2' :terme,
+      valeur t1 -&gt;
+      red t2 t2' -&gt;
+      red (app t1 t2) (app t1 t2').
+
+</pre><p>
+Nous utilisons la notation <code class="verb">t --&gt; t'</code> pour la réduction en une étape.</p><pre class="verbatim">Notation "t --&gt; t'" := (red t t') (at level 68).
+</pre>
+<!--TOC subsubsection id="sec23" La gestion de l’environnement et du contexte-->
+<h4 id="sec23" class="subsubsection">La gestion de l’environnement et du contexte</h4><!--SEC END --><pre class="verbatim">Definition ctx := list (string * typ).
+Open Scope list_scope.
+Module ListNotations.
+Notation " [ ] " := nil : list_scope.
+Notation " [ x ] " := (cons x nil) : list_scope.
+Notation " [ x ; .. ; y ] " := (cons x .. (cons y nil) ..) : list_scope.
+Notation " s1 &amp; s2 " := (Datatypes.app s1 s2) (at level 67)  : list_scope.
+End ListNotations.
+
+Import ListNotations.
+Definition e1 :ctx := [ ("v1", typ_var "entier") ].
+Definition e2 :ctx := [ ("v2", typ_var "entier") ].
+
+Compute e1 &amp; e2 .
+</pre>
+<!--TOC subsubsection id="sec24" Le typage-->
+<h4 id="sec24" class="subsubsection">Le typage</h4><!--SEC END --><p>If <span style="font-style:italic">E</span> and <span style="font-style:italic">F</span> are two contexts, then <span style="font-style:italic">E</span> &amp; <span style="font-style:italic">F</span> denotes their 
+concatenation. If <span style="font-style:italic">x</span> is a variable and <span style="font-style:italic">T</span> is a type, then 
+(<span style="font-style:italic">x</span>  ‍ <span style="font-style:italic">T</span>) denotes a singleton environment where <span style="font-style:italic">x</span> is bound to <span style="font-style:italic">T</span>.
+In particular, <span style="font-style:italic">E</span> &amp; <span style="font-style:italic">x</span>  ‍ <span style="font-style:italic">T</span> denotes a context <span style="font-style:italic">E</span> extended 
+with a binding from <span style="font-style:italic">x</span> to <span style="font-style:italic">T</span>. The empty environment is 
+called <span style="font-style:italic">empty</span>.</p><p>The ternary predicate <span style="font-style:italic">binds</span> holds when a given binding is
+present in an environment. </p><pre class="verbatim">Fixpoint binds (x:string) (T:typ) (E:ctx) {struct E} : Prop :=
+  match E with
+  | [] =&gt; False
+  | (v,t) :: r =&gt; (x=v /\ T=t) \/ binds x T r
+end.
+
+Compute binds "v1" (typ_var "entier") e1.
+Compute e1.
+
+Theorem b1 : binds "v1" (typ_var "entier") e1.
+Proof.
+  simpl.
+  left.
+  auto.
+Qed.
+
+Reserved Notation "E |= t ~: T" (at level 69).
+
+Inductive typing : ctx -&gt; terme -&gt; typ -&gt; Prop :=
+  | typing_var : forall E x T,
+      binds x T E -&gt;
+      E |= (fvar x) ~: T
+  | typing_abs : forall  E U T t1,
+      forall x,  
+        (E &amp; [(x , U)] |= t1 ^ x ~: T) -&gt;
+      E |= (abs t1) ~: (typ_arrow U T)
+  | typing_app : forall S T E t1 t2,
+      E |= t1 ~: (typ_arrow S T) -&gt; 
+      E |= t2 ~: S -&gt;
+      E |= (app t1 t2) ~: T
+
+where "E |= t ~: T" := (typing E t T).
+</pre>
+<!--TOC subsubsection id="sec25" Théorème de préservation-->
+<h4 id="sec25" class="subsubsection">Théorème de préservation</h4><!--SEC END --><p>
+Nous définissons le théorème de préservation du type.
+</p><pre class="verbatim">Definition preservation_statement := forall E t t' T,
+  E |= t ~: T -&gt;
+  t --&gt; t' -&gt;
+  E |= t' ~: T.
+</pre>
+<!--TOC subsubsection id="sec26" Théorème de la progression-->
+<h4 id="sec26" class="subsubsection">Théorème de la progression</h4><!--SEC END --><p>
+Le théorème de la progression nous dit que si un terme ne se réduit plus, alors c’est une <span style="font-style:italic">valeur</span>.
+</p><pre class="verbatim">Definition progress_statement := forall t T, 
+  nil |= t ~: T -&gt;
+     valeur t 
+  \/ exists t', t --&gt; t'.
+</pre>
+<!--TOC subsubsection id="sec27" La substitution-->
+<h4 id="sec27" class="subsubsection">La substitution</h4><!--SEC END --><pre class="verbatim">Fixpoint mem  (x:string) (l:list string) : bool :=
+ match l with
+ | nil =&gt; false
+ | h::t =&gt; if h=?x then true else mem x t 
+ end.
+
+Fixpoint union (l1 l2: list string) : list string :=
+  match l1 with
+    | a1::r1 =&gt; if mem a1 l2 then union r1 l2
+                else  a1 :: (union r1 l2)
+    | nil =&gt; l2
+    end.
+
+Fixpoint fv (t : terme) {struct t} : list string :=
+  match t with
+  | bvar i    =&gt; nil
+  | fvar x    =&gt; [x]
+  | abs t1    =&gt; (fv t1)
+  | app t1 t2 =&gt; (union (fv t1) (fv t2))
+  end.
+
+Fixpoint subst (z : string) (u : terme) (t : terme) {struct t} : terme :=
+  match t with
+  | bvar i    =&gt; bvar i
+  | fvar x    =&gt; if x =? z then u else (fvar x)
+  | abs t1    =&gt; abs (subst z u t1)
+  | app t1 t2 =&gt; app (subst z u t1) (subst z u t2)
+  end.
+
+Notation "[ z ~&gt; u ] t" := (subst z u t) (at level 68).
+
+Lemma demo_subst1:  ["Y" ~&gt; "Z"] (abs (app 0 "Y")) = (abs (app 0 "Z")).
+Proof.
+  simpl.
+  auto.
+Qed.
+</pre>
+<!--TOC subsection id="sec28" Inférence de type-->
+<h3 id="sec28" class="subsection">2.1.3 Inférence de type</h3><!--SEC END --><p>
+Pour présenter un système d’inférence de type, nous introduisons la constante de type <code class="verb">Int</code> à notre <span style="font-style:italic">lambda</span>-calcul
+simplement typé.</p><pre class="verbatim">type ltype = 
 | Int 
 | Vart of string
 | Fleche of ltype*ltype
@@ -1084,10 +1433,7 @@ Le terme <span style="font-style:italic">t</span> sera bien typé dans Γ par le
   | Lam of string * terme
   | Const of int
   | Plus of terme * terme
-</pre>
-<!--TOC subsubsection id="sec18" Inférence de type d’un terme <span style="font-style:italic">t</span>-->
-<h4 id="sec18" class="subsubsection">Inférence de type d’un terme <span style="font-style:italic">t</span></h4><!--SEC END --><p>
-Prenons l’exemple du terme 
+</pre><p>Prenons l’exemple du terme 
 <span style="font-family:monospace"><span style="font-style:italic">apply</span></span> ≡ λ <span style="font-style:italic">f</span> . λ <span style="font-style:italic">x</span> .<span style="font-style:italic">fx</span></p><p>L’algorithme d’inférence se déroule en quatre temps.</p><ol class="enumerate" type=1><li class="li-enumerate">
 Assignation préliminaire de types ou variables de types à chaque sous-terme de l’expression.
 Pour cela, nous parcourons l’arbre du terme en y affectant à chaque variable liée une variable de type, ainsi qu’à
@@ -1143,10 +1489,10 @@ Dans le cas contraire, échec. Nous utilisons l’algorithme d’unification que
                       Fleche (Vart "alpha_x", Vart "alpha_3"))
 </pre>
 </li></ol>
-<!--TOC section id="sec19" Les <span style="font-style:italic">Pure Type Systems</span>-->
-<h2 id="sec19" class="section">1.8 Les <span style="font-style:italic">Pure Type Systems</span></h2><!--SEC END -->
-<!--TOC subsubsection id="sec20" Introduction-->
-<h4 id="sec20" class="subsubsection">Introduction</h4><!--SEC END --><p>
+<!--TOC section id="sec29" Les <span style="font-style:italic">Pure Type Systems</span>-->
+<h2 id="sec29" class="section">2.2 Les <span style="font-style:italic">Pure Type Systems</span></h2><!--SEC END -->
+<!--TOC subsection id="sec30" Introduction-->
+<h3 id="sec30" class="subsection">2.2.1 Introduction</h3><!--SEC END --><p>
 Le λ-calcul simplement typé que nous nommons λ <sub>→</sub> ne permet
 de représenter des fonctions que des termes vers les termes. De manière générale, nous souhaiterions
 pouvoir modéliser :
@@ -1336,8 +1682,8 @@ let proj2 =
     App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "y"))))
 in print (fullReduc (App (proj2, prod_uv)))
 </pre>
-<!--TOC subsubsection id="sec21" MiniCOQ-->
-<h4 id="sec21" class="subsubsection">MiniCOQ</h4><!--SEC END --><p>
+<!--TOC subsection id="sec31" MiniCOQ-->
+<h3 id="sec31" class="subsection">2.2.2 MiniCOQ</h3><!--SEC END --><p>
 Nous nous éloignons de la simplicité du <span style="font-style:italic">Pure Type System</span> en surchargeant notre
 terme algébrique des types suivants :
 </p><ul class="itemize"><li class="li-itemize">
@@ -1406,16 +1752,20 @@ assumption.Qed.Print et_refl.</p><pre class="verbatim">let preuve_et_refl =
   in ( print preuve_et_refl ; print_string "\n"; print(check preuve_et_refl env0)) ;;
 &gt; λA:Type.λB:Type.λh:A/\B.conj(proj2(h) ,proj1(h))
   πA:Type.πB:Type.(A/\B→B/\A)
+</pre><p>
+Ou tout simplement en OCAML avec l’inférence de type:
+</p><pre class="verbatim">utop # let preuve_et_refl = function h -&gt; (snd h, fst h) ;;
+val preuve_et_refl : 'a * 'b -&gt; 'b * 'a = &lt;fun&gt;
 </pre>
-<!--TOC subsubsection id="sec22" Le ∨ logique-->
-<h4 id="sec22" class="subsubsection">Le ∨ logique</h4><!--SEC END --><p>
+<!--TOC subsection id="sec32" Le ∨ logique-->
+<h3 id="sec32" class="subsection">2.2.3 Le ∨ logique</h3><!--SEC END --><p>
 Theorem or_elim: ∀ (a b c:Prop), (a→c)-&gt;(b→c)-&gt;(a∨b)-&gt;c.Proof.1.00em
 intros a b c h1 h2 h3.1.00em
 destruct h3 as [ha | hb].1.00em
 apply h1. exact ha.1.00em
 apply h2. exact hb.Qed.
-</p><pre class="verbatim">(* fonction générée en COQ*)
-  or_elim = 
+</p><pre class="verbatim">(* fonction générée en COQ *)
+ or_elim = 
  fun (a b c : Prop) (h1 : a -&gt; c) (h2 : b -&gt; c) (h3 : a \/ b) =&gt;
  match h3 with
   | or_introl ha =&gt; h1 ha
@@ -1436,9 +1786,17 @@ let preuve_or_elim =
       print (check preuve_or_elim env0)) ;;
 &gt; λA:Type.λB:Type.λC:Type.λh1:(A→C).λh2:(B→C).λh3:A\/B.case(h3, h1, h2)
   πA:Type.πB:Type.πC:Type.((A→C)→((B→C)→(A\/B→C)))
+</pre><p>En OCAML, nous introduisons le type algébrique ci-dessous pour matérialiser le <code class="verb">or</code> logique
+</p><pre class="verbatim">type ('a, 'b) ou = Left of 'a | Right of 'b 
+
+let or_elim = fun h1 h2 h3 -&gt;
+ match h3 with
+  | Left a -&gt; h1 a
+  | Right b -&gt; h2 b ;;
+val or_elim : ('a -&gt; 'b) -&gt; ('c -&gt; 'b) -&gt; ('a, 'c) ou -&gt; 'b = &lt;fun&gt;
 </pre>
-<!--TOC subsubsection id="sec23" L’égalité-->
-<h4 id="sec23" class="subsubsection">L’égalité</h4><!--SEC END --><p>
+<!--TOC subsection id="sec33" L’égalité-->
+<h3 id="sec33" class="subsection">2.2.4 L’égalité</h3><!--SEC END --><p>
 Prouvons que ∀ <span style="font-style:italic">n</span> ∈ <span style="font-family:monospace"><span style="font-style:italic">Nat</span></span>, (λ <span style="font-style:italic">n</span>.2  <span style="font-style:italic">n</span>) = 2
 </p><pre class="verbatim">let th = Prod("n", Nat, Eq(Nat, App(cst2, V "n"), S (S O) )) 
   in print th;;
@@ -1467,8 +1825,8 @@ Ainsi, un terme peut avoir plusieurs types.</p><p>La preuve <code class="verb">�
 Nous constatons que la preuve n’exhibe pas le process calculatoire de la β-réduction.
 Le théorème est ici prouvé par calcul et non par raisonnement. Ces considérations philosophiques sont bien développées
 par Henri Poincaré[<a href="#poincare">14</a>]</p>
-<!--TOC subsubsection id="sec24" Le faux-->
-<h4 id="sec24" class="subsubsection">Le faux</h4><!--SEC END --><pre class="verbatim">let exf = Lam ("x", False, I) (* ex falso quodlibet *)
+<!--TOC subsection id="sec34" Le faux-->
+<h3 id="sec34" class="subsection">2.2.5 Le faux</h3><!--SEC END --><pre class="verbatim">let exf = Lam ("x", False, I) (* ex falso quodlibet *)
   in (print exf ; print_newline() ; print (check exf env0)) ;;
 &gt; λx:False.I
   (False→True) 
@@ -1498,9 +1856,29 @@ in  (print preuve_impl ; print_newline() ;
      print (fullReduc (check preuve_impl env0))) ;;
 &gt; λA:Type.λB:Type.λH:(λP:Type.~P A)\/B.λH0:A.case(H, λx:~A.false_ind(B,(x H0)), λy:B.y)
   πA:Type.πB:Type.(~A\/B→(A→B))
+</pre><p>Dans un langage comme OCAML, le type <code class="verb">faux</code> est un type sans constructeur.
+Il est <span style="font-style:italic">inhabité</span>. La preuve de la règle du modus tollens s’écrira de la manière suivante :
+</p><pre class="verbatim">type faux = | ;;
+
+let modus_tollens (hfq:'q-&gt;faux) (hpq:'p-&gt;'q) (hp:'p) =
+  hfq (hpq hp)
+</pre><p>
+Voici le même théorème en COQ :
+</p><pre class="verbatim">Theorem modus_tollens: forall (p q:Prop), (q-&gt;False)-&gt; (p-&gt;q) -&gt; (p-&gt;False).
+Proof.
+ intros p q Hfq Hpq Hp.
+        generalize (Hpq Hp).
+        exact Hfq.
+Qed.
+</pre><p>
+Nous pouvons décrire le <span style="font-style:italic">ex falso quodlibet</span> en OCAML comme suit :
+</p><pre class="verbatim">type faux = | ;;
+type vrai = I ;;
+
+let exfalsoquodlibet = fun (f:faux) -&gt;  I;;
 </pre>
-<!--TOC subsubsection id="sec25" Le point fixe-->
-<h4 id="sec25" class="subsubsection">Le point fixe</h4><!--SEC END --><p>
+<!--TOC subsection id="sec35" Le point fixe-->
+<h3 id="sec35" class="subsection">2.2.6 Le point fixe</h3><!--SEC END --><p>
 Nous surchargeons notre terme algébrique de l’opérateur de point fixe <code class="verb">Y of terme</code> qui
 se réduit en <code class="verb">Y t</code> D  <code class="verb">t (Y t)</code>
 </p><pre class="verbatim">let multF = 
@@ -1519,8 +1897,8 @@ let fac = Y facF  ;;
 print (fullReduc (App(fac, S (S (S (S (S O))))))) ;;
 &gt; 120
 </pre>
-<!--TOC subsubsection id="sec26" La logique classique-->
-<h4 id="sec26" class="subsubsection">La logique classique</h4><!--SEC END --><p>
+<!--TOC subsection id="sec36" La logique classique-->
+<h3 id="sec36" class="subsection">2.2.7 La logique classique</h3><!--SEC END --><p>
 Sous l’angle de la correspondance de Curry-Howard, notre système se base sur la logique intuitionniste.
 C’est-à-dire que toute proposition a une preuve constructive.
 Autrement dit, le type correspondant à la proposition est habité par un terme de notre système PTS.
@@ -1559,17 +1937,24 @@ let proof_peirce =
                                     λzz:A.zz,
                                     λyy:A.(H λH1:A.false_ind(B,(yy H1))))
   πA:Type.πB:Type.(((A→B)→A)→A)
-</pre>
-<!--BEGIN NOTES chapter-->
-<hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
-<a id="note1" href="#text1">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">La fonction STOP de mon toplevel sous Eclipse ne marche pas…</div></dd><dt class="dt-thefootnotes"><a id="note2" href="#text2">2</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">Un combinateur est un λ-terme comprenant uniquement 
-des variables liées</div></dd><dt class="dt-thefootnotes"><a id="note3" href="#text3">3</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">Nous insistons 
-là-dessus car nous rappelons que les interprètes MiniScheme et MiniML que nous implémenterons utiliseront la β-réduction faible par valeur.</div></dd></dl>
-<!--END NOTES-->
-<!--TOC chapter id="sec27" L’interprétation-->
-<h1 id="sec27" class="chapter">Chapitre ‍2 L’interprétation</h1><!--SEC END -->
-<!--TOC section id="sec28" Introduction-->
-<h2 id="sec28" class="section">2.1 Introduction</h2><!--SEC END --><p>
+</pre><p>Ainsi, le tiers-exclus n’est pas démontrable en logique classique. Cependant, on peut
+démontrer en logique intuitionniste qu’il n’est pas vrai que le tiers-exclus soit faux.
+C’est-à-dire que l’on ne peut démontrer <span style="font-style:italic">P</span>, mais ¬ ¬ <span style="font-style:italic">P</span></p><p>Il est surprenant de constater que "nier deux fois" est équivalent à "affirmer" en logique classique, mais est plus
+faible en logique intuitionniste.</p><p>Voici la démonstration en COQ.</p><p>
+Section excluded_middle.Variables A : Prop.Theorem il_n_est_pas_vrai_que_le_tiers_exclus_est_faux: ¬ ¬ (~A ∨ A).Proof.1.00em
+unfold not.1.00em
+intro H.1.00em
+apply H.1.00em
+left.1.00em
+intro H1.1.00em
+apply H.1.00em
+right.1.00em
+assumption.Qed.End excluded_middle.
+</p>
+<!--TOC chapter id="sec37" L’interprétation-->
+<h1 id="sec37" class="chapter">Chapitre ‍3 L’interprétation</h1><!--SEC END -->
+<!--TOC section id="sec38" Introduction-->
+<h2 id="sec38" class="section">3.1 Introduction</h2><!--SEC END --><p>
 Nous avons vu que le λ-calcul utilise la réduction, basée sur un mécanisme de substitution.
 Les langages interprétés que nous allons implémenter n’utilisent pas ce mécanisme de substitution, mais
 font appel un environnement qui permet de représenter les paires variable/valeur.
@@ -1586,10 +1971,10 @@ liaison <span style="font-style:italic">dynamique</span> et <span style="font-st
 et enfin un interprète par <span style="font-style:italic">continuation</span>, avant de conclure sur une tour de babel avec capacité de réification
 et réflection de notre méta-interpète. C’est comme une quête philosophique…</p><p>Pour ces diffèrentes variantes, nous nous inspirons de notre bible sur le langage LISP : <span style="font-style:italic">LISP In Small Pieces</span> de Christian Queinnec.
 [<a href="#lisp">15</a>]</p>
-<!--TOC section id="sec29" Un interprète MiniScheme avec OCAML-->
-<h2 id="sec29" class="section">2.2 Un interprète MiniScheme avec OCAML</h2><!--SEC END -->
-<!--TOC subsection id="sec30" L’évaluation-->
-<h3 id="sec30" class="subsection">2.2.1 L’évaluation</h3><!--SEC END --><p>
+<!--TOC section id="sec39" Un interprète MiniScheme avec OCAML-->
+<h2 id="sec39" class="section">3.2 Un interprète MiniScheme avec OCAML</h2><!--SEC END -->
+<!--TOC subsection id="sec40" L’évaluation-->
+<h3 id="sec40" class="subsection">3.2.1 L’évaluation</h3><!--SEC END --><p>
 Le λ-calcul repose sur un mécanisme de substitution permettant de réduire les termes et
 aboutir à une forme normale. En programmation fonctionnelle, au lieu de réduire un terme, on
 l’évaluera. Un terme non fermé ne pourra être évalué que dans un environnement où ses 
@@ -1663,8 +2048,8 @@ and ast =
 | Quote of exp
 and env = (string * exp) list
   </pre>
-<!--TOC subsection id="sec31" Les étapes Read, Eval, Print-->
-<h3 id="sec31" class="subsection">2.2.2 Les étapes Read, Eval, Print</h3><!--SEC END --><p>
+<!--TOC subsection id="sec41" Les étapes Read, Eval, Print-->
+<h3 id="sec41" class="subsection">3.2.2 Les étapes Read, Eval, Print</h3><!--SEC END --><p>
 L’interpréte présente trois étapes que l’on décrit souvent avec l’acronyme <span style="font-style:italic">REPL</span> :
 Read, Eval, Print, Loop</p><p>L’étape <span style="font-style:italic">READ</span> sera effectuée avec les moteurs ocamllex et ocmalyacc.
 Cette étape va lire la saisie clavier et construire l’arbre syntaxique des expressions SCHEME.</p><p>Voici quelques exemples d’arbres syntaxiques générés avec Yacc.
@@ -1689,12 +2074,12 @@ child node 3  child node body let childnode call child  node var child  nodeplus
 child node exp list child  node var child  nodea  child  node var child  nodeb     ;
 
 </div><p>L’étape <span style="font-style:italic">EVAL</span> va parcourir l’arbre syntaxique de l’expression, traiter cette expression et
-en exprimer une valeur modélisée avex le type <code class="verb">value</code></p><p>La fonction <code class="verb">eval</code> est une fonction prenant comme arguments une expression de type <code class="verb">ast</code> et un environnement.
+en exprimer une valeur modélisée avec le type <code class="verb">value</code></p><p>La fonction <code class="verb">eval</code> est une fonction prenant pour arguments une expression de type <code class="verb">ast</code> et un environnement.
 Elle retourne une valeur de type <code class="verb">exp</code>. Voici sa signature: <br>
 <code class="verb">val eval : ast -&gt; env -&gt; exp = &lt;fun&gt;</code></p><p>L’étape <span style="font-style:italic">PRINT</span> n’est autre que la fonction d’affichage finale de l’interprète.
 Une fois cette étape finie, l’interprète boucle sur l’étape initiale <span style="font-style:italic">READ</span></p>
-<!--TOC subsection id="sec32" Liaison lexicale vs liaison dynamique-->
-<h3 id="sec32" class="subsection">2.2.3 Liaison lexicale vs liaison dynamique</h3><!--SEC END --><p>
+<!--TOC subsection id="sec42" Liaison lexicale vs liaison dynamique-->
+<h3 id="sec42" class="subsection">3.2.3 Liaison lexicale vs liaison dynamique</h3><!--SEC END --><p>
 Nous allons utiliser ici la liaison lexicale (statique), et non dynamique.
 Cela nous impose de capturer l’environnement existant au moment de la définition de la fonction. 
 Plus précisément, l’environnement est capturé par l’évaluation de la lambda, évaluation dont la valeur est appelée une <span style="font-style:italic">closure</span>
@@ -1709,8 +2094,8 @@ lambda <code class="verb">inc_x</code> capture la valeur de <code class="verb">x
 <tr><td style="text-align:left;border:solid 1px;white-space:nowrap" ><code class="verb">&gt; (let ((x 100)) (inc_x))</code></td><td style="text-align:left;border:solid 1px;white-space:nowrap" ><code class="verb"># let x = 100 in inc_x () ;;</code> </td></tr>
 <tr><td style="text-align:left;border:solid 1px;white-space:nowrap" ><code class="verb">2</code></td><td style="text-align:left;border:solid 1px;white-space:nowrap" ><code class="verb">- : int = 2</code> </td></tr>
 </table>
-<!--TOC subsection id="sec33" Gestion de l’environnement-->
-<h3 id="sec33" class="subsection">2.2.4 Gestion de l’environnement</h3><!--SEC END --><p>Comme indiqué en préambule, plusieurs choix sont possibles pour la modélisation de l’environnement.
+<!--TOC subsection id="sec43" Gestion de l’environnement-->
+<h3 id="sec43" class="subsection">3.2.4 Gestion de l’environnement</h3><!--SEC END --><p>Comme indiqué en préambule, plusieurs choix sont possibles pour la modélisation de l’environnement.
 Le choix le plus simple est une représentation par une liste de paires <span style="font-style:italic">variable</span> ↔ <span style="font-style:italic">value</span>
 Ce choix peut être fait en OCAML par le type natif <code class="verb">list</code> ou en utilisant le type concret <code class="verb">Paire of Symbole * lobject</code></p><p>La principale difficulté est la représentation de fonctions récursives, comme en exemple la factorielle ci-dessous:
 </p><pre class="verbatim">(define fact 
@@ -1772,10 +2157,10 @@ C’est nécessaire afin que les <code class="verb">ei</code> puissent faire app
 </td></tr>
 </table></td></tr>
 </table></li></ol>
-<!--TOC section id="sec34" Un interprète LISP avec le nouvel interprète MiniScheme …-->
-<h2 id="sec34" class="section">2.3 Un interprète LISP avec le nouvel interprète MiniScheme …</h2><!--SEC END -->
-<!--TOC subsubsection id="sec35" La mise en abyme-->
-<h4 id="sec35" class="subsubsection">La mise en abyme</h4><!--SEC END --><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:left;white-space:nowrap" > 
+<!--TOC section id="sec44" Un interprète LISP avec le nouvel interprète MiniScheme …-->
+<h2 id="sec44" class="section">3.3 Un interprète LISP avec le nouvel interprète MiniScheme …</h2><!--SEC END -->
+<!--TOC subsubsection id="sec45" La mise en abyme-->
+<h4 id="sec45" class="subsubsection">La mise en abyme</h4><!--SEC END --><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:left;white-space:nowrap" > 
 <div class="minipage">
 <span style="font-style:italic">
 Pour obtenir cet effet, suivez-moi, j’invente un personnage de romancier, que je pose en figure centrale ;
@@ -1791,13 +2176,13 @@ Kαὶ εἶπεν ὁ θεὸς πρὸς Μωυσῆν Ἐγώ εἰμι ὁ �
 </div></td><td style="text-align:left;white-space:nowrap" >   </td><td style="text-align:left;white-space:nowrap" ><div class="minipage">
 <blockquote class="figure"><div class="center"><div class="center"><hr class="floatrule"></div>
 <img src="document002.png">
-<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 2.1: Gumpp</td></tr>
+<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 3.1: Gumpp</td></tr>
 </table></div>
 <div class="center"><hr class="floatrule"></div></div></blockquote></div>
 </td></tr>
 </table>
-<!--TOC subsubsection id="sec36" LISP mis en abyme-->
-<h4 id="sec36" class="subsubsection">LISP mis en abyme</h4><!--SEC END --><p> 
+<!--TOC subsubsection id="sec46" LISP mis en abyme-->
+<h4 id="sec46" class="subsubsection">LISP mis en abyme</h4><!--SEC END --><p> 
 C’est ici un exercice assez classique.
 Nous avons fait le choix d’un interprète avec liaison dynamique.
 Nous aurons ainsi l’évaluation suivante retournant 13 et non 10.
@@ -1814,14 +2199,14 @@ l’appel d’une fonction récusrsive. C’est l’un des avantages de la liais
    (fact 6)))
  env)
 </pre>
-<!--TOC section id="sec37" L’auto-interprétation de l’interprète-->
-<h2 id="sec37" class="section">2.4 L’auto-interprétation de l’interprète</h2><!--SEC END --><p>
+<!--TOC section id="sec47" L’auto-interprétation de l’interprète-->
+<h2 id="sec47" class="section">3.4 L’auto-interprétation de l’interprète</h2><!--SEC END --><p>
 En rendant explicite la procédure <code class="verb">eval</code> et ses acolytes <code class="verb">evlis, invoke, ...</code> dans l’environnement
 <code class="verb">env</code> , la procédure <code class="verb">evaluate</code> pourra être évaluée par elle-même. Le premier argument évalué de la fonction
 est le symbole <code class="verb">env</code>. Ce symbole devra être contenu dans l’environnement <code class="verb">env</code>, c’est-à-dire dans lui-même…</p><p>Nous avons <code class="verb">(eval '(eval '</code>π <code class="verb"> env) env)</code> ≡ 
 <code class="verb">(evaluate '</code>π <code class="verb"> env)</code> </p>
-<!--TOC subsection id="sec38" La tour de Babel-->
-<h3 id="sec38" class="subsection">2.4.1 La tour de Babel</h3><!--SEC END --><p>estun=[-&gt;,&gt;=latex]
+<!--TOC subsection id="sec48" La tour de Babel-->
+<h3 id="sec48" class="subsection">3.4.1 La tour de Babel</h3><!--SEC END --><p>estun=[-&gt;,&gt;=latex]
 [estun] (-1.5,4.9) to [bend right] (-2, 5.3) to[bend right] (-2.5, 5) ;
 (-3, 0) node[above right]<code class="verb">eval.&lt;proc&gt;</code>–(-0.5,0)–(-0.5,5)–(-3,5)
 node[below right]<code class="verb">env. #env</code> –(-3,0) ;
@@ -1837,8 +2222,8 @@ at (3,5.8) <span style="color:red"><span style="font-style:italic">I</span></spa
   (lambda (x y) (+ x y)) (fact 5) (fact 6) )))
        env))) env))) env))) env)
 </pre>
-<!--TOC subsubsection id="sec39" L’environnement-->
-<h4 id="sec39" class="subsubsection">L’environnement</h4><!--SEC END --><p>
+<!--TOC subsubsection id="sec49" L’environnement-->
+<h4 id="sec49" class="subsubsection">L’environnement</h4><!--SEC END --><p>
 L’environnement doit contenir la valeur du symbole <code class="verb">env</code>. Il doit faire référence à lui-même.
 Seule une liste mutable peut modéliser cette boucle infinie. 
 </p><pre class="verbatim">&gt; env ; affichage de l'environnement récursif avec DrRacket
@@ -1867,8 +2252,8 @@ Seule une liste mutable peut modéliser cette boucle infinie.
     (evallet . #&lt;procedure:...interpreter2.scm:121:6&gt;)
     (evaluate . #&lt;procedure:...interpreter2.scm:128:16&gt;))
 </pre>
-<!--TOC subsection id="sec40" Réification et réflexion-->
-<h3 id="sec40" class="subsection">2.4.2 Réification et réflexion</h3><!--SEC END --><p>
+<!--TOC subsection id="sec50" Réification et réflexion-->
+<h3 id="sec50" class="subsection">3.4.2 Réification et réflexion</h3><!--SEC END --><p>
 La <span style="font-style:italic">réification</span> est le fait de rendre concrète une chose abstraite.
 Dans le cas de notre tour de Babel, réifier un objet du langage d’implémentation le rendra accessible au langage implémenté.
 On peut citer l’exemple de la fonction <code class="verb">eval</code> rendant accessible dans Scheme le process d’évaluation. 
@@ -1897,8 +2282,8 @@ concret pour en former une représentation intellectuelle</em></div><p><br>
 </p><table border=1  style="border-spacing:0;" class="cellpadding1"><tr><td style="text-align:center;border:solid 1px;white-space:nowrap" >réification</td><td style="text-align:center;border:solid 1px;white-space:nowrap" >program vers data</td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><code class="verb">((reifier-to-cloture proc) (cdr e) r k)</code> </td></tr>
 <tr><td style="text-align:center;border:solid 1px;white-space:nowrap" >réflection</td><td style="text-align:center;border:solid 1px;white-space:nowrap" >data vers program</td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><code class="verb">(cloture-to-reifier (lambda (e r k) exp))</code> </td></tr>
 </table>
-<!--TOC subsubsection id="sec41" L’interprète par continuation -->
-<h4 id="sec41" class="subsubsection">L’interprète par continuation </h4><!--SEC END --><p>
+<!--TOC subsubsection id="sec51" L’interprète par continuation -->
+<h4 id="sec51" class="subsubsection">L’interprète par continuation </h4><!--SEC END --><p>
 La fonction d’évaluation sera enrichie pour prendre trois arguments, le programme π à évaluer, l’environnement 
 ρ et la continuation κ 
 </p><div class="center">
@@ -1951,7 +2336,7 @@ monter dans les étages doit cependant être tempéré. Le fait d’être à l�
 Autrement dit, la valeur <code class="verb">(eval'</code>π<code class="verb">)</code> est un point fixe de <code class="verb">eval</code>.</p></div><div class="minipage">
 <blockquote class="figure"><div class="center"><div class="center"><hr class="floatrule"></div>
 <img src="document003.png">
-<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 2.2: Bruegel</td></tr>
+<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 3.2: Bruegel</td></tr>
 </table></div>
 <div class="center"><hr class="floatrule"></div></div></blockquote></div><p><br>
 </p><p>ΓΕΝΕΣΙΣ 11 <br>
@@ -2218,10 +2603,10 @@ les réifications des fonctions <code class="verb">if, quote, begin</code>.</p><
        (set-car! global-env (cons 'global-env global-env ))
        (openloop "i0 " "i0 "))))
 </span></pre>
-<!--TOC chapter id="sec42" La compilation-->
-<h1 id="sec42" class="chapter">Chapitre ‍3 La compilation</h1><!--SEC END -->
-<!--TOC section id="sec43" Compilation des λ-termes en termes applicatifs-->
-<h2 id="sec43" class="section">3.1 Compilation des λ-termes en termes applicatifs</h2><!--SEC END --><p>
+<!--TOC chapter id="sec52" La compilation-->
+<h1 id="sec52" class="chapter">Chapitre ‍4 La compilation</h1><!--SEC END -->
+<!--TOC section id="sec53" Compilation des λ-termes en termes applicatifs-->
+<h2 id="sec53" class="section">4.1 Compilation des λ-termes en termes applicatifs</h2><!--SEC END --><p>
 Il existe un formalisme appelé <span style="font-style:italic">Logique Combinatoire</span> qui permet de construire
 un calcul sans variables liées. 
 C’est surprenant, mais ces variables liées qui sont introduites par abstraction puis éliminées par application
@@ -2320,7 +2705,7 @@ match ski_norm m0 with
 | _ -&gt; raise SkiErreur
 </pre><p>Utilisons l’exemple de la factorielle, exemple complexe car il comporte les représentations en λ-termes
 du combinateur <span style="font-style:italic">Y</span>, de la condition <span style="font-style:italic">if-then-else</span>, des entiers <span style="font-style:italic">Church</span> ainsi que les opérations
-<span style="font-style:italic">plus, moins, mult</span>.<sup><a id="text4" href="#note4">1</a></sup>
+<span style="font-style:italic">plus, moins, mult</span>.<sup><a id="text3" href="#note3">1</a></sup>
 </p><pre class="verbatim">print_terme (betaNormal (ski_lambda (exec (lambda_ski (App(fact, trois)))))) ;;
 λz.λz0.z (z (z (z (z (z z0) ) ) ) ) - : unit = () 
 </pre><p>Nous avons les deux propriétés suivantes que nous ne démontrerons pas.
@@ -2366,8 +2751,8 @@ and s x y z = (x z (y z))
 </pre><p>
 La base combinatoire {<span style="font-style:italic">S</span>,<span style="font-style:italic">K</span>} suffit donc au λ-calcul. 
 Une base à un seul élément existerait même…</p>
-<!--TOC subsubsection id="sec44" La correspondance de Curry-Howard-->
-<h4 id="sec44" class="subsubsection">La correspondance de Curry-Howard</h4><!--SEC END --><p>
+<!--TOC subsubsection id="sec54" La correspondance de Curry-Howard-->
+<h4 id="sec54" class="subsubsection">La correspondance de Curry-Howard</h4><!--SEC END --><p>
 Dans un λ-calcul typé, les types des combinateurs <span style="font-style:italic">K</span> et <span style="font-style:italic">S</span> correspondent aux deux axiomes
 des systèmes hilbertiens :
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">S</span> : (φ ⇒ (χ ⇒ ψ)) ⇒ ((φ ⇒ χ) ⇒(φ ⇒ ψ)) 
@@ -2399,8 +2784,8 @@ L’inférence de type OCAML nous donne en effet
 (<span style="font-style:italic">I</span><sub>⇒</sub>) : [φ]  χ/φ ⇒ χ qui équivalait à une abstraction 
 λ <span style="font-style:italic">x</span><sup>φ</sup>.<span style="font-style:italic">y</span><sup>ψ</sup></p><p>Le modus ponens et les axiomes permettent de simuler (<span style="font-style:italic">I</span><sub>⇒</sub>) de la même façon que 
 l’abstraction du λ-calcul est simulée à l’aide des constantes <span style="font-style:italic">S</span> et <span style="font-style:italic">K</span> en logique combinatoire.</p>
-<!--TOC section id="sec45" Compilation basique vers une machine à pile-->
-<h2 id="sec45" class="section">3.2 Compilation basique vers une machine à pile</h2><!--SEC END --><p>
+<!--TOC section id="sec55" Compilation basique vers une machine à pile-->
+<h2 id="sec55" class="section">4.2 Compilation basique vers une machine à pile</h2><!--SEC END --><p>
 Nous utilisons l’implémentation ci-dessous pour la représentation des piles sous
 formes de listes mutables.
 </p><pre class="verbatim">type 'a pile = 'a list ref ;;
@@ -2452,8 +2837,8 @@ let executer code =
 # executer code ;;
 # 100- : unit = ()
 </pre>
-<!--TOC subsection id="sec46" Certification de la compilation avec le langage COQ-->
-<h3 id="sec46" class="subsection">3.2.1 Certification de la compilation avec le langage COQ</h3><!--SEC END --><p>
+<!--TOC subsection id="sec56" Certification de la compilation avec le langage COQ-->
+<h3 id="sec56" class="subsection">4.2.1 Certification de la compilation avec le langage COQ</h3><!--SEC END --><p>
 <span style="font-style:italic">Quod erat demonstrandum.</span>
 </p><div class="center">
 
@@ -2532,10 +2917,10 @@ unfold progExec at 1. simpl. fold progExec.0.50em
 rewrite IHe1.0.50em
 unfold progExec at 1. simpl. fold progExec. reflexivity.0.50em
 Qed.Theorem compile_correct: ∀ e : exp, Some ((expEval e) :: nil) = (progExec (compile e) nil).intros.rewrite (app_nil_end (compile e)).rewrite compile_correct_lemme.reflexivity.Qed.Print compile_correct.</p>
-<!--TOC section id="sec47" Compilation du LISP vers une machine abstraite-->
-<h2 id="sec47" class="section">3.3 Compilation du LISP vers une machine abstraite</h2><!--SEC END -->
-<!--TOC subsubsection id="sec48" La machine SECD-->
-<h4 id="sec48" class="subsubsection">La machine SECD</h4><!--SEC END --><p>
+<!--TOC section id="sec57" Compilation du LISP vers une machine abstraite-->
+<h2 id="sec57" class="section">4.3 Compilation du LISP vers une machine abstraite</h2><!--SEC END -->
+<!--TOC subsubsection id="sec58" La machine SECD-->
+<h4 id="sec58" class="subsubsection">La machine SECD</h4><!--SEC END --><p>
 La machine SECD inventée par Landin est une machine abstraite utilisant quatre composants:
 </p><ul class="itemize"><li class="li-itemize">
 S, la pile ou <span style="font-style:italic">stack</span> permettant de stocker les résultats intermédiaires puis le résultat final
@@ -2547,8 +2932,8 @@ Nous devons implémenter deux fonctions.</p><p>La fonction de compilation <code 
 un environnement de compilation et l’accumulateur du code compilé.
 Nous ferons travailler la fonction <code class="verb">compile</code> sur la syntaxe abstraite pour plus de facilité.</p><p>La fonction d’éxecution <code class="verb">exe s e c d</code> prend en arguments les 
 quatre composantes de la machine abstraite.</p>
-<!--TOC subsubsection id="sec49" La compilation <span style="font-style:italic">C</span>: <span style="font-style:italic">exp</span> D  <span style="font-family:monospace">code</span>-->
-<h4 id="sec49" class="subsubsection">La compilation <span style="font-style:italic">C</span>: <span style="font-style:italic">exp</span> D  <span style="font-family:monospace">code</span></h4><!--SEC END --><p>
+<!--TOC subsubsection id="sec59" La compilation <span style="font-style:italic">C</span>: <span style="font-style:italic">exp</span> D  <span style="font-family:monospace">code</span>-->
+<h4 id="sec59" class="subsubsection">La compilation <span style="font-style:italic">C</span>: <span style="font-style:italic">exp</span> D  <span style="font-family:monospace">code</span></h4><!--SEC END --><p>
 <span style="font-family:monospace">c</span> D  <span style="font-family:monospace">CONST</span>(<span style="font-style:italic">c</span>) <br>
  <span style="font-family:monospace">n</span> D  <span style="font-family:monospace">ACCESS</span>(<span style="font-style:italic">n</span>) <br>
  <span style="font-family:monospace">(+ a1 a2)</span> D  <span style="font-style:italic">C</span>(<span style="font-style:italic">a</span><sub>1</sub>); <span style="font-style:italic">C</span>(<span style="font-style:italic">a</span><sub>2</sub>); <span style="font-family:monospace">ADD</span> <br>
@@ -2557,8 +2942,8 @@ quatre composantes de la machine abstraite.</p>
  <span style="font-family:monospace">((lambda (v1...vn) body) e1...en)</span> 
 D  <span style="font-family:monospace">NIL;</span> <span style="font-style:italic">C</span>(<span style="font-style:italic">v</span><sub>1</sub>)<span style="font-family:monospace">;ARG;</span>… <span style="font-style:italic">C</span>(<span style="font-style:italic">v</span><sub><span style="font-style:italic">n</span></sub>)<span style="font-family:monospace">;ARG;CLOSURE</span>(<span style="font-style:italic">C</span>(<span style="font-style:italic">body</span>)<span style="font-family:monospace">;RTS</span>)<span style="font-family:monospace">;JSR</span> <br>
  </p>
-<!--TOC subsubsection id="sec50" La table de transition de la machine SECD-->
-<h4 id="sec50" class="subsubsection">La table de transition de la machine SECD</h4><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table border=1  style="border-spacing:0;" class="cellpadding1"><tr><td style="text-align:center;border:solid 1px;white-space:nowrap"  colspan=4><span style="font-size:small"><span style="font-weight:bold">état avant</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap"  colspan=4><span style="font-size:small"><span style="font-weight:bold">état après</span></span><span style="font-size:small"> </span></td></tr>
+<!--TOC subsubsection id="sec60" La table de transition de la machine SECD-->
+<h4 id="sec60" class="subsubsection">La table de transition de la machine SECD</h4><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table border=1  style="border-spacing:0;" class="cellpadding1"><tr><td style="text-align:center;border:solid 1px;white-space:nowrap"  colspan=4><span style="font-size:small"><span style="font-weight:bold">état avant</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap"  colspan=4><span style="font-size:small"><span style="font-weight:bold">état après</span></span><span style="font-size:small"> </span></td></tr>
 <tr><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small">  </span><span style="font-size:small"><span style="font-style:italic">S</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">E</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">C</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">D</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">S</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">E</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">C</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">D</span></span><span style="font-size:small"> </span></td></tr>
 <tr><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small">  
 </span><span style="font-size:small"><span style="font-style:italic">s</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">e</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-family:monospace">CONST</span></span><span style="font-size:small">(</span><span style="font-size:small"><span style="font-style:italic">cst</span></span><span style="font-size:small">); </span><span style="font-size:small"><span style="font-style:italic">c</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">d</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">cst</span></span><span style="font-size:small">.</span><span style="font-size:small"><span style="font-style:italic">s</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">e</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">c</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">d</span></span><span style="font-size:small"> </span></td></tr>
@@ -2579,8 +2964,8 @@ D  <span style="font-family:monospace">NIL;</span> <span style="font-style:ita
 <tr><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small">  </span><span style="font-size:small"><span style="font-style:italic">v</span></span><span style="font-size:small">.</span><span style="font-size:small"><span style="font-style:italic">s</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">e</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-family:monospace"><span style="font-style:italic">RTS</span></span></span><span style="font-size:small">;</span><span style="font-size:small"><span style="font-style:italic">c</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-family:monospace"><span style="font-style:italic">ENVEXE</span></span></span><span style="font-size:small">(</span><span style="font-size:small"><span style="font-style:italic">s</span></span><sub><span style="font-size:small">1</span></sub><span style="font-size:small">, </span><span style="font-size:small"><span style="font-style:italic">e</span></span><sub><span style="font-size:small">1</span></sub><span style="font-size:small">, </span><span style="font-size:small"><span style="font-style:italic">c</span></span><sub><span style="font-size:small">1</span></sub><span style="font-size:small">).</span><span style="font-size:small"><span style="font-style:italic">d</span></span></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">v</span></span><span style="font-size:small">.</span><span style="font-size:small"><span style="font-style:italic">s</span></span><sub><span style="font-size:small">1</span></sub></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">e</span></span><sub><span style="font-size:small">1</span></sub></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">c</span></span><sub><span style="font-size:small">1</span></sub></td><td style="text-align:center;border:solid 1px;white-space:nowrap" ><span style="font-size:small"><span style="font-style:italic">d</span></span><span style="font-size:small"> </span></td></tr>
 </table></td></tr>
 </table>
-<!--TOC subsubsection id="sec51" L’implémentation en OCAML-->
-<h4 id="sec51" class="subsubsection">L’implémentation en OCAML</h4><!--SEC END --><pre class="verbatim"><span style="font-size:small">let rec compile envc exp codesuivant  =
+<!--TOC subsubsection id="sec61" L’implémentation en OCAML-->
+<h4 id="sec61" class="subsubsection">L’implémentation en OCAML</h4><!--SEC END --><pre class="verbatim"><span style="font-size:small">let rec compile envc exp codesuivant  =
   match exp with
   | Atom (Entier n) -&gt; CONST n :: codesuivant
   | Var s -&gt; ACCESS (adresse s envc) :: codesuivant
@@ -2650,12 +3035,12 @@ let rec exe s e c d =
 </span></pre>
 <!--BEGIN NOTES chapter-->
 <hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
-<a id="note4" href="#text4">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">Ce résultat est obtenu après quelques minutes...</div></dd></dl>
+<a id="note3" href="#text3">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">Ce résultat est obtenu après quelques minutes...</div></dd></dl>
 <!--END NOTES-->
-<!--TOC chapter id="sec52" La résolution-->
-<h1 id="sec52" class="chapter">Chapitre ‍4 La résolution</h1><!--SEC END -->
-<!--TOC section id="sec53" Représentation des termes finis-->
-<h2 id="sec53" class="section">4.1 Représentation des termes finis</h2><!--SEC END --><p>
+<!--TOC chapter id="sec62" La résolution-->
+<h1 id="sec62" class="chapter">Chapitre ‍5 La résolution</h1><!--SEC END -->
+<!--TOC section id="sec63" Représentation des termes finis-->
+<h2 id="sec63" class="section">5.1 Représentation des termes finis</h2><!--SEC END --><p>
 Nous reprenons ici le très bon formalisme du livre de <span style="font-style:italic">Lalement</span> [<a href="#lalement">11</a>].</p><p>Les symboles de constante <code class="verb">true</code>, <code class="verb">158</code>, les symboles de fonctions unaires <code class="verb">not</code>, <code class="verb">+</code>,
 les symboles de fonctions binaires <code class="verb">or</code>, etc. constituent la signature Σ du langage.
 Si <span style="font-style:italic">f</span> est d’arité <span style="font-style:italic">n</span> ≥ 1, alors <span style="font-style:italic">f</span> est un symbole fonctionnel, et si <span style="font-style:italic">f</span> est d’arité 0, <span style="font-style:italic">f</span> est un symbole de constante.
@@ -2764,8 +3149,8 @@ match ltermes with
             else hd::(greffeltermes (i-1) u tl greffon)
 | [] -&gt; raise Impossible
 </pre>
-<!--TOC section id="sec54" La substitution-->
-<h2 id="sec54" class="section">4.2 La substitution</h2><!--SEC END --><p>
+<!--TOC section id="sec64" La substitution-->
+<h2 id="sec64" class="section">5.2 La substitution</h2><!--SEC END --><p>
 Une substitution est une application θ : <span style="font-style:italic">X</span> → <span style="font-style:italic">T</span><sub><span style="font-style:italic">X</span> ∪ Σ</sub> </p><p>Le domaine de substitution est l’ensemble des variables de <span style="font-style:italic">X</span> telles que θ (<span style="font-style:italic">x</span>) ≠ <span style="font-style:italic">x</span>
 On dit aussi que l’application θ est l’identité <span style="font-style:italic">presque</span> partout, i.e sauf sur une partie finie
 de <span style="font-style:italic">X</span>.
@@ -2796,10 +3181,10 @@ let rec substituer terme sigma  =
   | Func(f, []) -&gt; Func(f, []) 
   | Func(f, args) -&gt; Func(f, (map (function t -&gt; (substituer t sigma)) args))
 </pre>
-<!--TOC section id="sec55" Filtrage et réécriture-->
-<h2 id="sec55" class="section">4.3 Filtrage et réécriture</h2><!--SEC END -->
-<!--TOC subsection id="sec56" Le filtrage-->
-<h3 id="sec56" class="subsection">4.3.1 Le filtrage</h3><!--SEC END --><p>
+<!--TOC section id="sec65" Filtrage et réécriture-->
+<h2 id="sec65" class="section">5.3 Filtrage et réécriture</h2><!--SEC END -->
+<!--TOC subsection id="sec66" Le filtrage-->
+<h3 id="sec66" class="subsection">5.3.1 Le filtrage</h3><!--SEC END --><p>
 Soient deux termes <span style="font-style:italic">M</span> et <span style="font-style:italic">M</span>′ appartenant à <span style="font-style:italic">T</span><sub><span style="font-style:italic">X</span></sub>, le filtrage consiste à trouver une substitution σ
 telle que σ <span style="font-style:italic">M</span> = <span style="font-style:italic">M</span>′. Autrement dit, il faut trouver les valeurs à donner aux variables de <span style="font-style:italic">M</span> pour que celui-ci
 soit égal <span style="font-style:italic">M</span>′.</p><p>On appelle <span style="font-style:italic">M</span> le <span style="font-style:italic">pattern</span> et <span style="font-style:italic">M</span>′ l’<span style="font-style:italic">instance</span>.
@@ -2840,8 +3225,8 @@ y &lt;-&gt; (h x )
 x &lt;-&gt;  a 
 - : unit = ()
 </pre>
-<!--TOC subsection id="sec57" La réécriture et l’arithmétique de Peano-->
-<h3 id="sec57" class="subsection">4.3.2 La réécriture et l’arithmétique de Peano</h3><!--SEC END --><p>
+<!--TOC subsection id="sec67" La réécriture et l’arithmétique de Peano-->
+<h3 id="sec67" class="subsection">5.3.2 La réécriture et l’arithmétique de Peano</h3><!--SEC END --><p>
 Le mécanisme de réécriture, très simple à comprendre conceptuellement, est un peu plus difficile
 à formaliser proprement.</p><p>Un système de <span style="font-style:italic">réécriture</span> est composé d’une signature Σ et d’un ensemble de règles
 <span style="color:red"><span style="font-style:italic">R</span></span> représenté par des couples (<span style="font-style:italic">P</span>,<span style="font-style:italic">Q</span>) ∈ <span style="font-style:italic">T</span><sub>Σ</sub>[<span style="font-style:italic">X</span>] × <span style="font-style:italic">T</span><sub>Σ</sub>[<span style="font-style:italic">X</span>].</p><p>Les couples (<span style="font-style:italic">P</span>,<span style="font-style:italic">Q</span>) sont notés <span style="font-style:italic">P</span> —→ <span style="font-style:italic">Q</span></p><p>Si nous avons un filtre σ tel que σ <span style="font-style:italic">P</span> = <span style="font-style:italic">M</span>|<sub><span style="font-style:italic">u</span></sub>, alors le terme <span style="font-style:italic">M</span> se 
@@ -2943,8 +3328,8 @@ let seize = Func("*", [quatre;quatre]) ;;
 rewrite_bourrin seize peano ;;    
  
 </pre>
-<!--TOC section id="sec58" L’unification des termes-->
-<h2 id="sec58" class="section">4.4 L’unification des termes</h2><!--SEC END --><p>
+<!--TOC section id="sec68" L’unification des termes-->
+<h2 id="sec68" class="section">5.4 L’unification des termes</h2><!--SEC END --><p>
 Un interprète PROLOG peut être considéré comme une machine à unifier.</p><p>Définissons d’abord l’opération d’unification de deux termes.
 Un unificateur de deux termes <span style="font-style:italic">t</span><sub>1</sub> et <span style="font-style:italic">t</span><sub>2</sub> est une substitution σ telle que σ <span style="font-style:italic">t</span><sub>1</sub> = σ <span style="font-style:italic">t</span><sub>2</sub></p><p>Soit <span style="font-style:italic">E</span>, un système d’équations, on peut définir des transformations <span style="font-style:italic">E</span><sub>1</sub> → <sub><span style="font-style:italic">t</span></sub> <span style="font-style:italic">E</span><sub>2</sub> 
 entre systèmes d’équations. On note le symbole ⊥ qui représente un système sans solution.
@@ -3007,8 +3392,8 @@ Ce bout de code vient du site de l’université de Cornell.</p><p>Voici un autr
     | _ -&gt; raise Impossible
   in unificateur t1 t2 
 </pre>
-<!--TOC section id="sec59" Un mini PROLOG-->
-<h2 id="sec59" class="section">4.5 Un mini PROLOG</h2><!--SEC END --><pre class="verbatim">let question() =
+<!--TOC section id="sec69" Un mini PROLOG-->
+<h2 id="sec69" class="section">5.5 Un mini PROLOG</h2><!--SEC END --><pre class="verbatim">let question() =
  begin
    print_string "\n autre solution 1/2 (1=oui, 2=non) ? :" ;
    if read_int()= 1  then false else true 
@@ -3036,10 +3421,10 @@ let prolog but lregles =
  prouveli [but] lvar_but
   
 </pre>
-<!--TOC section id="sec60" Quelques exemples de programmation en PROLOG-->
-<h2 id="sec60" class="section">4.6 Quelques exemples de programmation en PROLOG</h2><!--SEC END -->
-<!--TOC subsection id="sec61" Les entiers naturels-->
-<h3 id="sec61" class="subsection">4.6.1 Les entiers naturels</h3><!--SEC END --><p>
+<!--TOC section id="sec70" Quelques exemples de programmation en PROLOG-->
+<h2 id="sec70" class="section">5.6 Quelques exemples de programmation en PROLOG</h2><!--SEC END -->
+<!--TOC subsection id="sec71" Les entiers naturels-->
+<h3 id="sec71" class="subsection">5.6.1 Les entiers naturels</h3><!--SEC END --><p>
 Définissons en PROLOG le type des entiers naturels avec la fonction <code class="verb">nat</code> d’arité 1, la fonction <code class="verb">s</code>
 d’arité 1 et la constante <code class="verb">0</code>.
 Nous avons ainsi les 2 règles:
@@ -3065,8 +3450,8 @@ vincent@HP-Notebook:~/workspace vscodium$ ./prolog.byte
  autre solution 1/2 (1=oui, 2=non) ? :2
 vincent@HP-Notebook:~/workspace vscodium$ 
 </pre>
-<!--TOC subsection id="sec62" Les additions de Peano-->
-<h3 id="sec62" class="subsection">4.6.2 Les additions de Peano</h3><!--SEC END --><p>
+<!--TOC subsection id="sec72" Les additions de Peano-->
+<h3 id="sec72" class="subsection">5.6.2 Les additions de Peano</h3><!--SEC END --><p>
 Nous pouvons modéliser les additions avec l’arithmétique de Peano en utilisant les deux propositions suivantes:
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:left;white-space:nowrap" >	<span style="font-style:italic">add</span>(<span style="font-style:italic">x</span>, 0, <span style="font-style:italic">x</span>) ⇐ </td></tr>
 <tr><td style="text-align:left;white-space:nowrap" >	<span style="font-style:italic">add</span>(<span style="font-style:italic">x</span>, <span style="font-style:italic">s</span>(<span style="font-style:italic">y</span>), <span style="font-style:italic">s</span>(<span style="font-style:italic">z</span>)) ⇐  <span style="font-style:italic">add</span>(<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>,<span style="font-style:italic">z</span>)
@@ -3093,8 +3478,35 @@ vincent@HP-Notebook:~/vsc$ ./prolog.byte
  autre solution 1/2 (1=oui, 2=non) ? :1
 vincent@HP-Notebook:~/vsc$ 
 </pre>
-<!--TOC subsection id="sec63" La base généalogique-->
-<h3 id="sec63" class="subsection">4.6.3 La base généalogique</h3><!--SEC END --><pre class="verbatim">(* généalogie *)
+<!--TOC subsection id="sec73" Programmation "logique" en COQ-->
+<h3 id="sec73" class="subsection">5.6.3 Programmation "logique" en COQ</h3><!--SEC END --><p>
+L’utilisation des types dépendants en COQ nous permet également de définir
+les relations PROLOG.
+
+	
+Inductive entier :=| O: entier| S: entier → entier.Fixpoint somme (e1 e2:entier):entier :=1.00em
+match e1 with1.00em
+| O ⇒ e21.00em
+| S e1 ⇒ S (somme e1 e2)1.00em
+end.Lemma somme_O : ∀ e:entier, somme e O = e.Proof.4.00em
+intro e.4.00em
+induction e.4.00em
+simpl. reflexivity.4.00em
+simpl. rewrite IHe. reflexivity.Qed.Lemma somme_S : ∀ (e1 e2:entier), somme e1 (S e2)= S (somme e1 e2).Proof.4.00em
+intros.4.00em
+induction e1. simpl. reflexivity.4.00em
+simpl.4.00em
+rewrite IHe1. reflexivity.Qed.Compute somme (S O) (S O).Inductive sommeProlog : entier → entier → entier → Prop :=| SommeO: ∀ x, sommeProlog x O x| SommeS: ∀ x y z, sommeProlog x y z → sommeProlog x (S y) (S z).Example un_plus_un : sommeProlog (S O) (S O) (S (S O)).Proof.apply SommeS. apply SommeO.Defined.Theorem somme_deux_entiers : ∀ e1 e2, sommeProlog e1 e2 (somme e1 e2).Proof.4.00em
+intros e1 e2.4.00em
+induction e2.4.00em
+rewrite somme_O.4.00em
+apply SommeO.4.00em
+rewrite somme_S.4.00em
+apply SommeS.4.00em
+exact IHe2.Qed.4.00em
+</p>
+<!--TOC subsection id="sec74" La base généalogique-->
+<h3 id="sec74" class="subsection">5.6.4 La base généalogique</h3><!--SEC END --><pre class="verbatim">(* généalogie *)
 let grecs = [ [Func("mere", [Func("gaia",[]);Func("chronos",[]) ] ) ] ;
     [Func("mere", [Func("rhea",[]);Func("zeus",[]) ] ) ] ;
     [Func("mere", [Func("rhea",[]);Func("hades",[]) ] ) ] ;
@@ -3120,10 +3532,10 @@ vincent@HP-Notebook:~/vsc$ ./prolog.byte
  x  &lt;-&gt;  helene 
  autre solution 1/2 (1=oui, 2=non) ? :1
 </pre>
-<!--TOC section id="sec64" L’algorithme de complétion de Knuth-Bendix-->
-<h2 id="sec64" class="section">4.7 L’algorithme de complétion de Knuth-Bendix</h2><!--SEC END -->
-<!--TOC subsection id="sec65" Confluence et paires critiques-->
-<h3 id="sec65" class="subsection">4.7.1 Confluence et paires critiques</h3><!--SEC END --><p>
+<!--TOC section id="sec75" L’algorithme de complétion de Knuth-Bendix-->
+<h2 id="sec75" class="section">5.7 L’algorithme de complétion de Knuth-Bendix</h2><!--SEC END -->
+<!--TOC subsection id="sec76" Confluence et paires critiques-->
+<h3 id="sec76" class="subsection">5.7.1 Confluence et paires critiques</h3><!--SEC END --><p>
 Le lemme de Newman nous dit qu’un système de réécriture noethérien (qui termine) est confluent 
 ssi il est localement confluent.</p><p>La situation générale se présente comme cela:
 </p><div class="center">
@@ -3185,19 +3597,24 @@ let rec cp (l1,r1) (l2,r2) =
   let (oc, sigma) = superpose l1 l2 in
   ((substituer  r1 sigma), (greffe oc (substituer l1 sigma) (substituer r2 sigma))) ;;  
 </pre>
-<!--TOC subsection id="sec66" Terminaison-->
-<h3 id="sec66" class="subsection">4.7.2 Terminaison</h3><!--SEC END -->
-<!--TOC subsubsection id="sec67" Indécidabilité de la terminaison dans le cas "général"-->
-<h4 id="sec67" class="subsubsection">Indécidabilité de la terminaison dans le cas "général"</h4><!--SEC END --><p>
+<!--TOC subsection id="sec77" Terminaison-->
+<h3 id="sec77" class="subsection">5.7.2 Terminaison</h3><!--SEC END -->
+<!--TOC subsubsection id="sec78" Indécidabilité de la terminaison dans le cas "général"-->
+<h4 id="sec78" class="subsubsection">Indécidabilité de la terminaison dans le cas "général"</h4><!--SEC END --><p>
 Soient <span style="font-style:italic">a</span><sub>1</sub>,<span style="font-style:italic">a</span><sub>2</sub> ,<span style="font-style:italic">a</span><sub>3</sub> , … une numérotation de tous les algorithmes.
 On définit la fonction suivante : <span style="font-style:italic">diag</span>(<span style="font-style:italic">i</span>) ≡ si <span style="font-style:italic">a</span><sub><span style="font-style:italic">i</span></sub> termine alors <code class="verb">boucler</code>, sinon <code class="verb">s'arrêter</code> <br>
 
 Pour tout <span style="font-style:italic">i</span>, <span style="font-style:italic">diag</span>(<span style="font-style:italic">i</span>) termine ssi <span style="font-style:italic">a</span><sub><span style="font-style:italic">i</span></sub> ne termine pas.
 Mais il y a un <span style="font-style:italic">a</span><sub><span style="font-style:italic">j</span></sub> tel que <span style="font-style:italic">diag</span> = <span style="font-style:italic">a</span><sub><span style="font-style:italic">j</span></sub> . Nous avons donc
 <span style="font-style:italic">diag</span>(<span style="font-style:italic">j</span>) termine ssi <span style="font-style:italic">a</span><sub><span style="font-style:italic">j</span></sub> ne termine pas, ce qui donne
-<span style="font-style:italic">a</span><sub><span style="font-style:italic">j</span></sub> termine ssi <span style="font-style:italic">a</span><sub><span style="font-style:italic">j</span></sub> ne termine pas.</p>
-<!--TOC subsubsection id="sec68" Système de réécriture noethérien-->
-<h4 id="sec68" class="subsubsection">Système de réécriture noethérien</h4><!--SEC END --><p>
+<span style="font-style:italic">a</span><sub><span style="font-style:italic">j</span></sub> termine ssi <span style="font-style:italic">a</span><sub><span style="font-style:italic">j</span></sub> ne termine pas.</p><p>De manière peut-être plus formelle, en mettant en évidence la diagonalisation négative de Cantor :</p><p>Soit <span style="font-style:italic">f</span>(<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>) la fonction de terminaison de l’algorithme <span style="font-style:italic">a</span><sub><span style="font-style:italic">x</span></sub> sur l’entrée <span style="font-style:italic">y</span>.
+On peut définir <span style="font-style:italic">f</span>(<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>) comme <span style="font-style:italic">f</span>(<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>) = 1 si <span style="font-style:italic">a</span><sub><span style="font-style:italic">x</span></sub> termine sur <span style="font-style:italic">y</span> et 0 sinon.
+Soit <span style="font-style:italic">g</span> telle que <span style="font-style:italic">g</span>(0) = 1 et <span style="font-style:italic">g</span>(1) = 0 
+Considérons <span style="font-style:italic">h</span>(<span style="font-style:italic">i</span>) = <span style="font-style:italic">g</span>(<span style="font-style:italic">f</span>(<span style="font-style:italic">i</span>,<span style="font-style:italic">i</span>)).
+Alors on a <span style="font-style:italic">f</span>(<span style="font-style:italic">a</span>,<span style="font-style:italic">a</span>) = <span style="font-style:italic">h</span>(<span style="font-style:italic">a</span>) = <span style="font-style:italic">g</span>(<span style="font-style:italic">f</span>(<span style="font-style:italic">a</span>,<span style="font-style:italic">a</span>)) ≠ <span style="font-style:italic">f</span>(<span style="font-style:italic">a</span>,<span style="font-style:italic">a</span>) car <span style="font-style:italic">g</span> n’admet pas de point fixe.
+C’est-à-dire que l’on ne peut décider si l’algorithme <span style="font-style:italic">a</span><sub><span style="font-style:italic">a</span></sub> termine sur lui-même. </p>
+<!--TOC subsubsection id="sec79" Système de réécriture noethérien-->
+<h4 id="sec79" class="subsubsection">Système de réécriture noethérien</h4><!--SEC END --><p>
 Un système de réécriture est noethérien si et seulement s’il existe un ordre bien fondé
 ≻ sur l’ensemble des termes tel que
 </p><ul class="itemize"><li class="li-itemize">
@@ -3210,8 +3627,8 @@ En pratique, on utilise une fonction externe <span style="font-style:italic">h</
 d’occurrences de <span style="font-style:italic">x</span> dans <span style="font-style:italic">t</span>. On définit un ordre strict ≻ sur <span style="font-style:italic">T</span>[<span style="font-style:italic">X</span>] par :
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">s</span> &gt; <span style="font-style:italic">t</span> ⇔  |<span style="font-style:italic">s</span>| &gt; |<span style="font-style:italic">t</span>| <span style="font-style:italic">et</span>  ∀ <span style="font-style:italic">x</span> ∈ <span style="font-style:italic">X</span>, |<span style="font-style:italic">s</span>|<sub><span style="font-style:italic">x</span></sub> ≥ |<span style="font-style:italic">t</span>|<sub><span style="font-style:italic">x</span></sub> </td></tr>
 </table>
-<!--TOC subsection id="sec69" Complétion de Knuth-Bendix-->
-<h3 id="sec69" class="subsection">4.7.3 Complétion de Knuth-Bendix</h3><!--SEC END --><p>
+<!--TOC subsection id="sec80" Complétion de Knuth-Bendix-->
+<h3 id="sec80" class="subsection">5.7.3 Complétion de Knuth-Bendix</h3><!--SEC END --><p>
 Nous pourrons ici nous référer au livre très didactique <span style="font-style:italic">Term Rewriting and All That</span>[<a href="#rewriting">6</a>]
 </p><pre class="verbatim">let rec super_liste l1 l2 occ =
  match occ with
@@ -3254,10 +3671,10 @@ let rec superpose_liste_aux l1 l2 occ = (* rend liste des occurences et substitu
  with Impossible -&gt; []
 in superpose_liste_aux l1 l2 (occurences l1) ;;
 </pre>
-<!--TOC chapter id="sec70" La calculabilité-->
-<h1 id="sec70" class="chapter">Chapitre ‍5 La calculabilité</h1><!--SEC END -->
-<!--TOC section id="sec71" Les fonctions récursives-->
-<h2 id="sec71" class="section">5.1 Les fonctions récursives</h2><!--SEC END --><p>
+<!--TOC chapter id="sec81" Calculabilité et complexité-->
+<h1 id="sec81" class="chapter">Chapitre ‍6 Calculabilité et complexité</h1><!--SEC END -->
+<!--TOC section id="sec82" Les fonctions récursives-->
+<h2 id="sec82" class="section">6.1 Les fonctions récursives</h2><!--SEC END --><p>
 Commençons par définir les fonctions récursives <span style="font-style:italic">primitives</span> telles que formalisées par
 Gödel.</p><p>Un ensemble <span style="font-style:italic">E</span> de fonctions numériques de ℕ<sup><span style="font-style:italic">p</span></sup> dans ℕ est dit :
 </p><ul class="itemize"><li class="li-itemize">
@@ -3352,8 +3769,8 @@ pour tout <span style="font-style:italic">g</span> ∈ <span style="font-style:i
 alors <span style="font-style:italic">f</span>∈ <span style="font-style:italic">E</span>. On notera <span style="font-style:italic">f</span> =µ <span style="font-style:italic">p</span> [<span style="font-style:italic">g</span>(.,<span style="font-style:italic">p</span>)=0].</p><p>Les <span style="font-style:italic">fonctions récursives</span> sont les éléments du plus petit ensemble de fonctions
 numériques contenant les fonctions de base et clos par composition, récursion primitive et 
 minimisation totale.</p>
-<!--TOC section id="sec72" La machine de Turing-->
-<h2 id="sec72" class="section">5.2 La machine de Turing</h2><!--SEC END --><p>
+<!--TOC section id="sec83" La machine de Turing-->
+<h2 id="sec83" class="section">6.2 La machine de Turing</h2><!--SEC END --><p>
 Une machine de Turing est un automate à  état (<span style="font-style:italic">state machine</span>) qui a la
 capacité de lire puis d’enregistrer un caractère sur une bande de longueur
 infinie. </p><p>La machine change d’état sur la base de trois éléments: l’état courant,
@@ -3476,8 +3893,8 @@ etat:q2  position:2  lire:X  bande:   &lt;XXXX
 etat:q2  position:1  lire:&lt;  bande:   &lt;XXXX  
 etat:qf  position:0  lire:   bande:   nonXXXX  
 </pre>
-<!--TOC section id="sec73" La thèse de Church-->
-<h2 id="sec73" class="section">5.3 La thèse de Church</h2><!--SEC END --><div class="theorem"><span style="font-weight:bold">Théorème ‍5</span> <em>
+<!--TOC section id="sec84" La thèse de Church-->
+<h2 id="sec84" class="section">6.3 La thèse de Church</h2><!--SEC END --><div class="theorem"><span style="font-weight:bold">Théorème ‍5</span> <em>
 	Thèse de Church: toute fonction effectivement calculable est récursive.
 </em></div><div class="theorem"><span style="font-weight:bold">Théorème ‍6</span> <em>
 	Thèse forte de Church: si une fonction </em><span style="font-style:italic">f</span><em> est calculable par un algorithme, 
@@ -3487,10 +3904,236 @@ etat:qf  position:0  lire:   bande:   nonXXXX
 Pour </em><span style="font-style:italic">f</span>:ℕ<sup><span style="font-style:italic">p</span></sup> → ℕ<em>, les propriétés </em>(<span style="font-style:italic">i</span>) <span style="font-style:italic">f</span><em> est </em>λ<em>-définissable et 
 </em>(<span style="font-style:italic">ii</span>) <span style="font-style:italic">f</span><em> est récursive sont équivalentes.
 </em></div>
-<!--TOC chapter id="sec74" Annexes / Divers-->
-<h1 id="sec74" class="chapter">Chapitre ‍6 Annexes / Divers</h1><!--SEC END -->
-<!--TOC section id="sec75" Quelques fonctions sur les listes-->
-<h2 id="sec75" class="section">6.1 Quelques fonctions sur les listes</h2><!--SEC END --><table border=1  style="border-spacing:0;" class="cellpadding1"><tr><td style="text-align:left;border:solid 1px;white-space:nowrap" ><span style="font-size:small">SCHEME</span></td><td style="text-align:left;border:solid 1px;white-space:nowrap" ><span style="font-size:small">OCAML </span></td></tr>
+<!--TOC section id="sec85" Complexité-->
+<h2 id="sec85" class="section">6.4 Complexité</h2><!--SEC END -->
+<!--TOC subsection id="sec86" Théorème de Cook-->
+<h3 id="sec86" class="subsection">6.4.1 Théorème de Cook</h3><!--SEC END --><div class="theorem"><span style="font-weight:bold">Définition ‍7</span> <em>
+	Un problème est appelé NP-complet s’il vérifie les deux propriétés suivantes :
+	</em><ol class="enumerate" type=1><li class="li-enumerate"><em>
+		</em><em>Toute solution pourra être vérifiée en temps polynomial
+		</em></li><li class="li-enumerate"><em>Tous les problèmes de la classe NP se ramènent à celui-ci via une réduction polynomiale 
+	</em></li></ol><em>
+</em></div><p>
+L’algorithme SAT est significatif car il a été prouvé comme étant <span style="font-style:italic">NP-complet</span>.
+</p><div class="theorem"><span style="font-weight:bold">Définition ‍8</span> <em>
+	SAT (satisfaisabilité en logique propositionnelle). <br>
+	Instance : une formule conjonctive </em>φ ∈ <span style="font-style:italic">Prop</span>[<span style="font-style:italic">X</span>] <em> <br>
+	Requête : </em>φ<em> est-elle satisfaisable ? 
+</em></div><div class="theorem"><span style="font-weight:bold">Théorème ‍8</span> <em>
+	(COOK, 1971) - Le problème SAT est NP-complet.
+</em></div><div class="theorem"><span style="font-weight:bold">Théorème ‍9</span> <em>
+Conjecture : </em><span style="font-style:italic">P</span>≠ <span style="font-style:italic">NP</span><em>
+</em></div>
+<!--TOC subsection id="sec87" Implémentation de l’algorithme SAT-->
+<h3 id="sec87" class="subsection">6.4.2 Implémentation de l’algorithme SAT</h3><!--SEC END --><p>
+Pour des raisons d’efficacité, nous utilisons ici un principe de l’algorithme DPLL qui est la <span style="font-style:italic">propagation unitaire</span>.
+L’algorithme recherche des solutions en parcourant l’arbre de recherche en profondeur. Cela s’implémente de manière
+intuitive avec une fonction récursive. L’algorithme s’arrête dès qu’une solution a été trouvée.</p><pre class="verbatim">let sat c : (bool*env) =
+  let rec sat_aux c liste_litt e : (bool*env)  = 
+    let c' = propag_unitaire c in
+    let e' = extend_env c' e in
+      if eval_cnf e' c' then (true,e') 
+      else 
+        let liste_litt' = (diff (recup_litteral c') (find_units_cnf2 c')) in
+        match liste_litt' with 
+         | hd::tl -&gt; let (b1, e1) = sat_aux ([P hd]::c') tl ((hd,true)::e') in
+                if b1 then (b1,e1) 
+                else sat_aux ([N hd]::c') tl ((hd, false)::e')
+         | [] -&gt; (false, [])
+   in sat_aux c (diff (recup_litteral c) (find_units_cnf2 c)) (init_env c) ;;
+</pre><p>Voici la fonction de progation unitaire.
+</p><pre class="verbatim">let rec propag_unitaire c =
+  let units = find_units_cnf c 
+  in 
+  let rec propag_unitaire_aux c units =
+  match units with 
+    | [] -&gt; c
+    | hd::tl -&gt; propag_unitaire_aux (map (retire_unit hd) c) tl 
+in  let res = propag_unitaire_aux c units
+in if c=res then (filter (fun x -&gt; not (x=[])) c) else propag_unitaire res ;;
+(* on propage jusqu'à l'obtention d'un point fixe *)
+</pre><p>
+	
+Nous travaillons ici exclusivement sur des clauses normales conjonctives.
+Une clause normale conjonctive est une une conjonction de plusieurs disjonctions de plusieurs littéraux.
+Un littéral est un atome ou la négation d’un atome.
+</p><pre class="verbatim">type atome =  string ;;
+type lit =  P of atome | N of atome ;;
+type disj = lit list ;; 
+type cnf = disj list ;;
+</pre>
+<!--TOC subsection id="sec88" Sudoku - SAT encoding-->
+<h3 id="sec88" class="subsection">6.4.3 Sudoku - SAT encoding</h3><!--SEC END --><p>
+L’algorithme permettant de résoudre les sudokus peut être réalisé par l’algorithme SAT en modélisant
+les contraintes du sodoku sous la forme de clauses propositionnelles. Une variable <span style="font-style:italic">s</span><sub><span style="font-style:italic">xyz</span></sub> représente que la
+case de la ligne <span style="font-style:italic">x</span> et colonne <span style="font-style:italic">y</span> porte le nombre <span style="font-style:italic">z</span>.
+</p><ol class="enumerate" type=1><li class="li-enumerate">
+	Contrainte <span style="font-style:italic">C</span><sub>1</sub>. Il y a au moins un nombre pour chaque case 
+	<table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">C</span><sub>1</sub> ≜ </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">x</span>=1</td></tr>
+</table></td><td class="dcell">  </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">y</span>=1</td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∨</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">z</span>=1</td></tr>
+</table></td><td class="dcell"> <span style="font-style:italic">s</span><sub><span style="font-style:italic">xyz</span></sub></td></tr>
+</table><p>	</p></li><li class="li-enumerate">Contrainte <span style="font-style:italic">C</span><sub>2</sub>. Chaque nombre apparait au plus une fois dans une ligne
+	<table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">C</span><sub>2</sub> ≜ </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">y</span>=1</td></tr>
+</table></td><td class="dcell">  </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">z</span>=1</td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">8</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">x</span>=1</td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">i</span>=<span style="font-style:italic">x</span>+1</td></tr>
+</table></td><td class="dcell">  ( ¬ <span style="font-style:italic">s</span><sub><span style="font-style:italic">xyz</span></sub> ∨ ¬ <span style="font-style:italic">s</span><sub><span style="font-style:italic">iyz</span></sub> ) </td></tr>
+</table><p>	</p></li><li class="li-enumerate">Contrainte <span style="font-style:italic">C</span><sub>3</sub>. Chaque nombre apparait au plus une fois dans une colonne
+	<table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"> <span style="font-style:italic">C</span><sub>3</sub> ≜ </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">y</span>=1</td></tr>
+</table></td><td class="dcell">  </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">z</span>=1</td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">8</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">y</span>=1</td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">i</span>=<span style="font-style:italic">y</span>+1</td></tr>
+</table></td><td class="dcell">  ( ¬ <span style="font-style:italic">s</span><sub><span style="font-style:italic">xyz</span></sub> ∨ ¬ <span style="font-style:italic">s</span><sub><span style="font-style:italic">xiz</span></sub> ) </td></tr>
+</table><p>	</p></li><li class="li-enumerate">Contraintes <span style="font-style:italic">C</span><sub>1</sub> et <span style="font-style:italic">C</span><sub>5</sub>. Chaque nombre apparait au plus une fois dans une sous-grille 3x3
+	<table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"> <span style="font-style:italic">C</span><sub>4</sub> ≜ </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">z</span>=1</td></tr>
+</table></td><td class="dcell">  </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">2</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">i</span>=0</td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">3</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">x</span>=1</td></tr>
+</table></td><td class="dcell">
+	 </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">3</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">y</span>=1</td></tr>
+</table></td><td class="dcell">  </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">3</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">k</span>=<span style="font-style:italic">y</span>+1</td></tr>
+</table></td><td class="dcell">  ( ¬ <span style="font-style:italic">s</span><sub>(3<span style="font-style:italic">i</span>+<span style="font-style:italic">x</span>)(3<span style="font-style:italic">j</span>+<span style="font-style:italic">y</span>)<span style="font-style:italic">z</span></sub> ∨ ¬ <span style="font-style:italic">s</span><sub>(3<span style="font-style:italic">i</span>+<span style="font-style:italic">x</span>)(3<span style="font-style:italic">j</span>+<span style="font-style:italic">k</span>)<span style="font-style:italic">z</span></sub> ) </td></tr>
+</table><p>	</p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"> <span style="font-style:italic">C</span><sub>5</sub> ≜ </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">9</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">z</span>=1</td></tr>
+</table></td><td class="dcell">  </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">2</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">i</span>=0</td></tr>
+</table></td><td class="dcell"> </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">3</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">x</span>=1</td></tr>
+</table></td><td class="dcell">
+	 </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">3</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">y</span>=1</td></tr>
+</table></td><td class="dcell">  </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">3</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">k</span>=<span style="font-style:italic">x</span>+1</td></tr>
+</table></td><td class="dcell">  </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">3</td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∧</span></td></tr>
+<tr><td class="dcell" style="text-align:center"><span style="font-style:italic">l</span>=1</td></tr>
+</table></td><td class="dcell">  ( ¬ <span style="font-style:italic">s</span><sub>(3<span style="font-style:italic">i</span>+<span style="font-style:italic">x</span>)(3<span style="font-style:italic">j</span>+<span style="font-style:italic">y</span>)<span style="font-style:italic">z</span></sub> ∨ ¬ <span style="font-style:italic">s</span><sub>(3<span style="font-style:italic">i</span>+<span style="font-style:italic">k</span>)(3<span style="font-style:italic">j</span>+<span style="font-style:italic">l</span>)<span style="font-style:italic">z</span></sub> ) </td></tr>
+</table></li></ol><pre class="verbatim"><span style="font-size:xx-small">let produce_C1 =
+  print_string "let c1 = [";
+  for x=1 to 9 do
+    for y=1 to 9 do
+      print_string "[" ;
+      for z=1 to 9 do
+        print_string ("P \"x"  ^ string_of_int x ^ string_of_int y ^ string_of_int z ^ (if z&lt;&gt;9 then "\"; " else "\"")  )
+      done ;
+      print_string ("]" ^ (if (x=9 &amp;&amp; y=9)  then "" else ";") ^ "\n")  ;
+    done
+  done ;
+  print_string "]\n";
+;;
+
+(* C2 Each number appears at most once in each column *)
+let produce_C2 =
+  print_string "let c2 = [";
+  for y=1 to 9 do
+    for z=1 to 9 do
+      for x=1 to 8 do
+        for i=(x+1) to 9 do
+          print_string ("[ N \"x" ^ string_of_int x ^ string_of_int y ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int i ^ string_of_int y ^ string_of_int z  ^ "\"];\n ")
+        done
+      done
+    done
+  done ;
+  print_string "]\n" 
+;;
+
+(* C3 Each number appears at most once in each column *)
+let produce_C3 =
+  print_string "let c3 = [";
+  for x=1 to 9 do
+    for z=1 to 9 do
+      for y=1 to 8 do
+        for i=(y+1) to 9 do
+          print_string ("[ N \"x" ^ string_of_int x ^ string_of_int y ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int x ^ string_of_int i ^ string_of_int z  ^ "\"];\n ")
+        done
+      done
+    done
+  done ;
+  print_string "]\n" 
+;;
+
+(* C4 Each number appears at most once in each 3x3 sub-grid *)
+let produce_C4 =
+  print_string "let c4 = [";
+  for z=1 to 9 do
+    for i=0 to 2 do
+      for j=0 to 2 do
+        for x=1 to 3 do
+          for y=1 to 3 do
+            for k=(y+1) to 3 do
+          print_string ("[ N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+y) ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+k) ^ string_of_int z  ^ "\"];\n ")
+         done
+       done
+     done
+   done 
+  done
+done;
+  print_string "]\n" 
+;;
+let produce_C5 =
+  print_string "let c5 = [";
+  for z=1 to 9 do
+    for i=0 to 2 do
+      for j=0 to 2 do
+        for x=1 to 3 do
+          for y=1 to 3 do
+            for k=(x+1) to 3 do
+              for l=1 to 3 do
+          print_string ("[ N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+y) ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int (3*i+k) ^ string_of_int (3*j+l) ^ string_of_int z  ^ "\"];\n ")
+         done
+       done
+     done
+   done 
+  done
+done
+done; print_string "]\n" 
+;;
+</span></pre>
+<!--TOC chapter id="sec89" Annexes / Divers-->
+<h1 id="sec89" class="chapter">Chapitre ‍7 Annexes / Divers</h1><!--SEC END -->
+<!--TOC section id="sec90" Quelques fonctions sur les listes-->
+<h2 id="sec90" class="section">7.1 Quelques fonctions sur les listes</h2><!--SEC END --><table border=1  style="border-spacing:0;" class="cellpadding1"><tr><td style="text-align:left;border:solid 1px;white-space:nowrap" ><span style="font-size:small">SCHEME</span></td><td style="text-align:left;border:solid 1px;white-space:nowrap" ><span style="font-size:small">OCAML </span></td></tr>
 <tr><td style="text-align:left;border:solid 1px;white-space:nowrap" ><div class="minipage"><span style="font-size:small">
 </span><pre class="verbatim"><span style="font-size:small">
 (define (somme l)
@@ -3559,8 +4202,8 @@ let rec foldleft f acc l =
 </span></pre><span style="font-size:small">
 </span></div><span style="font-size:small">  </span></td></tr>
 </table>
-<!--TOC section id="sec76" Les listes mutables-->
-<h2 id="sec76" class="section">6.2 Les listes mutables</h2><!--SEC END --><p>En SCHEME, nous avons les fonctions <code class="verb">set-car!</code> et <code class="verb">set-cdr!</code> qui nous permettent de modifier physiquement
+<!--TOC section id="sec91" Les listes mutables-->
+<h2 id="sec91" class="section">7.2 Les listes mutables</h2><!--SEC END --><p>En SCHEME, nous avons les fonctions <code class="verb">set-car!</code> et <code class="verb">set-cdr!</code> qui nous permettent de modifier physiquement
 le car et le cdr d’un doublet.
 Nous pouvons par exemple définir la liste circulaire <code class="verb">(a b c a b c ...)</code>
 </p><pre class="verbatim">(define maliste (list 'a 'b 'c))
@@ -3608,8 +4251,8 @@ Cons ({contents = 1},
                 ...
                 
 </pre>
-<!--TOC section id="sec77" Les listes infinies ou <span style="font-style:italic">streams</span>-->
-<h2 id="sec77" class="section">6.3 Les listes infinies ou <span style="font-style:italic">streams</span></h2><!--SEC END --><p>	
+<!--TOC section id="sec92" Les listes infinies ou <span style="font-style:italic">streams</span>-->
+<h2 id="sec92" class="section">7.3 Les listes infinies ou <span style="font-style:italic">streams</span></h2><!--SEC END --><p>	
 Les <span style="font-style:italic">streams</span> sont des listes infinies.</p><p>Pour pouvoir les représenter, nous utilisons le fait que le corps d’une lambda n’est pas évalué, 
 comme nous l’avons vu en λ-calcul avec la
 stratégie de β-réduction faible.
@@ -3676,8 +4319,8 @@ let racine2_10000 = take 10000 racine2stream  (* environ 10 secondes à chaque a
 let racine2_10000_lazy = lazy (take 10000 racine2stream) ;;
 let racine2_force = force racine2_10000_lazy ;; (* uniquement long au 1er appel *)
 </pre>
-<!--TOC section id="sec78" Le module Graphics d’OCAML, les fractales-->
-<h2 id="sec78" class="section">6.4 Le module Graphics d’OCAML, les fractales</h2><!--SEC END --><p>Nous allons ici présenter tres brievement le module Graphics.
+<!--TOC section id="sec93" Le module Graphics d’OCAML, les fractales-->
+<h2 id="sec93" class="section">7.4 Le module Graphics d’OCAML, les fractales</h2><!--SEC END --><p>Nous allons ici présenter tres brievement le module Graphics.
 Je reprends le code de Xavier Leroy tiré de son livre <span style="font-style:italic">le langage CAML</span> [<a href="#caml">19</a>].</p><pre class="verbatim">open Graphics ;;
 
 Graphics.open_graph "";;
@@ -3739,15 +4382,15 @@ let flocon n c =
 <img src="document005.png">
 <img src="document006.png">
 <img src="document007.png"></p><blockquote class="figure"><div class="center"><div class="center"><hr class="floatrule"></div>
-		<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 6.1: Les côtes de la Bretagne</td></tr>
+		<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 7.1: Les côtes de la Bretagne</td></tr>
 </table></div>
 	<img src="document008.png">
 <div class="center"><hr class="floatrule"></div></div></blockquote><p>Les objets fractales ont une propriété surprenante : ils ont une aire finie, mais un périmètre infini.
 A l’itération <span style="font-style:italic">n</span>, le périmètre de notre flocon est de 3.(4/3)<sup><span style="font-style:italic">n</span></sup>. Et nous avons bien entendu 
 lim<sub><span style="font-style:italic">n</span> → ∞</sub> 3.(4/3)<sup><span style="font-style:italic">n</span></sup> =∞ </p><p>La longueur des côtes de la Bretagne est-elle aussi infinie ?
 <span style="font-style:italic">L’Atlantique ronge nos côtes.</span> [<a href="#vh">9</a>]</p>
-<!--TOC subsubsection id="sec79" L’ensemble de Mandelbrot-->
-<h4 id="sec79" class="subsubsection">L’ensemble de Mandelbrot</h4><!--SEC END --><p>
+<!--TOC subsubsection id="sec94" L’ensemble de Mandelbrot-->
+<h4 id="sec94" class="subsubsection">L’ensemble de Mandelbrot</h4><!--SEC END --><p>
 l’ensemble de Mandelbrot est une fractale définie comme l’ensemble des points <span style="font-style:italic">c</span> 
 du plan complexe pour lesquels la suite des nombres complexes définie comme ci-dessous est 
 <span style="font-weight:bold">bornée</span>.</p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table class="display"><tr style="vertical-align:middle"><td class="dcell">⎧<br>
@@ -3789,17 +4432,17 @@ let mandelbrot () =
    done
   done 
 </pre><blockquote class="figure"><div class="center"><div class="center"><hr class="floatrule"></div>
-		<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 6.2: L’ensemble de Mandelbrot</td></tr>
+		<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 7.2: L’ensemble de Mandelbrot</td></tr>
 </table></div>
 	<img src="document009.png">
 <div class="center"><hr class="floatrule"></div></div></blockquote>
-<!--TOC section id="sec80" Utilisation de -->
-<h2 id="sec80" class="section">6.5 Utilisation de </h2><!--SEC END --><p>
+<!--TOC section id="sec95" Utilisation de -->
+<h2 id="sec95" class="section">7.5 Utilisation de </h2><!--SEC END --><p>
  est un langage créé par D. Knuth [<a href="#mf">10</a>]. Il permet le
 design de nouvelles fontes de manière très élégante sous forme d’équations.
 La programmation se fait principalement de manière déclarative.</p><p>Je me suis amusé ici à créer le symbole D que j’ai souvent
 utilisé dans cet article, principalement dans la section sur le λ-calcul. </p><blockquote class="figure"><div class="center"><div class="center"><hr class="floatrule"></div>
-		<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 6.3: D </td></tr>
+		<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 7.3: D </td></tr>
 </table></div>
 	<img src="document010.png">
 <div class="center"><hr class="floatrule"></div></div></blockquote><p>
@@ -3863,12 +4506,12 @@ endchar;
 end
 </pre><p>Voici le résultat:
 </p><blockquote class="figure"><div class="center"><div class="center"><hr class="floatrule"></div>
-		<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 6.4: S </td></tr>
+		<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 7.4: S </td></tr>
 </table></div>
 	<img src="document011.png">
 <div class="center"><hr class="floatrule"></div></div></blockquote>
-<!--TOC section id="sec81" The boxes-->
-<h2 id="sec81" class="section">6.6 The boxes</h2><!--SEC END --><p>
+<!--TOC section id="sec96" The boxes-->
+<h2 id="sec96" class="section">7.6 The boxes</h2><!--SEC END --><p>
 Nous avons vu comment représenter un environnement comme une liste
 d’associations avec des paires <code class="verb">variable.valeur</code>.
 Une autre méthode est d’utiliser le principe de <span style="font-style:italic">box</span> qui encapsule la
@@ -3906,8 +4549,8 @@ let maboite = box 5 ;;
 (maboite "get") 0 ;;
 (maboite "reset") 0 ;;
 </pre>
-<!--TOC section id="sec82" Les modules OCAML. Modélisation d’un monoïde-->
-<h2 id="sec82" class="section">6.7 Les modules OCAML. Modélisation d’un monoïde</h2><!--SEC END --><p>
+<!--TOC section id="sec97" Les modules OCAML. Modélisation d’un monoïde-->
+<h2 id="sec97" class="section">7.7 Les modules OCAML. Modélisation d’un monoïde</h2><!--SEC END --><p>
 Un monoïde est une structure algébrique qui possède une loi de composition
 interne associative et un élément neutre.
 Représentons cette structure en OCAML, en définissant un module.
@@ -3951,17 +4594,17 @@ Nous avons ici utilisé l’opérateur <code class="verb">|&gt;</code> défini c
 le monoïde des entiers (avec + comme fonction de composition interne et 0
 comme élément neutre)
 </p>
-<!--TOC section id="sec83" Machine Learning and Neural Networks-->
-<h2 id="sec83" class="section">6.8 Machine Learning and Neural Networks</h2><!--SEC END -->
-<!--TOC subsection id="sec84" Introduction-->
-<h3 id="sec84" class="subsection">6.8.1 Introduction</h3><!--SEC END --><p>Nous implémentons en R un réseau de neurones réduit à sa plus simple expression.
+<!--TOC section id="sec98" Machine Learning and Neural Networks-->
+<h2 id="sec98" class="section">7.8 Machine Learning and Neural Networks</h2><!--SEC END -->
+<!--TOC subsection id="sec99" Introduction-->
+<h3 id="sec99" class="subsection">7.8.1 Introduction</h3><!--SEC END --><p>Nous implémentons en R un réseau de neurones réduit à sa plus simple expression.
 Il n’aura que deux couches de neurones.
 Le langage R est ici commode pour ses opérations natives sur les matrices.
 Nous pourrons voir ensuite comme transposer ce code en OCAML.</p><p>Nous entraînerons notre NN sur la base du jeu de test MNIST.
 Le "training set" contient 60000 exemples, et le "test set" 10000 exemples.
 Nous pourrons nous documenter plus précisément avec l’excellent ouvrage de François Chollet [<a href="#deepR">5</a>].</p>
-<!--TOC subsection id="sec85" Un peu de théorie-->
-<h3 id="sec85" class="subsection">6.8.2 Un peu de théorie</h3><!--SEC END --><p>Soit les 150 observations suivantes représentées par la matrice <span style="font-style:italic">X</span><sub>150,784</sub> (ou tensor 2 dimensions) comprenant 150 lignes pour les 150 observations et 784 colonnes pour les 784 features des observations.</p><p>2 matrices de poids <span style="font-style:italic">W</span><sub>32,150</sub><sup>1</sup> et <span style="font-style:italic">W</span><sub>10,150</sub><sup>2</sup> sont utilisées.</p><ul class="itemize"><li class="li-itemize">
+<!--TOC subsection id="sec100" Un peu de théorie-->
+<h3 id="sec100" class="subsection">7.8.2 Un peu de théorie</h3><!--SEC END --><p>Soit les 150 observations suivantes représentées par la matrice <span style="font-style:italic">X</span><sub>150,784</sub> (ou tensor 2 dimensions) comprenant 150 lignes pour les 150 observations et 784 colonnes pour les 784 features des observations.</p><p>2 matrices de poids <span style="font-style:italic">W</span><sub>32,150</sub><sup>1</sup> et <span style="font-style:italic">W</span><sub>10,150</sub><sup>2</sup> sont utilisées.</p><ul class="itemize"><li class="li-itemize">
 	1er layer de 32 neurones
 	</li><li class="li-itemize">2nd layer de 10 neurones
 </li></ul><p>La sortie <span style="font-style:italic">OUTPUT</span><sub>150,10</sub> est une matrice de 150 lignes avec les 10 colonnes représentant 
@@ -3974,8 +4617,8 @@ les 10 features que l’on cherche à reconnaître.</p><p>Voici le schéma simpl
 &gt;&gt; <span style="font-style:italic">LOSS</span>(Ŷ, <span style="font-style:italic">Y</span>)
 </td></tr>
 </table>
-<!--TOC subsection id="sec86" Calcul matriciel-->
-<h3 id="sec86" class="subsection">6.8.3 Calcul matriciel</h3><!--SEC END --><p>Cela donne le calcul matriciel ci-dessous:
+<!--TOC subsection id="sec101" Calcul matriciel-->
+<h3 id="sec101" class="subsection">7.8.3 Calcul matriciel</h3><!--SEC END --><p>Cela donne le calcul matriciel ci-dessous:
 <span style="font-size:small">
 </span></p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-size:small">
      
@@ -4207,9 +4850,9 @@ Le résultat donne une matrice de dimension (784,32) qui est de même dimension 
 </td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td></tr>
 </table></td></tr>
 </table>
-<!--TOC subsection id="sec87" Fonctions d’activation-->
-<h3 id="sec87" class="subsection">6.8.4 Fonctions d’activation</h3><!--SEC END --><p>Pour la fonction d’activation, ici appelée σ, nous utiliserons pour la première couche la fonction <span style="font-style:italic">relu</span>(<span style="font-style:italic">x</span>) = <span style="font-style:italic">max</span>(<span style="font-style:italic">o</span>,<span style="font-style:italic">x</span>)</p><p>Pour la seconde couche, nous utiliserons la fonction sigmoid <span style="font-style:italic">f</span>(<span style="font-style:italic">x</span>)= 1/1+<span style="font-style:italic">e</span><sup>−<span style="font-style:italic">x</span></sup></p><blockquote class="figure"><div class="center"><div class="center"><hr class="floatrule"></div>
-<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 6.5: La fonction sigmoid</td></tr>
+<!--TOC subsection id="sec102" Fonctions d’activation-->
+<h3 id="sec102" class="subsection">7.8.4 Fonctions d’activation</h3><!--SEC END --><p>Pour la fonction d’activation, ici appelée σ, nous utiliserons pour la première couche la fonction <span style="font-style:italic">relu</span>(<span style="font-style:italic">x</span>) = <span style="font-style:italic">max</span>(<span style="font-style:italic">o</span>,<span style="font-style:italic">x</span>)</p><p>Pour la seconde couche, nous utiliserons la fonction sigmoid <span style="font-style:italic">f</span>(<span style="font-style:italic">x</span>)= 1/1+<span style="font-style:italic">e</span><sup>−<span style="font-style:italic">x</span></sup></p><blockquote class="figure"><div class="center"><div class="center"><hr class="floatrule"></div>
+<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 7.5: La fonction sigmoid</td></tr>
 </table></div>
 <img src="document012.png">
 <div class="center"><hr class="floatrule"></div></div></blockquote><p>Voici le code en R:</p><pre class="verbatim"># the activation function
@@ -4249,8 +4892,8 @@ Le résultat donne une matrice de dimension (32,10) qui est de même dimension q
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">t</span>(150,32) * (150,10).(150.10) = (32,150)*(150,10)=(32,10)
 </td></tr>
 </table>
-<!--TOC section id="sec88" Les nombres premiers. L’algorithme RSA-->
-<h2 id="sec88" class="section">6.9 Les nombres premiers. L’algorithme RSA</h2><!--SEC END --><ul class="itemize"><li class="li-itemize">
+<!--TOC section id="sec103" Les nombres premiers. L’algorithme RSA-->
+<h2 id="sec103" class="section">7.9 Les nombres premiers. L’algorithme RSA</h2><!--SEC END --><ul class="itemize"><li class="li-itemize">
 	Le crible d’Erathostène (’Eratosjénhs) 
 	</li><li class="li-itemize">Leur répartition
 	</li><li class="li-itemize">Les nombres premiers jumeaux
@@ -4261,8 +4904,8 @@ Le résultat donne une matrice de dimension (32,10) qui est de même dimension q
 	</li><li class="li-itemize">La fonction <span style="font-style:italic">indicatrice</span> d’Euler
 	</li><li class="li-itemize">L’algorithme RSA
 </li></ul>
-<!--TOC subsubsection id="sec89" Le crible-->
-<h4 id="sec89" class="subsubsection">Le crible</h4><!--SEC END --><pre class="verbatim">type 'a stream = Cons of 'a * (unit -&gt; 'a stream) ;;
+<!--TOC subsubsection id="sec104" Le crible-->
+<h4 id="sec104" class="subsubsection">Le crible</h4><!--SEC END --><pre class="verbatim">type 'a stream = Cons of 'a * (unit -&gt; 'a stream) ;;
 let hd (Cons (h, _)) = h ;;
 let tl (Cons (_, tf)) = tf () ;;
 
@@ -4289,8 +4932,8 @@ let premiers = crible(entiers 2) ;;
  421; 431; 433; 439; 443; 449; 457; 461; 463; 467; 479; 487; 491; 499; 503;
  509; 521; 523; 541]
 </pre>
-<!--TOC subsubsection id="sec90" Le produit d’Euler aka le produit eulérien-->
-<h4 id="sec90" class="subsubsection">Le produit d’Euler aka le produit eulérien</h4><!--SEC END --><p>
+<!--TOC subsubsection id="sec105" Le produit d’Euler aka le produit eulérien-->
+<h4 id="sec105" class="subsubsection">Le produit d’Euler aka le produit eulérien</h4><!--SEC END --><p>
 La fonction zêta est égale au produit eulérien
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">ζ(<span style="font-style:italic">s</span>) = </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">∞</td></tr>
 <tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∑</span></td></tr>
@@ -4618,8 +5261,8 @@ Le dénominateur est le produit de l’ensemble des nombres premiers moins 1.</p
 </table></td></tr>
 </table></td><td class="dcell">. (...) </td></tr>
 </table>
-<!--TOC subsubsection id="sec91" Les nombres premiers jumeaux et la constante de Brun-->
-<h4 id="sec91" class="subsubsection">Les nombres premiers jumeaux et la constante de Brun</h4><!--SEC END --><p>
+<!--TOC subsubsection id="sec106" Les nombres premiers jumeaux et la constante de Brun-->
+<h4 id="sec106" class="subsubsection">Les nombres premiers jumeaux et la constante de Brun</h4><!--SEC END --><p>
 La somme inverse des nombres premiers jumeaux. Il y en aurait une infinité. Cependant, cette somme
 converge vers la constante de Brun.</p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">
      
@@ -4660,38 +5303,28 @@ converge vers la constante de Brun.</p><table class="display dcenter"><tr style=
 <span style="font-style:italic">Brun</span></td><td style="text-align:left;white-space:nowrap" >≈ 1,90216
 </td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td></tr>
 </table></td></tr>
-</table><pre class="verbatim">let inverse_sum n s = 
-  let rec aux n s acc =
-  if n=0 then acc
- else aux (n-1) (tl s) (acc +. (1. /. (float_of_int (hd s))))
-in aux n s 0. 
+</table><pre class="verbatim">let rec filtre_jumeaux = function
+ | Cons(x,l) -&gt; if (hd (l()) = (x+2)) then 
+                  Cons(x, fun() -&gt; Cons ((hd (l())) , (fun() -&gt;  (filtre_jumeaux  (l())))))
+                else filtre_jumeaux (l()) ;;
 
-let rec jumeaux (Cons(x, l)) =
-  let suivant = hd (l()) in
-    if suivant - x =2 then  Cons(x, fun()-&gt; (Cons(suivant, fun()-&gt; (jumeaux (tl(l()))))))
-    else jumeaux (l()) 
+take 100 (filtre_jumeaux premiers) ;;
 
-let jum = jumeaux premiers 
+let rec inverse (Cons(x,l)) = Cons(1. /. float_of_int x, fun() -&gt; inverse(l())) ;;
 
-utop # take 100 jum ;;
-- : int list =
-[3; 5; 11; 13; 17; 19; 29; 31; 41; 43; 59; 61; 71; 73; 101; 103; 107; 109; 137;
- 139; 149; 151; 179; 181; 191; 193; 197; 199; 227; 229; 239; 241; 269; 271;
- 281; 283; 311; 313; 347; 349; 419; 421; 431; 433; 461; 463; 521; 523; 569;
- 571; 599; 601; 617; 619; 641; 643; 659; 661; 809; 811; 821; 823; 827; 829;
- 857; 859; 881; 883; 1019; 1021; 1031; 1033; 1049; 1051; 1061; 1063; 1091;
- 1093; 1151; 1153; 1229; 1231; 1277; 1279; 1289; 1291; 1301; 1303; 1319; 1321;
- 1427; 1429; 1451; 1453; 1481; 1483; 1487; 1489; 1607; 1609]
- 
- # inverse_sum 20000 jum ;;
- - : float = 1.37118156832708848
- </pre><p>
-Avec les 10000 premières paires, nous sommes encore loin de 1,90216…</p>
-<!--TOC subsubsection id="sec92" Le petit théorème de Fermat-->
-<h4 id="sec92" class="subsubsection">Le petit théorème de Fermat</h4><!--SEC END --><p>
+let inverse_jumeaux = inverse (filtre_jumeaux premiers) ;;
+
+let rec somme n s =
+if n=0 then 0.
+else hd s +. somme (n-1) (tl s) ;;
+
+somme 10000 inverse_jumeaux ;;
+ </pre><p>Avec les 10000 premières paires, nous sommes encore loin de 1,90216…</p>
+<!--TOC subsubsection id="sec107" Le petit théorème de Fermat-->
+<h4 id="sec107" class="subsubsection">Le petit théorème de Fermat</h4><!--SEC END --><p>
 Si <span style="font-style:italic">p</span> est premier et si <span style="font-style:italic">a</span> n’est pas un multiple de <span style="font-style:italic">p</span>, alors <span style="font-style:italic">a</span><sup><span style="font-style:italic">p</span>−1</sup>≡1 mod <span style="font-style:italic">p</span></p>
-<!--TOC subsubsection id="sec93" Le théorème d’Euler-->
-<h4 id="sec93" class="subsubsection">Le théorème d’Euler</h4><!--SEC END --><p>
+<!--TOC subsubsection id="sec108" Le théorème d’Euler-->
+<h4 id="sec108" class="subsubsection">Le théorème d’Euler</h4><!--SEC END --><p>
 L’indicatrice d’Euler est une fonction, qui à tout entier naturel <span style="font-style:italic">n</span> non nul associe
 le nombre d’entiers compris entre 1 et <span style="font-style:italic">n</span> et premiers avec <span style="font-style:italic">n</span>. Cette fonction est nommée en anglais
 <span style="font-style:italic">Euler’s totient function</span>
@@ -4701,11 +5334,11 @@ le nombre d’entiers compris entre 1 et <span style="font-style:italic">n</span
 </table></td></tr>
 </table><p>Le théorème d’Euler nous dit que  <span style="font-style:italic">a</span><sup>ϕ (<span style="font-style:italic">n</span>)</sup> ≡ 1 mod <span style="font-style:italic">n</span> , si <span style="font-style:italic">a</span> est un entier premier à <span style="font-style:italic">n</span>.
 C’est une généralisation du petit théorème de Fermat.</p>
-<!--TOC subsubsection id="sec94" Le théorème de Bezout-->
-<h4 id="sec94" class="subsubsection">Le théorème de Bezout</h4><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">∀ <span style="font-style:italic">x</span>,<span style="font-style:italic">y</span> ∈ ℕ, ∃ <span style="font-style:italic">u</span> , <span style="font-style:italic">v</span> ∈ ℤ <span style="font-style:italic">tel</span> <span style="font-style:italic">que</span> <span style="font-style:italic">ux</span>+<span style="font-style:italic">vy</span>=<span style="font-style:italic">pgcd</span>(<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>) </td></tr>
+<!--TOC subsubsection id="sec109" Le théorème de Bezout-->
+<h4 id="sec109" class="subsubsection">Le théorème de Bezout</h4><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">∀ <span style="font-style:italic">x</span>,<span style="font-style:italic">y</span> ∈ ℕ, ∃ <span style="font-style:italic">u</span> , <span style="font-style:italic">v</span> ∈ ℤ <span style="font-style:italic">tel</span> <span style="font-style:italic">que</span> <span style="font-style:italic">ux</span>+<span style="font-style:italic">vy</span>=<span style="font-style:italic">pgcd</span>(<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>) </td></tr>
 </table>
-<!--TOC subsubsection id="sec95" L’inverse modulaire-->
-<h4 id="sec95" class="subsubsection">L’inverse modulaire</h4><!--SEC END --><p>
+<!--TOC subsubsection id="sec110" L’inverse modulaire-->
+<h4 id="sec110" class="subsubsection">L’inverse modulaire</h4><!--SEC END --><p>
 Avec <span style="font-style:italic">x</span> et <span style="font-style:italic">n</span> premiers entre eux, en prenant <span style="font-style:italic">u</span> et <span style="font-style:italic">v</span> dans ℤ tels que
 <span style="font-style:italic">ux</span>+<span style="font-style:italic">vn</span>=1, on a : 
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">
@@ -4717,8 +5350,8 @@ Avec <span style="font-style:italic">x</span> et <span style="font-style:italic"
 </td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td><td style="text-align:left;white-space:nowrap" >&nbsp;</td><td style="text-align:right;white-space:nowrap" >&nbsp;</td></tr>
 </table></td></tr>
 </table>
-<!--TOC subsubsection id="sec96" L’algorithme RSA-->
-<h4 id="sec96" class="subsubsection">L’algorithme RSA</h4><!--SEC END --><p>Soient <span style="font-style:italic">p</span>&gt;1 et <span style="font-style:italic">q</span>&gt;1 deux nombres premiers distincts, <span style="font-style:italic">n</span>=<span style="font-style:italic">pq</span> leur produit,
+<!--TOC subsubsection id="sec111" L’algorithme RSA-->
+<h4 id="sec111" class="subsubsection">L’algorithme RSA</h4><!--SEC END --><p>Soient <span style="font-style:italic">p</span>&gt;1 et <span style="font-style:italic">q</span>&gt;1 deux nombres premiers distincts, <span style="font-style:italic">n</span>=<span style="font-style:italic">pq</span> leur produit,
 <span style="font-style:italic">e</span> un nombre premier avec 
 ϕ(<span style="font-style:italic">n</span>) = (<span style="font-style:italic">p</span>−1)(<span style="font-style:italic">q</span>−1) et <span style="font-style:italic">d</span> = <span style="font-style:italic">e</span><sup>−1</sup> mod(<span style="font-style:italic">p</span>−1)(<span style="font-style:italic">q</span>−1).</p><p>Pour tout entier positif <span style="font-style:italic">m</span>&lt;<span style="font-style:italic">n</span>, on a <span style="font-style:italic">m</span><sup><span style="font-style:italic">ed</span></sup> ≡ <span style="font-style:italic">m</span> mod <span style="font-style:italic">n</span></p><p>La clé publique est le couple <span style="font-style:italic">P</span>=(<span style="font-style:italic">n</span>,<span style="font-style:italic">e</span>),
 la clé secrète est le couple <span style="font-style:italic">S</span>=(<span style="font-style:italic">n</span>,<span style="font-style:italic">d</span>).</p><p><span style="font-style:italic">Raisonnement:</span></p><p><span style="font-style:italic">ed</span>≡1 mod (<span style="font-style:italic">p</span>−1)(<span style="font-style:italic">q</span>−1), donc il existe <span style="font-style:italic">k</span> tel que <span style="font-style:italic">ed</span>=1+<span style="font-style:italic">k</span>(<span style="font-style:italic">p</span>−1)(<span style="font-style:italic">q</span>−1).</p><p>Si <span style="font-style:italic">m</span> n’est pas multiple de <span style="font-style:italic">p</span> ni de <span style="font-style:italic">q</span>, 
@@ -4734,8 +5367,8 @@ d’après le petit théorème de Fermat,
 </table><p>
 et si <span style="font-style:italic">m</span> est un multiple de <span style="font-style:italic">p</span>, <span style="font-style:italic">m</span>≡0 mod <span style="font-style:italic">p</span> et <span style="font-style:italic">m</span><sup><span style="font-style:italic">ed</span></sup>≡0 mod <span style="font-style:italic">p</span> (de même avec <span style="font-style:italic">q</span>).</p><p>L’entier <span style="font-style:italic">u</span><sup><span style="font-style:italic">ed</span></sup>−<span style="font-style:italic">m</span> est donc un multiple de <span style="font-style:italic">p</span> et de <span style="font-style:italic">q</span>, qui sont premiers distincts, 
 donc un multiple de leur produit <span style="font-style:italic">pq</span>=<span style="font-style:italic">n</span></p><p>Donc, pour tout entier <span style="font-style:italic">m</span>, <span style="font-style:italic">m</span><sup><span style="font-style:italic">ed</span></sup> ≡ <span style="font-style:italic">m</span> mod <span style="font-style:italic">n</span></p>
-<!--TOC subsubsection id="sec97" Le code-->
-<h4 id="sec97" class="subsubsection">Le code</h4><!--SEC END --><pre class="verbatim">open List
+<!--TOC subsubsection id="sec112" Le code-->
+<h4 id="sec112" class="subsubsection">Le code</h4><!--SEC END --><pre class="verbatim">open List
 open Random 
 
 let p = 61 and q = 53 ;;
@@ -4785,8 +5418,8 @@ let factor n =
     else aux n (k+2) l
 in rev (aux n 2 [])
 </pre>
-<!--TOC section id="sec98" Approximation du nombre π -->
-<h2 id="sec98" class="section">6.10 Approximation du nombre π </h2><!--SEC END --><div class="center">
+<!--TOC section id="sec113" Approximation du nombre π -->
+<h2 id="sec113" class="section">7.10 Approximation du nombre π </h2><!--SEC END --><div class="center">
 	<table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:center;white-space:nowrap" >		Que</td><td style="text-align:center;white-space:nowrap" >j’</td><td style="text-align:center;white-space:nowrap" >aime</td><td style="text-align:center;white-space:nowrap" >à</td><td style="text-align:center;white-space:nowrap" >faire</td><td style="text-align:center;white-space:nowrap" >connaître</td><td style="text-align:center;white-space:nowrap" >ce</td><td style="text-align:center;white-space:nowrap" >nombre</td><td style="text-align:center;white-space:nowrap" >utile</td><td style="text-align:center;white-space:nowrap" >aux</td><td style="text-align:center;white-space:nowrap" >sages. </td></tr>
 <tr><td style="text-align:center;white-space:nowrap" >		3,</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >4</td><td style="text-align:center;white-space:nowrap" >1</td><td style="text-align:center;white-space:nowrap" >5</td><td style="text-align:center;white-space:nowrap" >9</td><td style="text-align:center;white-space:nowrap" >2</td><td style="text-align:center;white-space:nowrap" >6</td><td style="text-align:center;white-space:nowrap" >5</td><td style="text-align:center;white-space:nowrap" >3</td><td style="text-align:center;white-space:nowrap" >5 </td></tr>
 <tr><td style="text-align:center;white-space:nowrap" >	</td></tr>
@@ -4899,8 +5532,8 @@ in rev (aux n 2 [])
 		<div class="center"><hr class="floatrule"></div></div></blockquote>
 	
 </li></ul>
-<!--TOC subsection id="sec99" La méthode des polygones-->
-<h3 id="sec99" class="subsection">6.10.1 La méthode des polygones</h3><!--SEC END --><p>	
+<!--TOC subsection id="sec114" La méthode des polygones-->
+<h3 id="sec114" class="subsection">7.10.1 La méthode des polygones</h3><!--SEC END --><p>	
 Pour calculer la valeur de π, il suffit de calculer pour <span style="font-style:italic">n</span> suffisament grand
 les périmètres des polygones réguliers de <span style="font-style:italic">n</span> côtés inscrits et circonscrits à un cercle de diamètre
 2<span style="font-style:italic">R</span>=1. 
@@ -4908,11 +5541,11 @@ Nous nous reférerons à l’excellent ouvrage [<a href="#gb">13</a>].
 Cette approche est appelée en anglais <span style="font-style:italic">the method of exhaustion</span>.</p><p>Le périmètre du polygone inscrit sera nommé <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub>. Le périmètre du polygone circonscrit
 sera <span style="font-style:italic">p</span>′<sub><span style="font-style:italic">n</span></sub>. Comme <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub> &lt; 2π <span style="font-style:italic">R</span> &lt; <span style="font-style:italic">p</span>′<sub><span style="font-style:italic">n</span></sub>, on aura <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub> &lt; π &lt; <span style="font-style:italic">p</span>′<sub><span style="font-style:italic">n</span></sub>.
 Nous obtiendrons alors deux valeurs approchées de π, l’une par défaut, l’autre par excès.</p>
-<!--TOC subsubsection id="sec100" Calcul de <span style="font-style:italic">p</span><sub>2<span style="font-style:italic">n</span></sub> en fonction de <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub>-->
-<h4 id="sec100" class="subsubsection">Calcul de <span style="font-style:italic">p</span><sub>2<span style="font-style:italic">n</span></sub> en fonction de <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub></h4><!--SEC END --><p>Nous rappelons les deux définitions suivantes :
-</p><div class="theorem"><span style="font-weight:bold">Définition ‍7</span> <em>
+<!--TOC subsubsection id="sec115" Calcul de <span style="font-style:italic">p</span><sub>2<span style="font-style:italic">n</span></sub> en fonction de <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub>-->
+<h4 id="sec115" class="subsubsection">Calcul de <span style="font-style:italic">p</span><sub>2<span style="font-style:italic">n</span></sub> en fonction de <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub></h4><!--SEC END --><p>Nous rappelons les deux définitions suivantes :
+</p><div class="theorem"><span style="font-weight:bold">Définition ‍9</span> <em>
 	Le rayon du polygone est le rayon du cercle circonscrit. 
-</em></div><div class="theorem"><span style="font-weight:bold">Définition ‍8</span> <em>
+</em></div><div class="theorem"><span style="font-weight:bold">Définition ‍10</span> <em>
 	L’apothème du polygone est le rayon du cercle inscrit. 
 </em></div><p>
 Nous pouvons ainsi exprimer l’apothème en fonction du rayon par la formule <span style="font-style:italic">a</span> = <span style="font-style:italic">r</span> cos(π/<span style="font-style:italic">n</span>)  où
@@ -4987,8 +5620,8 @@ Soit pour 2<span style="font-style:italic">R</span>=1
 </span> </td></tr>
 </table><p>En partant d’un carré inscrit (<span style="font-style:italic">n</span>=4), nous avons <span style="font-style:italic">c</span><sub>4</sub>=√<span style="text-decoration:overline">2</span>/2 et donc 
 nous pouvons calculer les valeurs de <span style="font-style:italic">p</span><sub>8</sub>, <span style="font-style:italic">p</span><sub>16</sub>, <span style="font-style:italic">p</span><sub>32</sub>, …</p>
-<!--TOC subsubsection id="sec101" Calcul de <span style="font-style:italic">p</span>′<sub><span style="font-style:italic">n</span></sub> en fonction de <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub>-->
-<h4 id="sec101" class="subsubsection">Calcul de <span style="font-style:italic">p</span>′<sub><span style="font-style:italic">n</span></sub> en fonction de <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub></h4><!--SEC END --><p>
+<!--TOC subsubsection id="sec116" Calcul de <span style="font-style:italic">p</span>′<sub><span style="font-style:italic">n</span></sub> en fonction de <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub>-->
+<h4 id="sec116" class="subsubsection">Calcul de <span style="font-style:italic">p</span>′<sub><span style="font-style:italic">n</span></sub> en fonction de <span style="font-style:italic">p</span><sub><span style="font-style:italic">n</span></sub></h4><!--SEC END --><p>
 Les polygones inscrits et cirsconscrits étant deux polygones semblables, nous avons :
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">
      
@@ -5117,8 +5750,8 @@ nous pouvons en déduire :
 </table></td></tr>
 </table></td><td class="dcell"> → π <span style="font-style:italic">quand</span> <span style="font-style:italic">m</span> → ∞ </td></tr>
 </table><p>Nous pourrons nous référer à [<a href="#wm">16</a>]</p>
-<!--TOC subsection id="sec102" La série alternée de Leibniz-->
-<h3 id="sec102" class="subsection">6.10.2 La série alternée de Leibniz</h3><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">∞</td></tr>
+<!--TOC subsection id="sec117" La série alternée de Leibniz-->
+<h3 id="sec117" class="subsection">7.10.2 La série alternée de Leibniz</h3><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">∞</td></tr>
 <tr><td class="dcell" style="text-align:center"><span style="font-size:xx-large">∑</span></td></tr>
 <tr><td class="dcell" style="text-align:center"><span style="font-style:italic">n</span>=0</td></tr>
 </table></td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">(−1)<sup><span style="font-style:italic">n</span></sup></td></tr>
@@ -5162,8 +5795,8 @@ Prenons les cinq millions premières valeurs de notre stream <code class="verb">
 </p><pre class="verbatim"># 4. *. sum 5000000 leibniz 0. ;;
 - : float = 3.14159245358977968
 </pre>
-<!--TOC subsection id="sec103" La loi des grands nombres-->
-<h3 id="sec103" class="subsection">6.10.3 La loi des grands nombres</h3><!--SEC END --><p>
+<!--TOC subsection id="sec118" La loi des grands nombres-->
+<h3 id="sec118" class="subsection">7.10.3 La loi des grands nombres</h3><!--SEC END --><p>
 Sur un tirage aléatoire de coordonnées (<span style="font-style:italic">x</span>,<span style="font-style:italic">y</span>) avec <span style="font-style:italic">x</span> et <span style="font-style:italic">y</span> compris entre −1 et 1,
 il y a π chances sur 4 que le tirage tombe dans le cercle de rayon 1.
 </p><div class="center">
@@ -5192,8 +5825,8 @@ else  sum (n-1) (tl s) (acc +. (hd s)) ;;
 4. *. (sum 5000000  tirage 0. /. 5000000.) ;;
 - : float = 3.142153
 </pre>
-<!--TOC subsection id="sec104" Le produit de Wallis-->
-<h3 id="sec104" class="subsection">6.10.4 Le produit de Wallis</h3><!--SEC END --><p>
+<!--TOC subsection id="sec119" Le produit de Wallis-->
+<h3 id="sec119" class="subsection">7.10.4 Le produit de Wallis</h3><!--SEC END --><p>
 Pour introduire le produit infini de Wallis, nous partons du fait que tout polynome
 de degré <span style="font-style:italic">n</span> s’écrivant <span style="font-style:italic">f</span>(<span style="font-style:italic">x</span>) = <span style="font-style:italic">a</span><sub><span style="font-style:italic">n</span></sub> <span style="font-style:italic">x</span><sup><span style="font-style:italic">n</span></sup> + <span style="font-style:italic">a</span><sub><span style="font-style:italic">n</span>−1</sub> <span style="font-style:italic">x</span><sup><span style="font-style:italic">n</span>−1</sup>+ … + <span style="font-style:italic">a</span><sub>1</sub> <span style="font-style:italic">x</span> + <span style="font-style:italic">a</span><sub>0</sub> peut se décomposer en :
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><span style="font-style:italic">f</span>(<span style="font-style:italic">x</span>) = <span style="font-style:italic">a</span><sub><span style="font-style:italic">n</span></sub>(<span style="font-style:italic">x</span>−<span style="font-style:italic">x</span><sub>1</sub>)(<span style="font-style:italic">x</span>−<span style="font-style:italic">x</span><sub>2</sub>)…(<span style="font-style:italic">x</span>−<span style="font-style:italic">x</span><sub><span style="font-style:italic">n</span></sub>)</td></tr>
@@ -5308,8 +5941,8 @@ de notre liste infinie <code class="verb">wallis</code>.
 2. *. mult 5000000 wallis 1. ;;
 - : float = 3.14159249652297845
 </pre>
-<!--TOC subsection id="sec105" L’intégrale ∫<sub>0</sub><sup>1</sup> 1/1+<span style="font-style:italic">x</span><sup>2</sup> <span style="font-style:italic">dx</span>-->
-<h3 id="sec105" class="subsection">6.10.5 L’intégrale ∫<sub>0</sub><sup>1</sup> 1/1+<span style="font-style:italic">x</span><sup>2</sup> <span style="font-style:italic">dx</span></h3><!--SEC END --><p>
+<!--TOC subsection id="sec120" L’intégrale ∫<sub>0</sub><sup>1</sup> 1/1+<span style="font-style:italic">x</span><sup>2</sup> <span style="font-style:italic">dx</span>-->
+<h3 id="sec120" class="subsection">7.10.5 L’intégrale ∫<sub>0</sub><sup>1</sup> 1/1+<span style="font-style:italic">x</span><sup>2</sup> <span style="font-style:italic">dx</span></h3><!--SEC END --><p>
 
 	[-&gt;] (-0.5, 0) – (1.5, 0) node[right] <span style="font-style:italic">x</span>;
 	[-&gt;] (0, -0.5) – (0, 1.5) node[above] <span style="font-style:italic">y</span>;
@@ -5362,8 +5995,8 @@ utop #
  4. *. somme 900000000. 0. 0. ;;
  - : float = 3.14159265692298773
 </pre>
-<!--TOC section id="sec106" Poésies-->
-<h2 id="sec106" class="section">6.11 Poésies</h2><!--SEC END --><blockquote class="verse">
+<!--TOC section id="sec121" Poésies-->
+<h2 id="sec121" class="section">7.11 Poésies</h2><!--SEC END --><blockquote class="verse">
 	Un soir t’en souvient-il ? Nous voguions en silence ; <br>
 	On n’entendait au loin, sur l’onde et sous les cieux, <br>
 	Que le bruit des rameurs qui frappaient en cadence <br>
@@ -5378,8 +6011,41 @@ utop #
 	Agneau de Dieu, qui nous comptes et nous nommes, <br>
 	Agneau de Dieu, vois, prends pitié de ce que nous sommes. <br>
 </blockquote>
-<!--TOC section id="sec107" L’irrationalité de √<span style="text-decoration:overline">2</span>-->
-<h2 id="sec107" class="section">6.12 L’irrationalité de √<span style="text-decoration:overline">2</span></h2><!--SEC END --><p>
+<!--TOC section id="sec122" Les fractions continues-->
+<h2 id="sec122" class="section">7.12 Les fractions continues</h2><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center">32</td></tr>
+<tr><td class="hrule"></td></tr>
+<tr><td class="dcell" style="text-align:center">7</td></tr>
+</table></td><td class="dcell"> = 4+</td><td class="dcell"><table class="display" style="width:100%;"><tr><td class="dcell" >1</td></tr>
+<tr><td class="dcell" ><hr class="horizontal-rule"></td></tr>
+<tr><td class="dcell" ><table class="display"><tr style="vertical-align:top"><td class="dcell">1+</td><td class="dcell"><table class="display" style="width:100%;"><tr><td class="dcell" >1</td></tr>
+<tr><td class="dcell" ><hr class="horizontal-rule"></td></tr>
+<tr><td class="dcell" ><table class="display"><tr style="vertical-align:top"><td class="dcell">1+</td><td class="dcell"><table class="display" style="width:100%;"><tr><td class="dcell" >1</td></tr>
+<tr><td class="dcell" ><hr class="horizontal-rule"></td></tr>
+<tr><td class="dcell" >3</td></tr>
+</table></td></tr>
+</table></td></tr>
+</table></td></tr>
+</table></td></tr>
+</table></td></tr>
+</table><pre class="verbatim">let cont a b =
+  let rec aux acc a b =
+    if a mod b = 0 then
+      a::acc
+    else  aux ((a / b)::acc) b (a mod b)
+  in rev (aux [] a b) ;;
+
+(* 
+[4;1;1:3]
+4+\cfrac{1}{1+\cfrac{1}{1+\cfrac{1}{3}}}
+*)
+
+let rec print = function
+  | [] -&gt; ""
+  | h::[] -&gt; string_of_int h 
+  | h::t -&gt;  string_of_int(h) ^ " + \\cfrac{1}{" ^ print t ^ "}" ;;
+</pre>
+<!--TOC section id="sec123" L’irrationalité de √<span style="text-decoration:overline">2</span>-->
+<h2 id="sec123" class="section">7.13 L’irrationalité de √<span style="text-decoration:overline">2</span></h2><!--SEC END --><p>
 [scale=2]
 	[-&gt;] (0, 0) – (2, 0) node[right] <span style="font-style:italic">x</span>;
 	(0, 0) – (1, 1) ;
@@ -5411,15 +6077,15 @@ utop #
 D √<span style="text-decoration:overline">2</span> n’est pas un nombre rationnel.		 
 	;
 </p>
-<!--TOC section id="sec108" Démonstration non constructive-->
-<h2 id="sec108" class="section">6.13 Démonstration non constructive</h2><!--SEC END --><p>
+<!--TOC section id="sec124" Démonstration non constructive-->
+<h2 id="sec124" class="section">7.14 Démonstration non constructive</h2><!--SEC END --><p>
 Démontrons qu’il existe deux irrationnels <span style="font-style:italic">a</span> et <span style="font-style:italic">b</span> tels que <span style="font-style:italic">a</span><sup><span style="font-style:italic">b</span></sup> soit rationnel.</p><p>Considérons √<span style="text-decoration:overline">3</span><sup>√<span style="text-decoration:overline">2</span></sup> </p><p>Si √<span style="text-decoration:overline">3</span><sup>√<span style="text-decoration:overline">2</span></sup> ∈ ℚ alors on pose <span style="font-style:italic">a</span> = √<span style="text-decoration:overline">3</span> et <span style="font-style:italic">b</span>= √<span style="text-decoration:overline">2</span></p><p>Sinon, on pose <span style="font-style:italic">a</span> = √<span style="text-decoration:overline">3</span><sup>√<span style="text-decoration:overline">2</span></sup> et <span style="font-style:italic">b</span>=√<span style="text-decoration:overline">3</span>, 
 de sorte que  (√<span style="text-decoration:overline">3</span><sup>√<span style="text-decoration:overline">2</span></sup>)<sup>√<span style="text-decoration:overline">2</span></sup> = 3 ∈ ℚ </p><p>Mais laquelle des deux est la solution ?
 Faut-il abandonner le principe du <span style="font-style:italic">tiers exlus</span> de nos démonstrations
 mathématiques ?
 </p>
-<!--TOC section id="sec109" L’hyperbole <span style="font-style:italic">xy</span>=1-->
-<h2 id="sec109" class="section">6.14 L’hyperbole <span style="font-style:italic">xy</span>=1</h2><!--SEC END --><p>
+<!--TOC section id="sec125" L’hyperbole <span style="font-style:italic">xy</span>=1-->
+<h2 id="sec125" class="section">7.15 L’hyperbole <span style="font-style:italic">xy</span>=1</h2><!--SEC END --><p>
 
 	[-&gt;] (-3, 0) – (3, 0) node[right] <span style="font-style:italic">x</span>;
 	[-&gt;] (0, -3) – (0, 3) node[above] <span style="font-style:italic">y</span>;
@@ -5428,8 +6094,8 @@ mathématiques ?
 	[red] (0.5,0) – (0.5,2) ;
 	[red] (0,2) – (0.5,2) node [right] L’aire du rectangle rouge est égale à 1 ;
 </p>
-<!--TOC section id="sec110" L’exponentielle-->
-<h2 id="sec110" class="section">6.15 L’exponentielle</h2><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">
+<!--TOC section id="sec126" L’exponentielle-->
+<h2 id="sec126" class="section">7.16 L’exponentielle</h2><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">
      
 
 </td><td class="dcell"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:right;white-space:nowrap" ><span style="font-style:italic">e</span><sup><span style="font-style:italic">x</span></sup></td><td style="text-align:left;white-space:nowrap" ><table class="display"><tr style="vertical-align:middle"><td class="dcell">= 1 + <span style="font-style:italic">x</span> + </td><td class="dcell"><table class="display"><tr><td class="dcell" style="text-align:center"><span style="font-style:italic">x</span><sup>2</sup></td></tr>
@@ -5459,8 +6125,8 @@ mathématiques ?
 </table><p>
 Nous avons ainsi : <span style="font-style:italic">e</span>= 1+1+1/2+1/6 +1/24+ … + + 1/<span style="font-style:italic">n</span>! + …  <br>
 Et également <span style="font-style:italic">e</span> = lim<sub><span style="font-style:italic">n</span> → ∞</sub> (1/1+<span style="font-style:italic">n</span>)<sup><span style="font-style:italic">n</span></sup> </p>
-<!--TOC section id="sec111" Les fonctions sin1/<span style="font-style:italic">x</span> et <span style="font-style:italic">x</span> . sin1/<span style="font-style:italic">x</span> -->
-<h2 id="sec111" class="section">6.16 Les fonctions sin1/<span style="font-style:italic">x</span> et <span style="font-style:italic">x</span> . sin1/<span style="font-style:italic">x</span> </h2><!--SEC END --><div class="center">
+<!--TOC section id="sec127" Les fonctions sin1/<span style="font-style:italic">x</span> et <span style="font-style:italic">x</span> . sin1/<span style="font-style:italic">x</span> -->
+<h2 id="sec127" class="section">7.17 Les fonctions sin1/<span style="font-style:italic">x</span> et <span style="font-style:italic">x</span> . sin1/<span style="font-style:italic">x</span> </h2><!--SEC END --><div class="center">
 [scale =3]
 	[-&gt;] (-0.2, 0) – (1, 0) node[right] <span style="font-style:italic">x</span>;
 	[-&gt;] (0, -1) – (0, 1) node[above] sin1/<span style="font-style:italic">x</span>;
@@ -5475,8 +6141,8 @@ Et également <span style="font-style:italic">e</span> = lim<sub><span style="fo
 [domain=0.01:1, smooth, variable=, red] plot (, -);
 
 </div>
-<!--TOC section id="sec112" Srivanasa Ramanujan-->
-<h2 id="sec112" class="section">6.17 Srivanasa Ramanujan</h2><!--SEC END --><p>
+<!--TOC section id="sec128" Srivanasa Ramanujan-->
+<h2 id="sec128" class="section">7.18 Srivanasa Ramanujan</h2><!--SEC END --><p>
 Le mathématicien indien aurait découvert la très belle formule 
 </p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell">3 = </td><td class="dcell"><table style="border-spacing:0" class="cellpadding0"><tr><td ALIGN="right"><div CLASS="vertical-rule" STYLE="height:8em;"></div></td></tr>
 <tr><td><span style="font-size:xx-large"><span style="font-size:150%">√</span></span></td></tr>
@@ -5591,12 +6257,21 @@ print_string (f_latex 1 10) ;;
 </table></td></tr>
 </table></td></tr>
 </table>
-<!--TOC section id="sec113" L’alphabet grec. Extraits du nouveau testament-->
-<h2 id="sec113" class="section">6.18 L’alphabet grec. Extraits du nouveau testament</h2><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:center;white-space:nowrap" > α</td><td style="text-align:center;white-space:nowrap" >β</td><td style="text-align:center;white-space:nowrap" >γ</td><td style="text-align:center;white-space:nowrap" >δ</td><td style="text-align:center;white-space:nowrap" >є</td><td style="text-align:center;white-space:nowrap" >ζ</td><td style="text-align:center;white-space:nowrap" >η</td><td style="text-align:center;white-space:nowrap" >θ</td><td style="text-align:center;white-space:nowrap" >ι</td><td style="text-align:center;white-space:nowrap" >κ</td><td style="text-align:center;white-space:nowrap" >λ</td><td style="text-align:center;white-space:nowrap" >µ</td><td style="text-align:center;white-space:nowrap" >ν</td><td style="text-align:center;white-space:nowrap" >ξ</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">o</span></td><td style="text-align:center;white-space:nowrap" >π</td><td style="text-align:center;white-space:nowrap" >ρ</td><td style="text-align:center;white-space:nowrap" >σ</td><td style="text-align:center;white-space:nowrap" >τ</td><td style="text-align:center;white-space:nowrap" > υ</td><td style="text-align:center;white-space:nowrap" >φ</td><td style="text-align:center;white-space:nowrap" >χ</td><td style="text-align:center;white-space:nowrap" >ψ</td><td style="text-align:center;white-space:nowrap" >ω </td></tr>
+<!--TOC section id="sec129" Le grec ancien-->
+<h2 id="sec129" class="section">7.19 Le grec ancien</h2><!--SEC END -->
+<!--TOC subsection id="sec130" L’alphabet grec-->
+<h3 id="sec130" class="subsection">7.19.1 L’alphabet grec</h3><!--SEC END --><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:center;white-space:nowrap" > α</td><td style="text-align:center;white-space:nowrap" >β</td><td style="text-align:center;white-space:nowrap" >γ</td><td style="text-align:center;white-space:nowrap" >δ</td><td style="text-align:center;white-space:nowrap" >є</td><td style="text-align:center;white-space:nowrap" >ζ</td><td style="text-align:center;white-space:nowrap" >η</td><td style="text-align:center;white-space:nowrap" >θ</td><td style="text-align:center;white-space:nowrap" >ι</td><td style="text-align:center;white-space:nowrap" >κ</td><td style="text-align:center;white-space:nowrap" >λ</td><td style="text-align:center;white-space:nowrap" >µ</td><td style="text-align:center;white-space:nowrap" >ν</td><td style="text-align:center;white-space:nowrap" >ξ</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">o</span></td><td style="text-align:center;white-space:nowrap" >π</td><td style="text-align:center;white-space:nowrap" >ρ</td><td style="text-align:center;white-space:nowrap" >σ</td><td style="text-align:center;white-space:nowrap" >τ</td><td style="text-align:center;white-space:nowrap" > υ</td><td style="text-align:center;white-space:nowrap" >φ</td><td style="text-align:center;white-space:nowrap" >χ</td><td style="text-align:center;white-space:nowrap" >ψ</td><td style="text-align:center;white-space:nowrap" >ω </td></tr>
 <tr><td style="text-align:center;white-space:nowrap" > <span style="font-style:italic">A</span></td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">B</span></td><td style="text-align:center;white-space:nowrap" >Γ</td><td style="text-align:center;white-space:nowrap" >Δ</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">E</span></td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">Z</span></td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">H</span></td><td style="text-align:center;white-space:nowrap" >Θ</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">I</span></td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">K</span></td><td style="text-align:center;white-space:nowrap" >Λ</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">M</span></td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">N</span></td><td style="text-align:center;white-space:nowrap" >Ξ</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">O</span></td><td style="text-align:center;white-space:nowrap" >Π</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">R</span></td><td style="text-align:center;white-space:nowrap" >Σ</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">T</span></td><td style="text-align:center;white-space:nowrap" >Υ</td><td style="text-align:center;white-space:nowrap" >Φ</td><td style="text-align:center;white-space:nowrap" ><span style="font-style:italic">X</span></td><td style="text-align:center;white-space:nowrap" >Ψ</td><td style="text-align:center;white-space:nowrap" >Ω
 </td></tr>
 </table></td></tr>
-</table><div class="center">
+</table>
+<!--TOC subsection id="sec131" Les mathématiques grecques-->
+<h3 id="sec131" class="subsection">7.19.2 Les mathématiques grecques</h3><!--SEC END --><table border=1  style="border-spacing:0;" class="cellpadding1"><tr><td style="text-align:center;border:solid 1px;white-space:nowrap" > j’apprends</td><td style="text-align:center;border:solid 1px;white-space:nowrap" >mathano </td></tr>
+<tr><td style="text-align:center;border:solid 1px;white-space:nowrap" > l’étude, la leçon</td><td style="text-align:center;border:solid 1px;white-space:nowrap" >to mathema </td></tr>
+<tr><td style="text-align:center;border:solid 1px;white-space:nowrap" > l’étude par excellence</td><td style="text-align:center;border:solid 1px;white-space:nowrap" >ta mathematija </td></tr>
+</table>
+<!--TOC subsection id="sec132" Extraits du nouveau testament-->
+<h3 id="sec132" class="subsection">7.19.3 Extraits du nouveau testament</h3><!--SEC END --><div class="center">
 
 [line width=0.7mm, smooth, tension=1] plot coordinates(0,0) (1,-0.5) (2.1, 0) (2.5, 0.55) ;
 [line width=0.7mm, smooth, tension=1] plot coordinates(0,0) (1,0.5) (2.1, 0) (2.5,-0.55) ;
@@ -5612,8 +6287,8 @@ node at (1.1,0) IQJUS ;
 ὃ μικρότερον μέν ἐστιν πάντων τῶν σπερμάτων: ὅταν δὲ αὐξηθῇ,
 μεῖζον τῶν λαχάνων ἐστίν, καὶ γίνεται δένδρον, ὥστε ἐλθεῖν τὰ πετεινὰ τοῦ οὐρανοῦ 
 καὶ κατασκηνοῦν ἐν τοῖς κλάδοις αὐτοῦ.</p><p>Eirene umin !
-</p><!--TOC chapter id="sec114" Références-->
-<h1 id="sec114" class="chapter">Références</h1><!--SEC END --><dl class="thebibliography"><dt class="dt-thebibliography">
+</p><!--TOC chapter id="sec133" Références-->
+<h1 id="sec133" class="chapter">Références</h1><!--SEC END --><dl class="thebibliography"><dt class="dt-thebibliography">
 <a id="genese">[1]</a></dt><dd class="dd-thebibliography">
 <em>Livre de la Genèse, Gn 11, 1-9</em>.</dd><dt class="dt-thebibliography"><a id="ab">[2]</a></dt><dd class="dd-thebibliography">
 Badiou Alain.
@@ -5630,7 +6305,10 @@ Baader Franz.
 <em>Term Rewriting and All That</em>.
 Cambridge University Press, 1998.</dd><dt class="dt-thebibliography"><a id="gide">[7]</a></dt><dd class="dd-thebibliography">
 André Gide.
-<em>Les faux monnayeurs</em>.</dd><dt class="dt-thebibliography"><a id="god">[8]</a></dt><dd class="dd-thebibliography">
+<em>Les faux monnayeurs</em>.</dd><dt class="dt-thebibliography"><a id="girard">[girard]</a></dt><dd class="dd-thebibliography">
+Jean-Yves Girard.
+<em>Le Point Aveugle, vers la perfection</em>.
+2006.</dd><dt class="dt-thebibliography"><a id="god">[8]</a></dt><dd class="dd-thebibliography">
 Douglas ‍R Hofstadter et ‍al.
 <em>G</em><em>ö</em><em>del, Escher, Bach: an eternal golden braid</em>, volume ‍13.
 Basic books New York, 1979.</dd><dt class="dt-thebibliography"><a id="vh">[9]</a></dt><dd class="dd-thebibliography">

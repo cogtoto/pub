@@ -60,7 +60,7 @@
 the active will, the contemplative reason, and the desire for aesthetic perfection.} \cite{wm}
 
 
-C'est sous cet angle de l'esthétique que j'ai voulu ici modestement décrire quelques concepts 
+C'est sous cet angle de l'esthétique que j'ai voulu modestement décrire ici quelques concepts 
  des fondements mathématiques de l'informatique.
 
  \vspace{0.5cm}
@@ -325,7 +325,7 @@ De même, nous n'aurons plus la facilité syntaxique de l'associativité à gauc
 du corps des abstractions.
 Je ne sais pas si une telle grammaire peut être conçue pour une analyse en mode
 récursif descendant.
-Je pense que non (après m'être un peu cassé les cheveux là-dessus\ldots)
+Je pense que non (après m'être un peu cassé les cheveux là-dessus... ). 
 
 Voici le code associé.
 \begin{Verbatim}
@@ -606,12 +606,6 @@ Un corollaire ne devrait pas nécessiter de preuve car supposée évidente. La v
 	 }	  ;
 \end{tikzpicture}
 
-
-
-
-		 
-
-
 \begin{Verbatim}
 let t1 = App (Lam ("x",App (Lam ("y", App (Var ("x"), Var ("y"))),Var ("u"))), Var ("z")) ;;
 # fullReduc t1 ;;
@@ -660,6 +654,182 @@ Voici un exemple de terme qui ne termine pas et qui enfle.
 $$ (\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta (\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx)
 \rightarrow _\beta (\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx)(\lambda x.xxx) \rightarrow _\beta \ldots
 $$  
+
+\section{Démonstration de la confluence du $\lambda$-calcul}
+Comment prouver que le $\lambda$-calcul est bien confluent ? C'est-à-dire que pour tout terme $M$, si $M\twoheadrightarrow M_1$ et
+  $ M\twoheadrightarrow M_2 $,
+alors il existe $M_3$ tel que $M_1\twoheadrightarrow M_3$ et  $M_2\twoheadrightarrow  M_3$.
+
+La démonstration pose quelques difficultés techniques.
+
+\begin{enumerate}
+	\item Il est difficile de raisonner par cas sur une relation $\twoheadrightarrow $
+	 qui est la cloture transitive
+	 et réflexive de la réduction en une étape $\rightarrow$
+
+	\item La réduction en une étape $\rightarrow$ n'a pas la propriété du diamant. Nous la rappelons : pour tout terme $M$,
+	 si $M\rightarrow  M_1$ et  $M\rightarrow M_2$,
+alors il existe $M_3$ tel que $M_1\rightarrow M_3$ et  $M_2\rightarrow M_3$.
+
+En effet, soit $R$ un redex qui se reduit en $R'$, le terme $(\lambda x.xx) R \rightarrow RR$ ou bien 
+ $(\lambda x.xx) R \rightarrow (\lambda x.xx) R'$. Il faudra une ou deux étapes pour arriver à $R'R'$. 
+
+ \item On démontre facilement (par étude de cas sur la structure du $\lambda$-terme) 
+ la faible confluence de la relation $\beta$, ç-à-d si $M \rightarrow M_1$ et $M \rightarrow M_2$, alors
+ il existe $M_3$ tel que $M_1 \twoheadrightarrow M_3$ et $M_2 \twoheadrightarrow M_3$.
+ Cependant la confluence faible n'implique pas la confluence si la relation n'est pas noetherienne.
+ C'est le cas du lambda calcul qui n'est pas fortement normalisant... 
+Considérons $\Omega \equiv \lambda x.xx $, nous avons une chaîne de réduction infinie $\Omega \rightarrow \Omega \rightarrow \dots $
+
+ \item Cependant, nous pourrons démontrer plus facilement la propriété du parallélogramme: pour tout terme $M$,
+  si $M\rightarrow M_1$ et  $M\twoheadrightarrow  M_2$,
+alors il existe $M_3$ tel que $M_1\twoheadrightarrow  M_3$ et  $M_2\twoheadrightarrow M_3$.
+
+Cette propriété du parallélogramme qui semble plus faible que la confluence lui est en fait équivalente. Cela
+s'explique par le diagramme suivant :
+
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+	\draw [-latex] (3,3) -- (2,2)  ;
+	\draw [-latex] (3,3) --node{$*$} (6,0)  ;
+	\draw [-latex] (2,2) --node{$*$} (5,-1)  ;
+	\draw [-latex] (6,0) --node{$*$} (5,-1)  ;
+
+	\draw [-latex, dashed] (2,2) -- (1,1) ;
+	\draw [dotted] (1,1) -- (0,0) ;
+	\draw [-latex, dashed] (0,0) -- (-1,-1) ;
+
+	\draw [-latex, dashed] (1,1) --node{$*$}  (4,-2) ;
+	\draw [-latex, dashed] (0,0) -- node{$*$} (3,-3) ;
+	\draw [-latex, dashed] (-1,-1) -- node{$*$} (2,-4) ;
+
+	\draw [-latex, dashed] (5,-1) -- node{$*$} (4,-2) ;
+	\draw [dotted] (4,-2) -- (3,-3) ;
+	\draw [-latex, dashed] (3,-3) -- node{$*$} (2,-4) ;
+\end{tikzpicture}
+\end{center}
+
+\item L'idée de la démonstration est simple : supposons $M \stackrel{\Delta}{\rightarrow} M_1  $ où
+$\Delta$ est un redex de $M$. Si dans la réduction $M\twoheadrightarrow M_2$, on garde la trace de ce qui se passe
+sur $\Delta$, alors en réduisant tous les résidus de $M_2$, on obtiendra $M_3$.
+\end{enumerate}
+
+\subsection{La restriction $\Lambda '$ du $\lambda$-calcul}
+Pour tracer les redex uniquement à réduire, on introduit $\Lambda '$, une restriction du $\lambda$-calcul.
+
+
+$\Lambda '$ est définie de manière inductive comme ci-dessous comme le $\lambda$-calcul avec en addition
+l'expression $((\lambda _i x.M)N)$ pour $i \in \mathbb{N}$
+Ainsi, nous marquons par un indice $i$ le redex que nous voulons tracer.
+Nous définissons également la réduction $\beta '$  qui contient la réduction $\beta$ et y ajoute 
+$(\lambda_i x.M)N \rightarrow M [x:=N]$
+
+Enfin, nous ajoutons la fonction $\phi$ qui réduit uniquement les redex indicés, et non les autres.
+$$\phi ((\lambda _i x.P)Q) \equiv \phi (P) [x:=\phi(Q)]$$
+
+Nous utilisons les notations $M\stackrel{\shortparallel }{\longrightarrow} N$
+et $M\stackrel{\phi } {\longrightarrow}N$
+
+Le pouvoir réducteur de $\beta '$ est le même que $\beta$.
+En outre, on a la propriété suivante : si $M \stackrel{\beta '}{\twoheadrightarrow} N$,
+alors   $\phi(M) \stackrel{\beta}{\longrightarrow} \phi (N)$ 
+
+\subsection{La démonstration}
+Nous présentons ici la démonstration détaillée dans \cite{baren_bible}.
+
+\begin{enumerate}
+	\item Hypothèses: $M\stackrel{\beta}{\twoheadrightarrow} N$ et
+                    $M\stackrel{\beta}{\rightarrow} M'$        
+       \item Cherchons à prouver qu'il existe $N'$ tel que  $N\stackrel{\beta}{\twoheadrightarrow} N'$ 
+et  $M' \stackrel{\beta}{\twoheadrightarrow} N'$ 
+        \item $M'$ est le résultat de la contraction du redex $\Delta$ dans $M$. Soit $\tilde{M} \in \Lambda '$
+        obtenu de $M$ en indexant $\Delta$. Alors, $ \tilde{M} \stackrel{\shortparallel}{\rightarrow} M$ et 
+       $ \tilde{M} \stackrel{\phi}{\rightarrow} M'$ 
+       \item Nous obtenons, l'existence d'un $\tilde{N}$ par $\tilde{M}\stackrel{\beta '}\twoheadrightarrow \tilde{N}$
+       \item Nous obtenons aussi l'existence d'un $N'$ tel que $\tilde{N} \stackrel{\phi}{\twoheadrightarrow} N'$
+       et $N \stackrel{\beta}{\twoheadrightarrow} N'$
+       \item Nous avons de même $M' \stackrel{\beta}{\twoheadrightarrow} N'$
+       \item Nous avons bien trouvé notre terme confluent $N'\ \  \square $
+
+\end{enumerate}
+
+\subsection{Un exemple}
+\begin{enumerate}
+	\item Soit $M \equiv (\lambda x.xx)((\lambda y.z)w)$ , nous avons 
+	$M \stackrel{\beta}{\rightarrow} N' \equiv (\lambda x.xx)z$ et $M \stackrel{\beta}{\rightarrow} N \equiv ((\lambda y.z)w)((\lambda y.z)w)$
+       \item Cherchons  $N'$ tel que  $N\stackrel{\beta}{\twoheadrightarrow} N'$ 
+et  $M' \stackrel{\beta}{\twoheadrightarrow} N'$ 
+	\item  Soit le redex $\Delta$ de $M$ tel que $\Delta \equiv ((\lambda y.z)w)$, alors $\tilde{M} \equiv (\lambda x.xx)((\lambda_1 y.z)w)$
+	Nous avons $\tilde{M}  \stackrel{\phi}{\rightarrow} M' \equiv (\lambda x.xx)z$
+	\item $\tilde{N}$ est obtenu de la même manière que $N$, mais en marquant les résidus de $\Delta$ :
+	 $\tilde{N} \equiv  ((\lambda _1 y.z)w)((\lambda _1 y.z)w)$
+
+	 \item  Nous réduisons maintenant les résidus de $\tilde{N}$ pour obtenir
+	  $\tilde{N}  \stackrel{\phi}{\twoheadrightarrow} zz$ \\
+	  Aussi, nous avons bien également $N \stackrel{\beta}{\twoheadrightarrow} zz$
+
+	 \item Nous avons également $M' \equiv (\lambda x.xx)z \stackrel{\beta}{\rightarrow} zz$
+	 \item Ainsi $N' \equiv zz$
+\end{enumerate}
+
+\subsection{La $\beta$-réduction parallèle}
+Une autre méthode de démonstration de la confluence repose sur l'introduction d'une nouvelle relation $\beta _\parallel $.
+Cette relation va permettre la réduction simultanée de plusieurs redex du $\lambda$-terme.
+
+\begin{definition}
+	La $\beta _\parallel$ réduction repose sur les 4 règles suivantes:
+	\begin{enumerate}
+		\item  
+		$ x \Rightarrow_\beta  x $
+		\item 
+		$ \lambda x.M \Rightarrow_\beta  \lambda x.M' , si\ M \Rightarrow_\beta  M' $
+		\item 
+		$ MN \Rightarrow_\beta  M' N' , \ si\ M  \Rightarrow_\beta  M' 
+		                                               \ et\ N  \Rightarrow_\beta  N'$
+		\item 
+		$ (\lambda x.M)N \Rightarrow_\beta M'[x:=N'] , \ si\ M \Rightarrow_\beta  M' 
+		                                               \ et\ N  \Rightarrow_\beta N'$
+	\end{enumerate}
+
+\end{definition}
+On peut démontrer par induction que cette relation $\beta _\parallel$ respecte la propriété du diamant : si
+$M \Rightarrow M_1,M_2$, alors $\exists N$ tel que $M_1,M_2  \Rightarrow N$.
+
+Cependant, nous allons encore plus simplement montrer qu'il existe un $M^*$ tel que si $M  \Rightarrow N  \forall N$, alors
+$N  \Rightarrow M^*$. Ce $M^*$ sera indépendant de $N$.
+L'idée est que le terme $M^*$ sera obtenu en réduisant simultanément tous les redex présents dans $M$.
+
+
+Soit la fonction $\mathcal{G}$, tel que 
+\begin{align}
+	\mathcal{G}(x)&=x \\
+	\mathcal{G}(\lambda x.M) &= \lambda x.(\mathcal{G}(M)) \\
+	\mathcal{G}(MN)&= \mathcal{G}(M)\mathcal{G}(N), \ si\ M \neq \lambda x.M_1 \\
+	 \mathcal{G}((\lambda x.M)N) &= \mathcal{G}(M)[x:=\mathcal{G}(N)]  
+\end{align}
+Nous pouvons montrer que si $M  \Rightarrow _\beta N, \forall N$, alors
+$N  \Rightarrow  _\beta \mathcal{G}(M)$.
+Par induction sur la relation $M  \Rightarrow _\beta N$  :
+ \begin{enumerate}
+	\item si $M \equiv x$, alors $N \equiv x \equiv \mathcal{G}(x)$
+
+	\item si $M \equiv \lambda x.M_1$, alors $N \equiv \lambda x.N_1$, avec $M_1  \Rightarrow _\beta N_1$. 
+	Par récurrence, $M_1  \Rightarrow _\beta \mathcal{G}(M_1)$, donc $M  \Rightarrow _\beta \lambda x.\mathcal{G}(M)_1 \equiv
+	\mathcal{G(M)}$
+
+	\item si $M\equiv (M_1 M_2)  \Rightarrow _\beta  N $, alors $N \equiv N_1 N_2$ 
+	avec $M_1 \Rightarrow _\beta N_1$ et  $M_2 \Rightarrow _\beta N_2$ , alors nous avons
+	 $N_1 N_2 \Rightarrow _\beta \mathcal{G}(N_1) \mathcal{G}(N_2) \equiv \mathcal{G}(M)$
+
+	 \item si $M\equiv ((\lambda x.M_1)M_2) \Rightarrow _\beta N$, alors 2 sous-cas à considérer :
+	 \subitem 
+	      si $N \equiv (\lambda x.N_1)N_2$, alors $N \Rightarrow _\beta \mathcal{G}(M_1)[x:=\mathcal{G}(M_2)] \equiv \mathcal{G}(M)$
+	 \subitem 
+	      si $N \equiv N_1[x:=N_2]$, alors $N \Rightarrow _\beta \mathcal{G}(M_1)[x:=\mathcal{G}(M_2)] \equiv \mathcal{G}(M)$ 
+
+
+\end{enumerate}
+
 
 \section{La $\beta$-réduction faible avec appel par valeur}
 Dans un langage fonctionnel comme SCHEME ou ML, il est important de noter que contrairement au $\lambda$-calcul, le corps de la lambda n'est pas \'{e}valu\'{e}. 
@@ -711,10 +881,11 @@ $$
 $$
 \end{itemize}
 
-\section{La récursivité, le point fixe et la diagonale de Cantor}
+\section{Récursivité et points fixes} 
 
 What else is a loop but a way of representing an endless process in a finite way?
 \cite{god}
+
 
 \begin{center}
  \begin{tabular}{cc}
@@ -724,7 +895,7 @@ What else is a loop but a way of representing an endless process in a finite way
  \end{tabular}
 \end{center}
 
-
+\subsection{Le point fixe du $\lambda$-calcul} %%
 
 En analyse, le point fixe d'une fonction $f$ est sa valeur $x$ telle que $f(x)=x$
 
@@ -786,14 +957,13 @@ val square2 : int -> float = <fun>
 \end{Verbatim}
 
 
-En $\lambda $-calcul, nous avons un combinateur\footnote{Un combinateur est un $\lambda$-terme comprenant uniquement 
+En $\lambda $-calcul, de manière très surprenante, il s'avère que tout terme a un point fixe !
+Nous avons un combinateur\footnote{Un combinateur est un $\lambda$-terme comprenant uniquement 
 des variables li\'{e}es} qui nous permet de calculer le point fixe de n'importe quel $\lambda $-terme.
 Ce combinateur s'appelle $Y$ . Il est défini par $$ Y=  \lambda f.(\lambda x.f(x x))(\lambda x.f(x x)) $$
 
-
 Ce n'est pas le seul combinateur de point fixe. Voici un autre d\^{u} \`{a} Turing :
  $$\Theta = (\lambda x. \lambda y. (y (x x y))) (\lambda x. \lambda y. (y (x x y)))$$
-
 
 Voici l'arbre syntaxique de $Y$:
 \begin{center}
@@ -920,9 +1090,6 @@ En SCHEME, nous pourrons implémenter ce combinateur $Z$ :
    (lambda (x) (lambda(v) ((f (x x) v))))))
 \end{Verbatim}
 
-
-
-
 En ML, le typage ne nous permettra pas de coder un combinateur comme $Y$ ou $Z$.
 
 Essayons cependant d'écrire:
@@ -954,7 +1121,6 @@ val fix : (('a -> 'b) -> 'a -> 'b) -> 'a -> 'b = <fun>
 - : int = 120
 \end{Verbatim}
 Ici aussi, le mécanisme de la ``$\eta$-expansion'' est utilisé.
-Je suis surpris cependant de voir que \verb+fix+ prenant deux arguments est correctement évalué lors de son appel \verb+(fix f)+.
 Je ne peux reproduire cela en SCHEME:
 
 \begin{Verbatim}
@@ -975,8 +1141,13 @@ Je ne peux reproduire cela en SCHEME:
   given: 1
 \end{Verbatim}
 
-%% la diagonale de Cantor %%
-Le théorème de Cantor nous dit qu'il n'y a pas de fonction surjective 
+\subsection{La diagonale de Cantor} %%
+ A la différence du $\lambda$-calcul où tout terme a un point fixe, la recherche de point fixe
+peut amener à des situations paradoxales.
+Voyons cela avec le théorème  de Cantor.
+
+
+Ce théorème nous dit qu'il n'y a pas de fonction surjective 
 $f: \mathbb{N} \rightarrow ( \mathbb{N} \rightarrow \mathbb{B}) $.
 Autrement dit, le cardinal des parties de $\mathbb{N}$ est strictement plus grand que le cardinal de $\mathbb{N}$.
 Démontrons cela. \\
@@ -1096,29 +1267,96 @@ on applique l'hypothèse de surjection de $f$ sur $h$
 \coqdockw{End} \coqdocvar{Cantor}.\coqdoceol
 \end{coqdoccode}
 
-Que vient faire Cantor sur ce chapitre décrivant les opérateurs de point fixes du $\lambda$-calcul ?
-Le mécanisme de la diagonalisation nous permet de retrouver l'opérateur de point fixe
- $\lambda g.(\lambda.g(xx))(\lambda.g(xx)$
 Nous pourrons nous reférer à l'ouvrage de Jean-Yves Girard, \textit{Le Point Aveugle}
 \cite{girard}
 
-Voyons cela.
+La construction ci-dessus appliquée sur le $\lambda$-calcul permet de mettre en évidence de 
+manière constructive que tout $\lambda$-terme a un point fixe.
+Considérons la fonction $f \equiv \lambda xy.xy$, l'application $xy$ dénote $x \in y$.
+Soit $g$ une fonction quelconque dont on recherche un point fixe.
+Considérons $h\equiv \lambda x.g(f (x x))=\lambda x.g(x x)$, alors $h h$ est 
+le point fixe recherché car :
+$$
+hh=(\lambda x.g(xx))(\lambda x.g(xx))=g(\lambda x.g(xx)(\lambda x.g(xx)))=g(hh)
+$$
 
-Prenons la fonction identité $f = \lambda x.x$. Considérons cette fonction identité
-pouvant prendre en argument une abstraction et rendant une abstraction pour se rapprocher
-de notre fonction $f$ précédente de type $A \rightarrow (A \rightarrow B)$
+\subsection{Le point fixe logique et le théorème d'incomplétude de Gödel} %%
+Il y a une similitude forte entre le point fixe du $\lambda$-calcul et le point fixe \textit{logique}. Voyons cela.
 
-Cette fonction est bien surjective. Donc par la contraposée du théorème de Cantor, 
-quel que soit $h$, nous aurons un $a$ tel que  $f a = h$, et ce $a$ pourra être $h$.
-Par diagonalisation : $ f a a = h a = h h $
+Nous ne décrirons pas le mécanisme de codage. 
+Nous utiliserons les fonctions suivantes :
+\begin{align*}
+\ulcorner t  \urcorner :& \  terme \rightarrow terme \hspace{1.3cm} \text{la fonction qui donne le code syntaxique d'un terme}\\
+\#  t :& \  terme \rightarrow \mathbb{N} \hspace{2cm} \text{la fonction qui donne le code numérique d'un terme}\\
+\overline{  n } :& \  \mathbb{N} \rightarrow terme \hspace{2cm}  \text{la fonction qui transforme un code numérique
+ en code syntaxique}
+\end{align*}
 
-Considérons $h = \lambda x.g((f x) x)$ pour un terme $g$ quelconque.
-$f$ est la fonction identité, donc $h= \lambda x.g(x x)$
-$$ h h = \lambda x.g(x x) \lambda x.g(x x)$$
-$$ h h = g (h h)$$
-L'opérateur de point fixe est ainsi $Y=\lambda g.(\lambda x.g(x x) \lambda x.g(x x))$.
-Aucun terme n'est donc sans point fixe dans le $\lambda$-calcul à la différence de l'exemple précédent où notre
-fonction de $\mathbb{B} \rightarrow \mathbb{B}$ n'avait pas de point fixe.
+On notera ainsi $\ulcorner t \urcorner$, le terme $\overline{n}$  si 
+$\# t =n$ . 
+
+
+\begin{theoreme}[Le point fixe logique]
+	Soit $T$ une théorie permettant de définir toutes les fonctions récursives.
+	Soit $\psi$ une formule quelconque avec une variable libre. Il existe une proposition $\phi$ telle que
+	$$ T \vdash \phi \leftrightarrow \psi (\ulcorner \phi\urcorner ) $$
+\end{theoreme}
+\begin{proof}
+	Soit la fonction diagonale $d : \mathbb{N} \rightarrow \mathbb{N} $ définie par :
+	$ d(n)= \# \chi _n(\overline{n})$ où $\chi_n$ est telle que $\# \chi =n$. Ainsi $d$ 
+	est une fonction récursive et donc définissable dans notre théorie $T$. On a donc :
+	$$T \vdash \forall y (\delta(\overline{n}, y)) \leftrightarrow y=\overline{d(n)} $$
+
+	Soit la formule $\alpha$ telle que $\alpha (x)=\exists y (\delta(x,y) \land \psi(y))$
+	, alors notre point fixe est $\phi = \alpha (\ulcorner \alpha \urcorner )$ \\
+	En effet :
+
+	\begin{align*}
+	 T \vdash \phi & \leftrightarrow \alpha(\ulcorner \alpha \urcorner ) \\
+	                 & \leftrightarrow \exists y\ (\delta( \ulcorner \alpha \urcorner , y) \land \psi (y)) \\
+	                 & \leftrightarrow \exists y\ (y=\ulcorner \alpha(\ulcorner \alpha  \urcorner)\urcorner \land \psi (y)) \\
+	                 & \leftrightarrow \psi (\ulcorner \alpha(\ulcorner \alpha \urcorner)\urcorner)  \\
+	                 & \leftrightarrow \psi (\ulcorner \phi \urcorner ) \\
+	\end{align*}
+\end{proof}
+
+
+La similitude avec le point fixe du $\lambda$-calcul est directe :
+$$
+\begin{array}{c|c}
+ \phi \leftrightarrow \psi (\ulcorner \phi\urcorner ) & p = fp \\
+ \delta(x,y) & \lambda x.xx \\
+ \exists y (\delta(x,y) \land \psi(y)) & \lambda x.f (x x) \\
+ \phi \equiv \alpha(\ulcorner \alpha \urcorner) & p \equiv (\lambda x.f(xx)) (\lambda x.f(xx)) \\
+\end{array}
+$$
+
+\begin{theoreme}[Indécidabilité de l'arithmétique]
+	Soit $T$ une théorique consistance telle que toutes les fonctions récursives
+	y soient $T$-définissables, alors $T$ est essentiellement indécidable.
+\end{theoreme}
+\begin{proof}
+        Soit la formule $th(\ulcorner x \urcorner)$ telle que :
+	\begin{align*}
+	T \vdash th(\ulcorner x \urcorner) \ &\text{ssi $x$ est un théorème de $T$} \\
+	T \vdash \neg th(\ulcorner x \urcorner) \ &\text{ssi $x$ n'est pas un théorème de $T$} \\
+	\end{align*}
+	Reprenons le thèorème du point fixe :
+	 $ T \vdash \phi \leftrightarrow \psi (\ulcorner \phi\urcorner ) $ et appliquons le à
+	 la fonction $\neg th$.
+	 
+	 Nous avons alors l'existence d'un point fixe $G$ tel que
+	  $$T \vdash G \leftrightarrow \neg th (\ulcorner G \urcorner ) $$ 
+
+	  Nous avons la contradiction suivante : $T \vdash G$ ssi $T \vdash th(\ulcorner G \urcorner)$ par définition de $th$
+	  et $T \vdash G$ ssi $T \vdash \neg th (\ulcorner G \urcorner)$ par construction de $G$
+\end{proof}
+
+\begin{theoreme}[Gödel, incomplétude de l'arithmétique]
+	Toute théorie consistante et telle que toutes les fonctions récursives y soient définissables
+	est incomplète.	
+\end{theoreme}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2115,7 +2353,7 @@ let exf = Lam ("x", False, I) (* ex falso quodlibet *)
 > λx:False.I
   (False→True) 
 \end{Verbatim}
-Voici un exemple simple manipulant la négation et la fonction d'induction du faux.
+Voici un exemple simple manipulant la négation et la fonction d'induction du faux.  
 
 \begin{coqdoccode}
 \coqdocnoindent
@@ -2499,9 +2737,9 @@ level 2/.style={sibling distance=2cm},  level 3/.style={sibling distance=1.5cm}]
 \end{center}
 
 L'étape \textit{EVAL} va parcourir l'arbre syntaxique de l'expression, traiter cette expression et
-en exprimer une valeur mod\'{e}lis\'{e}e avex le type \verb+value+
+en exprimer une valeur mod\'{e}lis\'{e}e avec le type \verb+value+
 
-La fonction \verb+eval+ est une fonction prenant comme arguments une expression de type \verb+ast+ et un environnement.
+La fonction \verb+eval+ est une fonction prenant pour  arguments une expression de type \verb+ast+ et un environnement.
 Elle retourne une valeur de type \verb+exp+. Voici sa signature: \\
 \verb+val eval : ast -> env -> exp = <fun>+
 
@@ -4696,10 +4934,27 @@ let add x y =
 	 !r
 	)
 \end{Verbatim}
-Existe-t'il des fonctions caculables qui ne sont pas primitives récursives ?
+Existe-t'il des fonctions calculables qui ne sont pas primitives récursives ?
 La réponse est oui. Notamment toute fonction qui ne termine pas (boucle \verb+while+ infinie)
 ne pourra s'écrire en fonction récursive primitive.
-Il est cependant beaucoup plus complexe d'identifier des fonctions qui terminent et qui soient non récursives primitives.
+
+
+Nous pouvons également montrer par un  argument \textit{diagonal}, qu'il existe des fonctions que nous ne 
+pouvons retrouver dans l'énumération des fonctions primitives récursives.
+\begin{proof}
+	Numérotons l'ensemble des fonctions récursives par l'indice $n$
+
+	Soit $f(n,x)$, la fonction prenant en argument cet indice $n$ et un argument $x$ sur $\mathbb{N}$.
+       
+	Soit la fonction $g(z)=z+1$, considérons la fonction $h(x)=g(f(x,x))=f(x,x)+1$
+
+        S'il existe un indice $a$, tel que $f(a,x)=h(x)$, alors $h(a)=f(a,a)=f(a,a)+1$ ce qui est 
+	impossible. Donc la fonction $h$ n'est pas récursive primitive.
+
+\end{proof}
+
+Il est cependant plus complexe d'identifier de fonctions plus \textit{concrètes}
+ qui terminent et qui soient non récursives primitives.
 La fonction d'\textit{Ackermann} est traditionnelement donnée en exemple, bien que cette fonction n'a pas
 de réalité pratique\dots
 
@@ -4896,7 +5151,8 @@ etat:qf  position:0  lire:   bande:   nonXXXX
   $(ii) f$ est récursive sont équivalentes.
 \end{theoreme}
 
-\section{Complexité et théorème de Cook}
+\section{Complexité}
+\subsection{Théorème de Cook}
 \begin{definition}
 	Un problème est appelé NP-complet s'il vérifie les deux propriétés suivantes :
 	\begin{enumerate}
@@ -4963,9 +5219,219 @@ type cnf = disj list ;;
 \end{Verbatim}
 
 \subsection{Sudoku - SAT encoding}
+L'algorithme permettant de résoudre les sudokus peut être réalisé par l'algorithme SAT en modélisant
+les contraintes du sodoku sous la forme de clauses propositionnelles. Une variable $s_{xyz}$ représente que la
+case de la ligne $x$ et colonne $y$ porte le nombre $z$.
+\begin{enumerate}
+	\item Contrainte $C_1$. Il y a au moins un nombre pour chaque case 
+	$$ C_1 \triangleq \bigwedge _{x=1}^9  \bigwedge _{y=1}^9 \bigvee  _{z=1}^9 s_{xyz}$$
+
+	\item Contrainte $C_2$.  Chaque nombre apparait au plus une fois dans une ligne
+	$$  C_2 \triangleq \bigwedge _{y=1}^9  \bigwedge _{z=1}^9 \bigwedge _{x=1}^8 \bigwedge _{i=x+1}^9  ( \lnot s_{xyz} \vee \lnot s_{iyz} ) $$
+
+	\item  Contrainte $C_3$. Chaque nombre apparait au plus une fois dans une colonne
+	$$ \ C_3 \triangleq \bigwedge _{y=1}^9  \bigwedge _{z=1}^9 \bigwedge _{y=1}^8 \bigwedge _{i=y+1}^9  ( \lnot s_{xyz} \vee \lnot s_{xiz} ) $$
+
+	\item  Contraintes $C_1$ et $C_5$. Chaque nombre apparait au plus une fois dans une sous-grille 3x3
+	$$ \ C_4 \triangleq \bigwedge _{z=1}^9  \bigwedge _{i=0}^2 \bigwedge _{x=1}^3
+	 \bigwedge _{y=1}^3  \bigwedge _{k=y+1}^3  ( \lnot s_{(3i+x)(3j+y)z} \vee \lnot s_{(3i+x)(3j+k)z} ) $$
+
+	$$ \ C_5 \triangleq \bigwedge _{z=1}^9  \bigwedge _{i=0}^2 \bigwedge _{x=1}^3
+	 \bigwedge _{y=1}^3  \bigwedge _{k=x+1}^3  \bigwedge _{l=1}^3  ( \lnot s_{(3i+x)(3j+y)z} \vee \lnot s_{(3i+k)(3j+l)z} ) $$
+\end{enumerate}
+\begin{tiny}
 \begin{Verbatim}
-	
+let produce_C1 =
+  print_string "let c1 = [";
+  for x=1 to 9 do
+    for y=1 to 9 do
+      print_string "[" ;
+      for z=1 to 9 do
+        print_string ("P \"x"  ^ string_of_int x ^ string_of_int y ^ string_of_int z ^ (if z<>9 then "\"; " else "\"")  )
+      done ;
+      print_string ("]" ^ (if (x=9 && y=9)  then "" else ";") ^ "\n")  ;
+    done
+  done ;
+  print_string "]\n";
+;;
+
+(* C2 Each number appears at most once in each column *)
+let produce_C2 =
+  print_string "let c2 = [";
+  for y=1 to 9 do
+    for z=1 to 9 do
+      for x=1 to 8 do
+        for i=(x+1) to 9 do
+          print_string ("[ N \"x" ^ string_of_int x ^ string_of_int y ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int i ^ string_of_int y ^ string_of_int z  ^ "\"];\n ")
+        done
+      done
+    done
+  done ;
+  print_string "]\n" 
+;;
+
+(* C3 Each number appears at most once in each column *)
+let produce_C3 =
+  print_string "let c3 = [";
+  for x=1 to 9 do
+    for z=1 to 9 do
+      for y=1 to 8 do
+        for i=(y+1) to 9 do
+          print_string ("[ N \"x" ^ string_of_int x ^ string_of_int y ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int x ^ string_of_int i ^ string_of_int z  ^ "\"];\n ")
+        done
+      done
+    done
+  done ;
+  print_string "]\n" 
+;;
+
+(* C4 Each number appears at most once in each 3x3 sub-grid *)
+let produce_C4 =
+  print_string "let c4 = [";
+  for z=1 to 9 do
+    for i=0 to 2 do
+      for j=0 to 2 do
+        for x=1 to 3 do
+          for y=1 to 3 do
+            for k=(y+1) to 3 do
+          print_string ("[ N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+y) ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+k) ^ string_of_int z  ^ "\"];\n ")
+         done
+       done
+     done
+   done 
+  done
+done;
+  print_string "]\n" 
+;;
+let produce_C5 =
+  print_string "let c5 = [";
+  for z=1 to 9 do
+    for i=0 to 2 do
+      for j=0 to 2 do
+        for x=1 to 3 do
+          for y=1 to 3 do
+            for k=(x+1) to 3 do
+              for l=1 to 3 do
+          print_string ("[ N \"x" ^ string_of_int (3*i+x) ^ string_of_int (3*j+y) ^ string_of_int z  ^ "\"; " ^
+                       "N \"x" ^ string_of_int (3*i+k) ^ string_of_int (3*j+l) ^ string_of_int z  ^ "\"];\n ")
+         done
+       done
+     done
+   done 
+  done
+done
+done; print_string "]\n" 
+;;
 \end{Verbatim}
+\end{tiny}
+
+%%%%%%%%%%%%%%%%%%%%
+\section{Métaprogrammation - récursivité et réflexivité}
+\subsection{Introduction}
+Une fonction récursive en programmation est de la forme
+\begin{center}	
+\begin{Verbatim}
+                                   f(x) = ... f ...
+\end{Verbatim}
+\end{center}
+
+Nous pouvons formaliser cette récursivité syntaxique avec une fonctionnelle $\phi$ de la manière suivante :
+$$
+f(x)=\phi(f,x)
+$$
+Remplaçons $\phi$ par une fonction partielle récursive $g$ et l'argument $f$ de $\phi$ par un indice $n$ qui représente la numérotation 
+du code de $f$. Cette équation est alors transformée en 
+$$ \{n\}(x)=g(n,x)$$
+C'est la forme du théorème de Kleene que nous démontrerons juste après. Ce théorème implique que pour toute fonction $g$,
+il existe un indice $n$ tel que  le programme de $n$ recevant en entrée $x$ calcule le même résultat que $g(n,x)$	
+
+\subsection{Le théorème de Kleene}
+\begin{theoreme}[S-M-N]
+Pour tout indice $s$, il existe une fonction récursive primitive $\rho$ telle que 
+$$ \{s\}(m_1,m_2) = \{\rho(s,m_1)\}m_2 $$
+\end{theoreme}
+
+\begin{theoreme}[Kleene]
+Soit $g$ une fonction partielle récursive de $\mathbb{N}^{k+1}$ dans $\mathbb{N}$, il existe
+$n \in \mathbb{N}$ tel que $\{n\}(x_1, ..., x_k) = g (n,x_1, ...,x_k)$
+\end{theoreme}
+
+En voici  la démonstration constructive. 
+
+Soit la fonction $\rho$ définie précédemment de $\mathbb{N}^2 \rightarrow \mathbb{N}.$ \\
+Considérons la fonction $ (t,x_1,...,x_k) \mapsto g(\rho(t,t), x_1, ..., x_k) $,
+il existe  $m \in \mathbb{N}$ tel que $$g(\rho(t,t),x_1, ...,x_k) = \{m\}(t, x_1, ..., x_k)$$ 
+
+Par définition de $\rho$, on a $\{ \rho(m,t)\}(x_1,...,x_k)=\{m\}(t,x_1,...,x_k)$ \\
+Alors $n=\rho(m,m)$ est le point fixe recherché, car
+$g(n,x_1,...,x_k)=\{n\}(x_1,...,x_k)$ \\ $ \Box $
+
+
+\subsection{Un programme Quine}
+Un programme \textit{Quine} est un programme qui affiche son propre code, quelque soit l'entrée qu'il reçoit.
+Le théorème de Kleene assure l'existance de ce type de programme $n$ tel que $\forall x, \{n\}x=n $
+
+Comment construire un tel programme ?
+Appuyons nous sur la démonstration constructive du théorème de Kleene.
+D'après ce théorème, pour toute fonction $g$, il existe $n$ tel que $\{n\}(x)=g(n,x)$. 
+Considérons $g\equiv \lambda nx.n$
+
+
+$g$ ainsi affiche son premier argument $n$ en ignorant son deuxième argument $x$.
+
+Soit la fonction $(t,x) \mapsto g(\rho(t,t),x)$ qui donne $(t,x) \mapsto \rho(t,t)$
+
+
+Il existe $m \in \mathbb{N}$ tel que $\{m\}(t,x)=\rho(t,t)$.
+
+Par définition de $\rho$, on a $\{ \rho(m,t)\}(x)=\{ m \}(t,x)$
+
+
+$n\equiv \rho(m,m)$ est ce point fixe recherché car $ \{ \rho(m,m)\} (x) = \{ m \} (m,x) = n $
+
+Le programme à construire est donc de la forme d'un programme qui prend en entrée la data représentative de son code
+et l'affiche deux fois : son code et la data.
+
+En OCAML, nous pouvons définir un programme Quine par le code suivant:
+\begin{Verbatim}
+	(fun x -> Printf.printf "%s %S" x x) "(fun x -> Printf.printf \"%s %S\" x x)"	
+\end{Verbatim}
+Le programme prend ainsi en argument son propre code en data et l'affiche deux fois: une fois pour le programme 
+et une fois pour la data de manière \textit{quotée}. 
+
+\subsection{Le théorème de Rice}
+\begin{theoreme}[Rice]
+Soit $I_A=\{ x \in \mathbb{N}; \{x\} \in A \}$. A est un ensemble de fonctions partielles récursives. Alors 
+$I_A$ est décidable si et seulement si $A=\emptyset$ ou $A$ est l'ensemble des fonctions partielles récursives.
+\end{theoreme}
+En voici la démonstration par contradiction.
+
+Supposons qu'il existe  des fonctions récursive partielles d'indices $f$ et $g$ telles que $\{f\}\in A$
+ et $\{g\} \notin A$ 
+
+Définissons $h$ tel que :
+$h(x,y)=\{g\}(y)$ si $x \in A$ et 
+$h(x,y)=\{f\}(y)$ si $x \notin A$  
+
+D'après le théorème de Kleene, il existe $e \in \mathbb{N}$ tel que $h(e,y)=\{ e \}(y)$ pour tout $y$.
+
+Est-ce que $\{ e \}$ appartient à l'ensemble $A$ ?
+
+\begin{itemize}
+	\item Si $\{e\} \in A$, $\{e\}(y)=h(x,y)=\{g\}(y)$ 
+	Donc $\{g\}$ devrait appartenir à $A$. Contradiction.
+
+	\item Si $\{e\} \notin A$, $\{e\}(y)=h(x,y)=\{f\}(y)$ 
+	Donc $\{ f\}$ ne devrait appartenir à $A$. Contradiction.
+\end{itemize}
+
+\begin{theoreme}[corollaire, problème de l'arrêt] 
+Soit $x \in \mathbb{N}$, soit $H=\{ n\in \mathbb{N}; \{n\}(x) \downarrow \}$, alors $H$ est indécidable.
+\end{theoreme}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Annexes / Divers}
 \section{Quelques fonctions sur les listes}
  

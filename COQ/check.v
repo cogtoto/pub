@@ -1,5 +1,15 @@
 Definition id (A:Set) := fun (x:A) => x.
-Compute id nat 5.
+
+Inductive nat : Set :=
+| O : nat
+| S (_:nat) : nat.
+
+Check S O.
+
+
+Check 3.
+
+Compute (id nat (S (S O))).
 
 Check id.
 

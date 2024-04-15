@@ -1,0 +1,183 @@
+\documentclass[11pt]{book}
+\usepackage[LGR, T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{fullpage}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikzsymbols}
+\usetikzlibrary{math}
+\usetikzlibrary{patterns}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[polutonikogreek, french]{babel}
+\usepackage{fancyvrb}
+\usepackage{lscape}
+\usepackage{textcomp}
+\usepackage[euler]{textgreek}
+\usepackage{lmodern}
+\usepackage{alltt}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage[utf8x]{inputenc}
+\usepackage{mflogo}
+\usepackage{wrapfig}
+\usepackage{coqdoc}
+\usepackage{proof}
+\fvset{tabsize=2}
+\newfont{\letterimp}{beta}
+\newcommand{\imp}{{\letterimp D}\hspace{0.1cm}}
+\newfont{\lettersnow}{snow}
+\newcommand{\snow}{{\lettersnow S\hspace{0.2cm}}}
+\newcommand{\trans}{\overset{*}{\longrightarrow_{\beta}}}
+
+\title{Le calcul \\
+     La réduction et la résolution \\
+	 Exemples en \textsc{Scheme}, \textsc{Ocaml} et \textsc{Coq} \\ \vspace{1cm}
+   \textgreek{᾿Αγεωμέτρητος μηδε εἰσίτω} \\
+      }
+
+\author{Vincent Cognet}
+\date{Sainte-Marguerite, le 27 avril 2020 \\
+      \url{https://github.com/cogtoto}}
+
+\newtheorem{definition}{Définition}
+\newtheorem{theoreme}{Théorème}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+\chapter{\textgreek{Ἐν ἀρχή}, Gn 1.1 et Jn 1.1}
+
+\textit{Aristote considérait les mathématiques comme une discipline, non pas tant de la vérité, que de la beauté.}
+\cite{ab}
+
+
+\textit{What is mathematics ? Mathematics as an expression of the human mind reflects
+the active will, the contemplative reason, and the desire for aesthetic perfection.} \cite{wm}
+
+
+C'est sous cet angle de l'esthétique que je décrirai  ici quelques concepts 
+ des fondements mathématiques\footnote{\textgreek{\textbf{manj'anw}}: \textit{j'apprends} 
+\textgreek{\textbf{t`o m'ajnma}}: \textit{l'étude} 
+\textgreek{\textbf{t`a majematik'a}}: \textit{les mathématiques, l'étude par excellence}} de l'informatique. \\
+
+ \vspace{0.5cm}
+
+Qu'est-ce que le \textbf{calcul} ? Il est difficile d'en donner une définition abstraite. Essayons cependant de 
+décrire l'action de calculer, le processus du calcul. 
+
+Nous identifions deux processus bien distincts appelés la \textbf{réduction} et la \textbf{résolution}.
+La réduction est l'action de réduire séquentiellement une expression en une autre plus simple
+au moyen de règles de réécriture. Lorsque plus aucune règle ne s'applique, l'expression calculée est alors en forme
+\textit{normale}. Cette forme normale correspondra à la \textit{valeur} de notre calcul. \\
+$(3+8)+(4-9)*2$ \,\imp\,  $11 -5*2$ \, \imp\, $11 -10$ \,\imp\, $1$ \\
+
+Ce processus de réduction soulève deux difficultés essentielles : 
+\begin{itemize}
+	\item La terminaison. Est-ce-que le processus termine en un nombre fini d'étapes ?
+	\item La confluence. Si le processus termine, est-ce-que l'expression aboutit à une forme normale unique ?
+\end{itemize}
+\vspace{0.3cm}
+La fonction mathématique usuelle est peu adaptée à une étude du processus du calcul. Car elle
+repose en fait sur une définition en \textit{extension} : une fonction mathématique est la 
+description d'une relation d'un ensemble de départ face à son ensemble d'arrivée.
+
+Pour modéliser notre processus de calcul, il nous faut une définition en \textit{intension}, 
+c'est-à-dire avec des règles de calcul explicites. Fondé sur
+cette idée, le $\lambda$-calcul a été créé par Alonzo Church dans les années 1930.
+Il est maintenant utilisé comme socle de tout langage fonctionnel. 
+Même s'il est  rudimentaire et basé sur un mécanisme simple de réécriture,
+nous verrons qu'il permet d'exprimer toutes les fonctions calculables. Sa \textit{puissance}
+de calcul est similaire aux machines de Turing ou aux fonctions $\mu$-récursives de Gödel.
+Nous l'étudierons en détails.
+
+\vspace{0.3cm}
+L'autre processus de calcul est la résolution. Nous l'utilisons chaque fois que nous devons résoudre
+une équation. En résolvant $x^2+2x-15=0$, nous souhaitons que notre processus 
+soit \textit{complet}, c'est-à-dire que nous calculions 
+l'ensemble des valeurs possibles $\{-5; 3\}$.
+ Nous étudierons également  ce mécanisme, et en particulier l'algorithme d'unification.
+
+\vspace{0.3cm}
+Enfin, nous aborderons la correspondance bluffante de la programmation fonctionnelle avec la logique. 
+C'est la correspondance de Curry-Howard. \\
+Avec un langage de programmation typé comme \textsc{Ocaml} où tout terme a un type, nous pouvons
+considérer un terme comme étant  la preuve (ou plutôt une des preuves possibles) de son type. 
+Le mécanisme strict de typage nous assure de la cohérence du terme avec son type.
+Nous avons alors le rapprochement suivant:
+
+\begin{center}
+\begin{tabular}[]{|c|c|}
+  \hline
+  terme & preuve \\
+  \hline
+  type & proposition \\
+  \hline
+\end{tabular}
+
+\end{center}
+Nous sommes ici dans une logique constructive, démontrer une proposition revient à exhiber une preuve, c'est-à-dire 
+un terme ayant pour type la proposition.
+Ainsi, le principe du tiers-exclus $P \vee  \neg P$ ne peut être ici démontré.
+
+Le type faux est un type inhabité, donc nous le définissons sans constructeur : \verb+ type faux = | +
+
+Nous pouvons par exemple prouver le théorème du modus tollens : \\
+
+\verb+let modus_tollens (hfq:'q->faux) (hpq:'p->'q) (hp:'p) = hfq (hpq hp)+  \\
+Le type de cette expression est  \verb+('q -> faux) -> ('p -> 'q) -> 'p -> faux+  \\
+
+Dans un langage proposant un système de types plus évolué comme \textsc{Coq}, le faux peut être exprimé 
+par le type $\forall p:P, p$. Ce type est également inhabité. Supposer le faux permettra de démontrer 
+n'importe quelle proposition.
+
+\begin{Verbatim}
+Theorem faux : forall P:Prop, P.
+Admitted.
+
+Theorem absurdité : 1=2.
+Proof.
+    exact (faux (1=2)). 
+Qed.
+\end{Verbatim}
+
+La correspondance de Curry-Howard montre toute son étendue dans le calcul des constructions, qui 
+considère les types comme des termes de premier ordre et permet ainsi de modéliser des types dépendants.
+\textsc{Coq} implémente ce formalisme.
+Nous en montrerons plusieurs exemples significatifs.
+
+\vspace{0.3cm}
+Bonne lecture !
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Le lambda-calcul et la réduction
+\include{chapter1}
+
+%% Le lambda-calcul simplement typé et les pure type systems
+\include{chapter2}
+
+% L'interprétation
+\include{chapter3}
+
+% La compilation
+\include{chapter4}
+
+% La résolution
+\include{chapter5}
+
+% Calculabilité et complexité
+\include{chapter6}
+
+% Annexes 
+\include{chapter7}
+
+\bibliographystyle{plain}
+\bibliography{book} 
+
+\end{document}
