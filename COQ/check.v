@@ -5,7 +5,11 @@ Inductive nat : Set :=
 | S (_:nat) : nat.
 
 Check S O.
+ 
+Inductive eg (x : nat) : nat -> Set :=
+| egal : eg x x.
 
+Check egal O.
 
 Check 3.
 

@@ -25,6 +25,7 @@
 \usepackage{wrapfig}
 \usepackage{coqdoc}
 \usepackage{proof}
+
 \fvset{tabsize=2}
 \newfont{\letterimp}{beta}
 \newcommand{\imp}{{\letterimp D}\hspace{0.1cm}}
@@ -49,7 +50,6 @@
 \begin{document}
 \maketitle
 \tableofcontents
-
 
 \chapter{\textgreek{Ἐν ἀρχή}, Gn 1.1 et Jn 1.1}
 
@@ -149,11 +149,11 @@ Qed.
 La correspondance de Curry-Howard montre toute son étendue dans le calcul des constructions, qui 
 considère les types comme des termes de premier ordre et permet ainsi de modéliser des types dépendants.
 \textsc{Coq} implémente ce formalisme.
+Ce formalisme permet d'identifier de manière claire la frontière entre le calcul et
+le raisonnement.
 Nous en montrerons plusieurs exemples significatifs.
-
 \vspace{0.3cm}
 Bonne lecture !
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Le lambda-calcul et la réduction
@@ -179,5 +179,6 @@ Bonne lecture !
 
 \bibliographystyle{plain}
 \bibliography{book} 
+
 
 \end{document}

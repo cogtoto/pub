@@ -1,46 +1,38 @@
--- first proof in agda
-
+-- first proof in agda , le théorème de cantor
 open import Agda.Builtin.Nat
+open import Agda.Builtin.Bool
 open import Agda.Builtin.List
 open import Agda.Builtin.Equality
+open import Agda.Builtin.Sigma
 
-toto : Nat → Nat
-toto x = zero
+data False : Set where
 
-prede : Nat → Nat
-prede zero = zero
-prede (suc n) = n
+cong-app : ∀ {A : Set } {B : A → Set } {f g : (x : A) → B x} →
+           f ≡ g → (x : A) → f x ≡ g x
+cong-app refl x = refl
 
-concat : List Nat → List Nat  → List Nat
-concat [] l2  = l2
-concat (x ∷ l1) l2 = x ∷ concat l1 l2
+surj : {A B : Set} → (f : A → B) → Set
+surj  {A} {B} f =  (b : B) → Σ A (λ a → (f a) ≡ b)
 
-popo = concat (1 ∷ 2 ∷ [])  (3 ∷ [])
+g : Bool → Bool
+g false = true
+g true = false
 
-longueur : List Nat → Nat
-longueur [] = zero
-longueur (x ∷ l) = 1 + (longueur l)
+lemme : (a : Bool) → a ≡ g a → False
+lemme true = λ ()  
+lemme false = λ ()  
 
-
-K : {A B : Set} → A → B → A
-K x y = x
-
-S : { A B C : Set} → (A → B → C) → (A → B) → (A → C)
-S x y z = x z (y z)
-
-I : {A : Set } → A → A
-I x = x
-
-simpl : 1 ≡ 1
-simpl = refl
-
-th :  S K I ≡  I
-th = refl  
-
-    
-
-
-
-
-
+cantor : (f : Nat → Nat → Bool) → surj f → False
+cantor f sur = fxx≢hx x (cong-app hyp x) 
+  where 
+  fxx≢hx : (x : Nat) → f x x ≡ g (f x x) → False
+  fxx≢hx x = lemme (f x x)
+  h : Nat → Bool
+  h x = g (f x x) -- h la diagonalisation négative de la mort
+  x : Nat
+  x = fst (sur h)
+  hyp : f x ≡ h     -- on applique l'hypothèse de la surjection sur h, donc il existe un x tq f x = h
+  hyp = snd (sur h)
+  
  
+  

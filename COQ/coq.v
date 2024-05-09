@@ -16,7 +16,6 @@ Inductive terme : Set :=
  | App : terme -> terme -> terme 
  | Lam :  string -> terme -> terme -> terme .
 
-
 Definition env : list (string*string) := ("a","1") :: ("b","2") :: ("c","3") :: nil .
 
 Fixpoint mem  (x:string) (l:list string) : bool :=
