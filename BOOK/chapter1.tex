@@ -1131,6 +1131,40 @@ on applique l'hypothèse de surjection de $f$ sur $h$
 Nous pourrons nous reférer à l'ouvrage de Jean-Yves Girard, \textit{Le Point Aveugle}
 \cite{girard}
 
+
+En AGDA, qui ne possède pas un langage de tactiques permettant de construire le terme, 
+nous devons nous-même construire la preuve. Mais cela peut se faire très élégamment
+grâce à la belle syntaxe procurée par ce langage.\cite[Program = Proof]{PF}
+
+\begin{verbatim}
+cong-app : ∀ {A : Set } {B : A → Set } {f g : (x : A) → B x} →
+           f ≡ g → (x : A) → f x ≡ g x
+cong-app refl x = refl
+
+surj : {A B : Set} → (f : A → B) → Set
+surj  {A} {B} f =  (b : B) → Σ A (λ a → (f a) ≡ b)
+
+g : Bool → Bool
+g false = true
+g true = false
+
+lemme : (a : Bool) → a ≡ g a → False
+lemme true = λ ()  
+lemme false = λ ()  
+
+cantor : (f : Nat → Nat → Bool) → surj f → False
+cantor f sur = fxx≢hx x (cong-app hyp x) 
+  where 
+  fxx≢hx : (x : Nat) → f x x ≡ g (f x x) → False
+  fxx≢hx x = lemme (f x x)
+  h : Nat → Bool
+  h x = g (f x x) -- h la diagonalisation négative de la mort
+  x : Nat
+  x = fst (sur h)
+  hyp : f x ≡ h     -- on applique l'hypothèse de la surjection sur h, donc il existe un x tq f x = h
+  hyp = snd (sur h)
+\end{verbatim}
+
 La construction ci-dessus appliquée sur le $\lambda$-calcul permet de mettre en évidence de 
 manière constructive que tout $\lambda$-terme a un point fixe.
 Considérons la fonction $f \equiv \lambda xy.xy$, l'application $xy$ dénote $x \in y$.

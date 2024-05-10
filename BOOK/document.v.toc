@@ -1,0 +1,105 @@
+\babel@toc {french}{}\relax 
+\contentsline {chapter}{\numberline {1}Le $\lambda $-calcul et la réduction}{9}{}%
+\contentsline {section}{\numberline {1.1}Définition, champ lexical et syntaxique}{9}{}%
+\contentsline {subsection}{\numberline {1.1.1}Analyse lexicale avec ocamllex}{9}{}%
+\contentsline {subsection}{\numberline {1.1.2}Analyse syntaxique avec menhir}{10}{}%
+\contentsline {subsection}{\numberline {1.1.3}Implémentation du parsing en mode \textit {récursif descendant}}{11}{}%
+\contentsline {section}{\numberline {1.2}Représentation en ML}{13}{}%
+\contentsline {section}{\numberline {1.3}La $\beta $-réduction faible avec appel par valeur}{17}{}%
+\contentsline {section}{\numberline {1.4}La récursivité et le point fixe}{18}{}%
+\contentsline {section}{\numberline {1.5}\textit {Church} encoding. Les entiers et les booléens en $\lambda $-calcul}{22}{}%
+\contentsline {subsection}{\numberline {1.5.1}Les entiers \textit {Church} }{22}{}%
+\contentsline {subsection}{\numberline {1.5.2}Les booléens }{24}{}%
+\contentsline {subsection}{\numberline {1.5.3}La fonction factorielle}{24}{}%
+\contentsline {section}{\numberline {1.6}La notation de \textit {de Bruijn}}{25}{}%
+\contentsline {section}{\numberline {1.7}Le $\lambda $-calcul simplement typé}{27}{}%
+\contentsline {subsubsection}{Implémentation}{27}{}%
+\contentsline {subsubsection}{Inférence de type d'un terme $t$}{28}{}%
+\contentsline {subsubsection}{Le code}{28}{}%
+\contentsline {chapter}{\numberline {2}L'interprétation}{29}{}%
+\contentsline {section}{\numberline {2.1}Introduction}{29}{}%
+\contentsline {section}{\numberline {2.2}Un interprète MiniScheme avec OCAML}{29}{}%
+\contentsline {subsection}{\numberline {2.2.1}L'évaluation}{29}{}%
+\contentsline {subsection}{\numberline {2.2.2}Les étapes Read, Eval, Print}{31}{}%
+\contentsline {subsection}{\numberline {2.2.3}Liaison lexicale vs liaison dynamique}{32}{}%
+\contentsline {subsection}{\numberline {2.2.4}Gestion de l'environnement}{33}{}%
+\contentsline {section}{\numberline {2.3}Un interprète LISP avec le nouvel interprète MiniScheme \ldots }{35}{}%
+\contentsline {subsubsection}{La mise en abyme}{35}{}%
+\contentsline {subsubsection}{LISP mis en abyme}{35}{}%
+\contentsline {section}{\numberline {2.4}L'auto-interprétation de l'interprète}{36}{}%
+\contentsline {subsection}{\numberline {2.4.1}La tour de Babel}{36}{}%
+\contentsline {subsubsection}{L'environnement}{36}{}%
+\contentsline {subsection}{\numberline {2.4.2}Réification et réflexion}{37}{}%
+\contentsline {subsubsection}{L'interprète par continuation }{38}{}%
+\contentsline {chapter}{\numberline {3}La compilation}{45}{}%
+\contentsline {section}{\numberline {3.1}Compilation des $\lambda $-termes en termes applicatifs}{45}{}%
+\contentsline {subsubsection}{La correspondance de Curry-Howard}{48}{}%
+\contentsline {section}{\numberline {3.2}Compilation du LISP vers une machine abstraite}{49}{}%
+\contentsline {subsubsection}{La machine SECD}{49}{}%
+\contentsline {subsubsection}{La compilation $C: exp$\ {\letterimp D}\hspace {0.1cm}\ \texttt {code}}{49}{}%
+\contentsline {subsubsection}{La table de transition de la machine SECD}{50}{}%
+\contentsline {subsubsection}{L'implémentation en OCAML}{50}{}%
+\contentsline {chapter}{\numberline {4}La résolution}{53}{}%
+\contentsline {section}{\numberline {4.1}Représentation des termes finis}{53}{}%
+\contentsline {section}{\numberline {4.2}La substitution}{55}{}%
+\contentsline {section}{\numberline {4.3}Filtrage et réécriture}{56}{}%
+\contentsline {subsection}{\numberline {4.3.1}Le filtrage}{56}{}%
+\contentsline {subsection}{\numberline {4.3.2}La réécriture et l'arithmétique de Peano}{57}{}%
+\contentsline {section}{\numberline {4.4}L'unification des termes}{59}{}%
+\contentsline {section}{\numberline {4.5}Un mini PROLOG}{61}{}%
+\contentsline {section}{\numberline {4.6}Quelques exemples de programmation en PROLOG}{62}{}%
+\contentsline {subsection}{\numberline {4.6.1}Les entiers naturels}{62}{}%
+\contentsline {subsection}{\numberline {4.6.2}Les additions de Peano}{62}{}%
+\contentsline {subsection}{\numberline {4.6.3}La base généalogique}{63}{}%
+\contentsline {section}{\numberline {4.7}L'algorithme de complétion de Knuth-Bendix}{63}{}%
+\contentsline {subsection}{\numberline {4.7.1}Confluence et paires critiques}{63}{}%
+\contentsline {subsection}{\numberline {4.7.2}Terminaison}{65}{}%
+\contentsline {subsubsection}{Indécidabilité de la terminaison dans le cas "général"}{65}{}%
+\contentsline {subsubsection}{Système de réécriture noethérien}{65}{}%
+\contentsline {subsection}{\numberline {4.7.3}Complétion de Knuth-Bendix}{65}{}%
+\contentsline {chapter}{\numberline {5}La calculabilité}{67}{}%
+\contentsline {section}{\numberline {5.1}Les fonctions récursives}{67}{}%
+\contentsline {section}{\numberline {5.2}La machine de Turing}{69}{}%
+\contentsline {section}{\numberline {5.3}La thèse de Church}{71}{}%
+\contentsline {chapter}{\numberline {6}Annexes / Divers}{73}{}%
+\contentsline {section}{\numberline {6.1}Quelques fonctions sur les listes}{73}{}%
+\contentsline {section}{\numberline {6.2}Les listes mutables}{73}{}%
+\contentsline {section}{\numberline {6.3}Les listes infinies ou \textit {streams}}{74}{}%
+\contentsline {section}{\numberline {6.4}Le module Graphics d'OCAML, les fractales}{76}{}%
+\contentsline {subsubsection}{L'ensemble de Mandelbrot}{78}{}%
+\contentsline {section}{\numberline {6.5}Utilisation de \textlogo {META}\-\textlogo {FONT}\spacefactor \@m {}}{79}{}%
+\contentsline {section}{\numberline {6.6}The boxes}{81}{}%
+\contentsline {section}{\numberline {6.7}Les modules OCAML. Modélisation d'un monoïde}{82}{}%
+\contentsline {section}{\numberline {6.8}La machine à pile}{83}{}%
+\contentsline {subsection}{\numberline {6.8.1}Certification avec le langage COQ}{84}{}%
+\contentsline {section}{\numberline {6.9}Machine Learning and Neural Networks}{85}{}%
+\contentsline {subsection}{\numberline {6.9.1}Introduction}{85}{}%
+\contentsline {subsection}{\numberline {6.9.2}Un peu de théorie}{85}{}%
+\contentsline {subsection}{\numberline {6.9.3}Calcul matriciel}{86}{}%
+\contentsline {subsection}{\numberline {6.9.4}Fonctions d'activation}{87}{}%
+\contentsline {section}{\numberline {6.10}Les nombres premiers. L'algorithme RSA}{88}{}%
+\contentsline {subsubsection}{Le crible}{88}{}%
+\contentsline {subsubsection}{Le produit d'Euler aka le produit eulérien}{88}{}%
+\contentsline {subsubsection}{Les nombres premiers jumeaux et la constante de Brun}{90}{}%
+\contentsline {subsubsection}{Le petit théorème de Fermat}{90}{}%
+\contentsline {subsubsection}{Le théorème d'Euler}{90}{}%
+\contentsline {subsubsection}{Le théorème de Bezout}{91}{}%
+\contentsline {subsubsection}{L'inverse modulaire}{91}{}%
+\contentsline {subsubsection}{L'algorithme RSA}{91}{}%
+\contentsline {subsubsection}{Le code}{91}{}%
+\contentsline {section}{\numberline {6.11}Approximation du nombre $\pi $ }{92}{}%
+\contentsline {subsection}{\numberline {6.11.1}La méthode des polygones}{93}{}%
+\contentsline {subsubsection}{Calcul de $p_{2n}$ en fonction de $p_n$}{93}{}%
+\contentsline {subsubsection}{Calcul de $p'_n$ en fonction de $p_n$}{94}{}%
+\contentsline {subsection}{\numberline {6.11.2}La série alternée de Leibniz}{95}{}%
+\contentsline {subsection}{\numberline {6.11.3}La loi des grands nombres}{96}{}%
+\contentsline {subsection}{\numberline {6.11.4}Le produit de Wallis}{96}{}%
+\contentsline {subsection}{\numberline {6.11.5}L'intégrale $\DOTSI \intop \ilimits@ _0^1 \frac {1}{1+x^2} dx$}{97}{}%
+\contentsline {section}{\numberline {6.12}Poésies}{98}{}%
+\contentsline {section}{\numberline {6.13}L'irrationalité de $\sqrt {2}$}{98}{}%
+\contentsline {section}{\numberline {6.14}Démonstration non constructive}{98}{}%
+\contentsline {section}{\numberline {6.15}L'hyperbole $xy=1$}{99}{}%
+\contentsline {section}{\numberline {6.16}L'exponentielle}{99}{}%
+\contentsline {section}{\numberline {6.17}Les fonctions $\sin \frac {1}{x}$ et $x . \sin \frac {1}{x}$ }{100}{}%
+\contentsline {section}{\numberline {6.18}Srivanasa Ramanujan}{100}{}%
+\contentsline {section}{\numberline {6.19}L'alphabet grec. Extraits du nouveau testament}{101}{}%

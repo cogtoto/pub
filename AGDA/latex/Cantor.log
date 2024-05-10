@@ -1,0 +1,1292 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.4.14)  9 MAY 2024 16:07
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Cantor.tex
+(./Cantor.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-01-16>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (./agda.sty
+Package: agda 
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifxetex.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/polytable/polytable.sty
+Package: polytable 2020/07/14 v0.8.6 `polytable' package (Andres Loeh)
+
+(/usr/share/texlive/texmf-dist/tex/latex/lazylist/lazylist.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen141
+\ar@mcellbox=\box51
+\extrarowheight=\dimen142
+\NC@list=\toks16
+\extratabsurround=\skip50
+\backup@length=\skip51
+\ar@cellbox=\box52
+)
+\PT@colwidth=\dimen143
+\PT@cols=\count193
+\PT@table=\count194
+\PT@toks=\toks17
+\PT@in=\read2
+\PT@out=\write3
+)
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/ucs.sty
+Package: ucs 2022/08/07 v2.3 UCS: Unicode input support
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-global.def
+File: uni-global.def 2022/08/07 UCS: Unicode global data
+)
+\uc@secondtry=\count195
+\uc@combtoks=\toks18
+\uc@combtoksb=\toks19
+\uc@temptokena=\toks20
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks21
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+(/usr/share/texmf/tex/latex/tipa/tipa.sty
+Package: tipa 2002/08/08 TIPA version 1.1
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+
+(/usr/share/texmf/tex/latex/tipa/t3enc.def
+File: t3enc.def 2001/12/31 T3 encoding
+Now handling font encoding T3 ...
+... no UTF-8 mapping file for font encoding T3
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks22
+\inpenc@posthook=\toks23
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/utf8x.def
+File: utf8x.def 2022/08/07 UCS: Input encoding UTF-8
+))
+! Undefined control sequence.
+l.27     \DeclareUnicodeCharacter
+                                 {9657}{$\triangleright$}
+? 
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27     \DeclareUnicodeCharacter{9
+                                   657}{$\triangleright$}
+? 
+LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+! Undefined control sequence.
+l.28     \DeclareUnicodeCharacter
+                                 {8759}{::}
+? 
+! Undefined control sequence.
+l.29     \DeclareUnicodeCharacter
+                                 {8263}{$?\!?$}
+? 
+! Undefined control sequence.
+l.30     \DeclareUnicodeCharacter
+                                 {737} {$^l$}  % FIX: Ugly, apparently ^r is
+? 
+! Undefined control sequence.
+l.33     \DeclareUnicodeCharacter
+                                 {8718}{$\blacksquare$}
+? 
+! Undefined control sequence.
+l.34     \DeclareUnicodeCharacter
+                                 {8255}{$\_$} % FIX: Couldn't find \undertie.
+? 
+! Undefined control sequence.
+l.35     \DeclareUnicodeCharacter
+                                 {9667}{$\triangleleft$}
+? 
+! Undefined control sequence.
+l.36     \DeclareUnicodeCharacter
+                                 {10218}{$\langle\!\langle$}
+? 
+! Undefined control sequence.
+l.37     \DeclareUnicodeCharacter
+                                 {10219}{$\rangle\!\rangle$}
+? 
+\mathindent=\dimen144
+) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count196
+\l__pdf_internal_box=\box53
+)
+(./Cantor.aux)
+\openout1 = `Cantor.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 4.
+LaTeX Font Info:    Trying to load font information for T3+cmr on input line 4.
+
+ (/usr/share/texmf/tex/latex/tipa/t3cmr.fd
+File: t3cmr.fd 2001/12/31 TIPA font definitions
+)
+LaTeX Font Info:    ... okay on input line 4.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count197
+\scratchdimen=\dimen145
+\scratchbox=\box54
+\nofMPsegments=\count198
+\nofMParguments=\count199
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count266
+\MPscratchDim=\dimen146
+\MPnumerator=\count267
+\makeMPintoPDFobject=\count268
+\everyMPtoPDFconversion=\toks25
+) (/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
+File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
+T3\textscriptg already defined.
+
+fontencoding T3 patched
+) (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+File: uni-0.def 2022/08/07 UCS: Unicode data U+0000..U+00FF
+)
+! Undefined control sequence.
+<recently read> \bN 
+                    
+l.6 Il n'existe pas de fonction surjective de $\bN
+                                                   $
+? 
+\openout3 = `Cantor.ptb'.
+
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 2
+73.
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
+File: t1cmss.fd 2022/07/10 v2.5l Standard LaTeX font definitions
+)
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 2
+73.
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
+)
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaPrimitive {Set}\Agd...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-34.def
+File: uni-34.def 2022/08/07 UCS: Unicode data U+2200..U+22FF
+)
+! Undefined control sequence.
+<inserted text> ...6I]\AgdaSymbol {∀}\AgdaSpace 
+                                                  {}\AgdaSymbol {\{}\AgdaBou...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaPrimitive {Set}\Agd...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...e {}\AgdaSymbol {\}}\AgdaSpace 
+                                                  {}\AgdaSymbol {\{}\AgdaBou...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaBound {A}\AgdaSpace...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-33.def
+File: uni-33.def 2022/08/07 UCS: Unicode data U+2100..U+21FF
+)
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaPrimitive {Set}\Agd...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...e {}\AgdaSymbol {\}}\AgdaSpace 
+                                                  {}\AgdaSymbol {\{}\AgdaBou...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaSymbol {(}\AgdaBoun...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaBound {A}\AgdaSymbo...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...d {A}\AgdaSymbol {)}\AgdaSpace 
+                                                  {}\AgdaSymbol {→}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaBound {B}\AgdaSpace...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {x}\AgdaSymbol {\}}\AgdaSpace 
+                                                  {}\AgdaSymbol {→}\<\\ \>...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...\AgdaDatatype {≡}}\AgdaSpace 
+                                                  {}\AgdaBound {g}\AgdaSpace...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaSymbol {(}\AgdaBoun...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaBound {A}\AgdaSymbo...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...d {A}\AgdaSymbol {)}\AgdaSpace 
+                                                  {}\AgdaSymbol {→}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaBound {f}\AgdaSpace...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...\AgdaDatatype {≡}}\AgdaSpace 
+                                                  {}\AgdaBound {g}\AgdaSpace...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {=}\AgdaSpace 
+                                                  {}\AgdaInductiveConstructo...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaSymbol {\{}\AgdaBou...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaPrimitive {Set}\Agd...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...Set}\AgdaSymbol {\}}\AgdaSpace 
+                                                  {}\AgdaSymbol {→}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaSymbol {(}\AgdaBoun...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaBound {A}\AgdaSpace...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaBound {B}\AgdaSymbo...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...d {B}\AgdaSymbol {)}\AgdaSpace 
+                                                  {}\AgdaSymbol {→}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaPrimitive {Set}\<\\...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {A}\AgdaSymbol {\}}\AgdaSpace 
+                                                  {}\AgdaSymbol {\{}\AgdaBou...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {B}\AgdaSymbol {\}}\AgdaSpace 
+                                                  {}\AgdaBound {f}\AgdaSpace...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaBound {B}\AgdaSymbo...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...d {B}\AgdaSymbol {)}\AgdaSpace 
+                                                  {}\AgdaSymbol {→}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaRecord {Σ}\AgdaSpa...
+l.273 \end{code}
+                
+? 
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-3.def
+File: uni-3.def 2022/08/07 UCS: Unicode data U+0300..U+03FF
+)
+! Undefined control sequence.
+\u-default-931 #1->\textSigma 
+                              
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {(λ}\AgdaSpace 
+                                                  {}\AgdaBound {a}\AgdaSpace...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaSymbol {(}\AgdaBoun...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...d {a}\AgdaSymbol {)}\AgdaSpace 
+                                                  {}\AgdaOperator {\AgdaData...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...\AgdaDatatype {≡}}\AgdaSpace 
+                                                  {}\AgdaBound {b}\AgdaSymbo...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaDatatype {Bool}\Agd...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaDatatype {Bool}\<\\...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {=}\AgdaSpace 
+                                                  {}\AgdaInductiveConstructo...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {=}\AgdaSpace 
+                                                  {}\AgdaInductiveConstructo...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaSymbol {(}\AgdaBoun...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaDatatype {Bool}\Agd...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...Bool}\AgdaSymbol {)}\AgdaSpace 
+                                                  {}\AgdaSymbol {→}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaBound {a}\AgdaSpace...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...\AgdaDatatype {≡}}\AgdaSpace 
+                                                  {}\AgdaFunction {g}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaDatatype {False}\<\...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {=}\AgdaSpace 
+                                                  {}\AgdaSymbol {λ}\AgdaSpa...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...e {}\AgdaSymbol {λ}\AgdaSpace 
+                                                  {}\AgdaSymbol {()}\<\\ \>[...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {=}\AgdaSpace 
+                                                  {}\AgdaSymbol {λ}\AgdaSpa...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...e {}\AgdaSymbol {λ}\AgdaSpace 
+                                                  {}\AgdaSymbol {()}\<\\ \\[...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaSymbol {(}\AgdaBoun...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaDatatype {Nat}\Agda...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaDatatype {Nat}\Agda...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaDatatype {Bool}\Agd...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...Bool}\AgdaSymbol {)}\AgdaSpace 
+                                                  {}\AgdaSymbol {→}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaFunction {surj}\Agd...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaDatatype {False}\<\...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {=}\AgdaSpace 
+                                                  {}\AgdaFunction {fxx≢hx}...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaSymbol {(}\AgdaBoun...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaDatatype {Nat}\Agda...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...{Nat}\AgdaSymbol {)}\AgdaSpace 
+                                                  {}\AgdaSymbol {→}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaBound {f}\AgdaSpace...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...\AgdaDatatype {≡}}\AgdaSpace 
+                                                  {}\AgdaFunction {g}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...d {x}\AgdaSymbol {)}\AgdaSpace 
+                                                  {}\AgdaSymbol {→}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaDatatype {False}\<\...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {=}\AgdaSpace 
+                                                  {}\AgdaFunction {lemme}\Ag...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaDatatype {Nat}\Agda...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ... {}\AgdaSymbol {→}\AgdaSpace 
+                                                  {}\AgdaDatatype {Bool}\<\\...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {=}\AgdaSpace 
+                                                  {}\AgdaFunction {g}\AgdaSp...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...d {x}\AgdaSymbol {)}\AgdaSpace 
+                                                  {}\AgdaComment {--\ h\ la\...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {:}\AgdaSpace 
+                                                  {}\AgdaDatatype {Nat}\<\\ ...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<inserted text> ...ce {}\AgdaSymbol {=}\AgdaSpace 
+                                                  {}\AgdaField {fst}\AgdaSpa...
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? 
+! Undefined control sequence.
+<recently read> \AgdaSpace 
+                           
+l.273 \end{code}
+                
+? X
+ 
+Here is how much of TeX's memory you used:
+ 5497 strings out of 476091
+ 73359 string characters out of 5794081
+ 1849330 words of memory out of 5000000
+ 25844 multiletter control sequences out of 15000+600000
+ 518277 words of font info for 49 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 70i,3n,81p,393b,620s stack positions out of 10000i,1000n,20000p,200000b,200000s
+No pages of output.
+PDF statistics:
+ 0 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

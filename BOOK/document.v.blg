@@ -1,0 +1,64 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: document.v.aux
+The style file: plain.bst
+Database file #1: book.bib
+Warning--I'm ignoring gb's extra "author" field
+--line 34 of file book.bib
+Warning--I'm ignoring wm's extra "author" field
+--line 119 of file book.bib
+Warning--to sort, need author, editor, or key in genese
+Warning--empty author and editor in genese
+Warning--empty publisher in genese
+Warning--empty year in genese
+Warning--empty publisher in gide
+Warning--empty year in gide
+Warning--empty publisher in god
+Warning--empty publisher in vh
+Warning--empty year in vh
+Warning--empty publisher in lalement
+Warning--empty publisher in WS
+Warning--empty year in WS
+Warning--empty publisher in reflective
+You've used 17 entries,
+            2118 wiz_defined-function locations,
+            571 strings with 5094 characters,
+and the built_in function-call counts, 3720 in all, are:
+= -- 311
+> -- 131
+< -- 0
++ -- 57
+- -- 38
+* -- 176
+:= -- 638
+add.period$ -- 45
+call.type$ -- 17
+change.case$ -- 53
+chr.to.int$ -- 0
+cite$ -- 30
+duplicate$ -- 200
+empty$ -- 377
+format.name$ -- 38
+if$ -- 781
+int.to.chr$ -- 0
+int.to.str$ -- 17
+missing$ -- 31
+newline$ -- 82
+num.names$ -- 32
+pop$ -- 153
+preamble$ -- 1
+purify$ -- 52
+quote$ -- 0
+skip$ -- 103
+stack$ -- 0
+substring$ -- 87
+swap$ -- 17
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 36
+warning$ -- 13
+while$ -- 32
+width$ -- 19
+write$ -- 153
+(There were 15 warnings)

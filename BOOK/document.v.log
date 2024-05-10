@@ -1,0 +1,1523 @@
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022/Debian) (preloaded format=xelatex 2024.4.14)  10 MAY 2024 15:26
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/home/vincent/Thesis/pub/BOOK/document.v.tex
+(/home/vincent/Thesis/pub/BOOK/document.v.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-01-16> (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/bk11.clo
+File: bk11.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count181
+\c@chapter=\count182
+\c@section=\count183
+\c@subsection=\count184
+\c@subsubsection=\count185
+\c@paragraph=\count186
+\c@subparagraph=\count187
+\c@figure=\count188
+\c@table=\count189
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+ (/usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/lgrenc.def
+File: lgrenc.def 2022/06/14 2.1 LGR Greek font encoding definitions
+ (/usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/greek-fontenc.def
+File: greek-fontenc.def 2020/10/30 2.0 Common Greek font encoding definitions
+))
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 112.
+ (/usr/share/texmf/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)) (/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+) (/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip50
+) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 107.
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
+))
+\Gin@req@height=\dimen141
+\Gin@req@width=\dimen142
+) (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks17
+\pgfutil@tempdima=\dimen143
+\pgfutil@tempdimb=\dimen144
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box51
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
+))
+Package: pgf 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks18
+\pgfkeys@temptoks=\toks19
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks20
+))
+\pgf@x=\dimen145
+\pgf@y=\dimen146
+\pgf@xa=\dimen147
+\pgf@ya=\dimen148
+\pgf@xb=\dimen149
+\pgf@yb=\dimen150
+\pgf@xc=\dimen151
+\pgf@yc=\dimen152
+\pgf@xd=\dimen153
+\pgf@yd=\dimen154
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count190
+\c@pgf@countb=\count191
+\c@pgf@countc=\count192
+\c@pgf@countd=\count193
+\t@pgf@toka=\toks21
+\t@pgf@tokb=\toks22
+\t@pgf@tokc=\toks23
+\pgf@sys@id@count=\count194
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
+)
+Driver file for pgf: pgfsys-xetex.def
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-xetex.def
+File: pgfsys-xetex.def 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-dvipdfmx.def
+File: pgfsys-dvipdfmx.def 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
+)
+\pgfsys@objnum=\count195
+))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfsyssoftpath@smallbuffer@items=\count196
+\pgfsyssoftpath@bigbuffer@items=\count197
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 227.
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen155
+\pgfmath@count=\count198
+\pgfmath@box=\box52
+\pgfmath@toks=\toks24
+\pgfmath@stack@operand=\toks25
+\pgfmath@stack@operation=\toks26
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count199
+)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@picminx=\dimen156
+\pgf@picmaxx=\dimen157
+\pgf@picminy=\dimen158
+\pgf@picmaxy=\dimen159
+\pgf@pathminx=\dimen160
+\pgf@pathmaxx=\dimen161
+\pgf@pathminy=\dimen162
+\pgf@pathmaxy=\dimen163
+\pgf@xx=\dimen164
+\pgf@xy=\dimen165
+\pgf@yx=\dimen166
+\pgf@yy=\dimen167
+\pgf@zx=\dimen168
+\pgf@zy=\dimen169
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@path@lastx=\dimen170
+\pgf@path@lasty=\dimen171
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@shorten@end@additional=\dimen172
+\pgf@shorten@start@additional=\dimen173
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfpic=\box53
+\pgf@hbox=\box54
+\pgf@layerbox@main=\box55
+\pgf@picture@serial@count=\count266
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgflinewidth=\dimen174
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@pt@x=\dimen175
+\pgf@pt@y=\dimen176
+\pgf@pt@temp=\dimen177
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowsep=\dimen178
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@max=\dimen179
+\pgf@sys@shading@range@num=\count267
+\pgf@shadingcount=\count268
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfexternal@startupbox=\box56
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodeparttextbox=\box57
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
+\pgf@nodesepstart=\dimen180
+\pgf@nodesepend=\dimen181
+) (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
+)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen182
+\pgffor@skip=\dimen183
+\pgffor@stack=\toks27
+\pgffor@toks=\toks28
+)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count269
+\pgfplotmarksize=\dimen184
+)
+\tikz@lastx=\dimen185
+\tikz@lasty=\dimen186
+\tikz@lastxsaved=\dimen187
+\tikz@lastysaved=\dimen188
+\tikz@lastmovetox=\dimen189
+\tikz@lastmovetoy=\dimen190
+\tikzleveldistance=\dimen191
+\tikzsiblingdistance=\dimen192
+\tikz@figbox=\box58
+\tikz@figbox@bg=\box59
+\tikz@tempbox=\box60
+\tikz@tempbox@bg=\box61
+\tikztreelevel=\count270
+\tikznumberofchildren=\count271
+\tikznumberofcurrentchild=\count272
+\tikz@fig@count=\count273
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count274
+\pgfmatrixcurrentcolumn=\count275
+\pgf@matrix@numberofcolumns=\count276
+)
+\tikz@expandcount=\count277
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/share/texlive/texmf-dist/tex/latex/tikzsymbols/tikzsymbols.sty (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2023-01-16 L3 programming layer (loader) 
+ (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2023-01-16 L3 backend support: XeTeX
+\g__graphics_track_int=\count278
+\l__pdf_internal_box=\box62
+\g__pdf_backend_object_int=\count279
+\g__pdf_backend_annotation_int=\count280
+\g__pdf_backend_link_int=\count281
+))
+Package: xparse 2023-01-16 L3 Experimental document command parser
+)
+Package: tikzsymbols 2021/12/14 v4.12a Some symbols created using tikz and LaTeX3.
+ (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2023-01-16 LaTeX2e option processing using LaTeX3 keys
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
+File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\arrowsize=\dimen193
+)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen194
+\pgfdecoratedremainingdistance=\dimen195
+\pgfdecoratedinputsegmentcompleteddistance=\dimen196
+\pgfdecoratedinputsegmentremainingdistance=\dimen197
+\pgf@decorate@distancetomove=\dimen198
+\pgf@decorate@repeatstate=\count282
+\pgfdecorationsegmentamplitude=\dimen199
+\pgfdecorationsegmentlength=\dimen256
+)
+\tikz@lib@dec@box=\box63
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytrees.code.tex
+File: tikzlibrarytrees.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+\l__tikzsymbols_Moai_thickness_dim=\dimen257
+\l__tikzsymbols_Kochtopf_nr_arguments_int=\count283
+\l__tikzsymbols_Bratpfanne_nr_arguments_int=\count284
+\l__tikzsymbols_Schneebesen_nr_arguments_int=\count285
+\l__tikzsymbols_Sieb_nr_arguments_int=\count286
+\l__tikzsymbols_Purierstab_nr_arguments_int=\count287
+\l__tikzsymbols_Dreizack_nr_arguments_int=\count288
+\l__tikzsymbols_Backblech_nr_arguments_int=\count289
+\l__tikzsymbols_Ofen_nr_arguments_int=\count290
+\l__tikzsymbols_Pfanne_nr_arguments_int=\count291
+\l__tikzsymbols_Herd_nr_arguments_int=\count292
+\l__tikzsymbols_Saftpresse_nr_arguments_int=\count293
+\l__tikzsymbols_Schussel_nr_arguments_int=\count294
+\l__tikzsymbols_Schaler_nr_arguments_int=\count295
+\l__tikzsymbols_Reibe_nr_arguments_int=\count296
+\l__tikzsymbols_Flasche_nr_arguments_int=\count297
+\l__tikzsymbols_Nudelholz_nr_arguments_int=\count298
+\l__tikzsymbols_Knoblauchpresse_nr_arguments_int=\count299
+\l__tikzsymbols_Sadey_nr_arguments_int=\count300
+\l__tikzsymbols_dSadey_nr_arguments_int=\count301
+\l__tikzsymbols_Changey_nr_arguments_int=\count302
+\l__tikzsymbols_dChangey_nr_arguments_int=\count303
+\l__tikzsymbols_cChangey_nr_arguments_int=\count304
+\l__tikzsymbols_dcChangey_nr_arguments_int=\count305
+\l__tikzsymbols_Annoey_nr_arguments_int=\count306
+\l__tikzsymbols_dAnnoey_nr_arguments_int=\count307
+\l__tikzsymbols_Smiley_nr_arguments_int=\count308
+\l__tikzsymbols_dSmiley_nr_arguments_int=\count309
+\l__tikzsymbols_Laughey_nr_arguments_int=\count310
+\l__tikzsymbols_dLaughey_nr_arguments_int=\count311
+\l__tikzsymbols_Neutrey_nr_arguments_int=\count312
+\l__tikzsymbols_dNeutrey_nr_arguments_int=\count313
+\l__tikzsymbols_Winkey_nr_arguments_int=\count314
+\l__tikzsymbols_oldWinkey_nr_arguments_int=\count315
+\l__tikzsymbols_dWinkey_nr_arguments_int=\count316
+\l__tikzsymbols_olddWinkey_nr_arguments_int=\count317
+\l__tikzsymbols_Sey_nr_arguments_int=\count318
+\l__tikzsymbols_dSey_nr_arguments_int=\count319
+\l__tikzsymbols_Xey_nr_arguments_int=\count320
+\l__tikzsymbols_dXey_nr_arguments_int=\count321
+\l__tikzsymbols_Innocey_nr_arguments_int=\count322
+\l__tikzsymbols_wInnocey_nr_arguments_int=\count323
+\l__tikzsymbols_dInnocey_nr_arguments_int=\count324
+\l__tikzsymbols_Cooley_nr_arguments_int=\count325
+\l__tikzsymbols_dCooley_nr_arguments_int=\count326
+\l__tikzsymbols_Tongey_nr_arguments_int=\count327
+\l__tikzsymbols_dTongey_nr_arguments_int=\count328
+\l__tikzsymbols_Nursey_nr_arguments_int=\count329
+\l__tikzsymbols_dNursey_nr_arguments_int=\count330
+\l__tikzsymbols_Vomey_nr_arguments_int=\count331
+\l__tikzsymbols_dVomey_nr_arguments_int=\count332
+\l__tikzsymbols_Walley_nr_arguments_int=\count333
+\l__tikzsymbols_rWalley_nr_arguments_int=\count334
+\l__tikzsymbols_dWalley_nr_arguments_int=\count335
+\l__tikzsymbols_drWalley_nr_arguments_int=\count336
+\l__tikzsymbols_Cat_nr_arguments_int=\count337
+\l__tikzsymbols_SchrodingersCat_nr_arguments_int=\count338
+\l__tikzsymbols_Ninja_nr_arguments_int=\count339
+\l__tikzsymbols_dNinja_nr_arguments_int=\count340
+\l__tikzsymbols_Sleepey_nr_arguments_int=\count341
+\l__tikzsymbols_dSleepey_nr_arguments_int=\count342
+\l__tikzsymbols_Maskey_nr_arguments_int=\count343
+\l__tikzsymbols_NiceReapey_nr_arguments_int=\count344
+\l__tikzsymbols_Strichmaxerl_nr_arguments_int=\count345
+\l__tikzsymbols_Person_nr_arguments_int=\count346
+\l__tikzsymbols_Heart_nr_arguments_int=\count347
+\l__tikzsymbols_dHeart_nr_arguments_int=\count348
+\l__tikzsymbols_HeartBroken_nr_arguments_int=\count349
+\l__tikzsymbols_Candle_nr_arguments_int=\count350
+\l__tikzsymbols_Fire_nr_arguments_int=\count351
+\l__tikzsymbols_Coffeecup_nr_arguments_int=\count352
+\l__tikzsymbols_Chair_nr_arguments_int=\count353
+\l__tikzsymbols_Bed_nr_arguments_int=\count354
+\l__tikzsymbols_Tribar_nr_arguments_int=\count355
+\l__tikzsymbols_Moai_nr_arguments_int=\count356
+\l__tikzsymbols_Snowman_nr_arguments_int=\count357
+\l__tikzsymbols_BasicTree_nr_arguments_int=\count358
+\l__tikzsymbols_WorstTree_nr_arguments_int=\count359
+\l__tikzsymbols_Springtree_nr_arguments_int=\count360
+\l__tikzsymbols_Summertree_nr_arguments_int=\count361
+\l__tikzsymbols_Autumntree_nr_arguments_int=\count362
+\l__tikzsymbols_Wintertree_nr_arguments_int=\count363
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymath.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfpu.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex))
+\tikz@math@for@depth=\count364
+\tikz@math@dimen=\dimen258
+\tikz@math@toks=\toks29
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypatterns.code.tex
+File: tikzlibrarypatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibrarypatterns.code.tex
+File: pgflibrarypatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2022/04/08 v2.17n AMS math features
+\@mathmargin=\skip51
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks30
+\ex@=\dimen259
+)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen260
+) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count365
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count366
+\leftroot@=\count367
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count368
+\DOTSCASE@=\count369
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box64
+\strutbox@=\box65
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen261
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count370
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count371
+\dotsspace@=\muskip17
+\c@parentequation=\count372
+\dspbrk@lvl=\count373
+\tag@help=\toks31
+\row@=\count374
+\column@=\count375
+\maxfields@=\count376
+\andhelp@=\toks32
+\eqnshift@=\dimen262
+\alignsep@=\dimen263
+\tagshift@=\dimen264
+\tagwidth@=\dimen265
+\totwidth@=\dimen266
+\lineht@=\dimen267
+\@envbody=\toks33
+\multlinegap=\skip52
+\multlinetaggap=\skip53
+\mathdisplay@stack=\toks34
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks35
+\thm@bodyfont=\toks36
+\thm@headfont=\toks37
+\thm@notefont=\toks38
+\thm@headpunct=\toks39
+\thm@preskip=\skip54
+\thm@postskip=\skip55
+\thm@headsep=\skip56
+\dth@everypar=\toks40
+) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2022/12/26 3.84 The Babel package
+\babel@savecnt=\count377
+\U@D=\dimen268
+\l@unhyphenated=\language87
+ (/usr/share/texlive/texmf-dist/tex/generic/babel/xebabel.def)
+\bbl@readstream=\read3
+\bbl@dirlevel=\count378
+ (/usr/share/texlive/texmf-dist/tex/generic/babel-greek/greek.ldf
+Language: greek 2020/11/10 v1.10 Greek support for the babel system
+\bbl@monogreek=\count379
+\bbl@polygreek=\count380
+\bbl@ancientgreek=\count381
+ (/usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/tuenc-greek.def
+File: tuenc-greek.def 2020/10/13 2.0 Greek LICRs for XeTeX and LuaTeX
+ (/usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/greek-fontenc.def
+File: greek-fontenc.def 2020/10/30 2.0 Common Greek font encoding definitions
+))
+LaTeX Info: Redefining \& on input line 125.
+) (/usr/share/texlive/texmf-dist/tex/generic/babel-french/french.ldf
+Language: french 2023/01/02 v3.5p French support from the babel system
+Package babel Info: Hyphen rules for 'acadian' set to \l@french
+(babel)             (\language37). Reported on input line 91.
+Package babel Info: Hyphen rules for 'canadien' set to \l@french
+(babel)             (\language37). Reported on input line 92.
+\FB@nonchar=\count382
+Package french.ldf Info: No need for active punctuation characters
+(french.ldf)             with this version of XeTeX!
+(french.ldf)             reported on input line 310.
+\FB@punctthick=\XeTeXcharclass1
+\FB@punctthin=\XeTeXcharclass2
+\FB@punctnul=\XeTeXcharclass3
+\FB@guilo=\XeTeXcharclass4
+\FB@guilf=\XeTeXcharclass5
+\FB@guilnul=\XeTeXcharclass6
+\FBguill@level=\count383
+\FBold@everypar=\toks41
+\FB@Mht=\dimen269
+\mc@charclass=\count384
+\mc@charfam=\count385
+\mc@charslot=\count386
+\std@mcc=\count387
+\dec@mcc=\count388
+\listindentFB=\dimen270
+\descindentFB=\dimen271
+\labelindentFB=\dimen272
+\labelwidthFB=\dimen273
+\leftmarginFB=\dimen274
+\parindentFFN=\dimen275
+\FBfnindent=\dimen276
+)) (/usr/share/texlive/texmf-dist/tex/generic/babel/locale/fr/babel-french.tex
+Package babel Info: Importing font and identification data for french
+(babel)             from babel-fr.ini. Reported on input line 11.
+) (/usr/share/texlive/texmf-dist/tex/latex/carlisle/scalefnt.sty) (/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2023/01/19 4.5a verbatim text (tvz,hv)
+\FV@CodeLineNo=\count389
+\FV@InFile=\read4
+\FV@TabBox=\box66
+\c@FancyVerbLine=\count390
+\FV@StepNumber=\count391
+\FV@OutFile=\write4
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/textgreek/textgreek.sty
+Package: textgreek 2011/10/09 v0.7 Greek symbols in text
+Package textgreek Info: Loading the definitions for the Greek fontencoding. on input line 39.
+ (/usr/share/texlive/texmf-dist/tex/latex/greek-fontenc/lgrenc.def LGR font encoding definitions already loaded)
+Package textgreek Info: Loaded fontmap: {eur/*/*}{U/eur/*/*} {phv/*/*}{U/psy/*/*}. on input line 69.
+) (/usr/share/texmf/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (/usr/share/texlive/texmf-dist/tex/latex/base/alltt.sty
+Package: alltt 2021/01/29 v2.0g defines alltt environment
+) (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip57
+\multirow@cntb=\count392
+\multirow@dima=\skip58
+\bigstrutjot=\dimen277
+) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count393
+\float@exts=\toks42
+\float@box=\box67
+\@float@everytoks=\toks43
+\@floatcapt=\box68
+) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks44
+\inpenc@posthook=\toks45
+
+
+Package inputenc Warning: inputenc package ignored with utf8 based engines.
+
+) (/usr/share/texlive/texmf-dist/tex/latex/mflogo/mflogo.sty
+Package: mflogo 1999/03/10 v2.0 LaTeX package for Metafont and MetaPost logos
+) (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen278
+\WF@size=\dimen279
+\c@WF@wrappedlines=\count394
+\WF@box=\box69
+\WF@everypar=\toks46
+Package: wrapfig 2003/01/31  v 3.6
+)
+\c@definition=\count395
+\c@theoreme=\count396
+ (./document.v.aux)
+\openout1 = `document.v.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 46.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 46.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 46.
+LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 46.
+ (/usr/share/texlive/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
+File: lgrcmr.fd 2017/07/29 v1.2 Greek European Computer Regular
+)
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Info: Redefining \degres on input line 46.
+LaTeX Info: Redefining \up on input line 46.
+LaTeX Font Info:    Trying to load font information for LGR+lmr on input line 47.
+ (/usr/share/texlive/texmf-dist/tex/latex/cbfonts-fd/lgrlmr.fd
+File: lgrlmr.fd 2017/07/29 v1.2 Scalable Greek Latin Modern Regular
+)
+Missing character: There is no Ἀ ("1F08) in font grmn1728!
+Missing character: There is no γ ("3B3) in font grmn1728!
+Missing character: There is no ε ("3B5) in font grmn1728!
+Missing character: There is no ω ("3C9) in font grmn1728!
+Missing character: There is no μ ("3BC) in font grmn1728!
+Missing character: There is no έ ("3AD) in font grmn1728!
+Missing character: There is no τ ("3C4) in font grmn1728!
+Missing character: There is no ρ ("3C1) in font grmn1728!
+Missing character: There is no η ("3B7) in font grmn1728!
+Missing character: There is no τ ("3C4) in font grmn1728!
+Missing character: There is no ο ("3BF) in font grmn1728!
+Missing character: There is no ς ("3C2) in font grmn1728!
+Missing character: There is no μ ("3BC) in font grmn1728!
+Missing character: There is no η ("3B7) in font grmn1728!
+Missing character: There is no ε ("3B5) in font grmn1728!
+Missing character: There is no ἰ ("1F30) in font grmn1728!
+Missing character: There is no σ ("3C3) in font grmn1728!
+Missing character: There is no ί ("3AF) in font grmn1728!
+Missing character: There is no τ ("3C4) in font grmn1728!
+Missing character: There is no ω ("3C9) in font grmn1728!
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 47.
+(/usr/share/texmf/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 47.
+ (/usr/share/texmf/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 47.
+ (/usr/share/texmf/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 47.
+ (/usr/share/texmf/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 47.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 47.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 47.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 47.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+
+] [2
+
+] (./document.v.toc
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 2.
+ [3]
+LaTeX Font Info:    Trying to load font information for U+logo on input line 70.
+ (/usr/share/texlive/texmf-dist/tex/latex/mflogo/ulogo.fd
+File: ulogo.fd 1999/03/10 v2.0 LaTeX font defs for Metafont and MetaPost logos
+) [4])
+\tf@toc=\write5
+\openout5 = `document.v.toc'.
+
+ [5] [6
+
+] [7] [8
+
+]
+Chapitre 1.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <24.88> on input line 102.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <20.74> on input line 102.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <17.28> on input line 102.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 127.
+(/usr/share/texmf/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [9] [10] [11]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12] [13] [14] [15]
+Overfull \hbox (29.01074pt too wide) in paragraph at lines 558--559
+[][] 
+ []
+
+[16]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 615.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 615.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 615.
+ [17]
+File: DrawingHands.jpg Graphic file (type bmp)
+<DrawingHands.jpg>
+
+Underfull \vbox (badness 1199) has occurred while \output is active []
+
+ [18]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 741.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 741.
+
+Underfull \vbox (badness 4120) has occurred while \output is active []
+
+ [19] [20] [21] [22] [23] [24]
+Underfull \hbox (badness 10000) in paragraph at lines 1080--1085
+
+ []
+
+
+Underfull \vbox (badness 2318) has occurred while \output is active []
+
+ [25] [26]
+Underfull \hbox (badness 10000) in paragraph at lines 1183--1186
+
+ []
+
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 1217.
+(/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
+File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [27] [28]
+Chapitre 2.
+[29
+
+] [30]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31] [32] [33] [34]
+Missing character: There is no ’ ("2019) in font ec-lmri10!
+Missing character: There is no ’ ("2019) in font ec-lmri10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 1617--1619
+
+ []
+
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὶ ("1F76) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ἶ ("1F36) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ὁ ("1F41) in font grmn1000!
+Missing character: There is no θ ("3B8) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ὸ ("1F78) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no ὸ ("1F78) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no Μ ("39C) in font grmn1000!
+Missing character: There is no ω ("3C9) in font grmn1000!
+Missing character: There is no υ ("3C5) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no ῆ ("1FC6) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no Ἐ ("1F18) in font grmn1000!
+Missing character: There is no γ ("3B3) in font grmn1000!
+Missing character: There is no ώ ("3CE) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ἰ ("1F30) in font grmn1000!
+Missing character: There is no μ ("3BC) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ὁ ("1F41) in font grmn1000!
+Missing character: There is no ὤ ("1F64) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+File: gumpp.jpeg Graphic file (type bmp)
+<gumpp.jpeg>
+[35]
+Overfull \hbox (62.19678pt too wide) in paragraph at lines 1688--1689
+[][] 
+ []
+
+[36] [37]
+Missing character: There is no ἡ ("1F21) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no φ ("3C6) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no ὴ ("1F74) in font grmn1000!
+Missing character: There is no ἔ ("1F14) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ἕ ("1F15) in font grmn1000!
+Missing character: There is no ω ("3C9) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῦ ("1FE6) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ὐ ("1F50) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῦ ("1FE6) in font grmn1000!
+File: bruegel.jpg Graphic file (type bmp)
+<bruegel.jpg>
+[38]
+Missing character: There is no Γ ("393) in font grmn1000!
+Missing character: There is no Ε ("395) in font grmn1000!
+Missing character: There is no Ν ("39D) in font grmn1000!
+Missing character: There is no Ε ("395) in font grmn1000!
+Missing character: There is no Σ ("3A3) in font grmn1000!
+Missing character: There is no Ι ("399) in font grmn1000!
+Missing character: There is no Σ ("3A3) in font grmn1000!
+Missing character: There is no Κ ("39A) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὶ ("1F76) in font grmn1000!
+Missing character: There is no ἦ ("1F26) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ᾶ ("1FB6) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ἡ ("1F21) in font grmn1000!
+Missing character: There is no γ ("3B3) in font grmn1000!
+Missing character: There is no ῆ ("1FC6) in font grmn1000!
+Missing character: There is no χ ("3C7) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ῖ ("1FD6) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no ἕ ("1F15) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὶ ("1F76) in font grmn1000!
+Missing character: There is no φ ("3C6) in font grmn1000!
+Missing character: There is no ω ("3C9) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ὴ ("1F74) in font grmn1000!
+Missing character: There is no μ ("3BC) in font grmn1000!
+Missing character: There is no ί ("1F77) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ᾶ ("1FB6) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no δ ("3B4) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ὰ ("1F70) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῦ ("1FE6) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ἐ ("1F10) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no ή ("1F75) in font grmn1000!
+Missing character: There is no θ ("3B8) in font grmn1000!
+Missing character: There is no η ("3B7) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ὸ ("1F78) in font grmn1000!
+Missing character: There is no ὄ ("1F44) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no μ ("3BC) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὐ ("1F50) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ῆ ("1FC6) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no Σ ("3A3) in font grmn1000!
+Missing character: There is no ύ ("1F7B) in font grmn1000!
+Missing character: There is no γ ("3B3) in font grmn1000!
+Missing character: There is no χ ("3C7) in font grmn1000!
+Missing character: There is no υ ("3C5) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no ὅ ("1F45) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ἐ ("1F10) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ῖ ("1FD6) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no υ ("3C5) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no έ ("1F73) in font grmn1000!
+Missing character: There is no χ ("3C7) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no ύ ("1F7B) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ὰ ("1F70) in font grmn1000!
+Missing character: There is no χ ("3C7) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ί ("1F77) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no η ("3B7) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ά ("1F71) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no η ("3B7) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ῆ ("1FC6) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no γ ("3B3) in font grmn1000!
+Missing character: There is no ῆ ("1FC6) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+\g__tikzsymbols_savebox_F_gray 0_10.95_Laughey_1_none_none_box=\box70
+[39]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [40]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [41]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [42]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [43] [44]
+Chapitre 3.
+[45
+
+] [46]
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 2276--2277
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2277--2278
+
+ []
+
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+[47]
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+Missing character: There is no λ ("3BB) in font ec-lmtt10!
+[48]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 2384.
+
+Overfull \hbox (28.80087pt too wide) in paragraph at lines 2385--2393
+\T1/lmtt/m/n/10.95 ((lambda (v1...vn) body) e1...en) \letterimp D  \T1/lmtt/m/n/10.95 NIL; $\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;ARG;$[] \OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;ARG;CLOSURE$\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 body\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;RTS$\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;JSR 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2385--2393
+
+ []
+
+
+Overfull \hbox (0.23276pt too wide) detected at line 2431
+[]
+ []
+
+
+Underfull \vbox (badness 5147) has occurred while \output is active []
+
+ [49] [50] [51] [52
+
+]
+Chapitre 4.
+[53] [54]
+Underfull \vbox (badness 2698) has occurred while \output is active []
+
+ [55] [56] [57] [58] [59] [60]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [61] [62] [63] [64]
+Missing character: There is no ≡ ("2261) in font rm-lmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 3142--3144
+
+ []
+
+Missing character: There is no ≥ ("2265) in font rm-lmr10!
+[65] [66]
+Chapitre 5.
+[67
+
+]
+Missing character: There is no ’ ("2019) in font ec-lmr10!
+Missing character: There is no ≥ ("2265) in font rm-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no ≥ ("2265) in font rm-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no ≥ ("2265) in font rm-lmr10!
+Missing character: There is no ≥ ("2265) in font rm-lmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 3284--3288
+
+ []
+
+Missing character: There is no ’ ("2019) in font ec-lmr10!
+Missing character: There is no ’ ("2019) in font ec-lmr10!
+[68] [69]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [70] [71] [72]
+Chapitre 6.
+[73
+
+] [74] [75] [76]
+File: flocon1.pdf Graphic file (type pdf)
+<use flocon1.pdf>
+File: flocon2.pdf Graphic file (type pdf)
+<use flocon2.pdf>
+File: flocon3.pdf Graphic file (type pdf)
+<use flocon3.pdf>
+File: flocon4.pdf Graphic file (type pdf)
+<use flocon4.pdf>
+File: bretagne.png Graphic file (type bmp)
+<bretagne.png>
+ [77]
+File: mandelbrot.png Graphic file (type bmp)
+<mandelbrot.png>
+
+Underfull \vbox (badness 1831) has occurred while \output is active []
+
+ [78]
+LaTeX Font Info:    Font shape `U/logo/bx/n' in size <14.4> not available
+(Font)              Font shape `U/logo/b/n' tried instead on input line 3845.
+File: imp.png Graphic file (type bmp)
+<imp.png>
+ [79]
+File: snow.png Graphic file (type bmp)
+<snow.png>
+ [80] [81] [82] [83] [84]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [85] [86]
+File: sigmoid.png Graphic file (type bmp)
+<sigmoid.png>
+ [87] [88] [89]
+Missing character: There is no ’ ("2019) in font ec-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr8!
+Missing character: There is no ≡ ("2261) in font rm-lmr10!
+[90]
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr8!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no ≡ ("2261) in font rm-lmr10!
+Missing character: There is no ≡ ("2261) in font rm-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no ’ ("2019) in font ec-lmr10!
+Missing character: There is no ’ ("2019) in font ec-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr8!
+Missing character: There is no − ("2212) in font rm-lmr8!
+Missing character: There is no − ("2212) in font rm-lmr8!
+Missing character: There is no − ("2212) in font rm-lmr8!
+Missing character: There is no ≡ ("2261) in font rm-lmr10!
+Missing character: There is no ≡ ("2261) in font rm-lmr10!
+Missing character: There is no ’ ("2019) in font ec-lmr10!
+Missing character: There is no − ("2212) in font rm-lmr10!
+Missing character: There is no ≡ ("2261) in font rm-lmr10!
+[91] [92] (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)) [93] [94] [95] [96] [97]
+Missing character: There is no ’ ("2019) in font ec-lmr10!
+Missing character: There is no ’ ("2019) in font ec-lmr10!
+[98]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [99] [100]
+Missing character: There is no Ἰ ("1F38) in font grmn1000!
+Missing character: There is no η ("3B7) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῦ ("1FE6) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no Χ ("3A7) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ὸ ("1F78) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no Θ ("398) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῦ ("1FE6) in font grmn1000!
+Missing character: There is no Υ ("3A5) in font grmn1000!
+Missing character: There is no ἱ ("1F31) in font grmn1000!
+Missing character: There is no ὸ ("1F78) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no Σ ("3A3) in font grmn1000!
+Missing character: There is no ω ("3C9) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ή ("3AE) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no Ἐ ("1F18) in font grmn1000!
+Missing character: There is no γ ("3B3) in font grmn1000!
+Missing character: There is no ὼ ("1F7C) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ὸ ("1F78) in font grmn1000!
+Missing character: There is no Ἄ ("1F0C) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no φ ("3C6) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὶ ("1F76) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ὸ ("1F78) in font grmn1000!
+Missing character: There is no ὁ ("1F41) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no ῶ ("1FF6) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὶ ("1F76) in font grmn1000!
+Missing character: There is no ὁ ("1F41) in font grmn1000!
+Missing character: There is no ἔ ("1F14) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no χ ("3C7) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no ἡ ("1F21) in font grmn1000!
+Missing character: There is no ἀ ("1F00) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no χ ("3C7) in font grmn1000!
+Missing character: There is no ὴ ("1F74) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὶ ("1F76) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ὸ ("1F78) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no έ ("1F73) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no Ἄ ("1F0C) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no η ("3B7) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no β ("3B2) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no ὴ ("1F74) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no έ ("1F73) in font grmn1000!
+Missing character: There is no θ ("3B8) in font grmn1000!
+Missing character: There is no η ("3B7) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὐ ("1F50) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῖ ("1FD6) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no έ ("1F73) in font grmn1000!
+Missing character: There is no γ ("3B3) in font grmn1000!
+Missing character: There is no ω ("3C9) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no Ὁ ("1F49) in font grmn1000!
+Missing character: There is no μ ("3BC) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ί ("1F77) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ἐ ("1F10) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ὶ ("1F76) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ἡ ("1F21) in font grmn1000!
+Missing character: There is no β ("3B2) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ί ("1F77) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ῶ ("1FF6) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ὐ ("1F50) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ῶ ("1FF6) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no ό ("1F79) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no ῳ ("1FF3) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ά ("1F71) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ω ("3C9) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no ὃ ("1F43) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no β ("3B2) in font grmn1000!
+Missing character: There is no ὼ ("1F7C) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ἄ ("1F04) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no θ ("3B8) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no ω ("3C9) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no ἔ ("1F14) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ἐ ("1F10) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ῷ ("1FF7) in font grmn1000!
+Missing character: There is no ἀ ("1F00) in font grmn1000!
+Missing character: There is no γ ("3B3) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no ῷ ("1FF7) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὐ ("1F50) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῦ ("1FE6) in font grmn1000!
+Missing character: There is no ὃ ("1F43) in font grmn1000!
+Missing character: There is no μ ("3BC) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no ό ("1F79) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no μ ("3BC) in font grmn1000!
+Missing character: There is no έ ("1F73) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ἐ ("1F10) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ά ("1F71) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ω ("3C9) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ῶ ("1FF6) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no μ ("3BC) in font grmn1000!
+Missing character: There is no ά ("1F71) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ω ("3C9) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ὅ ("1F45) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no δ ("3B4) in font grmn1000!
+Missing character: There is no ὲ ("1F72) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὐ ("1F50) in font grmn1000!
+Missing character: There is no ξ ("3BE) in font grmn1000!
+Missing character: There is no η ("3B7) in font grmn1000!
+Missing character: There is no θ ("3B8) in font grmn1000!
+Missing character: There is no ῇ ("1FC7) in font grmn1000!
+Missing character: There is no μ ("3BC) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ῖ ("1FD6) in font grmn1000!
+Missing character: There is no ζ ("3B6) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ῶ ("1FF6) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no χ ("3C7) in font grmn1000!
+Missing character: There is no ά ("1F71) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ω ("3C9) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ἐ ("1F10) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ί ("1F77) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὶ ("1F76) in font grmn1000!
+Missing character: There is no γ ("3B3) in font grmn1000!
+Missing character: There is no ί ("1F77) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no δ ("3B4) in font grmn1000!
+Missing character: There is no έ ("1F73) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no δ ("3B4) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ὥ ("1F65) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ἐ ("1F10) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no θ ("3B8) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ῖ ("1FD6) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ὰ ("1F70) in font grmn1000!
+Missing character: There is no π ("3C0) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ε ("3B5) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ὰ ("1F70) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῦ ("1FE6) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ὐ ("1F50) in font grmn1000!
+Missing character: There is no ρ ("3C1) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῦ ("1FE6) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὶ ("1F76) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no σ ("3C3) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no η ("3B7) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῦ ("1FE6) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no ἐ ("1F10) in font grmn1000!
+Missing character: There is no ν ("3BD) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῖ ("1FD6) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no κ ("3BA) in font grmn1000!
+Missing character: There is no λ ("3BB) in font grmn1000!
+Missing character: There is no ά ("1F71) in font grmn1000!
+Missing character: There is no δ ("3B4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ι ("3B9) in font grmn1000!
+Missing character: There is no ς ("3C2) in font grmn1000!
+Missing character: There is no α ("3B1) in font grmn1000!
+Missing character: There is no ὐ ("1F50) in font grmn1000!
+Missing character: There is no τ ("3C4) in font grmn1000!
+Missing character: There is no ο ("3BF) in font grmn1000!
+Missing character: There is no ῦ ("1FE6) in font grmn1000!
+(./document.v.bbl [101] [102
+
+]) [103] (./document.v.aux) ) 
+Here is how much of TeX's memory you used:
+ 32949 strings out of 476775
+ 686276 string characters out of 5808212
+ 2844200 words of memory out of 5000000
+ 52642 multiletter control sequences out of 15000+600000
+ 666968 words of font info for 147 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 84i,22n,89p,495b,1645s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on document.v.xdv (103 pages, 1140232 bytes).
