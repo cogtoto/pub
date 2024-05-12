@@ -1,12 +1,10 @@
-This is BibTeX, Version 0.99d (TeX Live 2022/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2020)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: document.v.aux
 The style file: plain.bst
 Database file #1: book.bib
 Warning--I'm ignoring gb's extra "author" field
 --line 34 of file book.bib
-Warning--I'm ignoring wm's extra "author" field
---line 119 of file book.bib
 Warning--to sort, need author, editor, or key in genese
 Warning--empty author and editor in genese
 Warning--empty publisher in genese
@@ -22,7 +20,7 @@ Warning--empty year in WS
 Warning--empty publisher in reflective
 You've used 17 entries,
             2118 wiz_defined-function locations,
-            571 strings with 5094 characters,
+            570 strings with 5079 characters,
 and the built_in function-call counts, 3720 in all, are:
 = -- 311
 > -- 131
@@ -61,4 +59,4 @@ warning$ -- 13
 while$ -- 32
 width$ -- 19
 write$ -- 153
-(There were 15 warnings)
+(There were 14 warnings)

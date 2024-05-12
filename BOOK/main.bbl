@@ -1,0 +1,114 @@
+\begin{thebibliography}{10}
+
+\bibitem{genese}
+{\em Livre de la Genèse, Gn 11, 1-9}.
+
+\bibitem{ab}
+Badiou Alain.
+\newblock {\em Eloge des mathématiques}.
+\newblock Flammarion, 2015.
+
+\bibitem{baren}
+Henk Barendregt.
+\newblock {\em Lambda calculi with types}.
+
+\bibitem{baren_bible}
+Henk Barendregt.
+\newblock {\em The Lambda Calculus, its Syntax and Semantics}.
+
+\bibitem{plisp}
+Jacques Chazarain.
+\newblock {\em Programmer avec Scheme: De la pratique {\`a} la th{\'e}orie}.
+\newblock International Thomson Publ. France, 1996.
+
+\bibitem{deepR}
+Francois Chollet and JJ~Allaire.
+\newblock Deep learning with r, 2018.
+
+\bibitem{rewriting}
+Baader Franz.
+\newblock {\em Term Rewriting and All That}.
+\newblock Cambridge University Press, 1998.
+
+\bibitem{gide}
+André Gide.
+\newblock {\em Les faux monnayeurs}.
+
+\bibitem{girard}
+Jean-Yves Girard.
+\newblock {\em Le Point Aveugle, vers la perfection}.
+\newblock 2006.
+
+\bibitem{god}
+Douglas~R Hofstadter et~al.
+\newblock {\em G{\"o}del, Escher, Bach: an eternal golden braid}.
+\newblock 1979.
+
+\bibitem{vh}
+Victor Hugo.
+\newblock {\em Les travailleurs de la mer}.
+
+\bibitem{meta}
+Kleene.
+\newblock {\em Introduction to meta-mathematics}.
+\newblock 1950.
+
+\bibitem{mf}
+Donald Knuth.
+\newblock {\em The \MF\ Book}.
+\newblock Addison Wesley, 1992.
+
+\bibitem{lalement}
+Ren{\'e} Lalement.
+\newblock {\em Logique, r{\'e}duction, r{\'e}solution}.
+\newblock 1990.
+
+\bibitem{lamport1994latex}
+Leslie Lamport.
+\newblock {\em \LaTeX\ a document preparation system}.
+\newblock Addison-wesley, 1994.
+
+\bibitem{gb}
+C.~Lebossé.
+\newblock {\em Géométrie plane}.
+\newblock Fernand Nathan, 1947.
+
+\bibitem{moby}
+Herman Melville.
+\newblock {\em Moby-Dick; or, The Whale}.
+\newblock 1851.
+
+\bibitem{PP}
+Samuel Mimram.
+\newblock {\em Program = Proof}.
+
+\bibitem{poincare}
+Henri Poincaré.
+\newblock {\em La science et l'hypothèse}.
+\newblock 1902.
+
+\bibitem{lisp}
+Christian Queinnec.
+\newblock {\em Lisp in small pieces}.
+\newblock Cambridge University Press, 2003.
+
+\bibitem{wm}
+Courant Richard.
+\newblock {\em What is Mathematics ?}
+\newblock Oxford University Press, 1941.
+
+\bibitem{WS}
+William Shakespeare.
+\newblock {\em Romeo and Juliet}.
+
+\bibitem{reflective}
+Daniel P.~Friedman Stanley~Jefferson.
+\newblock {\em A Simple Reflective Interpreter}.
+\newblock 1992.
+
+\bibitem{caml}
+Pierre Weis and Xavier Leroy.
+\newblock {\em Le langage Caml}.
+\newblock Dunod, 1999.
+
+\end{thebibliography}

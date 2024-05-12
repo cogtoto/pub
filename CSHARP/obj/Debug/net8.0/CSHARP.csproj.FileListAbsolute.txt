@@ -1,0 +1,15 @@
+/home/vincent/vsc/CSHARP/bin/Debug/net8.0/CSHARP
+/home/vincent/vsc/CSHARP/bin/Debug/net8.0/CSHARP.deps.json
+/home/vincent/vsc/CSHARP/bin/Debug/net8.0/CSHARP.runtimeconfig.json
+/home/vincent/vsc/CSHARP/bin/Debug/net8.0/CSHARP.dll
+/home/vincent/vsc/CSHARP/bin/Debug/net8.0/CSHARP.pdb
+/home/vincent/vsc/CSHARP/obj/Debug/net8.0/CSHARP.GeneratedMSBuildEditorConfig.editorconfig
+/home/vincent/vsc/CSHARP/obj/Debug/net8.0/CSHARP.AssemblyInfoInputs.cache
+/home/vincent/vsc/CSHARP/obj/Debug/net8.0/CSHARP.AssemblyInfo.cs
+/home/vincent/vsc/CSHARP/obj/Debug/net8.0/CSHARP.csproj.CoreCompileInputs.cache
+/home/vincent/vsc/CSHARP/obj/Debug/net8.0/CSHARP.sourcelink.json
+/home/vincent/vsc/CSHARP/obj/Debug/net8.0/CSHARP.dll
+/home/vincent/vsc/CSHARP/obj/Debug/net8.0/refint/CSHARP.dll
+/home/vincent/vsc/CSHARP/obj/Debug/net8.0/CSHARP.pdb
+/home/vincent/vsc/CSHARP/obj/Debug/net8.0/CSHARP.genruntimeconfig.cache
+/home/vincent/vsc/CSHARP/obj/Debug/net8.0/ref/CSHARP.dll

@@ -1,0 +1,1 @@
+-- cantor proof in agda

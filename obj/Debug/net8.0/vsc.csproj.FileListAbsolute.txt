@@ -1,0 +1,5 @@
+/home/vincent/vsc/obj/Debug/net8.0/vsc.GeneratedMSBuildEditorConfig.editorconfig
+/home/vincent/vsc/obj/Debug/net8.0/vsc.AssemblyInfoInputs.cache
+/home/vincent/vsc/obj/Debug/net8.0/vsc.AssemblyInfo.cs
+/home/vincent/vsc/obj/Debug/net8.0/vsc.csproj.CoreCompileInputs.cache
+/home/vincent/vsc/obj/Debug/net8.0/vsc.sourcelink.json

@@ -11,6 +11,8 @@ Proof.
 Qed.
      
 Definition surjective {X:Type} (f : nat -> X) : Prop := forall y, exists x, f x = y.
+Print surjective.
+
 
 Theorem cantor : ~ exists f : nat -> nat -> bool, surjective f.
 Proof.
@@ -31,5 +33,6 @@ Proof.
     apply negb_prop in C.
     assumption.
 Qed.
+Print cantor.
 
 End Cantor.
