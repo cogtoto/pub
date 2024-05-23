@@ -25,7 +25,7 @@
 \contentsline {chapter}{\numberline {3}Le $\lambda $-calcul simplement typ\IeC {\'e} et les Pure Type Systems}{35}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Le $\lambda $-calcul simplement typ\IeC {\'e}}{35}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Pr\IeC {\'e}sentation}{35}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Impl\IeC {\'e}mentation en \textsc {Coq}}{35}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.2}Impl\IeC {\'e}mentation en \textsc {Agda}}{35}{subsection.3.1.2}%
 \contentsline {subsubsection}{Repr\IeC {\'e}sentation des types et des termes}{35}{section*.2}%
 \contentsline {subsubsection}{Opening}{36}{section*.3}%
 \contentsline {subsubsection}{La s\IeC {\'e}mantique}{36}{section*.4}%

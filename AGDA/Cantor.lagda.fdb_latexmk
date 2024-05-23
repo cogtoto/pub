@@ -1,18 +1,17 @@
-# Fdb version 4
-["pdflatex"] 1715263524 "/home/vincent/Thesis/pub/AGDA/Cantor.lagda.tex" "Cantor.lagda.pdf" "Cantor.lagda" 1715263524 2
-  "/etc/texmf/web2c/texmf.cnf" 1682192257 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/vincent/Thesis/pub/AGDA/Cantor.lagda.tex" 1715263523 1275 ae5f917cf09e6932fe060a73f6a70417 ""
-  "/usr/share/texlive/texmf-dist/tex/latex/base/article.cls" 1667332637 20144 d5ecf0a5140c8d8d8b72cbe86e320eff ""
-  "/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty" 1654720880 5048 84b05796b49b69e2d4257d537721c960 ""
-  "/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo" 1667332637 8448 c33a4e1cb35cee9b33c2b21033b73e39 ""
-  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1676468108 39561 34c98e380bf7c7201ee6a7909aff625a ""
-  "/usr/share/texmf/web2c/texmf.cnf" 1676468108 39561 34c98e380bf7c7201ee6a7909aff625a ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1713100296 7881244 28971cc6b6765add3a0b99b316ba633d ""
-  "Cantor.lagda.aux" 1715263524 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "Cantor.lagda.tex" 1715263523 1275 ae5f917cf09e6932fe060a73f6a70417 ""
+# Fdb version 3
+["pdflatex"] 1715529369 "/home/vincent/vsc/AGDA/Cantor.lagda.tex" "/home/vincent/vsc/AGDA/Cantor.lagda.pdf" "Cantor.lagda" 1715529369
+  "/home/vincent/vsc/AGDA/Cantor.lagda.aux" 0 -1 0 ""
+  "/home/vincent/vsc/AGDA/Cantor.lagda.tex" 1715527912 1275 ae5f917cf09e6932fe060a73f6a70417 ""
+  "/home/vincent/vsc/AGDA/agda.sty" 0 -1 0 ""
+  "/usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls" 1580683321 20023 e427dd9e17e239bf926ef3aab67fe35e ""
+  "/usr/local/texlive/2020/texmf-dist/tex/latex/base/inputenc.sty" 1580683321 5050 8933a39ad74377accd18991c5eb90c58 ""
+  "/usr/local/texlive/2020/texmf-dist/tex/latex/base/size10.clo" 1580683321 8446 9874cccac5fee462272c582807dbbf56 ""
+  "/usr/local/texlive/2020/texmf-dist/web2c/texmf.cnf" 1583102494 39451 60d7debd9ef8ece44cbe965493576c2d ""
+  "/usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt" 1591453896 2434943 aa70f3a11a8ccb1c32ce04942cceec6d ""
+  "/usr/local/texlive/2020/texmf.cnf" 1591453828 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
+  "Cantor.lagda.tex" 1715527912 1275 ae5f917cf09e6932fe060a73f6a70417 ""
   "agda.sty" 0 -1 0 ""
   (generated)
-  "Cantor.lagda.aux"
   "Cantor.lagda.log"
-  "Cantor.lagda.pdf"
-  (rewritten before read)
+  "/home/vincent/vsc/AGDA/Cantor.lagda.pdf"
+  "/home/vincent/vsc/AGDA/Cantor.lagda.log"

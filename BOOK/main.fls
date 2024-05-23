@@ -453,10 +453,11 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsco10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmtti10.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-33.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-33.def
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/ueur.fd
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/ueur.fd
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/euler/eurm10.tfm
@@ -573,6 +574,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
 INPUT ./beta.600pk
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb

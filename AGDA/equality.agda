@@ -11,7 +11,6 @@ data bool : Set where
   true : bool
   false : bool
 
-
 th0 : egal zero zero
 th0 = refl {entier} {zero}
 
@@ -72,7 +71,6 @@ pred : entier → entier
 pred zero = zero
 pred (succ n) = n
 
-
 fac : entier → entier
 fac zero = un
 fac (succ n) = succ n * (fac n)
@@ -85,7 +83,26 @@ trois = deux + un
 th_f : egal (fac trois) (trois * trois) → Faux
 th_f = λ ()
 
+{-# BUILTIN NATURAL entier #-} 
 
-  
-  
-  
+data Liste (A : Set) : Set where
+  vide : Liste A
+  cons : A → Liste A → Liste A
+
+l1 = cons 1 (cons 2 (cons 3 vide))
+l2 = cons 4 (cons 5 (cons 6 vide))
+
+append : {A : Set} → Liste A → Liste A → Liste A
+append vide ys = ys
+append (cons x xs) ys = cons x (append xs ys)
+
+l3 = append l1 l2
+
+rev : {A : Set} → Liste A → Liste A
+rev vide = vide
+rev (cons x xs) = append (rev xs) (cons x vide)
+
+l4 = rev l3
+
+
+

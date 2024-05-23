@@ -24,7 +24,7 @@
 \BOOKMARK [0][-]{chapter.3}{Le -calcul simplement typ\351 et les Pure Type Systems}{}% 24
 \BOOKMARK [1][-]{section.3.1}{Le -calcul simplement typ\351}{chapter.3}% 25
 \BOOKMARK [2][-]{subsection.3.1.1}{Pr\351sentation}{section.3.1}% 26
-\BOOKMARK [2][-]{subsection.3.1.2}{Impl\351mentation en Coq}{section.3.1}% 27
+\BOOKMARK [2][-]{subsection.3.1.2}{Impl\351mentation en Agda}{section.3.1}% 27
 \BOOKMARK [2][-]{subsection.3.1.3}{Inf\351rence de type}{section.3.1}% 28
 \BOOKMARK [1][-]{section.3.2}{Les Pure Type Systems}{chapter.3}% 29
 \BOOKMARK [2][-]{subsection.3.2.1}{Introduction}{section.3.2}% 30

@@ -929,6 +929,11 @@ Lemma eta : forall (A B:Type) (f:A->B), f = fun x => f x.
 reflexivity.
 Qed.
 \end{Verbatim}
+Ou de manière similaire en \textsc{Agda} :
+\begin{Verbatim}
+eta : (A B : Set) → (f : A → B) → (λ x → f x) ≡ f
+eta A B f = refl
+\end{Verbatim}
 \end{definition}
 
 Appliquons à nouveau notre exemple avec ce combinateur $Z$ appliqué à $M=\lambda a. \lambda b. b$:
@@ -943,10 +948,10 @@ $$
 \end{array}
 $$
 
-Nous avons le même réultat et les même étapes de réduction avec \verb+betaNormal zm ;;+
+Nous avons le même résultat et les même étapes de réduction avec \verb+betaNormal zm ;;+
 
 
-En SCHEME, nous pourrons implémenter ce combinateur $Z$ :
+En \textsc{Scheme}, nous pourrons implémenter ce combinateur $Z$ :
 \begin{Verbatim}
 (define Z
  (lambda(f)
@@ -985,7 +990,7 @@ val fix : (('a -> 'b) -> 'a -> 'b) -> 'a -> 'b = <fun>
 - : int = 120
 \end{Verbatim}
 Ici aussi, le mécanisme de la ``$\eta$-expansion'' est utilisé.
-Reproduisons cela en SCHEME :
+Reproduisons cela en \textsc{Scheme} :
 \begin{Verbatim}
 (define factabs
   (lambda (f)
@@ -1161,7 +1166,8 @@ cantor f sur = fxx≢hx x (cong-app hyp x)
   h x = g (f x x) -- h la diagonalisation négative de la mort
   x : Nat
   x = fst (sur h)
-  hyp : f x ≡ h     -- on applique l'hypothèse de la surjection sur h, donc il existe un x tq f x = h
+  hyp : f x ≡ h     -- on applique l'hypothèse de la surjection sur h
+                     -- donc il existe un x tq f x = h
   hyp = snd (sur h)
 \end{verbatim}
 
