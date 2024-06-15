@@ -23,27 +23,26 @@ Pour les types, nous avons deux constructeurs, un pour les types de variable et 
  pour les types des abstractions: le type flèche de la forme  $T_1 \rightarrow T_2$.
 
 \begin{Verbatim}
-Inductive typ : Set :=
-  | typ_var   : string -> typ
-  | typ_arrow : typ -> typ -> typ.
+data type : Set where
+  typ_var : String → type
+  typ_arrow : type → type → type
 \end{Verbatim}
 
 Pour les termes, nous utilisons la \textit{locally namless representation}
 Les variables liées sont représentées par les indices de \textit{de Bruijn} et les variables 
 libres par des chaînes de caractères.
 \begin{Verbatim}
-Inductive terme : Set :=
-  | bvar : nat -> terme
-  | fvar : string -> terme
-  | abs  : terme -> terme
-  | app  : terme -> terme -> terme.
+data terme : Set where
+  bvar : Nat → terme
+  fvar : String → terme
+  abs : terme → terme
+  app : terme → terme → terme
 
-Coercion bvar : nat >-> terme.
-Coercion fvar : string >-> terme.
+-- t1 = λ x. λ y. (y x)
+t1 : terme
+t1 = abs (abs (app (bvar 0) (bvar 1)))
 \end{Verbatim}
-Voici un exemple avec le terme $t_2 = \lambda x.\lambda y. (y x)) $
 
-\verb+Definition t2 := abs (abs (app 0 1)).+
 
 \subsubsection{Opening}
 L'\textit{opening} remplace un indice par un terme. 
@@ -51,72 +50,38 @@ Cela correspond à la substitution d'une variable liée, telle qu'appliquée lor
 $\beta$-réduction.
 
 \begin{Verbatim}
-Fixpoint open_rec (k : nat) (u : terme) (t : terme) {struct t} : terme :=
-  match t with
-  | bvar i    => if k =? i then u else (bvar i)
-  | fvar x    => fvar x
-  | abs t1    => abs (open_rec (S k) u t1)
-  | app t1 t2 => app (open_rec k u t1) (open_rec k u t2)
-  end.
+open-rec : Nat → terme → terme → terme
+open-rec k u (bvar i) = if (i == k) then u else (bvar i)
+open-rec k u (fvar x) = fvar x
+open-rec k u (abs t) = abs (open-rec (suc k) u t)
+open-rec k u (app t1 t2) = app (open-rec k u t1) (open-rec k u t2)
 
-Definition open t u := open_rec 0 u t.
+-- open
+op : terme → terme → terme
+op t u = open-rec 0 u t
 
-Notation "{ k ~> u } t" := (open_rec k u t) (at level 67).
-Notation "t ^^ u" := (open t u) (at level 67).
-Notation "t ^ x" := (open t (fvar x)).
-
-Lemma demo_open :
-  open (app (abs (app 1 0)) 0) "Y" =
-       (app (abs (app "Y" 0)) "Y").
-Proof.
-  unfold open. unfold open_rec. auto.
-Qed.
+-- op (λ (1 0) 0) y ≡  λ (y 0) y
+demo-open : (op (app (abs (app (bvar 1) (bvar 0))) (bvar 0)) (fvar "y")) ≡ (app (abs (app (fvar "y") (bvar 0))) (fvar "y"))
+demo-open =  refl
 \end{Verbatim}
 
 \subsubsection{La sémantique} 
 Nous définissons la sémantique de la réduction avec appel par valeur.
 
 \begin{Verbatim}
-Inductive valeur : terme -> Prop :=
-  | valeur_abs : forall (t1: terme), valeur (abs t1).
+data valeur : terme → Set where
+  v_abs : (t : terme) → valeur (abs t)
+  v_nat : (n : Nat) → valeur (bvar n)
+  v_var : (x : String) → valeur (fvar x)
 
-Inductive red : terme -> terme -> Prop :=
-  | red_beta : forall (t1 t2:terme),
-      valeur t2 ->
-      red (app (abs t1) t2) (t1 ^^ t2)
-  | red_app_1 : forall t1 t1' t2 :terme,
-      red t1 t1' ->
-      red (app t1 t2) (app t1' t2)
-  | red_app_2 : forall t1 t2 t2' :terme,
-      valeur t1 ->
-      red t2 t2' ->
-      red (app t1 t2) (app t1 t2').
-
-\end{Verbatim}
-Nous utilisons la notation \verb+t --> t'+ pour la réduction en une étape.
-
-\begin{Verbatim}
-Notation "t --> t'" := (red t t') (at level 68).
+data _↦_ : terme → terme → Set where
+  red-beta : (t1 t2 : terme) → valeur t2 → (app (abs t1) t2) ↦ (op t1 t2)
+  red-app-1 : (t1 t1' t2 : terme) → t1 ↦ t1' → (app t1 t2) ↦ (app t1' t2)
+  red-app-2 : (t1 t2 t2' : terme) → t2 ↦ t2' → (app t1 t2) ↦ (app t1 t2')
 \end{Verbatim}
 
 \subsubsection{La gestion de l'environnement et du contexte}
     
-\begin{Verbatim}
-Definition ctx := list (string * typ).
-Open Scope list_scope.
-Module ListNotations.
-Notation " [ ] " := nil : list_scope.
-Notation " [ x ] " := (cons x nil) : list_scope.
-Notation " [ x ; .. ; y ] " := (cons x .. (cons y nil) ..) : list_scope.
-Notation " s1 & s2 " := (Datatypes.app s1 s2) (at level 67)  : list_scope.
-End ListNotations.
-
-Import ListNotations.
-Definition e1 :ctx := [ ("v1", typ_var "entier") ].
-Definition e2 :ctx := [ ("v2", typ_var "entier") ].
-
-Compute e1 & e2 .
-\end{Verbatim}
 
 \subsubsection{Le typage} 
 

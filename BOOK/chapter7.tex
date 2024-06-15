@@ -1431,7 +1431,7 @@ Mais laquelle des deux est la solution ?
 Faut-il abandonner le principe du \textit{tiers-exlus} de nos démonstrations
 mathématiques ?
 \section{Le tout est-il plus grand que chacune de ses parties ?}
-Galilée (et avant lui Aristote ?) remontait le paradoxe suivant sur les nombres entiers : Chaque entier peut être mappé 
+Galilée (et avant lui Aristote ?) remontait le paradoxe suivant sur les nombres entiers : chaque entier peut être mappé 
 un à un avec son carré. Pourtant l'ensemble de nombres carrés est intuitivement un sous-ensemble
 des nombres entiers.
 
@@ -1476,6 +1476,39 @@ Et également $e = \lim_{n \rightarrow \infty} (\frac{1}{1+n})^n $
 \end{tikzpicture}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%
+\section{Prouver par réflection en \sc{Agda}}
+Dans certaines situations, la constitution d'une preuve peut être très longue.
+Par exemple, nous aurons ce cas si la preuve fait appel à des constructeurs de type inductif.
+
+Considérons le type \verb+Pair+
+\begin{verbatim}
+data Pair : Nat → Set where
+  pair0 : Pair 0
+  pairSS : (n : Nat) → Pair n → Pair (suc (suc n))
+ 
+pair6 : Pair 6
+pair6 =  pairSS 4 (pairSS 2 (pairSS zero pair0))
+\end{verbatim}
+Définissons une fonction qui, par le calcul, rendra \verb+True+ si $n$ est pair et \verb+False+ si $n$ est impair.
+\begin{verbatim}
+ispair? : Nat → Set
+ispair? zero = True
+ispair? (suc zero) = False
+ispair? (suc (suc n)) = ispair? n 
+\end{verbatim}
+
+Il nous reste à montrer que cette fonction est consistante avec le type \verb+Pair+, c'est-à-dire que 
+\verb+ispair? n →  Pair n+
+
+\begin{verbatim}
+ispairxsound : {n : Nat} → ispair? n → Pair n
+ispairxsound {zero} tt = pair0
+ispairxsound {1} () 
+ispairxsound {suc (suc n)} x = pairSS n (ispairxsound {n} x)
+
+th : Pair 90
+th = ispairxsound tt
+\end{verbatim}
 
 \section{Srivanasa Ramanujan}
 Le mathématicien indien aurait  découvert la très belle formule 
@@ -1518,6 +1551,7 @@ $$
  \]
 
 \subsection{Extraits du nouveau testament}
+ \vspace*{1cm}
  \begin{center}
 \begin{tikzpicture}
   \draw [line width=0.7mm, smooth, tension=1] plot coordinates{(0,0) (1,-0.5) (2.1, 0) (2.5, 0.55)} ;

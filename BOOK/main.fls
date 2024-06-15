@@ -546,6 +546,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libr
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
 INPUT /usr/local/texlive/2020/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
 INPUT /home/vincent/vsc/BOOK/main.bbl
 INPUT /home/vincent/vsc/BOOK/main.bbl
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/knuth-lib/logosl10.tfm

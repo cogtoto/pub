@@ -31,7 +31,6 @@ Warning--empty publisher in meta
 Warning--empty publisher in lalement
 Warning--empty publisher in moby
 Warning--empty publisher in PP
-Warning--empty year in PP
 Warning--can't use both author and editor fields in poincare
 Warning--empty publisher in poincare
 Warning--empty publisher in WS
@@ -39,34 +38,34 @@ Warning--empty year in WS
 Warning--empty publisher in reflective
 You've used 24 entries,
             2118 wiz_defined-function locations,
-            603 strings with 5500 characters,
-and the built_in function-call counts, 5232 in all, are:
-= -- 431
+            604 strings with 5504 characters,
+and the built_in function-call counts, 5236 in all, are:
+= -- 433
 > -- 180
 < -- 0
 + -- 79
 - -- 52
-* -- 261
-:= -- 891
-add.period$ -- 63
+* -- 258
+:= -- 893
+add.period$ -- 64
 call.type$ -- 24
 change.case$ -- 74
 chr.to.int$ -- 0
-cite$ -- 49
+cite$ -- 48
 duplicate$ -- 284
 empty$ -- 531
 format.name$ -- 52
-if$ -- 1090
+if$ -- 1092
 int.to.chr$ -- 0
 int.to.str$ -- 24
 missing$ -- 45
-newline$ -- 114
+newline$ -- 115
 num.names$ -- 46
-pop$ -- 220
+pop$ -- 218
 preamble$ -- 1
 purify$ -- 73
 quote$ -- 0
-skip$ -- 142
+skip$ -- 143
 stack$ -- 0
 substring$ -- 123
 swap$ -- 26
@@ -74,8 +73,8 @@ text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 50
-warning$ -- 25
+warning$ -- 24
 while$ -- 46
 width$ -- 26
-write$ -- 210
-(There were 26 warnings)
+write$ -- 212
+(There were 25 warnings)

@@ -1,7 +1,7 @@
 -- equality
 
-data egal {A : Set} : A → A → Set where
-  refl : {x : A} → egal x x 
+data _≡_ {A : Set} : A → A → Set where
+  refl : {x : A} → x ≡ x 
   
 data entier : Set where
   zero : entier
@@ -11,23 +11,23 @@ data bool : Set where
   true : bool
   false : bool
 
-th0 : egal zero zero
+th0 : zero ≡ zero
 th0 = refl {entier} {zero}
 
 -- Le faux
-data Faux : Set where
+data ⊥ : Set where
 
 -- négation
 neg : Set → Set 
-neg A = A → Faux
+neg A = A → ⊥
 
-elim-faux : (P : Faux → Set) → (x : Faux) → P x
+elim-faux : (P : ⊥ → Set) → (x : ⊥) → P x
 elim-faux P () 
 
-elim-faux2 : (P : Set) →  Faux → P
+elim-faux2 : (P : Set) →  ⊥ → P
 elim-faux2 P () 
 
-th2 :  (egal zero (succ zero)) → Faux
+th2 :  (zero ≡ succ zero) → ⊥
 th2 ()
 
 data Dec (A : Set) : Set where
@@ -37,19 +37,19 @@ data Dec (A : Set) : Set where
 RelDec : {A : Set} ( R : A → A → Set) → Set
 RelDec {A} R = (x y : A) → (Dec (R x y))
 
-lemme :  neg (egal false true) 
+lemme :  neg (false ≡ true) 
 lemme = λ () 
 
-th4 : RelDec {bool} egal
+th4 : RelDec {bool} _≡_
 th4 true true = yes refl
 th4 false false = yes refl 
 th4 false true =  no lemme 
 th4 true false = no (λ ())
 
-suc-injective : {n m : entier} → (egal (succ n) (succ m)) → (egal n m)
+suc-injective : {n m : entier} → (succ n ≡ succ m) → (n ≡ m)
 suc-injective {n} {.n} refl = refl
 
-th5 : RelDec {entier} egal
+th5 : RelDec {entier} _≡_
 th5 zero zero = yes refl
 th5 zero (succ y) = no (λ ())
 th5 (succ x) zero = no (λ ())
@@ -80,7 +80,7 @@ quatre = deux + deux
 seize = quatre * quatre
 trois = deux + un
 
-th_f : egal (fac trois) (trois * trois) → Faux
+th_f : (fac trois) ≡ (trois * trois) → ⊥
 th_f = λ ()
 
 {-# BUILTIN NATURAL entier #-} 
@@ -104,5 +104,18 @@ rev (cons x xs) = append (rev xs) (cons x vide)
 
 l4 = rev l3
 
+length : {A : Set} → Liste A → entier
+length vide = zero
+length (cons x xs) = succ (length xs)
 
+cong : {A B : Set} → {x y : A} → (f : A → B) → x ≡ y → f x ≡ f y
+cong f refl = refl  
+
+th-l : (l1 l2 : Liste entier) → (length (append l1 l2)) ≡ (length l1 + length l2)
+th-l vide l2 = refl
+th-l (cons x l5) l2 = cong succ (th-l l5 l2)
+
+th-o : {n : entier} → (n + zero) ≡ n
+th-o {zero} = refl
+th-o {succ n} = cong succ (th-o {n})
 
