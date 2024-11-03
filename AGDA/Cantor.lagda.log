@@ -1,31 +1,32 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  12 MAY 2024 17:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.14)  14 OCT 2024 20:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/vincent/vsc/AGDA/Cantor.lagda.tex
-(/home/vincent/vsc/AGDA/Cantor.lagda.tex
-LaTeX2e <2020-02-02> patch level 5
-L3 programming layer <2020-06-03> (/usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
-(/usr/local/texlive/2020/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+**/home/vincent/cogtoto/pub/AGDA/Cantor.lagda.tex
+(/home/vincent/cogtoto/pub/AGDA/Cantor.lagda.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count167
-\c@section=\count168
-\c@subsection=\count169
-\c@subsubsection=\count170
-\c@paragraph=\count171
-\c@subparagraph=\count172
-\c@figure=\count173
-\c@table=\count174
-\abovecaptionskip=\skip47
-\belowcaptionskip=\skip48
-\bibindent=\dimen134
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2018/08/11 v1.3c Input encoding file
-\inpenc@prehook=\toks15
-\inpenc@posthook=\toks16
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
 )
 
 ! LaTeX Error: File `agda.sty' not found.
@@ -34,7 +35,7 @@ Type X to quit or <RETURN> to proceed,
 or enter new name. (Default extension: sty)
 
 Enter file name: 
-/home/vincent/vsc/AGDA/Cantor.lagda.tex:4: Emergency stop.
+/home/vincent/cogtoto/pub/AGDA/Cantor.lagda.tex:4: Emergency stop.
 <read *> 
          
 l.4 ^^M
@@ -43,11 +44,11 @@ l.4 ^^M
 
  
 Here is how much of TeX's memory you used:
- 238 strings out of 480478
- 2971 string characters out of 5899581
- 239147 words of memory out of 5000000
- 16350 multiletter control sequences out of 15000+600000
- 532338 words of font info for 24 fonts, out of 8000000 for 9000
+ 262 strings out of 474222
+ 3645 string characters out of 5748732
+ 1922975 words of memory out of 5000000
+ 22603 multiletter control sequences out of 15000+600000
+ 558069 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 25i,0n,20p,181b,36s stack positions out of 5000i,500n,10000p,200000b,80000s
-/home/vincent/vsc/AGDA/Cantor.lagda.tex:4:  ==> Fatal error occurred, no output PDF file produced!
+ 35i,0n,38p,189b,36s stack positions out of 10000i,1000n,20000p,200000b,200000s
+/home/vincent/cogtoto/pub/AGDA/Cantor.lagda.tex:4:  ==> Fatal error occurred, no output PDF file produced!

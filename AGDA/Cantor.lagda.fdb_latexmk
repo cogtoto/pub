@@ -1,17 +1,18 @@
-# Fdb version 3
-["pdflatex"] 1715529369 "/home/vincent/vsc/AGDA/Cantor.lagda.tex" "/home/vincent/vsc/AGDA/Cantor.lagda.pdf" "Cantor.lagda" 1715529369
-  "/home/vincent/vsc/AGDA/Cantor.lagda.aux" 0 -1 0 ""
-  "/home/vincent/vsc/AGDA/Cantor.lagda.tex" 1715527912 1275 ae5f917cf09e6932fe060a73f6a70417 ""
-  "/home/vincent/vsc/AGDA/agda.sty" 0 -1 0 ""
-  "/usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls" 1580683321 20023 e427dd9e17e239bf926ef3aab67fe35e ""
-  "/usr/local/texlive/2020/texmf-dist/tex/latex/base/inputenc.sty" 1580683321 5050 8933a39ad74377accd18991c5eb90c58 ""
-  "/usr/local/texlive/2020/texmf-dist/tex/latex/base/size10.clo" 1580683321 8446 9874cccac5fee462272c582807dbbf56 ""
-  "/usr/local/texlive/2020/texmf-dist/web2c/texmf.cnf" 1583102494 39451 60d7debd9ef8ece44cbe965493576c2d ""
-  "/usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt" 1591453896 2434943 aa70f3a11a8ccb1c32ce04942cceec6d ""
-  "/usr/local/texlive/2020/texmf.cnf" 1591453828 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "Cantor.lagda.tex" 1715527912 1275 ae5f917cf09e6932fe060a73f6a70417 ""
+# Fdb version 4
+["pdflatex"] 1728930540.34708 "/home/vincent/cogtoto/pub/AGDA/Cantor.lagda.tex" "Cantor.lagda.pdf" "Cantor.lagda" 1728930540.72305 2
+  "/etc/texmf/web2c/texmf.cnf" 1728930126.83663 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/vincent/cogtoto/pub/AGDA/Cantor.lagda.tex" 1728929506.71882 1275 ae5f917cf09e6932fe060a73f6a70417 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/article.cls" 1705352648 20144 147463a6a579f4597269ef9565205cfe ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty" 1705352648 5048 425739d70251273bf93e3d51f3c40048 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo" 1705352648 8448 dbc0dbf4156c0bb9ba01a1c685d3bad0 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1728930247 8214911 305e404d9b167a6457c998011c06d707 ""
+  "Cantor.lagda.aux" 1728930540.33717 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "Cantor.lagda.tex" 1728929506.71882 1275 ae5f917cf09e6932fe060a73f6a70417 ""
   "agda.sty" 0 -1 0 ""
   (generated)
+  "Cantor.lagda.aux"
   "Cantor.lagda.log"
-  "/home/vincent/vsc/AGDA/Cantor.lagda.pdf"
-  "/home/vincent/vsc/AGDA/Cantor.lagda.log"
+  "Cantor.lagda.pdf"
+  (rewritten before read)

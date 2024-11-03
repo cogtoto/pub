@@ -16,6 +16,7 @@ Un $\lambda $-terme est défini par induction de la manière suivante:
 \end{itemize}
 \end{definition}
 
+
 Voici le champ lexical des $\lambda $-termes:
 
 \vspace{0.2cm}
@@ -103,7 +104,7 @@ exp:      VARIABLE	{ Var($1) }
 
 
 Plus exactement, nous avons modifié cette grammaire \textit{naïve} pour la
-rendre non ambiguë et assurer l'associativité à gauche des
+rendre non ambiguë et assurer l'associativité à gauche des
 $\lambda$-applications.
 En effet: 
 $$ M N O P = (((M N) O) P) $$
@@ -397,7 +398,7 @@ let rec reduc1Normale terme =
 Enfin, nous avons une fonction \verb+fullReduc+ qui permet d'itérer l'opération de
 $\beta$-réduction jusqu'à trouver la forme normale, ou boucler s'il n'y a pas de forme formale.
 On lui impose donc maximum 1000 réductions. 
-Elle prend en argument la méthode (ie. la stratégie de réduction) à  utiliser. 
+Elle prend en argument la méthode (ie. la stratégie de réduction) à utiliser. 
 
 \begin{Verbatim}
 let rec fullReduc terme methode  =
@@ -931,7 +932,7 @@ Qed.
 \end{Verbatim}
 Ou de manière similaire en \textsc{Agda} :
 \begin{Verbatim}
-eta : (A B : Set) → (f : A → B) → (λ x → f x) ≡ f
+eta : (A B : Set) -> (f : A -> B) -> (λ x -> f x) \equiv f
 eta A B f = refl
 \end{Verbatim}
 \end{definition}
@@ -1142,8 +1143,8 @@ nous devons nous-même construire la preuve. Mais cela peut se faire très élé
 grâce à la belle syntaxe procurée par ce langage.\cite[Program = Proof]{PP}
 
 \begin{verbatim}
-cong-app : ∀ {A : Set } {B : A → Set } {f g : (x : A) → B x} →
-           f ≡ g → (x : A) → f x ≡ g x
+cong-app : \forall {A : Set } {B : A → Set } {f g : (x : A) → B x} →
+           f \equiv g → (x : A) → f x \equiv g x
 cong-app refl x = refl
 
 surj : {A B : Set} → (f : A → B) → Set
@@ -1153,20 +1154,20 @@ g : Bool → Bool
 g false = true
 g true = false
 
-lemme : (a : Bool) → a ≡ g a → False
+lemme : (a : Bool) → a \equiv g a → False
 lemme true = λ ()  
 lemme false = λ ()  
 
 cantor : (f : Nat → Nat → Bool) → surj f → False
 cantor f sur = fxx≢hx x (cong-app hyp x) 
   where 
-  fxx≢hx : (x : Nat) → f x x ≡ g (f x x) → False
+  fxx≢hx : (x : Nat) → f x x \equiv g (f x x) → False
   fxx≢hx x = lemme (f x x)
   h : Nat → Bool
   h x = g (f x x) -- h la diagonalisation négative de la mort
   x : Nat
   x = fst (sur h)
-  hyp : f x ≡ h     -- on applique l'hypothèse de la surjection sur h
+  hyp : f x \equiv h     -- on applique l'hypothèse de la surjection sur h
                      -- donc il existe un x tq f x = h
   hyp = snd (sur h)
 \end{verbatim}
@@ -1246,7 +1247,7 @@ $$
 	 $ T \vdash \phi \leftrightarrow \psi (\ulcorner \phi\urcorner ) $ et appliquons le à
 	 la fonction $\neg th$.
 	 
-	 Nous avons alors l'existence d'un point fixe $G$ tel que
+	  Nous avons alors l'existence d'un point fixe $G$ tel que
 	  $$T \vdash G \leftrightarrow \neg th (\ulcorner G \urcorner ) $$ 
 
 	  Nous avons la contradiction suivante : $T \vdash G$ ssi $T \vdash th(\ulcorner G \urcorner)$ par définition de $th$
@@ -1391,7 +1392,6 @@ $$
 \rightarrow _\beta & \lambda f . \lambda x . (f(f((\lambda f . \lambda x . (f((\lambda f . \lambda x . xf)x))f)x)))   \\
 \rightarrow _\beta & \lambda f . \lambda x . (f(f(\lambda x . (f((\lambda f . \lambda x . xf)x))x)))   \\
 \rightarrow _\beta & \lambda f . \lambda x . (f(f(f((\lambda f . \lambda x . xf)x))))   \\
-\rightarrow _\beta & \lambda f . \lambda x . (f(f(f(\lambda x . xx))))   \\
 \rightarrow _\beta & \lambda f . \lambda x . (f(f(fx)))   \\
 & Exception: IRREDUCTIBLE. 
 \end{array}
@@ -1586,11 +1586,17 @@ La représentation la plus commode semble finalement être d'utiliser la notatio
 
 Cela impose dans la définition inductive du terme de distinguer les variables libres des variables liées.
 
-Par exemple en COQ:
-\begin{Verbatim}
+Par exemple en COQ: \begin{Verbatim}
 Inductive terme : Set :=
   | bvar : nat -> terme
   | fvar : string -> terme
   | abs  : terme -> terme
   | app  : terme -> terme -> terme.
 \end{Verbatim}
+
+\section{La normalisation par évaluation}
+Comment normaliser un terme du $\lambda$-calcul en utilisant le méchanisme d'évaluation du langage d'implémentation ?
+L'idée va être de refléter (\textit{reflect}) le terme dans le langage d'implémentation, de l'évaluer, puis de le réifier \textit{reify} 
+en $\lambda$-calcul.
+
+
