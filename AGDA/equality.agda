@@ -119,3 +119,5 @@ th-o : {n : entier} → (n + zero) ≡ n
 th-o {zero} = refl
 th-o {succ n} = cong succ (th-o {n})
 
+axiomeChoix : {A B : Set} → {R : A → B → Set} → (∀ x → ∃ λ y → R x y) → ∃ λ f → ∀ x → R x (f x)
+axiomeChoix h = ?

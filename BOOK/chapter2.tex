@@ -928,3 +928,76 @@ Voici la démonstration en \textsc{Coq}.
 \coqdockw{End} \coqdocvar{excluded\_middle}.\coqdoceol
 \end{coqdoccode}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+
+\subsection{L'égalité (2)}
+Quand pouvons-nous dire que deux choses sont égales ?
+
+Nous pouvons identifier trois définitions usuelles de l'égalité.
+\begin{enumerate}
+
+	\item L'égalité par définition.
+	C'est l'égalité courante, introduite par le signe $=$. Dans un $\lambda$-calcul, on va considérer l'égalité entre deux
+	valeurs. Donc on retiendra les termes égaux comme ceux étant $\beta$-équivalents.
+
+	\item L'égalité propositionnelle
+
+En \textsc{Agda} :
+
+\begin{verbatim}
+data _≡_ {A : Set} (x : A) : A → Set where
+refl : x ≡ x	
+\end{verbatim}
+En particulier, deux termes égaux par définition seront égaux par proposition : ie. dans ce cas, il 
+n'y a pas besoin d'élaborer de preuves, l'utilisation immédiate du constructeur \verb+refl+ est suffisante.
+\begin{verbatim}
+t1 = 2
+t2 = 1 + 1
+
+t1≡t2 : t1 ≡ t2
+t1≡t2 = refl
+\end{verbatim}
+Mais ce n'est évidemment pas toujours le cas. Par exemple, prouver que $\forall n, n + 0 = n$ ne peut se faire
+sur une simple $\beta$-équivalence, mais par une démonstration récursive sur $n$
+\begin{verbatim}
+plus0 : (n : Nat) → n + 0 ≡ n
+plus0 zero = refl
+plus0 (suc n) = cong suc (plus0 n)  
+\end{verbatim}
+
+	\item L'égalité de Leibniz.
+
+Deux choses sont égales si et seulement si elles ont les mêmes propriétés.
+$$ \forall x y, \forall P, (x=y) \Rightarrow (P(x) \Rightarrow P(y)) $$
+
+Ou comme le formulait Leibniz à son époque :
+ \textit{Il n'est pas vrai que deux substances se ressemblent entièrement, et soient différentes solo numero}
+
+En \textsc{Agda} :
+\begin{verbatim}
+leib : {A : Set} ( x y : A ) → Set₁
+leib {A} x y = (P : A → Set) → (P x) → (P y)
+\end{verbatim}
+
+Il peut paraître surprenant que l'égalité de Leibniz ne se définisse que dans un sens ( de $P(x)$ vers $P(y)$ et non également de
+$P(y)$ vers $P(x)$ ). Il s'avère en fait que l'on peut démontrer l'autre sens.
+
+Considérons $Q(z) = P(z) \Rightarrow P(x)$. Comme $x=y$, on a par définition de l'égalité de Leibniz $Q(x) \Rightarrow Q(y)$.
+Or $Q(x) = P(x) \Rightarrow P(x)$ est vérifié donc on a bien $Q(y) = P(y) \Rightarrow P(x) \ \Box $ 
+
+\vspace*{1cm}
+Heureusement, l'égalité propositionnelle est équivalente à l'égalité de Leibniz. Donc il n'y aura pas ici de débat philosophique.
+\begin{verbatim}
+≡→leib : {A : Set} {x y : A} → (x ≡ y) → (leib x y)
+≡→leib xy P  =  subst P xy
+
+leib→≡ : {A : Set} {x y : A} → (leib x y) → (x ≡ y)
+leib→≡ {A} {x} {y} lxy = Qy
+  where
+    Q : A → Set
+    Q z = x ≡ z
+    Qx : Q x
+    Qx = refl
+    Qy : Q y
+    Qy = lxy Q Qx
+\end{verbatim}
+\end{enumerate}

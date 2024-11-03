@@ -478,11 +478,11 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmtt8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmtt8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmtt8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/lm/rm-lmtt12.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-32.def
+INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-32.def
 OUTPUT /home/vincent/vsc/BOOK/chapter3.aux
 INPUT /home/vincent/vsc/BOOK/chapter3.tex
 INPUT /home/vincent/vsc/BOOK/chapter3.tex
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-32.def
-INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-32.def
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cbfonts/grmn1000.tfm
 INPUT /home/vincent/vsc/BOOK/gumpp.jpeg
 INPUT /home/vincent/vsc/BOOK/gumpp.jpeg

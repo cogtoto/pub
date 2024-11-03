@@ -33,8 +33,9 @@
 \newcommand{\snow}{{\lettersnow S\hspace{0.2cm}}}
 \newcommand{\trans}{\overset{*}{\longrightarrow_{\beta}}}
 
-\title{Le calcul \\
-     La réduction et la résolution \\
+\title{Le calcul par la réduction et la résolution \\
+       Le raisonnement par la preuve et le programme \\
+
 	 Exemples en \textsc{Scheme}, \textsc{Ocaml}, \textsc{Coq} et \textsc{Agda}\\ \vspace{1cm}
    \textgreek{᾿Αγεωμέτρητος μηδε εἰσίτω} \\
       }
@@ -45,7 +46,6 @@
 
 \newtheorem{definition}{Définition}
 \newtheorem{theoreme}{Théorème}
-
 
 \begin{document}
 \maketitle
@@ -59,7 +59,6 @@
 
 \textit{What is mathematics ? Mathematics as an expression of the human mind reflects
 the active will, the contemplative reason, and the desire for aesthetic perfection.} \cite{wm}
-
 
 C'est sous cet angle de l'esthétique que je décrirai  ici quelques concepts 
  des fondements mathématiques\footnote{\textgreek{\textbf{manj'anw}}: \textit{j'apprends} 
@@ -109,7 +108,7 @@ C'est la correspondance de Curry-Howard. \\
 Avec un langage de programmation typé comme \textsc{Ocaml} où tout terme a un type, nous pouvons
 considérer un terme comme étant  la preuve (ou plutôt une des preuves possibles) de son type. 
 Le mécanisme strict de typage nous assure de la cohérence du terme avec son type.
-Nous avons alors le rapprochement suivant:
+Nous avons alors le rapprochement suivant : 
 
 \begin{center}
 \begin{tabular}[]{|c|c|}
