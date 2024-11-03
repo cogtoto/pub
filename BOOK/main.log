@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  3 NOV 2024 18:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  3 NOV 2024 18:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1260,11 +1260,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 131--133
 
  []
 
-
-Overfull \hbox (2.78656pt too wide) in paragraph at lines 152--155
-[]\T1/lmr/m/n/10.95 Nous en mon-tre-rons plu-sieurs exemples si-gni-fi-ca-tifs avec les lan-gages \T1/lmr/m/sc/10.95 Coq \T1/lmr/m/n/10.95 et \T1/lmr/m/sc/10.95 Agda\T1/lmr/m/n/10.95 . Ces exemples
- []
-
 [8]
 \openout2 = `chapter1.aux'.
 
@@ -1941,7 +1936,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  60i,24n,75p,482b,1718s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc} <./snow.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc} <./beta.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn0900.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsco10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /home/vincent/vsc/BOOK/main.pdf (137 pages, 1613545 bytes).
+Output written on /home/vincent/vsc/BOOK/main.pdf (137 pages, 1613508 bytes).
 PDF statistics:
  1710 PDF objects out of 1728 (max. 8388607)
  1486 compressed objects within 15 object streams
