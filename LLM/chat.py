@@ -6,7 +6,7 @@ pipe = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-dev", torch_dtype=
 pipe.enable_model_cpu_offload() #save some VRAM by offloading the model to CPU. Remove this if you have enough GPU power
 #pipe = pipe.to("cuda")
 
-prompt = "a beagle with a blue collar sitting in a beach"
+prompt = "a beautiful mountain scene with snow and sun"
 image = pipe(
     prompt,
     height=1024,
