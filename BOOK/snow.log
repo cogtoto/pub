@@ -1,0 +1,32 @@
+This is METAFONT, Version 2.71828182 (preloaded base=mf 2024.12.21)  22 DEC 2024 14:35
+**snow.mf
+(snow.mf
+>> begin_char
+! Isolated expression.
+<to be read again> 
+                   (
+l.2 begin_char(
+               "F", 10pt#, 10pt#, 0);
+? 
+! Extra tokens will be flushed.
+<to be read again> 
+                   (
+l.2 begin_char(
+               "F", 10pt#, 10pt#, 0);
+? 
+)
+*
+(Please type a command or say `end')
+*X
+
+*
+! Interruption.
+<*> 
+    
+? 
+! Emergency stop.
+<*> 
+    
+End of file on the terminal!
+
+

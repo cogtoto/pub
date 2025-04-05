@@ -1,0 +1,300 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {french}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}\textgreek {Ἐν ἀρχή}, Gn 1.1 et Jn 1.1}{5}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Le $\lambda $-calcul et la réduction}{7}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Définition, champ lexical et syntaxique}{7}{section.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.1}Analyse lexicale avec ocamllex}{7}{subsection.2.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.2}Analyse syntaxique avec menhir}{8}{subsection.2.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.3}Implémentation du parsing en mode \textit {récursif descendant}}{9}{subsection.2.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}Représentation en \textsc {Ocaml}}{11}{section.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Démonstration de la confluence du $\lambda $-calcul}{15}{section.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.1}La restriction $\Lambda '$ du $\lambda $-calcul}{16}{subsection.2.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.2}La démonstration}{16}{subsection.2.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.3}Un exemple}{17}{subsection.2.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.4}La $\beta $-réduction parallèle}{17}{subsection.2.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.4}La $\beta $-réduction faible avec appel par valeur}{18}{section.2.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.5}Récursivité et points fixes}{19}{section.2.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5.1}Le point fixe du $\lambda $-calcul}{19}{subsection.2.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5.2}La diagonale de Cantor}{23}{subsection.2.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5.3}Le point fixe logique et le théorème d'incomplétude de Gödel}{25}{subsection.2.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5.4}L'indécidabilité de la $\beta $-conversion}{26}{subsection.2.5.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.6}Encoding. Les entiers \textit {Church} et les booléens en $\lambda $-calcul}{27}{section.2.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.6.1}Les entiers \textit {Church} }{27}{subsection.2.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.6.2}Les booléens }{29}{subsection.2.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.6.3}La fonction factorielle}{29}{subsection.2.6.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.7}La notation de \textit {de Bruijn}}{30}{section.2.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.8}La normalisation par évaluation}{32}{section.2.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Le $\lambda $-calcul simplement typé et les Pure Type Systems}{33}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Le $\lambda $-calcul simplement typé}{33}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.1}Présentation}{33}{subsection.3.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.2}Implémentation en \textsc {Agda}}{33}{subsection.3.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Représentation des types et des termes}{33}{section*.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Opening}{34}{section*.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{La sémantique}{34}{section*.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{La gestion de l'environnement et du contexte}{35}{section*.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Le typage}{35}{section*.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Théorème de préservation}{35}{section*.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Théorème de la progression}{36}{section*.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{La substitution}{36}{section*.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.3}Inférence de type}{37}{subsection.3.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Les \textit {Pure Type Systems}}{38}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.1}Introduction}{38}{subsection.3.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.2}\textsc {MiniCoq}}{42}{subsection.3.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.3}Le $\lor $ logique}{43}{subsection.3.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.4}L'égalité}{44}{subsection.3.2.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.5}Le faux}{45}{subsection.3.2.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.6}Le point fixe}{47}{subsection.3.2.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.7}La logique classique}{47}{subsection.3.2.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.8}L'égalité (2)}{49}{subsection.3.2.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}L'interprétation}{51}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Introduction}{51}{section.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Un interprète \textsc {MiniScheme} avec \textsc {Ocaml}}{51}{section.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.1}L'évaluation}{51}{subsection.4.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.2}Les étapes Read, Eval, Print}{53}{subsection.4.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.3}Liaison lexicale vs liaison dynamique}{54}{subsection.4.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.4}Gestion de l'environnement}{55}{subsection.4.2.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}Un interprète \textsc {Lisp} avec le nouvel interprète \textsc {MiniScheme} \ldots }{57}{section.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{La mise en abyme}{57}{section*.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\textsc {Lisp} mis en abyme}{57}{section*.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.4}L'auto-interprétation de l'interprète}{58}{section.4.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.4.1}La tour de Babel}{58}{subsection.4.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{L'environnement}{58}{section*.12}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.4.2}Réification et réflexion}{59}{subsection.4.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{L'interprète par continuation }{60}{section*.13}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}La compilation}{67}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Compilation des $\lambda $-termes en termes applicatifs}{67}{section.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{La correspondance de Curry-Howard}{70}{section*.14}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Compilation basique vers une machine à pile}{71}{section.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2.1}Certification de la compilation avec le langage \textsc {Coq}}{72}{subsection.5.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.3}Compilation du \textsc {Lisp} vers une machine abstraite}{75}{section.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{La machine SECD}{75}{section*.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{La compilation $C: exp$\ {\letterimp D}\hspace {0.1cm}\ \texttt {code}}{75}{section*.16}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{La table de transition de la machine SECD}{75}{section*.17}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{L'implémentation en \textsc {Ocaml}}{76}{section*.18}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}La résolution}{79}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.1}Représentation des termes finis}{79}{section.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}La substitution}{81}{section.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Filtrage et réécriture}{82}{section.6.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.1}Le filtrage}{82}{subsection.6.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.2}La réécriture et l'arithmétique de Peano}{83}{subsection.6.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.4}L'unification des termes}{85}{section.6.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.5}Un mini \textsc {Prolog}}{87}{section.6.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.6}Quelques exemples de programmation en \textsc {Prolog}}{88}{section.6.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.6.1}Les entiers naturels}{88}{subsection.6.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.6.2}Les additions de Peano}{88}{subsection.6.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.6.3}Programmation "logique" en \textsc {Coq}}{89}{subsection.6.6.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.6.4}La base généalogique}{90}{subsection.6.6.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.7}L'algorithme de complétion de Knuth-Bendix}{90}{section.6.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.7.1}Confluence et paires critiques}{90}{subsection.6.7.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.7.2}Terminaison}{92}{subsection.6.7.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Indécidabilité de la terminaison dans le cas "général"}{92}{section*.19}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Système de réécriture noethérien}{92}{section*.20}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.7.3}Complétion de Knuth-Bendix}{93}{subsection.6.7.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {7}Calculabilité et complexité}{95}{chapter.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.1}Les fonctions récursives}{95}{section.7.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.2}La machine de Turing}{97}{section.7.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.3}La thèse de Church}{100}{section.7.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.4}Complexité}{100}{section.7.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.4.1}Théorème de Cook}{100}{subsection.7.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.4.2}Implémentation de l'algorithme SAT}{100}{subsection.7.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.4.3}Sudoku - SAT encoding}{101}{subsection.7.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.5}Métaprogrammation - récursivité et réflexivité}{103}{section.7.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.5.1}Introduction}{103}{subsection.7.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.5.2}Le théorème de Kleene}{103}{subsection.7.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.5.3}Un programme Quine}{104}{subsection.7.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.5.4}Le théorème de Rice}{104}{subsection.7.5.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {8}Annexes / Divers}{105}{chapter.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.1}Quelques fonctions sur les listes}{105}{section.8.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.2}Les listes mutables}{105}{section.8.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.3}Les listes infinies ou \textit {streams}}{106}{section.8.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.4}Le module Graphics d'\textsc {Ocaml}, les fractales}{108}{section.8.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{L'ensemble de Mandelbrot}{110}{section*.21}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.5}Utilisation de \textlogo {META}\-\textlogo {FONT}\spacefactor \@m {}}{111}{section.8.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.6}The boxes}{113}{section.8.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.7}Les modules \textsc {Ocaml}. Modélisation d'un monoïde}{114}{section.8.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.8}Machine Learning and Neural Networks}{115}{section.8.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.8.1}Introduction}{115}{subsection.8.8.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.8.2}Un peu de théorie}{115}{subsection.8.8.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.8.3}Calcul matriciel}{116}{subsection.8.8.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.8.4}Fonctions d'activation}{117}{subsection.8.8.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.9}Les nombres premiers. L'algorithme RSA}{118}{section.8.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Le crible}{118}{section*.22}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Le produit d'Euler aka le produit eulérien}{118}{section*.23}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Les nombres premiers jumeaux et la constante de Brun}{120}{section*.24}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Le petit théorème de Fermat}{120}{section*.25}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Le théorème d'Euler}{120}{section*.26}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Le théorème de Bezout}{120}{section*.27}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{L'inverse modulaire}{121}{section*.28}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{L'algorithme RSA}{121}{section*.29}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Le code}{121}{section*.30}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.10}Approximation du nombre $\pi $ }{122}{section.8.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.10.1}La méthode des polygones}{123}{subsection.8.10.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Calcul de $p_{2n}$ en fonction de $p_n$}{123}{section*.31}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Calcul de $p'_n$ en fonction de $p_n$}{124}{section*.32}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.10.2}La série alternée de Leibniz}{125}{subsection.8.10.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.10.3}La loi des grands nombres}{126}{subsection.8.10.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.10.4}Le produit de Wallis}{126}{subsection.8.10.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.10.5}L'intégrale $\DOTSI \intop \ilimits@ _0^1 \frac {1}{1+x^2} dx$}{127}{subsection.8.10.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.11}Poésies}{127}{section.8.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.12}Lectures}{128}{section.8.12}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.13}Les fractions continues}{128}{section.8.13}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.14}L'irrationalité de $\sqrt {2}$}{129}{section.8.14}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.15}Démonstration non constructive}{129}{section.8.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.16}Le tout est-il plus grand que chacune de ses parties ?}{129}{section.8.16}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.17}L'hyperbole $xy=1$}{130}{section.8.17}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.18}L'exponentielle}{130}{section.8.18}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.19}Les fonctions $\qopname \relax o{sin}\frac {1}{x}$ et $x . \qopname \relax o{sin}\frac {1}{x}$ }{131}{section.8.19}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.20}Prouver par réflection en \sc {Agda}}{131}{section.8.20}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.21}Srivanasa Ramanujan}{132}{section.8.21}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.22}Le grec ancien}{132}{section.8.22}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.22.1}L'alphabet grec}{132}{subsection.8.22.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.22.2}Extraits du nouveau testament}{133}{subsection.8.22.2}%

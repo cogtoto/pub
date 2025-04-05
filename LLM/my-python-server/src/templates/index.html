@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula Calculator</title>
+    <script>
+        async function calculate() {
+            const input = document.getElementById('formulaInput').value;
+            const response = await fetch('/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ formula: input })
+            });
+            const result = await response.json();
+            document.getElementById('resultOutput').innerText = result.result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Formula Calculator</h1>
+    <textarea id="formulaInput" rows="10" cols="50" placeholder="Enter your formula here..."></textarea><br>
+    <button onclick="calculate()">Calculate</button>
+    <h2>Result:</h2>
+    <div id="resultOutput"></div>
+</body>
+</html>
