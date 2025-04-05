@@ -1,0 +1,5 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'book.blg'
+[104] biber:340> INFO - === Tue Oct 15, 2024, 22:41:07
+[380] Utils.pm:399> ERROR - Cannot find 'book.bcf'!
+[380] Biber.pm:136> INFO - ERRORS: 1

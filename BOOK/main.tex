@@ -2,7 +2,7 @@
 \usepackage[LGR, T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{fullpage}
-\usepackage{url}
+%\usepackage{url}
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{tikzsymbols}
@@ -20,11 +20,16 @@
 \usepackage{alltt}
 \usepackage{multirow}
 \usepackage{float}
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ucs}
 \usepackage{mflogo}
 \usepackage{wrapfig}
-\usepackage{coqdoc}
 \usepackage{proof}
+\usepackage[euler]{textgreek}
+\usepackage{microtype}
+\usepackage[backend=biber]{biblatex}
+\usepackage{coqdoc}
+\usepackage[nottoc]{tocbibind}
 
 \fvset{tabsize=2}
 \newfont{\letterimp}{beta}
@@ -47,6 +52,7 @@
 \newtheorem{definition}{Définition}
 \newtheorem{theoreme}{Théorème}
 
+\addbibresource{book.bib}  
 \begin{document}
 \maketitle
 \tableofcontents
@@ -56,14 +62,13 @@
 \textit{Aristote considérait les mathématiques comme une discipline, non pas tant de la vérité, que de la beauté.}
 \cite{ab}
 
-
 \textit{What is mathematics ? Mathematics as an expression of the human mind reflects
 the active will, the contemplative reason, and the desire for aesthetic perfection.} \cite{wm}
 
-C'est sous cet angle de l'esthétique que je décrirai  ici quelques concepts 
- des fondements mathématiques\footnote{\textgreek{\textbf{manj'anw}}: \textit{j'apprends} 
-\textgreek{\textbf{t`o m'ajhma}}: \textit{l'étude} 
-\textgreek{\textbf{t`a majhmatik'a}}: \textit{les mathématiques, l'étude par excellence}} de l'informatique. \\
+C'est sous cet angle de l'esthétique que je décrirai ici quelques concepts des fondements 
+mathématiques\footnote{\textgreek{\textbf{manj'anw}} : \textit{j'apprends} 
+\textgreek{\textbf{t`o m'ajhma}} : \textit{l'étude} 
+\textgreek{\textbf{t`a majhmatik'a}} : \textit{les mathématiques, l'étude par excellence}} de l'informatique. \\
 
  \vspace{0.5cm}
 
@@ -72,7 +77,8 @@ décrire l'action de calculer, le processus du calcul.
 
 Nous identifions deux processus bien distincts appelés la \textbf{réduction} et la \textbf{résolution}.
 La réduction est l'action de réduire séquentiellement une expression en une autre plus simple
-au moyen de règles de réécriture. Lorsque plus aucune règle ne s'applique, l'expression calculée est alors en forme
+au moyen de règles de réécriture. Lorsque plus aucune règle ne s'applique, l'expression calculée
+ est alors en forme
 \textit{normale}. Cette forme normale correspondra à la \textit{valeur} de notre calcul. \\
 $(3+8)+(4-9)*2$ \,\imp\,  $11 -5*2$ \, \imp\, $11 -10$ \,\imp\, $1$ \\
 
@@ -178,7 +184,7 @@ Bonne lecture !
 % Annexes 
 \include{chapter7}
 
-\bibliographystyle{plain}
-\bibliography{book} 
 
+
+\printbibliography
 \end{document}

@@ -4,4 +4,6 @@ See the Tex document (in French), the compiled pdf doc
 
 Contains OCAML, SCHEME, COQ and AGDA code
 
-Have a happy reading !
+Please see the file BOOK/main.pdf
+
+Have a happy reading ! 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  3 NOV 2024 18:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.6)  5 APR 2025 12:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -386,9 +386,6 @@ Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/preprint/fullpage.sty
 Package: fullpage 1999/02/23 1.1 (PWD)
 \FP@margin=\skip49
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip16
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
  (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/keyval.sty
@@ -683,7 +680,7 @@ LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
 \macc@depth=\count275
 \c@MaxMatrixCols=\count276
-\dotsspace@=\muskip17
+\dotsspace@=\muskip16
 \c@parentequation=\count277
 \dspbrk@lvl=\count278
 \tag@help=\toks30
@@ -835,9 +832,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks43
 \inpenc@posthook=\toks44
- (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/utf8x.def
-File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
-)) (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/ucs.sty
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/ucs.sty
 Package: ucs 2013/05/11 v2.2 UCS: Unicode input support
  (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-global.def
 File: uni-global.def 2013/05/13 UCS: Unicode global data
@@ -855,28 +850,296 @@ Package: mflogo 1999/03/10 v2.0 LaTeX package for Metafont and MetaPost logos
 \WF@box=\box63
 \WF@everypar=\toks48
 Package: wrapfig 2003/01/31  v 3.6
-) (/home/vincent/vsc/BOOK/coqdoc.sty
-Package: coqdoc 2002/02/11
-\coqdocbaseindent=\skip58
- (/usr/local/texlive/2020/texmf-dist/tex/generic/iftex/ifpdf.sty
-Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
- (/usr/local/texlive/2020/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2020/03/06 v1.0d TeX engine tests
-)) (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
- (/usr/local/texlive/2020/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/lkproof/proof.sty
+\inferLineSkip=\dimen274
+\inferLabelSkip=\dimen275
+\@LeftOffset=\dimen276
+\@RightOffset=\dimen277
+\@SavedLeftOffset=\dimen278
+\UpperWidth=\dimen279
+\LowerWidth=\dimen280
+\LowerHeight=\dimen281
+\UpperLeftOffset=\dimen282
+\UpperRightOffset=\dimen283
+\UpperCenter=\dimen284
+\LowerCenter=\dimen285
+\UpperAdjust=\dimen286
+\RuleAdjust=\dimen287
+\LowerAdjust=\dimen288
+\RuleWidth=\dimen289
+\HLabelAdjust=\dimen290
+\VLabelAdjust=\dimen291
+\WidthAdjust=\dimen292
+\@UpperPart=\box64
+\@LowerPart=\box65
+\@LabelPart=\box66
+\ResultBox=\box67
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2019/11/18 v2.7d Micro-typographical refinements (RS)
+\MT@toks=\toks49
+\MT@count=\count302
+LaTeX Info: Redefining \textls on input line 790.
+\MT@outer@kern=\dimen293
+LaTeX Info: Redefining \textmicrotypecontext on input line 1354.
+\MT@listname@count=\count303
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2019/11/18 v2.7d Definitions specific to pdftex (RS)
+LaTeX Info: Redefining \lsstyle on input line 914.
+LaTeX Info: Redefining \lslig on input line 914.
+\MT@outer@space=\skip58
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2019/11/18 v2.7d microtype main configuration file (RS)
+)) (/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2019/12/01 v3.14 programmable bibliographies (PK/MW)
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
 Package: pdftexcmds 2020-06-04 v0.32 Utility functions of pdfTeX for LuaTeX (HO)
  (/usr/local/texlive/2020/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+) (/usr/local/texlive/2020/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+) (/usr/local/texlive/2020/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-) (/usr/local/texlive/2020/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count304
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
+ (/usr/local/texlive/2020/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
-) (/usr/local/texlive/2020/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+)) (/usr/local/texlive/2020/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count305
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+)) (/usr/local/texlive/2020/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+
+/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/biblatex.sty:155: Package biblatex Error: Incompatible package 'ucs'.
+
+See the biblatex package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.155 \blx@packageincompatibility
+                                 
+The 'ucs' package and biblatex are incompatible.
+
+\c@tabx@nest=\count306
+\c@listtotal=\count307
+\c@listcount=\count308
+\c@liststart=\count309
+\c@liststop=\count310
+\c@citecount=\count311
+\c@citetotal=\count312
+\c@multicitecount=\count313
+\c@multicitetotal=\count314
+\c@instcount=\count315
+\c@maxnames=\count316
+\c@minnames=\count317
+\c@maxitems=\count318
+\c@minitems=\count319
+\c@citecounter=\count320
+\c@maxcitecounter=\count321
+\c@savedcitecounter=\count322
+\c@uniquelist=\count323
+\c@uniquename=\count324
+\c@refsection=\count325
+\c@refsegment=\count326
+\c@maxextratitle=\count327
+\c@maxextratitleyear=\count328
+\c@maxextraname=\count329
+\c@maxextradate=\count330
+\c@maxextraalpha=\count331
+\c@abbrvpenalty=\count332
+\c@highnamepenalty=\count333
+\c@lownamepenalty=\count334
+\c@maxparens=\count335
+\c@parenlevel=\count336
+\blx@tempcnta=\count337
+\blx@tempcntb=\count338
+\blx@tempcntc=\count339
+\blx@maxsection=\count340
+\blx@maxsegment@0=\count341
+\blx@notetype=\count342
+\blx@parenlevel@text=\count343
+\blx@parenlevel@foot=\count344
+\blx@sectionciteorder@0=\count345
+\blx@entrysetcounter=\count346
+\labelnumberwidth=\skip59
+\labelalphawidth=\skip60
+\biblabelsep=\skip61
+\bibitemsep=\skip62
+\bibnamesep=\skip63
+\bibinitsep=\skip64
+\bibparsep=\skip65
+\bibhang=\skip66
+\blx@bcfin=\read5
+\blx@bcfout=\write5
+\blx@langwohyphens=\language87
+\c@mincomprange=\count347
+\c@maxcomprange=\count348
+\c@mincompwidth=\count349
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+(/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/blx-dm.def
+File: blx-dm.def 2019/12/01 v3.14 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count350
+\c@savedafterword=\count351
+\c@annotator=\count352
+\c@savedannotator=\count353
+\c@author=\count354
+\c@savedauthor=\count355
+\c@bookauthor=\count356
+\c@savedbookauthor=\count357
+\c@commentator=\count358
+\c@savedcommentator=\count359
+\c@editor=\count360
+\c@savededitor=\count361
+\c@editora=\count362
+\c@savededitora=\count363
+\c@editorb=\count364
+\c@savededitorb=\count365
+\c@editorc=\count366
+\c@savededitorc=\count367
+\c@foreword=\count368
+\c@savedforeword=\count369
+\c@holder=\count370
+\c@savedholder=\count371
+\c@introduction=\count372
+\c@savedintroduction=\count373
+\c@namea=\count374
+\c@savednamea=\count375
+\c@nameb=\count376
+\c@savednameb=\count377
+\c@namec=\count378
+\c@savednamec=\count379
+\c@translator=\count380
+\c@savedtranslator=\count381
+\c@shortauthor=\count382
+\c@savedshortauthor=\count383
+\c@shorteditor=\count384
+\c@savedshorteditor=\count385
+\c@labelname=\count386
+\c@savedlabelname=\count387
+\c@institution=\count388
+\c@savedinstitution=\count389
+\c@lista=\count390
+\c@savedlista=\count391
+\c@listb=\count392
+\c@savedlistb=\count393
+\c@listc=\count394
+\c@savedlistc=\count395
+\c@listd=\count396
+\c@savedlistd=\count397
+\c@liste=\count398
+\c@savedliste=\count399
+\c@listf=\count400
+\c@savedlistf=\count401
+\c@location=\count402
+\c@savedlocation=\count403
+\c@organization=\count404
+\c@savedorganization=\count405
+\c@origlocation=\count406
+\c@savedoriglocation=\count407
+\c@origpublisher=\count408
+\c@savedorigpublisher=\count409
+\c@publisher=\count410
+\c@savedpublisher=\count411
+\c@language=\count412
+\c@savedlanguage=\count413
+\c@origlanguage=\count414
+\c@savedoriglanguage=\count415
+\c@pageref=\count416
+\c@savedpageref=\count417
+\shorthandwidth=\skip67
+\shortjournalwidth=\skip68
+\shortserieswidth=\skip69
+\shorttitlewidth=\skip70
+\shortauthorwidth=\skip71
+\shorteditorwidth=\skip72
+\locallabelnumberwidth=\skip73
+\locallabelalphawidth=\skip74
+\localshorthandwidth=\skip75
+\localshortjournalwidth=\skip76
+\localshortserieswidth=\skip77
+\localshorttitlewidth=\skip78
+\localshortauthorwidth=\skip79
+\localshorteditorwidth=\skip80
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
+\c@textcitecount=\count418
+\c@textcitetotal=\count419
+\c@textcitemaxnames=\count420
+\c@biburlbigbreakpenalty=\count421
+\c@biburlbreakpenalty=\count422
+\c@biburlnumpenalty=\count423
+\c@biburlucpenalty=\count424
+\c@biburllcpenalty=\count425
+\biburlbigskip=\muskip18
+\biburlnumskip=\muskip19
+\biburlucskip=\muskip20
+\biburllcskip=\muskip21
+\c@smartand=\count426
+)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+File: numeric.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count427
+\c@bbx:relatedtotal=\count428
+))
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+File: numeric.cbx 2019/12/01 v3.14 biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+)) (/home/vincent/vsc/BOOK/coqdoc.sty
+Package: coqdoc 2002/02/11
+\coqdocbaseindent=\skip81
+ (/usr/local/texlive/2020/texmf-dist/tex/generic/iftex/ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
+ (/usr/local/texlive/2020/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 ) (/usr/local/texlive/2020/texmf-dist/tex/generic/pdfescape/pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
@@ -886,20 +1149,20 @@ Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/kvoptions/kvoptions.sty
-Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
 )
-\@linkdim=\dimen274
-\Hy@linkcounter=\count302
-\Hy@pagecounter=\count303
+\@linkdim=\dimen294
+\Hy@linkcounter=\count429
+\Hy@pagecounter=\count430
  (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2020-05-15 v7.00e Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
 ) (/usr/local/texlive/2020/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ) (/usr/local/texlive/2020/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count304
+\Hy@SavedSpaceFactor=\count431
 Package hyperref Info: Hyper figures OFF on input line 4464.
 Package hyperref Info: Link nesting OFF on input line 4469.
 Package hyperref Info: Hyper index ON on input line 4472.
@@ -907,17 +1170,17 @@ Package hyperref Info: Plain pages OFF on input line 4479.
 Package hyperref Info: Backreferencing OFF on input line 4484.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4717.
-\c@Hy@tempcnt=\count305
+\c@Hy@tempcnt=\count432
 LaTeX Info: Redefining \url on input line 5076.
-\XeTeXLinkMargin=\dimen275
+\XeTeXLinkMargin=\dimen295
  (/usr/local/texlive/2020/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (/usr/local/texlive/2020/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count306
-\Field@Width=\dimen276
-\Fld@charsize=\dimen277
+\Fld@menulength=\count433
+\Field@Width=\dimen296
+\Fld@charsize=\dimen297
 Package hyperref Info: Hyper figures OFF on input line 6347.
 Package hyperref Info: Link nesting OFF on input line 6352.
 Package hyperref Info: Hyper index ON on input line 6355.
@@ -930,19 +1193,18 @@ LaTeX Info: Redefining \pageref on input line 6421.
  (/usr/local/texlive/2020/texmf-dist/tex/generic/atbegshi/atbegshi.sty
 Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
 )
-\Hy@abspage=\count307
-\c@Item=\count308
-\c@Hfootnote=\count309
+\Hy@abspage=\count434
+\c@Item=\count435
+\c@Hfootnote=\count436
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2020-05-15 v7.00e Hyperref driver for pdfTeX
  (/usr/local/texlive/2020/texmf-dist/tex/latex/atveryend/atveryend.sty
 Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
-Package atveryend Info: \enddocument detected (standard20110627).
 )
-\Fld@listcount=\count310
-\c@bookmark@seq@number=\count311
+\Fld@listcount=\count437
+\c@bookmark@seq@number=\count438
  (/usr/local/texlive/2020/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
  (/usr/local/texlive/2020/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -950,89 +1212,85 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 286.
 )
-\Hy@SectionHShift=\skip59
+\Hy@SectionHShift=\skip82
 )
 Package hyperref Info: Option `raiselinks' set `true' on input line 113.
 Package hyperref Info: Option `colorlinks' set `true' on input line 113.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/tools/xr.sty
 Package: xr 2019/07/22 v5.05 eXternal References (DPC)
-)) (/usr/local/texlive/2020/texmf-dist/tex/latex/lkproof/proof.sty
-\inferLineSkip=\dimen278
-\inferLabelSkip=\dimen279
-\@LeftOffset=\dimen280
-\@RightOffset=\dimen281
-\@SavedLeftOffset=\dimen282
-\UpperWidth=\dimen283
-\LowerWidth=\dimen284
-\LowerHeight=\dimen285
-\UpperLeftOffset=\dimen286
-\UpperRightOffset=\dimen287
-\UpperCenter=\dimen288
-\LowerCenter=\dimen289
-\UpperAdjust=\dimen290
-\RuleAdjust=\dimen291
-\LowerAdjust=\dimen292
-\RuleWidth=\dimen293
-\HLabelAdjust=\dimen294
-\VLabelAdjust=\dimen295
-\WidthAdjust=\dimen296
-\@UpperPart=\box64
-\@LowerPart=\box65
-\@LabelPart=\box66
-\ResultBox=\box67
+)) (/usr/local/texlive/2020/texmf-dist/tex/latex/tocbibind/tocbibind.sty
+Package: tocbibind 2010/10/13 v1.5k extra ToC listings
+Package tocbibind Info: The document has chapter divisions on input line 50.
+
+
+Package tocbibind Note: Using chapter style headings, unless overridden.
+
 )
-\c@definition=\count312
-\c@theoreme=\count313
- (/home/vincent/vsc/BOOK/main.aux (/home/vincent/vsc/BOOK/chapter1.aux) (/home/vincent/vsc/BOOK/chapter2.aux) (/home/vincent/vsc/BOOK/chapter3.aux) (/home/vincent/vsc/BOOK/chapter4.aux) (/home/vincent/vsc/BOOK/chapter5.aux) (/home/vincent/vsc/BOOK/chapter6.aux) (/home/vincent/vsc/BOOK/chapter7.aux))
+\c@definition=\count439
+\c@theoreme=\count440
+
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
+\@quotelevel=\count441
+\@quotereset=\count442
+No file main.aux.
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 50.
-LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 50.
- (/usr/local/texlive/2020/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 56.
+LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 56.
+(/usr/local/texlive/2020/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
 File: lgrcmr.fd 2017/07/29 v1.2 Greek European Computer Regular
 )
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 50.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 56.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count314
-\scratchdimen=\dimen297
+\scratchcounter=\count443
+\scratchdimen=\dimen298
 \scratchbox=\box68
-\nofMPsegments=\count315
-\nofMParguments=\count316
-\everyMPshowfont=\toks49
-\MPscratchCnt=\count317
-\MPscratchDim=\dimen298
-\MPnumerator=\count318
-\makeMPintoPDFobject=\count319
-\everyMPtoPDFconversion=\toks50
+\nofMPsegments=\count444
+\nofMParguments=\count445
+\everyMPshowfont=\toks50
+\MPscratchCnt=\count446
+\MPscratchDim=\dimen299
+\MPnumerator=\count447
+\makeMPintoPDFobject=\count448
+\everyMPtoPDFconversion=\toks51
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 )) ABD: EveryShipout initializing macros
-LaTeX Info: Redefining \degres on input line 50.
-LaTeX Info: Redefining \dots on input line 50.
-LaTeX Info: Redefining \up on input line 50.
+LaTeX Info: Redefining \degres on input line 56.
+LaTeX Info: Redefining \dots on input line 56.
+LaTeX Info: Redefining \up on input line 56.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 LGR\textpentedeka already defined.
@@ -1113,8 +1371,44 @@ LGR\textaristerikeraia already defined.
 
 fontencoding LGR patched
 )
+LaTeX Info: Redefining \microtypecontext on input line 56.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `basictext'.
+LaTeX Info: Redefining \showhyphens on input line 56.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
+)
+Package biblatex Info: Trying to load language 'french'...
+Package biblatex Info: ... file 'french.lbx' found.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/biblatex/lbx/french.lbx
+File: french.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load language 'polutonikogreek'...
+Package biblatex Info: ... file 'polutonikogreek.lbx' not found.
+
+
+Package biblatex Warning: Language 'polutonikogreek' not supported.
+(biblatex)                Using fallback language 'french' on input line 56.
+
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout5 = `main.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'main.bbl' found.
+(/home/vincent/vsc/BOOK/main.bbl)
+Package biblatex Info: Reference section=0 on input line 56.
+Package biblatex Info: Reference segment=0 on input line 56.
 \AtBeginShipoutBox=\box69
-Package hyperref Info: Link coloring ON on input line 50.
+Package hyperref Info: Link coloring ON on input line 56.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/usr/local/texlive/2020/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1122,145 +1416,165 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/local/texlive/2020/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count320
+\c@section@level=\count449
 )
-LaTeX Info: Redefining \ref on input line 50.
-LaTeX Info: Redefining \pageref on input line 50.
-LaTeX Info: Redefining \nameref on input line 50.
- (/home/vincent/vsc/BOOK/main.out) (/home/vincent/vsc/BOOK/main.out)
-\@outlinefile=\write5
-\openout5 = `main.out'.
+LaTeX Info: Redefining \ref on input line 56.
+LaTeX Info: Redefining \pageref on input line 56.
+LaTeX Info: Redefining \nameref on input line 56.
+\@outlinefile=\write6
+\openout6 = `main.out'.
 
- (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-0.def
-File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
-)
-LaTeX Font Info:    Trying to load font information for LGR+lmr on input line 52.
+Package microtype Info: Character `029' is missing
+(microtype)             in font `T1/lmr/m/sc/17.28'.
+(microtype)             Ignoring protrusion settings for this character.
+LaTeX Font Info:    Trying to load font information for LGR+lmr on input line 58.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/cbfonts-fd/lgrlmr.fd
 File: lgrlmr.fd 2017/07/29 v1.2 Scalable Greek Latin Modern Regular
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-31.def
-File: uni-31.def 2013/05/13 UCS: Unicode data U+1F00..U+1FFF
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-3.def
-File: uni-3.def 2013/05/13 UCS: Unicode data U+0300..U+03FF
 )
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 52.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 58.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 52.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 58.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 52.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 58.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 52.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 58.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 52.
+(Font)              <12> on input line 58.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 52.
+(Font)              <8> on input line 58.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 52.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 52.
+(Font)              <6> on input line 58.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 58.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 58.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 52.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 58.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [1
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+ [1
 
 
 {/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
 
-] (/home/vincent/vsc/BOOK/main.toc
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 3.
- [3] [4]
-LaTeX Font Info:    Trying to load font information for U+logo on input line 110.
- (/usr/local/texlive/2020/texmf-dist/tex/latex/mflogo/ulogo.fd
-File: ulogo.fd 1999/03/10 v2.0 LaTeX font defs for Metafont and MetaPost logos
-))
-\tf@toc=\write6
-\openout6 = `main.toc'.
+]
+\tf@toc=\write7
+\openout7 = `main.toc'.
 
- [5] [6
+ [3] [4
 
 ]
 Chapitre 1.
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<def>-command' on input line 54.
+(hyperref)                removing `\<def>-command' on input line 60.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\encodingdefault' on input line 54.
+(hyperref)                removing `\encodingdefault' on input line 60.
 
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textpsili' on input line 54.
+(hyperref)                removing `\ensuregreek' on input line 60.
 
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textEpsilon' on input line 54.
+(hyperref)                removing `\accpsili' on input line 60.
 
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textnu' on input line 54.
+(hyperref)                removing `\textEpsilon' on input line 60.
 
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textpsili' on input line 54.
+(hyperref)                removing `\textnu' on input line 60.
 
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textalpha' on input line 54.
+(hyperref)                removing `\ensuregreek' on input line 60.
 
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textrho' on input line 54.
+(hyperref)                removing `\accpsili' on input line 60.
 
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\textchi' on input line 54.
-
-
-Package hyperref Warning: Composite letter `\textacute+\texteta'
-(hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textacute' on input line 54.
+(hyperref)                removing `\textalpha' on input line 60.
 
 
 Package hyperref Warning: Glyph not defined in PD1 encoding,
-(hyperref)                removing `\texteta' on input line 54.
+(hyperref)                removing `\textrho' on input line 60.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 63--67
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textchi' on input line 60.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\ensuregreek' on input line 60.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\acctonos' on input line 60.
+
+
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\texteta' on input line 60.
+
+
+LaTeX Warning: Citation 'ab' on page 5 undefined on input line 63.
+
+
+LaTeX Warning: Citation 'wm' on page 5 undefined on input line 66.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 69.
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--72
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--78
+Underfull \hbox (badness 10000) in paragraph at lines 78--84
 
  []
 
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
+[5]
+Package microtype Info: Character `029' is missing
+(microtype)             in font `T1/lmr/m/sc/10.95'.
+(microtype)             Ignoring protrusion settings for this character.
+
+Underfull \hbox (badness 10000) in paragraph at lines 135--136
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 131--133
+Underfull \hbox (badness 10000) in paragraph at lines 137--139
 
  []
 
-[8]
+[6]
 \openout2 = `chapter1.aux'.
 
  (/home/vincent/vsc/BOOK/chapter1.tex
@@ -1283,126 +1597,143 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <20.74> on input line 2.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <17.28> on input line 2.
-[9
+[7
 
 
-] [10] [11]
+] [8] [9]
 
 LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
-(Font)              using `T1/lmr/bx/n' instead on input line 217.
+(Font)              using `T1/lmr/bx/n' instead on input line 218.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [12] [13] [14] [15]
-Overfull \hbox (29.01074pt too wide) in paragraph at lines 454--455
+ [10] [11]
+
+LaTeX Warning: Citation 'plisp' on page 12 undefined on input line 337.
+
+[12] [13]
+Overfull \hbox (29.01074pt too wide) in paragraph at lines 455--456
 [][] 
  []
 
 
 Underfull \vbox (badness 1292) has occurred while \output is active []
 
- [16]
+ [14]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 513.
+(Font)              <14.4> on input line 514.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 513.
+(Font)              <10> on input line 514.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 513.
+(Font)              <7> on input line 514.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 513.
+(hyperref)                removing `math shift' on input line 514.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\lambda' on input line 513.
+(hyperref)                removing `\lambda' on input line 514.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 513.
+(hyperref)                removing `math shift' on input line 514.
+
+[15]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 573.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\Lambda' on input line 573.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 573.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 573.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\lambda' on input line 573.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 573.
+
+
+LaTeX Warning: Citation 'baren_bible' on page 16 undefined on input line 594.
+
+
+Overfull \hbox (8.88588pt too wide) in paragraph at lines 614--616
+[]\T1/lmr/m/n/10.95 (-20) Soit $\OML/lmm/m/it/10.95 M \OMS/lmsy/m/n/10.95 ^^Q \OT1/lmr/m/n/10.95 (-20) (\OML/lmm/m/it/10.95 ^^Ux:xx\OT1/lmr/m/n/10.95 (-20) )((\OML/lmm/m/it/10.95 ^^Uy:z\OT1/lmr/m/n/10.95 (-20) )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 (-20) )$ \T1/lmr/m/n/10.95 (-20) , nous avons $\OML/lmm/m/it/10.95 M [] N[] \OMS/lmsy/m/n/10.95 ^^Q \OT1/lmr/m/n/10.95 (-20) (\OML/lmm/m/it/10.95 ^^Ux:xx\OT1/lmr/m/n/10.95 (-20) )\OML/lmm/m/it/10.95 z$ \T1/lmr/m/n/10.95 (-20) et $\OML/lmm/m/it/10.95 M [] N \OMS/lmsy/m/n/10.95 ^^Q \OT1/lmr/m/n/10.95 (-20) ((\OML/lmm/m/it/10.95 ^^Uy:z\OT1/lmr/m/n/10.95 (-20) )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 (-20) )((\OML/lmm/m/it/10.95 ^^Uy:z\OT1/lmr/m/n/10.95 (-20) )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 (-20) )$ 
+ []
+
+[16]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 631.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\beta' on input line 631.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 631.
 
 [17]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 572.
+(hyperref)                removing `math shift' on input line 690.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\Lambda' on input line 572.
+(hyperref)                removing `\beta' on input line 690.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 572.
+(hyperref)                removing `math shift' on input line 690.
 
 
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 572.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\lambda' on input line 572.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 572.
-
-
-Overfull \hbox (13.13214pt too wide) in paragraph at lines 613--615
-[]\T1/lmr/m/n/10.95 Soit $\OML/lmm/m/it/10.95 M \OMS/lmsy/m/n/10.95 ^^Q \OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^^Ux:xx\OT1/lmr/m/n/10.95 )((\OML/lmm/m/it/10.95 ^^Uy:z\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 )$ \T1/lmr/m/n/10.95 , nous avons $\OML/lmm/m/it/10.95 M [] N[] \OMS/lmsy/m/n/10.95 ^^Q \OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^^Ux:xx\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 z$ \T1/lmr/m/n/10.95 et $\OML/lmm/m/it/10.95 M [] N \OMS/lmsy/m/n/10.95 ^^Q \OT1/lmr/m/n/10.95 ((\OML/lmm/m/it/10.95 ^^Uy:z\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 )((\OML/lmm/m/it/10.95 ^^Uy:z\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 )$ 
- []
+LaTeX Warning: Citation 'god' on page 18 undefined on input line 743.
 
 [18]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 630.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 630.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 630.
-
-[19]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 689.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 689.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 689.
-
-[20]
-<DrawingHands.jpg, id=764, 326.21875pt x 282.05376pt>
+<DrawingHands.jpg, id=167, 326.21875pt x 282.05376pt>
 File: DrawingHands.jpg Graphic file (type jpg)
 <use DrawingHands.jpg>
-Package pdftex.def Info: DrawingHands.jpg  used on input line 747.
+Package pdftex.def Info: DrawingHands.jpg  used on input line 748.
 (pdftex.def)             Requested size: 140.92793pt x 121.85315pt.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 753.
+(hyperref)                removing `math shift' on input line 754.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\lambda' on input line 753.
+(hyperref)                removing `\lambda' on input line 754.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 753.
+(hyperref)                removing `math shift' on input line 754.
 
-[21 </home/vincent/vsc/BOOK/DrawingHands.jpg>]
+
+LaTeX Warning: Citation 'lamport1994latex' on page 19 undefined on input line 766.
+
+[19 </home/vincent/vsc/BOOK/DrawingHands.jpg>]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <9> on input line 817.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 817.
- [22]
+ [20]
+Package microtype Info: Character `029' is missing
+(microtype)             in font `T1/lmr/m/sc/9'.
+(microtype)             Ignoring protrusion settings for this character.
+
 
 LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 924.
@@ -1411,28 +1742,95 @@ LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 932.
 
-(/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-33.def
-File: uni-33.def 2013/05/13 UCS: Unicode data U+2100..U+21FF
-)
 LaTeX Font Info:    Trying to load font information for OML+lmtt on input line 934.
 LaTeX Font Info:    No file OMLlmtt.fd. on input line 934.
-
 
 LaTeX Font Warning: Font shape `OML/lmtt/m/it' undefined
 (Font)              using `OML/cmm/m/it' instead on input line 934.
 
-(/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-34.def
-File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
-) [23] [24]
+[21] [22]
 Underfull \hbox (badness 10000) in paragraph at lines 1064--1066
 
  []
 
-[25]
+[23]
+
+LaTeX Warning: Citation 'girard' on page 24 undefined on input line 1137.
+
+
+LaTeX Warning: Citation 'PP' on page 24 undefined on input line 1142.
+
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 1172.
+(/usr/local/texlive/2020/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package microtype Info: Character `texttrademark ' is missing
+(microtype)             in font `TS1/lmtt/m/n/10.95'.
+(microtype)             Ignoring protrusion settings for this character.
 LaTeX Font Info:    Trying to load font information for U+eur on input line 1172.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/ueur.fd
 File: ueur.fd 2013/01/14 v3.01 Euler Roman
-) [26] [27]
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-eur.cfg
+File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
+)
+
+/home/vincent/vsc/BOOK/chapter1.tex:1172: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1172 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[24]
+
+/home/vincent/vsc/BOOK/chapter1.tex:1172: Package inputenc Error: Unicode character ≢ (U+2262)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1172 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter1.tex:1172: Package inputenc Error: Unicode character ≢ (U+2262)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1172 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter1.tex:1172: Package inputenc Error: Unicode character ≢ (U+2262)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1172 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[25]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1262.
@@ -1445,7 +1843,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1262.
 
-[28]
+[26]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1332.
@@ -1458,15 +1856,19 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1332.
 
-[29] [30] [31]
-Underfull \hbox (badness 10000) in paragraph at lines 1482--1487
+[27] [28] [29]
+
+LaTeX Warning: Citation 'WS' on page 30 undefined on input line 1483.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1481--1486
 
  []
 
 
 Underfull \vbox (badness 2318) has occurred while \output is active []
 
- [32] [33]) [34]
+ [30] [31]) [32]
 \openout2 = `chapter2.aux'.
 
  (/home/vincent/vsc/BOOK/chapter2.tex
@@ -1500,18 +1902,132 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--11
 
  []
 
-[35
+[33
 
 
 
 ]
+
+/home/vincent/vsc/BOOK/chapter2.tex:63: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.63 -- op (λ (1 0) 0) y ≡  λ (y 0) y
+                                         
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:64: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.64 ...abs (app (fvar "y") (bvar 0))) (fvar "y"))
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:77: Package inputenc Error: Unicode character ↦ (U+21A6)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77 data _↦_ : terme → terme → Set where
+                                               
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:78: Package inputenc Error: Unicode character ↦ (U+21A6)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78 ...ur t2 → (app (abs t1) t2) ↦ (op t1 t2)
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:79: Package inputenc Error: Unicode character ↦ (U+21A6)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.79 ...1 ↦ t1' → (app t1 t2) ↦ (app t1' t2)
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:79: Package inputenc Error: Unicode character ↦ (U+21A6)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.79 ...1 ↦ t1' → (app t1 t2) ↦ (app t1' t2)
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:80: Package inputenc Error: Unicode character ↦ (U+21A6)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.80 ...2 ↦ t2' → (app t1 t2) ↦ (app t1 t2')
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:80: Package inputenc Error: Unicode character ↦ (U+21A6)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.80 ...2 ↦ t2' → (app t1 t2) ↦ (app t1 t2')
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
 Underfull \vbox (badness 1867) has occurred while \output is active []
 
- [36] [37] [38]
+ [34] [35] [36]
 LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 214.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [39] [40] [41]
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+ [37]
+
+LaTeX Warning: Citation 'baren' on page 38 undefined on input line 295.
+
+[38] [39]
 Underfull \hbox (badness 10000) in paragraph at lines 367--371
 
  []
@@ -1526,12 +2042,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 374--375
 
  []
 
-[42] [43]
+[40] [41]
 Underfull \hbox (badness 10000) in paragraph at lines 512--514
 
  []
 
-[44]
+[42]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 601.
@@ -1544,56 +2060,295 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 601.
 
-[45] [46] [47] [48] [49] [50] (/usr/local/texlive/2020/texmf-dist/tex/latex/ucs/data/uni-32.def
-File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
-) [51]) [52]
+[43]
+
+/home/vincent/vsc/BOOK/chapter2.tex:672: Package inputenc Error: Unicode character ⊢ (U+22A2)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.672 ...B:s \ \ \     A=_\beta B}{\Gamma ⊢ t:B}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:672: Package inputenc Error: Unicode character ⊢ (U+22A2)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.672 ...B:s \ \ \     A=_\beta B}{\Gamma ⊢ t:B}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:672: Package inputenc Error: Unicode character ⊢ (U+22A2)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.672 ...B:s \ \ \     A=_\beta B}{\Gamma ⊢ t:B}
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[44]
+
+LaTeX Warning: Citation 'poincare' on page 45 undefined on input line 684.
+
+[45] [46] [47] [48]
+
+/home/vincent/vsc/BOOK/chapter2.tex:949: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.949 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:949: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.949 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:958: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.958 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:958: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.958 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:958: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.958 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:965: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.965 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:979: Package inputenc Error: Unicode character ₁ (U+2081)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.979 \end{verbatim}
+                    
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:1002: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1002 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:1002: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1002 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:1002: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1002 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[49]
+
+/home/vincent/vsc/BOOK/chapter2.tex:1002: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1002 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:1002: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1002 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:1002: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1002 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter2.tex:1002: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1002 \end{verbatim}
+                     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+) [50]
 \openout2 = `chapter3.aux'.
 
  (/home/vincent/vsc/BOOK/chapter3.tex
 Chapitre 4.
-[53
+
+LaTeX Warning: Citation 'lisp' on page 51 undefined on input line 29.
+
+[51
 
 
 
-] [54]
+] [52]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [55] [56] [57] [58]
+ [53] [54] [55] [56]
+
+LaTeX Warning: Citation 'gide' on page 57 undefined on input line 318.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 318--320
 
  []
 
-<gumpp.jpeg, id=989, 73.7154pt x 96.36pt>
+<gumpp.jpeg, id=409, 73.7154pt x 96.36pt>
 File: gumpp.jpeg Graphic file (type jpg)
 <use gumpp.jpeg>
 Package pdftex.def Info: gumpp.jpeg  used on input line 330.
 (pdftex.def)             Requested size: 142.26378pt x 185.99564pt.
-[59 </home/vincent/vsc/BOOK/gumpp.jpeg>]
+[57 </home/vincent/vsc/BOOK/gumpp.jpeg>]
 Overfull \hbox (62.19678pt too wide) in paragraph at lines 389--390
 [][] 
  []
 
-[60] [61]
-<bruegel.jpg, id=1012, 301.125pt x 240.9pt>
+[58] [59]
+
+LaTeX Warning: Citation 'reflective' on page 60 undefined on input line 484.
+
+
+LaTeX Warning: Citation 'genese' on page 60 undefined on input line 533.
+
+<bruegel.jpg, id=433, 301.125pt x 240.9pt>
 File: bruegel.jpg Graphic file (type jpg)
 <use bruegel.jpg>
 Package pdftex.def Info: bruegel.jpg  used on input line 550.
 (pdftex.def)             Requested size: 142.26378pt x 113.81482pt.
- [62]
+[60]
 \g__tikzsymbols_savebox_F_0 g 0 G_10.95_Laughey_1_none_none_box=\box70
- [63 </home/vincent/vsc/BOOK/bruegel.jpg>]
+ [61 </home/vincent/vsc/BOOK/bruegel.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [62]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [63]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [64]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [65]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [66]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [67]) [68]
+ [65]) [66]
 \openout2 = `chapter4.aux'.
 
  (/home/vincent/vsc/BOOK/chapter4.tex
@@ -1610,11 +2365,11 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 2.
 
-[69
+[67
 
 
 
-] [70]
+] [68]
 Underfull \hbox (badness 10000) in paragraph at lines 142--143
 
  []
@@ -1624,15 +2379,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
  []
 
-[71] [72] [73] [74] [75]
+[69] [70] [71] [72] [73]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [76]
+ [74]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 527.
 
-Overfull \hbox (28.79843pt too wide) in paragraph at lines 528--536
-\T1/lmtt/m/n/10.95 ((lambda (v1...vn) body) e1...en) \letterimp D  \T1/lmtt/m/n/10.95 NIL; $\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;ARG;$[] \OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;ARG;CLOSURE$\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 body\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;RTS$\OT1/lmr/m/n/10.95 )$\T1/lmtt/m/n/10.95 ;JSR 
+Overfull \hbox (27.54216pt too wide) in paragraph at lines 528--536
+\T1/lmtt/m/n/10.95 ((lambda (v1...vn) body) e1...en) \letterimp D  \T1/lmtt/m/n/10.95 NIL; $\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (-20) (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 (-20) )$\T1/lmtt/m/n/10.95 ;ARG;$[] \OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (-20) (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 (-20) )$\T1/lmtt/m/n/10.95 ;ARG;CLOSURE$\OT1/lmr/m/n/10.95 (-20) (\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (-20) (\OML/lmm/m/it/10.95 body\OT1/lmr/m/n/10.95 (-20) )$\T1/lmtt/m/n/10.95 ;RTS$\OT1/lmr/m/n/10.95 (-20) )$\T1/lmtt/m/n/10.95 ;JSR 
  []
 
 
@@ -1645,113 +2400,546 @@ Overfull \hbox (0.23276pt too wide) detected at line 574
 []
  []
 
-[77]
+[75]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [78]) [79]
+ [76]) [77]
 \openout2 = `chapter5.aux'.
 
- (/home/vincent/vsc/BOOK/chapter5.tex [80
+ (/home/vincent/vsc/BOOK/chapter5.tex [78
 
 
 
 ]
 Chapitre 6.
-[81] [82] [83] [84] [85] [86] [87] [88]
+
+LaTeX Warning: Citation 'lalement' on page 79 undefined on input line 3.
+
+
+LaTeX Warning: Citation 'meta' on page 79 undefined on input line 30.
+
+[79] [80] [81] [82] [83] [84] [85] [86]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [89] [90] [91] [92] [93]
+ [87] [88] [89] [90] [91]
+
+/home/vincent/vsc/BOOK/chapter5.tex:747: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.747 ...finit la fonction suivante : $diag(i) ≡
+                                                  $ si $a_i$ termine alors \...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 746--748
 
  []
 
-[94] [95]) [96]
+
+/home/vincent/vsc/BOOK/chapter5.tex:797: Package inputenc Error: Unicode character ≥ (U+2265)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.797 ...s| > |t|\ et\  \forall x \in X, |s|_x ≥
+                                                   |t|_x $$
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[92]
+
+LaTeX Warning: Citation 'rewriting' on page 93 undefined on input line 800.
+
+[93]) [94]
 \openout2 = `chapter6.aux'.
 
  (/home/vincent/vsc/BOOK/chapter6.tex
 Chapitre 7.
-[97
+[95
 
 
 
 ]
+
+LaTeX Warning: Command \texttimes invalid in math mode on input line 90.
+
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 90.
+(/usr/local/texlive/2020/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+
+LaTeX Warning: Command \texttimes invalid in math mode on input line 90.
+
+
+/home/vincent/vsc/BOOK/chapter6.tex:91: Package inputenc Error: Unicode character ≥ (U+2265)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.91 $A(0, p) = p + 1$ pour $p ≥
+                                   0$ \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter6.tex:92: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 $A(n, 0) = A(n −
+                        1, 1)$ pour $n ≥ 1$ \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter6.tex:92: Package inputenc Error: Unicode character ≥ (U+2265)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 $A(n, 0) = A(n − 1, 1)$ pour $n ≥
+                                           1$ \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter6.tex:93: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.93 $A(n, p) = A(n −
+                        1, A(n, p − 1))$ si $n ≥ 1, p ≥ 1$ \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter6.tex:93: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.93 $A(n, p) = A(n − 1, A(n, p −
+                                      1))$ si $n ≥ 1, p ≥ 1$ \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter6.tex:93: Package inputenc Error: Unicode character ≥ (U+2265)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.93 ... p) = A(n − 1, A(n, p − 1))$ si $n ≥
+                                                   1, p ≥ 1$ \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter6.tex:93: Package inputenc Error: Unicode character ≥ (U+2265)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.93 ... − 1, A(n, p − 1))$ si $n ≥ 1, p ≥
+                                                   1$ \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 90--94
 
  []
 
-[98] [99] [100] [101] [102] [103] [104] [105]) [106]
+[96] [97] [98] [99] [100] [101] [102] [103]) [104]
 \openout2 = `chapter7.aux'.
 
  (/home/vincent/vsc/BOOK/chapter7.tex
 Chapitre 8.
-[107
+[105
 
 
 
-] [108] [109]
+] [106] [107]
 
 LaTeX Font Warning: Font shape `T1/lmr/m/scit' undefined
 (Font)              using `T1/lmr/m/scsl' instead on input line 234.
 
-[110]
-<flocon1.pdf, id=1271, 150.5625pt x 138.5175pt>
+
+LaTeX Warning: Citation 'caml' on page 108 undefined on input line 234.
+
+[108]
+<flocon1.pdf, id=722, 150.5625pt x 138.5175pt>
 File: flocon1.pdf Graphic file (type pdf)
 <use flocon1.pdf>
 Package pdftex.def Info: flocon1.pdf  used on input line 296.
 (pdftex.def)             Requested size: 99.5875pt x 85.3579pt.
-<flocon2.pdf, id=1272, 156.585pt x 136.51pt>
+<flocon2.pdf, id=723, 156.585pt x 136.51pt>
 File: flocon2.pdf Graphic file (type pdf)
 <use flocon2.pdf>
 Package pdftex.def Info: flocon2.pdf  used on input line 297.
 (pdftex.def)             Requested size: 99.58806pt x 85.35811pt.
-<flocon3.pdf, id=1273, 149.55875pt x 130.4875pt>
+<flocon3.pdf, id=724, 149.55875pt x 130.4875pt>
 File: flocon3.pdf Graphic file (type pdf)
 <use flocon3.pdf>
 Package pdftex.def Info: flocon3.pdf  used on input line 298.
 (pdftex.def)             Requested size: 99.58539pt x 85.35942pt.
-<flocon4.pdf, id=1274, 139.52126pt x 127.47626pt>
+<flocon4.pdf, id=725, 139.52126pt x 127.47626pt>
 File: flocon4.pdf Graphic file (type pdf)
 <use flocon4.pdf>
 Package pdftex.def Info: flocon4.pdf  used on input line 299.
 (pdftex.def)             Requested size: 99.58661pt x 85.36195pt.
-<bretagne3.jpg, id=1275, 732.85164pt x 514.3497pt>
+<bretagne3.jpg, id=726, 732.85164pt x 514.3497pt>
 File: bretagne3.jpg Graphic file (type jpg)
 <use bretagne3.jpg>
 Package pdftex.def Info: bretagne3.jpg  used on input line 305.
 (pdftex.def)             Requested size: 113.81102pt x 79.8725pt.
- [111 </home/vincent/vsc/BOOK/flocon1.pdf> </home/vincent/vsc/BOOK/flocon2.pdf> </home/vincent/vsc/BOOK/flocon3.pdf> </home/vincent/vsc/BOOK/flocon4.pdf> </home/vincent/vsc/BOOK/bretagne3.jpg>]
-<mandelbrot.png, id=1307, 254.9525pt x 227.85126pt>
+
+
+LaTeX Warning: Citation 'vh' on page 109 undefined on input line 314.
+
+[109 </home/vincent/vsc/BOOK/flocon1.pdf> </home/vincent/vsc/BOOK/flocon2.pdf> </home/vincent/vsc/BOOK/flocon3.pdf> </home/vincent/vsc/BOOK/flocon4.pdf> </home/vincent/vsc/BOOK/bretagne3.jpg>]
+<mandelbrot.png, id=758, 254.9525pt x 227.85126pt>
 File: mandelbrot.png Graphic file (type png)
 <use mandelbrot.png>
 Package pdftex.def Info: mandelbrot.png  used on input line 367.
 (pdftex.def)             Requested size: 113.81102pt x 101.71507pt.
 
-Underfull \vbox (badness 1831) has occurred while \output is active []
+Underfull \vbox (badness 3525) has occurred while \output is active []
 
- [112]
+ [110]
+LaTeX Font Info:    Trying to load font information for U+logo on input line 370.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/mflogo/ulogo.fd
+File: ulogo.fd 1999/03/10 v2.0 LaTeX font defs for Metafont and MetaPost logos
+)
 LaTeX Font Info:    Font shape `U/logo/bx/n' in size <14.4> not available
 (Font)              Font shape `U/logo/b/n' tried instead on input line 370.
-<imp.png, id=1316, 573.14125pt x 491.8375pt>
+
+
+LaTeX Warning: Citation 'mf' on page 111 undefined on input line 371.
+
+<imp.png, id=765, 573.14125pt x 491.8375pt>
 File: imp.png Graphic file (type png)
 <use imp.png>
 Package pdftex.def Info: imp.png  used on input line 381.
 (pdftex.def)             Requested size: 113.81102pt x 97.6603pt.
- [113 </home/vincent/vsc/BOOK/mandelbrot.png> </home/vincent/vsc/BOOK/imp.png>]
-<snow.png, id=1327, 636.3775pt x 750.805pt>
+[111 </home/vincent/vsc/BOOK/mandelbrot.png> </home/vincent/vsc/BOOK/imp.png>]
+<snow.png, id=777, 636.3775pt x 750.805pt>
 File: snow.png Graphic file (type png)
 <use snow.png>
 Package pdftex.def Info: snow.png  used on input line 453.
 (pdftex.def)             Requested size: 113.81102pt x 134.26839pt.
- [114] [115 </home/vincent/vsc/BOOK/snow.png>] [116]
+ [112] [113 </home/vincent/vsc/BOOK/snow.png>] [114]
+
+LaTeX Warning: Citation 'deepR' on page 115 undefined on input line 565.
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [117] [118]
-<sigmoid.png, id=1355, 694.595pt x 729.72626pt>
+ [115] [116]
+<sigmoid.png, id=809, 694.595pt x 729.72626pt>
 File: sigmoid.png Graphic file (type png)
 <use sigmoid.png>
 Package pdftex.def Info: sigmoid.png  used on input line 720.
 (pdftex.def)             Requested size: 142.2657pt x 142.25708pt.
- [119 </home/vincent/vsc/BOOK/sigmoid.png>] [120] [121] [122] [123]
+ [117 </home/vincent/vsc/BOOK/sigmoid.png>] [118] [119]
+
+/home/vincent/vsc/BOOK/chapter7.tex:895: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.895 ...st pas un multiple de $p$, alors $a^{p−
+                                                  1}≡1  \mod p$
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:895: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.895 ...s un multiple de $p$, alors $a^{p−1}≡
+                                                  1  \mod p$
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[120]
+
+/home/vincent/vsc/BOOK/chapter7.tex:927: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.927 $\varphi(n) = (p−
+                         1)(q−1)$ et $d = e^{−1} \mod{(p−1)(q−1)}$.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:927: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.927 $\varphi(n) = (p−1)(q−
+                                1)$ et $d = e^{−1} \mod{(p−1)(q−1)}$.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:927: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.927 $\varphi(n) = (p−1)(q−1)$ et $d = e^{−
+                                                  1} \mod{(p−1)(q−1)}$.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:927: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.927 ...1)$ et $d = e^{−1} \mod{(p−1)(q−1)}
+                                                  $.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:927: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.927 ...1)$ et $d = e^{−1} \mod{(p−1)(q−1)}
+                                                  $.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:929: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.929 ...ut entier positif $m<n$, on a $m^{ed} ≡
+                                                   m \mod n$
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:936: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.936 $ed≡
+            1 \mod (p−1)(q−1)$, donc il existe $k$ tel que $ed=1+k(p−1...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:936: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.936 $ed≡1 \mod (p−
+                        1)(q−1)$, donc il existe $k$ tel que $ed=1+k(p−1...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:936: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.936 $ed≡1 \mod (p−1)(q−
+                               1)$, donc il existe $k$ tel que $ed=1+k(p−1...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:936: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.936 ..., donc il existe $k$ tel que $ed=1+k(p−
+                                                  1)(q−1)$.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:936: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.936 ...il existe $k$ tel que $ed=1+k(p−1)(q−
+                                                  1)$.
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:942: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.942   m^{ed}= m^{1+k(p−
+                           1)(q−1)} = m (m^{p-1})^{k(q-1)} \equiv m \mod p \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:942: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.942   m^{ed}= m^{1+k(p−1)(q−
+                                  1)} = m (m^{p-1})^{k(q-1)} \equiv m \mod p \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:944: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.944   m^{ed}= m^{1+k(p−
+                           1)(q−1)} = m (m^{q-1})^{k(q-1)} \equiv m \mod q
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:944: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.944   m^{ed}= m^{1+k(p−1)(q−
+                                  1)} = m (m^{q-1})^{k(q-1)} \equiv m \mod q
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:947: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.947 et si $m$ est un multiple de $p$, $m≡
+                                             0 \mod p$ et $m^{ed}≡0 \mod p...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:947: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.947 ...iple de $p$, $m≡0 \mod p$ et $m^{ed}≡
+                                                  0 \mod p$ (de même avec $...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:949: Package inputenc Error: Unicode character − (U+2212)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.949  L’entier $u^{ed}−
+                            m$ est donc un multiple de $p$ et de $q$, qui so...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/home/vincent/vsc/BOOK/chapter7.tex:952: Package inputenc Error: Unicode character ≡ (U+2261)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.952  Donc, pour tout entier $m, m^{ed} ≡
+                                             m \mod n$
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+[121]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1007.
@@ -1764,11 +2952,56 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1007.
 
-[124] (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+[122] (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-)) [125] [126] [127] [128]
+))
+
+LaTeX Warning: Citation 'gb' on page 123 undefined on input line 1056.
+
+[123]
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 1118.
+
+[124]
+
+LaTeX Warning: Citation 'wm' on page 125 undefined on input line 1190.
+
+[125] [126]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1291.
@@ -1809,7 +3042,10 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1291.
 
-[129]
+[127]
+
+LaTeX Warning: Citation 'moby' on page 128 undefined on input line 1351.
+
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1382.
@@ -1822,7 +3058,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1382.
 
-[130]
+[128]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1444.
@@ -1834,7 +3070,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [131]
+ [129]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 1462.
@@ -1910,36 +3146,56 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [132] [133] [134]) [135] (/home/vincent/vsc/BOOK/main.bbl [136
+ [130]
+Package microtype Info: Character `029' is missing
+(microtype)             in font `T1/lmr/m/sc/14.4'.
+(microtype)             Ignoring protrusion settings for this character.
+ [131] [132]) [133]
+
+LaTeX Warning: Empty bibliography on input line 189.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 190.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 190.
+(/home/vincent/vsc/BOOK/main.aux (/home/vincent/vsc/BOOK/chapter1.aux) (/home/vincent/vsc/BOOK/chapter2.aux) (/home/vincent/vsc/BOOK/chapter3.aux) (/home/vincent/vsc/BOOK/chapter4.aux) (/home/vincent/vsc/BOOK/chapter5.aux) (/home/vincent/vsc/BOOK/chapter6.aux) (/home/vincent/vsc/BOOK/chapter7.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 190.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 190.
 
 
-]) [137]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 184.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 184.
- (/home/vincent/vsc/BOOK/main.aux (/home/vincent/vsc/BOOK/chapter1.aux) (/home/vincent/vsc/BOOK/chapter2.aux) (/home/vincent/vsc/BOOK/chapter3.aux) (/home/vincent/vsc/BOOK/chapter4.aux) (/home/vincent/vsc/BOOK/chapter5.aux) (/home/vincent/vsc/BOOK/chapter6.aux) (/home/vincent/vsc/BOOK/chapter7.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 184.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 184.
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 62DDC3BAFC17AA122FB6BD00D1282D0E;9043.
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
 
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  696FA52E24B8E4F51FF8AD9BE89B0D26;9125.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 184.
+
+LaTeX Warning: There were undefined references.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                main
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'main.run.xml'.
+\openout1 = `main.run.xml'.
+
  ) 
 Here is how much of TeX's memory you used:
- 39896 strings out of 480478
- 768674 string characters out of 5899581
- 2752709 words of memory out of 5000000
- 54830 multiletter control sequences out of 15000+600000
- 720757 words of font info for 157 fonts, out of 8000000 for 9000
+ 46060 strings out of 480478
+ 907727 string characters out of 5899581
+ 3107410 words of memory out of 5000000
+ 60724 multiletter control sequences out of 15000+600000
+ 733030 words of font info for 282 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,24n,75p,482b,1718s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc} <./snow.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc} <./beta.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn0900.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsco10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /home/vincent/vsc/BOOK/main.pdf (137 pages, 1613508 bytes).
+ 60i,24n,75p,835b,1752s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc} <./snow.600pk>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc} <./beta.600pk></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1000.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn0900.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grxn1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmcsco10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on /home/vincent/vsc/BOOK/main.pdf (133 pages, 1585375 bytes).
 PDF statistics:
- 1710 PDF objects out of 1728 (max. 8388607)
- 1486 compressed objects within 15 object streams
- 415 named destinations out of 1000 (max. 500000)
- 1013 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1155 PDF objects out of 1200 (max. 8388607)
+ 943 compressed objects within 10 object streams
+ 387 named destinations out of 1000 (max. 500000)
+ 54861 words of extra memory for PDF output out of 61914 (max. 10000000)
 
