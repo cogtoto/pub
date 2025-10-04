@@ -1,6 +1,6 @@
 % !TEX root = main.tex
 \documentclass[11pt]{book}
-\usepackage[LGR, T1]{fontenc}
+%% \usepackage[LGR, T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{fullpage}
 \usepackage{url}
@@ -16,21 +16,23 @@
 \usepackage{fancyvrb}
 \usepackage{lscape}
 \usepackage{textcomp}
-\usepackage[euler]{textgreek}
 \usepackage{lmodern}
 \usepackage{alltt}
 \usepackage{multirow}
 \usepackage{float}
-\usepackage[utf8]{inputenc}
+%% \usepackage[utf8]{inputenc}
 %%\usepackage{ucs}
 \usepackage{mflogo}
 \usepackage{wrapfig}
 \usepackage{proof}
-\usepackage[euler]{textgreek}
 \usepackage{microtype}
 \usepackage{biblatex}
 \usepackage{coqdoc}
 \usepackage[nottoc]{tocbibind}
+\usepackage{textgreek}
+\usepackage{fontspec}
+%%\setmainfont{Linux Libertine O} % Set Linux Libertine as the main font
+\setmainfont{CMU Serif}
 
 \fvset{tabsize=2}
 \newfont{\letterimp}{beta}
@@ -43,7 +45,7 @@
        Le raisonnement par la preuve et le programme \\
 
 	 Exemples en \textsc{Scheme}, \textsc{Ocaml}, \textsc{Coq} et \textsc{Agda}\\ \vspace{1cm}
-   \textgreek{᾿Αγεωμέτρητος μηδε εἰσίτω} \\
+   ᾿Αγεωμέτρητος μηδε εἰσίτω \\
       }
 
 \author{Vincent Cognet}
@@ -57,9 +59,10 @@
 
 \begin{document}
 \maketitle
+
 \tableofcontents
 
-\chapter{\textgreek{Ἐν ἀρχή}, Gn 1.1 et Jn 1.1}
+\chapter{Ἐν ἀρχή, Gn 1.1 et Jn 1.1}
 
 \textit{Aristote considérait les mathématiques comme une discipline, non pas tant de la vérité, que de la beauté.}
 \cite{ab}
@@ -156,7 +159,7 @@ Qed.
 
 La correspondance de Curry-Howard montre toute son étendue dans le calcul des constructions, qui 
 considère les types comme des termes de premier ordre et permet ainsi de modéliser des types dépendants.
-\textsc{Coq} et \textsc{Agda} implémentent ce formalisme.
+\textsc{Coq}, \textsc{Agda} et \textsc{Lean} implémentent ce formalisme.
 
 Nous en montrerons plusieurs exemples significatifs avec ces langages.
 Ces exemples nous permettront, je l'espère, de mettre en évidence la frontière entre le calcul et
