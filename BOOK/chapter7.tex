@@ -1419,17 +1419,37 @@ let rec print = function
 \section{Démonstration non constructive}
 Démontrons qu'il existe deux irrationnels $a$ et $b$ tels que $a^b$ soit rationnel.
 
-Considérons $\sqrt{3}^{\sqrt{2}}$ 
+Considérons $\sqrt{2}^{\sqrt{2}}$ 
 
-Si  $\sqrt{3}^{\sqrt{2}} \in \mathbb{Q}$ alors on pose $a = \sqrt{3}$ et $b= \sqrt{2}$
+Si  $\sqrt{2}^{\sqrt{2}} \in \mathbb{Q}$ alors on pose $a = \sqrt{2}$ et $b= \sqrt{2}$
 
-Sinon, on pose $a = \sqrt{3}^{\sqrt{2}}$ et $b=\sqrt{2}$, 
-de sorte que $ {(\sqrt{3}^{\sqrt{2}})}^{\sqrt{2}} = 3 \in \mathbb{Q} $
+Sinon, on pose $a = \sqrt{2}^{\sqrt{2}}$ et $b=\sqrt{2}$, 
+de sorte que $ {(\sqrt{2}^{\sqrt{2}})}^{\sqrt{2}} = 2 \in \mathbb{Q} $
 
 
 Mais laquelle des deux est la solution ?
 Faut-il abandonner le principe du \textit{tiers-exlus} de nos démonstrations
 mathématiques ?
+Voici la démonstration formelle de ce théorème en \textsc{Lean} en utilisant la logique classique.
+
+
+\begin{verbatim}
+theorem existence_theorem :
+  ∃ x y : ℝ, Irrational x ∧ Irrational y ∧ ¬ Irrational (x ^ y) :=
+by
+  classical
+
+  let a : ℝ := Real.sqrt 2
+  have ha : Irrational a := irrational_sqrt_two
+
+  by_cases h : Irrational (a ^ a)
+  · -- Case 1: √2 ^ √2 is irrational
+        have h_simp : (Real.sqrt 2 ^ Real.sqrt 2) ^ Real.sqrt 2 = 2 := by
+          rw [ ← Real.rpow_mul ] <;> norm_num;
+        aesop
+  · -- Case 2: √2 ^ √2 is not irrational
+        use a, a
+\end{verbatim}
 \section{Le tout est-il plus grand que chacune de ses parties ?}
 Galilée (et avant lui Aristote ?) remontait le paradoxe suivant sur les nombres entiers : chaque entier peut être mappé 
 un à un avec son carré. Pourtant l'ensemble de nombres carrés est intuitivement un sous-ensemble
