@@ -17,8 +17,8 @@ Voici une représentation graphique des dépendances fonctionnelles et conceptue
         text width=3cm,
     },
     level 1 concept/.append style={
-        level distance=5cm,
-        sibling angle=60,
+        level distance=6cm,
+        sibling angle=90,
         text width=2.5cm,
     },
     level 2 concept/.append style={
@@ -39,8 +39,8 @@ Voici une représentation graphique des dépendances fonctionnelles et conceptue
     child [concept color=teal!30] { node (ch6) {Chapitre 6 \\ \textbf{Calculabilité} \\ \& Complexité} };
 
 % Secondary Nodes (Level 2 dependencies)
-% Ch 4 depends on Ch 3 and Ch 1
-\node [extra concept] (ch4) at (4, -4) {Chapitre 4 \\ \textbf{Compilation} \\ (SKI, SECD)};
+% Ch 4 depends on Ch 3 and Ch 1. Placed manually to avoid overlap.
+\node [extra concept] (ch4) at (-5, -5) {Chapitre 4 \\ \textbf{Compilation} \\ (SKI, SECD)};
 
 % Connections
 \path (ch3) edge [concept connection] (ch4);

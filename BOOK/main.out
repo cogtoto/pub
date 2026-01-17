@@ -82,38 +82,38 @@
 \BOOKMARK [2][-]{subsection.7.5.2}{Le th\351or\350me de Kleene}{section.7.5}% 82
 \BOOKMARK [2][-]{subsection.7.5.3}{Un programme Quine}{section.7.5}% 83
 \BOOKMARK [2][-]{subsection.7.5.4}{Le th\351or\350me de Rice}{section.7.5}% 84
-\BOOKMARK [0][-]{chapter*.21}{Conclusion}{}% 85
-\BOOKMARK [0][-]{chapter.8}{Annexes / Divers}{}% 86
-\BOOKMARK [1][-]{section.8.1}{Quelques fonctions sur les listes}{chapter.8}% 87
-\BOOKMARK [1][-]{section.8.2}{Les listes mutables}{chapter.8}% 88
-\BOOKMARK [1][-]{section.8.3}{Les listes infinies ou streams}{chapter.8}% 89
-\BOOKMARK [1][-]{section.8.4}{Le module Graphics d'Ocaml, les fractales}{chapter.8}% 90
-\BOOKMARK [1][-]{section.8.5}{Utilisation de Metafont}{chapter.8}% 91
-\BOOKMARK [1][-]{section.8.6}{The boxes}{chapter.8}% 92
-\BOOKMARK [1][-]{section.8.7}{Les modules Ocaml. Mod\351lisation d'un mono\357de}{chapter.8}% 93
-\BOOKMARK [1][-]{section.8.8}{Machine Learning and Neural Networks}{chapter.8}% 94
-\BOOKMARK [2][-]{subsection.8.8.1}{Introduction}{section.8.8}% 95
-\BOOKMARK [2][-]{subsection.8.8.2}{Un peu de th\351orie}{section.8.8}% 96
-\BOOKMARK [2][-]{subsection.8.8.3}{Calcul matriciel}{section.8.8}% 97
-\BOOKMARK [2][-]{subsection.8.8.4}{Fonctions d'activation}{section.8.8}% 98
-\BOOKMARK [1][-]{section.8.9}{Les nombres premiers. L'algorithme RSA}{chapter.8}% 99
-\BOOKMARK [1][-]{section.8.10}{Approximation du nombre \040}{chapter.8}% 100
-\BOOKMARK [2][-]{subsection.8.10.1}{La m\351thode des polygones}{section.8.10}% 101
-\BOOKMARK [2][-]{subsection.8.10.2}{La s\351rie altern\351e de Leibniz}{section.8.10}% 102
-\BOOKMARK [2][-]{subsection.8.10.3}{La loi des grands nombres}{section.8.10}% 103
-\BOOKMARK [2][-]{subsection.8.10.4}{Le produit de Wallis}{section.8.10}% 104
-\BOOKMARK [2][-]{subsection.8.10.5}{L'int\351grale 01 11+x2 dx}{section.8.10}% 105
-\BOOKMARK [1][-]{section.8.11}{Po\351sies}{chapter.8}% 106
-\BOOKMARK [1][-]{section.8.12}{Lectures}{chapter.8}% 107
-\BOOKMARK [1][-]{section.8.13}{Les fractions continues}{chapter.8}% 108
-\BOOKMARK [1][-]{section.8.14}{L'irrationalit\351 de 2}{chapter.8}% 109
-\BOOKMARK [1][-]{section.8.15}{D\351monstration non constructive}{chapter.8}% 110
-\BOOKMARK [1][-]{section.8.16}{Le tout est-il plus grand que chacune de ses parties ?}{chapter.8}% 111
-\BOOKMARK [1][-]{section.8.17}{L'hyperbole xy=1}{chapter.8}% 112
-\BOOKMARK [1][-]{section.8.18}{L'exponentielle}{chapter.8}% 113
-\BOOKMARK [1][-]{section.8.19}{Les fonctions sin1x et x . sin1x }{chapter.8}% 114
-\BOOKMARK [1][-]{section.8.20}{Prouver par r\351flection en Agda}{chapter.8}% 115
-\BOOKMARK [1][-]{section.8.21}{Srivanasa Ramanujan}{chapter.8}% 116
-\BOOKMARK [1][-]{section.8.22}{Le grec ancien}{chapter.8}% 117
-\BOOKMARK [2][-]{subsection.8.22.1}{L'alphabet grec}{section.8.22}% 118
-\BOOKMARK [2][-]{subsection.8.22.2}{Extraits du nouveau testament}{section.8.22}% 119
+\BOOKMARK [0][-]{chapter.8}{Annexes / Divers}{}% 85
+\BOOKMARK [1][-]{section.8.1}{Quelques fonctions sur les listes}{chapter.8}% 86
+\BOOKMARK [1][-]{section.8.2}{Les listes mutables}{chapter.8}% 87
+\BOOKMARK [1][-]{section.8.3}{Les listes infinies ou streams}{chapter.8}% 88
+\BOOKMARK [1][-]{section.8.4}{Le module Graphics d'Ocaml, les fractales}{chapter.8}% 89
+\BOOKMARK [1][-]{section.8.5}{Utilisation de Metafont}{chapter.8}% 90
+\BOOKMARK [1][-]{section.8.6}{The boxes}{chapter.8}% 91
+\BOOKMARK [1][-]{section.8.7}{Les modules Ocaml. Mod\351lisation d'un mono\357de}{chapter.8}% 92
+\BOOKMARK [1][-]{section.8.8}{Machine Learning and Neural Networks}{chapter.8}% 93
+\BOOKMARK [2][-]{subsection.8.8.1}{Introduction}{section.8.8}% 94
+\BOOKMARK [2][-]{subsection.8.8.2}{Un peu de th\351orie}{section.8.8}% 95
+\BOOKMARK [2][-]{subsection.8.8.3}{Calcul matriciel}{section.8.8}% 96
+\BOOKMARK [2][-]{subsection.8.8.4}{Fonctions d'activation}{section.8.8}% 97
+\BOOKMARK [1][-]{section.8.9}{Les nombres premiers. L'algorithme RSA}{chapter.8}% 98
+\BOOKMARK [1][-]{section.8.10}{Approximation du nombre \040}{chapter.8}% 99
+\BOOKMARK [2][-]{subsection.8.10.1}{La m\351thode des polygones}{section.8.10}% 100
+\BOOKMARK [2][-]{subsection.8.10.2}{La s\351rie altern\351e de Leibniz}{section.8.10}% 101
+\BOOKMARK [2][-]{subsection.8.10.3}{La loi des grands nombres}{section.8.10}% 102
+\BOOKMARK [2][-]{subsection.8.10.4}{Le produit de Wallis}{section.8.10}% 103
+\BOOKMARK [2][-]{subsection.8.10.5}{L'int\351grale 01 11+x2 dx}{section.8.10}% 104
+\BOOKMARK [1][-]{section.8.11}{Po\351sies}{chapter.8}% 105
+\BOOKMARK [1][-]{section.8.12}{Lectures}{chapter.8}% 106
+\BOOKMARK [1][-]{section.8.13}{Les fractions continues}{chapter.8}% 107
+\BOOKMARK [1][-]{section.8.14}{L'irrationalit\351 de 2}{chapter.8}% 108
+\BOOKMARK [1][-]{section.8.15}{D\351monstration non constructive}{chapter.8}% 109
+\BOOKMARK [1][-]{section.8.16}{Le tout est-il plus grand que chacune de ses parties ?}{chapter.8}% 110
+\BOOKMARK [1][-]{section.8.17}{L'hyperbole xy=1}{chapter.8}% 111
+\BOOKMARK [1][-]{section.8.18}{L'exponentielle}{chapter.8}% 112
+\BOOKMARK [1][-]{section.8.19}{Les fonctions sin1x et x . sin1x }{chapter.8}% 113
+\BOOKMARK [1][-]{section.8.20}{Prouver par r\351flection en Agda}{chapter.8}% 114
+\BOOKMARK [1][-]{section.8.21}{Srivanasa Ramanujan}{chapter.8}% 115
+\BOOKMARK [1][-]{section.8.22}{Le grec ancien}{chapter.8}% 116
+\BOOKMARK [2][-]{subsection.8.22.1}{L'alphabet grec}{section.8.22}% 117
+\BOOKMARK [2][-]{subsection.8.22.2}{Extraits du nouveau testament}{section.8.22}% 118
+\BOOKMARK [0][-]{chapter*.33}{Conclusion}{}% 119
