@@ -1,0 +1,67 @@
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+
+Nous avons parcouru un long chemin depuis les fondements du $\lambda$-calcul jusqu'aux limites de la calculabilité.
+Voici une représentation graphique des dépendances fonctionnelles et conceptuelles entre les différents chapitres de cet ouvrage.
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tikzpicture}[
+    mindmap,
+    concept color=blue!30,
+    every node/.style={concept, execute at begin node=\hskip0pt},
+    root concept/.append style={
+        concept color=blue!50,
+        fill=blue!50,
+        text width=3cm,
+    },
+    level 1 concept/.append style={
+        level distance=5cm,
+        sibling angle=60,
+        text width=2.5cm,
+    },
+    level 2 concept/.append style={
+        level distance=3cm,
+        sibling angle=45,
+    },
+    extra concept/.append style={
+        concept color=green!30,
+        text width=2.5cm,
+    }
+]
+
+% Main Node: Chapter 1
+\node [root concept] (ch1) {Chapitre 1 \\ \textbf{$\lambda$-calcul} \\ \& Réduction}
+    child [concept color=purple!30] { node (ch2) {Chapitre 2 \\ \textbf{Types} \\ \& PTS} }
+    child [concept color=orange!30] { node (ch3) {Chapitre 3 \\ \textbf{Interprétation} \\ (Scheme/Lisp)} }
+    child [concept color=red!30] { node (ch5) {Chapitre 5 \\ \textbf{Résolution} \\ \& Unification} }
+    child [concept color=teal!30] { node (ch6) {Chapitre 6 \\ \textbf{Calculabilité} \\ \& Complexité} };
+
+% Secondary Nodes (Level 2 dependencies)
+% Ch 4 depends on Ch 3 and Ch 1
+\node [extra concept] (ch4) at (4, -4) {Chapitre 4 \\ \textbf{Compilation} \\ (SKI, SECD)};
+
+% Connections
+\path (ch3) edge [concept connection] (ch4);
+\path (ch1) edge [concept connection] (ch4);
+
+% Additional conceptual links
+\draw [concept connection, dashed] (ch5) edge (ch6); % Validating undecidability
+\draw [concept connection, dashed] (ch2) edge (ch5); % Logic vs Types (Curry-Howard implicit link)
+
+\end{tikzpicture}
+\end{center}
+
+\vspace{1cm}
+
+Chaque chapitre s'appuie sur le formalisme minimaliste du $\lambda$-calcul (Chapitre 1) pour explorer une facette différente de l'informatique théorique :
+\begin{itemize}
+    \item La \textbf{rigidité} et la sûreté par le typage (Chapitre 2).
+    \item L'\textbf{expressivité} et la dynamique par l'interprétation (Chapitre 3).
+    \item L'\textbf{efficacité} par la compilation (Chapitre 4).
+    \item La \textbf{logique} et la recherche de preuve par la résolution (Chapitre 5).
+    \item Les \textbf{limites} de ces formalismes (Chapitre 6).
+\end{itemize}
+
+Ainsi se referme notre étude des fondements.

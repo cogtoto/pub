@@ -1,0 +1,119 @@
+\BOOKMARK [0][-]{chapter.1}{ , Gn 1.1 et Jn 1.1}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Le -calcul et la r\351duction}{}% 2
+\BOOKMARK [1][-]{section.2.1}{D\351finition, champ lexical et syntaxique}{chapter.2}% 3
+\BOOKMARK [2][-]{subsection.2.1.1}{Analyse lexicale avec ocamllex}{section.2.1}% 4
+\BOOKMARK [2][-]{subsection.2.1.2}{Analyse syntaxique avec menhir}{section.2.1}% 5
+\BOOKMARK [2][-]{subsection.2.1.3}{Impl\351mentation du parsing en mode r\351cursif descendant}{section.2.1}% 6
+\BOOKMARK [1][-]{section.2.2}{Repr\351sentation en Ocaml}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.3}{D\351monstration de la confluence du -calcul}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.3.1}{La restriction ' du -calcul}{section.2.3}% 9
+\BOOKMARK [2][-]{subsection.2.3.2}{La d\351monstration}{section.2.3}% 10
+\BOOKMARK [2][-]{subsection.2.3.3}{Un exemple}{section.2.3}% 11
+\BOOKMARK [2][-]{subsection.2.3.4}{La -r\351duction parall\350le}{section.2.3}% 12
+\BOOKMARK [1][-]{section.2.4}{La -r\351duction faible avec appel par valeur}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.5}{R\351cursivit\351 et points fixes}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.5.1}{Le point fixe du -calcul}{section.2.5}% 15
+\BOOKMARK [2][-]{subsection.2.5.2}{La diagonale de Cantor}{section.2.5}% 16
+\BOOKMARK [2][-]{subsection.2.5.3}{Le point fixe logique et le th\351or\350me d'incompl\351tude de G\366del}{section.2.5}% 17
+\BOOKMARK [2][-]{subsection.2.5.4}{L'ind\351cidabilit\351 de la -conversion}{section.2.5}% 18
+\BOOKMARK [1][-]{section.2.6}{Encoding. Les entiers Church et les bool\351ens en -calcul}{chapter.2}% 19
+\BOOKMARK [2][-]{subsection.2.6.1}{Les entiers Church }{section.2.6}% 20
+\BOOKMARK [2][-]{subsection.2.6.2}{Les bool\351ens }{section.2.6}% 21
+\BOOKMARK [2][-]{subsection.2.6.3}{La fonction factorielle}{section.2.6}% 22
+\BOOKMARK [1][-]{section.2.7}{La notation de de Bruijn}{chapter.2}% 23
+\BOOKMARK [1][-]{section.2.8}{La normalisation par \351valuation}{chapter.2}% 24
+\BOOKMARK [0][-]{chapter.3}{Le lambda-calcul simplement typ\351 et les Pure Type Systems}{}% 25
+\BOOKMARK [1][-]{section.3.1}{Le -calcul simplement typ\351}{chapter.3}% 26
+\BOOKMARK [2][-]{subsection.3.1.1}{Pr\351sentation}{section.3.1}% 27
+\BOOKMARK [2][-]{subsection.3.1.2}{Impl\351mentation en Agda}{section.3.1}% 28
+\BOOKMARK [2][-]{subsection.3.1.3}{Inf\351rence de type}{section.3.1}% 29
+\BOOKMARK [1][-]{section.3.2}{Les Pure Type Systems}{chapter.3}% 30
+\BOOKMARK [2][-]{subsection.3.2.1}{Introduction}{section.3.2}% 31
+\BOOKMARK [2][-]{subsection.3.2.2}{MiniCoq}{section.3.2}% 32
+\BOOKMARK [2][-]{subsection.3.2.3}{Le \040logique}{section.3.2}% 33
+\BOOKMARK [2][-]{subsection.3.2.4}{L'\351galit\351}{section.3.2}% 34
+\BOOKMARK [2][-]{subsection.3.2.5}{Le faux}{section.3.2}% 35
+\BOOKMARK [2][-]{subsection.3.2.6}{Le point fixe}{section.3.2}% 36
+\BOOKMARK [2][-]{subsection.3.2.7}{La logique classique}{section.3.2}% 37
+\BOOKMARK [2][-]{subsection.3.2.8}{L'\351galit\351 \(2\)}{section.3.2}% 38
+\BOOKMARK [0][-]{chapter.4}{L'interpr\351tation}{}% 39
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 40
+\BOOKMARK [1][-]{section.4.2}{Un interpr\350te MiniScheme avec Ocaml}{chapter.4}% 41
+\BOOKMARK [2][-]{subsection.4.2.1}{L'\351valuation}{section.4.2}% 42
+\BOOKMARK [2][-]{subsection.4.2.2}{Les \351tapes Read, Eval, Print}{section.4.2}% 43
+\BOOKMARK [2][-]{subsection.4.2.3}{Liaison lexicale vs liaison dynamique}{section.4.2}% 44
+\BOOKMARK [2][-]{subsection.4.2.4}{Gestion de l'environnement}{section.4.2}% 45
+\BOOKMARK [1][-]{section.4.3}{Un interpr\350te Lisp avec le nouvel interpr\350te MiniScheme \203}{chapter.4}% 46
+\BOOKMARK [1][-]{section.4.4}{L'auto-interpr\351tation de l'interpr\350te}{chapter.4}% 47
+\BOOKMARK [2][-]{subsection.4.4.1}{La tour de Babel}{section.4.4}% 48
+\BOOKMARK [2][-]{subsection.4.4.2}{R\351ification et r\351flexion}{section.4.4}% 49
+\BOOKMARK [0][-]{chapter.5}{La compilation}{}% 50
+\BOOKMARK [1][-]{section.5.1}{Compilation des -termes en termes applicatifs}{chapter.5}% 51
+\BOOKMARK [1][-]{section.5.2}{Compilation basique vers une machine \340 pile}{chapter.5}% 52
+\BOOKMARK [2][-]{subsection.5.2.1}{Certification de la compilation avec le langage Coq}{section.5.2}% 53
+\BOOKMARK [1][-]{section.5.3}{Compilation du Lisp vers une machine abstraite}{chapter.5}% 54
+\BOOKMARK [0][-]{chapter.6}{La r\351solution}{}% 55
+\BOOKMARK [1][-]{section.6.1}{Repr\351sentation des termes finis}{chapter.6}% 56
+\BOOKMARK [1][-]{section.6.2}{La substitution}{chapter.6}% 57
+\BOOKMARK [1][-]{section.6.3}{Filtrage et r\351\351criture}{chapter.6}% 58
+\BOOKMARK [2][-]{subsection.6.3.1}{Le filtrage}{section.6.3}% 59
+\BOOKMARK [2][-]{subsection.6.3.2}{La r\351\351criture et l'arithm\351tique de Peano}{section.6.3}% 60
+\BOOKMARK [1][-]{section.6.4}{L'unification des termes}{chapter.6}% 61
+\BOOKMARK [1][-]{section.6.5}{Un mini Prolog}{chapter.6}% 62
+\BOOKMARK [1][-]{section.6.6}{Quelques exemples de programmation en Prolog}{chapter.6}% 63
+\BOOKMARK [2][-]{subsection.6.6.1}{Les entiers naturels}{section.6.6}% 64
+\BOOKMARK [2][-]{subsection.6.6.2}{Les additions de Peano}{section.6.6}% 65
+\BOOKMARK [2][-]{subsection.6.6.3}{Programmation "logique" en Coq}{section.6.6}% 66
+\BOOKMARK [2][-]{subsection.6.6.4}{La base g\351n\351alogique}{section.6.6}% 67
+\BOOKMARK [1][-]{section.6.7}{L'algorithme de compl\351tion de Knuth-Bendix}{chapter.6}% 68
+\BOOKMARK [2][-]{subsection.6.7.1}{Confluence et paires critiques}{section.6.7}% 69
+\BOOKMARK [2][-]{subsection.6.7.2}{Terminaison}{section.6.7}% 70
+\BOOKMARK [2][-]{subsection.6.7.3}{Compl\351tion de Knuth-Bendix}{section.6.7}% 71
+\BOOKMARK [0][-]{chapter.7}{Calculabilit\351 et complexit\351}{}% 72
+\BOOKMARK [1][-]{section.7.1}{Les fonctions r\351cursives}{chapter.7}% 73
+\BOOKMARK [1][-]{section.7.2}{La machine de Turing}{chapter.7}% 74
+\BOOKMARK [1][-]{section.7.3}{La th\350se de Church}{chapter.7}% 75
+\BOOKMARK [1][-]{section.7.4}{Complexit\351}{chapter.7}% 76
+\BOOKMARK [2][-]{subsection.7.4.1}{Th\351or\350me de Cook}{section.7.4}% 77
+\BOOKMARK [2][-]{subsection.7.4.2}{Impl\351mentation de l'algorithme SAT}{section.7.4}% 78
+\BOOKMARK [2][-]{subsection.7.4.3}{Sudoku - SAT encoding}{section.7.4}% 79
+\BOOKMARK [1][-]{section.7.5}{M\351taprogrammation - r\351cursivit\351 et r\351flexivit\351}{chapter.7}% 80
+\BOOKMARK [2][-]{subsection.7.5.1}{Introduction}{section.7.5}% 81
+\BOOKMARK [2][-]{subsection.7.5.2}{Le th\351or\350me de Kleene}{section.7.5}% 82
+\BOOKMARK [2][-]{subsection.7.5.3}{Un programme Quine}{section.7.5}% 83
+\BOOKMARK [2][-]{subsection.7.5.4}{Le th\351or\350me de Rice}{section.7.5}% 84
+\BOOKMARK [0][-]{chapter*.21}{Conclusion}{}% 85
+\BOOKMARK [0][-]{chapter.8}{Annexes / Divers}{}% 86
+\BOOKMARK [1][-]{section.8.1}{Quelques fonctions sur les listes}{chapter.8}% 87
+\BOOKMARK [1][-]{section.8.2}{Les listes mutables}{chapter.8}% 88
+\BOOKMARK [1][-]{section.8.3}{Les listes infinies ou streams}{chapter.8}% 89
+\BOOKMARK [1][-]{section.8.4}{Le module Graphics d'Ocaml, les fractales}{chapter.8}% 90
+\BOOKMARK [1][-]{section.8.5}{Utilisation de Metafont}{chapter.8}% 91
+\BOOKMARK [1][-]{section.8.6}{The boxes}{chapter.8}% 92
+\BOOKMARK [1][-]{section.8.7}{Les modules Ocaml. Mod\351lisation d'un mono\357de}{chapter.8}% 93
+\BOOKMARK [1][-]{section.8.8}{Machine Learning and Neural Networks}{chapter.8}% 94
+\BOOKMARK [2][-]{subsection.8.8.1}{Introduction}{section.8.8}% 95
+\BOOKMARK [2][-]{subsection.8.8.2}{Un peu de th\351orie}{section.8.8}% 96
+\BOOKMARK [2][-]{subsection.8.8.3}{Calcul matriciel}{section.8.8}% 97
+\BOOKMARK [2][-]{subsection.8.8.4}{Fonctions d'activation}{section.8.8}% 98
+\BOOKMARK [1][-]{section.8.9}{Les nombres premiers. L'algorithme RSA}{chapter.8}% 99
+\BOOKMARK [1][-]{section.8.10}{Approximation du nombre \040}{chapter.8}% 100
+\BOOKMARK [2][-]{subsection.8.10.1}{La m\351thode des polygones}{section.8.10}% 101
+\BOOKMARK [2][-]{subsection.8.10.2}{La s\351rie altern\351e de Leibniz}{section.8.10}% 102
+\BOOKMARK [2][-]{subsection.8.10.3}{La loi des grands nombres}{section.8.10}% 103
+\BOOKMARK [2][-]{subsection.8.10.4}{Le produit de Wallis}{section.8.10}% 104
+\BOOKMARK [2][-]{subsection.8.10.5}{L'int\351grale 01 11+x2 dx}{section.8.10}% 105
+\BOOKMARK [1][-]{section.8.11}{Po\351sies}{chapter.8}% 106
+\BOOKMARK [1][-]{section.8.12}{Lectures}{chapter.8}% 107
+\BOOKMARK [1][-]{section.8.13}{Les fractions continues}{chapter.8}% 108
+\BOOKMARK [1][-]{section.8.14}{L'irrationalit\351 de 2}{chapter.8}% 109
+\BOOKMARK [1][-]{section.8.15}{D\351monstration non constructive}{chapter.8}% 110
+\BOOKMARK [1][-]{section.8.16}{Le tout est-il plus grand que chacune de ses parties ?}{chapter.8}% 111
+\BOOKMARK [1][-]{section.8.17}{L'hyperbole xy=1}{chapter.8}% 112
+\BOOKMARK [1][-]{section.8.18}{L'exponentielle}{chapter.8}% 113
+\BOOKMARK [1][-]{section.8.19}{Les fonctions sin1x et x . sin1x }{chapter.8}% 114
+\BOOKMARK [1][-]{section.8.20}{Prouver par r\351flection en Agda}{chapter.8}% 115
+\BOOKMARK [1][-]{section.8.21}{Srivanasa Ramanujan}{chapter.8}% 116
+\BOOKMARK [1][-]{section.8.22}{Le grec ancien}{chapter.8}% 117
+\BOOKMARK [2][-]{subsection.8.22.1}{L'alphabet grec}{section.8.22}% 118
+\BOOKMARK [2][-]{subsection.8.22.2}{Extraits du nouveau testament}{section.8.22}% 119
