@@ -1416,6 +1416,73 @@ let rec print = function
 	};
 \end{tikzpicture}
 
+
+En voici une démonstration formelle en \textsc{Lean}.
+\begin{Verbatim}
+import Mathlib
+open Nat
+
+def no_solution_sqrt2_irrational :  (a b : ℕ) →  a ≠ 0 → b ≠ 0 → a^2 = 2 * b^2 → False
+| a, b, a_ne_zero, b_ne_zero, a_sq_eq_2_b_sq =>
+
+  -- a must be even
+  have a_even : Even a := by
+    apply (Nat.even_or_odd a).resolve_right
+    intro a_odd
+    -- If a is odd, then a^2 is odd
+    have a_sq_odd : Odd (a^2) := Odd.pow a_odd
+    -- But 2 * b^2 is even, which is a contradiction
+    have two_b_sq_even : Even (2 * b^2) := Nat.even_mul.2 (Or.inl even_two)
+    rw [a_sq_eq_2_b_sq] at a_sq_odd
+    exact (Nat.not_even_iff_odd.2 a_sq_odd) two_b_sq_even
+
+  -- Let a = 2 * k
+  let k := a / 2
+  let a_eq : a = 2 * k := by
+   simp [k] ; rcases a_even with ⟨p, rfl⟩ ;  omega
+
+  let deuxkdeuxegb2 : 2 * k ^ 2 = b ^ 2 := by
+    rw [a_eq] at a_sq_eq_2_b_sq
+    simp only [mul_pow, pow_succ] at a_sq_eq_2_b_sq
+  -- Simplify to get 2 * k^2 = b^2
+    norm_num at a_sq_eq_2_b_sq
+    ring_nf at a_sq_eq_2_b_sq
+    have quatredeuxfoisdeux : 4 = 2 * 2 := by omega
+    rw [quatredeuxfoisdeux] at a_sq_eq_2_b_sq
+    omega
+  -- Thus, b must also be even
+  let b_even : Even b := by
+    apply (Nat.even_or_odd b).resolve_right
+    intro b_odd
+    -- If b is odd, then b^2 is odd
+    have b_sq_odd : Odd (b^2) := Odd.pow b_odd
+    rw [← deuxkdeuxegb2] at b_sq_odd
+    -- b_sq_odd is now Odd (2 * k^2)
+    have two_k_sq_even : Even (2 * k^2) := Nat.even_mul.2 (Or.inl even_two)
+    apply (Nat.not_even_iff_odd.2 b_sq_odd) two_k_sq_even
+
+  -- Let b = 2 * m
+  let m := b / 2
+   let b_eq : b = 2 * m := by
+     simp [m] ; rcases b_even with ⟨q, rfl⟩ ;  omega
+
+  -- We now have 2 * k^2 = (2 * m)^2 => 2 * k^2 = 4 * m^2 => k^2 = 2 * m^2
+  let k_sq_eq_2_m_sq : k^2 = 2 * m^2 := by
+    rw [b_eq] at deuxkdeuxegb2
+    ring_nf at deuxkdeuxegb2
+    nlinarith [deuxkdeuxegb2]
+
+  -- This implies that k and m satisfy the same equation as a and b
+  -- But k < a and m < b, leading to infinite descent
+
+  no_solution_sqrt2_irrational k m (by omega) (by omega) k_sq_eq_2_m_sq
+
+theorem sqrt2_irrational : ¬ ∃ a b : ℕ, a ≠ 0 ∧ b ≠ 0 ∧ a^2 = 2 * b^2 := by
+  intro ⟨a, b, a_ne_zero, b_ne_zero, a_sq_eq_2_b_sq⟩
+  exact no_solution_sqrt2_irrational a b a_ne_zero b_ne_zero a_sq_eq_2_b_sq
+
+\end{Verbatim}
+
 \section{Démonstration non constructive}
 Démontrons qu'il existe deux irrationnels $a$ et $b$ tels que $a^b$ soit rationnel.
 
