@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{module} \PYG{k}{type} \PYG{n+nc}{MONOID} \PYG{o}{=}
+\PYG{k}{sig}
+\PYG{k}{type} \PYG{n}{t}
+\PYG{k}{val} \PYG{o}{(} \PYG{o}{\PYGZlt{}+\PYGZgt{}} \PYG{o}{)} \PYG{o}{:} \PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{t}
+\PYG{k}{val} \PYG{n}{neutral} \PYG{o}{:} \PYG{n}{t}	
+\PYG{k}{end}
+
+\PYG{k}{module} \PYG{n+nc}{String\PYGZus{}monoid} \PYG{o}{:} \PYG{n+nc}{MONOID} \PYG{k}{with} \PYG{k}{type} \PYG{n}{t} \PYG{o}{=} \PYG{k+kt}{string}  \PYG{o}{=}
+\PYG{k}{struct}
+\PYG{k}{type} \PYG{n}{t} \PYG{o}{=} \PYG{k+kt}{string}
+\PYG{k}{let} \PYG{o}{(} \PYG{o}{\PYGZlt{}+\PYGZgt{}} \PYG{o}{)} \PYG{o}{=} \PYG{o}{(\PYGZca{})}
+\PYG{k}{let} \PYG{n}{neutral} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+\PYG{k}{end}
+
+\PYG{n+nn}{String\PYGZus{}monoid}\PYG{p}{.}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}abc\PYGZdq{}} \PYG{o}{\PYGZlt{}+\PYGZgt{}} \PYG{l+s+s2}{\PYGZdq{}def\PYGZdq{}} \PYG{o}{\PYGZlt{}+\PYGZgt{}} \PYG{n}{neutral}\PYG{o}{)}
+\PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nn}{String\PYGZus{}monoid}\PYG{p}{.}\PYG{n}{t} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}abcdef\PYGZdq{}}	
+\end{Verbatim}

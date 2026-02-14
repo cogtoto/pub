@@ -1,0 +1,51 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{open} \PYG{n+nc}{List}
+\PYG{k}{open} \PYG{n+nc}{Random}
+
+\PYG{k}{let} \PYG{n}{p} \PYG{o}{=} \PYG{l+m+mi}{61} \PYG{k}{and} \PYG{n}{q} \PYG{o}{=} \PYG{l+m+mi}{53} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{n} \PYG{o}{=} \PYG{n}{p}\PYG{o}{*}\PYG{n}{q} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{phi} \PYG{o}{=} \PYG{o}{(}\PYG{n}{p}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)*(}\PYG{n}{q}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{;;} \PYG{c}{(* phi=3233 *)}
+\PYG{k}{let} \PYG{n}{m} \PYG{o}{=} \PYG{l+m+mi}{65} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{pgcd} \PYG{n}{a} \PYG{n}{b} \PYG{o}{=}
+  \PYG{k}{if} \PYG{n}{b} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{k}{then} \PYG{n}{a}
+  \PYG{k}{else} \PYG{n}{pgcd} \PYG{n}{b} \PYG{o}{(}\PYG{n}{a} \PYG{o+ow}{mod} \PYG{n}{b}\PYG{o}{)}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{calcule\PYGZus{}e} \PYG{n}{p} \PYG{n}{q} \PYG{o}{=}
+  \PYG{k}{let} \PYG{n}{e} \PYG{o}{=} \PYG{n+nn}{Random}\PYG{p}{.}\PYG{n}{int} \PYG{o}{((}\PYG{n}{p}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)*(}\PYG{n}{q}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{))}
+    \PYG{k}{in} \PYG{k}{if} \PYG{n}{pgcd} \PYG{n}{e} \PYG{o}{((}\PYG{n}{p}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)*(}\PYG{n}{q}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{))} \PYG{o}{=} \PYG{l+m+mi}{1} \PYG{k}{then} \PYG{n}{e}
+      \PYG{k}{else} \PYG{n}{calcule\PYGZus{}e} \PYG{n}{p} \PYG{n}{q}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{euclide} \PYG{n}{a} \PYG{n}{b} \PYG{o}{=}
+  \PYG{k}{if} \PYG{n}{b} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{k}{then} \PYG{o}{(} \PYG{n}{a} \PYG{o}{,} \PYG{l+m+mi}{1} \PYG{o}{,} \PYG{l+m+mi}{0} \PYG{o}{)}
+    \PYG{k}{else}
+    \PYG{k}{begin}
+        \PYG{k}{let} \PYG{o}{(}\PYG{n}{d\PYGZsq{}}\PYG{o}{,} \PYG{n}{u\PYGZsq{}}\PYG{o}{,} \PYG{n}{v\PYGZsq{}}\PYG{o}{)} \PYG{o}{=} \PYG{n}{euclide} \PYG{n}{b} \PYG{o}{(}\PYG{n}{a} \PYG{o+ow}{mod} \PYG{n}{b}\PYG{o}{)}
+        \PYG{k}{in} \PYG{o}{(}\PYG{n}{d\PYGZsq{}}\PYG{o}{,} \PYG{n}{v\PYGZsq{}}\PYG{o}{,} \PYG{n}{u\PYGZsq{}} \PYG{o}{\PYGZhy{}} \PYG{o}{(}\PYG{n}{a} \PYG{o}{/} \PYG{n}{b}\PYG{o}{)} \PYG{o}{*} \PYG{n}{v\PYGZsq{}} \PYG{o}{)}
+    \PYG{k}{end}
+
+\PYG{k}{let} \PYG{n}{calcule\PYGZus{}d} \PYG{n}{p} \PYG{n}{q} \PYG{n}{e} \PYG{o}{=}
+    \PYG{k}{let}\PYG{o}{(\PYGZus{},} \PYG{n}{u} \PYG{o}{,\PYGZus{})} \PYG{o}{=} \PYG{n}{euclide} \PYG{n}{e} \PYG{o}{((} \PYG{n}{p}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)*(}\PYG{n}{q}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{))} \PYG{k}{in}
+      \PYG{n}{u} \PYG{o+ow}{mod} \PYG{o}{((}\PYG{n}{p}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)*(}\PYG{n}{q}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{))}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{pow} \PYG{n}{a} \PYG{n}{m} \PYG{o}{=} \PYG{k}{function}
+  \PYG{o}{|} \PYG{l+m+mi}{0} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{l+m+mi}{1} \PYG{o+ow}{mod} \PYG{n}{m}
+  \PYG{o}{|} \PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{a} \PYG{o+ow}{mod} \PYG{n}{m}
+  \PYG{o}{|} \PYG{n}{n} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+    \PYG{k}{let} \PYG{n}{b} \PYG{o}{=} \PYG{n}{pow} \PYG{n}{a} \PYG{n}{m} \PYG{o}{(}\PYG{n}{n} \PYG{o}{/} \PYG{l+m+mi}{2}\PYG{o}{)} \PYG{k}{in}
+    \PYG{n}{b} \PYG{o}{*} \PYG{n}{b} \PYG{o}{*} \PYG{o}{(}\PYG{k}{if} \PYG{n}{n} \PYG{o+ow}{mod} \PYG{l+m+mi}{2} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{k}{then} \PYG{l+m+mi}{1} \PYG{k}{else} \PYG{n}{a}\PYG{o}{)} \PYG{o+ow}{mod} \PYG{n}{m}
+  \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{e} \PYG{o}{=} \PYG{n}{calcule\PYGZus{}e} \PYG{n}{p} \PYG{n}{q}  \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{d} \PYG{o}{=} \PYG{n}{calcule\PYGZus{}d} \PYG{n}{p} \PYG{n}{q} \PYG{n}{e} \PYG{o}{;;}
+
+\PYG{n}{crypt} \PYG{o}{(}\PYG{n}{crypt} \PYG{n}{m} \PYG{n}{e} \PYG{n}{n}\PYG{o}{)} \PYG{n}{d} \PYG{n}{n}\PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{factor} \PYG{n}{n} \PYG{o}{=}
+  \PYG{k}{let} \PYG{k}{rec} \PYG{n}{aux} \PYG{n}{n} \PYG{n}{k} \PYG{n}{l} \PYG{o}{=}
+    \PYG{k}{if} \PYG{n}{n} \PYG{o}{\PYGZlt{}} \PYG{n}{k}\PYG{o}{/}\PYG{l+m+mi}{2} \PYG{k}{then} \PYG{n}{l}
+    \PYG{k}{else} \PYG{k}{if} \PYG{o}{(}\PYG{n}{n} \PYG{o+ow}{mod} \PYG{n}{k}\PYG{o}{)} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{k}{then} \PYG{n}{aux} \PYG{o}{(}\PYG{n}{n}\PYG{o}{/}\PYG{n}{k}\PYG{o}{)} \PYG{n}{k} \PYG{o}{(}\PYG{n}{k}\PYG{o}{::}\PYG{n}{l}\PYG{o}{)}
+    \PYG{k}{else} \PYG{k}{if} \PYG{o}{(}\PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{o}{)} \PYG{k}{then} \PYG{n}{aux} \PYG{n}{n} \PYG{l+m+mi}{3} \PYG{n}{l}
+    \PYG{k}{else} \PYG{n}{aux} \PYG{n}{n} \PYG{o}{(}\PYG{n}{k}\PYG{o}{+}\PYG{l+m+mi}{2}\PYG{o}{)} \PYG{n}{l}
+\PYG{k}{in} \PYG{n}{rev} \PYG{o}{(}\PYG{n}{aux} \PYG{n}{n} \PYG{l+m+mi}{2} \PYG{n+nb+bp}{[]}\PYG{o}{)}
+\end{Verbatim}

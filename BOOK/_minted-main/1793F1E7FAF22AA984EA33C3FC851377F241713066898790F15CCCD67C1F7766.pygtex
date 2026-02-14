@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{\PYGZpc{}file name}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{beta}.\PYG{n}{mf}
+
+\PYG{err}{beginchar(}\PYG{l+s+s2}{\PYGZdq{}D\PYGZdq{}}\PYG{err}{,15pt}\PYG{c}{\PYGZsh{},10pt\PYGZsh{},3pt\PYGZsh{});}
+\PYG{err}{\PYGZpc{}}\PYG{+w}{ }\PYG{err}{proportion}\PYG{+w}{ }\PYG{err}{ligne}\PYG{+w}{ }\PYG{err}{vs}\PYG{+w}{ }\PYG{err}{triangle}\PYG{+w}{ }\PYG{err}{3/4}\PYG{+w}{ }\PYG{err}{1/4}
+\PYG{n+nv}{prop}\PYG{o}{:=}\PYG{l+m}{3}/4\PYG{p}{;}
+
+\PYG{n+nv}{y1}\PYG{o}{=}h\PYGZhy{}d\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{y2}\PYG{o}{=}\PYG{l+m}{1}/5h\PYGZhy{}d\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{y3}\PYG{o}{=}\PYG{l+m}{4}/5h\PYGZhy{}d\PYG{p}{;}
+\PYG{n+nv}{y4}\PYG{o}{=}\PYG{l+m}{2}/5h\PYGZhy{}d\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{y5}\PYG{o}{=}\PYG{l+m}{3}/5h\PYGZhy{}d\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{y6}\PYG{o}{=}\PYG{l+m}{1}/2h\PYGZhy{}d\PYG{p}{;}
+\PYG{n+nv}{y7}\PYG{o}{=}\PYG{l+m}{3}/4h\PYGZhy{}d\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{y8}\PYG{o}{=}\PYG{l+m}{1}/4h\PYGZhy{}d\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{y9}\PYG{o}{=}h/2\PYGZhy{}d\PYG{p}{;}
+
+\PYG{n+nv}{x1}\PYG{o}{=}\PYG{l+m}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{x2}\PYG{o}{=}\PYG{l+m}{1}/5*prop*w\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{x3}\PYG{o}{=}\PYG{l+m}{2}/5*prop*w\PYG{p}{;}
+\PYG{n+nv}{x4}\PYG{o}{=}\PYG{l+m}{3}/5*prop*w\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{x5}\PYG{o}{=}\PYG{l+m}{4}/5*prop*w\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{x6}\PYG{o}{=}prop*w\PYG{p}{;}
+\PYG{n+nv}{x7}\PYG{o}{=}\PYG{n+nv}{x8}\PYG{o}{=}x6\PYG{p}{;}\PYG{+w}{ }\PYG{n+nv}{x9}\PYG{o}{=}w\PYG{p}{;}
+
+\PYG{err}{pickup}\PYG{+w}{ }\PYG{err}{pencircle}\PYG{+w}{ }\PYG{err}{scaled}\PYG{+w}{ }\PYG{err}{0.3pt;}
+\PYG{err}{draw}\PYG{+w}{ }\PYG{err}{z1\PYGZob{}right\PYGZcb{}..tension}\PYG{+w}{ }\PYG{err}{6..z2\PYGZob{}right\PYGZcb{}..tension}\PYG{+w}{ }\PYG{err}{5..z3\PYGZob{}right\PYGZcb{}}
+\PYG{+w}{     }\PYG{err}{..tension}\PYG{+w}{ }\PYG{err}{4..z4\PYGZob{}right\PYGZcb{}..tension}\PYG{+w}{ }\PYG{err}{4..z5\PYGZob{}right\PYGZcb{}..tension}\PYG{+w}{ }\PYG{err}{3..z6;}
+\PYG{err}{draw}\PYG{+w}{ }\PYG{err}{z7\PYGZhy{}\PYGZhy{}z8\PYGZhy{}\PYGZhy{}z9\PYGZhy{}\PYGZhy{}cycle;}
+\PYG{err}{labels(range}\PYG{+w}{ }\PYG{err}{1}\PYG{+w}{ }\PYG{err}{thru}\PYG{+w}{ }\PYG{err}{9);}
+\PYG{err}{endchar;}
+\PYG{err}{end}
+\end{Verbatim}

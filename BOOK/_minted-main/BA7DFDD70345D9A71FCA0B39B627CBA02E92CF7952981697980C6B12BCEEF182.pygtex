@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{exception} \PYG{n+nc}{Erreur}
+
+\PYG{k}{let} \PYG{n}{box} \PYG{n}{value0} \PYG{o}{=}
+	\PYG{k}{let} \PYG{n}{value} \PYG{o}{=} \PYG{n}{ref} \PYG{n}{value0} \PYG{k}{in}
+	\PYG{k}{fun} \PYG{n}{message} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+		\PYG{k}{match} \PYG{n}{message} \PYG{k}{with}
+		\PYG{o}{|} \PYG{l+s+s2}{\PYGZdq{}get\PYGZdq{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{any} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{print\PYGZus{}int} \PYG{o}{!}\PYG{n}{value}\PYG{o}{)}
+		\PYG{o}{|} \PYG{l+s+s2}{\PYGZdq{}set\PYGZdq{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{newvalue} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{value} \PYG{o}{:=} \PYG{n}{newvalue} \PYG{o}{;} \PYG{n}{print\PYGZus{}int} \PYG{o}{!}\PYG{n}{value} \PYG{o}{))}
+		\PYG{o}{|} \PYG{l+s+s2}{\PYGZdq{}reset\PYGZdq{}}\PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{any} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{value} \PYG{o}{:=} \PYG{n}{value0} \PYG{o}{;} \PYG{n}{print\PYGZus{}int} \PYG{o}{!}\PYG{n}{value}\PYG{o}{))}
+		\PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Erreur}
+		
+		
+\PYG{k}{let} \PYG{n}{maboite} \PYG{o}{=} \PYG{n}{box} \PYG{l+m+mi}{5} \PYG{o}{;;}
+\PYG{o}{(}\PYG{n}{maboite} \PYG{l+s+s2}{\PYGZdq{}get\PYGZdq{}}\PYG{o}{)} \PYG{l+m+mi}{0} \PYG{o}{;;}
+\PYG{o}{(}\PYG{n}{maboite} \PYG{l+s+s2}{\PYGZdq{}set\PYGZdq{}}\PYG{o}{)} \PYG{l+m+mi}{1976} \PYG{o}{;;}
+\PYG{o}{(}\PYG{n}{maboite} \PYG{l+s+s2}{\PYGZdq{}get\PYGZdq{}}\PYG{o}{)} \PYG{l+m+mi}{0} \PYG{o}{;;}
+\PYG{o}{(}\PYG{n}{maboite} \PYG{l+s+s2}{\PYGZdq{}reset\PYGZdq{}}\PYG{o}{)} \PYG{l+m+mi}{0} \PYG{o}{;;}
+\end{Verbatim}

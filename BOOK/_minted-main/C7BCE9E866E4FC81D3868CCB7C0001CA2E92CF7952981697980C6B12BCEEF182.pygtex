@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{cont} \PYG{n}{a} \PYG{n}{b} \PYG{o}{=}
+  \PYG{k}{let} \PYG{k}{rec} \PYG{n}{aux} \PYG{n}{acc} \PYG{n}{a} \PYG{n}{b} \PYG{o}{=}
+    \PYG{k}{if} \PYG{n}{a} \PYG{o+ow}{mod} \PYG{n}{b} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{k}{then}
+      \PYG{n}{a}\PYG{o}{::}\PYG{n}{acc}
+    \PYG{k}{else}  \PYG{n}{aux} \PYG{o}{((}\PYG{n}{a} \PYG{o}{/} \PYG{n}{b}\PYG{o}{)::}\PYG{n}{acc}\PYG{o}{)} \PYG{n}{b} \PYG{o}{(}\PYG{n}{a} \PYG{o+ow}{mod} \PYG{n}{b}\PYG{o}{)}
+  \PYG{k}{in} \PYG{n}{rev} \PYG{o}{(}\PYG{n}{aux} \PYG{n+nb+bp}{[]} \PYG{n}{a} \PYG{n}{b}\PYG{o}{)} \PYG{o}{;;}
+
+\PYG{c}{(*}
+\PYG{c}{[4;1;1:3]}
+\PYG{c}{4+\PYGZbs{}cfrac\PYGZob{}1\PYGZcb{}\PYGZob{}1+\PYGZbs{}cfrac\PYGZob{}1\PYGZcb{}\PYGZob{}1+\PYGZbs{}cfrac\PYGZob{}1\PYGZcb{}\PYGZob{}3\PYGZcb{}\PYGZcb{}\PYGZcb{}}
+\PYG{c}{*)}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{print} \PYG{o}{=} \PYG{k}{function}
+  \PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+  \PYG{o}{|} \PYG{n}{h}\PYG{o}{::}\PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{string\PYGZus{}of\PYGZus{}int} \PYG{n}{h}
+  \PYG{o}{|} \PYG{n}{h}\PYG{o}{::}\PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}}  \PYG{n}{string\PYGZus{}of\PYGZus{}int}\PYG{o}{(}\PYG{n}{h}\PYG{o}{)} \PYG{o}{\PYGZca{}} \PYG{l+s+s2}{\PYGZdq{} + }\PYG{l+s+se}{\PYGZbs{}\PYGZbs{}}\PYG{l+s+s2}{cfrac\PYGZob{}1\PYGZcb{}\PYGZob{}\PYGZdq{}} \PYG{o}{\PYGZca{}} \PYG{n}{print} \PYG{n}{t} \PYG{o}{\PYGZca{}} \PYG{l+s+s2}{\PYGZdq{}\PYGZcb{}\PYGZdq{}} \PYG{o}{;;}
+\end{Verbatim}

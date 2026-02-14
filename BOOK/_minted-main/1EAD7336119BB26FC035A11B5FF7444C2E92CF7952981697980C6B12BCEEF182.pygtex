@@ -1,0 +1,38 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{exception} \PYG{n+nc}{Listenulle}
+\PYG{k}{type} \PYG{n}{liste} \PYG{o}{=} \PYG{n+nc}{Nil} \PYG{o}{|} \PYG{n+nc}{Cons} \PYG{k}{of} \PYG{k+kt}{int} \PYG{n}{ref} \PYG{o}{*} \PYG{n}{liste} \PYG{n}{ref} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{set\PYGZus{}car} \PYG{n}{d} \PYG{n}{v} \PYG{o}{=}
+	\PYG{k}{match} \PYG{n}{d} \PYG{k}{with}
+	\PYG{o}{|} \PYG{n+nc}{Nil} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Listenulle}
+	\PYG{o}{|} \PYG{n+nc}{Cons}\PYG{o}{(}\PYG{n}{car}\PYG{o}{,}\PYG{n}{cdr}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{car}\PYG{o}{:=}\PYG{n}{v}  \PYG{o}{;;}
+	
+\PYG{k}{let} \PYG{n}{set\PYGZus{}cdr} \PYG{n}{d} \PYG{n}{v} \PYG{o}{=}
+	\PYG{k}{match} \PYG{n}{d} \PYG{k}{with}
+	\PYG{o}{|} \PYG{n+nc}{Nil} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Listenulle}
+	\PYG{o}{|} \PYG{n+nc}{Cons}\PYG{o}{(}\PYG{n}{car}\PYG{o}{,}\PYG{n}{cdr}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{cdr}\PYG{o}{:=}\PYG{n}{v} \PYG{o}{;;}
+	
+\PYG{k}{let}  \PYG{n}{cdr} \PYG{n}{l} \PYG{o}{=}
+ \PYG{k}{match} \PYG{n}{l} \PYG{k}{with}
+ \PYG{o}{|} \PYG{n+nc}{Nil} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Listenulle}
+ \PYG{o}{|} \PYG{n+nc}{Cons}\PYG{o}{(}\PYG{n}{tete}\PYG{o}{,} \PYG{n}{reste}\PYG{o}{)} \PYG{k}{when} \PYG{o}{!}\PYG{n}{reste} \PYG{o}{\PYGZlt{}\PYGZgt{}} \PYG{n+nc}{Nil} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{reste}
+
+\PYG{k}{let} \PYG{n}{maliste} \PYG{o}{=} \PYG{n+nc}{Cons}\PYG{o}{(}\PYG{n}{ref} \PYG{l+m+mi}{1} \PYG{o}{,} \PYG{n}{ref} \PYG{o}{(} \PYG{n+nc}{Cons} \PYG{o}{(}\PYG{n}{ref} \PYG{l+m+mi}{2}\PYG{o}{,} \PYG{n}{ref} \PYG{o}{(} \PYG{n+nc}{Cons} \PYG{o}{(}\PYG{n}{ref} \PYG{l+m+mi}{3}\PYG{o}{,} \PYG{n}{ref} \PYG{n+nc}{Nil}\PYG{o}{)))} \PYG{o}{))}
+\PYG{n}{set\PYGZus{}cdr} \PYG{o}{(!}\PYG{n}{cdr} \PYG{o}{!(}\PYG{n}{cdr} \PYG{n}{maliste}\PYG{o}{))} \PYG{n}{maliste} \PYG{o}{;;}
+
+\PYG{o}{\PYGZsh{}} \PYG{n}{maliste}\PYG{o}{;;}
+\PYG{o}{\PYGZhy{}} \PYG{o}{:} \PYG{n}{liste} \PYG{o}{=}
+\PYG{n+nc}{Cons} \PYG{o}{(\PYGZob{}}\PYG{n}{contents} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{o}{\PYGZcb{},}
+ \PYG{o}{\PYGZob{}}\PYG{n}{contents} \PYG{o}{=}
+   \PYG{n+nc}{Cons} \PYG{o}{(\PYGZob{}}\PYG{n}{contents} \PYG{o}{=} \PYG{l+m+mi}{2}\PYG{o}{\PYGZcb{},}
+    \PYG{o}{\PYGZob{}}\PYG{n}{contents} \PYG{o}{=}
+      \PYG{n+nc}{Cons} \PYG{o}{(\PYGZob{}}\PYG{n}{contents} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{o}{\PYGZcb{},}
+       \PYG{o}{\PYGZob{}}\PYG{n}{contents} \PYG{o}{=}
+         \PYG{n+nc}{Cons} \PYG{o}{(\PYGZob{}}\PYG{n}{contents} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{o}{\PYGZcb{},}
+          \PYG{o}{\PYGZob{}}\PYG{n}{contents} \PYG{o}{=}
+            \PYG{n+nc}{Cons} \PYG{o}{(\PYGZob{}}\PYG{n}{contents} \PYG{o}{=} \PYG{l+m+mi}{2}\PYG{o}{\PYGZcb{},}
+             \PYG{o}{\PYGZob{}}\PYG{n}{contents} \PYG{o}{=}
+               \PYG{n+nc}{Cons} \PYG{o}{(\PYGZob{}}\PYG{n}{contents} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{o}{\PYGZcb{},}
+               	\PYG{o}{...}
+               	
+\end{Verbatim}

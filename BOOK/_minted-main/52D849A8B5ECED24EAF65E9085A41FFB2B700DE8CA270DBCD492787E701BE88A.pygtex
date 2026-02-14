@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data}\PYG{+w}{ }Pair\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Nat\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{k+kt}{Set}\PYG{+w}{ }\PYG{k+kr}{where}
+\PYG{+w}{  }\PYG{n+nf}{pair0}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Pair\PYG{+w}{ }\PYG{l+m+mi}{0}
+\PYG{+w}{  }\PYG{n+nf}{pairSS}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{(}n\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Nat\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }Pair\PYG{+w}{ }n\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }Pair\PYG{+w}{ }\PYG{o}{(}suc\PYG{+w}{ }\PYG{o}{(}suc\PYG{+w}{ }n\PYG{o}{))}
+
+\PYG{n+nf}{pair6}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Pair\PYG{+w}{ }\PYG{l+m+mi}{6}
+pair6\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{  }pairSS\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{+w}{ }\PYG{o}{(}pairSS\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{o}{(}pairSS\PYG{+w}{ }zero\PYG{+w}{ }pair0\PYG{o}{))}
+\end{Verbatim}

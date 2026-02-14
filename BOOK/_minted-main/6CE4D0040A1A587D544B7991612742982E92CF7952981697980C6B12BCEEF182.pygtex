@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZsh{}} \PYG{l+m+mi}{4}\PYG{o}{.} \PYG{o}{*.} \PYG{n}{sum} \PYG{l+m+mi}{5000000} \PYG{n}{leibniz} \PYG{l+m+mi}{0}\PYG{o}{.} \PYG{o}{;;}
+\PYG{o}{\PYGZhy{}} \PYG{o}{:} \PYG{k+kt}{float} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{o}{.}\PYG{l+m+mi}{14159245358977968}
+\end{Verbatim}

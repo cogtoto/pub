@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{filtre\PYGZus{}jumeaux} \PYG{o}{=} \PYG{k}{function}
+ \PYG{o}{|} \PYG{n+nc}{Cons}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,}\PYG{n}{l}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{if} \PYG{o}{(}\PYG{n}{hd} \PYG{o}{(}\PYG{n}{l}\PYG{n+nb+bp}{()}\PYG{o}{)} \PYG{o}{=} \PYG{o}{(}\PYG{n}{x}\PYG{o}{+}\PYG{l+m+mi}{2}\PYG{o}{))} \PYG{k}{then}
+                  \PYG{n+nc}{Cons}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,} \PYG{k}{fun}\PYG{n+nb+bp}{()} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Cons} \PYG{o}{((}\PYG{n}{hd} \PYG{o}{(}\PYG{n}{l}\PYG{n+nb+bp}{()}\PYG{o}{))} \PYG{o}{,} \PYG{o}{(}\PYG{k}{fun}\PYG{n+nb+bp}{()} \PYG{o}{\PYGZhy{}\PYGZgt{}}  \PYG{o}{(}\PYG{n}{filtre\PYGZus{}jumeaux}  \PYG{o}{(}\PYG{n}{l}\PYG{n+nb+bp}{()}\PYG{o}{)))))}
+                \PYG{k}{else} \PYG{n}{filtre\PYGZus{}jumeaux} \PYG{o}{(}\PYG{n}{l}\PYG{n+nb+bp}{()}\PYG{o}{)} \PYG{o}{;;}
+
+\PYG{n}{take} \PYG{l+m+mi}{100} \PYG{o}{(}\PYG{n}{filtre\PYGZus{}jumeaux} \PYG{n}{premiers}\PYG{o}{)} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{inverse} \PYG{o}{(}\PYG{n+nc}{Cons}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,}\PYG{n}{l}\PYG{o}{))} \PYG{o}{=} \PYG{n+nc}{Cons}\PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{.} \PYG{o}{/.} \PYG{n}{float\PYGZus{}of\PYGZus{}int} \PYG{n}{x}\PYG{o}{,} \PYG{k}{fun}\PYG{n+nb+bp}{()} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{inverse}\PYG{o}{(}\PYG{n}{l}\PYG{n+nb+bp}{()}\PYG{o}{))} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{inverse\PYGZus{}jumeaux} \PYG{o}{=} \PYG{n}{inverse} \PYG{o}{(}\PYG{n}{filtre\PYGZus{}jumeaux} \PYG{n}{premiers}\PYG{o}{)} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{somme} \PYG{n}{n} \PYG{n}{s} \PYG{o}{=}
+\PYG{k}{if} \PYG{n}{n}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{k}{then} \PYG{l+m+mi}{0}\PYG{o}{.}
+\PYG{k}{else} \PYG{n}{hd} \PYG{n}{s} \PYG{o}{+.} \PYG{n}{somme} \PYG{o}{(}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{tl} \PYG{n}{s}\PYG{o}{)} \PYG{o}{;;}
+
+\PYG{n}{somme} \PYG{l+m+mi}{10000} \PYG{n}{inverse\PYGZus{}jumeaux} \PYG{o}{;;}
+\end{Verbatim}

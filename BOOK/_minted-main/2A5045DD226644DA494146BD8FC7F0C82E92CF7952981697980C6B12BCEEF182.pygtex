@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZsh{}}\PYG{n}{load} \PYG{l+s+s2}{\PYGZdq{}Str.cma\PYGZdq{}}
+
+\PYG{k}{let} \PYG{n}{count}  \PYG{n}{t} \PYG{o}{=}  \PYG{n}{split} \PYG{o}{(}\PYG{n}{regexp} \PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{o}{)} \PYG{n}{t}   \PYG{o}{|\PYGZgt{}} \PYG{n+nn}{List}\PYG{p}{.}\PYG{n}{length} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{pageA} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}Hello World \PYGZdq{}}
+\PYG{k}{let} \PYG{n}{pageB} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}Foo bar \PYGZdq{}}
+\PYG{k}{let} \PYG{n}{pageC} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}O Caml \PYGZdq{}} \PYG{o}{;;}
+
+\PYG{n}{count} \PYG{n+nn}{String\PYGZus{}monoid}\PYG{p}{.}\PYG{o}{(}\PYG{n}{pageA} \PYG{o}{\PYGZlt{}+\PYGZgt{}} \PYG{n}{pageB} \PYG{o}{\PYGZlt{}+\PYGZgt{}}  \PYG{n}{pageC}\PYG{o}{)} \PYG{o}{;;}
+\PYG{n}{count}\PYG{o}{(}\PYG{n+nn}{String\PYGZus{}monoid}\PYG{p}{.}\PYG{o}{(}\PYG{n}{pageA}\PYG{o}{))} \PYG{o}{+} \PYG{n}{count}\PYG{o}{(}\PYG{n+nn}{String\PYGZus{}monoid}\PYG{p}{.}\PYG{o}{(}\PYG{n}{pageB}\PYG{o}{))} \PYG{o}{+} \PYG{n}{count}\PYG{o}{(}\PYG{n+nn}{String\PYGZus{}monoid}\PYG{p}{.}\PYG{o}{(}\PYG{n}{pageC}\PYG{o}{));;}
+\end{Verbatim}

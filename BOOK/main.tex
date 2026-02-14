@@ -14,7 +14,6 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage[polutonikogreek, french]{babel}
-\usepackage{fancyvrb}
 \usepackage{lscape}
 \usepackage{textcomp}
 \usepackage{lmodern}
@@ -31,9 +30,13 @@
 \usepackage{coqdoc}
 \usepackage[nottoc]{tocbibind}
 \usepackage{textgreek}
-%%\usepackage{fontspec}
-%%\setmainfont{Linux Libertine O} % Set Linux Libertine as the main font
-%%\setmainfont{CMU Serif}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{fontspec}
+
+\setmainfont{Libertinus Serif}
+\setmonofont{DejaVu Sans Mono}
+%%\setmonofont{JuliaMono}
 
 \fvset{tabsize=2}
 \newfont{\letterimp}{beta}
@@ -41,6 +44,7 @@
 \newfont{\lettersnow}{snow}
 \newcommand{\snow}{{\lettersnow S\hspace{0.2cm}}}
 \newcommand{\trans}{\overset{*}{\longrightarrow_{\beta}}}
+
 
 \title{Le calcul par la réduction et la résolution \\
        Le raisonnement par la preuve et le programme \\
@@ -57,17 +61,20 @@
 \newtheorem{theoreme}{Théorème}
 
 \addbibresource{book.bib}  
-
-\DeclareUnicodeCharacter{21A6}{\ensuremath{\mapsto}}
-\DeclareUnicodeCharacter{22A2}{\ensuremath{\vdash}}
-\DeclareUnicodeCharacter{2261}{\ensuremath{\equiv}}
-\DeclareUnicodeCharacter{2081}{\ensuremath{_1}}
-\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
-\DeclareUnicodeCharacter{2262}{\ensuremath{\not\equiv}}
-
 \begin{document}
+
+%%\DeclareUnicodeCharacter{21A6}{\ensuremath{\mapsto}}
+%%\DeclareUnicodeCharacter{22A2}{\ensuremath{\vdash}}
+%%\DeclareUnicodeCharacter{2261}{\ensuremath{\equiv}
+%%\DeclareUnicodeCharacter{2081}{\ensuremath{_1}}
+%%\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+%%\DeclareUnicodeCharacter{2262}{\ensuremath{\not\equiv}}
+%%\DeclareUnicodeCharacter{2215}{\ensuremath{\mathbb{N}}}
+%%\DeclareUnicodeCharacter{2260}{\ensuremath{\neq}}
+
 \maketitle
 \tableofcontents
+
 
 \chapter{Ἐν ἀρχή, Gn 1.1 et Jn 1.1}
 
@@ -199,7 +206,7 @@ Bonne lecture !
 \include{chapter7}
 
 
-\include{conclusion}
+%%\include{conclusion}
 
 \printbibliography
 \end{document}

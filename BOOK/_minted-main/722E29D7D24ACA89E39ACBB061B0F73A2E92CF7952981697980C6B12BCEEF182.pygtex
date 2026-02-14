@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{open} \PYG{n+nc}{Complex} \PYG{o}{;;}   \PYG{c}{(* \PYGZob{}re=2.; im=4.\PYGZcb{} *)}
+
+\PYG{k}{let} \PYG{n}{appartient} \PYG{n}{c} \PYG{o}{=}
+	\PYG{k}{let} \PYG{k}{rec} \PYG{n}{loop} \PYG{n}{n} \PYG{n}{z} \PYG{o}{=}
+		\PYG{k}{if} \PYG{o}{(}\PYG{n}{n} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{300}\PYG{o}{)} \PYG{k}{then} \PYG{n+nb+bp}{true}
+		\PYG{k}{else} \PYG{k}{if} \PYG{o}{((}\PYG{n}{norm2} \PYG{n}{z}\PYG{o}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{4}\PYG{o}{.)} \PYG{k}{then} \PYG{n+nb+bp}{false}
+					\PYG{k}{else} \PYG{n}{loop} \PYG{o}{(}\PYG{n}{n}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{add} \PYG{n}{c} \PYG{o}{(}\PYG{n}{mul} \PYG{n}{z} \PYG{n}{z}\PYG{o}{))}
+	\PYG{k}{in} \PYG{n}{loop} \PYG{l+m+mi}{0} \PYG{n}{c}
+
+\PYG{o}{\PYGZsh{}}\PYG{n}{load} \PYG{l+s+s2}{\PYGZdq{}/home/vincent/.opam/ocaml\PYGZhy{}base\PYGZhy{}compiler/lib/graphics/graphics.cma\PYGZdq{}} \PYG{o}{;;}
+\PYG{o}{\PYGZsh{}}\PYG{n}{require} \PYG{l+s+s2}{\PYGZdq{}graphics\PYGZdq{}} \PYG{o}{;;}
+\PYG{k}{open} \PYG{n+nc}{Graphics} \PYG{o}{;;}
+\PYG{n+nn}{Graphics}\PYG{p}{.}\PYG{n}{open\PYGZus{}graph} \PYG{l+s+s2}{\PYGZdq{} 500x200+0\PYGZhy{}0\PYGZdq{}} \PYG{o}{;;}
+\PYG{n+nn}{Graphics}\PYG{p}{.}\PYG{n}{set\PYGZus{}window\PYGZus{}title} \PYG{l+s+s2}{\PYGZdq{}Mandelbrot\PYGZdq{}} \PYG{o}{;;}
+\PYG{n+nn}{Graphics}\PYG{p}{.}\PYG{n}{set\PYGZus{}color} \PYG{n+nn}{Graphics}\PYG{p}{.}\PYG{n}{blue}\PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{mandelbrot} \PYG{n+nb+bp}{()} \PYG{o}{=}
+	\PYG{k}{for} \PYG{n}{i} \PYG{o}{=} \PYG{o}{(\PYGZhy{}}\PYG{l+m+mi}{200}\PYG{o}{)} \PYG{k}{to} \PYG{l+m+mi}{50}
+		\PYG{k}{do}
+		  \PYG{k}{for} \PYG{n}{j}\PYG{o}{=(\PYGZhy{}}\PYG{l+m+mi}{125}\PYG{o}{)} \PYG{k}{to} \PYG{l+m+mi}{125}
+			\PYG{k}{do}
+			  \PYG{k}{if} \PYG{o}{(}\PYG{n}{appartient} \PYG{o}{\PYGZob{}}\PYG{n}{re}\PYG{o}{=((}\PYG{n}{float\PYGZus{}of\PYGZus{}int} \PYG{n}{i}\PYG{o}{)/.}\PYG{l+m+mi}{100}\PYG{o}{.);} \PYG{n}{im}\PYG{o}{=((}\PYG{n}{float\PYGZus{}of\PYGZus{}int} \PYG{n}{j}\PYG{o}{)/.}\PYG{l+m+mi}{100}\PYG{o}{.)\PYGZcb{})}
+			  \PYG{k}{then} \PYG{n}{plot} \PYG{o}{(}\PYG{l+m+mi}{200}\PYG{o}{+}\PYG{n}{i}\PYG{o}{)} \PYG{o}{(}\PYG{l+m+mi}{200}\PYG{o}{+}\PYG{n}{j}\PYG{o}{)}
+			\PYG{k}{done}
+		\PYG{k}{done}
+\end{Verbatim}

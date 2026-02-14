@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{square2} \PYG{n}{iter} \PYG{o}{=}
+  \PYG{k}{if} \PYG{o}{(}\PYG{n}{iter} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{o}{)} \PYG{k}{then} \PYG{l+m+mi}{1}\PYG{o}{.}
+  \PYG{k}{else}
+  \PYG{l+m+mi}{1}\PYG{o}{.} \PYG{o}{+.} \PYG{o}{(} \PYG{l+m+mi}{1}\PYG{o}{.} \PYG{o}{/.} \PYG{o}{(} \PYG{l+m+mi}{1}\PYG{o}{.} \PYG{o}{+.} \PYG{n}{square2} \PYG{o}{(}\PYG{n}{iter} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{)))}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{racine2cons} \PYG{n}{n} \PYG{o}{=} \PYG{n+nc}{Cons}\PYG{o}{(}\PYG{n}{square2} \PYG{n}{n}\PYG{o}{,} \PYG{k}{fun} \PYG{n+nb+bp}{()} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{racine2cons} \PYG{o}{(}\PYG{n}{n}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{o}{))}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{racine2stream} \PYG{o}{=} \PYG{n}{racine2cons} \PYG{l+m+mi}{1}
+  \PYG{k}{in} \PYG{n}{take} \PYG{l+m+mi}{10} \PYG{n}{racine2stream} \PYG{o}{;;}
+
+\PYG{o}{\PYGZhy{}} \PYG{o}{:} \PYG{k+kt}{float} \PYG{k+kt}{list} \PYG{o}{=}
+\PYG{o}{[}\PYG{l+m+mi}{1}\PYG{o}{.;} \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{5}\PYG{o}{;} \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{4}\PYG{o}{;} \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{41666666666666674}\PYG{o}{;} \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{4137931034482758}\PYG{o}{;} \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{41428571428571437}\PYG{o}{;}
+ \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{41420118343195256}\PYG{o}{;} \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{41421568627450989}\PYG{o}{;} \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{41421319796954315}\PYG{o}{;}
+ \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{41421362489486957}\PYG{o}{]}
+\end{Verbatim}

@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{open} \PYG{n+nc}{Lazy} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{racine2\PYGZus{}10000} \PYG{o}{=} \PYG{n}{take} \PYG{l+m+mi}{10000} \PYG{n}{racine2stream}  \PYG{c}{(* environ 10 secondes à chaque appel *)}
+
+\PYG{k}{let} \PYG{n}{racine2\PYGZus{}10000\PYGZus{}lazy} \PYG{o}{=} \PYG{k}{lazy} \PYG{o}{(}\PYG{n}{take} \PYG{l+m+mi}{10000} \PYG{n}{racine2stream}\PYG{o}{)} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{racine2\PYGZus{}force} \PYG{o}{=} \PYG{n}{force} \PYG{n}{racine2\PYGZus{}10000\PYGZus{}lazy} \PYG{o}{;;} \PYG{c}{(* uniquement long au 1er appel *)}
+\end{Verbatim}

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{n+nv}{maliste}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{list}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZsq{}a}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZsq{}b}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZsq{}c}\PYG{p}{))}
+\PYG{p}{(}\PYG{n+nb}{set\PYGZhy{}cdr!}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{cddr}\PYG{+w}{ }\PYG{n+nv}{maliste}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nv}{maliste}\PYG{p}{)}
+\PYG{+w}{ }\PYG{n+nv}{maliste}
+\PYG{+w}{ }\PYG{n+nv}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{0=}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{a}\PYG{+w}{ }\PYG{n+nv}{b}\PYG{+w}{ }\PYG{n+nv}{c}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{0}\PYG{o}{\PYGZsh{}}\PYG{p}{)}
+\end{Verbatim}

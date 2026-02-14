@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{box}\PYG{+w}{ }\PYG{n+nv}{value}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{msg}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{k}{case}\PYG{+w}{ }\PYG{n+nv}{msg}
+\PYG{+w}{      }\PYG{p}{(}\PYG{l+s}{\PYGZdq{}get\PYGZdq{}}\PYG{+w}{ }\PYG{n+nv}{value}\PYG{p}{)}
+\PYG{+w}{      }\PYG{p}{(}\PYG{l+s}{\PYGZdq{}set\PYGZdq{}}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{new\PYGZhy{}value}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{set!}\PYG{+w}{ }\PYG{n+nv}{value}\PYG{+w}{ }\PYG{n+nv}{new\PYGZhy{}value}\PYG{p}{))))))}
+
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{make\PYGZhy{}box}\PYG{+w}{ }\PYG{n+nv}{value}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{(}\PYG{n+nf}{box}\PYG{+w}{ }\PYG{n+nv}{value}\PYG{p}{))}
+
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{n+nv}{maboite}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{make\PYGZhy{}box}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{))}
+\PYG{p}{(}\PYG{n+nf}{maboite}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}get\PYGZdq{}}\PYG{p}{)}
+\PYG{p}{((}\PYG{n+nf}{maboite}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}set\PYGZdq{}}\PYG{p}{)}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{)}
+\end{Verbatim}

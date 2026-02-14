@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{ispairxsound}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{\PYGZob{}}n\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Nat\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }ispair?\PYG{+w}{ }n\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }Pair\PYG{+w}{ }n
+ispairxsound\PYG{+w}{ }\PYG{o}{\PYGZob{}}zero\PYG{o}{\PYGZcb{}}\PYG{+w}{ }tt\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }pair0
+ispairxsound\PYG{+w}{ }\PYG{o}{\PYGZob{}}\PYG{l+m+mi}{1}\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{()}
+ispairxsound\PYG{+w}{ }\PYG{o}{\PYGZob{}}suc\PYG{+w}{ }\PYG{o}{(}suc\PYG{+w}{ }n\PYG{o}{)\PYGZcb{}}\PYG{+w}{ }x\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }pairSS\PYG{+w}{ }n\PYG{+w}{ }\PYG{o}{(}ispairxsound\PYG{+w}{ }\PYG{o}{\PYGZob{}}n\PYG{o}{\PYGZcb{}}\PYG{+w}{ }x\PYG{o}{)}
+
+\PYG{n+nf}{th}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Pair\PYG{+w}{ }\PYG{l+m+mi}{90}
+th\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }ispairxsound\PYG{+w}{ }tt
+\end{Verbatim}

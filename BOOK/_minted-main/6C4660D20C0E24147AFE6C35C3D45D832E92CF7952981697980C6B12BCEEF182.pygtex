@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{f} \PYG{n}{x} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{o}{.} \PYG{o}{/.} \PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{.} \PYG{o}{+.} \PYG{n}{x}\PYG{o}{**}\PYG{l+m+mi}{2}\PYG{o}{.)}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{somme} \PYG{n}{n} \PYG{n}{i} \PYG{n}{acc} \PYG{o}{=}
+  \PYG{k}{if} \PYG{n}{i} \PYG{o}{\PYGZgt{}} \PYG{n}{n} \PYG{k}{then} \PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{./.} \PYG{n}{n}\PYG{o}{)} \PYG{o}{*.} \PYG{n}{acc}
+  \PYG{k}{else} \PYG{n}{somme} \PYG{n}{n} \PYG{o}{(}\PYG{n}{i} \PYG{o}{+.} \PYG{l+m+mi}{1}\PYG{o}{.)}  \PYG{o}{(}\PYG{n}{acc} \PYG{o}{+.} \PYG{o}{(}\PYG{n}{f} \PYG{o}{(}\PYG{n}{i} \PYG{o}{/.} \PYG{n}{n}\PYG{o}{)))} \PYG{o}{;;}
+
+\PYG{n}{utop} \PYG{o}{\PYGZsh{}}
+ \PYG{l+m+mi}{4}\PYG{o}{.} \PYG{o}{*.} \PYG{n}{somme} \PYG{l+m+mi}{900000000}\PYG{o}{.} \PYG{l+m+mi}{0}\PYG{o}{.} \PYG{l+m+mi}{0}\PYG{o}{.} \PYG{o}{;;}
+ \PYG{o}{\PYGZhy{}} \PYG{o}{:} \PYG{k+kt}{float} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{o}{.}\PYG{l+m+mi}{14159265692298773}
+\end{Verbatim}

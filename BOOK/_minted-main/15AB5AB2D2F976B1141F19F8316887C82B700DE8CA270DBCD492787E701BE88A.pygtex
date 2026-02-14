@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{ispair?}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Nat\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{k+kt}{Set}
+ispair?\PYG{+w}{ }zero\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }True
+ispair?\PYG{+w}{ }\PYG{o}{(}suc\PYG{+w}{ }zero\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }False
+ispair?\PYG{+w}{ }\PYG{o}{(}suc\PYG{+w}{ }\PYG{o}{(}suc\PYG{+w}{ }n\PYG{o}{))}\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }ispair?\PYG{+w}{ }n
+\end{Verbatim}

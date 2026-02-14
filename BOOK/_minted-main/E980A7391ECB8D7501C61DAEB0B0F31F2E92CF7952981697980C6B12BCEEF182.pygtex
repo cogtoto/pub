@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{gen}\PYG{n+nb+bp}{()} \PYG{o}{=}
+\PYG{k}{let} \PYG{n}{x} \PYG{o}{=} \PYG{k}{if} \PYG{n+nn}{Random}\PYG{p}{.}\PYG{n}{bool} \PYG{n+nb+bp}{()} \PYG{k}{then} \PYG{n+nn}{Random}\PYG{p}{.}\PYG{n}{float} \PYG{l+m+mi}{1}\PYG{o}{.} \PYG{k}{else} \PYG{o}{(\PYGZhy{}.} \PYG{n+nn}{Random}\PYG{p}{.}\PYG{n}{float} \PYG{l+m+mi}{1}\PYG{o}{.)} \PYG{k}{in}
+\PYG{k}{let} \PYG{n}{y} \PYG{o}{=} \PYG{k}{if} \PYG{n+nn}{Random}\PYG{p}{.}\PYG{n}{bool} \PYG{n+nb+bp}{()} \PYG{k}{then} \PYG{n+nn}{Random}\PYG{p}{.}\PYG{n}{float} \PYG{l+m+mi}{1}\PYG{o}{.} \PYG{k}{else} \PYG{o}{(\PYGZhy{}.} \PYG{n+nn}{Random}\PYG{p}{.}\PYG{n}{float} \PYG{l+m+mi}{1}\PYG{o}{.)} \PYG{k}{in}
+\PYG{k}{if} \PYG{o}{(}\PYG{n}{x} \PYG{o}{**} \PYG{l+m+mi}{2}\PYG{o}{.} \PYG{o}{+.} \PYG{n}{y} \PYG{o}{**} \PYG{l+m+mi}{2}\PYG{o}{.} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{1}\PYG{o}{.)} \PYG{k}{then} \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{0} \PYG{k}{else} \PYG{l+m+mi}{0}\PYG{o}{.}\PYG{l+m+mi}{0} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{from} \PYG{n}{i} \PYG{o}{=} \PYG{n+nc}{Cons} \PYG{o}{(}\PYG{n}{gen}\PYG{n+nb+bp}{()}\PYG{o}{,} \PYG{k}{fun} \PYG{n+nb+bp}{()} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{from} \PYG{o}{(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{))} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{sum} \PYG{n}{n} \PYG{n}{s} \PYG{n}{acc} \PYG{o}{=}
+\PYG{k}{if} \PYG{n}{n}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{k}{then} \PYG{n}{acc}
+\PYG{k}{else}  \PYG{n}{sum} \PYG{o}{(}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{tl} \PYG{n}{s}\PYG{o}{)} \PYG{o}{(}\PYG{n}{acc} \PYG{o}{+.} \PYG{o}{(}\PYG{n}{hd} \PYG{n}{s}\PYG{o}{))} \PYG{o}{;;}
+
+\PYG{l+m+mi}{4}\PYG{o}{.} \PYG{o}{*.} \PYG{o}{(}\PYG{n}{sum} \PYG{l+m+mi}{5000000}  \PYG{n}{tirage} \PYG{l+m+mi}{0}\PYG{o}{.} \PYG{o}{/.} \PYG{l+m+mi}{5000000}\PYG{o}{.)} \PYG{o}{;;}
+\PYG{o}{\PYGZhy{}} \PYG{o}{:} \PYG{k+kt}{float} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{o}{.}\PYG{l+m+mi}{142153}
+\end{Verbatim}

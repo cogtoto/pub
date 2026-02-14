@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{\PYGZpc{}file name}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{snow}.\PYG{n}{mf}
+\PYG{err}{\PYGZpc{}mode\PYGZus{}setup;}
+\PYG{err}{\PYGZpc{}shape}\PYG{+w}{ }\PYG{err}{for}\PYG{+w}{ }\PYG{err}{the}\PYG{+w}{ }\PYG{err}{character}\PYG{+w}{ }\PYG{err}{S}
+
+\PYG{n+nv}{i}\PYG{o}{:=}\PYG{l+m}{1}\PYG{p}{;}
+
+\PYG{err}{def}\PYG{+w}{ }\PYG{err}{dessine(expr}\PYG{+w}{ }\PYG{err}{debut,}\PYG{+w}{ }\PYG{n+nv}{fin)}\PYG{+w}{ }\PYG{o}{=}
+\PYG{err}{z[i]=debut;}
+\PYG{err}{z[i+1]=1/3[debut,}\PYG{+w}{ }\PYG{err}{fin];}
+\PYG{err}{z[i+2]=}\PYG{+w}{ }\PYG{err}{(z[i+1]\PYGZhy{}z[i])}\PYG{+w}{ }\PYG{err}{rotated}\PYG{+w}{ }\PYG{err}{60}\PYG{+w}{ }\PYG{err}{shifted}\PYG{+w}{ }\PYG{err}{z[i+1];}
+\PYG{err}{z[i+3]}\PYG{+w}{ }\PYG{err}{=}\PYG{+w}{ }\PYG{err}{2/3[debut,}\PYG{+w}{ }\PYG{err}{fin]}\PYG{+w}{ }\PYG{err}{;}
+\PYG{err}{z[i+4]}\PYG{+w}{ }\PYG{err}{=}\PYG{+w}{ }\PYG{err}{fin}\PYG{+w}{ }\PYG{err}{;}
+\PYG{err}{pickup}\PYG{+w}{ }\PYG{err}{pencircle}\PYG{+w}{ }\PYG{err}{scaled}\PYG{+w}{ }\PYG{err}{0.1pt;}
+\PYG{err}{draw}\PYG{+w}{ }\PYG{err}{z[i]\PYGZhy{}\PYGZhy{}z[i+1]\PYGZhy{}\PYGZhy{}z[i+2]\PYGZhy{}\PYGZhy{}z[i+3]\PYGZhy{}\PYGZhy{}z[i+4];}
+\PYG{n+nv}{i}\PYG{o}{:=}i+5\PYG{p}{;}
+\PYG{err}{enddef;}
+
+\PYG{err}{def}\PYG{+w}{ }\PYG{err}{motif}\PYG{+w}{ }\PYG{err}{(expr}\PYG{+w}{ }\PYG{err}{debut,}\PYG{+w}{ }\PYG{err}{fin,}\PYG{+w}{ }\PYG{n+nv}{n)}\PYG{+w}{ }\PYG{o}{=}
+\PYG{c+cp}{if (n=1):dessine(debut,fin) else:}
+\PYG{+w}{	}motif\PYG{o}{(}debut,\PYG{+w}{ }\PYG{l+m}{1}/3\PYG{o}{[}debut,fin\PYG{o}{]},\PYG{+w}{ }n\PYGZhy{}1\PYG{o}{)}\PYG{+w}{ }\PYG{p}{;}
+\PYG{+w}{	}motif\PYG{o}{(}\PYG{l+m}{1}/3\PYG{o}{[}debut,fin\PYG{o}{]},
+\PYG{+w}{		}\PYG{o}{(}\PYG{l+m}{1}/3\PYG{o}{[}debut,fin\PYG{o}{]}\PYG{+w}{ }\PYGZhy{}\PYG{+w}{ }debut\PYG{o}{)}\PYG{+w}{ }rotated\PYG{+w}{ }\PYG{l+m}{60}\PYG{+w}{ }shifted\PYG{+w}{ }\PYG{o}{(}\PYG{l+m}{1}/3\PYG{o}{[}debut,fin\PYG{o}{])},\PYG{+w}{ }n\PYGZhy{}1\PYG{o}{)}\PYG{+w}{ }\PYG{p}{;}
+\PYG{+w}{	}motif\PYG{o}{((}\PYG{l+m}{1}/3\PYG{o}{[}debut,fin\PYG{o}{]}\PYG{+w}{ }\PYGZhy{}\PYG{+w}{ }debut\PYG{o}{)}\PYG{+w}{ }rotated\PYG{+w}{ }\PYG{l+m}{60}\PYG{+w}{ }shifted\PYG{+w}{ }\PYG{o}{(}\PYG{l+m}{1}/3\PYG{o}{[}debut,fin\PYG{o}{])},
+\PYG{+w}{		}\PYG{o}{(}\PYG{l+m}{1}/3\PYG{o}{[}debut,fin\PYG{o}{]}\PYG{+w}{ }\PYGZhy{}debut\PYG{o}{)}\PYG{+w}{ }shifted\PYG{+w}{ }\PYG{o}{(}\PYG{l+m}{1}/3\PYG{o}{[}debut,fin\PYG{o}{])},\PYG{+w}{ }n\PYGZhy{}1\PYG{o}{)}\PYG{+w}{ }\PYG{p}{;}
+\PYG{+w}{	}motif\PYG{o}{((}\PYG{l+m}{1}/3\PYG{o}{[}debut,fin\PYG{o}{]}\PYG{+w}{ }\PYGZhy{}\PYG{+w}{ }debut\PYG{o}{)}\PYG{+w}{ }shifted\PYG{+w}{ }\PYG{o}{(}\PYG{l+m}{1}/3\PYG{o}{[}debut,fin\PYG{o}{])},\PYG{+w}{ }fin,\PYG{+w}{ }n\PYGZhy{}1\PYG{o}{)}\PYG{+w}{ }\PYG{p}{;}
+\PYG{err}{fi;}
+\PYG{err}{enddef;}
+
+\PYG{err}{beginchar(}\PYG{l+s+s2}{\PYGZdq{}S\PYGZdq{}}\PYG{err}{,15pt}\PYG{c}{\PYGZsh{},15pt\PYGZsh{},5pt\PYGZsh{}); \PYGZdq{}The snowflake\PYGZdq{} ;}
+\PYG{err}{motif((0,0),}\PYG{+w}{ }\PYG{err}{(w/2,h),4);}
+\PYG{err}{motif((w/2,h),}\PYG{+w}{ }\PYG{err}{(w,0),4);}
+\PYG{err}{motif((w,0),}\PYG{+w}{ }\PYG{err}{(0,0),4);}
+\PYG{err}{endchar;}
+\PYG{err}{end}
+\end{Verbatim}
