@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{type} \PYG{n}{entiers} \PYG{o}{=} \PYG{n+nc}{Zero} \PYG{o}{|} \PYG{n+nc}{S} \PYG{k}{of} \PYG{n}{entiers}
+\end{Verbatim}

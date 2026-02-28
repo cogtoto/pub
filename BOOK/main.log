@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.12.0 (TeX Live 2020)  (format=lualatex 2020.6.6)  14 FEB 2026 12:20
+This is LuaHBTeX, Version 1.12.0 (TeX Live 2020)  (format=lualatex 2020.6.6)  28 FEB 2026 17:30
  system commands enabled.
  file:line:error style messages enabled.
 **/home/vincent/vsc/BOOK/main
@@ -612,14 +612,6 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box60
 \@float@everytoks=\toks42
 \@floatcapt=\box61
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2018/08/11 v1.3c Input encoding file
-\inpenc@prehook=\toks43
-\inpenc@posthook=\toks44
-
-
-Package inputenc Warning: inputenc package ignored with utf8 based engines.
-
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/mflogo/mflogo.sty
 Package: mflogo 1999/03/10 v2.0 LaTeX package for Metafont and MetaPost logos
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/wrapfig/wrapfig.sty
@@ -627,7 +619,7 @@ Package: mflogo 1999/03/10 v2.0 LaTeX package for Metafont and MetaPost logos
 \WF@size=\dimen273
 \c@WF@wrappedlines=\count292
 \WF@box=\box62
-\WF@everypar=\toks45
+\WF@everypar=\toks43
 Package: wrapfig 2003/01/31  v 3.6
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/lkproof/proof.sty
 \inferLineSkip=\dimen274
@@ -655,7 +647,7 @@ Package: wrapfig 2003/01/31  v 3.6
 \ResultBox=\box66
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/microtype.sty
 Package: microtype 2019/11/18 v2.7d Micro-typographical refinements (RS)
-\MT@toks=\toks46
+\MT@toks=\toks44
 \MT@count=\count293
 LaTeX Info: Redefining \textls on input line 790.
 \MT@outer@kern=\dimen293
@@ -685,7 +677,7 @@ Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-\pdftexcmds@toks=\toks47
+\pdftexcmds@toks=\toks45
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count295
@@ -1019,7 +1011,7 @@ Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbat
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \linenopenalty=\count433
-\output=\toks48
+\output=\toks46
 \linenoprevgraf=\count434
 \linenumbersep=\dimen298
 \linenumberwidth=\dimen299
@@ -1099,7 +1091,7 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \minted@code=\write6
 \c@minted@FancyVerbLineTemp=\count456
 \c@minted@pygmentizecounter=\count457
-\@float@every@listing=\toks49
+\@float@every@listing=\toks47
 \c@listing=\count458
 )
 runsystem(mkdir -p _minted-main)...executed
@@ -1208,36 +1200,36 @@ runsystem(rm main.aex)...executed
 (./main.aux (./chapter1.aux) (./chapter2.aux) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux) (./chapter7.aux))
 \openout1 = main.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 64.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 74.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 74.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 64.
-LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 64.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 74.
+LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 74.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
 File: lgrcmr.fd 2017/07/29 v1.2 Greek European Computer Regular
 )
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
  (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count474
@@ -1245,12 +1237,12 @@ LaTeX Font Info:    ... okay on input line 64.
 \scratchbox=\box74
 \nofMPsegments=\count475
 \nofMParguments=\count476
-\everyMPshowfont=\toks50
+\everyMPshowfont=\toks48
 \MPscratchCnt=\count477
 \MPscratchDim=\dimen319
 \MPnumerator=\count478
 \makeMPintoPDFobject=\count479
-\everyMPtoPDFconversion=\toks51
+\everyMPtoPDFconversion=\toks49
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
  (/usr/local/texlive/2020/texmf-dist/tex/latex/grfext/grfext.sty
@@ -1263,16 +1255,16 @@ Package grfext Info: Graphics extension search list:
  (/usr/local/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 )) ABD: EveryShipout initializing macros
-LaTeX Info: Redefining \dots on input line 64.
-LaTeX Info: Redefining \up on input line 64.
-LaTeX Info: Redefining \microtypecontext on input line 64.
+LaTeX Info: Redefining \dots on input line 74.
+LaTeX Info: Redefining \up on input line 74.
+LaTeX Info: Redefining \microtypecontext on input line 74.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 64.
+LaTeX Info: Redefining \showhyphens on input line 74.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of spacing.
 Package microtype Info: No adjustment of kerning.
@@ -1290,7 +1282,7 @@ Package biblatex Info: ... file 'polutonikogreek.lbx' not found.
 
 
 Package biblatex Warning: Language 'polutonikogreek' not supported.
-(biblatex)                Using fallback language 'french' on input line 64.
+(biblatex)                Using fallback language 'french' on input line 74.
 
 Package biblatex Info: LuaTeX detected.
 (biblatex)             Assuming input encoding 'utf8'.
@@ -1301,10 +1293,10 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
 (./main.bbl)
-Package biblatex Info: Reference section=0 on input line 64.
-Package biblatex Info: Reference segment=0 on input line 64.
+Package biblatex Info: Reference section=0 on input line 74.
+Package biblatex Info: Reference segment=0 on input line 74.
 \AtBeginShipoutBox=\box75
-Package hyperref Info: Link coloring ON on input line 64.
+Package hyperref Info: Link coloring ON on input line 74.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/usr/local/texlive/2020/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1314,44 +1306,44 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count480
 )
-LaTeX Info: Redefining \ref on input line 64.
-LaTeX Info: Redefining \pageref on input line 64.
-LaTeX Info: Redefining \nameref on input line 64.
+LaTeX Info: Redefining \ref on input line 74.
+LaTeX Info: Redefining \pageref on input line 74.
+LaTeX Info: Redefining \nameref on input line 74.
  (./main.out) (./main.out)
 \@outlinefile=\write7
 
 \openout7 = main.out
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 76.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 77.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 76.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 77.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 76.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 77.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 76.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 77.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 76.
+(Font)              <12> on input line 77.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 76.
+(Font)              <8> on input line 77.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 76.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 76.
+(Font)              <6> on input line 77.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 77.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 76.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 77.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1370,7 +1362,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 6.
  [3] [4]
-LaTeX Font Info:    Trying to load font information for U+logo on input line 222.
+LaTeX Font Info:    Trying to load font information for U+logo on input line 224.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/mflogo/ulogo.fd
 File: ulogo.fd 1999/03/10 v2.0 LaTeX font defs for Metafont and MetaPost logos
 ))
@@ -1437,14 +1429,14 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 
 ] [10] [11]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 3039) has occurred while \output is active []
 
- [12] [13] [14] [15]
+ [12] [13] [14]
 Overfull \hbox (29.01074pt too wide) in paragraph at lines 454--455
 [][] 
  []
 
-[16]
+[15]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <14.4> on input line 513.
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -1464,7 +1456,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 513.
 
-[17]
+[16]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 572.
@@ -1489,7 +1481,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 572.
 
-[18]
+[17]
 Overfull \hbox (16.14792pt too wide) in paragraph at lines 619--621
 []$[]$ \TU/LibertinusSerif(0)/m/n/10.95 est ob-tenu de la même ma-nière que $\OML/lmm/m/it/10.95 N$\TU/LibertinusSerif(0)/m/n/10.95 , mais en mar-quant les ré-si-dus de $\OT1/lmr/m/n/10.95 $ \TU/LibertinusSerif(0)/m/n/10.95 : $[] \OMS/lmsy/m/n/10.95  \OT1/lmr/m/n/10.95 ((\OML/lmm/m/it/10.95 []y:z\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 )((\OML/lmm/m/it/10.95 []y:z\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 )$ 
  []
@@ -1506,6 +1498,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 630.
 
+[18]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 689.
@@ -1519,12 +1512,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 689.
 
 [19]
-<DrawingHands.jpg, id=759, 326.21875pt x 282.05376pt>
+<DrawingHands.jpg, id=764, 326.21875pt x 282.05376pt>
 File: DrawingHands.jpg Graphic file (type jpg)
 <use DrawingHands.jpg>
 Package luatex.def Info: DrawingHands.jpg  used on input line 747.
 (luatex.def)             Requested size: 140.92793pt x 121.85315pt.
- [20]
+
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 753.
@@ -1537,25 +1530,22 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 753.
 
-[21<./DrawingHands.jpg>]
+[20<./DrawingHands.jpg>]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <9> on input line 816.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 816.
-
-Underfull \vbox (badness 1024) has occurred while \output is active []
-
- [22] [23] [24]
+ [21] [22] [23]
 Underfull \hbox (badness 10000) in paragraph at lines 1063--1065
 
  []
 
-[25] [26]
+[24] [25]
 Overfull \hbox (18.0865pt too wide) in paragraph at lines 1171--1171
 []  \remove@tlig hyp : f x \equiv h     -- on applique l'hypothèse de la surjection sur h[] 
  []
 
-[27]
+[26]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1261.
@@ -1568,7 +1558,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1261.
 
-[28]
+[27]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1331.
@@ -1586,17 +1576,18 @@ Overfull \hbox (60.14232pt too wide) in paragraph at lines 1346--1347
 [][]\remove@tlig Lam("n", Lam("f", Lam("x",App(Var "f", App(App(Var "n", Var "f"), Var "x"))))) 
  []
 
-[29] [30] [31]
+[28] [29] [30]
 Underfull \hbox (badness 10000) in paragraph at lines 1481--1486
 
  []
 
-
-Underfull \vbox (badness 2334) has occurred while \output is active []
-
- [32] [33]) [34]
+[31] [32]) [33]
 \openout2 = chapter2.aux
- (./chapter2.tex
+ (./chapter2.tex [34
+
+
+
+]
 Chapitre 3.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1615,14 +1606,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--11
 
  []
 
-[35
-
-
-
-]
-Underfull \vbox (badness 1888) has occurred while \output is active []
-
- [36] [37] [38]
+[35] [36] [37] [38]
 LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 214.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1631,7 +1615,10 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [39] [40] [41]
+ [39]
+Underfull \vbox (badness 1242) has occurred while \output is active []
+
+ [40]
 Underfull \hbox (badness 10000) in paragraph at lines 367--371
 
  []
@@ -1646,12 +1633,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 374--375
 
  []
 
-[42] [43]
+[41] [42]
 Underfull \hbox (badness 10000) in paragraph at lines 512--514
 
  []
 
-[44]
+[43] [44]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 601.
@@ -1668,15 +1655,15 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Missing character: There is no ⊢ (U+22A2) in font rm-lmr10!
 Missing character: There is no ⊢ (U+22A2) in font rm-lmr10!
 Missing character: There is no ⊢ (U+22A2) in font rm-lmr10!
- [46] [47] [48] [49] [50] [51]) [52]
+ [46] [47] [48] [49] [50]) [51]
 \openout2 = chapter3.aux
- (./chapter3.tex
+ (./chapter3.tex [52
+
+
+
+]
 Chapitre 4.
-[53
-
-
-
-] [54] [55]
+[53] [54] [55]
 Overfull \hbox (35.0865pt too wide) in paragraph at lines 190--191
 [][] \remove@tlig Lambda (parametres, expression) -> Closure (parametres, expression, env)  
  []
@@ -1701,7 +1688,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 318--320
 
  []
 
-<gumpp.jpeg, id=986, 73.7154pt x 96.36pt>
+<gumpp.jpeg, id=992, 73.7154pt x 96.36pt>
 File: gumpp.jpeg Graphic file (type jpg)
 <use gumpp.jpeg>
 Package luatex.def Info: gumpp.jpeg  used on input line 330.
@@ -1748,11 +1735,12 @@ Missing character: There is no ὁ (U+1F41) in font grmn1095!
 Missing character: There is no ὤ (U+1F64) in font grmn1095!
 Missing character: There is no ν (U+03BD) in font grmn1095!
 <./gumpp.jpeg>] [60] [61]
-<bruegel.jpg, id=1018, 301.125pt x 240.9pt>
+<bruegel.jpg, id=1026, 301.125pt x 240.9pt>
 File: bruegel.jpg Graphic file (type jpg)
 <use bruegel.jpg>
 Package luatex.def Info: bruegel.jpg  used on input line 550.
 (luatex.def)             Requested size: 142.26378pt x 113.81482pt.
+\g__tikzsymbols_savebox_F_0 g 0 G_10.95_Laughey_1_none_none_box=\box76
  [62
 Missing character: There is no ἡ (U+1F21) in font grmn1095!
 Missing character: There is no κ (U+03BA) in font grmn1095!
@@ -1779,9 +1767,6 @@ Missing character: There is no α (U+03B1) in font grmn1095!
 Missing character: There is no ν (U+03BD) in font grmn1095!
 Missing character: There is no ο (U+03BF) in font grmn1095!
 Missing character: There is no ῦ (U+1FE6) in font grmn1095!
-<./bruegel.jpg>]
-\g__tikzsymbols_savebox_F_0 g 0 G_10.95_Laughey_1_none_none_box=\box76
- [63
 Missing character: There is no Γ (U+0393) in font grmn1095!
 Missing character: There is no Ε (U+0395) in font grmn1095!
 Missing character: There is no Ν (U+039D) in font grmn1095!
@@ -1897,7 +1882,7 @@ Missing character: There is no ς (U+03C2) in font grmn1095!
 Missing character: There is no γ (U+03B3) in font grmn1095!
 Missing character: There is no ῆ (U+1FC6) in font grmn1095!
 Missing character: There is no ς (U+03C2) in font grmn1095!
-]
+<./bruegel.jpg>] [63]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [64]
@@ -1906,13 +1891,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [65]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [66]) [67]
+ [66]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [67]) [68]
 \openout2 = chapter4.aux
- (./chapter4.tex [68
-
-
-
-]
+ (./chapter4.tex
 Chapitre 5.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -1926,7 +1910,11 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 2.
 
-[69] [70]
+[69
+
+
+
+] [70]
 Underfull \hbox (badness 10000) in paragraph at lines 142--143
 
  []
@@ -1937,11 +1925,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 143--144
  []
 
 [71] [72] [73] [74] [75]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [76]
-Overfull \hbox (78.62703pt too wide) in paragraph at lines 528--536
-\remove@tlig ((lambda (v1...vn) body) e1...en) \letterimp D  \remove@tlig NIL; $\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\remove@tlig ;ARG;$[] \OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\remove@tlig ;ARG;CLOSURE$\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 body\OT1/lmr/m/n/10.95 )$\remove@tlig ;RTS$\OT1/lmr/m/n/10.95 )$\remove@tlig ;JSR 
+Overfull \hbox (5.95628pt too wide) in paragraph at lines 528--536
+\TU/DejaVuSansMono(0)/m/n/9 ((lambda (v1...vn) body) e1...en) \letterimp D  \TU/DejaVuSansMono(0)/m/n/9 NIL; $\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\TU/DejaVuSansMono(0)/m/n/9 ;ARG;$[] \OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\TU/DejaVuSansMono(0)/m/n/9 ;ARG;CLOSURE$\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 body\OT1/lmr/m/n/10.95 )$\TU/DejaVuSansMono(0)/m/n/9 ;RTS$\OT1/lmr/m/n/10.95 )$\TU/DejaVuSansMono(0)/m/n/9 ;JSR 
  []
 
 
@@ -1949,45 +1934,95 @@ Underfull \hbox (badness 10000) in paragraph at lines 528--536
 
  []
 
+[76]
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 548.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 549.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 550.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 551.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 568.
+
 
 Overfull \hbox (0.23276pt too wide) detected at line 574
 []
  []
 
-[77]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [78]) [79]
+[77]) [78]
 \openout2 = chapter5.aux
- (./chapter5.tex [80
+ (./chapter5.tex
+Chapitre 6.
+
+\openout5 = main.pyg
+(./_minted-main/default-pyg-prefix.pygstyle) (./_minted-main/bw.pygstyle) (./_minted-main/8DF3C30FD9A93341883EB8D8EFEA872F2E92CF7952981697980C6B12BCEEF182.pygtex)
+\openout5 = main.pyg
+ (./_minted-main/03E1B5CD480ECB69E76AC5F3329DAD0A2E92CF7952981697980C6B12BCEEF182.pygtex)
+\openout5 = main.pyg
+ (./_minted-main/CD2CBEBDA083F0DC0CE5205C29438B272DBFA264DF06886913656D43575DC0AD.pygtex) [79
 
 
 
 ]
-Chapitre 6.
-[81]
-Overfull \hbox (11.00092pt too wide) in paragraph at lines 55--57
-[]\TU/LibertinusSerif(0)/m/n/10.95 Pre-nons par exemple le terme []\remove@tlig Func("f", [Func("g", [Var "x"; Var "y"]); Var "z"])
- []
-
-[82] [83] [84] [85] [86] [87] [88] [89] [90] [91] [92]
+\openout5 = main.pyg
+ (./_minted-main/C6443486AC60B0E5D92FDCB0A83E30AE2E92CF7952981697980C6B12BCEEF182.pygtex [80])
+\openout5 = main.pyg
+ (./_minted-main/01C821BB3478155FB27FCE2491F86C642E92CF7952981697980C6B12BCEEF182.pygtex)
+\openout5 = main.pyg
+ (./_minted-main/688AE388D2EFF1E0D9011E10FFDD06FC2E92CF7952981697980C6B12BCEEF182.pygtex [81])
+\openout5 = main.pyg
+ (./_minted-main/AE6CBBC13D81D56EEB80AC422BA5D3742E92CF7952981697980C6B12BCEEF182.pygtex [82])
+\openout5 = main.pyg
+ (./_minted-main/A4C59C9AA5E9071B10745BC000BB0E932E92CF7952981697980C6B12BCEEF182.pygtex)
+\openout5 = main.pyg
+ (./_minted-main/5DEABB2E931868AE762389E38240DFFF2E92CF7952981697980C6B12BCEEF182.pygtex [83])
+\openout5 = main.pyg
+ (./_minted-main/9847F111B3B73FB6C36B10AD8C4AE3F62E92CF7952981697980C6B12BCEEF182.pygtex)
+\openout5 = main.pyg
+ (./_minted-main/10BFFA95E201A031C7BAD8B4DE7419132E92CF7952981697980C6B12BCEEF182.pygtex [84])
+\openout5 = main.pyg
+ (./_minted-main/17021CDFEAB167832CC238C4CA4215042E92CF7952981697980C6B12BCEEF182.pygtex)
+\openout5 = main.pyg
+ (./_minted-main/F981CC398C0F8A336980E0F79CF52CF62E92CF7952981697980C6B12BCEEF182.pygtex) [85]
+\openout5 = main.pyg
+ (./_minted-main/6052CDA142A8489B4957F3FAB3540A2E2E92CF7952981697980C6B12BCEEF182.pygtex)
+\openout5 = main.pyg
+ (./_minted-main/5FB05F0822C9BF26097ACEE968485DF72E92CF7952981697980C6B12BCEEF182.pygtex [86])
+\openout5 = main.pyg
+ (./_minted-main/B547E10A1D45D5058783CC907E16FC6F2E92CF7952981697980C6B12BCEEF182.pygtex)
+\openout5 = main.pyg
+ (./_minted-main/18EEDAADB1EAA5B25677C69DA93653D12E92CF7952981697980C6B12BCEEF182.pygtex [87]) [88]
+\openout5 = main.pyg
+ (./_minted-main/25750A7D386DBB20A5EFC23A3EAC77D02E92CF7952981697980C6B12BCEEF182.pygtex) [89]
+\openout5 = main.pyg
+ (./_minted-main/5DA8EB76C701799ACD9E16D7415A75E52E92CF7952981697980C6B12BCEEF182.pygtex [90])
 Missing character: There is no ≡ (U+2261) in font rm-lmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 746--748
+Underfull \hbox (badness 10000) in paragraph at lines 745--747
 
  []
 
-[93]
+
+\openout5 = main.pyg
+(./_minted-main/E75A76ED2B9DD56B2EAC3323DD7B448A2E92CF7952981697980C6B12BCEEF182.pygtex)
 Missing character: There is no ≥ (U+2265) in font rm-lmr10!
- [94]) [95]
+
+\openout5 = main.pyg
+ (./_minted-main/D5B9512E2629E4FA082197E5A90095252E92CF7952981697980C6B12BCEEF182.pygtex [91])) [92]
 \openout2 = chapter6.aux
- (./chapter6.tex [96
+ (./chapter6.tex
+Chapitre 7.
+[93
 
 
 
 ]
-Chapitre 7.
-[97]
 Missing character: There is no ≥ (U+2265) in font rm-lmr10!
 Missing character: There is no ≥ (U+2265) in font rm-lmr10!
 Missing character: There is no − (U+2212) in font rm-lmr10!
@@ -2007,55 +2042,63 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--94
 
  []
 
-[98] [99] [100] [101] [102] [103] [104] [105]) [106]
+[94] [95]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [96] [97] [98] [99]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [100]
+\openout5 = main.pyg
+ (./_minted-main/127CEA43529F378A701534937020D8D015FD3AC568E0CF553111787252C2754C.pygtex [101]) [102]) [103]
 \openout2 = chapter7.aux
- (./chapter7.tex
+ (./chapter7.tex [104
+
+
+
+]
 Chapitre 8.
 
 \openout5 = main.pyg
-(./_minted-main/default-pyg-prefix.pygstyle) (./_minted-main/default.pygstyle) (./_minted-main/60C135449B42A36D38A37D051457C5C7AAF2CC25471917964966A56B6CC58DD8.pygtex
+(./_minted-main/60C135449B42A36D38A37D051457C5C7AAF2CC25471917964966A56B6CC58DD8.pygtex
 Overfull \hbox (21.52142pt too wide) in paragraph at lines 102--1
 \TU/LibertinusSerif(0)/m/n/10.95 que-ment le car et le cdr d’un dou-blet. Nous pou-vons par exemple dé-fi-nir la liste cir-cu-laire []\remove@tlig (a b c a b c ...) 
  []
 
 )
 \openout5 = main.pyg
- (./_minted-main/1EAD7336119BB26FC035A11B5FF7444C2E92CF7952981697980C6B12BCEEF182.pygtex [107
-
-
-
-])
+ (./_minted-main/1EAD7336119BB26FC035A11B5FF7444C2E92CF7952981697980C6B12BCEEF182.pygtex [105])
 \openout5 = main.pyg
- (./_minted-main/BBEFF5525F9EB998E6C5132D4A58F0162E92CF7952981697980C6B12BCEEF182.pygtex [108])
+ (./_minted-main/BBEFF5525F9EB998E6C5132D4A58F0162E92CF7952981697980C6B12BCEEF182.pygtex [106])
 \openout5 = main.pyg
  (./_minted-main/226BCDA7B95073DBE0335B5554F950BF2E92CF7952981697980C6B12BCEEF182.pygtex)
 \openout5 = main.pyg
  (./_minted-main/D42160A36B6FEC9740EE05A7C0C5487B2E92CF7952981697980C6B12BCEEF182.pygtex)
 \openout5 = main.pyg
- (./_minted-main/1254912056030468995FEBA646F60A262E92CF7952981697980C6B12BCEEF182.pygtex [109])
-<flocon1.pdf, id=1269, 150.5625pt x 138.5175pt>
+ (./_minted-main/1254912056030468995FEBA646F60A262E92CF7952981697980C6B12BCEEF182.pygtex [107])
+<flocon1.pdf, id=1267, 150.5625pt x 138.5175pt>
 File: flocon1.pdf Graphic file (type pdf)
 <use flocon1.pdf>
 Package luatex.def Info: flocon1.pdf  used on input line 296.
 (luatex.def)             Requested size: 99.5875pt x 85.3579pt.
-<flocon2.pdf, id=1270, 156.585pt x 136.51pt>
+<flocon2.pdf, id=1268, 156.585pt x 136.51pt>
 File: flocon2.pdf Graphic file (type pdf)
 <use flocon2.pdf>
 Package luatex.def Info: flocon2.pdf  used on input line 297.
 (luatex.def)             Requested size: 99.58806pt x 85.35811pt.
-<flocon3.pdf, id=1271, 149.55875pt x 130.4875pt>
+<flocon3.pdf, id=1269, 149.55875pt x 130.4875pt>
 File: flocon3.pdf Graphic file (type pdf)
 <use flocon3.pdf>
 Package luatex.def Info: flocon3.pdf  used on input line 298.
 (luatex.def)             Requested size: 99.58539pt x 85.35942pt.
-<flocon4.pdf, id=1272, 139.52126pt x 127.47626pt>
+<flocon4.pdf, id=1270, 139.52126pt x 127.47626pt>
 File: flocon4.pdf Graphic file (type pdf)
 <use flocon4.pdf>
 Package luatex.def Info: flocon4.pdf  used on input line 299.
 (luatex.def)             Requested size: 99.58661pt x 85.36195pt.
 
 warning  (file bretagne3.jpg) (readjpg): Exif resolution 300dpi x 300dpi differs from the input resolution 299dpi x 299dpi
-<bretagne3.jpg, id=1273, 730.4088pt x 512.6352pt>
+<bretagne3.jpg, id=1271, 730.4088pt x 512.6352pt>
 File: bretagne3.jpg Graphic file (type jpg)
 <use bretagne3.jpg>
 Package luatex.def Info: bretagne3.jpg  used on input line 305.
@@ -2063,62 +2106,62 @@ Package luatex.def Info: bretagne3.jpg  used on input line 305.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [110]
+ [108]
 \openout5 = main.pyg
- (./_minted-main/722E29D7D24ACA89E39ACBB061B0F73A2E92CF7952981697980C6B12BCEEF182.pygtex [111<./flocon1.pdf><./flocon2.pdf><./flocon3.pdf><./flocon4.pdf><./bretagne3.jpg
+ (./_minted-main/722E29D7D24ACA89E39ACBB061B0F73A2E92CF7952981697980C6B12BCEEF182.pygtex [109<./flocon1.pdf><./flocon2.pdf><./flocon3.pdf><./flocon4.pdf><./bretagne3.jpg
 warning  (readjpg): Exif resolution 300dpi x 300dpi differs from the input resolution 299dpi x 299dpi
 >])
-<mandelbrot.png, id=1313, 254.9525pt x 227.85126pt>
+<mandelbrot.png, id=1310, 254.9525pt x 227.85126pt>
 File: mandelbrot.png Graphic file (type png)
 <use mandelbrot.png>
 Package luatex.def Info: mandelbrot.png  used on input line 367.
 (luatex.def)             Requested size: 113.81102pt x 101.71507pt.
-<imp.png, id=1315, 573.14125pt x 491.8375pt>
+<imp.png, id=1312, 573.14125pt x 491.8375pt>
 File: imp.png Graphic file (type png)
 <use imp.png>
 Package luatex.def Info: imp.png  used on input line 381.
 (luatex.def)             Requested size: 113.81102pt x 97.6603pt.
 
 \openout5 = main.pyg
- (./_minted-main/1793F1E7FAF22AA984EA33C3FC851377F241713066898790F15CCCD67C1F7766.pygtex [112<./mandelbrot.png><./imp.png>])
+ (./_minted-main/1793F1E7FAF22AA984EA33C3FC851377F241713066898790F15CCCD67C1F7766.pygtex [110<./mandelbrot.png><./imp.png>])
 \openout5 = main.pyg
  (./_minted-main/C47934AECBB49E1549A9059B6896FB76F241713066898790F15CCCD67C1F7766.pygtex)
-<snow.png, id=1327, 636.3775pt x 750.805pt>
+<snow.png, id=1324, 636.3775pt x 750.805pt>
 File: snow.png Graphic file (type png)
 <use snow.png>
 Package luatex.def Info: snow.png  used on input line 453.
 (luatex.def)             Requested size: 113.81102pt x 134.26839pt.
 
-Underfull \vbox (badness 1910) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [113]
+ [111]
 \openout5 = main.pyg
  (./_minted-main/0F6AAE88BF3F6A4609801A3160E97278AAF2CC25471917964966A56B6CC58DD8.pygtex)
 \openout5 = main.pyg
  (./_minted-main/BA7DFDD70345D9A71FCA0B39B627CBA02E92CF7952981697980C6B12BCEEF182.pygtex)
 \openout5 = main.pyg
- (./_minted-main/CC02872B2D21CEE271C6FA6E8ADD20EB2E92CF7952981697980C6B12BCEEF182.pygtex [114<./snow.png>])
+ (./_minted-main/CC02872B2D21CEE271C6FA6E8ADD20EB2E92CF7952981697980C6B12BCEEF182.pygtex [112<./snow.png>])
 \openout5 = main.pyg
- (./_minted-main/2A5045DD226644DA494146BD8FC7F0C82E92CF7952981697980C6B12BCEEF182.pygtex) [115] [116]
-<sigmoid.png, id=1351, 694.595pt x 729.72626pt>
+ (./_minted-main/2A5045DD226644DA494146BD8FC7F0C82E92CF7952981697980C6B12BCEEF182.pygtex) [113] [114]
+<sigmoid.png, id=1349, 694.595pt x 729.72626pt>
 File: sigmoid.png Graphic file (type png)
 <use sigmoid.png>
 Package luatex.def Info: sigmoid.png  used on input line 720.
 (luatex.def)             Requested size: 142.2657pt x 142.25708pt.
 
 \openout5 = main.pyg
- (./_minted-main/4DCD47F8AECD3C651AE033840AD01EA6D1B441A9AB0E232E9D4562FAA45AEAC6.pygtex [117<./sigmoid.png>])
+ (./_minted-main/4DCD47F8AECD3C651AE033840AD01EA6D1B441A9AB0E232E9D4562FAA45AEAC6.pygtex [115<./sigmoid.png>])
 \openout5 = main.pyg
  (./_minted-main/D1C2AB75F34430650B87B44D371F00462E92CF7952981697980C6B12BCEEF182.pygtex)
 \openout5 = main.pyg
- (./_minted-main/8D707A5A8B8B85ED8A81F041CB1245972E92CF7952981697980C6B12BCEEF182.pygtex [118]) [119]
+ (./_minted-main/8D707A5A8B8B85ED8A81F041CB1245972E92CF7952981697980C6B12BCEEF182.pygtex [116]) [117]
 \openout5 = main.pyg
  (./_minted-main/29D6A4FC47A3B67A5FF1C08775D4743D2E92CF7952981697980C6B12BCEEF182.pygtex)
 Missing character: There is no − (U+2212) in font rm-lmr8!
 Missing character: There is no − (U+2212) in font rm-lmr8!
 Missing character: There is no ≡ (U+2261) in font rm-lmr10!
 Missing character: There is no ≡ (U+2261) in font rm-lmr10!
- [120]
+ [118]
 Missing character: There is no − (U+2212) in font rm-lmr10!
 Missing character: There is no − (U+2212) in font rm-lmr10!
 Missing character: There is no − (U+2212) in font rm-lmr10!
@@ -2157,7 +2200,7 @@ Missing character: There is no − (U+2212) in font rm-lmr10!
 Missing character: There is no ≡ (U+2261) in font rm-lmr10!
 
 \openout5 = main.pyg
- (./_minted-main/4FB071610263BAA39249CFDC06922C852E92CF7952981697980C6B12BCEEF182.pygtex [121])
+ (./_minted-main/4FB071610263BAA39249CFDC06922C852E92CF7952981697980C6B12BCEEF182.pygtex [119])
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1005.
@@ -2170,17 +2213,17 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1005.
 
-[122] (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+[120] (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-)) [123] [124]
+)) [121] [122]
 \openout5 = main.pyg
- (./_minted-main/849BBE78C63D76051B5B19453296A8EE2E92CF7952981697980C6B12BCEEF182.pygtex [125])
+ (./_minted-main/849BBE78C63D76051B5B19453296A8EE2E92CF7952981697980C6B12BCEEF182.pygtex [123])
 \openout5 = main.pyg
  (./_minted-main/6CE4D0040A1A587D544B7991612742982E92CF7952981697980C6B12BCEEF182.pygtex)
 \openout5 = main.pyg
- (./_minted-main/E980A7391ECB8D7501C61DAEB0B0F31F2E92CF7952981697980C6B12BCEEF182.pygtex) [126]
+ (./_minted-main/E980A7391ECB8D7501C61DAEB0B0F31F2E92CF7952981697980C6B12BCEEF182.pygtex) [124]
 \openout5 = main.pyg
  (./_minted-main/D042E8EBAC48B982258328171545D94E2E92CF7952981697980C6B12BCEEF182.pygtex)
 \openout5 = main.pyg
@@ -2227,7 +2270,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 \openout5 = main.pyg
-(./_minted-main/6C4660D20C0E24147AFE6C35C3D45D832E92CF7952981697980C6B12BCEEF182.pygtex) [127]
+(./_minted-main/6C4660D20C0E24147AFE6C35C3D45D832E92CF7952981697980C6B12BCEEF182.pygtex) [125]
 \openout5 = main.pyg
  (./_minted-main/C7BCE9E866E4FC81D3868CCB7C0001CA2E92CF7952981697980C6B12BCEEF182.pygtex)
 
@@ -2242,11 +2285,11 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1379.
 
-[128]
+[126]
 \openout5 = main.pyg
- (./_minted-main/53175C108A6E600493BAD624CA6DBE5F15FD3AC568E0CF553111787252C2754C.pygtex [129])
+ (./_minted-main/53175C108A6E600493BAD624CA6DBE5F15FD3AC568E0CF553111787252C2754C.pygtex [127])
 \openout5 = main.pyg
- (./_minted-main/0109060437494B4F752B845DB3483D4115FD3AC568E0CF553111787252C2754C.pygtex) [130]
+ (./_minted-main/0109060437494B4F752B845DB3483D4115FD3AC568E0CF553111787252C2754C.pygtex) [128]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1526.
@@ -2330,7 +2373,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [131]
+ [129]
 \openout5 = main.pyg
  (./_minted-main/52D849A8B5ECED24EAF65E9085A41FFB2B700DE8CA270DBCD492787E701BE88A.pygtex)
 \openout5 = main.pyg
@@ -2341,11 +2384,14 @@ Overfull \hbox (65.88713pt too wide) in paragraph at lines 1582--1584
 
 
 \openout5 = main.pyg
-(./_minted-main/7906D436C0E4E765A8EC5C2C514279A42B700DE8CA270DBCD492787E701BE88A.pygtex) [132]
+(./_minted-main/7906D436C0E4E765A8EC5C2C514279A42B700DE8CA270DBCD492787E701BE88A.pygtex)
+Underfull \vbox (badness 1831) has occurred while \output is active []
+
+ [130]
 \openout5 = main.pyg
  (./_minted-main/B3DD075F8617A3C4E2435CE505D1557A2E92CF7952981697980C6B12BCEEF182.pygtex)
 \openout5 = main.pyg
- (./_minted-main/55C874CC4DDA83721B24F4777DAE06CD2E92CF7952981697980C6B12BCEEF182.pygtex) [133]) [134] [135
+ (./_minted-main/55C874CC4DDA83721B24F4777DAE06CD2E92CF7952981697980C6B12BCEEF182.pygtex) [131]) [132] [133
 
 
 ]
@@ -2354,9 +2400,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 212.
  (./main.aux (./chapter1.aux) (./chapter2.aux) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux) (./chapter7.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 212.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 212.
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 8DFA195D543107D43462EB59B0C62393;23017.
 
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 047CE5348A51656A1EF67EE309C873EE;23352
+(rerunfilecheck)             After:  3C8C530D9D2E412D2E72C6E40CB1F5FC;23357.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -2367,19 +2419,19 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 54533 strings out of 480885
- 596095,4101490 words of node,token memory allocated
+ 54931 strings out of 480885
+ 596087,4101490 words of node,token memory allocated
  13180 words of node memory still in use:
    11 hlist, 2 vlist, 2 rule, 5 dir, 595 glue, 4 kern, 1 penalty, 2 sub_mlist, 4 glyph, 3605 attribute, 72 glue_spec, 517 attribute_list, 2 write, 34 pdf_literal, 2 pdf_action, 2 pdf_colorstack nodes
-   avail lists: 1:17,2:179377,3:11128,4:931,5:1138,6:85,7:12175,8:94,9:1409,10:16,11:280
- 69490 multiletter control sequences out of 65536+600000
- 177 fonts using 35884363 bytes
+   avail lists: 1:18,2:178181,3:11128,4:578,5:1138,6:86,7:12175,8:94,9:1405,10:16,11:315
+ 69522 multiletter control sequences out of 65536+600000
+ 184 fonts using 39077283 bytes
  60i,24n,81p,830b,2163s stack positions out of 5000i,500n,10000p,200000b,100000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}<<./snow.600pk>>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf></usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-BoldItalic.otf><<./beta.600pk>>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Italic.otf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Bold.otf></usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Regular.otf></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn0900.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1095.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (135 pages, 1430972 bytes).
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}<<./snow.600pk>></usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-BoldItalic.otf><<./beta.600pk>>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Italic.otf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Bold.otf></usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Regular.otf></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn0900.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn1095.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (133 pages, 1435566 bytes).
 
-PDF statistics: 1613 PDF objects out of 1728 (max. 8388607)
- 1389 compressed objects within 14 object streams
- 414 named destinations out of 1000 (max. 131072)
- 965 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1617 PDF objects out of 1728 (max. 8388607)
+ 1392 compressed objects within 14 object streams
+ 413 named destinations out of 1000 (max. 131072)
+ 973 words of extra memory for PDF output out of 10000 (max. 100000000)
 

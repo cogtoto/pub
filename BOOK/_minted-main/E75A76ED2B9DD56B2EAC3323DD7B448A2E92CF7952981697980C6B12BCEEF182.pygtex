@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{halt}\PYG{o}{(}\PYG{n}{x}\PYG{o}{)} \PYG{o}{=} \PYG{n}{si} \PYG{n}{le} \PYG{n}{programme} \PYG{n}{x} \PYG{n}{s\PYGZsq{}arrête} \PYG{n}{alors} \PYG{n}{vrai}
+          \PYG{n}{sinon} \PYG{n}{faux} \PYG{o}{;}
+
+\PYG{n}{diag}\PYG{o}{(}\PYG{n}{p}\PYG{o}{)} \PYG{o}{=} \PYG{n}{si} \PYG{n}{halt} \PYG{o}{(}\PYG{n}{p}\PYG{o}{)} \PYG{n}{alors} \PYG{n}{boucle}\PYG{n+nb+bp}{()}
+          \PYG{n}{sinon} \PYG{n}{stop}\PYG{n+nb+bp}{()} \PYG{o}{;}
+\end{Verbatim}

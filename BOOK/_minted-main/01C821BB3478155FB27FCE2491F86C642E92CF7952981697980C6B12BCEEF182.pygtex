@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{greffe} \PYG{n}{i} \PYG{n}{terme} \PYG{n}{greffon} \PYG{o}{=}
+\PYG{k}{match} \PYG{n}{terme} \PYG{k}{with}
+\PYG{o}{|} \PYG{n+nc}{Var} \PYG{o}{\PYGZus{}} \PYG{o}{|} \PYG{n+nc}{Func}\PYG{o}{(\PYGZus{},} \PYG{n+nb+bp}{[]}\PYG{o}{)} \PYG{k}{when} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{greffon}
+\PYG{o}{|} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f}\PYG{o}{,} \PYG{n}{lt}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{if} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{k}{then} \PYG{n}{greffon}
+				 \PYG{k}{else} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f}\PYG{o}{,} \PYG{n}{greffeltermes} \PYG{o}{(}\PYG{n}{int\PYGZus{}of\PYGZus{}string}\PYG{o}{(}\PYG{n}{string\PYGZus{}of\PYGZus{}char}\PYG{o}{((}\PYG{n}{string\PYGZus{}of\PYGZus{}int} \PYG{n}{i}\PYG{o}{).[}\PYG{l+m+mi}{0}\PYG{o}{])))}
+				  			                \PYG{o}{(}\PYG{n}{int\PYGZus{}of\PYGZus{}string}\PYG{o}{(}\PYG{n}{reste} \PYG{o}{(}\PYG{n}{string\PYGZus{}of\PYGZus{}int} \PYG{n}{i}\PYG{o}{)))}
+								            \PYG{n}{lt}
+								            \PYG{n}{greffon}\PYG{o}{)}
+\PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+\PYG{k}{and} \PYG{n}{greffeltermes} \PYG{n}{i} \PYG{n}{u} \PYG{n}{ltermes} \PYG{n}{greffon} \PYG{o}{=}
+\PYG{k}{match} \PYG{n}{ltermes} \PYG{k}{with}
+\PYG{o}{|} \PYG{n}{hd}\PYG{o}{::}\PYG{n}{tl} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{if} \PYG{o}{(}\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{k}{then}  \PYG{o}{(}\PYG{n}{greffe} \PYG{n}{u} \PYG{n}{hd} \PYG{n}{greffon}\PYG{o}{)::}\PYG{n}{tl}
+            \PYG{k}{else} \PYG{n}{hd}\PYG{o}{::(}\PYG{n}{greffeltermes} \PYG{o}{(}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{n}{u} \PYG{n}{tl} \PYG{n}{greffon}\PYG{o}{)}
+\PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+\end{Verbatim}

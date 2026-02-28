@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{superpose} \PYG{n}{l1} \PYG{n}{l2} \PYG{o}{=}
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{super} \PYG{n}{l1} \PYG{n}{l2} \PYG{n}{occ} \PYG{o}{=}
+	\PYG{k}{match} \PYG{n}{occ} \PYG{k}{with}
+	\PYG{o}{|} \PYG{n}{a}\PYG{o}{::}\PYG{n}{b} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+	\PYG{k}{begin}
+		\PYG{k}{try}
+		\PYG{k}{let} \PYG{n}{t} \PYG{o}{=} \PYG{n}{cut} \PYG{n}{a} \PYG{n}{l1} \PYG{k}{in}
+		\PYG{k}{match} \PYG{n}{t} \PYG{k}{with}
+		\PYG{o}{|} \PYG{n+nc}{Var} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+		\PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{let} \PYG{n}{sigma} \PYG{o}{=} \PYG{n}{unifier} \PYG{o}{((}\PYG{n}{cut} \PYG{n}{a} \PYG{n}{l1}\PYG{o}{),} \PYG{n}{l2}\PYG{o}{)}
+				\PYG{k}{in} \PYG{o}{(}\PYG{n}{a}\PYG{o}{,} \PYG{n}{sigma}\PYG{o}{)}
+		\PYG{k}{with} \PYG{n+nc}{Impossible} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{super} \PYG{n}{l1} \PYG{n}{l2} \PYG{n}{b}
+	\PYG{k}{end}
+\PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+\PYG{k}{in} \PYG{n}{super} \PYG{n}{l1} \PYG{n}{l2} \PYG{o}{(}\PYG{n}{occurences} \PYG{l+m+mi}{0} \PYG{n}{l1}\PYG{o}{)}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{cp} \PYG{o}{(}\PYG{n}{l1}\PYG{o}{,}\PYG{n}{r1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{l2}\PYG{o}{,}\PYG{n}{r2}\PYG{o}{)} \PYG{o}{=}
+  \PYG{k}{let} \PYG{o}{(}\PYG{n}{oc}\PYG{o}{,} \PYG{n}{sigma}\PYG{o}{)} \PYG{o}{=} \PYG{n}{superpose} \PYG{n}{l1} \PYG{n}{l2} \PYG{k}{in}
+  \PYG{o}{((}\PYG{n}{substituer}  \PYG{n}{r1} \PYG{n}{sigma}\PYG{o}{),} \PYG{o}{(}\PYG{n}{greffe} \PYG{n}{oc} \PYG{o}{(}\PYG{n}{substituer} \PYG{n}{l1} \PYG{n}{sigma}\PYG{o}{)} \PYG{o}{(}\PYG{n}{substituer} \PYG{n}{r2} \PYG{n}{sigma}\PYG{o}{)))} \PYG{o}{;;}
+\end{Verbatim}

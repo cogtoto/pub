@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{k}{type} \PYG{n}{terme} \PYG{o}{=}
+	\PYG{o}{|} \PYG{n+nc}{Var} \PYG{k}{of} \PYG{k+kt}{string}
+	\PYG{o}{|} \PYG{n+nc}{Func} \PYG{k}{of} \PYG{k+kt}{string} \PYG{o}{*} \PYG{n}{terme} \PYG{k+kt}{list}
+\end{Verbatim}

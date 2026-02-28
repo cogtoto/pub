@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{rewrite} \PYG{n}{t} \PYG{n}{l} \PYG{n}{r} \PYG{o}{=}
+\PYG{k}{match} \PYG{n}{t} \PYG{k}{with}
+\PYG{o}{|} \PYG{n+nc}{Var}\PYG{o}{(\PYGZus{})} \PYG{o}{|} \PYG{n+nc}{Func}\PYG{o}{(\PYGZus{},}\PYG{n+nb+bp}{[]}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{t}
+\PYG{o}{|} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f}\PYG{o}{,} \PYG{n}{listet}\PYG{o}{)}  \PYG{o}{\PYGZhy{}\PYGZgt{}}
+	\PYG{k}{try} \PYG{k}{let} \PYG{n}{subst} \PYG{o}{=} \PYG{n}{filtre} \PYG{n}{l} \PYG{n}{t} \PYG{n+nb+bp}{[]} \PYG{k}{in}
+		\PYG{n}{substituer} \PYG{n}{r} \PYG{n}{subst}
+	\PYG{k}{with} \PYG{n+nc}{Impossible} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f}\PYG{o}{,} \PYG{n}{map} \PYG{o}{(}\PYG{k}{function} \PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{rewrite} \PYG{n}{t} \PYG{n}{l} \PYG{n}{r}\PYG{o}{))} \PYG{n}{listet}\PYG{o}{)}
+\PYG{k}{and} \PYG{n}{rewriteall} \PYG{n}{lregles} \PYG{n}{t} \PYG{o}{=}
+	\PYG{k}{match} \PYG{n}{lregles} \PYG{k}{with}
+	\PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{t}
+	\PYG{o}{|} \PYG{o}{(}\PYG{n}{l}\PYG{o}{,}\PYG{n}{r}\PYG{o}{)} \PYG{o}{::}\PYG{n}{reste} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+		\PYG{k}{let} \PYG{n}{t1} \PYG{o}{=} \PYG{o}{(}\PYG{n}{rewrite} \PYG{n}{t} \PYG{n}{l} \PYG{n}{r}\PYG{o}{)} \PYG{k}{in}
+			\PYG{k}{if} \PYG{n}{t1}\PYG{o}{=}\PYG{n}{t} \PYG{k}{then} \PYG{n}{rewriteall} \PYG{n}{reste} \PYG{n}{t}
+			\PYG{k}{else} \PYG{n}{t1}
+\PYG{k}{and} \PYG{n}{rewrite\PYGZus{}bourrin} \PYG{n}{t} \PYG{n}{lregles} \PYG{o}{=}
+	\PYG{k}{let} \PYG{n}{t1} \PYG{o}{=} \PYG{n}{rewriteall} \PYG{n}{lregles} \PYG{n}{t} \PYG{k}{in}
+	\PYG{k}{if} \PYG{n}{t1}\PYG{o}{=}\PYG{n}{t} \PYG{k}{then} \PYG{n}{t}
+	\PYG{k}{else} \PYG{n}{rewrite\PYGZus{}bourrin} \PYG{n}{t1} \PYG{n}{lregles}
+\end{Verbatim}

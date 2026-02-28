@@ -20,7 +20,7 @@
 \usepackage{alltt}
 \usepackage{multirow}
 \usepackage{float}
-\usepackage[utf8]{inputenc}
+%%\usepackage[utf8]{inputenc}
 %%\usepackage{ucs}
 \usepackage{mflogo}
 \usepackage{wrapfig}
@@ -32,11 +32,20 @@
 \usepackage{textgreek}
 \usepackage{fancyvrb}
 \usepackage{minted}
+\usemintedstyle{bw}
 \usepackage{fontspec}
 
+\usepackage{fancyvrb}
+\fvset{
+  fontsize=\small
+}
 \setmainfont{Libertinus Serif}
+%%\setmathfont{Libertinus Math}
 \setmonofont{DejaVu Sans Mono}
 %%\setmonofont{JuliaMono}
+
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{{\footnotesize\oldtexttt{#1}}}
 
 \fvset{tabsize=2}
 \newfont{\letterimp}{beta}
@@ -44,7 +53,6 @@
 \newfont{\lettersnow}{snow}
 \newcommand{\snow}{{\lettersnow S\hspace{0.2cm}}}
 \newcommand{\trans}{\overset{*}{\longrightarrow_{\beta}}}
-
 
 \title{Le calcul par la réduction et la résolution \\
        Le raisonnement par la preuve et le programme \\
@@ -60,21 +68,13 @@
 \newtheorem{definition}{Définition}
 \newtheorem{theoreme}{Théorème}
 
+\AtBeginEnvironment{Verbatim}{\small}
+
 \addbibresource{book.bib}  
 \begin{document}
 
-%%\DeclareUnicodeCharacter{21A6}{\ensuremath{\mapsto}}
-%%\DeclareUnicodeCharacter{22A2}{\ensuremath{\vdash}}
-%%\DeclareUnicodeCharacter{2261}{\ensuremath{\equiv}
-%%\DeclareUnicodeCharacter{2081}{\ensuremath{_1}}
-%%\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
-%%\DeclareUnicodeCharacter{2262}{\ensuremath{\not\equiv}}
-%%\DeclareUnicodeCharacter{2215}{\ensuremath{\mathbb{N}}}
-%%\DeclareUnicodeCharacter{2260}{\ensuremath{\neq}}
-
 \maketitle
 \tableofcontents
-
 
 \chapter{Ἐν ἀρχή, Gn 1.1 et Jn 1.1}
 
@@ -126,7 +126,7 @@ L'autre processus de calcul est la résolution. Nous l'utilisons chaque fois que
 une équation. En résolvant $x^2+2x-15=0$, nous souhaitons que notre processus 
 soit \textit{complet}, c'est-à-dire que nous calculions 
 l'ensemble des valeurs possibles $\{-5; 3\}$.
- Nous étudierons également  ce mécanisme, et en particulier l'algorithme d'unification.
+Nous étudierons également  ce mécanisme, et en particulier l'algorithme d'unification.
 
 \vspace{0.3cm}
 Enfin, nous aborderons la correspondance bluffante de la programmation fonctionnelle avec la logique. 
@@ -144,8 +144,8 @@ Nous avons alors le rapprochement suivant :
   type & proposition \\
   \hline
 \end{tabular}
-
 \end{center}
+
 Nous sommes ici dans une logique constructive, démontrer une proposition revient à exhiber une preuve, c'est-à-dire 
 un terme ayant pour type la proposition.
 Ainsi, le principe du tiers-exclus $P \vee  \neg P$ ne peut être ici démontré.

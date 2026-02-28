@@ -465,6 +465,56 @@ done; print_string "]\n"
 ;;
 \end{Verbatim}
 \end{tiny}
+\subsection{Sudoku - un algorithme simple et récursif en \textsc{Lean4}}
+Voici un algorithme en \textsc{Lean4}. 
+La grille du Sudoku est représenté par une fonction de \texttt{Coord → Option Digit}.
+\begin{minted}{lean4}
+import Mathlib
+open Nat
+
+def Digit := Fin 9
+deriving BEq
+
+def Coord := Fin 9 × Fin 9
+
+instance : DecidableEq Coord :=
+  inferInstanceAs (DecidableEq (Fin 9 × Fin 9))
+
+def Grid := Coord → Option Digit
+
+def sameRow (a b : Coord) : Bool := a.1 == b.1
+def sameCol (a b : Coord) : Bool := a.2 == b.2
+
+def sameBlock (a b : Coord) : Bool :=
+  (a.1.val / 3 == b.1.val / 3) &&
+  (a.2.val / 3 == b.2.val / 3)
+
+def allCoords : List Coord := List.product (List.finRange 9) (List.finRange 9)
+
+def conflicts (g : Grid) (c : Coord) (d : Digit) : Bool :=
+  allCoords.any (fun c' => (c' != c) &&
+    (sameRow c c' || sameCol c c' || sameBlock c c') &&
+    match g c' with
+    | some d' => d' == d
+    | none    => false)
+
+def candidates (g : Grid) (c : Coord) : List Digit :=
+  (List.finRange 9).filter (fun d => !(conflicts g c d))
+
+def set (g : Grid) (c : Coord) (d : Digit) : Grid :=
+  fun c' => if c' == c then some d else g c'
+
+def emptyCells (g : Grid) : List Coord :=
+  allCoords.filter (fun c => g c == none)
+
+partial def solve : Grid → Option Grid
+| g =>
+  match emptyCells g with
+  | []      => some g
+  | c :: _  =>
+      (candidates g c).findSome? (fun d => solve (set g c d))
+
+\end{minted}
 
 %%%%%%%%%%%%%%%%%%%%
 \section{Métaprogrammation - récursivité et réflexivité}

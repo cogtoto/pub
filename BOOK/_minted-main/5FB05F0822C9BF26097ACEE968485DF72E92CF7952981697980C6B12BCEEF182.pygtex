@@ -1,0 +1,28 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{question}\PYG{n+nb+bp}{()} \PYG{o}{=}
+	\PYG{k}{begin}
+	  \PYG{n}{print\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{ autre solution 1/2 (1=oui, 2=non) ? :\PYGZdq{}} \PYG{o}{;}
+	  \PYG{k}{if} \PYG{n}{read\PYGZus{}int}\PYG{n+nb+bp}{()}\PYG{o}{=} \PYG{l+m+mi}{1}  \PYG{k}{then} \PYG{n+nb+bp}{false} \PYG{k}{else} \PYG{n+nb+bp}{true}
+	\PYG{k}{end}
+
+\PYG{k}{let} \PYG{n}{autre\PYGZus{}solution} \PYG{n}{lvar} \PYG{n}{lvaleur}  \PYG{o}{=}
+	\PYG{k}{if} \PYG{n}{lvaleur} \PYG{o}{\PYGZlt{}\PYGZgt{}} \PYG{n+nb+bp}{[]} \PYG{k}{then} \PYG{o}{(}\PYG{n}{affiche\PYGZus{}solution} \PYG{n}{lvar} \PYG{n}{lvaleur} \PYG{o}{;} \PYG{n}{question}\PYG{n+nb+bp}{()}\PYG{o}{)}
+	\PYG{k}{else} \PYG{n+nb+bp}{false}
+
+\PYG{k}{let} \PYG{n}{prolog} \PYG{n}{but} \PYG{n}{lregles} \PYG{o}{=}
+	\PYG{k}{let} \PYG{n}{lvar\PYGZus{}but} \PYG{o}{=} \PYG{n}{listevar} \PYG{n}{but} \PYG{k}{in}
+	\PYG{k}{let} \PYG{k}{rec} \PYG{n}{prouveli} \PYG{n}{lbuts} \PYG{n}{lvaleur} \PYG{o}{=}
+	  \PYG{k}{match} \PYG{n}{lbuts} \PYG{k}{with}
+	  \PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{autre\PYGZus{}solution} \PYG{n}{lvar\PYGZus{}but} \PYG{n}{lvaleur}
+	  \PYG{o}{|} \PYG{n}{h}\PYG{o}{::}\PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+		\PYG{n}{some} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{regle} \PYG{o}{\PYGZhy{}\PYGZgt{}}  \PYG{k}{try}
+				 \PYG{k}{let} \PYG{n}{regle\PYGZus{}bis} \PYG{o}{=} \PYG{o}{(}\PYG{n}{renomme} \PYG{n}{regle}\PYG{o}{)} \PYG{k}{in}
+				 \PYG{k}{let} \PYG{n}{sigma1} \PYG{o}{=} \PYG{n}{unifier} \PYG{n}{h} \PYG{o}{(}\PYG{n}{hd} \PYG{n}{regle\PYGZus{}bis}\PYG{o}{)} \PYG{k}{in}			
+				 \PYG{n}{prouveli}
+				   \PYG{o}{(}\PYG{n}{sublis} \PYG{n}{sigma1} \PYG{o}{((}\PYG{n}{lhypotheses} \PYG{n}{regle\PYGZus{}bis}\PYG{o}{)} \PYG{o}{@} \PYG{n}{t}\PYG{o}{))}
+				   \PYG{o}{(}\PYG{n}{sublis} \PYG{n}{sigma1} \PYG{n}{lvaleur}\PYG{o}{)}
+			   \PYG{k}{with} \PYG{n+nc}{Impossible} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb+bp}{false}\PYG{o}{)}
+		  \PYG{n}{lregles}
+	\PYG{k}{in}
+	\PYG{n}{prouveli} \PYG{o}{[}\PYG{n}{but}\PYG{o}{]} \PYG{n}{lvar\PYGZus{}but}
+\end{Verbatim}

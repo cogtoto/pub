@@ -3,8 +3,8 @@
 Nous reprenons ici le très bon formalisme du livre de \textit{Lalement} \cite{lalement}.
 
 
-Les symboles de constante \verb+true+, \verb+158+, les symboles de fonctions unaires \verb+not+, \verb-+-,
-les symboles de fonctions binaires \verb+or+, etc. constituent la signature $\Sigma$ du langage.
+Les symboles de constante \texttt{true}, \texttt{158}, les symboles de fonctions unaires \texttt{not}, \texttt{-},
+les symboles de fonctions binaires \texttt{or}, etc. constituent la signature $\Sigma$ du langage.
 Si $f$ est d'arité $n \geq 1$, alors $f$ est un symbole fonctionnel, et si $f$ est d'arité $0$, $f$ est un symbole de constante.
 Nous ajoutons à $\Sigma$ un ensemble $X$ de symboles de variables.
 
@@ -16,12 +16,11 @@ L'ensemble des termes $T_{\Sigma \cup X}$ est défini de la manière suivante:
 \end{itemize}
 
 Nous pouvons représenter les termes en \textsc{Ocaml} avec le type abstrait suivant:
-\begin{Verbatim}
+\begin{minted}{ocaml}
 	type terme = 
 	| Var of string
 	| Func of string * terme list
-\end{Verbatim}
-
+\end{minted}
 En fait, quasiment tous les objets que nous manipulerons pourront être modélisés par des termes.
 
 \vspace{.5cm}
@@ -34,14 +33,14 @@ Prenons l'exemple suivant pour définir le \textit{type} des entiers naturels à
 Les symboles $O$ et $S$ sont respectivement d'arité $0$ et $1$.
 Nous avons ainsi : $$T_\Sigma = \{0, S0, SS0, SSS0, ... \} $$
 En \textsc{Ocaml}, nous pourrons écrire:
-\begin{Verbatim}
+\begin{minted}{ocaml}
 type entiers = Zero | S of entiers 
-\end{Verbatim}
+\end{minted}
 En \textsc{Prolog}:
-\begin{Verbatim}
+\begin{minted}{prolog}
 entiers(zero).
 entiers(s(X)) :- entiers(X)
-\end{Verbatim}
+\end{minted}
 En Coq:
 \begin{coqdoccode}
 \coqdocemptyline
@@ -52,7 +51,7 @@ En Coq:
 \end{coqdoccode}
 Les termes se représentent naturellement sous forme d'arbres.
 
-Prenons par exemple le terme \verb+Func("f", [Func("g", [Var "x"; Var "y"]); Var "z"])+
+Prenons par exemple le terme \texttt{Func("f", [Func("g", [Var "x"; Var "y"]); Var "z"])}
 Il sera représenté par l'arbre ci-dessous annoté de ses occurences $u \in \mathcal{O}(M) $ :
 \begin{center}
 	\begin{tikzpicture}[level distance=1.5cm,
@@ -86,7 +85,7 @@ et de manière équivalente pour les symboles $M(\epsilon) = f$ et $M(i.u)=M_i(u
 Nous implémentons cela avec un peu de difficulté pour les conversions 
 \verb+string+ vers \verb+int+ nécessaire à la manipulation des occurences $u$. 
 On considère ici qu'un arbre ne peut avoir plus de 9 fils, donc un seul digit permet de définir le numéro du noeud associé.
-\begin{Verbatim}
+\begin{minted}{ocaml}
 open String
 
 let rec occurences i terme  =
@@ -118,10 +117,10 @@ and subterme i u ltermes =
   | hd::tl -> if (i=1) then  cut u hd else  subterme (i-1) u tl
   | [] -> raise Impossible
 
-\end{Verbatim}
+\end{minted}
 Nous pouvons aussi définir l'opération de \textit{greffe} à une occurence $u$ donnée. Nous utiliserons
 l'écriture $M[N]_u$ pour signifier que le terme $M$ reçoit à l'occurence $u$ son greffon $N$.
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let rec greffe i terme greffon =
 match terme with
 | Var _ | Func(_, []) when i=0 -> greffon
@@ -136,7 +135,7 @@ match ltermes with
 | hd::tl -> if (i=1) then  (greffe u hd greffon)::tl  
             else hd::(greffeltermes (i-1) u tl greffon)
 | [] -> raise Impossible
-\end{Verbatim}
+\end{minted}
 
 \section{La substitution}
 Une substitution est une application $\theta : X \rightarrow T_{X \cup \Sigma} $
@@ -165,7 +164,7 @@ $\hat{\theta}$ est l'unique fonction telle que $\forall x \in X, \hat{\theta}x =
 \end{center}
 
 Voici un exemple d'implémentation de la substitution en \textsc{Ocaml}:
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let valeur_subst sigma var =
   try assoc var sigma
   with Not_found -> var
@@ -175,7 +174,7 @@ let rec substituer terme sigma  =
   | Var(x) -> (valeur_subst sigma terme)
   | Func(f, []) -> Func(f, []) 
   | Func(f, args) -> Func(f, (map (function t -> (substituer t sigma)) args))
-\end{Verbatim}
+\end{minted}
 
 \section{Filtrage et réécriture}
 \subsection{Le filtrage}
@@ -185,7 +184,7 @@ soit égal $M'$.
 
 On appelle $M$ le \textit{pattern} et $M'$ l'\textit{instance}.
 Nous implémentons cela comme ci-dessous :
-\begin{Verbatim}
+\begin{minted}{ocaml}
 type terme = 
   | Var of string
   | Func of string * terme list
@@ -221,7 +220,7 @@ z <->  b
 y <-> (h x )
 x <->  a 
 - : unit = ()
-\end{Verbatim}
+\end{minted}
 
 \subsection{La réécriture et l'arithmétique de Peano}
 Le mécanisme de réécriture, très simple à comprendre conceptuellement, est un peu plus difficile
@@ -262,7 +261,7 @@ entiers à partir de la fonction successeur. On se donne uniquement le symbole
 $S$ d'arité 1 et le symbole de constante 0.
 Les entiers sont les termes de la forme $0, S0, SS0, SSS0 \ldots$
 Nous pouvons implémenter cela en OCAM avec le type abstrait \verb+peano+
-\begin{Verbatim}
+\begin{minted}{ocaml}
 type peano = 
 	| Zero
 	| Succ of peano
@@ -272,7 +271,7 @@ type peano =
 let un = Succ Zero ;;
 let deux = Succ (Succ Zero) ;;
 let trois = Succ (Succ (Succ Zero)) ;;
-\end{Verbatim}
+\end{minted}
 
 Puis nous avons les quatre règles de réécriture suivante:
 $$
@@ -284,7 +283,7 @@ $$
 \end{array}
 $$
 Ces quatre règles sont implémentées par la fonction \verb+réduire+ ci-dessous:
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let rec reduire = function
 	| Plus (p, Zero) -> reduire p
 	| Plus (p1 , (Succ p2)) -> Succ ( reduire ((Plus (reduire p1, reduire p2))) )
@@ -299,7 +298,7 @@ let rec peano_entier = function
 	| any -> peano_entier (reduire any)
 	
 peano_entier (Plus ( Mult(deux, trois), trois));;
-\end{Verbatim}
+\end{minted}
 
 Essayons maintenant d'implémenter le mécanisme de réécriture en utilisation le type 
 \textit{terme} que nous avons précedemment présenté, ainsi que la fonction de filtrage \verb+filtre+ et 
@@ -317,7 +316,7 @@ Nous avons fait simple avec cette méthode naïve qui utilise les trois fonction
 	Désolé pour cette méthode bourrin, mais ça fonctionne\dots
 \end{itemize}
 
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let rec rewrite t l r =
 match t with
 | Var(_) | Func(_,[]) -> t
@@ -336,20 +335,20 @@ and rewrite_bourrin t lregles =
 	let t1 = rewriteall lregles t in
 	if t1=t then t
 	else rewrite_bourrin t1 lregles
-\end{Verbatim}
+\end{minted}
 
 Les quatre règles de Peano sont modélisées de la façon suivante :
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let peano = [
 (Func("+", [Var "x"; Func("0", [])]), Var "x") ;
 (Func("+", [Var "x"; Func("S", [Var "y"])])), Func("S", [Func("+", [Var "x"; Var "y"])]) ;
 (Func("*", [Var "x"; Func("0", [])]), Func("0", [])) ;
 (Func("*", [Var "x"; Func("S", [Var "y"])])), Func("+", [Var "x"; Func("*", [Var "x"; Var "y"])]) ;
 ] 
-\end{Verbatim}
+\end{minted}
 
 Nous pouvons ainsi calculer la valeur 16 :
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let un = Func("S", [Func("0", [])]) ;;
 let deux = Func("+", [un; un]) ;;
 let quatre = Func("*", [deux;deux]) ;;
@@ -357,7 +356,7 @@ let seize = Func("*", [quatre;quatre]) ;;
 
 rewrite_bourrin seize peano ;;    
 	
-\end{Verbatim}
+\end{minted}
 
 
 
@@ -392,7 +391,7 @@ la substitution unifiant les deux termes initiaux.
 Avec une seule fonction parcourant le système d'équations, représentés en \textsc{Ocaml} par le type \verb+(term * term) list+,
 je pense que ce n'est pas possible. Je me suis là aussi un peu cassé les cheveux.
 Voici mon code avec deux fonctions:
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let rec  unifier equation =
 match equation with
 | (Var(x),Var(y)) -> if x=y then [] else [(Var(x), Var(y))] 
@@ -409,7 +408,7 @@ and unifierliste = function
 	let t2 = unifierliste t in
 	let t1 = unifier ((substituer x t2 ),(substituer y t2)) in
 	t1 @ t2
-\end{Verbatim}
+\end{minted}
 % 
 
 On retrouve dans la fonction \verb+unifier+, qui travaille uniquement sur une paire de terme, les différentes règles
@@ -418,7 +417,7 @@ de l'équation. C'est un bel exemple de récursivité qui nous dépasse très so
 Ce bout de code vient du site de l'université de Cornell.
 
 Voici un autre exemple moins proche de l'algorithme présenté.
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let unifier t1 t2 =
   let rec unificateur t1 t2 =
     match (t1,t2) with
@@ -443,11 +442,11 @@ let unifier t1 t2 =
       end		
     | _ -> raise Impossible
   in unificateur t1 t2 
-\end{Verbatim}
+\end{minted}
 
 
 \section{Un mini \textsc{Prolog}}
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let question() =
 	begin
 	  print_string "\n autre solution 1/2 (1=oui, 2=non) ? :" ;
@@ -475,12 +474,12 @@ let prolog but lregles =
 	in
 	prouveli [but] lvar_but
   
-\end{Verbatim}
+\end{minted}
 
 \section{Quelques exemples de programmation en \textsc{Prolog}}
 \subsection{Les entiers naturels}
-Définissons en \textsc{Prolog} le type des entiers naturels avec la fonction \verb+nat+ d'arité 1, la fonction \verb+s+
-d'arité 1 et la constante \verb+0+.
+Définissons en \textsc{Prolog} le type des entiers naturels avec la fonction \texttt{nat}  d'arité 1, la fonction \texttt{s} d'arité 1 et la constante \texttt{0}.
+d'arité 1 et la constante \texttt{0}.
 Nous avons ainsi les 2 règles:
 $$
 \begin{array}{l}
@@ -488,7 +487,7 @@ nat(0) \Leftarrow \\
 nat(s(x)) \Leftarrow nat(x)
 \end{array}
 $$
-\begin{Verbatim}
+\begin{minted}{ocaml}
 ---------------------------------------------------
 let nat = [ [Func("nat", [Func("0", [])])] ;
             [Func("nat", [Func("s",[Var("X")])]) ; Func("nat", [Var("X")])] ] ;;
@@ -506,7 +505,7 @@ vincent@HP-Notebook:~/workspace vscodium$ ./prolog.byte
  X  <-> (s(s(s 0 )))
  autre solution 1/2 (1=oui, 2=non) ? :2
 vincent@HP-Notebook:~/workspace vscodium$ 
-\end{Verbatim}
+\end{minted}
 
 \subsection{Les additions de Peano}
 Nous pouvons modéliser les additions avec l'arithmétique de Peano en utilisant les deux propositions suivantes:
@@ -517,7 +516,7 @@ $$
 \end{array}
 $$
 Puis demandons à notre mini \textsc{Prolog} de résoudre l'équation $add(x,y, s(s(s(0))))$
-\begin{Verbatim}
+\begin{minted}{ocaml}
 (* les entiers de peano *)
 let peano = [ [Func("add", [Var("x"); Func("0", []); Var("x")]) ] ;
 				[Func("add", [Var("x");  Func("S", [Var("y")]) ; Func("S", [Var("z")])]) ;
@@ -536,7 +535,7 @@ vincent@HP-Notebook:~/vsc$ ./prolog.byte
  x  <->  0  y  <-> (S(S(S 0 )))
  autre solution 1/2 (1=oui, 2=non) ? :1
 vincent@HP-Notebook:~/vsc$ 
-\end{Verbatim}
+\end{minted}
 \subsection{Programmation "logique" en \textsc{Coq}}
 L'utilisation des types dépendants en \textsc{Coq} nous permet également de définir
 les relations \textsc{Prolog}.
@@ -635,7 +634,7 @@ les relations \textsc{Prolog}.
 \end{coqdoccode}
 
 \subsection{La base généalogique}
-\begin{Verbatim}
+\begin{minted}{ocaml}
 (* généalogie *)
 let grecs = [ [Func("mere", [Func("gaia",[]);Func("chronos",[]) ] ) ] ;
 				[Func("mere", [Func("rhea",[]);Func("zeus",[]) ] ) ] ;
@@ -661,7 +660,7 @@ vincent@HP-Notebook:~/vsc$ ./prolog.byte
 	autre solution 1/2 (1=oui, 2=non) ? :1
 	x  <->  helene 
 	autre solution 1/2 (1=oui, 2=non) ? :1
-\end{Verbatim}
+\end{minted}
 
 \section{L'algorithme de complétion de Knuth-Bendix}
 \subsection{Confluence et paires critiques}
@@ -718,7 +717,7 @@ Sinon, il y a un chevauchement \textit{critique} :
 	 \begin{theoreme}[Knuth-Bendix]
 		  Un système de réécriture noethérien est confluent si ses paires critiques sont joignables.
 	\end{theoreme}
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let superpose l1 l2 =
 let rec super l1 l2 occ =
 	match occ with
@@ -738,13 +737,13 @@ in super l1 l2 (occurences 0 l1)
 let rec cp (l1,r1) (l2,r2) =
   let (oc, sigma) = superpose l1 l2 in
   ((substituer  r1 sigma), (greffe oc (substituer l1 sigma) (substituer r2 sigma))) ;;  
-\end{Verbatim}
+\end{minted}
 
 
 \subsection{Terminaison}
 \subsubsection{Indécidabilité de la terminaison dans le cas "général"}
 Soient $a_1,a_2 ,a_3 , \dots$ une numérotation de tous les algorithmes.
-On définit la fonction suivante : $diag(i) ≡$ si $a_i$ termine alors \verb+boucler+, sinon \verb+s'arrêter+ \\
+On définit la fonction suivante : $diag(i) ≡$ si $a_i$ termine alors \texttt{boucler}, sinon \texttt{s'arrêter} \\
 
 Pour tout $i$, $diag(i)$ termine ssi $a_i$ ne termine pas.
 Mais il y a un $a_j$ tel que $diag = a_j$ . Nous avons donc
@@ -764,20 +763,20 @@ C'est-à-dire que l'on ne peut décider si l'algorithme $a_a$ termine sur lui-m�
 \vspace{0.5cm}
 
 Cela donne en pseudo-code :
-\begin{Verbatim}
+\begin{minted}{ocaml}
 halt(x) = si le programme x s'arrête alors vrai 
           sinon faux ;
 
 diag(p) = si halt (p) alors boucle()
           sinon stop() ;
-\end{Verbatim}
-Quel est le comportement de \verb+halt(diag(diag))+ ?
+\end{minted}
+Quel est le comportement de \texttt{halt(diag(diag))} ?
 
 
-S'il répond vrai, alors \verb+diag+ s'arrête alors qu'il est censé boucler par définition de \verb+diag+
+S'il répond vrai, alors \texttt{diag} s'arrête alors qu'il est censé boucler par définition de \texttt{diag}
 
 
-S'il répond faux, alors \verb+diag+ boucle, alors qu'il est censé s'arrêter par défintion de \verb+diag+
+S'il répond faux, alors \texttt{diag} boucle, alors qu'il est censé s'arrêter par défintion de \texttt{diag}
 
 \subsubsection{Système de réécriture noethérien}
 Un système de réécriture est noethérien si et seulement s'il existe un ordre bien fondé
@@ -798,7 +797,7 @@ $$ s > t \Leftrightarrow  |s| > |t|\ et\  \forall x \in X, |s|_x ≥ |t|_x $$
 
 \subsection{Complétion de Knuth-Bendix}
 Nous pourrons ici nous référer au livre très didactique \textit{Term Rewriting and All That}\cite{rewriting}
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let rec super_liste l1 l2 occ =
  match occ with
  | a::b -> 
@@ -839,4 +838,4 @@ let rec superpose_liste_aux l1 l2 occ = (* rend liste des occurences et substitu
 		end
 	with Impossible -> []
 in superpose_liste_aux l1 l2 (occurences l1) ;;
-\end{Verbatim}
+\end{minted}

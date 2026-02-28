@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{entiers}\PYG{p}{(}\PYG{l+s+sAtom}{zero}\PYG{p}{).}
+\PYG{n+nf}{entiers}\PYG{p}{(}\PYG{n+nf}{s}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{))} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{entiers}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{)}
+\end{Verbatim}

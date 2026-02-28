@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{valeur\PYGZus{}subst} \PYG{n}{sigma} \PYG{n}{var} \PYG{o}{=}
+  \PYG{k}{try} \PYG{n}{assoc} \PYG{n}{var} \PYG{n}{sigma}
+  \PYG{k}{with} \PYG{n+nc}{Not\PYGZus{}found} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{var}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{substituer} \PYG{n}{terme} \PYG{n}{sigma}  \PYG{o}{=}
+  \PYG{k}{match} \PYG{n}{terme} \PYG{k}{with}
+  \PYG{o}{|} \PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{valeur\PYGZus{}subst} \PYG{n}{sigma} \PYG{n}{terme}\PYG{o}{)}
+  \PYG{o}{|} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f}\PYG{o}{,} \PYG{n+nb+bp}{[]}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f}\PYG{o}{,} \PYG{n+nb+bp}{[]}\PYG{o}{)}
+  \PYG{o}{|} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f}\PYG{o}{,} \PYG{n}{args}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f}\PYG{o}{,} \PYG{o}{(}\PYG{n}{map} \PYG{o}{(}\PYG{k}{function} \PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{substituer} \PYG{n}{t} \PYG{n}{sigma}\PYG{o}{))} \PYG{n}{args}\PYG{o}{))}
+\end{Verbatim}

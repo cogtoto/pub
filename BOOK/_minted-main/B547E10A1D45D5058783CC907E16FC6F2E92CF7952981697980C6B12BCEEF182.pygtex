@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{k}{let} \PYG{n}{nat} \PYG{o}{=} \PYG{o}{[} \PYG{o}{[}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}nat\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}0\PYGZdq{}}\PYG{o}{,} \PYG{n+nb+bp}{[]}\PYG{o}{)])]} \PYG{o}{;}
+            \PYG{o}{[}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}nat\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}s\PYGZdq{}}\PYG{o}{,[}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{)])])} \PYG{o}{;} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}nat\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{)])]} \PYG{o}{]} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{but} \PYG{o}{=} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}nat\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{)])} \PYG{o}{;;}
+
+\PYG{n}{prolog} \PYG{n}{but} \PYG{n}{nat} \PYG{o}{;;}
+\PYG{o}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{n}{vincent}\PYG{o}{@}\PYG{n+nc}{HP}\PYG{o}{\PYGZhy{}}\PYG{n+nc}{Notebook}\PYG{o}{:\PYGZti{}/}\PYG{n}{workspace} \PYG{n}{vscodium}\PYG{o}{\PYGZdl{}} \PYG{o}{./}\PYG{n}{prolog}\PYG{o}{.}\PYG{n}{byte}
+ \PYG{n+nc}{X}  \PYG{o}{\PYGZlt{}\PYGZhy{}\PYGZgt{}}  \PYG{l+m+mi}{0}
+ \PYG{n}{autre} \PYG{n}{solution} \PYG{l+m+mi}{1}\PYG{o}{/}\PYG{l+m+mi}{2} \PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{=}\PYG{n}{oui}\PYG{o}{,} \PYG{l+m+mi}{2}\PYG{o}{=}\PYG{n}{non}\PYG{o}{)} \PYG{o}{?} \PYG{o}{:}\PYG{l+m+mi}{1}
+ \PYG{n+nc}{X}  \PYG{o}{\PYGZlt{}\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{s} \PYG{l+m+mi}{0} \PYG{o}{)}
+ \PYG{n}{autre} \PYG{n}{solution} \PYG{l+m+mi}{1}\PYG{o}{/}\PYG{l+m+mi}{2} \PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{=}\PYG{n}{oui}\PYG{o}{,} \PYG{l+m+mi}{2}\PYG{o}{=}\PYG{n}{non}\PYG{o}{)} \PYG{o}{?} \PYG{o}{:}\PYG{l+m+mi}{1}
+ \PYG{n+nc}{X}  \PYG{o}{\PYGZlt{}\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{s}\PYG{o}{(}\PYG{n}{s} \PYG{l+m+mi}{0} \PYG{o}{))}
+ \PYG{n}{autre} \PYG{n}{solution} \PYG{l+m+mi}{1}\PYG{o}{/}\PYG{l+m+mi}{2} \PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{=}\PYG{n}{oui}\PYG{o}{,} \PYG{l+m+mi}{2}\PYG{o}{=}\PYG{n}{non}\PYG{o}{)} \PYG{o}{?} \PYG{o}{:}\PYG{l+m+mi}{1}
+ \PYG{n+nc}{X}  \PYG{o}{\PYGZlt{}\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{s}\PYG{o}{(}\PYG{n}{s}\PYG{o}{(}\PYG{n}{s} \PYG{l+m+mi}{0} \PYG{o}{)))}
+ \PYG{n}{autre} \PYG{n}{solution} \PYG{l+m+mi}{1}\PYG{o}{/}\PYG{l+m+mi}{2} \PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{=}\PYG{n}{oui}\PYG{o}{,} \PYG{l+m+mi}{2}\PYG{o}{=}\PYG{n}{non}\PYG{o}{)} \PYG{o}{?} \PYG{o}{:}\PYG{l+m+mi}{2}
+\PYG{n}{vincent}\PYG{o}{@}\PYG{n+nc}{HP}\PYG{o}{\PYGZhy{}}\PYG{n+nc}{Notebook}\PYG{o}{:\PYGZti{}/}\PYG{n}{workspace} \PYG{n}{vscodium}\PYG{o}{\PYGZdl{}}
+\end{Verbatim}
