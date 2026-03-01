@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{ski\PYGZus{}norm} \PYG{n}{m} \PYG{o}{=}
+\PYG{k}{match} \PYG{n}{m} \PYG{k}{with}
+\PYG{o}{|} \PYG{n+nc}{S} \PYG{o}{|} \PYG{n+nc}{K} \PYG{o}{|} \PYG{n+nc}{I} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{m}
+\PYG{o}{|} \PYG{n+nc}{Varia} \PYG{n}{x} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{m}
+\PYG{o}{|} \PYG{n+nc}{Appl} \PYG{o}{(}\PYG{n}{m0}\PYG{o}{,} \PYG{n}{m1}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{k}{match} \PYG{n}{ski\PYGZus{}norm} \PYG{n}{m0} \PYG{k}{with}
+\PYG{o}{|} \PYG{n+nc}{I} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{ski\PYGZus{}norm} \PYG{n}{m1}
+\PYG{o}{|} \PYG{n+nc}{Appl} \PYG{o}{(}\PYG{n+nc}{K}\PYG{o}{,} \PYG{n}{m\PYGZsq{}}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{m\PYGZsq{}}
+\PYG{o}{|} \PYG{n+nc}{Appl} \PYG{o}{(}\PYG{n+nc}{Appl} \PYG{o}{(}\PYG{n+nc}{S}\PYG{o}{,} \PYG{n}{m3}\PYG{o}{),} \PYG{n}{m2}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{ski\PYGZus{}norm} \PYG{o}{(}\PYG{n+nc}{Appl} \PYG{o}{(}\PYG{n+nc}{Appl} \PYG{o}{(}\PYG{n}{m3}\PYG{o}{,} \PYG{n}{m1}\PYG{o}{),} \PYG{n+nc}{Appl} \PYG{o}{(}\PYG{n}{m2}\PYG{o}{,} \PYG{n}{m1}\PYG{o}{)))}
+\PYG{o}{|} \PYG{n}{autre} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Appl} \PYG{o}{(}\PYG{n}{autre}\PYG{o}{,} \PYG{n}{ski\PYGZus{}norm} \PYG{n}{m1}\PYG{o}{);;}
+\end{Verbatim}

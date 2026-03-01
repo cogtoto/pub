@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nv}{env}\PYG{+w}{ }\PYG{c+c1}{; affichage de l\PYGZsq{}environnement récursif avec DrRacket}
+\PYG{o}{\PYGZsh{}}\PYG{n+nv}{0=}\PYG{p}{((}\PYG{n+nf}{env}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{0}\PYG{o}{\PYGZsh{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{not}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:15:17\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{=}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:16:15\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{*}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:17:17\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{\PYGZhy{}}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:18:17\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{+}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:19:17\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{atom?}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:20:19\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{boolean?}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:21:22\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{number?}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:22:21\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{cons}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:23:18\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{car}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:24:17\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{cdr}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:25:17\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{pair?}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:34:19\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{apply}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:36:22\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{fact}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:46:20\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{lookup}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:53:21\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{eprogn}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:63:21\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{evlis}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:74:20\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{invoke}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:85:14\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{extend}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:94:18\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{mapcar}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:105:18\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{mapcadr}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:113:19\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{evallet}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:121:6\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nf}{evaluate}\PYG{+w}{ }\PYG{o}{.}\PYG{+w}{ }\PYG{o}{\PYGZsh{}}\PYG{n+nv}{\PYGZlt{}procedure:}\PYG{o}{...}\PYG{n+nv}{interpreter2}\PYG{o}{.}\PYG{n+nv}{scm:128:16\PYGZgt{}}\PYG{p}{))}
+\end{Verbatim}

@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{ski\PYGZus{}lambda} \PYG{o}{=} \PYG{k}{function}
+\PYG{o}{|} \PYG{n+nc}{I} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{)}
+\PYG{o}{|} \PYG{n+nc}{K} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{))}
+\PYG{o}{|} \PYG{n+nc}{S} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}z\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}z\PYGZdq{}}\PYG{o}{),} \PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}z\PYGZdq{}}\PYG{o}{)))))}
+\PYG{o}{|} \PYG{n+nc}{Varia}\PYG{o}{(}\PYG{n}{x}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{)}
+\PYG{o}{|} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n}{m}\PYG{o}{,}\PYG{n}{n}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{App}\PYG{o}{(}\PYG{n}{ski\PYGZus{}lambda} \PYG{n}{m}\PYG{o}{,}\PYG{n}{ski\PYGZus{}lambda} \PYG{n}{n}\PYG{o}{)}
+\PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{SkiErreur}
+\end{Verbatim}

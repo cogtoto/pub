@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{type} \PYG{n}{exp} \PYG{o}{=}
+\PYG{o}{|} \PYG{n+nc}{Booleen} \PYG{k}{of} \PYG{k+kt}{bool}
+\PYG{o}{|} \PYG{n+nc}{Symbole} \PYG{k}{of} \PYG{k+kt}{string}
+\PYG{o}{|} \PYG{n+nc}{Mot} \PYG{k}{of} \PYG{k+kt}{string}
+\PYG{o}{|} \PYG{n+nc}{Entier} \PYG{k}{of} \PYG{k+kt}{int}
+\PYG{o}{|} \PYG{n+nc}{Nil}
+\PYG{o}{|} \PYG{n+nc}{Paire} \PYG{k}{of} \PYG{n}{exp} \PYG{n}{ref} \PYG{o}{*} \PYG{n}{exp} \PYG{n}{ref}
+\PYG{o}{|} \PYG{n+nc}{Closure} \PYG{k}{of} \PYG{k+kt}{string} \PYG{k+kt}{list} \PYG{o}{*} \PYG{n}{ast} \PYG{k+kt}{list} \PYG{o}{*} \PYG{o}{(}\PYG{n}{env} \PYG{n}{ref}\PYG{o}{)}
+\PYG{k}{and} \PYG{n}{ast} \PYG{o}{=}
+\PYG{o}{|} \PYG{n+nc}{Atom} \PYG{k}{of} \PYG{n}{exp}
+\PYG{o}{|} \PYG{n+nc}{Var} \PYG{k}{of} \PYG{k+kt}{string}
+\PYG{o}{|} \PYG{n+nc}{If} \PYG{k}{of} \PYG{n}{ast} \PYG{o}{*} \PYG{n}{ast} \PYG{o}{*} \PYG{n}{ast}
+\PYG{o}{|} \PYG{n+nc}{Cond} \PYG{k}{of} \PYG{o}{(}\PYG{n}{ast} \PYG{o}{*} \PYG{n}{ast}\PYG{o}{)} \PYG{k+kt}{list}
+\PYG{o}{|} \PYG{n+nc}{And} \PYG{k}{of} \PYG{n}{ast} \PYG{k+kt}{list}
+\PYG{o}{|} \PYG{n+nc}{Or} \PYG{k}{of} \PYG{n}{ast} \PYG{k+kt}{list}
+\PYG{o}{|} \PYG{n+nc}{Call} \PYG{k}{of} \PYG{n}{ast} \PYG{o}{*} \PYG{n}{ast} \PYG{k+kt}{list}
+\PYG{o}{|} \PYG{n+nc}{Call0} \PYG{k}{of} \PYG{n}{ast}    \PYG{c}{(* procedure sans argument *)}
+\PYG{o}{|} \PYG{n+nc}{Lambda} \PYG{k}{of} \PYG{k+kt}{string} \PYG{k+kt}{list} \PYG{o}{*} \PYG{n}{ast} \PYG{k+kt}{list}
+\PYG{o}{|} \PYG{n+nc}{Let} \PYG{k}{of} \PYG{o}{(}\PYG{k+kt}{string} \PYG{o}{*} \PYG{n}{ast}\PYG{o}{)} \PYG{k+kt}{list} \PYG{o}{*} \PYG{n}{ast} \PYG{k+kt}{list}
+\PYG{o}{|} \PYG{n+nc}{Letrec} \PYG{k}{of} \PYG{o}{(}\PYG{k+kt}{string} \PYG{o}{*} \PYG{n}{ast}\PYG{o}{)} \PYG{k+kt}{list} \PYG{o}{*} \PYG{n}{ast} \PYG{k+kt}{list}
+\PYG{o}{|} \PYG{n+nc}{Define} \PYG{k}{of} \PYG{k+kt}{string} \PYG{o}{*} \PYG{n}{ast}
+\PYG{o}{|} \PYG{n+nc}{Begin} \PYG{k}{of} \PYG{n}{ast} \PYG{k+kt}{list}
+\PYG{o}{|} \PYG{n+nc}{Apply} \PYG{k}{of} \PYG{n}{ast} \PYG{o}{*} \PYG{n}{ast} \PYG{k+kt}{list}
+\PYG{o}{|} \PYG{n+nc}{Quote} \PYG{k}{of} \PYG{n}{exp}
+\PYG{k}{and} \PYG{n}{env} \PYG{o}{=} \PYG{o}{(}\PYG{k+kt}{string} \PYG{o}{*} \PYG{n}{exp}\PYG{o}{)} \PYG{k+kt}{list}
+\end{Verbatim}

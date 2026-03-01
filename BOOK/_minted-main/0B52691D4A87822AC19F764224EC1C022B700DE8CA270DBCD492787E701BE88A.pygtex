@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{≡→leib}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{\PYGZob{}}A\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{k+kt}{Set}\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZob{}}x\PYG{+w}{ }y\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }A\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{o}{(}x\PYG{+w}{ }≡\PYG{+w}{ }y\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{o}{(}leib\PYG{+w}{ }x\PYG{+w}{ }y\PYG{o}{)}
+≡→leib\PYG{+w}{ }xy\PYG{+w}{ }P\PYG{+w}{  }\PYG{o+ow}{=}\PYG{+w}{  }subst\PYG{+w}{ }P\PYG{+w}{ }xy
+
+\PYG{n+nf}{leib→≡}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{\PYGZob{}}A\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{k+kt}{Set}\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZob{}}x\PYG{+w}{ }y\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }A\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{o}{(}leib\PYG{+w}{ }x\PYG{+w}{ }y\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{o}{(}x\PYG{+w}{ }≡\PYG{+w}{ }y\PYG{o}{)}
+leib→≡\PYG{+w}{ }\PYG{o}{\PYGZob{}}A\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZob{}}x\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZob{}}y\PYG{o}{\PYGZcb{}}\PYG{+w}{ }lxy\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }Qy
+\PYG{+w}{  }\PYG{k+kr}{where}
+\PYG{+w}{    }\PYG{n+nf}{Q}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }A\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{k+kt}{Set}
+\PYG{+w}{    }Q\PYG{+w}{ }z\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }x\PYG{+w}{ }≡\PYG{+w}{ }z
+\PYG{+w}{    }\PYG{n+nf}{Qx}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Q\PYG{+w}{ }x
+\PYG{+w}{    }Qx\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }refl
+\PYG{+w}{    }\PYG{n+nf}{Qy}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Q\PYG{+w}{ }y
+\PYG{+w}{    }Qy\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }lxy\PYG{+w}{ }Q\PYG{+w}{ }Qx
+\end{Verbatim}

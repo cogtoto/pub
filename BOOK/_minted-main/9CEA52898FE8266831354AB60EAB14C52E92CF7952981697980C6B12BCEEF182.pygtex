@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{type} \PYG{n}{faux} \PYG{o}{=} \PYG{o}{|} \PYG{o}{;;}
+\PYG{k}{type} \PYG{n}{vrai} \PYG{o}{=} \PYG{n+nc}{I} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{exfalsoquodlibet} \PYG{o}{=} \PYG{k}{fun} \PYG{o}{(}\PYG{n}{f}\PYG{o}{:}\PYG{n}{faux}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}}  \PYG{n+nc}{I}\PYG{o}{;;}
+\end{Verbatim}

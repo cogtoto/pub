@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nv}{SCHEME}
+\PYG{p}{(}\PYG{k}{letrec}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{f}\PYG{+w}{ }\PYG{n+nv}{e}\PYG{p}{))}
+\PYG{+w}{  }\PYG{n+nv}{corps}\PYG{p}{)}
+\PYG{+w}{  }\PYG{n+nv}{==\PYGZgt{}}
+\PYG{+w}{ }\PYG{p}{(}\PYG{k}{let}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{f}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZsq{}any}\PYG{p}{))}
+\PYG{+w}{    }\PYG{p}{(}\PYG{k}{let}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{f\PYGZhy{}aux}\PYG{+w}{ }\PYG{n+nv}{e}\PYG{p}{))}
+\PYG{+w}{       }\PYG{p}{(}\PYG{k}{set!}\PYG{+w}{ }\PYG{n+nv}{f}\PYG{+w}{ }\PYG{n+nv}{f\PYGZhy{}aux}\PYG{p}{)}
+\PYG{+w}{       }\PYG{n+nv}{corps}\PYG{p}{))}
+
+\PYG{p}{(}\PYG{k}{let}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{fact}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZsq{}any}\PYG{p}{))}
+\PYG{+w}{      }\PYG{p}{(}\PYG{k}{let}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{f\PYGZhy{}aux}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{n}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{eq?}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{*}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{fact}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{\PYGZhy{}}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)))))))}
+\PYG{+w}{        }\PYG{p}{(}\PYG{k}{set!}\PYG{+w}{ }\PYG{n+nv}{fact}\PYG{+w}{ }\PYG{n+nv}{f\PYGZhy{}aux}\PYG{p}{))}
+\PYG{+w}{  }\PYG{p}{(}\PYG{n+nf}{fact}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{))}
+
+\PYG{n+nv}{OCAML}
+\PYG{k}{let}\PYG{+w}{ }\PYG{n+nv}{fact}\PYG{+w}{ }\PYG{n+nb}{=}\PYG{+w}{ }\PYG{n+nv}{ref}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{function}\PYG{+w}{ }\PYG{n+nv}{x}\PYG{+w}{ }\PYG{n+nv}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n+nv}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nv}{in}
+\PYG{+w}{	}\PYG{k}{let}\PYG{+w}{ }\PYG{n+nv}{aux}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{n+nb}{=}\PYG{+w}{ }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nv}{n=0}\PYG{+w}{ }\PYG{n+nv}{then}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{n+nb}{*}\PYG{+w}{ }\PYG{n+nv}{!fact}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{n}\PYG{+w}{ }\PYG{n+nb}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nv}{in}
+\PYG{+w}{	 }\PYG{n+nv}{fact:=}\PYG{+w}{ }\PYG{n+nv}{aux}\PYG{+w}{ }\PYG{c+c1}{; !fact 5}
+\end{Verbatim}

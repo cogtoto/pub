@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nv}{envRec}\PYG{+w}{ }\PYG{n+nb}{=}\PYG{+w}{  }\PYG{p}{(}\PYG{n+nf}{fac,}\PYG{+w}{ }\PYG{n+nv}{\PYGZlt{}lambda}\PYG{+w}{ }\PYG{n+nv}{corps\PYGZgt{},}\PYG{+w}{ }\PYG{n+nv}{envRec}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nv}{::}\PYG{+w}{ }\PYG{n+nv}{env}
+\end{Verbatim}

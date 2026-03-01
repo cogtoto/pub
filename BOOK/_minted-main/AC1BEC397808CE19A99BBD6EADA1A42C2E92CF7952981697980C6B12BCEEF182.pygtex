@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{type} \PYG{n}{faux} \PYG{o}{=} \PYG{o}{|} \PYG{o}{;;}
+\PYG{k}{type} \PYG{n}{farfelu} \PYG{o}{=} \PYG{o}{|} \PYG{o}{;;}
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{f} \PYG{o}{(}\PYG{n}{x}\PYG{o}{:}\PYG{n}{faux}\PYG{o}{):}\PYG{n}{farfelu} \PYG{o}{=} \PYG{n}{f} \PYG{n}{x}  \PYG{o}{;;}
+\PYG{k}{val} \PYG{n}{f} \PYG{o}{:} \PYG{n}{faux} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{farfelu} \PYG{o}{=} \PYG{o}{\PYGZlt{}}\PYG{k}{fun}\PYG{o}{\PYGZgt{}}
+\end{Verbatim}

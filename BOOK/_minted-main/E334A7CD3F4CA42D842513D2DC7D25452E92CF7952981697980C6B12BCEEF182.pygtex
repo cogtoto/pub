@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{exec\PYGZus{}aux} \PYG{o}{=} \PYG{k}{function}
+\PYG{o}{|} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n+nc}{I}\PYG{o}{,} \PYG{n}{x}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{exec\PYGZus{}aux} \PYG{n}{x}
+\PYG{o}{|} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n+nc}{K}\PYG{o}{,} \PYG{n}{x}\PYG{o}{),} \PYG{n}{y}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{exec\PYGZus{}aux} \PYG{n}{x}
+\PYG{o}{|} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n+nc}{S}\PYG{o}{,}\PYG{n}{x}\PYG{o}{),}\PYG{n}{y}\PYG{o}{),}\PYG{n}{z}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n}{exec\PYGZus{}aux} \PYG{n}{x}\PYG{o}{,} \PYG{n}{exec\PYGZus{}aux} \PYG{n}{z}\PYG{o}{),} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n}{exec\PYGZus{}aux} \PYG{n}{y}\PYG{o}{,}\PYG{n}{exec\PYGZus{}aux} \PYG{n}{z}\PYG{o}{))}
+\PYG{o}{|} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,}\PYG{n}{y}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n}{exec\PYGZus{}aux} \PYG{n}{x}\PYG{o}{,} \PYG{n}{exec\PYGZus{}aux} \PYG{n}{y}\PYG{o}{)}
+\PYG{o}{|} \PYG{n+nc}{Varia} \PYG{n}{x} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Varia} \PYG{n}{x}
+\PYG{o}{|} \PYG{n+nc}{I} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{I}
+\PYG{o}{|} \PYG{n+nc}{K} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{K}
+\PYG{o}{|} \PYG{n+nc}{S} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{S}
+\PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{SkiErreur}
+\PYG{k}{and}  \PYG{n}{exec} \PYG{n}{t} \PYG{o}{=}
+\PYG{k}{let} \PYG{n}{r} \PYG{o}{=} \PYG{n}{exec\PYGZus{}aux} \PYG{n}{t} \PYG{k}{in}
+	\PYG{k}{if} \PYG{n}{r}\PYG{o}{=}\PYG{n}{t} \PYG{k}{then} \PYG{n}{r} \PYG{k}{else} \PYG{n}{exec\PYGZus{}aux} \PYG{n}{r}
+\end{Verbatim}

@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+t1\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }\PYG{l+m+mi}{2}
+t2\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }+\PYG{+w}{ }\PYG{l+m+mi}{1}
+
+\PYG{n+nf}{t1≡t2}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }t1\PYG{+w}{ }≡\PYG{+w}{ }t2
+t1≡t2\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }refl
+\end{Verbatim}

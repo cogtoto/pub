@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{preuve\PYGZus{}impl} \PYG{o}{=}
+  \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}A\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Type}\PYG{o}{,}
+    \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}B\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Type}\PYG{o}{,}
+      \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}H\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Or}\PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n}{non}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}A\PYGZdq{}}\PYG{o}{),} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}B\PYGZdq{}}\PYG{o}{),}
+        \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}H0\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}A\PYGZdq{}}\PYG{o}{,}
+          \PYG{n+nc}{Case} \PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}H\PYGZdq{}}\PYG{o}{,}
+                \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Prod}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}w\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}A\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{False}\PYG{o}{),} \PYG{n+nc}{False\PYGZus{}ind}\PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}B\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}H0\PYGZdq{}}\PYG{o}{))),}
+                \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}B\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{))))))}
+\PYG{k}{in}  \PYG{o}{(}\PYG{n}{print} \PYG{n}{preuve\PYGZus{}impl} \PYG{o}{;} \PYG{n}{print\PYGZus{}newline}\PYG{n+nb+bp}{()} \PYG{o}{;}
+     \PYG{n}{print} \PYG{o}{(}\PYG{n}{fullReduc} \PYG{o}{(}\PYG{n}{check} \PYG{n}{preuve\PYGZus{}impl} \PYG{n}{env0}\PYG{o}{)))} \PYG{o}{;;}
+\PYG{o}{\PYGZgt{}} \PYG{n}{λA}\PYG{o}{:}\PYG{n+nn}{Type}\PYG{p}{.}\PYG{n}{λB}\PYG{o}{:}\PYG{n+nn}{Type}\PYG{p}{.}\PYG{n}{λH}\PYG{o}{:(}\PYG{n}{λP}\PYG{o}{:}\PYG{n+nn}{Type}\PYG{p}{.}\PYG{o}{\PYGZti{}}\PYG{n+nc}{P} \PYG{n+nc}{A}\PYG{o}{)}\PYG{err}{\PYGZbs{}}\PYG{o}{/}\PYG{n+nn}{B}\PYG{p}{.}\PYG{n}{λH0}\PYG{o}{:}\PYG{n+nn}{A}\PYG{p}{.}\PYG{n}{case}\PYG{o}{(}\PYG{n+nc}{H}\PYG{o}{,} \PYG{n}{λx}\PYG{o}{:\PYGZti{}}\PYG{n+nn}{A}\PYG{p}{.}\PYG{n}{false\PYGZus{}ind}\PYG{o}{(}\PYG{n+nc}{B}\PYG{o}{,(}\PYG{n}{x} \PYG{n+nc}{H0}\PYG{o}{)),} \PYG{n}{λy}\PYG{o}{:}\PYG{n+nn}{B}\PYG{p}{.}\PYG{n}{y}\PYG{o}{)}
+  \PYG{n}{πA}\PYG{o}{:}\PYG{n+nn}{Type}\PYG{p}{.}\PYG{n}{πB}\PYG{o}{:}\PYG{n+nn}{Type}\PYG{p}{.}\PYG{o}{(\PYGZti{}}\PYG{n+nc}{A}\PYG{err}{\PYGZbs{}}\PYG{o}{/}\PYG{n+nc}{B}\PYG{err}{→}\PYG{o}{(}\PYG{n+nc}{A}\PYG{err}{→}\PYG{n+nc}{B}\PYG{o}{))}
+\end{Verbatim}

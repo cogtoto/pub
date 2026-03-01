@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{n+nv}{callcc}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{cloture\PYGZhy{}to\PYGZhy{}reifier}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{e}\PYG{+w}{ }\PYG{n+nv}{r}\PYG{+w}{ }\PYG{n+nv}{k}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{evaluate}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{car}\PYG{+w}{ }\PYG{n+nv}{e}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nv}{r}\PYG{+w}{ }\PYG{n+nv}{id}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nv}{k}\PYG{p}{))))}
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{k}{quote}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{cloture\PYGZhy{}to\PYGZhy{}reifier}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{e}\PYG{+w}{ }\PYG{n+nv}{r}\PYG{+w}{ }\PYG{n+nv}{k}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{k}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{car}\PYG{+w}{ }\PYG{n+nv}{e}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{))))}
+\end{Verbatim}

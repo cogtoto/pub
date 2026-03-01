@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{f} \PYG{o}{(}\PYG{n}{x}\PYG{o}{:}\PYG{n}{faux}\PYG{o}{)} \PYG{o}{:} \PYG{n}{farfelu} \PYG{o}{=} \PYG{k}{match} \PYG{n}{x} \PYG{k}{with} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{.} \PYG{o}{;;}
+\PYG{k}{val} \PYG{n}{f} \PYG{o}{:} \PYG{n}{faux} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{farfelu} \PYG{o}{=} \PYG{o}{\PYGZlt{}}\PYG{k}{fun}\PYG{o}{\PYGZgt{}}
+\end{Verbatim}

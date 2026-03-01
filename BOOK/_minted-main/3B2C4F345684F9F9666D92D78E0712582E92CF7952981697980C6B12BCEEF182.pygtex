@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{type} \PYG{n}{faux} \PYG{o}{=} \PYG{o}{|} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{modus\PYGZus{}tollens} \PYG{o}{(}\PYG{n}{hfq}\PYG{o}{:}\PYG{k}{\PYGZsq{}}\PYG{n}{q}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{faux}\PYG{o}{)} \PYG{o}{(}\PYG{n}{hpq}\PYG{o}{:}\PYG{k}{\PYGZsq{}}\PYG{n}{p}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{k}{\PYGZsq{}}\PYG{n}{q}\PYG{o}{)} \PYG{o}{(}\PYG{n}{hp}\PYG{o}{:}\PYG{k}{\PYGZsq{}}\PYG{n}{p}\PYG{o}{)} \PYG{o}{=}
+  \PYG{n}{hfq} \PYG{o}{(}\PYG{n}{hpq} \PYG{n}{hp}\PYG{o}{)}
+\end{Verbatim}

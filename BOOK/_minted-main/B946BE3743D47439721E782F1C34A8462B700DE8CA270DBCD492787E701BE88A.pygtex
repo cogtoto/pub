@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{plus0}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{(}n\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Nat\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }n\PYG{+w}{ }+\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }≡\PYG{+w}{ }n
+plus0\PYG{+w}{ }zero\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }refl
+plus0\PYG{+w}{ }\PYG{o}{(}suc\PYG{+w}{ }n\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }cong\PYG{+w}{ }suc\PYG{+w}{ }\PYG{o}{(}plus0\PYG{+w}{ }n\PYG{o}{)}
+\end{Verbatim}

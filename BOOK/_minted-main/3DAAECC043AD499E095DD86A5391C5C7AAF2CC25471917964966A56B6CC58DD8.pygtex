@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{n+nv}{evaluate}
+\PYG{+w}{  }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{e}\PYG{+w}{ }\PYG{n+nv}{r}\PYG{+w}{ }\PYG{n+nv}{k}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{((}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{pair?}\PYG{+w}{ }\PYG{n+nv}{e}\PYG{p}{)}
+\PYG{+w}{        }\PYG{p}{(}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{equal?}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{car}\PYG{+w}{ }\PYG{n+nv}{e}\PYG{p}{)}\PYG{+w}{ }\PYG{l+s+ss}{\PYGZsq{}lambda}\PYG{p}{)}
+\PYG{+w}{            }\PYG{n+nv}{eval\PYGZhy{}abstraction}
+\PYG{+w}{            }\PYG{n+nv}{eval\PYGZhy{}application}\PYG{p}{)}
+\PYG{+w}{        }\PYG{p}{(}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{or}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{or}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{number?}\PYG{+w}{ }\PYG{n+nv}{e}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{string?}\PYG{+w}{ }\PYG{n+nv}{e}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{boolean?}\PYG{+w}{ }\PYG{n+nv}{e}\PYG{p}{))}
+\PYG{+w}{            }\PYG{n+nv}{eval\PYGZhy{}constante}
+\PYG{+w}{            }\PYG{n+nv}{eval\PYGZhy{}variable}\PYG{p}{))}
+\PYG{+w}{     }\PYG{n+nv}{e}\PYG{+w}{ }\PYG{n+nv}{r}\PYG{+w}{ }\PYG{n+nv}{k}\PYG{+w}{ }\PYG{p}{)))}
+\end{Verbatim}

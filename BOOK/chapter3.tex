@@ -10,7 +10,7 @@ des arguments de la fonction.
 Nous perdons donc le côté  pur du $\lambda$-calcul qui se suffit à lui-même pour
 dérouler ses calculs.
 L'interprète ne pourra évaluer son expression qu'en présence d'un environnement.
-Un interprète est ainsi  une fonction \verb+eval+ telle que \verb+(eval+ $\pi$ \verb+env)+ \imp\  \verb+valeur+
+Un interprète est ainsi  une fonction \texttt{eval} telle que \texttt{(eval $\pi$ env)} \imp\  \texttt{valeur}
 
 Nous reprenons ici  un peu du code de l'excellent blog :
 \url{https://bernsteinbear.com/blog/lisp}.
@@ -61,8 +61,8 @@ représenter la valeur d'une évaluation avec un type différent de l'expression
 La puissance de Lisp repose sur  cette uniformité entre programmme et valeur. Nous utiliserons cette caractéristique pour
 implémenter un interprète Lisp en Lisp.
 
-Voici la séquence du code, depuis le stream en entrée de l'analyseur lexical jusqu'à la sortie de l'évaluateur \verb+eval+.
-J'ai fait le choix d'avoir une représentation intermédiaire \verb+ast+ permettant de modéliser l'arbre syntaxique, et de faciliter
+Voici la séquence du code, depuis le stream en entrée de l'analyseur lexical jusqu'à la sortie de l'évaluateur \texttt{eval}.
+J'ai fait le choix d'avoir une représentation intermédiaire \texttt{ast} permettant de modéliser l'arbre syntaxique, et de faciliter
 le processus d'évaluation.
 \begin{center}
 \begin{tikzpicture}
@@ -95,7 +95,7 @@ le processus d'évaluation.
 
 Voici le code \textsc{Ocaml} des type abstrait \verb+exp+, \verb+ast+ et \verb+env+ :
 
-\begin{Verbatim}
+\begin{minted}{ocaml}
 type exp =
 | Booleen of bool
 | Symbole of string
@@ -121,7 +121,7 @@ and ast =
 | Apply of ast * ast list
 | Quote of exp
 and env = (string * exp) list
-  \end{Verbatim}
+\end{minted}
 
 
 \subsection{Les étapes Read, Eval, Print}
@@ -136,7 +136,7 @@ Voici quelques exemples d'arbres syntaxiques générés avec Yacc.
 Ces arbres syntaxiques sont à nouveau dessinés avec le package Tikz et nous avons développé une petite
 fonction qui parcourt l'expression et génère le code Tikz.
 
-\verb+(moins 4 3)+
+\texttt{(moins 4 3)}
 \begin{center}
 \begin{tikzpicture}[level distance=1.5cm]
 \node {call} child {node {var} child { node{moins} }}  
@@ -147,7 +147,7 @@ fonction qui parcourt l'expression et génère le code Tikz.
 \end{center}
 
 
-\verb+(if #t (plus 4 5) (moins 3 2))+
+\texttt{(if #t (plus 4 5) (moins 3 2))}
 \begin{center}
 \begin{tikzpicture}[ level 1/.style={sibling distance=3cm},
 level 2/.style={sibling distance=1.5cm},  level 3/.style={sibling distance=1.5cm}]
@@ -160,7 +160,7 @@ child {node {exp list} child { node {4 }}  child { node {5 }} } }  child {node {
 \end{tikzpicture}
 \end{center}
 
-Et enfin une expression let \verb+(let ((a 2) (b 3)) (plus a b))+
+Et enfin une expression let \texttt{(let ((a 2) (b 3)) (plus a b))}
 \begin{center}
 \begin{tikzpicture}[ level 1/.style={sibling distance=3.5cm},
 level 2/.style={sibling distance=2cm},  level 3/.style={sibling distance=1.5cm}]
@@ -171,11 +171,11 @@ level 2/.style={sibling distance=2cm},  level 3/.style={sibling distance=1.5cm}]
 \end{center}
 
 L'étape \textit{EVAL} va parcourir l'arbre syntaxique de l'expression, traiter cette expression et
-en exprimer une valeur mod\'{e}lis\'{e}e avec le type \verb+value+
+en exprimer une valeur mod\'{e}lis\'{e}e avec le type \texttt{value}
 
-La fonction \verb+eval+ est une fonction prenant pour  arguments une expression de type \verb+ast+ et un environnement.
-Elle retourne une valeur de type \verb+exp+. Voici sa signature: \\
-\verb+val eval : ast -> env -> exp = <fun>+
+La fonction \texttt{eval} est une fonction prenant pour  arguments une expression de type \texttt{ast} et un environnement.
+Elle retourne une valeur de type \texttt{exp}. Voici sa signature: \\
+\texttt{val eval : ast -> env -> exp = <fun>}
 
 L'étape \textit{PRINT} n'est autre que la fonction d'affichage finale de l'interpr\`{e}te.
 Une fois cette étape finie, l'interprète boucle sur l'étape initiale \textit{READ}
@@ -187,7 +187,7 @@ Plus précisément, l'environnement est captur\'{e} par l'\'{e}valuation de la l
 ou \textit{fermeture}. 
 
 
-\verb+ Lambda (parametres, expression) -> Closure (parametres, expression, env) +    
+\texttt{Lambda (parametres, expression) -> Closure (parametres, expression, env)}     
 
 
 Dans le cas de la liaison dynamique, la fonction est appliqu\'{e}e en utilisant l'environnement courant, 
@@ -195,7 +195,7 @@ et non pas son environnement de définition. Donc pas besoin de fermeture.
 
 A ma connaissance, la liaison statique est maintenant utilisée dans la plupart des langages fonctionnels.
 En Scheme et Ocaml, nous pouvons voir dans l'exemple ci-dessous que l'évaluation de la définition de la
- lambda \verb+inc_x+ capture la valeur de \verb+x+ .
+ lambda \texttt{inc} capture la valeur de \texttt{x} .
 
 
 \begin{tabular}{l|l} \hline
@@ -208,22 +208,20 @@ En Scheme et Ocaml, nous pouvons voir dans l'exemple ci-dessous que l'évaluatio
 \verb!2! & \verb+- : int = 2+  \\
 \end{tabular}
 
-
 \subsection{Gestion de l'environnement}
-
 
 Comme indiqué en préambule, plusieurs choix sont possibles pour la modélisation de l'environnement.
 Le choix le plus simple est une représentation par une liste de paires $variable \leftrightarrow  value$
 Ce choix peut être fait en \textsc{Ocaml} par le type natif \verb+list+ ou en utilisant le type concret \verb+Paire of Symbole * lobject+
 
 La principale difficulté est la représentation de fonctions récursives, comme en exemple la factorielle ci-dessous:
-\begin{Verbatim}
+\begin{minted}{scheme}
 (define fact 
  (lambda (n) 
   (if (eq? n 0) 
     1
     (* n (fact (- n 1)))))
-\end{Verbatim}
+\end{minted}
 Nous devons capturer l'environnement existant au moment de la définition de la fonction.
 Cet environnement existant ne contient pas déjà la définition de \verb+fact+.
 
@@ -233,16 +231,17 @@ Il y a trois possibilités pour traiter ce problème de représentation d'un env
 La matérialisation de cette boucle ne peut à ma connaissance qu'être réalisée par un type liste \textit{mutable}.
 
 Comment construire un environnement qui contient la fonction que l'on est en train de définir ?
-\begin{Verbatim}
+\begin{minted}{scheme}
 envRec =  (fac, <lambda corps>, envRec) :: env 
-\end{Verbatim}
+\end{minted}
+
 C'est une équation de point fixe\ldots
 
-On remarquera également que le \verb+letrec+ de SCHEME peut être sémantiquement remplacé par un \verb+let+ associé de \verb(set!(
+On remarquera également que le \texttt{letrec} de SCHEME peut être sémantiquement remplacé par un \texttt{let} associé de \texttt{set!}
 Et de la même manière, nous pouvons faire cette opération en ML, avec l'unique nuance est que le \verb+let+ temporaire représente bien
 une fonction pour que la cohérence des types soit assurée.
 
-\begin{Verbatim}
+\begin{minted}{scheme}
 SCHEME
 (letrec ((f e))
   corps)
@@ -261,7 +260,7 @@ OCAML
 let fact = ref (function x -> x) in
 	let aux n = if n=0 then 1 else n * !fact (n - 1) in
 	 fact:= aux ; !fact 5
-\end{Verbatim}
+\end{minted}
 
   \item Dans le cas de fonction récursive, ne plus nous reposer sur l'environnement mais, comme en $\lambda$-calcul, 
   utiliser un combinateur de point fixe qui  permet de calculer le point fixe de notre fonction, sans avoir à la nommer.
@@ -269,7 +268,8 @@ let fact = ref (function x -> x) in
   Nous allons utiliser ce procédé dans l'implémentation ML de notre interprète Scheme.
 
   Nous rappelons ci-dessous un exemple de  combinateur implémenté en SCHEME, et comment il peut être utilisé.
-  \begin{Verbatim}
+
+\begin{minted}{scheme}
 (define Y
 (lambda(f)
  (let ((g (lambda (h) (lambda(x) ((f (h h) x))))))
@@ -283,13 +283,13 @@ let fact = ref (function x -> x) in
           (* n (f (- n 1)))))))
           
  (define fact (Y F*))
-\end{Verbatim}
+\end{minted}
   
   \item La troisième approche est de modéliser l'environnement par une fonction, et non plus une liste d'association.
   La consultation de l'environnement consiste \`{a} appliquer la fonction \verb+env+ qui le repr\'{e}sente.
 
-  Considérons l'expression \verb+(letrec ((x1 e1) ... (xn en)) corps)+  qui, on le rappelle, est \'{e}quivalente à 
-  \verb+ ((lambda (x1 ... xn) corps) e1 ... en)+
+  Considérons l'expression \texttt{(letrec ((x1 e1) ... (xn en)) corps)}  qui, on le rappelle, est \'{e}quivalente à 
+  \texttt{((lambda (x1 ... xn) corps) e1 ... en)}
   
   L'environnement capturé \verb+envRec+ au moment de la définition de la lambda  doit correspondre à 
   l'environnement étendu aux \verb+xi+ dont les valeurs sont données par l'évaluation des \verb+ei+ de la lambda 
@@ -319,7 +319,7 @@ let fact = ref (function x -> x) in
        Les Faux-monnayeurs. André Gide\\
        
        \vspace{1cm}
-       \textgreek{Kαὶ εἶπεν ὁ θεὸς πρὸς Μωυσῆν Ἐγώ εἰμι ὁ ὤν.}\\
+       Kαὶ εἶπεν ὁ θεὸς πρὸς Μωυσῆν Ἐγώ εἰμι ὁ ὤν.\\
        Exode 3, 14. La Septante
 \end{minipage}
 
@@ -335,34 +335,34 @@ let fact = ref (function x -> x) in
 \end{minipage}
 \end{tabular}
 
- \subsubsection{\textsc{Lisp} mis en abyme} 
+\subsubsection{\textsc{Lisp} mis en abyme} 
 C'est ici un exercice assez classique.
 Nous avons fait le choix d'un interprète avec liaison dynamique.
 Nous aurons ainsi l'évaluation suivante retournant 13 et non 10.
-\begin{Verbatim}
+\begin{minted}{scheme}
 	((evaluate  
 	'(let ((a 1))
 	  (let ((f (lambda (b) (+ b a)))) 
 		 (let ((a 3)) (f 10)))
 	)) env)
-\end{Verbatim}
+\end{minted}
 En outre, il n'est pas nécessaire d'avoir un mécanisme de point fixe ou d'environnement récursif pour
 l'appel d'une fonction récusrsive. C'est l'un des avantages de la liaison dynamique.
-\begin{Verbatim}
+\begin{minted}{scheme}
 ((evaluate
  '(let ((fact (lambda (n) (if (= n 0) 1 (* n (fact (- n 1)))))))
    (fact 6)))
  env)
-\end{Verbatim}
+\end{minted}
 
 
 \section{L'auto-interprétation de l'interprète}
-En rendant explicite la procédure \verb+eval+ et ses acolytes \verb+evlis, invoke, ...+ dans l'environnement
-\verb+env+ , la procédure \verb+evaluate+ pourra être évaluée par elle-même. Le premier argument évalué de la fonction
-est le symbole \verb+env+. Ce symbole devra être contenu dans l'environnement \verb+env+, c'est-à-dire dans lui-même\dots
+En rendant explicite la procédure \texttt{eval} et ses acolytes \texttt{evlis, invoke, ...} dans l'environnement
+\texttt{env}, la procédure \texttt{evaluate} pourra être évaluée par elle-même. Le premier argument évalué de la fonction
+est le symbole \texttt{env}. Ce symbole devra être contenu dans l'environnement \texttt{env}, c'est-à-dire dans lui-même\dots
 
-Nous avons \verb+(eval '(eval '+$\pi$ \verb+ env) env)+ $\equiv$ 
- \verb+(evaluate '+$\pi$ \verb+ env)+ 
+Nous avons \texttt{(eval '(eval '}$\pi$ \texttt{env) env)} $\equiv$ 
+ \texttt{(evaluate '$\pi$ env)} 
 
 \subsection{La tour de Babel}
 
@@ -388,16 +388,16 @@ Nous avons \verb+(eval '(eval '+$\pi$ \verb+ env) env)+ $\equiv$
 
 \end{tikzpicture}
 
-\begin{Verbatim}
+\begin{minted}{scheme}
 	((evaluate (quote ((evaluate (quote ((evaluate (quote ((evaluate (quote (
 		(lambda (x y) (+ x y)) (fact 5) (fact 6) )))
 				   env))) env))) env))) env)
-\end{Verbatim}
+\end{minted}
 
 \subsubsection{L'environnement}
-L'environnement doit contenir la valeur du symbole \verb+env+. Il doit faire référence à lui-même.
+L'environnement doit contenir la valeur du symbole \texttt{env}. Il doit faire référence à lui-même.
 Seule une liste mutable peut modéliser cette boucle infinie. 
-\begin{Verbatim}
+\begin{minted}{scheme}
 > env ; affichage de l'environnement récursif avec DrRacket
 #0=((env . #0#)
     (not . #<procedure:...interpreter2.scm:15:17>)
@@ -423,35 +423,35 @@ Seule une liste mutable peut modéliser cette boucle infinie.
     (mapcadr . #<procedure:...interpreter2.scm:113:19>)
     (evallet . #<procedure:...interpreter2.scm:121:6>)
     (evaluate . #<procedure:...interpreter2.scm:128:16>))
-\end{Verbatim}
+\end{minted}
 
 \subsection{Réification et réflexion}
 La \textit{réification} est le fait de rendre concrète une chose abstraite.
 Dans le cas de notre tour de Babel, réifier un objet du langage d'implémentation le rendra accessible au langage implémenté.
-On peut citer l'exemple de la fonction \verb+eval+ rendant accessible dans Scheme le process d'évaluation. 
-\verb+(eval '+$\pi$ \verb+) = + $\pi$
+On peut citer l'exemple de la fonction \texttt{eval} rendant accessible dans Scheme le process d'évaluation. 
+\texttt{(eval '$\pi$ env)} = $\pi$
 
 L'autre exemple que nous implémenterons est la réification de la continuation courante, mis à disposition
-par la fonction \verb+call/cc+. Cette fonction prend en argument une lambda avec un seul paramètre qui récupère la
+par la fonction \texttt{call/cc}. Cette fonction prend en argument une lambda avec un seul paramètre qui récupère la
 continuation courante de l'expression en cours d'évaluation.
-\begin{Verbatim}
+\begin{minted}{scheme}
 E = (e1 e2 ... (call/cc (lambda (k) ei)) ... en)	
-\end{Verbatim}
-  Si \verb+ei+ ne fait pas appel à \verb+k+, alors \verb+ei+ est évaluée normalement, ainsi que \verb+E+. 
-Dans le cas contraire, \verb+k+ est appelée, liée à la continuation courante. Le résultat de \verb+ei+ est ainsi rendue
-à cette continuation capturée \verb+(e1 ... [] ... en)+. Autrement écrit \verb+k = (lambda(v) (e1 ... v ... en))+
-\begin{Verbatim}
+\end{minted}
+  Si \texttt{ei} ne fait pas appel à \texttt{k}, alors \texttt{ei} est évaluée normalement, ainsi que \texttt{E}. 
+Dans le cas contraire, \texttt{k} est appelée, liée à la continuation courante. Le résultat de \texttt{ei} est ainsi rendue
+à cette continuation capturée \texttt{(e1 ... [] ... en)}. Autrement écrit \texttt{k = (lambda(v) (e1 ... v ... en))}
+\begin{minted}{scheme}
 (+ 5 (call/cc (lambda (k) (* 2 (k 8)))))  = 12
-\end{Verbatim} 
+\end{minted} 
 
 
-L'environnement \verb+global-env+ partagé avec les différents interprètes $\mathcal{I}_i$ de notre tour de babel est aussi considéré
+L'environnement \texttt{global-env} partagé avec les différents interprètes $\mathcal{I}_i$ de notre tour de babel est aussi considéré
 comme un environnement réifié. L'environnement du langage d'implémentation est ici mis à disposition aux langages implémentés.
 
 
 La \textit{réflection} peut être vue comme l'opération inverse de la réification.
 Elle permet la mise à disposition dans le langage d'implémentation un objet du langage implémenté.
-Comme exemple, citons la fonction \verb+quote+ qui n'évalue pas son argument et le rend tel quel. \verb+quote+ est
+Comme exemple, citons la fonction \texttt{quote} qui n'évalue pas son argument et le rend tel quel. \texttt{quote} est
  une primitive du langage Scheme dans le 
 sens où il n'est pas possible  de redéfinir cette fonction avec les autre éléments du langage.
 Avec l'implémentation de l'interprète $\mathcal{I}_R$ permettant les opérations de réflection et réification,
@@ -469,8 +469,8 @@ Voici ce que nous donne pour information la définition du terme \textit{abstrac
 \vspace{0.5cm}
 
 \begin{tabular}{c|c|c} \hline
-réification & program vers data &  \verb+((reifier-to-cloture proc) (cdr e) r k)+   \\ \hline
-réflection  & data vers program & \verb+(cloture-to-reifier (lambda (e r k) exp))+ \\ \hline
+réification & program vers data &  \texttt{((reifier-to-cloture proc) (cdr e) r k)}   \\ \hline
+réflection  & data vers program & \texttt{(cloture-to-reifier (lambda (e r k) exp))} \\ \hline
 \end{tabular}
 
 
@@ -478,42 +478,41 @@ réflection  & data vers program & \verb+(cloture-to-reifier (lambda (e r k) exp
 La fonction d'évaluation sera enrichie pour prendre trois arguments, le programme $\pi$ à évaluer, l'environnement 
 $\rho$ et la continuation $\kappa$ 
 \begin{center}
-\verb+(eval+ $\pi\ \rho\ \kappa$ \verb+)+ \imp\  \verb+valeur+
+\texttt{(eval $\pi\ \rho\ \kappa$)} \imp\  \texttt{valeur}
 \end{center}
 
 Nous reprenons ici le code de l'excellent article \textit{a Simple Reflective Interpreter} \cite{reflective}
-La fonction \verb+evaluate+ implémente un interprète Lisp en mode CPS de manière très naturelle.
+La fonction \texttt{evaluate} implémente un interprète Lisp en mode CPS de manière très naturelle.
 La valeur ajoutée de l'article est la modélisation des fonctions. Trois types sont disponibles et 
 distinguées par un tag dans l'environnement.
 \begin{enumerate}
-  \item Les fonctions utilisateurs \verb+(cloture (parl) exp env)+
-  \item Les fonctions réifiées \verb+(reifier (e r k ) exp )+
-  \item Les fonctions primitives \verb+(primitive nom )+
+  \item Les fonctions utilisateurs \texttt{(cloture (parl) exp env)}
+  \item Les fonctions réifiées \texttt{(reifier (e r k ) exp )}
+  \item Les fonctions primitives \texttt{(primitive nom )}
 \end{enumerate}
 L'application d'une fonction utilisateur se fait de manière classique par une évaluation du corps
 de la lambda sur un environnement étendu aux nouvelles liaisons entre paramètres et arguments préalablement évalués.
 
-Une fonction réifiée prend trois paramètres \verb+e+, \verb+r+ et \verb+k+.
+Une fonction réifiée prend trois paramètres \texttt{e}, \texttt{r} et \texttt{k}.
 \begin{itemize}
-  \item  \verb+e+ est lié à la liste des arguments non évalués de l'application.
-  \item \verb+r+ est lié à l'environnement de l'interprète évaluant l'application.
-  \item \verb+k+ est lié à la continuation de l'interprète évaluant l'application.
+  \item  \texttt{e} est lié à la liste des arguments non évalués de l'application.
+  \item \texttt{r} est lié à l'environnement de l'interprète évaluant l'application.
+  \item \texttt{k} est lié à la continuation de l'interprète évaluant l'application.
 \end{itemize}
 Ainsi, nous avons un contrôle \textit{complet} de la fonction réifiée : contrôle du corps de la fonction et des arguments
 non encore évalués par l'interprète sous-jacent, mais aussi la possibilité d'accéder à l'environnement et à la continuation
 courante. En bref, no limit, on peut tout définir\dots
 
-Les fonctions \verb+callcc+ et \verb+quote+ seront très simplement codées de la manière suivante:
-\begin{Verbatim}
+Les fonctions \texttt{callcc} et \texttt{quote} seront très simplement codées de la manière suivante:
+\begin{minted}{scheme}
 (define callcc (cloture-to-reifier (lambda (e r k) ((evaluate (car e) r id) k))))
 (define quote (cloture-to-reifier (lambda (e r k) (k (car e) ))))
-\end{Verbatim}
+\end{minted}
 
-
-Dès le niveau 1 de notre tour, c'est-à-dire lorsque la fonction \verb+evaluate+ n'est plus évaluée par Scheme 
-mais par elle-même, les formes spéciales \verb+if, quote, begin, define+ sont représentées par des fonctions réifiées.
+Dès le niveau 1 de notre tour, c'est-à-dire lorsque la fonction \texttt{evaluate} n'est plus évaluée par Scheme 
+mais par elle-même, les formes spéciales \texttt{if, quote, begin, define} sont représentées par des fonctions réifiées.
 La fonction d'évaluation peut ainsi être réduite à son strict minimum :
-\begin{Verbatim}
+\begin{minted}{scheme}
 (define evaluate
   (lambda (e r k)
     ((if (pair? e)
@@ -524,23 +523,23 @@ La fonction d'évaluation peut ainsi être réduite à son strict minimum :
             eval-constante
             eval-variable))  
      e r k )))
-\end{Verbatim}
+\end{minted}
 
 
 \begin{minipage}{10.5cm}
-  La fonction \verb+openloop+ peut être lancée à volonté et peut créer une succession 
+  La fonction \texttt{openloop} peut être lancée à volonté et peut créer une succession 
   de  nouveaux étages dans notre tour de babel.
   Comme dans l'épisode biblique du livre de la Genèse\cite{genese}, 
   la faculté d'avoir un langage commun permet la construction
   d'une tour de hauteur potentiellement infinie.
    Nous nous retrouvons nous-même grisés par cette tour \textit{dont la tête touche les cieux}
-  (\textgreek{ἡ κεφαλὴ ἔσται ἕως τοῦ οὐρανοῦ}). Nous citons ici la Septante (LXX).
+  (ἡ κεφαλὴ ἔσται ἕως τοῦ οὐρανοῦ). Nous citons ici la Septante (LXX).
   
   L'enthousiasme de pouvoir
   monter dans les étages doit cependant être tempéré. Le fait d'être à l'étage 
-  $n+1$ n'apporte rien par rapport à l'étage $n$. L'application \verb+eval+ est idempotente car 
-  $\forall \pi$ \verb+(eval '+$\pi$\verb+)+ $=$ \verb+(eval (eval '+ $\pi$\verb+))+.
-  Autrement dit, la valeur \verb+(eval'+$\pi$\verb+)+ est un point fixe de \verb+eval+.
+  $n+1$ n'apporte rien par rapport à l'étage $n$. L'application \texttt{eval} est idempotente car 
+  $\forall \pi$ \texttt{(eval '}$\pi$\texttt{)} $=$ \texttt{(eval (eval '}$\pi$\texttt{))}.
+  Autrement dit, la valeur \texttt{(eval '}$\pi$\texttt{)} est un point fixe de \texttt{eval}.
  
 
   \end{minipage}
@@ -556,11 +555,11 @@ La fonction d'évaluation peut ainsi être réduite à son strict minimum :
 
 \vspace{0.5cm}
 
-\textgreek{ΓΕΝΕΣΙΣ     11 \\
+ΓΕΝΕΣΙΣ     11 \\
   1. Καὶ ἦν πᾶσα ἡ γῆ χεῖλος ἕν, καὶ φωνὴ μία πᾶσιν. \\
    (...) \\ 
   9. διὰ τοῦτο ἐκλήθη τὸ ὄνομα αὐτῆς Σύγχυσις, ὅτι ἐκεῖ συνέχεεν κύριος τὰ χείλη πάσης τῆς γῆς.
-}
+
 \textit{\noindent
   Toute la terre avait alors une même parole ; il y avait une seule langue pour tous. \\ 
   À cause de cela, ce lieu fut appelé Babel (confusion), parce que là le Seigneur confondit les langues de toute la terre.

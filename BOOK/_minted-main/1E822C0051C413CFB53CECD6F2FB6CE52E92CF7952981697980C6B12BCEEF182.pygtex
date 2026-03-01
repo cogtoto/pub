@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{multF} \PYG{o}{=}
+  \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}f\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Prod}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}w\PYGZdq{}}\PYG{o}{,}\PYG{n+nc}{Nat}\PYG{o}{,} \PYG{n+nc}{Nat}\PYG{o}{),}
+   \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}n\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Nat}\PYG{o}{,} \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}m\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Nat}\PYG{o}{,}
+        \PYG{n+nc}{IfThenElse}\PYG{o}{(}\PYG{n+nc}{Egal}\PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}n\PYGZdq{}}\PYG{o}{,}\PYG{n+nc}{O}\PYG{o}{),} \PYG{n+nc}{O}\PYG{o}{,} \PYG{n+nc}{Add} \PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}m\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{App} \PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}f\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Sub1} \PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}n\PYGZdq{}}\PYG{o}{)),} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}m\PYGZdq{}}\PYG{o}{))))))}
+
+\PYG{k}{let} \PYG{n}{mult} \PYG{o}{=} \PYG{n+nc}{Y} \PYG{n}{multF} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{facF} \PYG{o}{=} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}f\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Prod} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}z\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Nat}\PYG{o}{,} \PYG{n+nc}{Nat}\PYG{o}{),}
+             \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}n\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Nat}\PYG{o}{,}
+              \PYG{n+nc}{IfThenElse}\PYG{o}{(}\PYG{n+nc}{Egal}\PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}n\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{O}\PYG{o}{),} \PYG{n+nc}{S} \PYG{n+nc}{O}\PYG{o}{,} \PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n}{mult}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}n\PYGZdq{}}\PYG{o}{),} \PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}f\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Sub1} \PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}n\PYGZdq{}}\PYG{o}{))} \PYG{o}{)} \PYG{o}{))))} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{fac} \PYG{o}{=} \PYG{n+nc}{Y} \PYG{n}{facF}  \PYG{o}{;;}
+
+\PYG{n}{print} \PYG{o}{(}\PYG{n}{fullReduc} \PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n}{fac}\PYG{o}{,} \PYG{n+nc}{S} \PYG{o}{(}\PYG{n+nc}{S} \PYG{o}{(}\PYG{n+nc}{S} \PYG{o}{(}\PYG{n+nc}{S} \PYG{o}{(}\PYG{n+nc}{S} \PYG{n+nc}{O}\PYG{o}{)))))))} \PYG{o}{;;}
+\PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{120}
+\end{Verbatim}

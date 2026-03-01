@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{utop} \PYG{o}{\PYGZsh{}} \PYG{n}{print\PYGZus{}ski} \PYG{o}{(}\PYG{n}{lambda\PYGZus{}ski} \PYG{n}{y}\PYG{o}{)} \PYG{o}{;;}
+\PYG{o}{((}\PYG{n+nc}{S}\PYG{o}{((}\PYG{n+nc}{S}\PYG{o}{((}\PYG{n+nc}{S}\PYG{o}{(}\PYG{n+nc}{KS}\PYG{o}{))((}\PYG{n+nc}{S}\PYG{o}{(}\PYG{n+nc}{KK}\PYG{o}{))}\PYG{n+nc}{I}\PYG{o}{)))(}\PYG{n+nc}{K}\PYG{o}{((}\PYG{n+nc}{SI}\PYG{o}{)}\PYG{n+nc}{I}\PYG{o}{))))((}\PYG{n+nc}{S}\PYG{o}{((}\PYG{n+nc}{S}\PYG{o}{(}\PYG{n+nc}{KS}\PYG{o}{))((}\PYG{n+nc}{S}\PYG{o}{(}\PYG{n+nc}{KK}\PYG{o}{))}\PYG{n+nc}{I}\PYG{o}{)))(}\PYG{n+nc}{K}\PYG{o}{((}\PYG{n+nc}{SI}\PYG{o}{)}\PYG{n+nc}{I}\PYG{o}{))))}
+\end{Verbatim}

@@ -724,7 +724,7 @@ implication =
 
 
 Avec notre implémentation \textsc{Ocaml}, cela donne :
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let preuve_impl =
   Lam("A", Type,
     Lam("B", Type,
@@ -737,64 +737,64 @@ in  (print preuve_impl ; print_newline() ;
      print (fullReduc (check preuve_impl env0))) ;;
 > λA:Type.λB:Type.λH:(λP:Type.~P A)\/B.λH0:A.case(H, λx:~A.false_ind(B,(x H0)), λy:B.y)
   πA:Type.πB:Type.(~A\/B→(A→B))
-\end{Verbatim}
+\end{minted}
 
 Dans un langage comme \textsc{Ocaml}, le type \verb+faux+ est un type sans constructeur.
 Il est \textit{inhabité}. La preuve de la règle du modus tollens s'écrira de la manière suivante :
-\begin{Verbatim}
+\begin{minted}{ocaml}
 type faux = | ;;
 
 let modus_tollens (hfq:'q->faux) (hpq:'p->'q) (hp:'p) =
   hfq (hpq hp)
-\end{Verbatim}
+\end{minted}
 Voici le même théorème en \textsc{Coq} :
-\begin{Verbatim}
+\begin{minted}{coq}
 Theorem modus_tollens: forall (p q:Prop), (q->False)-> (p->q) -> (p->False).
 Proof.
 	intros p q Hfq Hpq Hp.
         generalize (Hpq Hp).
         exact Hfq.
 Qed.
-\end{Verbatim}
+\end{minted}
 Nous pouvons décrire le \textit{ex falso quodlibet} en \textsc{Ocaml} comme suit :
-\begin{Verbatim}
+\begin{minted}{ocaml}
 type faux = | ;;
 type vrai = I ;;
 
 let exfalsoquodlibet = fun (f:faux) ->  I;;
-\end{Verbatim}
+\end{minted}
 En \textsc{Coq}, le pattern matching sur un type n'ayant aucun constructeur permet de 
 définir une fonction retournant un terme de n'importe quel type.
 
 
 Considérons par exemple la fonction $f$ de type $False \rightarrow 2=3$ :
-\begin{Verbatim}
+\begin{minted}{coq}
 Definition f := fun (x:False) => 
    match x return 2=3 with end.
-\end{Verbatim}
+\end{minted}
 Cette fonction $f$, est à mon sens, l'expression peu élégante de la correspondance 
 de Curry-Howard. Une fonction ne pouvant matcher son argument peut retourner un type non habité\dots
 
 En \textsc{Ocaml}, je ne pense pas que la syntaxe nous permet d'écrire qu'un pattern matching
 ne retourne rien, nous pouvons cependant boucler indéfiniment :
-\begin{Verbatim} 
+\begin{minted}{ocaml}
 type faux = | ;;
 type farfelu = | ;;
 let rec f (x:faux):farfelu = f x  ;;
 val f : faux -> farfelu = <fun>
-\end{Verbatim}
+\end{minted}
 
 Erreur de ma part, après recherche, nous pouvons bien écrire en \textsc{Ocaml} un pattern matching
 qui ne retourne rien avec le '.' comme ci-dessous :
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let f (x:faux) : farfelu = match x with _ -> . ;;
 val f : faux -> farfelu = <fun>
-\end{Verbatim}
+\end{minted}
 
 \subsection{Le point fixe}
-Nous surchargeons notre terme algébrique de l'opérateur de point fixe \verb+Y of terme+ qui
-se réduit en \verb+Y t+ \imp\ \verb+t (Y t)+
-\begin{Verbatim}
+Nous surchargeons notre terme algébrique de l'opérateur de point fixe \texttt{Y of terme} qui
+se réduit en \texttt{Y t} \imp\ \texttt{t (Y t)}
+\begin{minted}{ocaml}
 let multF = 
   Lam ("f", Prod("w",Nat, Nat),
    Lam ("n", Nat, Lam ("m", Nat, 
@@ -810,7 +810,7 @@ let fac = Y facF  ;;
 
 print (fullReduc (App(fac, S (S (S (S (S O))))))) ;;
 > 120
-\end{Verbatim}
+\end{minted}
 
 \subsection{La logique classique}
 Sous l'angle de la correspondance de Curry-Howard, notre système se base sur la logique intuitionniste.
@@ -943,27 +943,26 @@ Nous pouvons identifier trois définitions usuelles de l'égalité.
 
 En \textsc{Agda} :
 
-\begin{verbatim}
+\begin{minted}{agda}
 data _≡_ {A : Set} (x : A) : A → Set where
 refl : x ≡ x	
-\end{verbatim}
+\end{minted}
 En particulier, deux termes égaux par définition seront égaux par proposition : ie. dans ce cas, il 
 n'y a pas besoin d'élaborer de preuves, l'utilisation immédiate du constructeur \verb+refl+ est suffisante.
-\begin{verbatim}
+\begin{minted}{agda}
 t1 = 2
 t2 = 1 + 1
 
 t1≡t2 : t1 ≡ t2
 t1≡t2 = refl
-\end{verbatim}
+\end{minted}
 Mais ce n'est évidemment pas toujours le cas. Par exemple, prouver que $\forall n, n + 0 = n$ ne peut se faire
 sur une simple $\beta$-équivalence, mais par une démonstration récursive sur $n$
-\begin{verbatim}
+\begin{minted}{agda}
 plus0 : (n : Nat) → n + 0 ≡ n
 plus0 zero = refl
 plus0 (suc n) = cong suc (plus0 n)  
-\end{verbatim}
-
+\end{minted}
 	\item L'égalité de Leibniz.
 
 Deux choses sont égales si et seulement si elles ont les mêmes propriétés.
@@ -973,10 +972,10 @@ Ou comme le formulait Leibniz à son époque :
  \textit{Il n'est pas vrai que deux substances se ressemblent entièrement, et soient différentes solo numero}
 
 En \textsc{Agda} :
-\begin{verbatim}
+\begin{minted}{agda}
 leib : {A : Set} ( x y : A ) → Set₁
 leib {A} x y = (P : A → Set) → (P x) → (P y)
-\end{verbatim}
+\end{minted}
 
 Il peut paraître surprenant que l'égalité de Leibniz ne se définisse que dans un sens ( de $P(x)$ vers $P(y)$ et non également de
 $P(y)$ vers $P(x)$ ). Il s'avère en fait que l'on peut démontrer l'autre sens.
@@ -986,7 +985,7 @@ Or $Q(x) = P(x) \Rightarrow P(x)$ est vérifié donc on a bien $Q(y) = P(y) \Rig
 
 \vspace*{1cm}
 Heureusement, l'égalité propositionnelle est équivalente à l'égalité de Leibniz. Donc il n'y aura pas ici de débat philosophique.
-\begin{verbatim}
+\begin{minted}{agda}
 ≡→leib : {A : Set} {x y : A} → (x ≡ y) → (leib x y)
 ≡→leib xy P  =  subst P xy
 
@@ -999,5 +998,5 @@ leib→≡ {A} {x} {y} lxy = Qy
     Qx = refl
     Qy : Q y
     Qy = lxy Q Qx
-\end{verbatim}
+\end{minted}
 \end{enumerate}

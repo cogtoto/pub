@@ -51,7 +51,7 @@ Et voici la définition de la traduction des $\lambda$-termes en termes applicat
 Dans la définition de notre type applicatif \verb+ski+, nous incluons aussi notre opérateur $[x].A$ 
 avec le constructeur \verb+Op+.
 
-\begin{Verbatim}
+\begin{minted}{ocaml}
 type ski = 
 | Varia of string
 | I
@@ -72,12 +72,12 @@ and lambda_ski_op = function
 | Op(x, Appl(m, n))  when (mem x (var m)) || (mem x (var n)) 
 	  -> Appl(Appl(S, (lambda_ski_op (Op(x,m)))), (lambda_ski_op (Op(x,n)))) 
 | _ -> raise SkiErreur
-\end{Verbatim}
+\end{minted}
 A titre d'exemple, traduisons notre combinateur $y$ en termes applicatifs:
-\begin{Verbatim}
+\begin{minted}{ocaml}
 utop # print_ski (lambda_ski y) ;;
 ((S((S((S(KS))((S(KK))I)))(K((SI)I))))((S((S(KS))((S(KK))I)))(K((SI)I))))
-\end{Verbatim}
+\end{minted}
 Une fois le code compilé, son exécution sera réalisée avec les règles de réécriture :
 \[
 \begin{array}{ccc}
@@ -88,7 +88,7 @@ Une fois le code compilé, son exécution sera réalisée avec les règles de r�
 \]
 Voici une première version de l'exécution de ces règles de réécriture. Ce code un est peu bourrin car on appelle
 la fonction tant que le terme n'est pas réduit.
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let rec exec_aux = function
 | Appl(I, x) -> exec_aux x
 | Appl(Appl(K, x), y) -> exec_aux x
@@ -102,10 +102,10 @@ let rec exec_aux = function
 and  exec t =
 let r = exec_aux t in
 	if r=t then r else exec_aux r 
-\end{Verbatim}
+\end{minted}
 
 Voici une version plus élégante qui retourne la forme réduite.
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let rec ski_norm m =
 match m with
 | S | K | I -> m
@@ -116,10 +116,10 @@ match ski_norm m0 with
 | Appl (K, m') -> m'
 | Appl (Appl (S, m3), m2) -> ski_norm (Appl (Appl (m3, m1), Appl (m2, m1)))
 | autre -> Appl (autre, ski_norm m1);;
-\end{Verbatim}
+\end{minted}
 
 La traduction en sens inverse $A \mapsto A_\lambda $ se fait naturellement par la fonction ML ci-dessous:
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let rec ski_lambda = function
 | I -> Lam("x", Var "x")
 | K -> Lam("x", Lam("y", Var "x"))
@@ -127,7 +127,7 @@ let rec ski_lambda = function
 | Varia(x) -> Var(x)
 | Appl(m,n) -> App(ski_lambda m,ski_lambda n)
 | _ -> raise SkiErreur
-\end{Verbatim}
+\end{minted}
 
 Utilisons l'exemple de la factorielle, exemple complexe car il comporte les représentations en $\lambda$-termes
 du combinateur $Y$, de la condition \textit{if-then-else}, des entiers \textit{Church} ainsi que les opérations
@@ -202,8 +202,8 @@ $$
 $$   K : \phi \Rightarrow (\psi \Rightarrow \phi)
 $$
 L'inférence de type OCAML nous donne en effet 
-\verb+k : 'a -> 'b -> 'a+ et  \\ 
-\verb+ s : ('a -> 'b -> 'c) -> ('a -> 'b) -> 'a -> 'c+
+\texttt{k : 'a -> 'b -> 'a} et  \\ 
+\texttt{ s : ('a -> 'b -> 'c) -> ('a -> 'b) -> 'a -> 'c}
 \begin{center}
 \begin{figure}[H]
 	\begin{tabular}{|c|c|} \hline
@@ -232,7 +232,7 @@ l'abstraction du $\lambda$-calcul est simulée à l'aide des constantes $S$ et $
 \section{Compilation basique vers une machine à pile}
 Nous utilisons l'implémentation ci-dessous pour la représentation des piles sous
 formes de listes mutables.
-\begin{Verbatim}
+\begin{minted}{ocaml}
 type 'a pile = 'a list ref ;;
 let empiler x p = p := x :: !p ;;
 
@@ -247,17 +247,17 @@ let sommet p =
 	match !p with
 	| [] -> raise Vide
 	| x::t -> x  ;;
-\end{Verbatim}
+\end{minted}
 
 La machine à pile exécutera les instructions suivantes:\\
-\verb+["EMPILER"; "nombre"],["ADD"], ["SUB"], ["MUL"], ["STOP"]+
+\texttt{["EMPILER"; "nombre"],["ADD"], ["SUB"], ["MUL"], ["STOP"]}
 
 La lecture d'une instruction est réalisée par la fonction \texttt{fetch}. Cette
 fonction parcourt de manière linéaire le code représenté par un \textit{array}.
-Chaque \texttt{fetch} incrémente la variable \verb+pc+ qui représente le
+Chaque \texttt{fetch} incrémente la variable \texttt{pc} qui représente le
 \textit{program counter}.
 
-\begin{Verbatim}
+\begin{minted}{ocaml}
 exception Erreur ;;
 	
 let executer code =
@@ -282,16 +282,16 @@ let executer code =
 		| ["STOP"] -> print_int (sommet pile)
 		| _ -> raise Erreur
 	in exec ()
-\end{Verbatim}
+\end{minted}
 
 Voici l'exécution de la machine à pile:
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let code = [| ["EMPILER"; "10"] ;["EMPILER"; "15"] ; ["ADD"] ;
 						  ["EMPILER"; "4"] ; ["MUL"] ; ["STOP"] |] ;;
 						  
 # executer code ;;
 # 100- : unit = ()
-\end{Verbatim}
+\end{minted}
 
 \subsection{Certification de la compilation avec le langage \textsc{Coq}}
 \textit{Quod erat demonstrandum.}

@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{n+nv}{fact}
+\PYG{+w}{ }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{n}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{(}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{eq?}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{p}{(}\PYG{n+nb}{*}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{fact}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{\PYGZhy{}}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)))))}
+\end{Verbatim}
