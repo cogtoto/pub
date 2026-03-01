@@ -4,6 +4,7 @@ See the Tex document (in French), the compiled pdf doc
 
 Contains OCAML, SCHEME, COQ and AGDA code
 
-Please see the file BOOK/main.pdf
-
+Please see my "thesis"
+# My Thesis
+[Download main.pdf](https://github.com/cogtoto/pub/raw/main/main.pdf)
 Have a happy reading ! 
