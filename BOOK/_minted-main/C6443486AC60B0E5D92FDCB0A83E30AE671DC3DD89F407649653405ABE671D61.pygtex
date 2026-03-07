@@ -29,4 +29,5 @@
   \PYG{k}{match} \PYG{n}{ltermes} \PYG{k}{with}
   \PYG{o}{|} \PYG{n}{hd}\PYG{o}{::}\PYG{n}{tl} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{if} \PYG{o}{(}\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{k}{then}  \PYG{n}{cut} \PYG{n}{u} \PYG{n}{hd} \PYG{k}{else}  \PYG{n}{subterme} \PYG{o}{(}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{n}{u} \PYG{n}{tl}
   \PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+
 \end{Verbatim}

@@ -1,4 +1,6 @@
 % !TEX root = main.tex
+% !TEX program = lualatex
+% !BIB program = biber
 \documentclass[11pt]{book}
 \usepackage[LGR, T1]{fontenc}
 \usepackage{textcomp}
@@ -31,7 +33,7 @@
 \usepackage[nottoc]{tocbibind}
 \usepackage{textgreek}
 \usepackage{fancyvrb}
-\usepackage{minted}
+\usepackage[draft]{minted}
 \usemintedstyle{bw}
 \usepackage{fontspec}
 \usepackage{fancyvrb}
@@ -72,8 +74,10 @@
 \addbibresource{book.bib}  
 \begin{document}
 
+\frontmatter
 \maketitle
 \tableofcontents
+\mainmatter
 
 \chapter{Ἐν ἀρχή, Gn 1.1 et Jn 1.1}
 
@@ -149,12 +153,12 @@ Nous sommes ici dans une logique constructive, démontrer une proposition revien
 un terme ayant pour type la proposition.
 Ainsi, le principe du tiers-exclus $P \vee  \neg P$ ne peut être ici démontré.
 
-Le type faux est un type inhabité, donc nous le définissons sans constructeur : \verb+ type faux = | +
+Le type faux est un type inhabité, donc nous le définissons sans constructeur : \texttt{type faux = | }
 
 Nous pouvons par exemple prouver le théorème du modus tollens : \\
 
-\verb+let modus_tollens (hfq:'q->faux) (hpq:'p->'q) (hp:'p) = hfq (hpq hp)+  \\
-Le type de cette expression est  \verb+('q -> faux) -> ('p -> 'q) -> 'p -> faux+  \\
+\texttt{let ModusTollens (hfq:'q->faux) (hpq:'p->'q) (hp:'p) = hfq (hpq hp)}  \\
+Le type de cette expression est  \texttt{('q -> faux) -> ('p -> 'q) -> 'p -> faux}  \\
 
 Dans un langage proposant un système de types plus évolué comme \textsc{Coq}, le faux peut être exprimé 
 par le type $\forall p:P, p$. Ce type est également inhabité. Supposer le faux permettra de démontrer 

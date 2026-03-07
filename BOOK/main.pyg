@@ -1,0 +1,5 @@
+let rec f_latex n i =
+  if i = 0 then "\\ldots"
+  else (string_of_int n)^ "\\sqrt{1 + " ^ (f_latex (n + 1) (i-1)) ^ "}" ;;
+
+print_string (f_latex 1 10) ;;	
