@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{unifier} \PYG{n}{t1} \PYG{n}{t2} \PYG{o}{=}
+  \PYG{k}{let} \PYG{k}{rec} \PYG{n}{unificateur} \PYG{n}{t1} \PYG{n}{t2} \PYG{o}{=}
+    \PYG{k}{match} \PYG{o}{(}\PYG{n}{t1}\PYG{o}{,}\PYG{n}{t2}\PYG{o}{)} \PYG{k}{with}
+    \PYG{o}{|} \PYG{o}{(}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{),} \PYG{o}{\PYGZus{})}  \PYG{o}{\PYGZhy{}\PYGZgt{}}
+      \PYG{k}{begin}
+        \PYG{k}{if} \PYG{n}{t1} \PYG{o}{=} \PYG{n}{t2} \PYG{k}{then} \PYG{n+nb+bp}{[]}
+        \PYG{k}{else} \PYG{k}{if} \PYG{o}{(}\PYG{n}{mem} \PYG{n}{t1} \PYG{o}{(}\PYG{n}{listevar} \PYG{n}{t2}\PYG{o}{))} \PYG{k}{then} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+             \PYG{k}{else} \PYG{o}{[(}\PYG{n}{t1}\PYG{o}{,} \PYG{n}{t2}\PYG{o}{)]}
+      \PYG{k}{end}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}
+    \PYG{o}{|} \PYG{o}{(\PYGZus{},} \PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{))} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{unificateur} \PYG{n}{t2} \PYG{n}{t1}
+    \PYG{o}{|} \PYG{o}{(}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,} \PYG{n}{l1}\PYG{o}{),} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{y}\PYG{o}{,} \PYG{n}{l2}\PYG{o}{))} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{if} \PYG{n}{x}\PYG{o}{\PYGZlt{}\PYGZgt{}}\PYG{n}{y} \PYG{k}{then} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+      \PYG{k}{else} \PYG{o}{(}\PYG{n}{unifliste} \PYG{n}{l1} \PYG{n}{l2} \PYG{n+nb+bp}{[]}\PYG{o}{)}
+  \PYG{k}{and} \PYG{n}{unifliste} \PYG{n}{l1} \PYG{n}{l2} \PYG{n}{sigma} \PYG{o}{=}
+    \PYG{k}{match} \PYG{o}{(}\PYG{n}{l1}\PYG{o}{,} \PYG{n}{l2}\PYG{o}{)} \PYG{k}{with}
+    \PYG{o}{|} \PYG{o}{(}\PYG{n+nb+bp}{[]}\PYG{o}{,} \PYG{o}{\PYGZus{})} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{sigma}
+    \PYG{o}{|} \PYG{o}{(}\PYG{n}{h1}\PYG{o}{::}\PYG{n}{t1}\PYG{o}{,} \PYG{n}{h2}\PYG{o}{::}\PYG{n}{t2}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+      \PYG{k}{begin}
+        \PYG{k}{let} \PYG{n}{sigma1} \PYG{o}{=} \PYG{o}{(}\PYG{n}{unificateur} \PYG{n}{h1} \PYG{n}{h2}\PYG{o}{)} \PYG{k}{in}
+        \PYG{n}{unifliste} \PYG{o}{(}\PYG{n}{map} \PYG{o}{(}\PYG{k}{function} \PYG{n}{terme} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{substituer} \PYG{n}{terme} \PYG{n}{sigma1}\PYG{o}{))} \PYG{n}{t1}\PYG{o}{)}
+          \PYG{o}{(}\PYG{n}{map} \PYG{o}{(}\PYG{k}{function} \PYG{n}{terme} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{substituer} \PYG{n}{terme} \PYG{n}{sigma1}\PYG{o}{))} \PYG{n}{t2}\PYG{o}{)}
+          \PYG{o}{(}\PYG{n}{compose\PYGZus{}subst} \PYG{n}{sigma} \PYG{n}{sigma1}\PYG{o}{)}
+      \PYG{k}{end}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}
+    \PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+  \PYG{k}{in} \PYG{n}{unificateur} \PYG{n}{t1} \PYG{n}{t2}
+\end{Verbatim}

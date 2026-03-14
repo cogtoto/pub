@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Lemma} \PYG{n}{eta} \PYG{o}{:} \PYG{k}{forall} \PYG{o}{(}\PYG{n}{A} \PYG{n}{B}\PYG{o}{:}\PYG{k+kt}{Type}\PYG{o}{)} \PYG{o}{(}\PYG{n}{f}\PYG{o}{:}\PYG{n}{A}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{B}\PYG{o}{),} \PYG{n}{f} \PYG{o}{=} \PYG{k}{fun} \PYG{n}{x} \PYG{o}{=\PYGZgt{}} \PYG{n}{f} \PYG{n}{x}\PYG{o}{.}
+\PYG{k+kp}{reflexivity}\PYG{o}{.}
+\PYG{k+kn}{Qed}\PYG{o}{.}
+\end{Verbatim}

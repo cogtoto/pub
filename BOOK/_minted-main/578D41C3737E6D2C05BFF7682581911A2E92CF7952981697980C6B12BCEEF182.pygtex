@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{prod\PYGZus{}100\PYGZus{}101} \PYG{o}{=}
+  \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{C} \PYG{l+s+s2}{\PYGZdq{}nat\PYGZdq{}}\PYG{o}{,}
+    \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Prod}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}z\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{C} \PYG{l+s+s2}{\PYGZdq{}nat\PYGZdq{}}\PYG{o}{,}
+\PYG{o}{:}\PYG{n}{w}
+     \PYG{o}{(}\PYG{n+nc}{Prod} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}w\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{C} \PYG{l+s+s2}{\PYGZdq{}nat\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}} \PYG{o}{))),}\PYG{n+nc}{App} \PYG{o}{(}\PYG{n+nc}{App} \PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{N} \PYG{l+m+mi}{100}\PYG{o}{),} \PYG{n+nc}{N} \PYG{l+m+mi}{101}\PYG{o}{)))} \PYG{o}{;;}
+\PYG{n}{print} \PYG{o}{(}\PYG{n}{typage} \PYG{n}{prod\PYGZus{}100\PYGZus{}101} \PYG{n}{env0}\PYG{o}{)} \PYG{o}{;;}
+\PYG{n}{πX}\PYG{o}{:}\PYG{n}{nat}\PYG{o}{.((}\PYG{n}{nat}\PYG{err}{→}\PYG{o}{(}\PYG{n}{nat}\PYG{err}{→}\PYG{n+nc}{X}\PYG{o}{))}\PYG{err}{→}\PYG{n+nc}{X}\PYG{o}{)}
+\end{Verbatim}

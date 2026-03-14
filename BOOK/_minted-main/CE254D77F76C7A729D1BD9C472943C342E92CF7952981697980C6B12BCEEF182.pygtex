@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZsh{}} \PYG{k}{let} \PYG{k}{rec} \PYG{n}{fix} \PYG{n}{f} \PYG{o}{=} \PYG{n}{f} \PYG{o}{(}\PYG{n}{fix} \PYG{n}{f}\PYG{o}{)} \PYG{o}{;;}
+\PYG{k}{val} \PYG{n}{fix} \PYG{o}{:} \PYG{o}{(}\PYG{k}{\PYGZsq{}}\PYG{n}{a} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{\PYGZsq{}}\PYG{n}{a}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{\PYGZsq{}}\PYG{n}{a} \PYG{o}{=} \PYG{o}{\PYGZlt{}}\PYG{k}{fun}\PYG{o}{\PYGZgt{}}
+
+\PYG{k}{let} \PYG{n}{factabs} \PYG{n}{fact} \PYG{o}{=} \PYG{k}{function}
+  \PYG{o}{|} \PYG{l+m+mi}{0} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{l+m+mi}{1}
+  \PYG{o}{|} \PYG{n}{n} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{n} \PYG{o}{*} \PYG{n}{fact} \PYG{o}{(}\PYG{n}{n} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{;;}
+
+\PYG{k}{val} \PYG{n}{factabs} \PYG{o}{:} \PYG{o}{(}\PYG{k+kt}{int} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{int}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{int} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{int} \PYG{o}{=} \PYG{o}{\PYGZlt{}}\PYG{k}{fun}\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZsh{}} \PYG{o}{(}\PYG{n}{fix} \PYG{n}{factabs}\PYG{o}{)} \PYG{l+m+mi}{5} \PYG{o}{;;}
+\PYG{n+nc}{Stack} \PYG{n}{overflow} \PYG{n}{during} \PYG{n}{evaluation} \PYG{o}{(}\PYG{n}{looping} \PYG{n}{recursion}\PYG{o}{?).}
+\end{Verbatim}

@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{f\PYGZus{}latex} \PYG{n}{n} \PYG{n}{i} \PYG{o}{=}
+  \PYG{k}{if} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{k}{then} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}\PYGZbs{}}\PYG{l+s+s2}{ldots\PYGZdq{}}
+  \PYG{k}{else} \PYG{o}{(}\PYG{n}{string\PYGZus{}of\PYGZus{}int} \PYG{n}{n}\PYG{o}{)\PYGZca{}} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}\PYGZbs{}}\PYG{l+s+s2}{sqrt\PYGZob{}1 + \PYGZdq{}} \PYG{o}{\PYGZca{}} \PYG{o}{(}\PYG{n}{f\PYGZus{}latex} \PYG{o}{(}\PYG{n}{n} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{))} \PYG{o}{\PYGZca{}} \PYG{l+s+s2}{\PYGZdq{}\PYGZcb{}\PYGZdq{}} \PYG{o}{;;}
+
+\PYG{n}{print\PYGZus{}string} \PYG{o}{(}\PYG{n}{f\PYGZus{}latex} \PYG{l+m+mi}{1} \PYG{l+m+mi}{10}\PYG{o}{)} \PYG{o}{;;\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}
+\end{Verbatim}

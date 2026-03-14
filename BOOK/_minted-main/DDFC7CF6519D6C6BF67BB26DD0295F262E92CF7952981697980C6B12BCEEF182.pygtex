@@ -1,0 +1,59 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{open} \PYG{n+nc}{Graphics} \PYG{o}{;;}
+
+\PYG{n+nn}{Graphics}\PYG{p}{.}\PYG{n}{open\PYGZus{}graph} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{o}{;;}
+\PYG{n+nn}{Graphics}\PYG{p}{.}\PYG{n}{set\PYGZus{}window\PYGZus{}title} \PYG{l+s+s2}{\PYGZdq{}THE WINDOW\PYGZdq{}} \PYG{o}{;;}
+
+\PYG{k}{type}  \PYG{n}{etat} \PYG{o}{=} \PYG{o}{\PYGZob{}} \PYG{k}{mutable} \PYG{n}{x} \PYG{o}{:} \PYG{k+kt}{float}\PYG{o}{;} \PYG{k}{mutable} \PYG{n}{y} \PYG{o}{:} \PYG{k+kt}{float}\PYG{o}{;}
+               \PYG{k}{mutable} \PYG{n}{visee} \PYG{o}{:} \PYG{k+kt}{float}\PYG{o}{;} \PYG{k}{mutable} \PYG{n}{levee} \PYG{o}{:} \PYG{k+kt}{bool} \PYG{o}{\PYGZcb{};;}
+\PYG{k}{let} \PYG{n}{crayon} \PYG{o}{=} \PYG{o}{\PYGZob{}} \PYG{n}{x} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{;} \PYG{n}{y} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{;} \PYG{n}{visee} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{;} \PYG{n}{levee} \PYG{o}{=} \PYG{n+nb+bp}{false} \PYG{o}{\PYGZcb{};;}
+\PYG{k}{let} \PYG{n}{fixe\PYGZus{}crayon} \PYG{n}{b} \PYG{o}{=} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{levee} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{b}\PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{pi\PYGZus{}sur\PYGZus{}180} \PYG{o}{=}\PYG{k}{let} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mi}{4}\PYG{o}{.}\PYG{l+m+mi}{0} \PYG{o}{*.} \PYG{o}{(}\PYG{n}{atan} \PYG{l+m+mi}{1}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{)} \PYG{k}{in} \PYG{n}{pi} \PYG{o}{/.} \PYG{l+m+mi}{180}\PYG{o}{.}\PYG{l+m+mi}{0}
+
+
+\PYG{k}{let} \PYG{n}{tourne} \PYG{n}{angle} \PYG{o}{=} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{visee} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{o}{(}\PYG{n}{crayon}\PYG{o}{.}\PYG{n}{visee} \PYG{o}{+.} \PYG{n}{angle} \PYG{o}{*.} \PYG{n}{pi\PYGZus{}sur\PYGZus{}180}\PYG{o}{)} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{zero\PYGZus{}x} \PYG{o}{=} \PYG{n}{float\PYGZus{}of\PYGZus{}int} \PYG{o}{((}\PYG{n}{size\PYGZus{}x} \PYG{n+nb+bp}{()}\PYG{o}{)} \PYG{o}{/} \PYG{l+m+mi}{2}\PYG{o}{);;}
+\PYG{k}{let} \PYG{n}{zero\PYGZus{}y} \PYG{o}{=} \PYG{n}{float\PYGZus{}of\PYGZus{}int} \PYG{o}{((}\PYG{n}{size\PYGZus{}y} \PYG{n+nb+bp}{()}\PYG{o}{)} \PYG{o}{/} \PYG{l+m+mi}{2}\PYG{o}{);;}
+
+\PYG{k}{let} \PYG{n}{vide\PYGZus{}ecran} \PYG{n+nb+bp}{()} \PYG{o}{=}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iset\PYGZus{}color} \PYG{n}{white}\PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ifill\PYGZus{}rect} \PYG{l+m+mi}{0} \PYG{l+m+mi}{0} \PYG{o}{(}\PYG{n}{size\PYGZus{}x} \PYG{n+nb+bp}{()}\PYG{o}{)} \PYG{o}{(}\PYG{n}{size\PYGZus{}y} \PYG{n+nb+bp}{()}\PYG{o}{);}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iset\PYGZus{}color} \PYG{n}{black}\PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nn}{Icrayon}\PYG{p}{.}\PYG{n}{x} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{zero\PYGZus{}x}\PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nn}{Icrayon}\PYG{p}{.}\PYG{n}{y} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{zero\PYGZus{}y}\PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nn}{Icrayon}\PYG{p}{.}\PYG{n}{visee} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m+mi}{0}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nn}{Icrayon}\PYG{p}{.}\PYG{n}{levee} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nb+bp}{false}\PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Imoveto} \PYG{o}{(}\PYG{n}{round} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{x}\PYG{o}{)} \PYG{o}{(}\PYG{n}{round} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{y}\PYG{o}{);;}
+
+
+\PYG{k}{let} \PYG{n}{avance} \PYG{n}{d} \PYG{o}{=}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ilet} \PYG{n}{dx} \PYG{o}{=} \PYG{n}{d} \PYG{o}{*.} \PYG{n}{cos} \PYG{o}{(}\PYG{n}{crayon}\PYG{o}{.}\PYG{n}{visee}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iand} \PYG{n}{dy} \PYG{o}{=} \PYG{n}{d} \PYG{o}{*.} \PYG{n}{sin} \PYG{o}{(}\PYG{n}{crayon}\PYG{o}{.}\PYG{n}{visee}\PYG{o}{)} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nn}{Icrayon}\PYG{p}{.}\PYG{n}{x} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{x} \PYG{o}{+.} \PYG{n}{dx}\PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nn}{Icrayon}\PYG{p}{.}\PYG{n}{y} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{y} \PYG{o}{+.} \PYG{n}{dy}\PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iif} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{levee} \PYG{k}{then} \PYG{n}{moveto} \PYG{o}{(}\PYG{n}{round} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{x}\PYG{o}{)} \PYG{o}{(}\PYG{n}{round} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{y}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ielse} \PYG{n}{lineto} \PYG{o}{(}\PYG{n}{round} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{x}\PYG{o}{)} \PYG{o}{(}\PYG{n}{round} \PYG{n}{crayon}\PYG{o}{.}\PYG{n}{y}\PYG{o}{);;}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{motif} \PYG{n}{n} \PYG{n}{c} \PYG{o}{=}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iif} \PYG{n}{n} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{k}{then} \PYG{n}{avance} \PYG{n}{c}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ielse}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ibegin}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Imotif} \PYG{o}{(}\PYG{n}{n} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{c} \PYG{o}{/.} \PYG{l+m+mi}{3}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{);}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Itourne} \PYG{l+m+mi}{60}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Imotif} \PYG{o}{(}\PYG{n}{n} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{c} \PYG{o}{/.} \PYG{l+m+mi}{3}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{);}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Itourne} \PYG{o}{(\PYGZhy{}}\PYG{l+m+mi}{120}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{);}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Imotif} \PYG{o}{(}\PYG{n}{n} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{c} \PYG{o}{/.} \PYG{l+m+mi}{3}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{);}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Itourne} \PYG{l+m+mi}{60}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Imotif} \PYG{o}{(}\PYG{n}{n} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{c} \PYG{o}{/.} \PYG{l+m+mi}{3}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iend}\PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{flocon} \PYG{n}{n} \PYG{n}{c} \PYG{o}{=}
+  \PYG{k}{for} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1} \PYG{k}{to} \PYG{l+m+mi}{3}
+   \PYG{k}{do}
+     \PYG{n}{motif} \PYG{n}{n} \PYG{n}{c}\PYG{o}{;} \PYG{n}{tourne} \PYG{o}{(\PYGZhy{}}\PYG{l+m+mi}{120}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{)}
+   \PYG{k}{done}\PYG{o}{;;}
+
+  \PYG{n}{flocon} \PYG{l+m+mi}{1} \PYG{l+m+mi}{100}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{;\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iflocon} \PYG{l+m+mi}{2} \PYG{l+m+mi}{100}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{;\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}  \PYG{n}{flocon} \PYG{l+m+mi}{3} \PYG{l+m+mi}{100}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{;}  \PYG{n}{flocon} \PYG{l+m+mi}{4} \PYG{l+m+mi}{100}\PYG{o}{.}\PYG{l+m+mi}{0}\PYG{o}{;\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}
+\end{Verbatim}

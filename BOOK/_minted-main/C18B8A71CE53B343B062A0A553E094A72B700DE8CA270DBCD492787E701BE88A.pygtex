@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{eta}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{(}A\PYG{+w}{ }B\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{k+kt}{Set}\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{o}{(}f\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }A\PYG{+w}{ }\PYG{o+ow}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }B\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{o}{(}\PYG{o+ow}{λ}\PYG{+w}{ }x\PYG{+w}{ }\PYG{o+ow}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }f\PYG{+w}{ }x\PYG{o}{)}\PYG{+w}{ }\PYGZbs{}equiv\PYG{+w}{ }f
+eta\PYG{+w}{ }A\PYG{+w}{ }B\PYG{+w}{ }f\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }refl
+\end{Verbatim}

@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{n+nv}{factabs}
+\PYG{+w}{  }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{f}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{n}\PYG{p}{)}
+\PYG{+w}{      }\PYG{p}{(}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{eq?}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{          }\PYG{l+m+mi}{1}
+\PYG{+w}{          }\PYG{p}{(}\PYG{n+nb}{*}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{f}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{\PYGZhy{}}\PYG{+w}{ }\PYG{n+nv}{n}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)))))))}
+
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{n+nv}{fix}
+\PYG{+w}{  }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{f}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{f}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{fix}\PYG{+w}{ }\PYG{n+nv}{f}\PYG{p}{))}\PYG{+w}{ }\PYG{n+nv}{x}\PYG{p}{))))}
+
+\PYG{p}{((}\PYG{n+nf}{fix}\PYG{+w}{ }\PYG{n+nv}{factabs}\PYG{p}{)}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{k}{=\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{120}
+\end{Verbatim}

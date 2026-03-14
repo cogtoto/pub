@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Theorem} \PYG{n}{faux} \PYG{o}{:} \PYG{k}{forall} \PYG{n}{P}\PYG{o}{:}\PYG{k+kt}{Prop}\PYG{o}{,} \PYG{n}{P}\PYG{o}{.}
+\PYG{k+kn}{Admitted}\PYG{o}{.}
+
+\PYG{k+kn}{Theorem} \PYG{n}{absurdité} \PYG{o}{:} \PYG{l+m+mi}{1}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{o}{.}
+\PYG{k+kn}{Proof}\PYG{o}{.}
+    \PYG{k+kp}{exact} \PYG{o}{(}\PYG{n}{faux} \PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{o}{)).}
+\PYG{k+kn}{Qed}\PYG{o}{.}
+\end{Verbatim}

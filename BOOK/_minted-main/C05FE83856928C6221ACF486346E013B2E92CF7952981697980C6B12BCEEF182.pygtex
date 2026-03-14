@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{type} \PYG{k}{\PYGZsq{}}\PYG{n}{a} \PYG{n}{pile} \PYG{o}{=} \PYG{k}{\PYGZsq{}}\PYG{n}{a} \PYG{k+kt}{list} \PYG{n}{ref} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{empiler} \PYG{n}{x} \PYG{n}{p} \PYG{o}{=} \PYG{n}{p} \PYG{o}{:=} \PYG{n}{x} \PYG{o}{::} \PYG{o}{!}\PYG{n}{p} \PYG{o}{;;}
+
+\PYG{k}{exception} \PYG{n+nc}{Vide} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{depiler} \PYG{n}{p} \PYG{o}{=}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Imatch} \PYG{o}{!}\PYG{n}{p} \PYG{k}{with}
+  \PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Vide}
+  \PYG{o}{|}\PYG{n}{x}\PYG{o}{::}\PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{p}\PYG{o}{:=}\PYG{n}{t} \PYG{o}{;} \PYG{n}{x} \PYG{o}{;;}
+
+\PYG{k}{let} \PYG{n}{sommet} \PYG{n}{p} \PYG{o}{=}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Imatch} \PYG{o}{!}\PYG{n}{p} \PYG{k}{with}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Vide}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n}{x}\PYG{o}{::}\PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{x}  \PYG{o}{;;}
+\end{Verbatim}

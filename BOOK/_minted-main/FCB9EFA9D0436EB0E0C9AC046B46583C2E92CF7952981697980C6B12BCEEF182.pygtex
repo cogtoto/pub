@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{proj1} \PYG{o}{=}
+  \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}t\PYGZdq{}}\PYG{o}{,} \PYG{o}{(}\PYG{n}{typage} \PYG{n}{prod\PYGZus{}uv} \PYG{n}{env0}\PYG{o}{),}
+    \PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}t\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}U\PYGZdq{}}\PYG{o}{),} \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}U\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}V\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{))))}
+ \PYG{k}{in} \PYG{n}{print} \PYG{o}{(}\PYG{n}{fullReduc} \PYG{o}{(}\PYG{n+nc}{App} \PYG{o}{(}\PYG{n}{proj1}\PYG{o}{,} \PYG{n}{prod\PYGZus{}100\PYGZus{}101}\PYG{o}{)))}
+
+\PYG{k}{let} \PYG{n}{proj2} \PYG{o}{=}
+  \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}t\PYGZdq{}}\PYG{o}{,} \PYG{o}{(}\PYG{n}{typage} \PYG{n}{prod\PYGZus{}uv} \PYG{n}{env0}\PYG{o}{),}
+    \PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}t\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}U\PYGZdq{}}\PYG{o}{),} \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}U\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}V\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{))))}
+\PYG{k}{in} \PYG{n}{print} \PYG{o}{(}\PYG{n}{fullReduc} \PYG{o}{(}\PYG{n+nc}{App} \PYG{o}{(}\PYG{n}{proj2}\PYG{o}{,} \PYG{n}{prod\PYGZus{}uv}\PYG{o}{)))}
+\end{Verbatim}

@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Itype} \PYG{n}{terme} \PYG{o}{=}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Var} \PYG{k}{of} \PYG{k+kt}{string}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Func} \PYG{k}{of} \PYG{k+kt}{string} \PYG{o}{*} \PYG{n}{terme} \PYG{k+kt}{list}
+\end{Verbatim}

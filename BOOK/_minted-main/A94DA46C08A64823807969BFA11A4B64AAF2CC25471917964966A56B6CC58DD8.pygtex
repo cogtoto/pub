@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nv}{\PYGZca{}\PYGZca{}I}\PYG{p}{((}\PYG{n+nf}{evaluate}
+\PYG{n+nv}{\PYGZca{}\PYGZca{}I}\PYG{o}{\PYGZsq{}}\PYG{p}{(}\PYG{k}{let}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{a}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{))}
+\PYG{n+nv}{\PYGZca{}\PYGZca{}I}\PYG{+w}{  }\PYG{p}{(}\PYG{k}{let}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{f}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{b}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{+}\PYG{+w}{ }\PYG{n+nv}{b}\PYG{+w}{ }\PYG{n+nv}{a}\PYG{p}{))))}
+\PYG{n+nv}{\PYGZca{}\PYGZca{}I\PYGZca{}\PYGZca{}I}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{let}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{a}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{f}\PYG{+w}{ }\PYG{l+m+mi}{10}\PYG{p}{)))}
+\PYG{n+nv}{\PYGZca{}\PYGZca{}I}\PYG{p}{))}\PYG{+w}{ }\PYG{n+nv}{env}\PYG{p}{)}
+\end{Verbatim}

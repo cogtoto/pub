@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{exception} \PYG{n+nc}{Erreur} \PYG{o}{;;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}
+\PYG{k}{let} \PYG{n}{executer} \PYG{n}{code} \PYG{o}{=}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ilet} \PYG{n}{pc} \PYG{o}{=} \PYG{n}{ref} \PYG{l+m+mi}{0} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ilet} \PYG{n}{pile} \PYG{o}{=} \PYG{n}{ref} \PYG{n+nb+bp}{[]} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ilet} \PYG{n}{fetch} \PYG{n}{code}  \PYG{o}{=}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ibegin}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ipc} \PYG{o}{:=} \PYG{o}{!}\PYG{n}{pc} \PYG{o}{+} \PYG{l+m+mi}{1} \PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nn}{IArray}\PYG{p}{.}\PYG{n}{get} \PYG{n}{code} \PYG{o}{(!}\PYG{n}{pc} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iend}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iin}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ilet} \PYG{k}{rec} \PYG{n}{exec} \PYG{n+nb+bp}{()} \PYG{o}{=}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ilet} \PYG{n}{instr} \PYG{o}{=} \PYG{n}{fetch} \PYG{n}{code} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Imatch} \PYG{n}{instr} \PYG{k}{with}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{[}\PYG{l+s+s2}{\PYGZdq{}EMPILER\PYGZdq{}}\PYG{o}{;} \PYG{n}{n}\PYG{o}{]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(} \PYG{n}{empiler} \PYG{o}{(}\PYG{n}{int\PYGZus{}of\PYGZus{}string} \PYG{n}{n}\PYG{o}{)} \PYG{n}{pile} \PYG{o}{;} \PYG{n}{exec} \PYG{n+nb+bp}{()} \PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{[}\PYG{l+s+s2}{\PYGZdq{}ADD\PYGZdq{}}\PYG{o}{]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{let} \PYG{n}{v2} \PYG{o}{=} \PYG{n}{depiler} \PYG{n}{pile} \PYG{k}{in} \PYG{k}{let} \PYG{n}{v1} \PYG{o}{=} \PYG{n}{depiler} \PYG{n}{pile} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}            \PYG{o}{(} \PYG{n}{empiler} \PYG{o}{(}\PYG{n}{v1} \PYG{o}{+} \PYG{n}{v2}\PYG{o}{)} \PYG{n}{pile} \PYG{o}{;} \PYG{n}{exec} \PYG{n+nb+bp}{()} \PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{[}\PYG{l+s+s2}{\PYGZdq{}SUB\PYGZdq{}}\PYG{o}{]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{let} \PYG{n}{v2} \PYG{o}{=} \PYG{n}{depiler} \PYG{n}{pile} \PYG{k}{in} \PYG{k}{let} \PYG{n}{v1} \PYG{o}{=} \PYG{n}{depiler} \PYG{n}{pile} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}            \PYG{o}{(} \PYG{n}{empiler} \PYG{o}{(}\PYG{n}{v1} \PYG{o}{\PYGZhy{}} \PYG{n}{v2}\PYG{o}{)} \PYG{n}{pile} \PYG{o}{;} \PYG{n}{exec} \PYG{n+nb+bp}{()} \PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{[}\PYG{l+s+s2}{\PYGZdq{}MUL\PYGZdq{}}\PYG{o}{]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{let} \PYG{n}{v2} \PYG{o}{=} \PYG{n}{depiler} \PYG{n}{pile} \PYG{k}{in} \PYG{k}{let} \PYG{n}{v1} \PYG{o}{=} \PYG{n}{depiler} \PYG{n}{pile} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}            \PYG{o}{(} \PYG{n}{empiler} \PYG{o}{(}\PYG{n}{v1} \PYG{o}{*} \PYG{n}{v2}\PYG{o}{)} \PYG{n}{pile} \PYG{o}{;} \PYG{n}{exec} \PYG{n+nb+bp}{()} \PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{[}\PYG{l+s+s2}{\PYGZdq{}STOP\PYGZdq{}}\PYG{o}{]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{print\PYGZus{}int} \PYG{o}{(}\PYG{n}{sommet} \PYG{n}{pile}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Erreur}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iin} \PYG{n}{exec} \PYG{n+nb+bp}{()}
+\end{Verbatim}

@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{type} \PYG{n}{ski} \PYG{o}{=}
+\PYG{o}{|} \PYG{n+nc}{Varia} \PYG{k}{of} \PYG{k+kt}{string}
+\PYG{o}{|} \PYG{n+nc}{I}
+\PYG{o}{|} \PYG{n+nc}{K}
+\PYG{o}{|} \PYG{n+nc}{S}
+\PYG{o}{|} \PYG{n+nc}{Appl} \PYG{k}{of} \PYG{n}{ski}\PYG{o}{*}\PYG{n}{ski}
+\PYG{o}{|} \PYG{n+nc}{Op} \PYG{k}{of} \PYG{k+kt}{string} \PYG{o}{*} \PYG{n}{ski} \PYG{o}{;;}
+
+\PYG{k}{exception} \PYG{n+nc}{SkiExec}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{lambda\PYGZus{}ski} \PYG{o}{=} \PYG{k}{function}
+\PYG{o}{|} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,} \PYG{n}{t}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{lambda\PYGZus{}ski\PYGZus{}op} \PYG{o}{(}\PYG{n+nc}{Op}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,} \PYG{n}{lambda\PYGZus{}ski} \PYG{n}{t}\PYG{o}{))}
+\PYG{o}{|} \PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Varia}\PYG{o}{(}\PYG{n}{x}\PYG{o}{)}
+\PYG{o}{|} \PYG{n+nc}{App}\PYG{o}{(}\PYG{n}{m}\PYG{o}{,}\PYG{n}{n}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n}{lambda\PYGZus{}ski} \PYG{n}{m}\PYG{o}{,} \PYG{n}{lambda\PYGZus{}ski} \PYG{n}{n}\PYG{o}{)}
+\PYG{k}{and} \PYG{n}{lambda\PYGZus{}ski\PYGZus{}op} \PYG{o}{=} \PYG{k}{function}
+\PYG{o}{|} \PYG{n+nc}{Op}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,}\PYG{n+nc}{Varia} \PYG{n}{y}\PYG{o}{)} \PYG{k}{when} \PYG{n}{x}\PYG{o}{=}\PYG{n}{y} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{I}
+\PYG{o}{|} \PYG{n+nc}{Op}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,} \PYG{n}{t}\PYG{o}{)} \PYG{k}{when} \PYG{n}{not} \PYG{o}{(}\PYG{n}{mem} \PYG{n}{x} \PYG{o}{(}\PYG{n}{var} \PYG{n}{t}\PYG{o}{))} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n+nc}{K}\PYG{o}{,} \PYG{n}{t}\PYG{o}{)}
+\PYG{o}{|} \PYG{n+nc}{Op}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n}{m}\PYG{o}{,} \PYG{n}{n}\PYG{o}{))}  \PYG{k}{when} \PYG{o}{(}\PYG{n}{mem} \PYG{n}{x} \PYG{o}{(}\PYG{n}{var} \PYG{n}{m}\PYG{o}{))} \PYG{o}{||} \PYG{o}{(}\PYG{n}{mem} \PYG{n}{x} \PYG{o}{(}\PYG{n}{var} \PYG{n}{n}\PYG{o}{))}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}  \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n+nc}{Appl}\PYG{o}{(}\PYG{n+nc}{S}\PYG{o}{,} \PYG{o}{(}\PYG{n}{lambda\PYGZus{}ski\PYGZus{}op} \PYG{o}{(}\PYG{n+nc}{Op}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,}\PYG{n}{m}\PYG{o}{)))),} \PYG{o}{(}\PYG{n}{lambda\PYGZus{}ski\PYGZus{}op} \PYG{o}{(}\PYG{n+nc}{Op}\PYG{o}{(}\PYG{n}{x}\PYG{o}{,}\PYG{n}{n}\PYG{o}{))))}
+\PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{SkiErreur}
+\end{Verbatim}

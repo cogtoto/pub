@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nv}{\PYGZca{}\PYGZca{}I}\PYG{p}{((}\PYG{n+nf}{evaluate}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{quote}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{evaluate}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{quote}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{evaluate}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{quote}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{evaluate}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{quote}\PYG{+w}{ }\PYG{p}{(}
+\PYG{n+nv}{\PYGZca{}\PYGZca{}I\PYGZca{}\PYGZca{}I}\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{x}\PYG{+w}{ }\PYG{n+nv}{y}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{+}\PYG{+w}{ }\PYG{n+nv}{x}\PYG{+w}{ }\PYG{n+nv}{y}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{fact}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{fact}\PYG{+w}{ }\PYG{l+m+mi}{6}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{)))}
+\PYG{n+nv}{\PYGZca{}\PYGZca{}I\PYGZca{}\PYGZca{}I\PYGZca{}\PYGZca{}I\PYGZca{}\PYGZca{}I}\PYG{+w}{   }\PYG{n+nv}{env}\PYG{p}{)))}\PYG{+w}{ }\PYG{n+nv}{env}\PYG{p}{)))}\PYG{+w}{ }\PYG{n+nv}{env}\PYG{p}{)))}\PYG{+w}{ }\PYG{n+nv}{env}\PYG{p}{)}
+\end{Verbatim}

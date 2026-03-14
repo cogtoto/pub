@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{type} \PYG{n}{peano} \PYG{o}{=}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Zero}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Succ} \PYG{k}{of} \PYG{n}{peano}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Plus} \PYG{k}{of} \PYG{n}{peano} \PYG{o}{*} \PYG{n}{peano}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Mult} \PYG{k}{of} \PYG{n}{peano} \PYG{o}{*} \PYG{n}{peano}
+
+\PYG{k}{let} \PYG{n}{un} \PYG{o}{=} \PYG{n+nc}{Succ} \PYG{n+nc}{Zero} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{deux} \PYG{o}{=} \PYG{n+nc}{Succ} \PYG{o}{(}\PYG{n+nc}{Succ} \PYG{n+nc}{Zero}\PYG{o}{)} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{trois} \PYG{o}{=} \PYG{n+nc}{Succ} \PYG{o}{(}\PYG{n+nc}{Succ} \PYG{o}{(}\PYG{n+nc}{Succ} \PYG{n+nc}{Zero}\PYG{o}{))} \PYG{o}{;;}
+\end{Verbatim}

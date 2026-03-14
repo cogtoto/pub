@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{n}{code} \PYG{o}{=} \PYG{o}{[|} \PYG{o}{[}\PYG{l+s+s2}{\PYGZdq{}EMPILER\PYGZdq{}}\PYG{o}{;} \PYG{l+s+s2}{\PYGZdq{}10\PYGZdq{}}\PYG{o}{]} \PYG{o}{;[}\PYG{l+s+s2}{\PYGZdq{}EMPILER\PYGZdq{}}\PYG{o}{;} \PYG{l+s+s2}{\PYGZdq{}15\PYGZdq{}}\PYG{o}{]} \PYG{o}{;} \PYG{o}{[}\PYG{l+s+s2}{\PYGZdq{}ADD\PYGZdq{}}\PYG{o}{]} \PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}  \PYG{o}{[}\PYG{l+s+s2}{\PYGZdq{}EMPILER\PYGZdq{}}\PYG{o}{;} \PYG{l+s+s2}{\PYGZdq{}4\PYGZdq{}}\PYG{o}{]} \PYG{o}{;} \PYG{o}{[}\PYG{l+s+s2}{\PYGZdq{}MUL\PYGZdq{}}\PYG{o}{]} \PYG{o}{;} \PYG{o}{[}\PYG{l+s+s2}{\PYGZdq{}STOP\PYGZdq{}}\PYG{o}{]} \PYG{o}{|]} \PYG{o}{;;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}
+\PYG{o}{\PYGZsh{}} \PYG{n}{executer} \PYG{n}{code} \PYG{o}{;;}
+\PYG{o}{\PYGZsh{}} \PYG{l+m+mi}{100}\PYG{o}{\PYGZhy{}} \PYG{o}{:} \PYG{k+kt}{unit} \PYG{o}{=} \PYG{n+nb+bp}{()}
+\end{Verbatim}

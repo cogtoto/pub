@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{reduire} \PYG{o}{=} \PYG{k}{function}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Plus} \PYG{o}{(}\PYG{n}{p}\PYG{o}{,} \PYG{n+nc}{Zero}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{reduire} \PYG{n}{p}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Plus} \PYG{o}{(}\PYG{n}{p1} \PYG{o}{,} \PYG{o}{(}\PYG{n+nc}{Succ} \PYG{n}{p2}\PYG{o}{))} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Succ} \PYG{o}{(} \PYG{n}{reduire} \PYG{o}{((}\PYG{n+nc}{Plus} \PYG{o}{(}\PYG{n}{reduire} \PYG{n}{p1}\PYG{o}{,} \PYG{n}{reduire} \PYG{n}{p2}\PYG{o}{)))} \PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Mult} \PYG{o}{(}\PYG{n}{p}\PYG{o}{,} \PYG{n+nc}{Zero}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nc}{Zero}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Mult} \PYG{o}{(}\PYG{n}{p1}\PYG{o}{,} \PYG{o}{(}\PYG{n+nc}{Succ} \PYG{n}{p2}\PYG{o}{))}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}    \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{reduire} \PYG{o}{(}\PYG{n+nc}{Plus} \PYG{o}{(}\PYG{n}{reduire} \PYG{n}{p1}\PYG{o}{,} \PYG{n}{reduire} \PYG{o}{((}\PYG{n+nc}{Mult} \PYG{o}{(}\PYG{n}{reduire} \PYG{n}{p1}\PYG{o}{,} \PYG{n}{reduire} \PYG{n}{p2}\PYG{o}{)))} \PYG{o}{))}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{k}{as} \PYG{n}{p} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{p}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{peano\PYGZus{}entier} \PYG{o}{=} \PYG{k}{function}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Zero} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{l+m+mi}{0}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n+nc}{Succ} \PYG{n}{p} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{l+m+mi}{1} \PYG{o}{+} \PYG{o}{(}\PYG{n}{peano\PYGZus{}entier} \PYG{n}{p}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{n}{any} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{peano\PYGZus{}entier} \PYG{o}{(}\PYG{n}{reduire} \PYG{n}{any}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}
+\PYG{n}{peano\PYGZus{}entier} \PYG{o}{(}\PYG{n+nc}{Plus} \PYG{o}{(} \PYG{n+nc}{Mult}\PYG{o}{(}\PYG{n}{deux}\PYG{o}{,} \PYG{n}{trois}\PYG{o}{),} \PYG{n}{trois}\PYG{o}{));;}
+\end{Verbatim}

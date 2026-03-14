@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} the activation function}
+\PYG{n}{sigmoid}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n}{I1.0}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m}{1.0}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{x}\PYG{p}{))}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{x}\PYG{o}{=}\PYG{n+nf}{seq}\PYG{p}{(}\PYG{l+m}{0}\PYG{p}{,}\PYG{l+m}{10}\PYG{p}{,}\PYG{l+m}{0.1}\PYG{p}{)}
+\PYG{n+nf}{plot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nf}{sigmoid}\PYG{p}{(}\PYG{n}{x}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}l\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} the derivative of the activation function}
+\PYG{n}{sigmoid\PYGZus{}derivative}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nf}{Isigmoid}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m}{1.0}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n+nf}{sigmoid}\PYG{p}{(}\PYG{n}{x}\PYG{p}{))}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

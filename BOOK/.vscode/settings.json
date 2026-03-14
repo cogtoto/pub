@@ -11,5 +11,31 @@
 		"**/CVS": true,
 		"**/.DS_Store": true,
 		"**/Thumbs.db": true
-	}
+	},
+	"latex-workshop.latex.autoBuild.run": "onSave",
+	"latex-workshop.latex.outDir": "%DIR%",
+	"latex-workshop.latex.recipes": [
+		{
+			"name": "latexmk (lualatex + shell-escape)",
+			"tools": [
+				"latexmk_lualatex_shellescape"
+			]
+		}
+	],
+	"latex-workshop.latex.tools": [
+		{
+			"name": "latexmk_lualatex_shellescape",
+			"command": "latexmk",
+			"args": [
+				"-f",
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"-lualatex",
+				"-shell-escape",
+				"%DOC%"
+			]
+		}
+	],
+	"latex-workshop.latex.recipe.default": "first"
 }

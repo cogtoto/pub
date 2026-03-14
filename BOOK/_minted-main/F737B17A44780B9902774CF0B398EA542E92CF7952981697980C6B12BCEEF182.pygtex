@@ -1,0 +1,37 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{type} \PYG{n}{terme} \PYG{o}{=}
+  \PYG{o}{|} \PYG{n+nc}{Var} \PYG{k}{of} \PYG{k+kt}{string}
+  \PYG{o}{|} \PYG{n+nc}{Func} \PYG{k}{of} \PYG{k+kt}{string} \PYG{o}{*} \PYG{n}{terme} \PYG{k+kt}{list}
+
+\PYG{k}{exception} \PYG{n+nc}{Impossible}
+
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{filtre\PYGZus{}termes} \PYG{n}{lt1} \PYG{n}{lt2} \PYG{n}{sigma} \PYG{o}{=}
+  \PYG{k}{match} \PYG{o}{(}\PYG{n}{lt1}\PYG{o}{,}\PYG{n}{lt2}\PYG{o}{)} \PYG{k}{with}
+    \PYG{o}{|} \PYG{o}{(}\PYG{n+nb+bp}{[]}\PYG{o}{,} \PYG{o}{\PYGZus{})}  \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{sigma}
+    \PYG{o}{|} \PYG{o}{(\PYGZus{},} \PYG{n+nb+bp}{[]}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}}  \PYG{n}{sigma}
+    \PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+     \PYG{k}{begin}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}  \PYG{k}{let} \PYG{n}{sigma1} \PYG{o}{=} \PYG{n}{filtre} \PYG{o}{(}\PYG{n}{hd}\PYG{o}{(}\PYG{n}{lt1}\PYG{o}{))} \PYG{o}{(}\PYG{n}{hd}\PYG{o}{(}\PYG{n}{lt2}\PYG{o}{))} \PYG{n}{sigma} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}  \PYG{n}{filtre\PYGZus{}termes} \PYG{o}{(}\PYG{n}{tl}\PYG{o}{(}\PYG{n}{lt1}\PYG{o}{))} \PYG{o}{(}\PYG{n}{tl}\PYG{o}{(}\PYG{n}{lt2}\PYG{o}{))} \PYG{n}{sigma1}
+    \PYG{k}{end}
+\PYG{k}{and} \PYG{n}{filtre} \PYG{n}{m} \PYG{n}{n} \PYG{n}{sigma} \PYG{o}{=}
+  \PYG{k}{match} \PYG{o}{(}\PYG{n}{m}\PYG{o}{,}\PYG{n}{n}\PYG{o}{)} \PYG{k}{with}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{(}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f}\PYG{o}{,\PYGZus{}),} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{g}\PYG{o}{,} \PYG{o}{\PYGZus{}))} \PYG{k}{when} \PYG{n}{f} \PYG{o}{\PYGZlt{}\PYGZgt{}} \PYG{n}{g} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{(}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{),} \PYG{n}{n}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ibegin}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Itry} \PYG{k}{let} \PYG{n}{var\PYGZus{}val} \PYG{o}{=} \PYG{n}{assoc} \PYG{o}{(}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{))} \PYG{n}{sigma} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iif} \PYG{n}{var\PYGZus{}val} \PYG{o}{=} \PYG{n}{n} \PYG{k}{then} \PYG{n}{sigma} \PYG{k}{else} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iwith} \PYG{n+nc}{Not\PYGZus{}found} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{),} \PYG{n}{n}\PYG{o}{)::}\PYG{n}{sigma}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iend}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{(}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f}\PYG{o}{,}\PYG{n}{f1}\PYG{o}{),} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{g}\PYG{o}{,}\PYG{n}{g1}\PYG{o}{))} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{filtre\PYGZus{}termes} \PYG{n}{f1} \PYG{n}{g1} \PYG{n}{sigma}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+
+\PYG{k}{let} \PYG{n}{f1} \PYG{o}{=} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}f\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{;} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}g\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{;} \PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}z\PYGZdq{}}\PYG{o}{]);} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}h\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{])])} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{f2} \PYG{o}{=} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}f\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}a\PYGZdq{}}\PYG{o}{,}\PYG{n+nb+bp}{[]}\PYG{o}{);} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}g\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}h\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Var} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{]);} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}b\PYGZdq{}}\PYG{o}{,} \PYG{n+nb+bp}{[]}\PYG{o}{)]);} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}h\PYGZdq{}}\PYG{o}{,} \PYG{o}{[}\PYG{n+nc}{Func} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}a\PYGZdq{}}\PYG{o}{,} \PYG{n+nb+bp}{[]}\PYG{o}{)])])} \PYG{o}{;;}
+\PYG{n}{imprime\PYGZus{}sigma} \PYG{o}{(}\PYG{n}{filtre} \PYG{n}{f1} \PYG{n}{f2} \PYG{n+nb+bp}{[]}\PYG{o}{)} \PYG{o}{;;}
+\PYG{o}{=\PYGZgt{}\PYGZgt{}\PYGZgt{}}
+\PYG{n}{z} \PYG{o}{\PYGZlt{}\PYGZhy{}\PYGZgt{}}  \PYG{n}{b}
+\PYG{n}{y} \PYG{o}{\PYGZlt{}\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{h} \PYG{n}{x} \PYG{o}{)}
+\PYG{n}{x} \PYG{o}{\PYGZlt{}\PYGZhy{}\PYGZgt{}}  \PYG{n}{a}
+\PYG{o}{\PYGZhy{}} \PYG{o}{:} \PYG{k+kt}{unit} \PYG{o}{=} \PYG{n+nb+bp}{()}
+\end{Verbatim}

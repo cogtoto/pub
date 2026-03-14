@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZsh{}} \PYG{k}{let} \PYG{k}{rec} \PYG{n}{fix} \PYG{n}{f} \PYG{n}{x} \PYG{o}{=} \PYG{n}{f} \PYG{o}{(}\PYG{n}{fix} \PYG{n}{f}\PYG{o}{)} \PYG{n}{x} \PYG{o}{;;}
+\PYG{k}{val} \PYG{n}{fix} \PYG{o}{:} \PYG{o}{((}\PYG{k}{\PYGZsq{}}\PYG{n}{a} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{\PYGZsq{}}\PYG{n}{b}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{\PYGZsq{}}\PYG{n}{a} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{\PYGZsq{}}\PYG{n}{b}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{\PYGZsq{}}\PYG{n}{a} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{\PYGZsq{}}\PYG{n}{b} \PYG{o}{=} \PYG{o}{\PYGZlt{}}\PYG{k}{fun}\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZsh{}} \PYG{o}{(}\PYG{n}{fix} \PYG{n}{factabs}\PYG{o}{)} \PYG{l+m+mi}{5} \PYG{o}{;;}
+\PYG{o}{\PYGZhy{}} \PYG{o}{:} \PYG{k+kt}{int} \PYG{o}{=} \PYG{l+m+mi}{120}
+\end{Verbatim}

@@ -21,11 +21,11 @@ Voici le champ lexical des $\lambda $-termes:
 
 \vspace{0.2cm}
 token = \begin{tabular}{lll}
-| & $\lambda$  & 	{ \verb+LAMBDA+ } \\
-| & '.' &  { \verb+POINT+ } \\
-| & $[ a-z ] [ a-z\  0-9 ]$ * & { \verb+VARIABLE+ } \\
-| & '('	 &	{ \verb+PARLEFT+ } \\
-| & ')'	 &	{ \verb+PARRIGHT+ }
+| & $\lambda$  & 	{ \texttt{LAMBDA} } \\
+| & '.' &  { \texttt{POINT} } \\
+| & $[ a-z ] [ a-z\  0-9 ]$ * & { \texttt{VARIABLE} } \\
+| & '('	 &	{ \texttt{PARLEFT} } \\
+| & ')'	 &	{ \texttt{PARRIGHT} }
 \end{tabular}
 \vspace{0.4cm}
 
@@ -34,9 +34,9 @@ avant :
 
 \vspace{0.2cm}
 \begin{tabular}{lll}
-\textit{terme} ::= & | & \verb+VARIABLE+  \\
-& | & \verb+PARLEFT+ \ \textit{terme} \ \textit{terme} \ \verb+PARRIGHT+ \\
-& |& \verb+LAMBDA+ \ \verb+VARIABLE+ \  . \ \textit{terme}
+\textit{terme} ::= & | & \texttt{VARIABLE}  \\
+& | & \texttt{PARLEFT} \ \textit{terme} \ \textit{terme} \ \texttt{PARRIGHT} \\
+& |& \texttt{LAMBDA} \ \texttt{VARIABLE} \  . \ \textit{terme}
 \end{tabular}
 \vspace{0.2cm}
 
@@ -63,20 +63,20 @@ rule token = parse
 | eof		{ raise End_of_file }
 \end{Verbatim}
 
-La compilation de ce fichier \verb+.mll+ va générer une fonction dont le nom
-est celui de la règle (ici \verb+token+).
-Cette fonction prend comme argument le type \verb+lexbuf+ et rend le type \verb+token+. 
+La compilation de ce fichier \texttt{lambdalexical.mll} va générer une fonction dont le nom
+est celui de la règle (ici \texttt{token}).
+Cette fonction prend comme argument le type \texttt{lexbuf} et rend le type \texttt{token}. 
 
-\verb+lexbuf+  est un type de données abstrait défini dans le module Lexing 
+\texttt{lexbuf}  est un type de données abstrait défini dans le module Lexing 
 qui permet de mémoriser la chaîne ou le fichier en cours d'analyse.
 \begin{Verbatim}
 val token :  Lexing.lexbuf  -> token 
 \end{Verbatim}
 
 \subsection{Analyse syntaxique avec menhir}
-Nous d\'{e}finissons ici la grammaire du $\lambda$-calcul.
-Nous retrouvons les constructeurs du type ML associ\'{e}s \`{a} chacune des r\`{e}gles de la grammaire.
-Ces constructeurs seront préenté dans la section qui suit.
+Nous définissons ici la grammaire du $\lambda$-calcul.
+Nous retrouvons les constructeurs du type ML associés à chacune des règles de la grammaire.
+Ces constructeurs seront préentés dans la section qui suit.
 
 
 \begin{Verbatim}
@@ -138,14 +138,14 @@ Lam("f",App(Lam("x",App(Var "f" ,App(Var "x" ,Var "x" ))),
 
 
 
-La compilation de ce fichier \verb+.mly+ va générer une fonction dont le nom
-est celui de l'axiome de notre grammaire (ici \verb+exp+). Cette fonction prend deux arguments: la fonction de l'analyseur lexical qui génère les tokens et l'input. Elle rend le type
+La compilation de ce fichier \texttt{lambdagrammar.mly} va générer une fonction dont le nom
+est celui de l'axiome de notre grammaire (ici \texttt{exp}). Cette fonction prend deux arguments: la fonction de l'analyseur lexical qui génère les tokens et l'input. Elle rend le type
 des expressions utilisées commes actions dans la grammaire.
 \begin{Verbatim}
 val exp :   (Lexing.lexbuf  -> token) -> Lexing.lexbuf -> Terme.terme
 \end{Verbatim}
 
- Si le langage analysé n'est pas reconnu par la grammaire, l'exception \verb+Parse_error+ est levée.
+ Si le langage analysé n'est pas reconnu par la grammaire, l'exception \texttt{ParseError} est levée.
  \subsection{Implémentation du parsing en mode \textit{récursif descendant}}
  
  Si nous voulons nous passer d'un outil tel que ocamlyacc ou menhir, nous pouvons très facilement implémenter un parser
@@ -157,13 +157,13 @@ val exp :   (Lexing.lexbuf  -> token) -> Lexing.lexbuf -> Terme.terme
  
 \vspace{0.5cm}
 \begin{tabular}{lll}
-\textit{exprule} & $::=$ & | \verb+VARIABLE+  \\
-					  &	    & | \verb+PARLEFT+ \  \textit{parrule} \\
-					  & 		 & | \verb+NEWLINE+ \\
-\textit{parrule} & $::=$ & | \verb+LAMBDA+ \ \textit{lambdarule}  \\
+\textit{exprule} & $::=$ & | \texttt{VARIABLE}  \\
+					  &	    & | \texttt{PARLEFT} \  \textit{parrule} \\
+					  & 		 & | \texttt{NEWLINE} \\
+\textit{parrule} & $::=$ & | \texttt{LAMBDA} \ \textit{lambdarule}  \\
 					  &       & | \textit{apprule} \\ 
-\textit{lambdarule} & $::=$ & \verb+VARIABLE+  \verb+POINT+  \textit{exprule}  \verb+PARRIGHT+ \\
-\textit{apprule} & $::=$    &  \textit{exprule} \textit{exprule}  \verb+PARRIGHT+ \\
+\textit{lambdarule} & $::=$ & \texttt{VARIABLE}  \texttt{POINT}  \textit{exprule}  \texttt{PARRIGHT} \\
+\textit{apprule} & $::=$    &  \textit{exprule} \textit{exprule}  \texttt{PARRIGHT} \\
 \end{tabular}
 \vspace{0.5cm}
 
@@ -224,17 +224,17 @@ type terme =
 \end{Verbatim}
 
 
-Un terme du $\lambda $-calcul est donc un type ML compos\'{e}, avec les constructeurs $Var$, $App$ et $Lam$.
+Un terme du $\lambda $-calcul est donc un type ML composé, avec les constructeurs $Var$, $App$ et $Lam$.
 
-Par exemple, le terme $ \lambda x.(x y) z $ est represent\'{e} par la structure:
+Par exemple, le terme $ \lambda x.(x y) z $ est representé par la structure:
 
 
 
-\verb+App ((Lam ("x", (App ((Var "x"), (Var "y"))))), (Var "z"))+
+\texttt{App ((Lam ("x", (App ((Var "x"), (Var "y"))))), (Var "z"))}
 
 
 C'est un peu verbeux.
-Voici cependant sa représentation sous la forme d'un arbre syntaxique. Le symbole @ repr\'{e}sente ici l'application.
+Voici cependant sa représentation sous la forme d'un arbre syntaxique. Le symbole @ représente ici l'application.
 \begin{center}
 \begin{tikzpicture}[level distance=1.5cm,
 level 1/.style={sibling distance=3cm},
@@ -251,7 +251,7 @@ child { node {z} };
 \end{tikzpicture}
 \end{center}
 
-Pour dessiner cet arbre, nous utilisons le tr\`{e}s bon package \textsc{Tikz} qui permet facilement de repr\'{e}senter
+Pour dessiner cet arbre, nous utilisons le très bon package \textsc{Tikz} qui permet facilement de représenter
 les arbres avec une syntaxe très simple.
 \begin{Verbatim}
 \node{@}
@@ -265,12 +265,11 @@ child { node {$\lambda $}
 child { node {z} };
 \end{Verbatim}
 
-On impl\'{e}mente deux fonctions \textsc{Ocaml}
+On implémente deux fonctions \textsc{Ocaml}
 qui permettent  d'afficher une expression de type $\lambda $-terme en code \LaTeX\ ou en code \textsc{Tikz}.
 
 
-
-La fonction \verb+varLibres+ retourne les variables libres (ie. non li\'{e}es) d'un $\lambda $-terme.
+La fonction \texttt{varLibres} retourne les variables libres (ie. non liées) d'un $\lambda $-terme.
 \begin{Verbatim}
 let rec varLibres lambdaTerm =
 	match lambdaTerm with
@@ -394,7 +393,7 @@ let rec reduc1Normale terme =
 			with IRREDUCTIBLE   -> App (n, (reduc1Normale m)) 
 \end{Verbatim}
 
-Enfin, nous avons une fonction \verb+fullReduc+ qui permet d'itérer l'opération de
+Enfin, nous avons une fonction \texttt{fullReduc} qui permet d'itérer l'opération de
 $\beta$-réduction jusqu'à trouver la forme normale, ou boucler s'il n'y a pas de forme formale.
 On lui impose donc maximum 1000 réductions. 
 Elle prend en argument la méthode (ie. la stratégie de réduction) à utiliser. 
@@ -880,7 +879,7 @@ sans réduire le redex $Mx$
 
 En utilisant notre programme OCAML, voyons cela avec en prenant $M = \lambda a. (\lambda b . b) $ :
 
-\verb+# betaNormal ym ;;+
+\texttt{\# betaNormal ym ;;}
 $$
 \begin{array}{lll}
  & (\lambda f . (\lambda x . (f(xx))\lambda x . (f(xx)))\lambda a . \lambda b . b) &  \\
@@ -890,7 +889,7 @@ $$
 \end{array}
 $$
 
-\verb+# betaValeur ym ;;+
+\texttt{\# betaValeur ym ;;}
 $$
 \begin{array}{lll}
  & (\lambda f . (\lambda x . (f(xx))\lambda x . (f(xx)))\lambda a . \lambda b . b)  &  \\
@@ -923,21 +922,21 @@ Les termes $(\lambda x.Mx)$ et M sont $\eta$-équivalents. On écrira $(\lambda 
 En \textsc{Coq}, le lemme suivant se démontre par l'utilisation simple
 de la tactique \texttt{reflexivity} car l'expression \texttt{fun x => f x} se 
 réduit en \texttt{f}.
-\begin{Verbatim} 
+\begin{minted}{coq}
 Lemma eta : forall (A B:Type) (f:A->B), f = fun x => f x.
 reflexivity.
 Qed.
-\end{Verbatim}
+\end{minted}
 Ou de manière similaire en \textsc{Agda} :
-\begin{Verbatim}
+\begin{minted}{agda}
 eta : (A B : Set) -> (f : A -> B) -> (λ x -> f x) \equiv f
 eta A B f = refl
-\end{Verbatim}
+\end{minted}
 \end{definition}
 
 Appliquons à nouveau notre exemple avec ce combinateur $Z$ appliqué à $M=\lambda a. \lambda b. b$:
 
-\verb+# betaValeur zm ;;+
+\texttt{\# betaValeur zm ;;}
 $$
 \begin{array}{ll}
 & ((\lambda f . ((\lambda x . (f(\lambda v . ((xx)v))))(\lambda x . (f(\lambda v . ((xx)v))))))(\lambda a . (\lambda b . b))) \\
@@ -947,22 +946,22 @@ $$
 \end{array}
 $$
 
-Nous avons le même résultat et les même étapes de réduction avec \verb+betaNormal zm ;;+
+Nous avons le même résultat et les même étapes de réduction avec \texttt{betaNormal zm ;;}
 
 
 En \textsc{Scheme}, nous pourrons implémenter ce combinateur $Z$ :
-\begin{Verbatim}
+\begin{minted}{scheme}
 (define Z
  (lambda(f)
    (lambda (x) (lambda(v) ((f (x x) v))))
    (lambda (x) (lambda(v) ((f (x x) v))))))
-\end{Verbatim}
+\end{minted}
 
 En ML, le typage ne nous permettra pas de coder un combinateur comme $Y$ ou $Z$.
 
 Essayons cependant d'écrire:
 
-\begin{Verbatim}
+\begin{minted}{ocaml}
 
 # let rec fix f = f (fix f) ;;
 val fix : ('a -> 'a) -> 'a = <fun>
@@ -974,7 +973,7 @@ let factabs fact = function
 val factabs : (int -> int) -> int -> int = <fun>
 # (fix factabs) 5 ;;
 Stack overflow during evaluation (looping recursion?).
-\end{Verbatim}
+\end{minted}
 ML est bien un langage \textit{strict}: les arguments d'une fonction sont évalués en premier 
 comme on l'a vu dans la $\beta$-réduction faible avec appel par valeur.
 
@@ -982,15 +981,15 @@ comme on l'a vu dans la $\beta$-réduction faible avec appel par valeur.
 Pour éviter la boucle infinie $f(f\ldots(f (fix f))\ldots)$, 
 une astuce que j'ai pu lire est d'introduire une variable supplémentaire:
 
-\begin{Verbatim}
+\begin{minted}{ocaml}
 # let rec fix f x = f (fix f) x ;;
 val fix : (('a -> 'b) -> 'a -> 'b) -> 'a -> 'b = <fun>
 # (fix factabs) 5 ;;
 - : int = 120
-\end{Verbatim}
+\end{minted}
 Ici aussi, le mécanisme de la ``$\eta$-expansion'' est utilisé.
 Reproduisons cela en \textsc{Scheme} :
-\begin{Verbatim}
+\begin{minted}{scheme}
 (define factabs
   (lambda (f)
     (lambda (n)
@@ -1003,7 +1002,7 @@ Reproduisons cela en \textsc{Scheme} :
 
 ((fix factabs) 5)
 => 120
-\end{Verbatim}
+\end{minted}
 
 
 \subsection{La diagonale de Cantor} %%
@@ -1135,12 +1134,12 @@ on applique l'hypothèse de surjection de $f$ sur $h$
 Nous pourrons nous reférer à l'ouvrage de Jean-Yves Girard, \textit{Le Point Aveugle}
 \cite{girard}
 
+\vspace{.5cm}
 
-En \textsc{Agda}, qui ne possède pas un langage de tactiques permettant de construire le terme, 
-nous devons nous-même construire la preuve. Mais cela peut se faire très élégamment
-grâce à la belle syntaxe procurée par ce langage.\cite[Program = Proof]{PP}
-
-\begin{verbatim}
+\textsc{Agda}, qui ne possède pas un langage de tactiques permettant de construire le terme, 
+doit expliciter le terme matérialisant la preuve. Cela peut se faire très élégamment
+grâce à la belle syntaxe du langage.\cite[Program = Proof]{PP}
+\begin{minted}{agda}
 cong-app : \forall {A : Set } {B : A → Set } {f g : (x : A) → B x} →
            f \equiv g → (x : A) → f x \equiv g x
 cong-app refl x = refl
@@ -1168,7 +1167,25 @@ cantor f sur = fxx≢hx x (cong-app hyp x)
   hyp : f x \equiv h     -- on applique l'hypothèse de la surjection sur h
                      -- donc il existe un x tq f x = h
   hyp = snd (sur h)
-\end{verbatim}
+\end{minted}
+
+\vspace{.5cm}
+
+\textsc{Lean} se rapproche de \textsc{Coq} avec son langage de tactiques. En voici la preuve.
+\begin{minted}{lean}
+def surj {A B : Type} (f : A → B) : Prop :=
+ (b : B) → ∃ a : A, f a = b
+
+theorem cantor : ¬ (∃ f : ℕ → ℕ → Bool, surj f) := by
+intro h
+rcases h with ⟨f , SURJ⟩
+let g := fun b => not b
+let h := fun x => g (f x x)
+rcases (SURJ h) with ⟨ x , B ⟩
+let C : h x = f x x  := by simp [B]
+simp [h] at C
+simp [g] at C
+\end{minted}
 
 La construction ci-dessus appliquée sur le $\lambda$-calcul permet de mettre en évidence de 
 manière constructive que tout $\lambda$-terme a un point fixe.
@@ -1193,7 +1210,7 @@ Nous utiliserons les fonctions suivantes :
 \end{align*}
 
 On notera ainsi $\ulcorner t \urcorner$, le terme $\overline{n}$  si 
-$\# t =n$ . 
+$\# t =n$ .> 
 
 
 \begin{theoreme}[Le point fixe logique]
@@ -1597,5 +1614,4 @@ Inductive terme : Set :=
 Comment normaliser un terme du $\lambda$-calcul en utilisant le méchanisme d'évaluation du langage d'implémentation ?
 L'idée va être de refléter (\textit{reflect}) le terme dans le langage d'implémentation, de l'évaluer, puis de le réifier \textit{reify} 
 en $\lambda$-calcul.
-
 

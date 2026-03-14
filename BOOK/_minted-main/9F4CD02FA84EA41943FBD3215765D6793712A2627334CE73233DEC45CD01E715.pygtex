@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Theorem} \PYG{n}{modus\PYGZus{}tollens}\PYG{o}{:} \PYG{k}{forall} \PYG{o}{(}\PYG{n}{p} \PYG{n}{q}\PYG{o}{:}\PYG{k+kt}{Prop}\PYG{o}{),} \PYG{o}{(}\PYG{n}{q}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{False}\PYG{o}{)\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{p}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{q}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{(}\PYG{n}{p}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{False}\PYG{o}{).}
+\PYG{k+kn}{Proof}\PYG{o}{.}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n}{Iintros} \PYG{n}{p} \PYG{n}{q} \PYG{n}{Hfq} \PYG{n}{Hpq} \PYG{n}{Hp}\PYG{o}{.}
+        \PYG{k}{generalize} \PYG{o}{(}\PYG{n}{Hpq} \PYG{n}{Hp}\PYG{o}{).}
+        \PYG{k+kp}{exact} \PYG{n}{Hfq}\PYG{o}{.}
+\PYG{k+kn}{Qed}\PYG{o}{.}
+\end{Verbatim}

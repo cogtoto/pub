@@ -1,0 +1,42 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{super\PYGZus{}liste} \PYG{n}{l1} \PYG{n}{l2} \PYG{n}{occ} \PYG{o}{=}
+ \PYG{k}{match} \PYG{n}{occ} \PYG{k}{with}
+ \PYG{o}{|} \PYG{n}{a}\PYG{o}{::}\PYG{n}{b} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ibegin}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I} \PYG{k}{try}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I} \PYG{k}{let} \PYG{n}{t} \PYG{o}{=} \PYG{n}{cut} \PYG{n}{a} \PYG{n}{l1} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I} \PYG{k}{match} \PYG{n}{t} \PYG{k}{with}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I} \PYG{o}{|} \PYG{n+nc}{Var} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I} \PYG{o}{|} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{let} \PYG{n}{sigma} \PYG{o}{=} \PYG{n}{unifier} \PYG{o}{((}\PYG{n}{cut} \PYG{n}{a} \PYG{n}{l1}\PYG{o}{),} \PYG{n}{l2}\PYG{o}{)}
+ \PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iin} \PYG{o}{(}\PYG{n}{a}\PYG{o}{,} \PYG{n}{sigma}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I} \PYG{k}{with} \PYG{n+nc}{Impossible} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{super\PYGZus{}liste} \PYG{n}{l1} \PYG{n}{l2} \PYG{n}{b}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I} \PYG{k}{end}
+ \PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+
+\PYG{k}{let} \PYG{n}{superpose\PYGZus{}liste} \PYG{o}{(}\PYG{n}{l1}\PYG{o}{,}\PYG{n}{r1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{l2}\PYG{o}{,}\PYG{n}{r2}\PYG{o}{)} \PYG{o}{=}
+\PYG{k}{let} \PYG{k}{rec} \PYG{n}{superpose\PYGZus{}liste\PYGZus{}aux} \PYG{n}{l1} \PYG{n}{l2} \PYG{n}{occ} \PYG{o}{=} \PYG{c}{(* rend liste des occurences et substitution *)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iif}   \PYG{n}{alpha\PYGZus{}equiv} \PYG{o}{(}\PYG{n}{l1}\PYG{o}{,}\PYG{n}{r1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{l2}\PYG{o}{,}\PYG{n}{r2}\PYG{o}{)} \PYG{k}{then}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Itry}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ilet} \PYG{o}{(}\PYG{n}{oc}\PYG{o}{,} \PYG{n}{sigma}\PYG{o}{)} \PYG{o}{=} \PYG{n}{super\PYGZus{}liste} \PYG{n}{l1} \PYG{o}{(}\PYG{n}{rename} \PYG{n}{l2} \PYG{n}{l1}\PYG{o}{)} \PYG{o}{(}\PYG{n}{remove} \PYG{l+m+mi}{0} \PYG{n}{occ}\PYG{o}{)} \PYG{c}{(* retire 0 car occurence triviale si alpha\PYGZus{}equiv *)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iin}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ibegin}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iprint\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}superposition à l\PYGZsq{}occurence \PYGZdq{}}\PYG{o}{;} \PYG{n}{print\PYGZus{}int} \PYG{n}{oc} \PYG{o}{;}  \PYG{n}{print\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iprint\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}sur le termes l1 :\PYGZdq{}} \PYG{o}{;} \PYG{n}{imprime} \PYG{n}{l1} \PYG{o}{;} \PYG{n}{print\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iprint\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}sur le terme l2 :\PYGZdq{}} \PYG{o}{;} \PYG{n}{imprime} \PYG{n}{l2} \PYG{o}{;} \PYG{n}{print\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iprint\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}avec la substitution :\PYGZdq{}}\PYG{o}{;} \PYG{n}{imprime\PYGZus{}sigma} \PYG{n}{sigma}\PYG{o}{;} \PYG{n}{print\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{(}\PYG{n}{oc}\PYG{o}{,} \PYG{n}{sigma}\PYG{o}{)::}\PYG{n}{superpose\PYGZus{}liste\PYGZus{}aux} \PYG{n}{l1} \PYG{n}{l2} \PYG{o}{(}\PYG{n}{remove} \PYG{n}{oc} \PYG{n}{occ}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iend}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iwith} \PYG{n+nc}{Impossible} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb+bp}{[]}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ielse}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Itry}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ilet} \PYG{o}{(}\PYG{n}{oc}\PYG{o}{,} \PYG{n}{sigma}\PYG{o}{)} \PYG{o}{=} \PYG{n}{super\PYGZus{}liste} \PYG{n}{l1} \PYG{o}{(}\PYG{n}{rename} \PYG{n}{l2} \PYG{n}{l1}\PYG{o}{)} \PYG{n}{occ}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iin}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ibegin} \PYG{n}{print\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}superposition à l\PYGZsq{}occurence \PYGZdq{}}\PYG{o}{;} \PYG{n}{print\PYGZus{}int} \PYG{n}{oc} \PYG{o}{;}  \PYG{n}{print\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iprint\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}sur le terme l1 :\PYGZdq{}} \PYG{o}{;} \PYG{n}{imprime} \PYG{n}{l1} \PYG{o}{;} \PYG{n}{print\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iprint\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}sur le terme l2 :\PYGZdq{}} \PYG{o}{;} \PYG{n}{imprime} \PYG{n}{l2} \PYG{o}{;} \PYG{n}{print\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iprint\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}avec la substitution :\PYGZdq{}}\PYG{o}{;} \PYG{n}{imprime\PYGZus{}sigma} \PYG{n}{sigma}\PYG{o}{;} \PYG{n}{print\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{;}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{(}\PYG{n}{oc}\PYG{o}{,} \PYG{n}{sigma}\PYG{o}{)::}\PYG{n}{superpose\PYGZus{}liste\PYGZus{}aux} \PYG{n}{l1} \PYG{n}{l2} \PYG{o}{(}\PYG{n}{remove} \PYG{n}{oc} \PYG{n}{occ}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{I}\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iend}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Iwith} \PYG{n+nc}{Impossible} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb+bp}{[]}
+\PYG{k}{in} \PYG{n}{superpose\PYGZus{}liste\PYGZus{}aux} \PYG{n}{l1} \PYG{n}{l2} \PYG{o}{(}\PYG{n}{occurences} \PYG{n}{l1}\PYG{o}{)} \PYG{o}{;;}
+\end{Verbatim}

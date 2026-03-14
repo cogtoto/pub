@@ -190,7 +190,7 @@ Qed.
 \end{Verbatim}
 
 \subsection{Inférence de type}
-Pour présenter un système d'inférence de type, nous introduisons la constante de type \verb+Int+ à notre $\lambda$-calcul
+Pour présenter un système d'inférence de type, nous introduisons la constante de type \texttt{Int} à notre $\lambda$-calcul
 simplement typé.
 
 \begin{Verbatim}
@@ -200,7 +200,7 @@ type ltype =
 | Fleche of ltype*ltype
 \end{Verbatim}
 
-De même, nous enrichissons notre définition de terme avec le constructeur \verb+Const of int+ et la fonction binaire  \verb+Plus+ 
+De même, nous enrichissons notre définition de terme avec le constructeur \texttt{Const of int} et la fonction binaire  \texttt{Plus} 
 \begin{Verbatim}
 type terme = 
   | Var of string 
@@ -380,9 +380,9 @@ $$\Gamma = \{ (*:\square) ;\ (\text{nat}:*) ;\ (O:nat) ;\ (\text{succ}:\Pi x:\te
 Voici quelques exemples interprétés par \textsc{Ocaml} ci-dessous. Nous avons simplifié l'affichage
 du type $\Pi x:A.B$ par $A\rightarrow B$ si $x$ n'est pas une variable libre de $B$.
 
-Nous utilisons pour l'affichage \textsc{Ocaml} les caractères UTF-8 :  \verb+λ, π, →+
+Nous utilisons pour l'affichage \textsc{Ocaml} les caractères UTF-8 :  \texttt{λ, π, →}
 
-\begin{Verbatim}
+\begin{minted}{ocaml}
 (*  Polymorphisme   *)
 let id = Lam("A", C "*", Lam("x", V "A", V "x")) ;;
 let id_nat = App(id, C "nat") ;;
@@ -429,7 +429,7 @@ utop # print_terme (typage twice env0) ;;
 let plus2  = App(App(twice, entiers), succ) ;;
 print_terme (fullReduc (App(plus2, trois))) ;
 λX:*.λx:X.λy:(X→X).y (y (y (y (y x) ) ) )
-\end{Verbatim}
+\end{minted}
 Le type produit pourra être défini de la manière suivante :
 
 Si $U$ et $V$ sont des types, alors 
@@ -437,7 +437,7 @@ $$U\times V = \Pi X.(U\rightarrow V \rightarrow X)\rightarrow X$$
 $$ <u,v> = \lambda X:*.\lambda x:(U \rightarrow V \rightarrow X). x u v $$ 
 
 Prenons par exemple le couple d'entiers $<100, 101>$, nous le modélisons par 
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let prod_100_101 = 
   Lam("X", C "nat", 
     Lam("x", Prod("z", C "nat", 
@@ -445,11 +445,11 @@ let prod_100_101 =
      (Prod ("w", C "nat", V "X" ))),App (App (V "x", N 100), N 101))) ;;
 print (typage prod_100_101 env0) ;;
 πX:nat.((nat→(nat→X))→X)  
-\end{Verbatim}
+\end{minted}
 
 Les projections sont définies par 
 $$\pi^1 t = t\ U (\lambda x:U.\lambda y:V. x) \text{  et  } \pi^2 t = t\ U (\lambda x:U.\lambda y:V. y)$$
-\begin{Verbatim}
+\begin{minted}{ocaml}
 let proj1 = 
   Lam("t", (typage prod_uv env0), 
     App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "x"))))
@@ -459,20 +459,20 @@ let proj2 =
   Lam("t", (typage prod_uv env0),
     App(App(V "t", V "U"), Lam ("x", V "U", Lam ("y", V "V", V "y"))))
 in print (fullReduc (App (proj2, prod_uv)))
-\end{Verbatim}
+\end{minted}
 
 \subsection{\textsc{MiniCoq}}
 Nous  nous éloignons de la simplicité du \textit{Pure Type System} en surchargeant notre
  terme algébrique des types suivants :
 \begin{itemize}
-  \item Le type \verb+Nat+ avec ses constructeurs \verb+0+ et \verb+S+
-  \item Le type de l'égalité \verb+Eq+ avec son unique constructeur \verb+Eq_refl+
-  \item Le type \verb+And+ avec son unique constructeur \verb+Conj+ et ses fonctions
-  \verb+Proj1+ et \verb+Proj2+. L'affichage du type \verb+And+ se fera avec les caractères \verb+/\+
-  \item Le type \verb+Or+ avec ses constructeurs \verb+Or_introl+ et \verb+Or_intror+ et sa fonction \verb+Case+.
-  L'affichage de ce type se fera avec les caractères \verb+\/+
-  \item Le type \verb+False+ sans constructeur, mais avec la fonction \verb+False_ind(t1,t2)+ qui se
-  réduit en \verb+t1+ si le type de \verb+t2+ est égal à \verb+False+  (\textit{ex falso quodlibet})
+  \item Le type \texttt{Nat} avec ses constructeurs \texttt{0} et \texttt{S}
+  \item Le type de l'égalité \texttt{Eq} avec son unique constructeur \texttt{EqRefl}
+  \item Le type \texttt{And} avec son unique constructeur \texttt{Conj} et ses fonctions
+  \texttt{Proj1} et \texttt{Proj2}. L'affichage du type \texttt{And} se fera avec les caractères \verb+/+
+  \item Le type \texttt{Or} avec ses constructeurs \texttt{OrIntrol} et \texttt{OrIntror} et sa fonction \texttt{Case}.
+  L'affichage de ce type se fera avec les caractères \verb+|+
+  \item Le type \texttt{False} sans constructeur, mais avec la fonction \texttt{FalseInd(t1,t2)} qui se
+  réduit en \texttt{t1} si le type de \texttt{t2} est égal à \texttt{False}  (\textit{ex falso quodlibet})
 \end{itemize}
 
 \vspace{0.2cm}

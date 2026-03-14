@@ -1,0 +1,29 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{cong\PYGZhy{}app}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYGZbs{}forall\PYG{+w}{ }\PYG{o}{\PYGZob{}}A\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{k+kt}{Set}\PYG{+w}{ }\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZob{}}B\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }A\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{k+kt}{Set}\PYG{+w}{ }\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZob{}}f\PYG{+w}{ }g\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{(}x\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }A\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }B\PYG{+w}{ }x\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o+ow}{→}
+\PYG{+w}{           }f\PYG{+w}{ }\PYGZbs{}equiv\PYG{+w}{ }g\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{o}{(}x\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }A\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }f\PYG{+w}{ }x\PYG{+w}{ }\PYGZbs{}equiv\PYG{+w}{ }g\PYG{+w}{ }x
+cong\PYGZhy{}app\PYG{+w}{ }refl\PYG{+w}{ }x\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }refl
+
+\PYG{n+nf}{surj}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{\PYGZob{}}A\PYG{+w}{ }B\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{k+kt}{Set}\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{o}{(}f\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }A\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }B\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{k+kt}{Set}
+surj\PYG{+w}{  }\PYG{o}{\PYGZob{}}A\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZob{}}B\PYG{o}{\PYGZcb{}}\PYG{+w}{ }f\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{  }\PYG{o}{(}b\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }B\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }Σ\PYG{+w}{ }A\PYG{+w}{ }\PYG{o}{(}\PYG{o+ow}{λ}\PYG{+w}{ }a\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }\PYG{o}{(}f\PYG{+w}{ }a\PYG{o}{)}\PYG{+w}{ }≡\PYG{+w}{ }b\PYG{o}{)}
+
+\PYG{n+nf}{g}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Bool\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }Bool
+g\PYG{+w}{ }false\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }true
+g\PYG{+w}{ }true\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }false
+
+\PYG{n+nf}{lemme}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{(}a\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Bool\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }a\PYG{+w}{ }\PYGZbs{}equiv\PYG{+w}{ }g\PYG{+w}{ }a\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }False
+lemme\PYG{+w}{ }true\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }\PYG{o+ow}{λ}\PYG{+w}{ }\PYG{o}{()}
+lemme\PYG{+w}{ }false\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }\PYG{o+ow}{λ}\PYG{+w}{ }\PYG{o}{()}
+
+\PYG{n+nf}{cantor}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{(}f\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Nat\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }Nat\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }Bool\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }surj\PYG{+w}{ }f\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }False
+cantor\PYG{+w}{ }f\PYG{+w}{ }sur\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }fxx≢hx\PYG{+w}{ }x\PYG{+w}{ }\PYG{o}{(}cong\PYGZhy{}app\PYG{+w}{ }hyp\PYG{+w}{ }x\PYG{o}{)}
+\PYG{+w}{  }\PYG{k+kr}{where}
+\PYG{+w}{  }\PYG{n+nf}{fxx≢hx}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }\PYG{o}{(}x\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Nat\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }f\PYG{+w}{ }x\PYG{+w}{ }x\PYG{+w}{ }\PYGZbs{}equiv\PYG{+w}{ }g\PYG{+w}{ }\PYG{o}{(}f\PYG{+w}{ }x\PYG{+w}{ }x\PYG{o}{)}\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }False
+\PYG{+w}{  }fxx≢hx\PYG{+w}{ }x\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }lemme\PYG{+w}{ }\PYG{o}{(}f\PYG{+w}{ }x\PYG{+w}{ }x\PYG{o}{)}
+\PYG{+w}{  }\PYG{n+nf}{h}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Nat\PYG{+w}{ }\PYG{o+ow}{→}\PYG{+w}{ }Bool
+\PYG{+w}{  }h\PYG{+w}{ }x\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }g\PYG{+w}{ }\PYG{o}{(}f\PYG{+w}{ }x\PYG{+w}{ }x\PYG{o}{)}\PYG{+w}{ }\PYG{c+c1}{\PYGZhy{}\PYGZhy{} h la diagonalisation négative de la mort}
+\PYG{+w}{  }\PYG{n+nf}{x}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }Nat
+\PYG{+w}{  }x\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }fst\PYG{+w}{ }\PYG{o}{(}sur\PYG{+w}{ }h\PYG{o}{)}
+\PYG{+w}{  }\PYG{n+nf}{hyp}\PYG{+w}{ }\PYG{o+ow}{:}\PYG{+w}{ }f\PYG{+w}{ }x\PYG{+w}{ }\PYGZbs{}equiv\PYG{+w}{ }h\PYG{+w}{     }\PYG{c+c1}{\PYGZhy{}\PYGZhy{} on applique l\PYGZsq{}hypothèse de la surjection sur h}
+\PYG{+w}{                     }\PYG{c+c1}{\PYGZhy{}\PYGZhy{} donc il existe un x tq f x = h}
+\PYG{+w}{  }hyp\PYG{+w}{ }\PYG{o+ow}{=}\PYG{+w}{ }snd\PYG{+w}{ }\PYG{o}{(}sur\PYG{+w}{ }h\PYG{o}{)}
+\end{Verbatim}

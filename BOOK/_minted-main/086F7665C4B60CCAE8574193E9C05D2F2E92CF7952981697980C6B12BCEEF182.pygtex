@@ -1,0 +1,29 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{cong}\PYG{o}{\PYGZhy{}}\PYG{n}{app} \PYG{o}{:} \PYG{err}{\PYGZbs{}}\PYG{n}{forall} \PYG{o}{\PYGZob{}}\PYG{n+nc}{A} \PYG{o}{:} \PYG{n+nc}{Set} \PYG{o}{\PYGZcb{}} \PYG{o}{\PYGZob{}}\PYG{n+nc}{B} \PYG{o}{:} \PYG{n+nc}{A} \PYG{err}{→} \PYG{n+nc}{Set} \PYG{o}{\PYGZcb{}} \PYG{o}{\PYGZob{}}\PYG{n}{f} \PYG{n}{g} \PYG{o}{:} \PYG{o}{(}\PYG{n}{x} \PYG{o}{:} \PYG{n+nc}{A}\PYG{o}{)} \PYG{err}{→} \PYG{n+nc}{B} \PYG{n}{x}\PYG{o}{\PYGZcb{}} \PYG{err}{→}
+           \PYG{n}{f} \PYG{err}{\PYGZbs{}}\PYG{n}{equiv} \PYG{n}{g} \PYG{err}{→} \PYG{o}{(}\PYG{n}{x} \PYG{o}{:} \PYG{n+nc}{A}\PYG{o}{)} \PYG{err}{→} \PYG{n}{f} \PYG{n}{x} \PYG{err}{\PYGZbs{}}\PYG{n}{equiv} \PYG{n}{g} \PYG{n}{x}
+\PYG{n}{cong}\PYG{o}{\PYGZhy{}}\PYG{n}{app} \PYG{n}{refl} \PYG{n}{x} \PYG{o}{=} \PYG{n}{refl}
+
+\PYG{n}{surj} \PYG{o}{:} \PYG{o}{\PYGZob{}}\PYG{n+nc}{A} \PYG{n+nc}{B} \PYG{o}{:} \PYG{n+nc}{Set}\PYG{o}{\PYGZcb{}} \PYG{err}{→} \PYG{o}{(}\PYG{n}{f} \PYG{o}{:} \PYG{n+nc}{A} \PYG{err}{→} \PYG{n+nc}{B}\PYG{o}{)} \PYG{err}{→} \PYG{n+nc}{Set}
+\PYG{n}{surj}  \PYG{o}{\PYGZob{}}\PYG{n+nc}{A}\PYG{o}{\PYGZcb{}} \PYG{o}{\PYGZob{}}\PYG{n+nc}{B}\PYG{o}{\PYGZcb{}} \PYG{n}{f} \PYG{o}{=}  \PYG{o}{(}\PYG{n}{b} \PYG{o}{:} \PYG{n+nc}{B}\PYG{o}{)} \PYG{err}{→} \PYG{n}{Σ} \PYG{n+nc}{A} \PYG{o}{(}\PYG{n}{λ} \PYG{n}{a} \PYG{err}{→} \PYG{o}{(}\PYG{n}{f} \PYG{n}{a}\PYG{o}{)} \PYG{err}{≡} \PYG{n}{b}\PYG{o}{)}
+
+\PYG{n}{g} \PYG{o}{:} \PYG{n+nc}{Bool} \PYG{err}{→} \PYG{n+nc}{Bool}
+\PYG{n}{g} \PYG{n+nb+bp}{false} \PYG{o}{=} \PYG{n+nb+bp}{true}
+\PYG{n}{g} \PYG{n+nb+bp}{true} \PYG{o}{=} \PYG{n+nb+bp}{false}
+
+\PYG{n}{lemme} \PYG{o}{:} \PYG{o}{(}\PYG{n}{a} \PYG{o}{:} \PYG{n+nc}{Bool}\PYG{o}{)} \PYG{err}{→} \PYG{n}{a} \PYG{err}{\PYGZbs{}}\PYG{n}{equiv} \PYG{n}{g} \PYG{n}{a} \PYG{err}{→} \PYG{n+nc}{False}
+\PYG{n}{lemme} \PYG{n+nb+bp}{true} \PYG{o}{=} \PYG{n}{λ} \PYG{n+nb+bp}{()}
+\PYG{n}{lemme} \PYG{n+nb+bp}{false} \PYG{o}{=} \PYG{n}{λ} \PYG{n+nb+bp}{()}
+
+\PYG{n}{cantor} \PYG{o}{:} \PYG{o}{(}\PYG{n}{f} \PYG{o}{:} \PYG{n+nc}{Nat} \PYG{err}{→} \PYG{n+nc}{Nat} \PYG{err}{→} \PYG{n+nc}{Bool}\PYG{o}{)} \PYG{err}{→} \PYG{n}{surj} \PYG{n}{f} \PYG{err}{→} \PYG{n+nc}{False}
+\PYG{n}{cantor} \PYG{n}{f} \PYG{n}{sur} \PYG{o}{=} \PYG{n}{fxx}\PYG{err}{≢}\PYG{n}{hx} \PYG{n}{x} \PYG{o}{(}\PYG{n}{cong}\PYG{o}{\PYGZhy{}}\PYG{n}{app} \PYG{n}{hyp} \PYG{n}{x}\PYG{o}{)}
+  \PYG{n}{where}
+  \PYG{n}{fxx}\PYG{err}{≢}\PYG{n}{hx} \PYG{o}{:} \PYG{o}{(}\PYG{n}{x} \PYG{o}{:} \PYG{n+nc}{Nat}\PYG{o}{)} \PYG{err}{→} \PYG{n}{f} \PYG{n}{x} \PYG{n}{x} \PYG{err}{\PYGZbs{}}\PYG{n}{equiv} \PYG{n}{g} \PYG{o}{(}\PYG{n}{f} \PYG{n}{x} \PYG{n}{x}\PYG{o}{)} \PYG{err}{→} \PYG{n+nc}{False}
+  \PYG{n}{fxx}\PYG{err}{≢}\PYG{n}{hx} \PYG{n}{x} \PYG{o}{=} \PYG{n}{lemme} \PYG{o}{(}\PYG{n}{f} \PYG{n}{x} \PYG{n}{x}\PYG{o}{)}
+  \PYG{n}{h} \PYG{o}{:} \PYG{n+nc}{Nat} \PYG{err}{→} \PYG{n+nc}{Bool}
+  \PYG{n}{h} \PYG{n}{x} \PYG{o}{=} \PYG{n}{g} \PYG{o}{(}\PYG{n}{f} \PYG{n}{x} \PYG{n}{x}\PYG{o}{)} \PYG{o}{\PYGZhy{}\PYGZhy{}} \PYG{n}{h} \PYG{n}{la} \PYG{n}{diagonalisation} \PYG{n}{négative} \PYG{n}{de} \PYG{n}{la} \PYG{n}{mort}
+  \PYG{n}{x} \PYG{o}{:} \PYG{n+nc}{Nat}
+  \PYG{n}{x} \PYG{o}{=} \PYG{n}{fst} \PYG{o}{(}\PYG{n}{sur} \PYG{n}{h}\PYG{o}{)}
+  \PYG{n}{hyp} \PYG{o}{:} \PYG{n}{f} \PYG{n}{x} \PYG{err}{\PYGZbs{}}\PYG{n}{equiv} \PYG{n}{h}     \PYG{o}{\PYGZhy{}\PYGZhy{}} \PYG{n}{on} \PYG{n}{applique} \PYG{n}{l\PYGZsq{}hypothèse} \PYG{n}{de} \PYG{n}{la} \PYG{n}{surjection} \PYG{n}{sur} \PYG{n}{h}
+                     \PYG{o}{\PYGZhy{}\PYGZhy{}} \PYG{n}{donc} \PYG{n}{il} \PYG{n}{existe} \PYG{n}{un} \PYG{n}{x} \PYG{n}{tq} \PYG{n}{f} \PYG{n}{x} \PYG{o}{=} \PYG{n}{h}
+  \PYG{n}{hyp} \PYG{o}{=} \PYG{n}{snd} \PYG{o}{(}\PYG{n}{sur} \PYG{n}{h}\PYG{o}{)}
+\end{Verbatim}

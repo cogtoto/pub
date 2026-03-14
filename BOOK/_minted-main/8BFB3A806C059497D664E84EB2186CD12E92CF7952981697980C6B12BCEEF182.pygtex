@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{let} \PYG{k}{rec}  \PYG{n}{unifier} \PYG{n}{equation} \PYG{o}{=}
+\PYG{k}{match} \PYG{n}{equation} \PYG{k}{with}
+\PYG{o}{|} \PYG{o}{(}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{),}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{y}\PYG{o}{))} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{if} \PYG{n}{x}\PYG{o}{=}\PYG{n}{y} \PYG{k}{then} \PYG{n+nb+bp}{[]} \PYG{k}{else} \PYG{o}{[(}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{),} \PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{y}\PYG{o}{))]}
+\PYG{o}{|} \PYG{o}{(}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f1}\PYG{o}{,}\PYG{n}{l1}\PYG{o}{),}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{f2}\PYG{o}{,} \PYG{n}{l2}\PYG{o}{))} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{if} \PYG{n}{f1} \PYG{o}{=} \PYG{n}{f2} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n+nn}{List}\PYG{p}{.}\PYG{n}{length} \PYG{n}{l1} \PYG{o}{=} \PYG{n+nn}{List}\PYG{p}{.}\PYG{n}{length} \PYG{n}{l2}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ithen} \PYG{n}{unifierliste} \PYG{o}{(}\PYG{n+nn}{List}\PYG{p}{.}\PYG{n}{combine} \PYG{n}{l1} \PYG{n}{l2}\PYG{o}{)}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ielse} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+\PYG{o}{|} \PYG{o}{(}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{m}\PYG{o}{,}\PYG{n}{n}\PYG{o}{),}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{))} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{unifier} \PYG{o}{(}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{),} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{m}\PYG{o}{,}\PYG{n}{n}\PYG{o}{))}
+\PYG{o}{|} \PYG{o}{(}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{),} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{m}\PYG{o}{,}\PYG{n}{n}\PYG{o}{))} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{k}{if} \PYG{o}{(}\PYG{n}{mem} \PYG{o}{(}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{))} \PYG{o}{(}\PYG{n}{listevar} \PYG{o}{(}\PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{m}\PYG{o}{,}\PYG{n}{n}\PYG{o}{))))}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ithen} \PYG{k}{raise} \PYG{n+nc}{Impossible}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ielse} \PYG{o}{[(}\PYG{n+nc}{Var}\PYG{o}{(}\PYG{n}{x}\PYG{o}{),} \PYG{n+nc}{Func}\PYG{o}{(}\PYG{n}{m}\PYG{o}{,}\PYG{n}{n}\PYG{o}{))} \PYG{o}{]}
+\PYG{k}{and} \PYG{n}{unifierliste} \PYG{o}{=} \PYG{k}{function}
+\PYG{o}{|} \PYG{n+nb+bp}{[]} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb+bp}{[]}
+\PYG{o}{|} \PYG{o}{(}\PYG{n}{x}\PYG{o}{,}\PYG{n}{y}\PYG{o}{)::}\PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ilet} \PYG{n}{t2} \PYG{o}{=} \PYG{n}{unifierliste} \PYG{n}{t} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{Ilet} \PYG{n}{t1} \PYG{o}{=} \PYG{n}{unifier} \PYG{o}{((}\PYG{n}{substituer} \PYG{n}{x} \PYG{n}{t2} \PYG{o}{),(}\PYG{n}{substituer} \PYG{n}{y} \PYG{n}{t2}\PYG{o}{))} \PYG{k}{in}
+\PYG{o}{\PYGZca{}\PYGZca{}}\PYG{n+nc}{It1} \PYG{o}{@} \PYG{n}{t2}
+\end{Verbatim}

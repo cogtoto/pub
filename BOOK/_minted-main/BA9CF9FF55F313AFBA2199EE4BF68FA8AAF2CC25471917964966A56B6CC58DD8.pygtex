@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{(}\PYG{k}{define}\PYG{+w}{ }\PYG{n+nv}{Z}
+\PYG{+w}{ }\PYG{p}{(}\PYG{k}{lambda}\PYG{p}{(}\PYG{n+nf}{f}\PYG{p}{)}
+\PYG{+w}{   }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{lambda}\PYG{p}{(}\PYG{n+nf}{v}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{f}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{x}\PYG{+w}{ }\PYG{n+nv}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nv}{v}\PYG{p}{))))}
+\PYG{+w}{   }\PYG{p}{(}\PYG{k}{lambda}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{lambda}\PYG{p}{(}\PYG{n+nf}{v}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{((}\PYG{n+nf}{f}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{x}\PYG{+w}{ }\PYG{n+nv}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nv}{v}\PYG{p}{))))))}
+\end{Verbatim}

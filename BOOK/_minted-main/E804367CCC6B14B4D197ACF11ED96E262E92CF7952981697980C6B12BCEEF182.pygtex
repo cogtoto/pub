@@ -1,0 +1,48 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{(*  Polymorphisme   *)}
+\PYG{k}{let} \PYG{n}{id} \PYG{o}{=} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}A\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{C} \PYG{l+s+s2}{\PYGZdq{}*\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}A\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{))} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{id\PYGZus{}nat} \PYG{o}{=} \PYG{n+nc}{App}\PYG{o}{(}\PYG{n}{id}\PYG{o}{,} \PYG{n+nc}{C} \PYG{l+s+s2}{\PYGZdq{}nat\PYGZdq{}}\PYG{o}{)} \PYG{o}{;;}
+\PYG{k}{let} \PYG{n}{zero} \PYG{o}{=} \PYG{n+nc}{App}\PYG{o}{(}\PYG{n}{id\PYGZus{}nat}\PYG{o}{,} \PYG{n+nc}{C} \PYG{l+s+s2}{\PYGZdq{}O\PYGZdq{}}\PYG{o}{)} \PYG{o}{;;}
+
+\PYG{n}{id} \PYG{o}{=} \PYG{n}{λA}\PYG{o}{:*.}\PYG{n}{λx}\PYG{o}{:}\PYG{n+nn}{A}\PYG{p}{.}\PYG{n}{x}
+\PYG{n}{id} \PYG{n}{nat} \PYG{o}{=} \PYG{n}{λA}\PYG{o}{:*.}\PYG{n}{λx}\PYG{o}{:}\PYG{n+nn}{A}\PYG{p}{.}\PYG{n}{x} \PYG{n}{nat}
+
+\PYG{n}{print\PYGZus{}terme} \PYG{o}{(}\PYG{n}{typage} \PYG{n}{id} \PYG{n}{env0}\PYG{o}{)}
+\PYG{n}{πA}\PYG{o}{:*.}\PYG{n+nc}{A}\PYG{err}{→}\PYG{n+nc}{A}
+
+\PYG{n}{print\PYGZus{}terme} \PYG{o}{(}\PYG{n}{reduc} \PYG{n}{id\PYGZus{}nat}\PYG{o}{)} \PYG{o}{;;}
+\PYG{n}{λx}\PYG{o}{:}\PYG{n}{nat}\PYG{o}{.}\PYG{n}{x}
+
+\PYG{n}{print\PYGZus{}terme} \PYG{n}{zero} \PYG{o}{;;}
+\PYG{n}{λA}\PYG{o}{:*.}\PYG{n}{λx}\PYG{o}{:}\PYG{n+nn}{A}\PYG{p}{.}\PYG{n}{x} \PYG{n}{nat} \PYG{n+nc}{O}
+\PYG{n}{print\PYGZus{}terme} \PYG{n}{zero} \PYG{o}{;;}
+\PYG{n}{print\PYGZus{}terme} \PYG{o}{(}\PYG{n}{typage} \PYG{n}{zero} \PYG{n}{env0}\PYG{o}{)} \PYG{o}{;;}
+\PYG{n}{nat}
+
+\PYG{n}{print\PYGZus{}terme} \PYG{o}{(}\PYG{n}{fullReduc} \PYG{n}{zero}\PYG{o}{)} \PYG{o}{;;}
+\PYG{n+nc}{O}
+
+\PYG{c}{(* Les entiers *)}
+\PYG{k}{let} \PYG{n}{entiers} \PYG{o}{=} \PYG{n+nc}{Prod} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{C} \PYG{l+s+s2}{\PYGZdq{}*\PYGZdq{}}\PYG{o}{,}  \PYG{n+nc}{Prod} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Prod} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Prod} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}z\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{),} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{)))}
+\PYG{n}{utop} \PYG{o}{\PYGZsh{}} \PYG{n}{print\PYGZus{}terme} \PYG{n}{entiers}\PYG{o}{;;}
+\PYG{n}{πX}\PYG{o}{:*.(}\PYG{n+nc}{X}\PYG{err}{→}\PYG{o}{((}\PYG{n+nc}{X}\PYG{err}{→}\PYG{n+nc}{X}\PYG{o}{)}\PYG{err}{→}\PYG{n+nc}{X}\PYG{o}{))}
+
+\PYG{k}{let} \PYG{n}{zero} \PYG{o}{=}  \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{C} \PYG{l+s+s2}{\PYGZdq{}*\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Lam}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Prod}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}z\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{),} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{)))}
+
+\PYG{k}{let} \PYG{n}{succ} \PYG{o}{=} \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}n\PYGZdq{}}\PYG{o}{,} \PYG{n}{entiers}\PYG{o}{,} \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{C} \PYG{l+s+s2}{\PYGZdq{}*\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Lam} \PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{Prod}\PYG{o}{(}\PYG{l+s+s2}{\PYGZdq{}z\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{),}
+               \PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{App} \PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}n\PYGZdq{}}\PYG{o}{,} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}X\PYGZdq{}}\PYG{o}{),} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}x\PYGZdq{}}\PYG{o}{),} \PYG{n+nc}{V} \PYG{l+s+s2}{\PYGZdq{}y\PYGZdq{}}\PYG{o}{)} \PYG{o}{)))))}
+
+\PYG{n}{utop} \PYG{o}{\PYGZsh{}} \PYG{n}{print\PYGZus{}terme} \PYG{o}{(}\PYG{n}{fullReduc} \PYG{n}{trois}\PYG{o}{)} \PYG{o}{;;}
+\PYG{n}{λX}\PYG{o}{:*.}\PYG{n}{λx}\PYG{o}{:}\PYG{n+nn}{X}\PYG{p}{.}\PYG{n}{λy}\PYG{o}{:(}\PYG{n+nc}{X}\PYG{err}{→}\PYG{n+nc}{X}\PYG{o}{).}\PYG{n}{y} \PYG{o}{(}\PYG{n}{y} \PYG{o}{(}\PYG{n}{y} \PYG{n}{x}\PYG{o}{)} \PYG{o}{)}
+
+\PYG{c}{(*twice*)}
+\PYG{n}{utop} \PYG{o}{\PYGZsh{}} \PYG{n}{print\PYGZus{}terme} \PYG{n}{twice} \PYG{o}{;;}
+\PYG{n}{λA}\PYG{o}{:*.}\PYG{n}{λf}\PYG{o}{:(}\PYG{n+nc}{A}\PYG{err}{→}\PYG{n+nc}{A}\PYG{o}{).}\PYG{n}{λa}\PYG{o}{:}\PYG{n+nn}{A}\PYG{p}{.}\PYG{n}{f} \PYG{o}{(}\PYG{n}{f} \PYG{n}{a}\PYG{o}{)}
+
+\PYG{n}{utop} \PYG{o}{\PYGZsh{}} \PYG{n}{print\PYGZus{}terme} \PYG{o}{(}\PYG{n}{typage} \PYG{n}{twice} \PYG{n}{env0}\PYG{o}{)} \PYG{o}{;;}
+\PYG{n}{πA}\PYG{o}{:*.((}\PYG{n+nc}{A}\PYG{err}{→}\PYG{n+nc}{A}\PYG{o}{)}\PYG{err}{→}\PYG{o}{(}\PYG{n+nc}{A}\PYG{err}{→}\PYG{n+nc}{A}\PYG{o}{))}
+
+\PYG{k}{let} \PYG{n}{plus2}  \PYG{o}{=} \PYG{n+nc}{App}\PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n}{twice}\PYG{o}{,} \PYG{n}{entiers}\PYG{o}{),} \PYG{n}{succ}\PYG{o}{)} \PYG{o}{;;}
+\PYG{n}{print\PYGZus{}terme} \PYG{o}{(}\PYG{n}{fullReduc} \PYG{o}{(}\PYG{n+nc}{App}\PYG{o}{(}\PYG{n}{plus2}\PYG{o}{,} \PYG{n}{trois}\PYG{o}{)))} \PYG{o}{;}
+\PYG{n}{λX}\PYG{o}{:*.}\PYG{n}{λx}\PYG{o}{:}\PYG{n+nn}{X}\PYG{p}{.}\PYG{n}{λy}\PYG{o}{:(}\PYG{n+nc}{X}\PYG{err}{→}\PYG{n+nc}{X}\PYG{o}{).}\PYG{n}{y} \PYG{o}{(}\PYG{n}{y} \PYG{o}{(}\PYG{n}{y} \PYG{o}{(}\PYG{n}{y} \PYG{o}{(}\PYG{n}{y} \PYG{n}{x}\PYG{o}{)} \PYG{o}{)} \PYG{o}{)} \PYG{o}{)}
+\end{Verbatim}
