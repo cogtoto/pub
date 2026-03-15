@@ -1562,7 +1562,7 @@ Et également $e = \lim_{n \rightarrow \infty} (\frac{1}{1+n})^n $
 Dans certaines situations, la constitution d'une preuve peut être très longue.
 Par exemple, nous aurons ce cas si la preuve fait appel à des constructeurs de type inductif.
 
-Considérons le type \verb+Pair+
+Considérons le type \texttt{Pair}
 \begin{minted}[fontsize=\footnotesize]{agda}
 data Pair : Nat → Set where
   pair0 : Pair 0
@@ -1579,8 +1579,8 @@ ispair? (suc zero) = False
 ispair? (suc (suc n)) = ispair? n 
 \end{minted}
 
-Il nous reste à montrer que cette fonction est consistante avec le type \verb+Pair+, c'est-à-dire que 
-\verb+ispair? n →  Pair n+
+Il nous reste à montrer que cette fonction est consistante avec le type \texttt{Pair}, c'est-à-dire que 
+\texttt{ispair? n →  Pair n}
 
 \begin{minted}[fontsize=\footnotesize]{agda}
 ispairxsound : {n : Nat} → ispair? n → Pair n
@@ -1612,7 +1612,7 @@ utop # f 1. 10 ;;
 - : float = 2.99480026926620502
 \end{minted}
 
-Nous pouvons définir la fonction d'affichage \verb+f_latex+ comme ci-dessous:
+Nous pouvons définir la fonction d'affichage \texttt{flatex} comme ci-dessous:
 \begin{minted}[fontsize=\footnotesize]{ocaml}
 let rec f_latex n i =
   if i = 0 then "\\ldots"  
