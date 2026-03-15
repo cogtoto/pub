@@ -1368,4 +1368,763 @@ File: ulogo.fd 1999/03/10 v2.0 LaTeX font defs for Metafont and MetaPost logos
 
 ]
 Chapitre 1.
-LaTeX Font Info:    Trying to load font information for LGR+LibertinusSerif(0)
+LaTeX Font Info:    Trying to load font information for LGR+LibertinusSerif(0) on input line 93.
+LaTeX Font Info:    No file LGRLibertinusSerif(0).fd. on input line 93.
+
+LaTeX Font Warning: Font shape `LGR/LibertinusSerif(0)/m/n' undefined
+(Font)              using `LGR/cmr/m/n' instead on input line 93.
+
+
+LaTeX Font Warning: Font shape `LGR/LibertinusSerif(0)/b/n' undefined
+(Font)              using `LGR/LibertinusSerif(0)/m/n' instead on input line 93.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--94
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--106
+
+ []
+
+[1
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 158--159
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 160--162
+
+ []
+
+[2]
+\openout2 = chapter1.aux
+ (./chapter1.tex
+Chapitre 2.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 2.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <24.88> on input line 2.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <20.74> on input line 2.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <17.28> on input line 2.
+[3
+
+
+] [4] [5] [6] [7] [8]
+Overfull \hbox (29.01074pt too wide) in paragraph at lines 453--454
+[][] 
+ []
+
+[9]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 512.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 512.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 512.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 512.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 512.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 512.
+
+[10]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 571.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\Lambda' on input line 571.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 571.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 571.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 571.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 571.
+
+[11]
+Overfull \hbox (16.14792pt too wide) in paragraph at lines 618--620
+[]$[]$ \TU/LibertinusSerif(0)/m/n/10.95 est ob-tenu de la même ma-nière que $\OML/lmm/m/it/10.95 N$\TU/LibertinusSerif(0)/m/n/10.95 , mais en mar-quant les ré-si-dus de $\OT1/lmr/m/n/10.95 $ \TU/LibertinusSerif(0)/m/n/10.95 : $[] \OMS/lmsy/m/n/10.95  \OT1/lmr/m/n/10.95 ((\OML/lmm/m/it/10.95 []y:z\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 )((\OML/lmm/m/it/10.95 []y:z\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 )$ 
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 629.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\beta' on input line 629.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 629.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 688.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\beta' on input line 688.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 688.
+
+[12]
+<DrawingHands.jpg, id=760, 326.21875pt x 282.05376pt>
+File: DrawingHands.jpg Graphic file (type jpg)
+<use DrawingHands.jpg>
+Package luatex.def Info: DrawingHands.jpg  used on input line 746.
+(luatex.def)             Requested size: 140.92793pt x 121.85315pt.
+ [13]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 752.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 752.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 752.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 815.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 815.
+[14<./DrawingHands.jpg>] [15] [16] [17]
+Underfull \hbox (badness 10000) in paragraph at lines 1062--1064
+
+ []
+
+[18] [19] [20]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1278.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\beta' on input line 1278.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1278.
+
+[21]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1348.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 1348.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1348.
+
+
+Overfull \hbox (60.14232pt too wide) in paragraph at lines 1363--1364
+[][]\TU/DejaVuSansMono(0)/m/n/10.95 Lam("n", Lam("f", Lam("x",App(Var "f", App(App(Var "n", Var "f"), Var "x"))))) 
+ []
+
+[22] [23]
+Underfull \hbox (badness 10000) in paragraph at lines 1498--1503
+
+ []
+
+[24] [25]) [26]
+\openout2 = chapter2.aux
+ (./chapter2.tex
+Chapitre 3.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 3.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 3.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 3.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--11
+
+ []
+
+[27
+
+
+
+] [28] [29]
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 214.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/ot1lmtt.fd
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+ [30] [31]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32]
+Underfull \hbox (badness 10000) in paragraph at lines 367--371
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--374
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 374--375
+
+ []
+
+[33] [34]
+Underfull \hbox (badness 10000) in paragraph at lines 512--514
+
+ []
+
+[35] [36]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 601.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lor' on input line 601.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 601.
+
+[37]
+Missing character: There is no ⊢ (U+22A2) in font rm-lmr10!
+Missing character: There is no ⊢ (U+22A2) in font rm-lmr10!
+Missing character: There is no ⊢ (U+22A2) in font rm-lmr10!
+ [38] [39] [40] [41]) [42]
+\openout2 = chapter3.aux
+ (./chapter3.tex
+Chapitre 4.
+[43
+
+
+
+] [44] [45]
+Overfull \hbox (39.30917pt too wide) in paragraph at lines 201--210
+[][] 
+ []
+
+[46] [47]
+Underfull \hbox (badness 1466) in paragraph at lines 318--320
+[] \TU/LibertinusSerif(0)/m/it/10.95 Pour ob-te-nir cet ef-fet, suivez-moi, j’in-vente un
+ []
+
+
+Underfull \hbox (badness 1577) in paragraph at lines 318--320
+\TU/LibertinusSerif(0)/m/it/10.95 per-son-nage de ro-man-cier, que je pose en fi-gure
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 318--320
+
+ []
+
+<gumpp.jpeg, id=977, 73.7154pt x 96.36pt>
+File: gumpp.jpeg Graphic file (type jpg)
+<use gumpp.jpeg>
+Package luatex.def Info: gumpp.jpeg  used on input line 330.
+(luatex.def)             Requested size: 142.26378pt x 185.99564pt.
+[48<./gumpp.jpeg>]
+Overfull \hbox (101.8516pt too wide) in paragraph at lines 389--390
+[][] 
+ []
+
+[49] [50]
+<bruegel.jpg, id=999, 301.125pt x 240.9pt>
+File: bruegel.jpg Graphic file (type jpg)
+<use bruegel.jpg>
+Package luatex.def Info: bruegel.jpg  used on input line 549.
+(luatex.def)             Requested size: 142.26378pt x 113.81482pt.
+ [51]
+\g__tikzsymbols_savebox_F_0 g 0 G_10.95_Laughey_1_none_none_box=\box76
+ [52<./bruegel.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [53]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [54]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [55]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [56]) [57]
+\openout2 = chapter4.aux
+ (./chapter4.tex [58
+
+
+
+]
+Chapitre 5.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 2.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2.
+
+[59] [60]
+Underfull \hbox (badness 10000) in paragraph at lines 142--143
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+
+ []
+
+[61] [62] [63] [64] [65]
+Overfull \hbox (5.95628pt too wide) in paragraph at lines 528--536
+\remove@tlig ((lambda (v1...vn) body) e1...en) \letterimp D  \remove@tlig NIL; $\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\remove@tlig ;ARG;$[] \OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\remove@tlig ;ARG;CLOSURE$\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 body\OT1/lmr/m/n/10.95 )$\remove@tlig ;RTS$\OT1/lmr/m/n/10.95 )$\remove@tlig ;JSR 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 528--536
+
+ []
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 548.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 549.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 550.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 551.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 568.
+
+
+Overfull \hbox (0.23276pt too wide) detected at line 574
+[]
+ []
+
+[66] [67]) [68]
+\openout2 = chapter5.aux
+ (./chapter5.tex
+Chapitre 6.
+[69
+
+
+
+] [70] [71]
+Underfull \vbox (badness 4108) has occurred while \output is active []
+
+ [72] [73] [74] [75]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [76] [77] [78] [79]
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 745--747
+
+ []
+
+[80]
+Missing character: There is no ≥ (U+2265) in font rm-lmr10!
+ [81]) [82]
+\openout2 = chapter6.aux
+ (./chapter6.tex
+Chapitre 7.
+[83
+
+
+
+]
+Missing character: There is no ≥ (U+2265) in font rm-lmr10!
+Missing character: There is no ≥ (U+2265) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no ≥ (U+2265) in font rm-lmr10!
+Missing character: There is no ≥ (U+2265) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no ≥ (U+2265) in font rm-lmr10!
+Missing character: There is no ≥ (U+2265) in font rm-lmr10!
+Missing character: There is no ≥ (U+2265) in font rm-lmr10!
+Missing character: There is no ≥ (U+2265) in font rm-lmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--94
+
+ []
+
+[84] [85] [86] [87] [88] [89]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [90] [91] [92]) [93]
+\openout2 = chapter7.aux
+ (./chapter7.tex [94
+
+
+
+]
+Chapitre 8.
+
+Overfull \hbox (21.52142pt too wide) in paragraph at lines 102--105
+\TU/LibertinusSerif(0)/m/n/10.95 que-ment le car et le cdr d’un dou-blet. Nous pou-vons par exemple dé-fi-nir la liste cir-cu-laire []\remove@tlig (a b c a b c ...) 
+ []
+
+[95] [96] [97]
+<flocon1.pdf, id=1250, 150.5625pt x 138.5175pt>
+File: flocon1.pdf Graphic file (type pdf)
+<use flocon1.pdf>
+Package luatex.def Info: flocon1.pdf  used on input line 296.
+(luatex.def)             Requested size: 99.5875pt x 85.3579pt.
+<flocon2.pdf, id=1251, 156.585pt x 136.51pt>
+File: flocon2.pdf Graphic file (type pdf)
+<use flocon2.pdf>
+Package luatex.def Info: flocon2.pdf  used on input line 297.
+(luatex.def)             Requested size: 99.58806pt x 85.35811pt.
+<flocon3.pdf, id=1252, 149.55875pt x 130.4875pt>
+File: flocon3.pdf Graphic file (type pdf)
+<use flocon3.pdf>
+Package luatex.def Info: flocon3.pdf  used on input line 298.
+(luatex.def)             Requested size: 99.58539pt x 85.35942pt.
+<flocon4.pdf, id=1253, 139.52126pt x 127.47626pt>
+File: flocon4.pdf Graphic file (type pdf)
+<use flocon4.pdf>
+Package luatex.def Info: flocon4.pdf  used on input line 299.
+(luatex.def)             Requested size: 99.58661pt x 85.36195pt.
+
+warning  (file bretagne3.jpg) (readjpg): Exif resolution 300dpi x 300dpi differs from the input resolution 299dpi x 299dpi
+<bretagne3.jpg, id=1254, 730.4088pt x 512.6352pt>
+File: bretagne3.jpg Graphic file (type jpg)
+<use bretagne3.jpg>
+Package luatex.def Info: bretagne3.jpg  used on input line 305.
+(luatex.def)             Requested size: 113.81102pt x 79.87221pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [98] [99<./flocon1.pdf><./flocon2.pdf><./flocon3.pdf><./flocon4.pdf><./bretagne3.jpg
+warning  (readjpg): Exif resolution 300dpi x 300dpi differs from the input resolution 299dpi x 299dpi
+>]
+<mandelbrot.png, id=1293, 254.9525pt x 227.85126pt>
+File: mandelbrot.png Graphic file (type png)
+<use mandelbrot.png>
+Package luatex.def Info: mandelbrot.png  used on input line 367.
+(luatex.def)             Requested size: 113.81102pt x 101.71507pt.
+<imp.png, id=1295, 573.14125pt x 491.8375pt>
+File: imp.png Graphic file (type png)
+<use imp.png>
+Package luatex.def Info: imp.png  used on input line 381.
+(luatex.def)             Requested size: 113.81102pt x 97.6603pt.
+ [100<./mandelbrot.png><./imp.png>]
+<snow.png, id=1307, 636.3775pt x 750.805pt>
+File: snow.png Graphic file (type png)
+<use snow.png>
+Package luatex.def Info: snow.png  used on input line 453.
+(luatex.def)             Requested size: 113.81102pt x 134.26839pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [101] [102<./snow.png>] [103] [104]
+<sigmoid.png, id=1331, 694.595pt x 729.72626pt>
+File: sigmoid.png Graphic file (type png)
+<use sigmoid.png>
+Package luatex.def Info: sigmoid.png  used on input line 720.
+(luatex.def)             Requested size: 142.2657pt x 142.25708pt.
+ [105<./sigmoid.png>] [106] [107]
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+ [108]
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no − (U+2212) in font rm-lmr8!
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+Missing character: There is no − (U+2212) in font rm-lmr10!
+Missing character: There is no ≡ (U+2261) in font rm-lmr10!
+ [109]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1005.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\pi' on input line 1005.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1005.
+
+[110] (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+ (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)) [111] [112] [113] [114]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\intop' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\ilimits@' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\begingroup' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\endgroup' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@@over' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1288.
+
+[115]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1379.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@ifnextchar' on input line 1379.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1379.
+
+[116] [117] [118]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1526.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1526.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\mathop' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\mathgroup' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\symoperators' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@ifnextchar' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\begingroup' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\endgroup' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@@over' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\mathop' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\mathgroup' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\symoperators' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@ifnextchar' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\begingroup' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\endgroup' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@@over' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1544.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [119]
+Overfull \hbox (65.88713pt too wide) in paragraph at lines 1582--1584
+[]\TU/LibertinusSerif(0)/m/n/10.95 Il nous reste à mon-trer que cette fonc-tion est consis-tante avec le type []\remove@tlig Pair\TU/LibertinusSerif(0)/m/n/10.95 , c’est-à-dire que []\remove@tlig ispair? n →  Pair n 
+ []
+
+
+Underfull \vbox (badness 1831) has occurred while \output is active []
+
+ [120] [121]) [122] [123
+
+
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 215.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 215.
+ (./main.aux (./chapter1.aux) (./chapter2.aux) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux) (./chapter7.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 215.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 215.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 3C8C530D9D2E412D2E72C6E40CB1F5FC;23357.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+Package logreq Info: Writing requests to 'main.run.xml'.
+
+\openout1 = main.run.xml
+)
+
+Here is how much of LuaTeX's memory you used:
+ 53664 strings out of 480885
+ 596079,4101490 words of node,token memory allocated
+ 13150 words of node memory still in use:
+   11 hlist, 2 vlist, 2 rule, 5 dir, 595 glue, 4 kern, 1 penalty, 2 sub_mlist, 2 glyph, 3598 attribute, 72 glue_spec, 516 attribute_list, 2 write, 34 pdf_literal, 2 pdf_action, 2 pdf_colorstack nodes
+   avail lists: 1:18,2:178181,3:11128,4:183,5:534,6:86,7:12175,8:94,9:1159,10:16,11:263
+ 69222 multiletter control sequences out of 65536+600000
+ 176 fonts using 35639403 bytes
+ 60i,24n,81p,830b,2163s stack positions out of 5000i,500n,10000p,200000b,100000s
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}<<./snow.600pk>>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-BoldItalic.otf><<./beta.600pk>>{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Italic.otf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Bold.otf></usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Regular.otf></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cbfonts/grmn0900.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (129 pages, 1385539 bytes).
+
+PDF statistics: 1590 PDF objects out of 1728 (max. 8388607)
+ 1373 compressed objects within 14 object streams
+ 409 named destinations out of 1000 (max. 131072)
+ 973 words of extra memory for PDF output out of 10000 (max. 100000000)
+
