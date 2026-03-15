@@ -1,17 +1,17 @@
 [0] Config.pm:304> INFO - This is Biber 2.14
 [0] Config.pm:307> INFO - Logfile is 'main.blg'
-[131] biber:322> INFO - === dim. mars 15, 2026, 16:56:13
-[155] Biber.pm:415> INFO - Reading 'main.bcf'
-[280] Biber.pm:943> INFO - Found 24 citekeys in bib section 0
-[304] Biber.pm:4256> INFO - Processing section 0
-[305] Utils.pm:75> INFO - Globbing data source 'book.bib'
-[305] Utils.pm:91> INFO - Globbed data source 'book.bib' to book.bib
-[321] Biber.pm:4455> INFO - Looking for bibtex format file 'book.bib' for section 0
-[322] bibtex.pm:1653> INFO - LaTeX decoding ...
-[350] bibtex.pm:1471> INFO - Found BibTeX data source 'book.bib'
-[568] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
-[568] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[568] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
-[569] Biber.pm:4090> INFO - No sort tailoring available for locale 'fr-FR'
-[598] bbl.pm:652> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[613] bbl.pm:755> INFO - Output to main.bbl
+[135] biber:322> INFO - === dim. mars 15, 2026, 19:03:31
+[157] Biber.pm:415> INFO - Reading 'main.bcf'
+[272] Biber.pm:943> INFO - Found 24 citekeys in bib section 0
+[295] Biber.pm:4256> INFO - Processing section 0
+[295] Utils.pm:75> INFO - Globbing data source 'book.bib'
+[296] Utils.pm:91> INFO - Globbed data source 'book.bib' to book.bib
+[311] Biber.pm:4455> INFO - Looking for bibtex format file 'book.bib' for section 0
+[313] bibtex.pm:1653> INFO - LaTeX decoding ...
+[339] bibtex.pm:1471> INFO - Found BibTeX data source 'book.bib'
+[537] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[537] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[537] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
+[538] Biber.pm:4090> INFO - No sort tailoring available for locale 'fr-FR'
+[564] bbl.pm:652> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[578] bbl.pm:755> INFO - Output to main.bbl

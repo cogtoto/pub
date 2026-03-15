@@ -99,9 +99,9 @@ let rec foldleft f acc l =
 \end{footnotesize}
 \section{Les listes mutables}
 
-En \textsc{Scheme}, nous avons les fonctions \verb+set-car!+ et \verb+set-cdr!+ qui nous permettent de modifier physiquement
- le car et le cdr d'un doublet.
-Nous pouvons par exemple définir la liste circulaire \verb+(a b c a b c ...)+
+En \textsc{Scheme}, nous avons les fonctions \texttt{set-car!} et \texttt{set-cdr!} 
+qui nous permettent de modifier physiquement le car et le cdr d'un doublet.
+Nous pouvons par exemple définir la liste circulaire \texttt{(a b c a b c ...)}
 \begin{minted}[fontsize=\footnotesize]{scheme}
 (define maliste (list 'a 'b 'c))
 (set-cdr! (cddr maliste) maliste)
@@ -161,9 +161,9 @@ comme nous l'avons vu en $\lambda$-calcul avec la
 stratégie de la $\beta$-réduction faible.
 
 
-Une lambda \verb+fun()->2*2+\ \imp\ \verb+- : unit -> int = <fun>+ est en fait considérée 
+Une lambda \texttt{fun()->2*2}\ \imp\ \texttt{- : unit -> int = <fun>} est en fait considérée 
 comme une \textit{valeur}. Seul son appel provoquera l'évaluation de la lambda
-\verb+(fun() -> 2*2) ()+\ \imp\  \verb+- : int = 4+
+\texttt{(fun() -> 2*2) ()}\ \imp\  \texttt{- : int = 4}
 
 Un \textit{stream} sera ainsi représenté comme une liste, mais dont le \verb+cdr+ ne pointera plus directement 
 sur une liste, mais sera une fonction dont le corps sera la liste. L'évaluation du \verb+cdr+ est ainsi retardé.
@@ -212,10 +212,10 @@ let rec racine2stream = racine2cons 1
 Nous voyons la convergence très rapide de la fraction continue.
 
 Cependant, le calcul \textsc{Ocaml} est très inefficace, car chaque nouvel élément de la liste recalcule la totalité de la fraction continue
-en passant par la fonction \verb+square2 iter+. Si nous essayons par exemple de calculer les $10000$ premiers éléments du stream, cela prend sur ma machine une
+en passant par la fonction \texttt{square2 iter}. Si nous essayons par exemple de calculer les $10000$ premiers éléments du stream, cela prend sur ma machine une
 dizaine de seconde. 
 
-En utilisant le module \verb+Lazy+ d'\textsc{Ocaml}, nous pouvons utiliser le mécanisme
+En utilisant le module \texttt{Lazy} d'\textsc{Ocaml}, nous pouvons utiliser le mécanisme
  de \textit{mémoisation}. Les valeurs du stream ne seront pas recalculées au 
 2ème appel.
 \begin{minted}[fontsize=\footnotesize]{ocaml}
@@ -546,9 +546,9 @@ let pageC = "O Caml " ;;
 count String_monoid.(pageA <+> pageB <+>  pageC) ;;
 count(String_monoid.(pageA)) + count(String_monoid.(pageB)) + count(String_monoid.(pageC));;
 \end{minted}
-Nous avons ici utilisé l'opérateur \verb+|>+ défini comme suit \verb+let ( |> ) x f = f x+
+Nous avons ici utilisé l'opérateur \texttt{|>} défini comme suit \texttt{let ( |> ) x f = f x}
 
-Cette fonction \verb+count+ est ainsi un morphisme entre le monoïde \verb+String_monoid+ et 
+Cette fonction \texttt{count} est ainsi un morphisme entre le monoïde \texttt{StringMonoid} et 
 le monoïde des entiers (avec $+$ comme fonction de composition interne et $0$
 comme élément neutre)
 \section{Machine Learning and Neural Networks}
@@ -1558,7 +1558,7 @@ Et également $e = \lim_{n \rightarrow \infty} (\frac{1}{1+n})^n $
 \end{tikzpicture}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%
-\section{Prouver par réflection en \sc{Agda}}
+\section{Prouver par réflection en \textsc{Agda} et \textsc{Lean}}
 Dans certaines situations, la constitution d'une preuve peut être très longue.
 Par exemple, nous aurons ce cas si la preuve fait appel à des constructeurs de type inductif.
 
@@ -1571,7 +1571,7 @@ data Pair : Nat → Set where
 pair6 : Pair 6
 pair6 =  pairSS 4 (pairSS 2 (pairSS zero pair0))
 \end{minted}
-Définissons une fonction qui, par le calcul, rendra \verb+True+ si $n$ est pair et \verb+False+ si $n$ est impair.
+Définissons une fonction qui, par le calcul, rendra \texttt{True} si $n$ est pair et \texttt{False} si $n$ est impair.
 \begin{minted}[fontsize=\footnotesize]{agda}
 ispair? : Nat → Set
 ispair? zero = True
@@ -1590,6 +1590,29 @@ ispairxsound {suc (suc n)} x = pairSS n (ispairxsound {n} x)
 
 th : Pair 90
 th = ispairxsound tt
+\end{minted}
+
+Ou de manière équivalente en \textsc{Lean} :
+\begin{minted}{lean}
+inductive Pair : ℕ → Prop where
+| pair0 : Pair 0
+| pairSS : (n : ℕ) → Pair n → Pair (n + 2)
+
+open Pair
+
+theorem pair6 : Pair 6 := pairSS 4 (pairSS 2 (pairSS 0 pair0))
+
+def ispair? : ℕ → Prop
+| 0 => True
+| 1 => False
+| n + 2 => ispair? n
+
+theorem ispair?IsSound : (n : ℕ) → ispair? n → Pair n
+| 0 , trivial => pair0
+| 1 , _ => by contradiction
+| n + 2 , x => pairSS n (ispair?IsSound n x)
+
+theorem pair100 : Pair 100 := ispair?IsSound 100 trivial 
 \end{minted}
 
 \section{Srivanasa Ramanujan}

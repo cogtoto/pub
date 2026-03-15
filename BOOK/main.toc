@@ -197,7 +197,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {7.4.3}Sudoku - SAT encoding}{89}{subsection.7.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.4.4}Sudoku - un algorithme simple et récursif en \textsc {Lean4}}{91}{subsection.7.4.4}%
+\contentsline {subsection}{\numberline {7.4.4}Sudoku - un algorithme simple et récursif en \textsc {Lean}}{91}{subsection.7.4.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7.5}Métaprogrammation - récursivité et réflexivité}{92}{section.7.5}%
 \defcounter {refsection}{0}\relax 
@@ -291,12 +291,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {8.19}Les fonctions $\qopname \relax o{sin}\frac {1}{x}$ et $x . \qopname \relax o{sin}\frac {1}{x}$ }{120}{section.8.19}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.20}Prouver par réflection en \sc {Agda}}{120}{section.8.20}%
+\contentsline {section}{\numberline {8.20}Prouver par réflection en \textsc {Agda} et \textsc {Lean}}{120}{section.8.20}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {8.21}Srivanasa Ramanujan}{121}{section.8.21}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8.22}Le grec ancien}{121}{section.8.22}%
+\contentsline {section}{\numberline {8.22}Le grec ancien}{122}{section.8.22}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.22.1}L'alphabet grec}{121}{subsection.8.22.1}%
+\contentsline {subsection}{\numberline {8.22.1}L'alphabet grec}{122}{subsection.8.22.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {8.22.2}Extraits du nouveau testament}{121}{subsection.8.22.2}%
+\contentsline {subsection}{\numberline {8.22.2}Extraits du nouveau testament}{122}{subsection.8.22.2}%
