@@ -41,7 +41,7 @@ En \textsc{Prolog}:
 entiers(zero).
 entiers(s(X)) :- entiers(X)
 \end{minted}
-En Coq:
+En \textsc{Coq}:
 \begin{coqdoccode}
 \coqdocemptyline
 \coqdocnoindent
@@ -83,7 +83,7 @@ Avec les égalités suivantes pour les sous-termes $M|_\epsilon = f$ et $M|_{i.u
 et de manière équivalente pour les symboles $M(\epsilon) = f$ et $M(i.u)=M_i(u) $
 
 Nous implémentons cela avec un peu de difficulté pour les conversions 
-\verb+string+ vers \verb+int+ nécessaire à la manipulation des occurences $u$. 
+\texttt{string} vers \texttt{int} nécessaire à la manipulation des occurences $u$. 
 On considère ici qu'un arbre ne peut avoir plus de 9 fils, donc un seul digit permet de définir le numéro du noeud associé.
 \begin{minted}{ocaml}
 open String
@@ -260,7 +260,7 @@ Peano a reconstruit la théorie des
 entiers à partir de la fonction successeur. On se donne uniquement le symbole
 $S$ d'arité 1 et le symbole de constante 0.
 Les entiers sont les termes de la forme $0, S0, SS0, SSS0 \ldots$
-Nous pouvons implémenter cela en OCAM avec le type abstrait \verb+peano+
+Nous pouvons implémenter cela en OCAM avec le type abstrait \texttt{peano}
 \begin{minted}{ocaml}
 type peano = 
 	| Zero
@@ -282,7 +282,7 @@ $$
 (r_4) & (*\ x\ (S\ y)) \to (+\ y\ (* x\ y)) \\
 \end{array}
 $$
-Ces quatre règles sont implémentées par la fonction \verb+réduire+ ci-dessous:
+Ces quatre règles sont implémentées par la fonction \texttt{réduire} ci-dessous:
 \begin{minted}{ocaml}
 let rec reduire = function
 	| Plus (p, Zero) -> reduire p
@@ -301,18 +301,18 @@ peano_entier (Plus ( Mult(deux, trois), trois));;
 \end{minted}
 
 Essayons maintenant d'implémenter le mécanisme de réécriture en utilisation le type 
-\textit{terme} que nous avons précedemment présenté, ainsi que la fonction de filtrage \verb+filtre+ et 
-la fonction du substitution \verb+substituer+.
+\textit{terme} que nous avons précedemment présenté, ainsi que la fonction de filtrage \texttt{filtre} et 
+la fonction du substitution \texttt{substituer}.
 
 Nous avons fait simple avec cette méthode naïve qui utilise les trois fonctions ci-dessous :
 \begin{itemize}
-	\item La première \verb+rewrite+ utilise la fonction \verb+filtre+ pour chercher une substitution
+	\item La première \texttt{rewrite} utilise la fonction \texttt{filtre} pour chercher une substitution
 	égalisant notre terme avec la partie gauche de la règle de substitution. Si cette substitution est trouveée, la 
 	fonction retourne la partie droite de la règle appliquée à la substitution. Dans le cas contraire, la fonction
 	est appelée récursivement sur l'ensemble des arguments du terme.
-	\item  La seconde \verb+rewriteall+ déroule l'ensemble des règles représentées par une liste de paires $(l,r)$ tant
+	\item  La seconde \texttt{rewriteall} déroule l'ensemble des règles représentées par une liste de paires $(l,r)$ tant
 	que la réécriture ne modifie par le terme.
-	\item La troisième \verb+rewrite_bourrin+ itère la fonction précédente tant que l'on peut réduire le terme.
+	\item La troisième \texttt{rewrite-bourrin} itère la fonction précédente tant que l'on peut réduire le terme.
 	Désolé pour cette méthode bourrin, mais ça fonctionne\dots
 \end{itemize}
 
@@ -388,7 +388,7 @@ cycle & $E \cup \{ x=M \} \rightarrow  \bot $ si $x \in var(M)$ \\
 La difficulté de cet algorithme est  sa condition d'arrêt. 
  Si aucune règle ne peut plus s'appliquer sur les éléments du système d'équations, alors l'algorithme doit s'arrêter et son résultat est
 la substitution unifiant les deux termes initiaux.
-Avec une seule fonction parcourant le système d'équations, représentés en \textsc{Ocaml} par le type \verb+(term * term) list+,
+Avec une seule fonction parcourant le système d'équations, représentés en \textsc{Ocaml} par le type \texttt{(term * term) list},
 je pense que ce n'est pas possible. Je me suis là aussi un peu cassé les cheveux.
 Voici mon code avec deux fonctions:
 \begin{minted}{ocaml}
@@ -411,8 +411,8 @@ and unifierliste = function
 \end{minted}
 % 
 
-On retrouve dans la fonction \verb+unifier+, qui travaille uniquement sur une paire de terme, les différentes règles
-de l'algorithme. La fonction \verb+unifierliste+ va unifier sa première paire en utilisant la substitution trouvée dans le reste
+On retrouve dans la fonction \texttt{unifier}, qui travaille uniquement sur une paire de terme, les différentes règles
+de l'algorithme. La fonction \texttt{unifierliste} va unifier sa première paire en utilisant la substitution trouvée dans le reste
 de l'équation. C'est un bel exemple de récursivité qui nous dépasse très souvent... 
 Ce bout de code vient du site de l'université de Cornell.
 

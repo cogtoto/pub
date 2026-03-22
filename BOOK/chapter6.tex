@@ -135,7 +135,7 @@ La table de transition est modélisée par une a-liste d'a-listes.
 La première a-liste permet de faire matcher l'état courant.
 La seconde a-liste permet de faire matcher le caractère lu.
 Ces deux informations combinées fournissent  le triplet de sortie
-\verb+(état_suivant, caractère_écrit, direction)+
+\texttt{(état-suivant, caractère-écrit, direction)}
 
 \begin{Verbatim}
 let matable = [ ("q0" , [ (">", ("q1", "X", "G")) ;
@@ -155,18 +155,18 @@ let matable = [ ("q0" , [ (">", ("q1", "X", "G")) ;
 
 Cette table de transition va nous permettre de vérifier le bon parenthésage
 d'une expression en entrée fournie sur la bande représentée par une liste 
-\verb+let mabande =   [" "; "<"; ">"; " "]+
+\texttt{let mabande =   [" "; "<"; ">"; " "]}
 
-L'état \verb+q0+ va rechercher une parenthèse \verb+>+ en allant vers la droite.
+L'état \texttt{q0} va rechercher une parenthèse \texttt{>} en allant vers la droite.
 
-L'état \verb+q1+ va rechercher une parenthèse \verb+<+ en allant vers la gauche.
+L'état \texttt{q1} va rechercher une parenthèse \texttt{<} en allant vers la gauche.
 
-L'état \verb+q2+ va rechercher une parenthèse \verb+>+ en allant vers la gauche.
+L'état \texttt{q2} va rechercher une parenthèse \texttt{>} en allant vers la gauche.
 
 
-Les parenthèses matchées sont remplacées par le caractère \verb+X+.
-Le passage à  l'état final \verb+qf+ est accompagné par l'écriture \verb+oui+ ou
-\verb+non+ sur la bande suivant si l'expression est ou non correctement parenthésée.
+Les parenthèses matchées sont remplacées par le caractère \texttt{X}.
+Le passage à  l'état final \texttt{qf} est accompagné par l'écriture \texttt{oui} ou
+\texttt{non} sur la bande suivant si l'expression est ou non correctement parenthésée.
 
 \begin{Verbatim}
 
