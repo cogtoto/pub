@@ -1,0 +1,14 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{surj}\PYG{+w}{ }\PYG{o}{\PYGZob{}}\PYG{n}{A}\PYG{+w}{ }\PYG{n}{B}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{Type}\PYG{o}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{(}\PYG{n}{f}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{A}\PYG{+w}{ }\PYG{n+nb+bp}{→}\PYG{+w}{ }\PYG{n}{B}\PYG{o}{)}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k+kt}{Prop}\PYG{+w}{ }\PYG{o}{:=}
+\PYG{+w}{ }\PYG{o}{(}\PYG{n}{b}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{B}\PYG{o}{)}\PYG{+w}{ }\PYG{n+nb+bp}{→}\PYG{+w}{ }\PYG{n+nb+bp}{∃}\PYG{+w}{ }\PYG{n}{a}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{A}\PYG{o}{,}\PYG{+w}{ }\PYG{n}{f}\PYG{+w}{ }\PYG{n}{a}\PYG{+w}{ }\PYG{n+nb+bp}{=}\PYG{+w}{ }\PYG{n}{b}
+
+\PYG{k+kd}{theorem}\PYG{+w}{ }\PYG{n}{cantor}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n+nb+bp}{¬}\PYG{+w}{ }\PYG{o}{(}\PYG{n+nb+bp}{∃}\PYG{+w}{ }\PYG{n}{f}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{ℕ}\PYG{+w}{ }\PYG{n+nb+bp}{→}\PYG{+w}{ }\PYG{n}{ℕ}\PYG{+w}{ }\PYG{n+nb+bp}{→}\PYG{+w}{ }\PYG{n}{Bool}\PYG{o}{,}\PYG{+w}{ }\PYG{n}{surj}\PYG{+w}{ }\PYG{n}{f}\PYG{o}{)}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{k+kd}{by}
+\PYG{n}{intro}\PYG{+w}{ }\PYG{n}{h}
+\PYG{n}{rcases}\PYG{+w}{ }\PYG{n}{h}\PYG{+w}{ }\PYG{k}{with}\PYG{+w}{ }\PYG{o}{⟨}\PYG{n}{f}\PYG{+w}{ }\PYG{o}{,}\PYG{+w}{ }\PYG{n}{SURJ}\PYG{o}{⟩}
+\PYG{k}{let}\PYG{+w}{ }\PYG{n}{g}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{k}{fun}\PYG{+w}{ }\PYG{n}{b}\PYG{+w}{ }\PYG{n+nb+bp}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{not}\PYG{+w}{ }\PYG{n}{b}
+\PYG{k}{let}\PYG{+w}{ }\PYG{n}{h}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{k}{fun}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{n+nb+bp}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{g}\PYG{+w}{ }\PYG{o}{(}\PYG{n}{f}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{n}{x}\PYG{o}{)}
+\PYG{n}{rcases}\PYG{+w}{ }\PYG{o}{(}\PYG{n}{SURJ}\PYG{+w}{ }\PYG{n}{h}\PYG{o}{)}\PYG{+w}{ }\PYG{k}{with}\PYG{+w}{ }\PYG{o}{⟨}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{,}\PYG{+w}{ }\PYG{n}{B}\PYG{+w}{ }\PYG{o}{⟩}
+\PYG{k}{let}\PYG{+w}{ }\PYG{n}{C}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{h}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{n+nb+bp}{=}\PYG{+w}{ }\PYG{n}{f}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{  }\PYG{o}{:=}\PYG{+w}{ }\PYG{k+kd}{by}\PYG{+w}{ }\PYG{n}{simp}\PYG{+w}{ }\PYG{o}{[}\PYG{n}{B}\PYG{o}{]}
+\PYG{n}{simp}\PYG{+w}{ }\PYG{o}{[}\PYG{n}{h}\PYG{o}{]}\PYG{+w}{ }\PYG{n}{at}\PYG{+w}{ }\PYG{n}{C}
+\PYG{n}{simp}\PYG{+w}{ }\PYG{o}{[}\PYG{n}{g}\PYG{o}{]}\PYG{+w}{ }\PYG{n}{at}\PYG{+w}{ }\PYG{n}{C}
+\end{MintedVerbatim}

@@ -1,0 +1,11 @@
+{
+  "lean4.infoview.autoOpen": true,
+  "lean4.infoview.autoOpenShowsGoal": true,
+  "lean4.infoview.expectedTypeVisibility": "Expanded by default",
+  "lean4.infoview.showGoalNames": true,
+  "lean4.alwaysShowTitleBarMenu": true,
+  "lean4.showUnsolvedGoalsDecoration": true,
+  "lean4.showDiagnosticGutterDecorations": true,
+  "workbench.editor.openSideBySideDirection": "down",
+  "workbench.panel.defaultLocation": "bottom"
+}

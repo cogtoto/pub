@@ -1,0 +1,21 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{inductive}\PYG{+w}{ }\PYG{n}{Pair}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{ℕ}\PYG{+w}{ }\PYG{n+nb+bp}{→}\PYG{+w}{ }\PYG{k+kt}{Prop}\PYG{+w}{ }\PYG{n}{where}
+\PYG{n+nb+bp}{|}\PYG{+w}{ }\PYG{n}{pair0}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{Pair}\PYG{+w}{ }\PYG{l+m+mi}{0}
+\PYG{n+nb+bp}{|}\PYG{+w}{ }\PYG{n}{pairSS}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{o}{(}\PYG{n}{n}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{ℕ}\PYG{o}{)}\PYG{+w}{ }\PYG{n+nb+bp}{→}\PYG{+w}{ }\PYG{n}{Pair}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{n+nb+bp}{→}\PYG{+w}{ }\PYG{n}{Pair}\PYG{+w}{ }\PYG{o}{(}\PYG{n}{n}\PYG{+w}{ }\PYG{n+nb+bp}{+}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{o}{)}
+
+\PYG{k+kn}{open}\PYG{+w}{ }\PYG{n}{Pair}
+
+\PYG{k+kd}{theorem}\PYG{+w}{ }\PYG{n}{pair6}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{Pair}\PYG{+w}{ }\PYG{l+m+mi}{6}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n}{pairSS}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{+w}{ }\PYG{o}{(}\PYG{n}{pairSS}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{o}{(}\PYG{n}{pairSS}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{n}{pair0}\PYG{o}{))}
+
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{ispair}\PYG{n+nb+bp}{?}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{ℕ}\PYG{+w}{ }\PYG{n+nb+bp}{→}\PYG{+w}{ }\PYG{k+kt}{Prop}
+\PYG{n+nb+bp}{|}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{n+nb+bp}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{True}
+\PYG{n+nb+bp}{|}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{n+nb+bp}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{False}
+\PYG{n+nb+bp}{|}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{n+nb+bp}{+}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{n+nb+bp}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{ispair}\PYG{n+nb+bp}{?}\PYG{+w}{ }\PYG{n}{n}
+
+\PYG{k+kd}{theorem}\PYG{+w}{ }\PYG{n}{ispair}\PYG{n+nb+bp}{?}\PYG{n}{IsSound}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{o}{(}\PYG{n}{n}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{ℕ}\PYG{o}{)}\PYG{+w}{ }\PYG{n+nb+bp}{→}\PYG{+w}{ }\PYG{n}{ispair}\PYG{n+nb+bp}{?}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{n+nb+bp}{→}\PYG{+w}{ }\PYG{n}{Pair}\PYG{+w}{ }\PYG{n}{n}
+\PYG{n+nb+bp}{|}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{o}{,}\PYG{+w}{ }\PYG{n}{trivial}\PYG{+w}{ }\PYG{n+nb+bp}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{pair0}
+\PYG{n+nb+bp}{|}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{,}\PYG{+w}{ }\PYG{n}{\PYGZus{}}\PYG{+w}{ }\PYG{n+nb+bp}{=\PYGZgt{}}\PYG{+w}{ }\PYG{k+kd}{by}\PYG{+w}{ }\PYG{n}{contradiction}
+\PYG{n+nb+bp}{|}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{n+nb+bp}{+}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{o}{,}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{n+nb+bp}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{pairSS}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{(}\PYG{n}{ispair}\PYG{n+nb+bp}{?}\PYG{n}{IsSound}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{n}{x}\PYG{o}{)}
+
+\PYG{k+kd}{theorem}\PYG{+w}{ }\PYG{n}{pair100}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{Pair}\PYG{+w}{ }\PYG{l+m+mi}{100}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n}{ispair}\PYG{n+nb+bp}{?}\PYG{n}{IsSound}\PYG{+w}{ }\PYG{l+m+mi}{100}\PYG{+w}{ }\PYG{n}{trivial}
+\end{MintedVerbatim}
