@@ -1,16 +1,14 @@
-> This is the Project PRD for the simple Python neural net (living copy also in Project Context).
-
 # PRD: Simple neural network (Python)
 
 Status: **draft** — iterating with Vincent. Do not decompose into user stories or write code until Vincent asks.
 
 ## Problem
 
-Vincent wants a very simple neural network in Python so he can learn how it works: a from-scratch implementation of the two-layer MNIST network from his notes.
+Vincent wants a very simple neural network in Python so he can learn how it works: a from-scratch two-layer MNIST network.
 
 ## Goals
 
-- A small, self-explanatory neural network in Python that makes the mechanics visible
+- A small, self-explanatory neural network in **Python** that makes the mechanics visible
 - Follow the definition Vincent quoted from his notes (below)
 - Train on a small MNIST subset file and print a few digit guesses
 - **Priority: keep it simple and self-explanatory** — not accuracy
@@ -19,10 +17,10 @@ Vincent wants a very simple neural network in Python so he can learn how it work
 
 ## Non-goals (until the PRD says otherwise)
 
+- Any language other than Python
 - Any Python ML library (PyTorch, TensorFlow, Keras, scikit-learn, JAX, and similar)
 - NumPy or other numeric libraries — pure Python only
 - Full 60k/10k MNIST training
-- Keeping the implementation in R or OCaml
 - User-story decomposition
 - Production OCR, GPUs, or a full deep-learning framework
 - Any accuracy target, hyperparameter search, or tuning for a score
@@ -33,8 +31,7 @@ Vincent wants a very simple neural network in Python so he can learn how it work
 
 ## Reference
 
-- [NN chapter](/workspace/BOOK/chapter8.tex) — “Machine Learning and Neural Networks”
-- [R sketch](/workspace/R/NN.R)
+- Vincent’s notes for the two-layer MNIST definition quoted below (math and schema only)
 
 ## Model definition (from Vincent)
 
@@ -58,10 +55,11 @@ Simplified 2-layer schema:
 X \longrightarrow \otimes W^{1} \rightarrow Z^{1} \rightarrow \sigma \rightarrow LAYER^{1} \longrightarrow \otimes W^{2} \rightarrow Z^{2} \rightarrow \sigma \rightarrow \hat{Y} \gg LOSS(\hat{Y}, Y)
 \]
 
-Vincent’s schema uses \(\sigma\) as a generic activation. **Chosen activations:** hidden **ReLU**, output **sigmoid** (as in the later chapter paragraph and the R sketch).
+Vincent’s schema uses \(\sigma\) as a generic activation. **Chosen activations:** hidden **ReLU**, output **sigmoid**.
 
 ## Decisions
 
+- **Language:** Python only (standard library). No other languages.
 - **Purpose:** learning how a neural network works
 - **Stack:** pure Python, from scratch. No ML libraries, no NumPy.
 - **Task:** handwritten digit recognition (OCR) on MNIST
@@ -70,7 +68,7 @@ Vincent’s schema uses \(\sigma\) as a generic activation. **Chosen activations
 - **Weight matrices:** \(W^{1}\) is **784×32**, \(W^{2}\) is **32×10** (Vincent deferred; this is what matches MNIST)
 - **Forward:** \(X \to \otimes W^{1} \to Z^{1} \to \mathrm{ReLU} \to LAYER^{1} \to \otimes W^{2} \to Z^{2} \to \mathrm{sigmoid} \to \hat{Y} \gg LOSS(\hat{Y}, Y)\)
 - **Activations:** hidden **ReLU** \(\max(0,x)\); output **sigmoid** \(1/(1+e^{-x})\)
-- **Loss:** MSE, \(LOSS = (\hat{Y} - Y)^{2}\) (from the same chapter)
+- **Loss:** MSE, \(LOSS = (\hat{Y} - Y)^{2}\)
 - **Prediction:** argmax over the 10 outputs → digit 0–9
 - **Subset file:** ~1,000 train / ~200 test
 - **Batch:** **150 images per training step** (\(X_{150,784}\) as in the notes). That is option **B** — 150 is not the whole dataset.
@@ -117,7 +115,7 @@ No extra tricks: no momentum, Adam, or regularization. Repeat over batches until
 
 - Implement from scratch in pure Python (explicit forward pass, loss, backprop).
 - Keep the code readable next to the schema above.
-- No ML libraries, no NumPy.
+- No ML libraries, no NumPy, no other languages.
 - MNIST subset file for train/eval.
 - After training, print digit guesses for some images (no score to hit).
 - Two layers, 32 then 10 neurons.
