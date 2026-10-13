@@ -1,6 +1,8 @@
 # PRD: Simple neural network (Python)
 
-Status: **draft** — iterating with Vincent. Do not decompose into user stories or write code until Vincent asks.
+Status: **draft** — user stories requested. Python code still waits until Vincent asks.
+
+User stories: [user-stories.md](/cursor/stores/self/docs/user-stories.md) (four groups: network structure, MNIST, learning, usage).
 
 ## Problem
 
@@ -46,6 +48,38 @@ We show it a picture of a handwritten digit. It outputs **10 scores**, one per d
 It does not “see” a picture the way we do. The picture is turned into **784 numbers**: each pixel of the 28×28 grid is one number between 0 (white) and 1 (black), laid out in a single row.
 
 So one image is a row vector of length 784. A batch of 150 images is the matrix \(X_{150,784}\) from the notes.
+
+### What we want to recognize
+
+The goal is **not** to read a full page or a printed font. It is: given one small handwritten numeral, **name the digit** (`0`…`9`).
+
+Below are a few **real MNIST** examples (originally 28×28 pixels, shown larger). The caption is the true label — what we want the network to output after it looks at that picture.
+
+![MNIST example: digit 0](mnist-examples/digit-0.png)
+
+**True label: 0** — the network should guess `0`.
+
+![MNIST example: digit 1](mnist-examples/digit-1.png)
+
+**True label: 1** — the network should guess `1`.
+
+![MNIST example: digit 2](mnist-examples/digit-2.png)
+
+**True label: 2** — the network should guess `2`.
+
+![MNIST example: digit 3](mnist-examples/digit-3.png)
+
+**True label: 3** — the network should guess `3`.
+
+![MNIST example: digit 7](mnist-examples/digit-7.png)
+
+**True label: 7** — the network should guess `7`.
+
+![MNIST example: digit 8](mnist-examples/digit-8.png)
+
+**True label: 8** — the network should guess `8`.
+
+Handwriting varies (a sloppy `7` vs a crossed `7`, an `8` that looks like a `0`). That is why we train on many examples. After training, we print a few guesses vs these kinds of labels. We do **not** require a score; we want the loop to be obvious.
 
 ### A neuron
 
@@ -197,8 +231,8 @@ Schema: \(X \to \otimes W^{1} \to Z^{1} \to \sigma \to LAYER^{1} \to \otimes W^{
 
 - Language: Python (standard library only)
 - Code on Vincent’s local machine when we reach implementation
-- Process: PRD (here) → user stories (on request) → code and tests (on request)
+- Process: PRD (here) → [user stories](/cursor/stores/self/docs/user-stories.md) (requested) → code and tests (on request)
 
 ## Open questions
 
-None on the model. PRD stays **draft** until Vincent says it is mature enough for user stories.
+None on the model. Stories are in [user-stories.md](/cursor/stores/self/docs/user-stories.md). Python still waits until Vincent asks.
