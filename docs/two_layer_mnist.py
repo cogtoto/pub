@@ -8,7 +8,8 @@ Run:
     python3 two_layer_mnist.py
 
 It loads docs/mnist_subset.json.gz (~1,000 train / ~200 test), trains 50
-epochs, prints the loss after each epoch, then names a few test digits.
+epochs, prints the loss after each epoch, then draws a few test digits
+and names them.
 Accuracy is not a goal — watching the loop is.
 """
 
@@ -194,6 +195,25 @@ def batches(X, Y, size):
         yield X[start : start + size], Y[start : start + size]
 
 
+# Darker glyph = more ink. Pixels are 0 (empty) … 1 (ink), same numbers as X.
+_INK = " .:-=+*#%@"
+
+
+def print_digit(pixels):
+    """The 28×28 picture this guess is about, as text (two chars per pixel)."""
+    for r in range(28):
+        row = pixels[r * 28 : (r + 1) * 28]
+        chars = []
+        for px in row:
+            i = int(px * (len(_INK) - 1) + 0.5)
+            if i < 0:
+                i = 0
+            elif i >= len(_INK):
+                i = len(_INK) - 1
+            chars.append(_INK[i] * 2)
+        print("".join(chars))
+
+
 # ---------------------------------------------------------------------------
 # Train by running this file, then print a few digit guesses
 # ---------------------------------------------------------------------------
@@ -258,6 +278,8 @@ def main():
         _Z1, _L1, _Z2, Yhat = forward([img], W1, W2)
         pred = argmax(Yhat[0])
         mark = "ok" if pred == lab else "  "
+        print()
+        print_digit(img)
         print(f"  {mark}  guess {pred}  true {lab}  scores " +
               " ".join(f"{s:.2f}" for s in Yhat[0]))
         seen_digit.add(lab)
