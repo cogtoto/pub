@@ -20,6 +20,7 @@ import json
 import math
 import os
 import random
+import sys
 
 # --- shapes locked in the PRD (so X · W¹ and LAYER¹ · W² are valid) ---
 N_PIXELS = 784  # 28×28 flattened
@@ -199,8 +200,26 @@ def batches(X, Y, size):
 _INK = " .:-=+*#%@"
 
 
+def _digit_bitmap(pixels, scale=8):
+    """28×28 picture scaled up. Each value is 0 (empty) … 255 (ink)."""
+    side = 28 * scale
+    rows = []
+    for y in range(side):
+        src_y = y // scale
+        row = []
+        for x in range(side):
+            v = pixels[src_y * 28 + (x // scale)]
+            if v < 0.0:
+                v = 0.0
+            elif v > 1.0:
+                v = 1.0
+            row.append(int(v * 255 + 0.5))
+        rows.append(row)
+    return side, side, rows
+
+
 def print_digit(pixels):
-    """The 28×28 picture this guess is about, as text (two chars per pixel)."""
+    """The 28×28 picture as text, when the terminal cannot draw an image."""
     for r in range(28):
         row = pixels[r * 28 : (r + 1) * 28]
         chars = []
@@ -212,6 +231,59 @@ def print_digit(pixels):
                 i = len(_INK) - 1
             chars.append(_INK[i] * 2)
         print("".join(chars))
+
+
+def _sixel(pixels, scale=8):
+    """The same picture as a sixel image (what foot draws inline)."""
+    width, height, rows = _digit_bitmap(pixels, scale)
+    # #0 black background, #1 white ink — the stored MNIST picture.
+    parts = [f'\033P0;1;0q"1;1;{width};{height}#0;2;0;0;0#1;2;100;100;100']
+    for y in range(0, height, 6):
+        for color, bright in ((0, False), (1, True)):
+            parts.append(f"#{color}")
+            for x in range(width):
+                bits = 0
+                for bit in range(6):
+                    yy = y + bit
+                    if yy < height:
+                        ink = rows[yy][x] > 40
+                        if ink == bright:
+                            bits |= 1 << bit
+                parts.append(chr(63 + bits))
+            parts.append("$")
+        parts.append("-")
+    parts.append("\033\\")
+    return "".join(parts)
+
+
+def _in_foot():
+    """Foot draws sixel even when TERM is xterm-256color."""
+    pid = os.getpid()
+    seen = set()
+    while pid and pid not in seen:
+        seen.add(pid)
+        try:
+            comm = open(f"/proc/{pid}/comm", encoding="utf-8").read().strip()
+            stat = open(f"/proc/{pid}/stat", encoding="utf-8").read()
+        except OSError:
+            return False
+        if comm == "foot":
+            return True
+        try:
+            ppid = int(stat[stat.rfind(")") + 2 :].split()[1])
+        except (ValueError, IndexError):
+            return False
+        pid = ppid
+    return False
+
+
+def show_digit(pixels):
+    """Draw the test picture. Foot gets the real image; otherwise text."""
+    if sys.stdout.isatty() and _in_foot():
+        sys.stdout.write(_sixel(pixels))
+        sys.stdout.write("\n")
+    else:
+        print_digit(pixels)
 
 
 # ---------------------------------------------------------------------------
@@ -279,7 +351,7 @@ def main():
         pred = argmax(Yhat[0])
         mark = "ok" if pred == lab else "  "
         print()
-        print_digit(img)
+        show_digit(img)
         print(f"  {mark}  guess {pred}  true {lab}  scores " +
               " ".join(f"{s:.2f}" for s in Yhat[0]))
         seen_digit.add(lab)
