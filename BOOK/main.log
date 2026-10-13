@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.10.10)  10 OCT 2026 18:24
+This is LuaHBTeX, Version 1.24.0 (TeX Live 2026/Arch Linux)  (format=lualatex 2026.10.10)  10 OCT 2026 19:34
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/home/vincent/cogtoto/pub/BOOK/main
@@ -1216,4 +1216,822 @@ LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 72
 File: lgrcmr.fd 2017/07/29 v1.2 Greek European Computer Regular
 )
 LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for PD1/pdf
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+ (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count594
+\scratchdimen=\dimen326
+\scratchbox=\box82
+\nofMPsegments=\count595
+\nofMParguments=\count596
+\everyMPshowfont=\toks53
+\MPscratchCnt=\count597
+\MPscratchDim=\dimen327
+\MPnumerator=\count598
+\makeMPintoPDFobject=\count599
+\everyMPtoPDFconversion=\toks54
+) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+LaTeX Info: Redefining \microtypecontext on input line 72.
+Package microtype Info: Applying patch `item' on input line 72.
+Package microtype Info: Applying patch `toc' on input line 72.
+Package microtype Info: Applying patch `eqnum' on input line 72.
+Package microtype Info: Applying patch `footnote' on input line 72.
+Package microtype Info: Applying patch `verbatim' on input line 72.
+LaTeX Info: Redefining \microtypesetup on input line 72.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+Package microtype Info: Patching command `\showhyphens'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `LibertinusSerif' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package biblatex Info: Trying to load language 'french'...
+Package biblatex Info: ... file 'french.lbx' found.
+ (/usr/share/texmf-dist/tex/latex/biblatex/lbx/french.lbx
+File: french.lbx 2025/07/10 v3.21 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load language 'polutonikogreek'...
+Package biblatex Info: ... file 'polutonikogreek.lbx' not found.
+
+
+Package biblatex Warning: Language 'polutonikogreek' not supported.
+(biblatex)                Using dummy definitions on input line 72.
+
+Package biblatex Info: LuaTeX detected.
+(biblatex)             Assuming input encoding 'utf8'.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+
+\openout4 = main.bcf
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'main.bbl' found.
+(./main.bbl)
+Package biblatex Info: Reference section=0 on input line 72.
+Package biblatex Info: Reference segment=0 on input line 72.
+Package hyperref Info: Link coloring ON on input line 72.
+ (./main.out) (./main.out)
+\@outlinefile=\write6
+
+\openout6 = main.out
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 76.
+ (/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) (/usr/share/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 76.
+ (/usr/share/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 76.
+ (/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 76.
+ (/usr/share/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 76.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 76.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 76.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 76.
+ (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (/usr/share/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 76.
+ (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (/usr/share/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `DejaVuSansMono' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+ [1
+
+
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
+
+] (./main.toc
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 3.
+ [3] [4]
+LaTeX Font Info:    Trying to load font information for U+logo on input line 116.
+ (/usr/share/texmf-dist/tex/latex/mflogo/ulogo.fd
+File: ulogo.fd 1999/03/10 v2.0 LaTeX font defs for Metafont and MetaPost logos
+))
+\tf@toc=\write7
+
+\openout7 = main.toc
+ [5] [6]
+Chapitre 1.
+LaTeX Font Info:    Trying to load font information for LGR+LibertinusSerif(0) on input line 90.
+LaTeX Font Info:    No file LGRLibertinusSerif(0).fd. on input line 90.
+
+LaTeX Font Warning: Font shape `LGR/LibertinusSerif(0)/m/n' undefined
+(Font)              using `LGR/cmr/m/n' instead on input line 90.
+
+
+LaTeX Font Warning: Font shape `LGR/LibertinusSerif(0)/b/n' undefined
+(Font)              using `LGR/LibertinusSerif(0)/m/n' instead on input line 90.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--91
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--103
+
+ []
+
+[1
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 155--156
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 157--159
+
+ []
+
+[2]
+\openout2 = chapter1.aux
+ (./chapter1.tex
+Chapitre 2.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 2.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <24.88> on input line 2.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <20.74> on input line 2.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <17.28> on input line 2.
+[3
+
+
+] [4] [5] [6] [7] [8]
+Overfull \hbox (29.01074pt too wide) in paragraph at lines 453--454
+[][] 
+ []
+
+[9]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 512.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 512.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 512.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 512.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 512.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 512.
+
+[10]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 571.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\Lambda' on input line 571.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 571.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 571.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 571.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 571.
+
+[11]
+Overfull \hbox (16.14792pt too wide) in paragraph at lines 618--620
+[]$[]$ \TU/LibertinusSerif(0)/m/n/10.95 est ob-tenu de la même ma-nière que $\OML/lmm/m/it/10.95 N$\TU/LibertinusSerif(0)/m/n/10.95 , mais en mar-quant les ré-si-dus de $\OT1/lmr/m/n/10.95 $ \TU/LibertinusSerif(0)/m/n/10.95 : $[] \OMS/lmsy/m/n/10.95  \OT1/lmr/m/n/10.95 ((\OML/lmm/m/it/10.95 []y:z\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 )((\OML/lmm/m/it/10.95 []y:z\OT1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 w\OT1/lmr/m/n/10.95 )$ 
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 629.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\beta' on input line 629.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 629.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 688.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\beta' on input line 688.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 688.
+
+[12]
+<DrawingHands.jpg, id=766, 326.21875pt x 282.05376pt>
+File: DrawingHands.jpg Graphic file (type jpg)
+<use DrawingHands.jpg>
+Package luatex.def Info: DrawingHands.jpg  used on input line 746.
+(luatex.def)             Requested size: 140.92793pt x 121.85315pt.
+ [13]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 752.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 752.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 752.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 815.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 815.
+[14<./DrawingHands.jpg>] [15]
+\pydata@fh@0=\write8
+
+\openout8 = _FAD58DE7366495DB4650CFEFAC2FCD61.data.minted
+runsystem(latexminted config  --timestamp 20261010193433 FAD58DE7366495DB4650CFEFAC2FCD61)...executed.
+ (./_FAD58DE7366495DB4650CFEFAC2FCD61.config.minted)
+runsystem(latexminted cleanconfig  --timestamp 20261010193433 FAD58DE7366495DB4650CFEFAC2FCD61)...executed.
+ (./_minted/bw.style.minted) (./_minted/02E7168A544607F0D9DB03B67345BCC2.highlight.minted) (./_minted/FF53280708B42B6B3BC9988CBF4C9EA6.highlight.minted) (./_minted/51845C8D7232FDC4F141D891E711F5AB.highlight.minted [16]) (./_minted/907FF11F45CC23F97D2275784539048F.highlight.minted) (./_minted/9A2ED18C64D0E8184992A6FE4E8BEE6D.highlight.minted) (./_minted/D9EAA8A2E1B1309579586293014ACE38.highlight.minted) [17]
+Underfull \hbox (badness 10000) in paragraph at lines 1062--1064
+
+ []
+
+[18] (./_minted/DE033A0F4DE0CEA7EF333B703826BF5C.highlight.minted) (./_minted/F0C5B120934413A57AFE7ED4C8EB7371.highlight.minted) [19] [20]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1278.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\beta' on input line 1278.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1278.
+
+[21]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1348.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 1348.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1348.
+
+
+Overfull \hbox (60.14232pt too wide) in paragraph at lines 1363--1364
+[][]\TU/DejaVuSansMono(0)/m/n/10.95 Lam("n", Lam("f", Lam("x",App(Var "f", App(App(Var "n", Var "f"), Var "x"))))) 
+ []
+
+[22] [23]
+Underfull \hbox (badness 10000) in paragraph at lines 1498--1503
+
+ []
+
+[24] [25]) [26]
+\openout2 = chapter2.aux
+ (./chapter2.tex
+Chapitre 3.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 3.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 3.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 3.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--11
+
+ []
+
+[27
+
+
+
+
+] [28] [29]
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 214.
+ (/usr/share/texmf-dist/tex/latex/lm/ot1lmtt.fd
+File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [30] [31]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32]
+Underfull \hbox (badness 10000) in paragraph at lines 367--371
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--374
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 374--375
+
+ []
+
+(./_minted/820ACA4C506DF616CE3B3ACAE066B7DE.highlight.minted [33]) (./_minted/04B9BF4CCE6E32F17B25C129533DD1E9.highlight.minted [34]) (./_minted/6A170A95B6A3BB81447B9F60C54AE372.highlight.minted)
+Underfull \hbox (badness 10000) in paragraph at lines 512--514
+
+ []
+
+[35] [36]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 601.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lor' on input line 601.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 601.
+
+[37] (./_minted/735E86D078416B8A3B200B830A2A1413.highlight.minted [38]) (./_minted/9AEC9547D0FCBFDCC0E2DFE89792204F.highlight.minted) (./_minted/406F7916A05406560A760FE20CB44C44.highlight.minted) (./_minted/046DA42F2EA60E93BA770D4B645F18A6.highlight.minted) (./_minted/265C3B0EB7556CB5AF1F251A1430A199.highlight.minted) (./_minted/B68FEB537D0DA45CAFD388ABB502427A.highlight.minted) (./_minted/DDE9F8E50E287B5071E9CB2BFC7F55B9.highlight.minted) (./_minted/A80BF7C90F45CA3A67FEA88EABAE3D25.highlight.minted [39]) [40] (./_minted/023D113A6980E9DA0D59E60A47AC7426.highlight.minted [41]) (./_minted/86A70E0569A15B5A9FAC7C3BCB71C6DC.highlight.minted) (./_minted/77A4AFB569F1645CA60D562DE966D962.highlight.minted) (./_minted/EFAFDBA5F1C93CF3FC7203FA62555E88.highlight.minted) (./_minted/5EF353D2096959F12A2E3E26B130869B.highlight.minted)) [42]
+\openout2 = chapter3.aux
+ (./chapter3.tex
+Chapitre 4.
+[43
+
+
+
+
+] (./_minted/93F20BF12DAC106276047F1156AFF2BA.highlight.minted [44]) [45]
+Overfull \hbox (39.30917pt too wide) in paragraph at lines 201--210
+[][] 
+ []
+
+[46] (./_minted/2882CB2DA60529F89266A23760DEC2EF.highlight.minted) (./_minted/C22020A6D317C219C8C1B7B94AD91DB2.highlight.minted) (./_minted/4097650BF42B402B9F4FBBA5F124F277.highlight.minted) (./_minted/8D4313AC51E57E8E5BE85429228B5CA6.highlight.minted [47])
+Underfull \hbox (badness 1466) in paragraph at lines 318--320
+[] \TU/LibertinusSerif(0)/m/it/10.95 Pour ob-te-nir cet ef-fet, suivez-moi, j’in-vente un
+ []
+
+
+Underfull \hbox (badness 1577) in paragraph at lines 318--320
+\TU/LibertinusSerif(0)/m/it/10.95 per-son-nage de ro-man-cier, que je pose en fi-gure
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 318--320
+
+ []
+
+<gumpp.jpeg, id=985, 73.7154pt x 96.36pt>
+File: gumpp.jpeg Graphic file (type jpg)
+<use gumpp.jpeg>
+Package luatex.def Info: gumpp.jpeg  used on input line 330.
+(luatex.def)             Requested size: 142.26378pt x 185.99564pt.
+(./_minted/867026D45129B477E11DD29CF1B1A26B.highlight.minted [48<./gumpp.jpeg>]) (./_minted/4A7EF02270EC2220F7931715B96F1D27.highlight.minted)
+Overfull \hbox (101.8516pt too wide) in paragraph at lines 389--390
+[][] 
+ []
+
+(./_minted/150E5060AB8132EC6C7813A10C2E16B5.highlight.minted) (./_minted/185552D2382D00B41D52A8AB3747F4BD.highlight.minted [49]) (./_minted/79FAB0485B3F2AA1C8EEB3E413D8EE38.highlight.minted) (./_minted/2DF632D74616FD83C7EABF6A1F3F29FD.highlight.minted) [50] (./_minted/9AEE0CA3D30B32C90E39AA857FA9668E.highlight.minted) (./_minted/1F76B91CE1E5AAE991E2B1E508E851EB.highlight.minted [51])
+<bruegel.jpg, id=1019, 301.125pt x 240.9pt>
+File: bruegel.jpg Graphic file (type jpg)
+<use bruegel.jpg>
+Package luatex.def Info: bruegel.jpg  used on input line 549.
+(luatex.def)             Requested size: 142.26378pt x 113.81482pt.
+\g__tikzsymbols_savebox_F_0 g 0 G_10.95_Laughey_1_none_none_box=\box83
+ [52<./bruegel.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [53]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [54]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [55]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [56]) [57]
+\openout2 = chapter4.aux
+ (./chapter4.tex [58
+
+
+
+
+]
+Chapitre 5.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 2.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2.
+
+(./_minted/85DEE9B5EFFEE05D2485526E27067F7E.highlight.minted [59]) (./_minted/F95EAFC08B0D605D67F3D93F4840F409.highlight.minted) (./_minted/F91821D1AB8C949772E5C297FA290FC4.highlight.minted) (./_minted/7930BD77CA941D483D6C421286922CC6.highlight.minted [60]) (./_minted/2146B0F128C0CCDA251F9D3D097C1AA6.highlight.minted)
+Underfull \hbox (badness 10000) in paragraph at lines 142--143
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+
+ []
+
+[61] (./_minted/A0B52455FD85BB6F881FF1453227F436.highlight.minted [62]) (./_minted/23BC72F1C6CBF7F8918BDB31A6ACAD5A.highlight.minted) (./_minted/D8BB88D9BBD8B9FE7940B71719E69D09.highlight.minted) [63] [64] [65]
+Overfull \hbox (5.95628pt too wide) in paragraph at lines 528--536
+\TU/DejaVuSansMono(0)/m/n/9 ((lambda (v1...vn) body) e1...en) \letterimp D  \TU/DejaVuSansMono(0)/m/n/9 NIL; $\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\TU/DejaVuSansMono(0)/m/n/9 ;ARG;$[] \OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 v[]\OT1/lmr/m/n/10.95 )$\TU/DejaVuSansMono(0)/m/n/9 ;ARG;CLOSURE$\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 C\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 body\OT1/lmr/m/n/10.95 )$\TU/DejaVuSansMono(0)/m/n/9 ;RTS$\OT1/lmr/m/n/10.95 )$\TU/DejaVuSansMono(0)/m/n/9 ;JSR 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 528--536
+
+ []
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 548.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 549.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 550.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 551.
+
+
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 568.
+
+
+Overfull \hbox (0.23276pt too wide) detected at line 574
+[]
+ []
+
+[66] [67]) [68]
+\openout2 = chapter5.aux
+ (./chapter5.tex
+Chapitre 6.
+(./_minted/4E32DA65C6E421B44E226E033A77815A.highlight.minted) (./_minted/9C50268684711853D16CD6488EF9C915.highlight.minted) (./_minted/FF53A99D8B442199A61489218A72BA3B.highlight.minted) [69
+
+
+
+
+] (./_minted/428A5B689A800BFB6880761307F07C93.highlight.minted [70]) (./_minted/4E37CB319D4E0649465163EAABFE810F.highlight.minted) (./_minted/44305CA1EA720942ABD140AA9529EE82.highlight.minted [71]) (./_minted/C9C1FBA36B5848974DD92EF5485EEB28.highlight.minted) [72] (./_minted/EE6768F5C03519F4A53912B960F59D42.highlight.minted) (./_minted/9AD996543ED301211A5860F86D97CEC1.highlight.minted [73]) (./_minted/EA76F7CF685C156ED55447D57F63003A.highlight.minted) (./_minted/BCBBAD0E65415F9C3A6869EE01D248DF.highlight.minted) (./_minted/FA74FE27C9F45E613EFEECC87F3D00CF.highlight.minted [74]) (./_minted/451D7DDBA8DB7557038F0181E95684B8.highlight.minted) (./_minted/1F716D62984D4B77172683D4BF3BCFB1.highlight.minted [75]) (./_minted/EC7A15E4FA9DEDC0C48073E031297712.highlight.minted)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [76] (./_minted/7305CEA2D3218F92590376AB36567218.highlight.minted) (./_minted/E1BAA6849449721D4DE1503112FB7BCA.highlight.minted) [77] (./_minted/EF70000CD57B4EBC8E8DE777A8C9A4C4.highlight.minted [78]) [79] (./_minted/DE436E8A5A3DB78C033F0E4535844BEE.highlight.minted)
+Underfull \hbox (badness 10000) in paragraph at lines 745--747
+
+ []
+
+[80] (./_minted/33C00A35DD028CFE84FA792A63C7EF1E.highlight.minted) (./_minted/8B3BA25B03FFD54601A65ABB4A6AA908.highlight.minted [81])) [82]
+\openout2 = chapter6.aux
+ (./chapter6.tex
+Chapitre 7.
+[83
+
+
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 90--94
+
+ []
+
+[84] [85] [86] [87] [88] [89]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [90] (./_minted/6B08E0E663B5738ED351BD21733E366D.highlight.minted) [91] [92]) [93]
+\openout2 = chapter7.aux
+ (./chapter7.tex [94
+
+
+
+
+]
+Chapitre 8.
+) [95]
+\openout2 = chapter8.aux
+ (./chapter8.tex [96
+
+
+
+
+]
+Chapitre 9.
+(./_minted/9B512E831079F091C907BC9255DB0CA4.highlight.minted) (./_minted/20F0C07EB339D4B5333C5370028BC1FC.highlight.minted [97]) (./_minted/B0F62E03D3BE786963720F231E62B416.highlight.minted [98]) (./_minted/FE0E1DEA482A89F27453E001CD9A5AD2.highlight.minted) (./_minted/5A8F1B81AB99A27C765F6461384DA432.highlight.minted) (./_minted/78EC661893DF6B6C937B52C8FE466E4E.highlight.minted [99])
+<flocon1.pdf, id=1265, 150.5625pt x 138.5175pt>
+File: flocon1.pdf Graphic file (type pdf)
+<use flocon1.pdf>
+Package luatex.def Info: flocon1.pdf  used on input line 296.
+(luatex.def)             Requested size: 99.5875pt x 85.3579pt.
+<flocon2.pdf, id=1266, 156.585pt x 136.51pt>
+File: flocon2.pdf Graphic file (type pdf)
+<use flocon2.pdf>
+Package luatex.def Info: flocon2.pdf  used on input line 297.
+(luatex.def)             Requested size: 99.58806pt x 85.35811pt.
+<flocon3.pdf, id=1267, 149.55875pt x 130.4875pt>
+File: flocon3.pdf Graphic file (type pdf)
+<use flocon3.pdf>
+Package luatex.def Info: flocon3.pdf  used on input line 298.
+(luatex.def)             Requested size: 99.58539pt x 85.35942pt.
+<flocon4.pdf, id=1268, 139.52126pt x 127.47626pt>
+File: flocon4.pdf Graphic file (type pdf)
+<use flocon4.pdf>
+Package luatex.def Info: flocon4.pdf  used on input line 299.
+(luatex.def)             Requested size: 99.58661pt x 85.36195pt.
+
+warning  (file bretagne3.jpg) (readjpg): Exif resolution 300dpi x 300dpi differs from the input resolution 299dpi x 299dpi
+<bretagne3.jpg, id=1269, 730.4088pt x 512.6352pt>
+File: bretagne3.jpg Graphic file (type jpg)
+<use bretagne3.jpg>
+Package luatex.def Info: bretagne3.jpg  used on input line 305.
+(luatex.def)             Requested size: 113.81102pt x 79.87221pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [100] (./_minted/1AFBD9C07864775246B4E091601710C2.highlight.minted [101<./flocon1.pdf><./flocon2.pdf><./flocon3.pdf><./flocon4.pdf><./bretagne3.jpg
+warning  (readjpg): Exif resolution 300dpi x 300dpi differs from the input resolution 299dpi x 299dpi
+>])
+<mandelbrot.png, id=1308, 254.9525pt x 227.85126pt>
+File: mandelbrot.png Graphic file (type png)
+<use mandelbrot.png>
+Package luatex.def Info: mandelbrot.png  used on input line 367.
+(luatex.def)             Requested size: 113.81102pt x 101.71507pt.
+<imp.png, id=1310, 573.14125pt x 491.8375pt>
+File: imp.png Graphic file (type png)
+<use imp.png>
+Package luatex.def Info: imp.png  used on input line 381.
+(luatex.def)             Requested size: 113.81102pt x 97.6603pt.
+ (./_minted/61AE7E4C1DC91BE73329788C92CD531D.highlight.minted [102<./mandelbrot.png><./imp.png>]) (./_minted/BF98639BBEAB4BEA9E0041992648AB4D.highlight.minted)
+<snow.png, id=1322, 636.3775pt x 750.805pt>
+File: snow.png Graphic file (type png)
+<use snow.png>
+Package luatex.def Info: snow.png  used on input line 453.
+(luatex.def)             Requested size: 113.81102pt x 134.26839pt.
+
+Underfull \vbox (badness 7649) has occurred while \output is active []
+
+ [103] (./_minted/B51EEF252623F7EEA76D7A87014BF133.highlight.minted) (./_minted/19C8031EC017D7881E8615A6ADC6A636.highlight.minted) (./_minted/3BD0737CC25803801DF620E664016439.highlight.minted [104<./snow.png>]) (./_minted/27DB2DA0A200FA24AAE077841C3C389E.highlight.minted) [105] [106]
+<sigmoid.png, id=1347, 694.595pt x 729.72626pt>
+File: sigmoid.png Graphic file (type png)
+<use sigmoid.png>
+Package luatex.def Info: sigmoid.png  used on input line 720.
+(luatex.def)             Requested size: 142.2657pt x 142.25708pt.
+ (./_minted/F9D21B8438F1CEC00FAF5CBCAAF06CD3.highlight.minted [107<./sigmoid.png>]) (./_minted/1BF77A0D3DE1AADB493B4F5AEA5F5B21.highlight.minted) (./_minted/C359B120BA654539A5CB3AF3B3855E18.highlight.minted [108]) [109] (./_minted/B388E278EE164E4BCF9EE2808FFED55B.highlight.minted) [110] (./_minted/C40E6E0693B4993AB3116E54C3DC394E.highlight.minted [111])
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1005.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\pi' on input line 1005.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1005.
+
+[112] (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+ (/usr/share/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)) [113] [114] (./_minted/143E3DDC8C76A9F4DA4F975EEF1C5B7C.highlight.minted) (./_minted/215E250908F6C4ECAADAAD05BFCE2EC6.highlight.minted) [115] (./_minted/1A6E5384BA1722C0153C757C12FACB89.highlight.minted) [116] (./_minted/8A3B3854DE23AA6C9DEDC4F51DDA9E92.highlight.minted) (./_minted/999B9CB391AC063DA4AA0FD828E63FE9.highlight.minted)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\intop' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\ilimits@' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\Ustack' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\begingroup' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\endgroup' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@@over' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 1288.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1288.
+
+(./_minted/BD7804F306087A1C0E2CA19859858446.highlight.minted) [117] (./_minted/7123529A3A51B78814FE3A6823225794.highlight.minted)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1379.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@ifnextchar' on input line 1379.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1379.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [118] (./_minted/339CD81821F9B8400E41FBA575F9BF69.highlight.minted [119]) (./_minted/08446C4739A1DB8B4718269B349A8D27.highlight.minted) [120]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1526.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1526.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\sin' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\Ustack' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\begingroup' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\endgroup' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@@over' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\sin' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\Ustack' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\begingroup' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\endgroup' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@@over' on input line 1544.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1544.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [121] (./_minted/A70A6061A455218B9A633C10A289FE8D.highlight.minted) (./_minted/F60AE1CA7F7E13B514A39B1DB34590BE.highlight.minted) (./_minted/F77082DD9B4CD411EDCFDEAE045698E0.highlight.minted) (./_minted/C61D83F4006799679973FDD1274CE1A2.highlight.minted [122]) (./_minted/FC11BD76C51F95C2F7FA16B8D7249BBA.highlight.minted) (./_minted/E00143AD9C9AE61A23FC422C7FC23C08.highlight.minted) [123]) [124] [125
+\def\@LN@column{1}
+
+
+
+] (./main.aux (./chapter1.aux) (./chapter2.aux) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux) (./chapter7.aux) (./chapter8.aux))
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+ ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 8B678774AAD2FE5627FD22EF59454182;23443.
+Package logreq Info: Writing requests to 'main.run.xml'.
+
+\openout1 = main.run.xml
+)
+
+Here is how much of LuaTeX's memory you used:
+ 58713 strings out of 476076
+ 596483,4101490 words of node,token memory allocated
+ 13158 words of node memory still in use:
+   12 hlist, 2 vlist, 2 rule, 1 local_par, 611 glue, 4 kern, 2 penalty, 2 sub_mlist, 1 margin_kern, 5 glyph, 2602 attribute, 443 glue_spec, 522 attribute_list, 3 write, 34 pdf_literal, 2 pdf_action, 2 pdf_colorstack nodes
+   avail lists: 1:15,2:134105,3:22010,4:1151,5:2191,6:135,7:24370,8:95,9:2856,10:17,11:509
+ 78932 multiletter control sequences out of 65536+600000
+ 165 fonts using 33263255 bytes
+ 84i,24n,100p,1027b,2151s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}<<./snow.600pk>>{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf-dist/fonts/truetype/public/dejavu/DejaVuSansMono-Bold.ttf></usr/share/texmf-dist/fonts/truetype/public/dejavu/DejaVuSansMono-BoldOblique.ttf></usr/share/texmf-dist/fonts/truetype/public/dejavu/DejaVuSansMono-Oblique.ttf></usr/share/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-BoldItalic.otf><<./beta.600pk>>{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/share/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Italic.otf></usr/share/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Bold.otf></usr/share/texmf-dist/fonts/truetype/public/dejavu/DejaVuSansMono.ttf></usr/share/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Regular.otf></usr/share/texmf-dist/fonts/type1/public/cbfonts/grmn0900.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></usr/share/texmf-dist/fonts/type1/hoekwater/mflogo-font/logo10.pfb></usr/share/texmf-dist/fonts/type1/hoekwater/mflogo-font/logod10.pfb></usr/share/texmf-dist/fonts/type1/hoekwater/mflogo-font/logosl10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (131 pages, 1434013 bytes).
+
+PDF statistics: 1612 PDF objects out of 1728 (max. 8388607)
+ 1390 compressed objects within 14 object streams
+ 412 named destinations out of 1000 (max. 1048576)
+ 981 words of extra memory for PDF output out of 10000 (max. 100000000)
+

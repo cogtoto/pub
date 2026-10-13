@@ -743,7 +743,7 @@ let rec cp (l1,r1) (l2,r2) =
 \subsection{Terminaison}
 \subsubsection{Indécidabilité de la terminaison dans le cas "général"}
 Soient $a_1,a_2 ,a_3 , \dots$ une numérotation de tous les algorithmes.
-On définit la fonction suivante : $diag(i) ≡$ si $a_i$ termine alors \texttt{boucler}, sinon \texttt{s'arrêter} \\
+On définit la fonction suivante : $diag(i) \equiv $ si $a_i$ termine alors \texttt{boucler}, sinon \texttt{s'arrêter} \\
 
 Pour tout $i$, $diag(i)$ termine ssi $a_i$ ne termine pas.
 Mais il y a un $a_j$ tel que $diag = a_j$ . Nous avons donc
@@ -793,7 +793,7 @@ $\mathbb{N}$.
 
 Pour un terme $t$ et une variable $x$ , on note $|t|$ le cardinal de $t$ et $|t|_x$ le nombre
 d'occurrences de $x$ dans $t$. On définit un ordre strict $\succ$ sur $T[X]$ par :
-$$ s > t \Leftrightarrow  |s| > |t|\ et\  \forall x \in X, |s|_x ≥ |t|_x $$
+$$ s > t \Leftrightarrow  |s| > |t|\ et\  \forall x \in X, |s|_x \geq  |t|_x $$
 
 \subsection{Complétion de Knuth-Bendix}
 Nous pourrons ici nous référer au livre très didactique \textit{Term Rewriting and All That}\cite{rewriting}

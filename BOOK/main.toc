@@ -104,8 +104,9 @@
 \contentsline {subsection}{\numberline {7.5.3}Un programme Quine}{92}{subsection.7.5.3}%
 \contentsline {subsection}{\numberline {7.5.4}Le théorème de Rice}{93}{subsection.7.5.4}%
 \contentsline {chapter}{\numberline {8}Le grec ancien}{95}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Le nouveau testament}{95}{section.8.1}%
-\contentsline {section}{\numberline {8.2}La Septante}{95}{section.8.2}%
+\contentsline {section}{\numberline {8.1}L'alphabet grec}{95}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Le nouveau testament}{95}{section.8.2}%
+\contentsline {section}{\numberline {8.3}La Septante (LXX)}{95}{section.8.3}%
 \contentsline {chapter}{\numberline {9}Annexes / Divers}{97}{chapter.9}%
 \contentsline {section}{\numberline {9.1}Quelques fonctions sur les listes}{97}{section.9.1}%
 \contentsline {section}{\numberline {9.2}Les listes mutables}{97}{section.9.2}%
@@ -149,6 +150,3 @@
 \contentsline {section}{\numberline {9.19}Les fonctions $\sin \frac {1}{x}$ et $x . \sin \frac {1}{x}$ }{122}{section.9.19}%
 \contentsline {section}{\numberline {9.20}Prouver par réflection en \textsc {Agda} et \textsc {Lean}}{122}{section.9.20}%
 \contentsline {section}{\numberline {9.21}Srivanasa Ramanujan}{123}{section.9.21}%
-\contentsline {section}{\numberline {9.22}Le grec ancien}{124}{section.9.22}%
-\contentsline {subsection}{\numberline {9.22.1}L'alphabet grec}{124}{subsection.9.22.1}%
-\contentsline {subsection}{\numberline {9.22.2}Extraits du nouveau testament}{124}{subsection.9.22.2}%
