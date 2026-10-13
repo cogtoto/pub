@@ -16,7 +16,7 @@ Each story is for Vincent, learning how a tiny neural net works.
 
 - Input size is 784 (flattened 28×28).
 - Hidden layer size is 32; output size is 10 (one score per digit 0–9).
-- Weight matrices are $W^{1}$ of shape 784×32 and $W^{2}$ of shape 32×10.
+- Weight matrices are W¹ of shape 784×32 and W² of shape 32×10.
 - No bias vectors.
 
 ### US-1.2 — Activations
@@ -25,8 +25,8 @@ Each story is for Vincent, learning how a tiny neural net works.
 
 **Acceptance**
 
-- Hidden: $\mathrm{ReLU}(z)=\max(0,z)$.
-- Output: $\mathrm{sigmoid}(z)=1/(1+e^{-z})$.
+- Hidden: ReLU(z) = max(0, z).
+- Output: sigmoid(z) = 1 / (1 + e^(−z)).
 - A guess is argmax over the 10 sigmoid scores.
 
 ### US-1.3 — One readable Python file
@@ -49,7 +49,7 @@ Each story is for Vincent, learning how a tiny neural net works.
 
 **Acceptance**
 
-- PRD (and later comments) describe: one image = 784 pixels in $[0,1]$; label = which digit; labels stored one-hot for the loss.
+- PRD (and later comments) describe: one image = 784 pixels in [0, 1]; label = which digit; labels stored one-hot for the loss.
 - A few real MNIST pictures sit in the PRD with their true labels (what “recognition” means).
 - Scope is isolated handwritten numerals, not full-page OCR or printed fonts.
 
@@ -61,7 +61,7 @@ Each story is for Vincent, learning how a tiny neural net works.
 
 - Subset file with about **1,000** training images and **200** test images, digits 0–9 represented.
 - Loaded in pure Python (no ML dataset helpers).
-- A training **batch** is 150 rows, i.e. $X_{150,784}$ as in the notes (150 is not the whole subset).
+- A training **batch** is 150 rows, i.e. X of shape 150 × 784 as in the notes (150 is not the whole subset).
 
 ---
 
@@ -73,8 +73,8 @@ Each story is for Vincent, learning how a tiny neural net works.
 
 **Acceptance**
 
-- $Z^{1} = X \cdot W^{1}$, $LAYER^{1} = \mathrm{ReLU}(Z^{1})$, $Z^{2} = LAYER^{1} \cdot W^{2}$, $\hat{Y} = \mathrm{sigmoid}(Z^{2})$.
-- $LOSS = (\hat{Y} - Y)^{2}$ (summed over the batch).
+- Z¹ = X · W¹, LAYER¹ = ReLU(Z¹), Z² = LAYER¹ · W², Ŷ = sigmoid(Z²).
+- LOSS = (Ŷ − Y)² (summed over the batch).
 - No softmax, no extra losses.
 
 ### US-3.2 — Backpropagation and SGD
@@ -83,10 +83,10 @@ Each story is for Vincent, learning how a tiny neural net works.
 
 **Acceptance**
 
-- Output error $E = 2(\hat{Y}-Y) \odot \mathrm{sigmoid}'(Z^{2})$.
-- $\partial LOSS/\partial W^{2} = (LAYER^{1})^{\top} \cdot E$.
-- $\partial LOSS/\partial W^{1} = X^{\top} \cdot ((E \cdot (W^{2})^{\top}) \odot \mathrm{ReLU}'(Z^{1}))$.
-- Update: $W \leftarrow W - \eta\,\partial LOSS/\partial W$ with $\eta = 1$.
+- Output error E = 2(Ŷ − Y) ⊙ sigmoid′(Z²).
+- ∂LOSS/∂W² = (LAYER¹)ᵀ · E.
+- ∂LOSS/∂W¹ = Xᵀ · ((E · (W²)ᵀ) ⊙ ReLU′(Z¹)).
+- Update: W ← W − η · ∂LOSS/∂W with η = 1.
 - No momentum, Adam, or regularization.
 
 ### US-3.3 — Training loop

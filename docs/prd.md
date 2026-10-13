@@ -4,7 +4,7 @@ Status: **draft** — user stories requested. Python code still waits until Vinc
 
 User stories: [user-stories.md](/cursor/stores/self/docs/user-stories.md) (four groups: network structure, MNIST, learning, usage).
 
-Open this file in **Markdown Preview** to see the formulas (not the raw `$…$` source).
+Formulas below are plain text (no LaTeX), so they show in Cursor **Preview**.
 
 ## Problem
 
@@ -49,7 +49,7 @@ We show it a picture of a handwritten digit. It outputs **10 scores**, one per d
 
 It does not “see” a picture the way we do. The picture is turned into **784 numbers**: each pixel of the 28×28 grid is one number between 0 (white) and 1 (black), laid out in a single row.
 
-So one image is a row vector of length 784. A batch of 150 images is the matrix $X_{150,784}$ from the notes.
+So one image is a row vector of length 784. A batch of 150 images is the matrix **X** of shape **150 × 784** from the notes.
 
 ### What we want to recognize
 
@@ -87,8 +87,8 @@ Handwriting varies (a sloppy `7` vs a crossed `7`, an `8` that looks like a `0`)
 
 One **neuron** does two things:
 
-1. **Weighted sum** — multiply each incoming number by a weight, then add those products. That sum is $z$.
-2. **Activation** — pass $z$ through a small function $\sigma(z)$ so the output stays in a useful range (not a huge raw sum).
+1. **Weighted sum** — multiply each incoming number by a weight, then add those products. That sum is **z**.
+2. **Activation** — pass **z** through a small function σ(z) so the output stays in a useful range (not a huge raw sum).
 
 The **weights** are the knobs we will learn. At the start they are random. After training they should make the digit scores match the labels.
 
@@ -103,35 +103,35 @@ So the shapes that actually fit MNIST are:
 
 | object | meaning | shape |
 | --- | --- | --- |
-| $X$ | 150 images, 784 pixels each | $150 \times 784$ |
-| $W^{1}$ | every hidden neuron’s 784 weights | $784 \times 32$ |
-| $Z^{1}$ | hidden weighted sums | $150 \times 32$ |
-| $LAYER^{1}$ | hidden activations | $150 \times 32$ |
-| $W^{2}$ | every output neuron’s 32 weights | $32 \times 10$ |
-| $Z^{2}$ | output weighted sums | $150 \times 10$ |
-| $\hat{Y}$ | 10 scores per image | $150 \times 10$ |
-| $Y$ | true labels, one-hot (a 1 in the true digit column) | $150 \times 10$ |
+| X | 150 images, 784 pixels each | 150 × 784 |
+| W¹ | every hidden neuron’s 784 weights | 784 × 32 |
+| Z¹ | hidden weighted sums | 150 × 32 |
+| LAYER¹ | hidden activations | 150 × 32 |
+| W² | every output neuron’s 32 weights | 32 × 10 |
+| Z² | output weighted sums | 150 × 10 |
+| Ŷ | 10 scores per image | 150 × 10 |
+| Y | true labels, one-hot (a 1 in the true digit column) | 150 × 10 |
 
-The notes label the weights $W^{1}_{32,150}$ and $W^{2}_{10,150}$. Those subscripts do not multiply with $X_{150,784}$. We keep the **32 and 10 neurons**, and use **784×32** and **32×10** so the multiplications are valid.
+The notes label the weights W¹ as 32×150 and W² as 10×150. Those sizes do not multiply with X (150 × 784). We keep the **32 and 10 neurons**, and use **784×32** and **32×10** so the multiplications are valid.
 
 ### Forward pass (how a guess is made)
 
-From the notes, with $\sigma$ meaning “an activation” in general:
+From the notes, with σ meaning “an activation” in general:
 
-$$
-X \longrightarrow \otimes W^{1} \rightarrow Z^{1} \rightarrow \sigma \rightarrow LAYER^{1} \longrightarrow \otimes W^{2} \rightarrow Z^{2} \rightarrow \sigma \rightarrow \hat{Y} \gg LOSS(\hat{Y}, Y)
-$$
+```
+X → ⊗ W¹ → Z¹ → σ → LAYER¹ → ⊗ W² → Z² → σ → Ŷ  >>  LOSS(Ŷ, Y)
+```
 
-In this Project the two $\sigma$ are **different** functions:
+In this Project the two σ are **different** functions:
 
-1. $Z^{1} = X \cdot W^{1}$
-2. $LAYER^{1} = \mathrm{ReLU}(Z^{1})$
-3. $Z^{2} = LAYER^{1} \cdot W^{2}$
-4. $\hat{Y} = \mathrm{sigmoid}(Z^{2})$
+1. Z¹ = X · W¹
+2. LAYER¹ = ReLU(Z¹)
+3. Z² = LAYER¹ · W²
+4. Ŷ = sigmoid(Z²)
 
-**ReLU** (hidden layer): $\mathrm{ReLU}(z) = \max(0, z)$. Negative sums become 0; positive sums pass through. That is a cheap “on/off” that is easy to differentiate (slope 1 if $z>0$, else 0).
+**ReLU** (hidden layer): ReLU(z) = max(0, z). Negative sums become 0; positive sums pass through. That is a cheap “on/off” that is easy to differentiate (slope 1 if z > 0, else 0).
 
-**Sigmoid** (output layer): $\mathrm{sigmoid}(z) = 1 / (1 + e^{-z})$. Each of the 10 numbers is squashed into $(0, 1)$, which we treat as a soft score for that digit. We do **not** force them to sum to 1 (that would be softmax — out of scope). The guess is simply **argmax**: the column with the largest score.
+**Sigmoid** (output layer): sigmoid(z) = 1 / (1 + e^(−z)). Each of the 10 numbers is squashed into (0, 1), which we treat as a soft score for that digit. We do **not** force them to sum to 1 (that would be softmax — out of scope). The guess is simply **argmax**: the column with the largest score.
 
 ### Loss (how wrong a guess is)
 
@@ -139,11 +139,11 @@ The true label for an image is a **one-hot** row: digit `3` is `[0,0,0,1,0,0,0,0
 
 **Mean squared error** compares every score to every one-hot entry:
 
-$$
-LOSS = (\hat{Y} - Y)^{2}
-$$
+```
+LOSS = (Ŷ − Y)²
+```
 
-(summed over the batch in the code). If the network is sure about the right digit, $\hat{Y}$ is close to $Y$ and the loss is small. If it is sure about the wrong digit, the loss is large.
+(summed over the batch in the code). If the network is sure about the right digit, Ŷ is close to Y and the loss is small. If it is sure about the wrong digit, the loss is large.
 
 We **do not** chase an accuracy percentage. Loss is only there so the backward pass has a number to reduce.
 
@@ -153,39 +153,41 @@ Learning is **backpropagation** plus **SGD**. Idea in one sentence: *measure the
 
 Derivatives we need:
 
-- $\mathrm{sigmoid}'(z) = \sigma(z)\,(1-\sigma(z))$
-- $\mathrm{ReLU}'(z) = 1$ if $z>0$, else $0$
+- sigmoid′(z) = σ(z) · (1 − σ(z))
+- ReLU′(z) = 1 if z > 0, else 0
 
-$\odot$ is element-wise multiply (Hadamard). $\cdot$ is matrix multiply. $(\cdot)^{\top}$ is transpose.
+⊙ is element-wise multiply (Hadamard). · is matrix multiply. ᵀ is transpose.
 
 For one batch:
 
 1. Error at the output (MSE + sigmoid):
 
-$$
-E = 2(\hat{Y}-Y) \odot \mathrm{sigmoid}'(Z^{2})
-$$
+```
+E = 2(Ŷ − Y) ⊙ sigmoid′(Z²)
+```
 
 2. How to change the second-layer weights (closer to the answer):
 
-$$
-\frac{\partial LOSS}{\partial W^{2}} = (LAYER^{1})^{\top} \cdot E
-$$
+```
+∂LOSS/∂W² = (LAYER¹)ᵀ · E
+```
 
    Read: “for each of the 32 hidden values, how much did it push each of the 10 output errors?”
-3. Send that error back to the hidden layer, through $W^{2}$ and ReLU:
 
-$$
-\frac{\partial LOSS}{\partial W^{1}} = X^{\top} \cdot \bigl( (E \cdot (W^{2})^{\top}) \odot \mathrm{ReLU}'(Z^{1}) \bigr)
-$$
+3. Send that error back to the hidden layer, through W² and ReLU:
+
+```
+∂LOSS/∂W¹ = Xᵀ · ((E · (W²)ᵀ) ⊙ ReLU′(Z¹))
+```
 
    Read: “for each of the 784 pixels, how much did it push each of the 32 hidden neurons, given the error that came from the output?”
-4. **SGD update** (take a small step downhill; $\eta = 1$):
 
-$$
-W^{1} \leftarrow W^{1} - \eta\,\frac{\partial LOSS}{\partial W^{1}}, \quad
-W^{2} \leftarrow W^{2} - \eta\,\frac{\partial LOSS}{\partial W^{2}}
-$$
+4. **SGD update** (take a small step downhill; η = 1):
+
+```
+W¹ ← W¹ − η · ∂LOSS/∂W¹
+W² ← W² − η · ∂LOSS/∂W²
+```
 
 No momentum, Adam, or regularization. Repeat: **batch** of 150 images → **epoch** = one full walk through the ~1,000 training images (~7 batches) → **50 epochs**.
 
@@ -193,15 +195,15 @@ That is the whole learning theory for this Project.
 
 ## Model definition (from Vincent)
 
-150 observations in a matrix $X_{150,784}$ (2D tensor): 150 rows (observations), 784 columns (features).
+150 observations in a matrix X of shape 150 × 784 (2D tensor): 150 rows (observations), 784 columns (features).
 
-Two weight matrices. The notes label them $W^{1}_{32,150}$ and $W^{2}_{10,150}$. **Locked** implementable shapes: $W^{1}$ is $784 \times 32$, $W^{2}$ is $32 \times 10$.
+Two weight matrices. The notes label them W¹ as 32×150 and W² as 10×150. **Locked** implementable shapes: W¹ is **784 × 32**, W² is **32 × 10**.
 
 Layers: 1st layer of 32 neurons, 2nd layer of 10 neurons.
 
-Output $OUTPUT_{150,10}$: 150 rows, 10 columns (the 10 digit classes).
+Output OUTPUT of shape 150 × 10: 150 rows, 10 columns (the 10 digit classes).
 
-Schema: $X \to \otimes W^{1} \to Z^{1} \to \sigma \to LAYER^{1} \to \otimes W^{2} \to Z^{2} \to \sigma \to \hat{Y} \gg LOSS(\hat{Y}, Y)$, with hidden ReLU and output sigmoid.
+Schema: X → ⊗ W¹ → Z¹ → σ → LAYER¹ → ⊗ W² → Z² → σ → Ŷ >> LOSS(Ŷ, Y), with hidden ReLU and output sigmoid.
 
 ## Decisions
 
@@ -211,13 +213,13 @@ Schema: $X \to \otimes W^{1} \to Z^{1} \to \sigma \to LAYER^{1} \to \otimes W^{2
 - **Task:** handwritten digit recognition (OCR) on MNIST
 - **Done:** one well-commented Python file that trains and can emit digit guesses. **No accuracy objective.** Priority is that a reader can follow the learning loop.
 - **Architecture:** 32 neurons then 10 neurons on 784-pixel inputs → **784 → 32 → 10**
-- **Weight matrices:** $W^{1}$ is **784×32**, $W^{2}$ is **32×10**
+- **Weight matrices:** W¹ is **784×32**, W² is **32×10**
 - **Forward / activations / loss / backprop:** as in **Theory** above
 - **Prediction:** argmax over the 10 outputs → digit 0–9
 - **Subset file:** ~1,000 train / ~200 test
 - **Batch:** **150 images per training step**
 - **Epochs:** 50, print the loss after each epoch
-- **Learning rate:** $\eta = 1$
+- **Learning rate:** η = 1
 - **Deliverable:** **one Python file**, well commented so it reads as this theory in code
 
 ## Requirements
