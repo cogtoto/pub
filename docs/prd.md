@@ -1,22 +1,23 @@
 # PRD: Simple neural network (Python)
 
-Status: **draft** — user stories requested. Python code still waits until Vincent asks.
+Status: **implemented** — see `two_layer_mnist.py`.
 
-User stories: [user-stories.md](/cursor/stores/self/docs/user-stories.md) (four groups: network structure, MNIST, learning, usage).
+User stories: [user-stories.md](user-stories.md) (four groups: network structure, MNIST, learning, usage).
 
-Formulas below are plain text (no LaTeX), so they show in Cursor **Preview**.
+Formulas below are plain text (no LaTeX), so they show in Cursor **Preview**. The typeset edition, with the TikZ structure figure, is [prd.tex](prd.tex).
 
 ## Problem
 
-Vincent wants a very simple neural network in Python so he can learn how it works: a from-scratch two-layer MNIST network.
+Vincent wants a very simple neural network in Python so he can learn how it works: a from-scratch two-layer MNIST network. In **run mode** he wants a beautiful graphical view of **both layers** (the 32 hidden neurons and the 10 output scores) — not the training loss spam.
 
 ## Goals
 
 - A small, self-explanatory neural network in **Python** that makes the mechanics visible
 - Follow the definition Vincent quoted from his notes (below)
 - Train on a small MNIST subset file and print a few digit guesses
+- **Run mode:** after weights exist, show each test digit with a polished terminal graphic of **LAYER¹** (32) and **LAYER²** (10)
 - **Priority: keep it simple and self-explanatory** — not accuracy
-- Spec-driven delivery (this PRD is the source of truth until stories and code are requested)
+- Spec-driven delivery (this PRD is the source of truth)
 - Implementation and tests run on Vincent’s local machine
 
 ## Non-goals (until the PRD says otherwise)
@@ -96,8 +97,10 @@ This Project has **no bias terms** (no extra “+ b” per neuron), so the theor
 
 ### Two layers
 
-- **Layer 1 (hidden):** 32 neurons. Each one looks at all 784 pixels. Together they are a 32-number “internal sketch” of the image: not a digit yet, just features the second layer can use.
-- **Layer 2 (output):** 10 neurons. Each one looks at those 32 numbers and votes for one digit class.
+- **Layer 1 (hidden):** 32 neurons. Each one looks at all 784 pixels. Together they are a 32-number “internal sketch” of the image: not a digit yet, just features the second layer can use. In **run mode** these 32 values are drawn as a heat grid (4×8) plus a sparkline.
+- **Layer 2 (output):** 10 neurons. Each one looks at those 32 numbers and votes for one digit class. In **run mode** these 10 sigmoid scores are drawn as labeled bars (guess ★ / true highlighted).
+
+There is **one** hidden layer and **one** output layer — two layers total. “Both layers” in the UI means LAYER¹ + LAYER², not two hidden layers.
 
 So the shapes that actually fit MNIST are:
 
@@ -211,16 +214,31 @@ Schema: X → ⊗ W¹ → Z¹ → σ → LAYER¹ → ⊗ W² → Z² → σ → 
 - **Purpose:** learning how a neural network works
 - **Stack:** pure Python, from scratch. No ML libraries, no NumPy.
 - **Task:** handwritten digit recognition (OCR) on MNIST
-- **Done:** one well-commented Python file that trains and can emit digit guesses. **No accuracy objective.** Priority is that a reader can follow the learning loop.
+- **Done:** one well-commented Python file that trains, saves weights, and in **run mode** shows digit + both layers graphically. **No accuracy objective.** Priority is that a reader can follow the learning loop and *see* the activations.
 - **Architecture:** 32 neurons then 10 neurons on 784-pixel inputs → **784 → 32 → 10**
 - **Weight matrices:** W¹ is **784×32**, W² is **32×10**
 - **Forward / activations / loss / backprop:** as in **Theory** above
 - **Prediction:** argmax over the 10 outputs → digit 0–9
 - **Subset file:** ~1,000 train / ~200 test
 - **Batch:** **150 images per training step**
-- **Epochs:** 50, print the loss after each epoch
+- **Epochs:** 50, print the loss after each epoch (**training mode** only)
 - **Learning rate:** η = 1
+- **Modes:** `--train` (loss only + save weights), `--run` (load weights + layer graphics, no training), default = train then run
+- **Weights file:** `mnist_weights.json.gz` next to the script (so `--run` skips training)
 - **Deliverable:** **one Python file**, well commented so it reads as this theory in code
+
+### Run mode — graphical view of both layers
+
+Training mode is for watching the loss. **Run mode is for seeing the network think.**
+
+For each sample digit 0…9 (one test image per class):
+
+1. Draw the 28×28 digit (sixel in Foot, text art otherwise).
+2. Draw **LAYER¹** (32 ReLU activations): a 4×8 heat grid. Each neuron is one fixed-width cell (the ReLU value on a brightness ramp) plus a one-line sparkline under the grid. Cells are scaled to the peak ReLU for that image.
+3. Draw **LAYER²** (10 sigmoid scores): horizontal bars labeled 0…9; ★ marks the guess; true label and guess use distinct highlights.
+4. Print a one-line verdict: guess vs true.
+
+No epoch lines in `--run`. Soft ANSI color when stdout is a TTY (`NO_COLOR` disables it). Pure Unicode + ANSI — no GUI toolkit.
 
 ## Requirements
 
@@ -228,22 +246,24 @@ Schema: X → ⊗ W¹ → Z¹ → σ → LAYER¹ → ⊗ W² → Z² → σ → 
 - Comments should retell the theory above, next to the matching lines.
 - No ML libraries, no NumPy, no other languages.
 - MNIST subset file for train/eval.
-- After training, print digit guesses for some images (no score to hit).
+- After training (or via `--run`), show digit guesses with the **both-layers** graphic (no score to hit).
 - Two layers, 32 then 10 neurons.
 - Ship as a single well-commented `.py` file.
+- `--train` / `--run` / default (both) as above.
 
 ## Success criteria
 
 - The single `.py` file is simple and self-explanatory (comments carry the forward / loss / backward / update story).
-- Running it trains the net and prints a few predicted digits vs labels.
+- Training mode prints loss each epoch and saves weights.
+- Run mode loads weights and shows each sample digit with a clear graphic of LAYER¹ and LAYER².
 - **No accuracy number is required.** We do not tune to hit a %.
 
 ## Constraints
 
 - Language: Python (standard library only)
-- Code on Vincent’s local machine when we reach implementation
-- Process: PRD (here) → [user stories](/cursor/stores/self/docs/user-stories.md) (requested) → code and tests (on request)
+- Code on Vincent’s local machine
+- Process: PRD (here) → [user stories](user-stories.md) → `two_layer_mnist.py`
 
 ## Open questions
 
-None on the model. Stories are in [user-stories.md](/cursor/stores/self/docs/user-stories.md). Python still waits until Vincent asks.
+None.

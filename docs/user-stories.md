@@ -112,12 +112,13 @@ Each story is for Vincent, learning how a tiny neural net works.
 - Running the file loads the subset, trains 50 epochs, prints loss each epoch.
 - No extra CLI framework required (a simple `python thefile.py` is enough).
 
-### US-4.2 — Read a digit guess
+### US-4.2 — Read a digit guess (run mode)
 
-**As** Vincent, **I want** the trained net to name a few handwritten digits, **so that** I see what “usage” means: image in, digit out.
+**As** Vincent, **I want** a **run mode** that names a few handwritten digits and shows both layers graphically, **so that** I see what “usage” means: image in, activations visible, digit out — without training noise.
 
 **Acceptance**
 
-- After training, run forward on a few test (or held-out) images.
+- `--run` loads saved weights (or default trains then runs); no epoch loss spam in `--run`.
+- For a few test images: draw the digit, then **LAYER¹** (32 ReLU heat grid + sparkline) and **LAYER²** (10 sigmoid bars with guess/true highlights).
 - Print predicted digit (argmax) next to the true label.
 - No accuracy percentage required; a handful of guesses is enough.
