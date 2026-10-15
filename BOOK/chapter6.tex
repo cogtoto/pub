@@ -88,9 +88,9 @@ La fonction d'\textit{Ackermann} est traditionnelement donnée en exemple, bien 
 de réalité pratique\dots
 
 La fonction d’Ackermann $A$ est définie sur $\mathbb{N} × \mathbb{N}$ par : \\
-$A(0, p) = p + 1$ pour $p ≥ 0$ \\
-$A(n, 0) = A(n − 1, 1)$ pour $n ≥ 1$ \\
-$A(n, p) = A(n − 1, A(n, p − 1))$ si $n ≥ 1, p ≥ 1$ \\ 
+$A(0, p) = p + 1$ pour $p \geq  0$ \\
+$A(n, 0) = A(n - 1, 1)$ pour $n \geq  1$ \\
+$A(n, p) = A(n - 1, A(n, p - 1))$ si $n \geq  1, p \geq  1$ \\ 
 
 \begin{Verbatim}
 let rec ack = function

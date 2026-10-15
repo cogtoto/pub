@@ -890,7 +890,7 @@ somme 10000 inverse_jumeaux ;;
  Avec les 10000 premières paires, nous sommes encore loin de $1,90216$\dots
 
 \subsubsection{Le petit théorème de Fermat}
-Si $p$ est premier et si $a$ n’est pas un multiple de $p$, alors $a^{p−1}≡1  \mod p$
+Si $p$ est premier et si $a$ n’est pas un multiple de $p$, alors $a^{p-1}\equiv 1  \mod p$
 
 \subsubsection{Le théorème d'Euler}
 L'indicatrice d'Euler est une fonction, qui à tout entier naturel $n$ non nul associe
@@ -922,32 +922,32 @@ $ux+vn=1$, on a :
 
 Soient $p>1$ et $q>1$ deux nombres premiers distincts, $n=pq$ leur produit,
  $e$ un nombre premier avec 
-$\varphi(n) = (p−1)(q−1)$ et $d = e^{−1} \mod{(p−1)(q−1)}$.
+$\varphi(n) = (p-1)(q-1)$ et $d = e^{-1} \mod{(p-1)(q-1)}$.
 
-Pour tout entier positif $m<n$, on a $m^{ed} ≡ m \mod n$
+Pour tout entier positif $m<n$, on a $m^{ed} \equiv  m \mod n$
 
 La clé publique  est le couple $P=(n,e)$,
 la clé secrète est le couple $S=(n,d)$.
 
 \textit{Raisonnement:}
 
-$ed≡1 \mod (p−1)(q−1)$, donc il existe $k$ tel que $ed=1+k(p−1)(q−1)$.
+$ed\equiv 1 \mod (p-1)(q-1)$, donc il existe $k$ tel que $ed=1+k(p-1)(q-1)$.
 
 Si $m$ n’est pas multiple de $p$ ni de $q$, 
 d’après le petit théorème de Fermat,
 $$
 \begin{cases}
-  m^{ed}= m^{1+k(p−1)(q−1)} = m (m^{p-1})^{k(q-1)} \equiv m \mod p \\ 
+  m^{ed}= m^{1+k(p-1)(q-1)} = m (m^{p-1})^{k(q-1)} \equiv m \mod p \\ 
  
-  m^{ed}= m^{1+k(p−1)(q−1)} = m (m^{q-1})^{k(q-1)} \equiv m \mod q
+  m^{ed}= m^{1+k(p-1)(q-1)} = m (m^{q-1})^{k(q-1)} \equiv m \mod q
 \end{cases}
 $$
-et si $m$ est un multiple de $p$, $m≡0 \mod p$ et $m^{ed}≡0 \mod p$ (de même avec $q$).
+et si $m$ est un multiple de $p$, $m\equiv 0 \mod p$ et $m^{ed}\equiv 0 \mod p$ (de même avec $q$).
 
- L’entier $u^{ed}−m$ est donc un multiple de $p$ et de $q$, qui sont premiers distincts, 
+ L’entier $u^{ed}-m$ est donc un multiple de $p$ et de $q$, qui sont premiers distincts, 
  donc un multiple de leur produit $pq=n$
 
- Donc, pour tout entier $m, m^{ed} ≡ m \mod n$
+ Donc, pour tout entier $m, m^{ed} \equiv  m \mod n$
 
  \subsubsection{Le code}
  \begin{minted}[fontsize=\footnotesize]{ocaml}
@@ -1645,34 +1645,5 @@ print_string (f_latex 1 10) ;;
 \end{minted}
 $$3 = 1\sqrt{1 + 2\sqrt{1 + 3\sqrt{1 + 4\sqrt{1 + 5\sqrt{1 + 6\sqrt{1 + 7\sqrt{1 + 8\sqrt{1 + 9\sqrt{1 + 10\sqrt{1 + \ldots}}}}}}}}}}
 $$
-\section{Le grec ancien}
-\subsection{L'alphabet grec}
-\[
-\begin{array}{cccccccccccccccccccccccc}
- \alpha & \beta &\gamma &  \delta & \epsilon & \zeta & \eta &\theta & \iota &\kappa &\lambda & \mu & \nu & \xi & o & \pi & \rho & \sigma & \tau & 
- \upsilon & \phi & \chi & \psi & \omega \\
- A & B & \Gamma & \Delta & E & Z & H & \Theta & I & K & \Lambda & M & N  &\Xi & O & \Pi & R & \Sigma & T & \Upsilon & \Phi & X & \Psi & \Omega
- \end{array}
- \]
-
-\subsection{Extraits du nouveau testament}
- \vspace*{1cm}
- \begin{center}
-\begin{tikzpicture}
-  \draw [line width=0.7mm, smooth, tension=1] plot coordinates{(0,0) (1,-0.5) (2.1, 0) (2.5, 0.55)} ;
-  \draw [line width=0.7mm, smooth, tension=1] plot coordinates{(0,0) (1,0.5) (2.1, 0) (2.5,-0.55)} ;
-  \draw node at (1.1,0) {ΙΧΘΥΣ} ;
-\end{tikzpicture}
-\end{center}
-
-\vspace{0.5cm}
-
-᾿Εγὼ τὸ ῎Αλφα καὶ τὸ Ὦμεγα, ὁ πρῶτος καὶ ὁ ἔσχατος, ἡ ἀρχὴ καὶ τὸ τέλος. (Ap 22,13)
-
- Ἐάν τις ἀγαπᾷ με, τὸν λόγον μου τηρήσει, καὶ ὁ πατήρ μου ἀγαπήσει αὐτόν,
-  καὶ πρὸς αὐτὸν ἐλευσόμεθα, καὶ μονὴν παρ’ αὐτῷ ποιήσομεν. (Jn 14,23)
-
-Εἰρήνη ὑμῖν !
-
 
 

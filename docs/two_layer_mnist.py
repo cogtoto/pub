@@ -8,8 +8,8 @@ Run:
     python3 two_layer_mnist.py
 
 It loads docs/mnist_subset.json.gz (~1,000 train / ~200 test), trains 50
-epochs, prints the loss after each epoch, then draws a few test digits
-and names them.
+epochs, prints the loss after each epoch, then shows a few test
+pictures (a real image in foot, text otherwise) and names them.
 Accuracy is not a goal — watching the loop is.
 """
 

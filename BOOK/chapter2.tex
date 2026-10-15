@@ -669,7 +669,7 @@ let proof = Lam("n", Nat, Eq_refl(Nat, App(cst2, V "n"))) in
 \end{Verbatim}
 Rappelons la règle de conversion ci-dessous :
 $$
-\frac{\Gamma ⊢ t:A \ \ \     \Gamma ⊢ B:s \ \ \     A=_\beta B}{\Gamma ⊢ t:B}
+\frac{\Gamma \vdash  t:A \ \ \     \Gamma \vdash  B:s \ \ \     A=_\beta B}{\Gamma \vdash  t:B}
 $$
 Ainsi, un terme peut avoir plusieurs types.
 
