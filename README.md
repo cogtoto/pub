@@ -2,7 +2,7 @@ Lambda calculus, types system, interpreter, compiler, rewriting, resolution... a
 
 See the Tex document (in French), the compiled pdf doc
 
-Contains OCAML, SCHEME, COQ and AGDA code
+Contains OCAML, SCHEME, COQ, AGDA and LEAN code
 
 Please see my "thesis"
 # My Thesis
